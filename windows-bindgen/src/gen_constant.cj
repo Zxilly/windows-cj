@@ -134,6 +134,10 @@ func formatConstantValueLiteral(index: TypeIndex, value: String, fieldType: Meta
             if (isPointerType(resolved)) {
                 return pointerConstantLiteral(resolved, value)
             }
+            if (isSupportStatusWrapperType(resolved)) {
+                let stripped = stripTypeSuffix(value)
+                return Some("${resolved}(${stripped})")
+            }
 
             match (fieldType) {
                 case ValueName(tn) =>
@@ -158,6 +162,15 @@ func formatConstantValueLiteral(index: TypeIndex, value: String, fieldType: Meta
             }
             return Some(value)
     }
+}
+
+func isSupportStatusWrapperType(typeName: String): Bool {
+    return typeName == "windows_core.WIN32_ERROR" ||
+           typeName == "windows_core.NTSTATUS" ||
+           typeName == "windows_core.RPC_STATUS" ||
+           typeName == "windows_result.WIN32_ERROR" ||
+           typeName == "windows_result.NTSTATUS" ||
+           typeName == "windows_result.RPC_STATUS"
 }
 
 func handleAliasUnderlyingType(index: TypeIndex, tn: TypeName): Option<String> {
@@ -210,4 +223,3 @@ func pointerConstantLiteral(pointerType: String, value: String): Option<String> 
     }
     return Some("unsafe { ${pointerType}(CPointer<UInt8>() + ${stripped}) }")
 }
-

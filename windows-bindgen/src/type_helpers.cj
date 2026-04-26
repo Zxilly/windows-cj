@@ -118,7 +118,25 @@ func resolveTypeName(tn: TypeName): String {
         if (name == "BOOL") {
             return "Int32"
         }
+        if (name == "BOOLEAN") {
+            return "UInt8"
+        }
+        if (name == "CHAR") {
+            return "Int8"
+        }
+        if (name == "COLORREF") {
+            return "UInt32"
+        }
+        if (name == "VARIANT_BOOL") {
+            return "Int16"
+        }
         if (name == "HANDLE") {
+            return "CPointer<Unit>"
+        }
+        if (name == "HANDLE_PTR") {
+            return "CPointer<Unit>"
+        }
+        if (name == "HGLOBAL") {
             return "CPointer<Unit>"
         }
         if (name == "HWND") {
@@ -127,11 +145,32 @@ func resolveTypeName(tn: TypeName): String {
         if (name == "HINSTANCE") {
             return "CPointer<Unit>"
         }
+        if (name == "HLOCAL") {
+            return "CPointer<Unit>"
+        }
+        if (name == "HLSURF") {
+            return "CPointer<Unit>"
+        }
         if (name == "HMODULE") {
             return "CPointer<Unit>"
         }
         if (name == "HRESULT") {
             return "Int32"
+        }
+        if (name == "HRSRC") {
+            return "CPointer<Unit>"
+        }
+        if (name == "HSPRITE") {
+            return "CPointer<Unit>"
+        }
+        if (name == "HSTR") {
+            return "CPointer<Unit>"
+        }
+        if (name == "HTASK") {
+            return "CPointer<Unit>"
+        }
+        if (name == "HUMPD") {
+            return "CPointer<Unit>"
         }
         if (name == "PSTR") {
             return "CPointer<UInt8>"
@@ -147,6 +186,9 @@ func resolveTypeName(tn: TypeName): String {
         }
         if (name == "BSTR") {
             return "CPointer<UInt16>"
+        }
+        if (name == "SHANDLE_PTR") {
+            return "CPointer<Unit>"
         }
         if (name == "NTSTATUS") {
             return "Int32"
@@ -374,6 +416,11 @@ public func constantTypeToCj(ty: MetadataType): String {
 
 // Check if a type is a handle type (single field named "Value" of primitive type)
 public func isHandleType(index: TypeIndex, fileIdx: Int64, row: Int64): Bool {
+    let namespace = index.typeDefNamespace(fileIdx, row)
+    if (namespace != "Windows.Win32" && !namespace.startsWith("Windows.Win32.")) {
+        return false
+    }
+
     let category = index.typeDefCategory(fileIdx, row)
     match (category) {
         case Struct =>
@@ -520,7 +567,7 @@ public func metadataTypeToProjectionCj(index: TypeIndex, ty: MetadataType): Stri
         case MetadataType.F64 => "Float64"
         case MetadataType.ISize => "IntNative"
         case MetadataType.USize => "UIntNative"
-        case MetadataType.MdString => "String"
+        case MetadataType.MdString => winrtStringProjectionType()
         case MetadataType.MdObject => "IInspectable"
         case MetadataType.ClassName(tn) => typeNameToProjectionCj(index, tn)
         case MetadataType.ValueName(tn) => typeNameToProjectionCj(index, tn)
@@ -580,16 +627,32 @@ public func metadataTypeRuntimeSignature(index: TypeIndex, ty: MetadataType): St
     }
 }
 
+func isSystemStringTypeName(tn: TypeName): Bool {
+    return tn.namespace == "System" && trimTick(tn.name) == "String" && tn.generics.isEmpty()
+}
+
+func isSystemGuidTypeName(tn: TypeName): Bool {
+    return tn.namespace == "System" && trimTick(tn.name) == "Guid" && tn.generics.isEmpty()
+}
+
+func winrtStringProjectionType(): String {
+    return "windows_core.HString"
+}
+
 public func typeNameToProjectionCj(index: TypeIndex, tn: TypeName): String {
     let ns = tn.namespace
     let name = trimTick(tn.name)
 
     if (ns == "System") {
-        if (name == "String") {
-            return "String"
+        if (isSystemStringTypeName(tn)) {
+            return winrtStringProjectionType()
         }
         if (name == "Object") {
             return "IInspectable"
+        }
+        if (name == "Guid") {
+            useSupportSymbol("windows_core", "GuidValue")
+            return "GuidValue"
         }
     }
 
@@ -717,9 +780,12 @@ public func delegateRuntimeSignature(
 
 public func classRuntimeSignature(index: TypeIndex, fileIdx: Int64, row: Int64): String {
     let runtimeName = "${index.typeDefNamespace(fileIdx, row)}.${trimTick(index.typeDefName(fileIdx, row))}"
-    match (findDefaultInterfaceType(index, fileIdx, row)) {
+    // Use winmdDefaultClassInterfaceType (handles TypeSpec generic-instantiated default interfaces)
+    // rather than findDefaultInterfaceType, which only handles TypeDef/TypeRef and would treat
+    // generic-default classes (e.g. PropertySet / StringMap with `IMap<String, ...>` default) as static-only.
+    match (winmdDefaultClassInterfaceType(index, fileIdx, row)) {
         case Some(defaultInterface) => return "rc(${runtimeName};${typeNameRuntimeSignature(index, defaultInterface)})"
-        case None => return runtimeName
+        case None => throw Exception("classRuntimeSignature called for static-only class `${runtimeName}` (no default interface); static classes must not be registered as RuntimeType")
     }
 }
 
@@ -778,14 +844,14 @@ func projectedTypePath(namespace: String, name: String): String {
     match (bindgenContext()) {
         case Some(context) =>
             let current = currentNamespace()
+            let currentType = currentTypeName()
             if (context.typeMap.containsType(namespace, name)) {
-                if (current.isEmpty() || current == namespace || context
-                    .config
-                    .sharesGeneratedPackage(current, namespace)) {
+                let packageName = context.config.packageNameForType(namespace, name)
+                if (current.isEmpty() || currentPackageName(context.config, current, currentType) == packageName) {
                     return escapeSourceIdentifier(name)
                 }
 
-                return "${packageTypeQualifier(context.config, namespace)}.${escapeSourceIdentifier(name)}"
+                return "${packageTypeQualifier(packageName)}.${escapeSourceIdentifier(name)}"
             }
 
             if (context.references.containsType(namespace, name)) {
@@ -796,13 +862,22 @@ func projectedTypePath(namespace: String, name: String): String {
                 return escapeSourceIdentifier(name)
             }
 
-            return "${packageTypeQualifier(context.config, namespace)}.${escapeSourceIdentifier(name)}"
+            return "${packageTypeQualifier(context.config.packageNameForNamespace(namespace))}.${escapeSourceIdentifier(name)}"
         case None => return escapeSourceIdentifier(name)
     }
 }
 
-func packageTypeQualifier(config: BindgenConfig, namespace: String): String {
-    let packageName = config.packageNameForNamespace(namespace)
+func currentPackageName(config: BindgenConfig, namespace: String, name: String): String {
+    if (namespace.isEmpty()) {
+        return ""
+    }
+    if (name.isEmpty()) {
+        return config.packageNameForNamespace(namespace)
+    }
+    return config.packageNameForType(namespace, name)
+}
+
+func packageTypeQualifier(packageName: String): String {
     return importedPackageQualifier(packageName)
 }
 

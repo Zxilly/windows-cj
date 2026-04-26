@@ -3,8 +3,11 @@ package windows_result
 import std.convert.*
 
 // NTSTATUS — status code returned by NT kernel and driver functions.
-public struct NTSTATUS <: ToString & Equatable<NTSTATUS> & Hashable & Comparable<NTSTATUS> {
-    public let value: Int32
+@C
+public struct NTSTATUS {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value

@@ -57,6 +57,9 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
     private var runtimeClassName: Option<HString> = None
     private var agileEnabled: Bool = false
     private var runtimePinned: Bool = false
+    // WinRT trust level reported by IInspectable::GetTrustLevel.
+    // 0 = BaseTrust, 1 = PartialTrust, 2 = FullTrust. Defaults to BaseTrust.
+    private var trustLevel: Int32 = 0i32
 
     public init(inner: T, supportedIids: Array<GUID>, resolvedDescriptors: Array<ResolvedDescriptor>) {
         this.inner = Some(inner)
@@ -69,6 +72,14 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
             this.resolvedDescriptors.add(descriptor)
         }
         agileEnabled = true
+    }
+
+    public func setTrustLevel(level: Int32): Unit {
+        trustLevel = level
+    }
+
+    public func getTrustLevel(): Int32 {
+        trustLevel
     }
 
     public func bindInterfacePointers(pointers: Array<CPointer<Unit>>): Unit {
@@ -241,6 +252,11 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
         if (iid == IID_IINSPECTABLE && containsIid(IID_IINSPECTABLE)) {
             return writeInterfacePointer(0, resultSlot)
         }
+        for (descriptor in resolvedDescriptors) {
+            if (descriptor.matchesNonIdentity(iid)) {
+                return writeInterfacePointer(descriptor.slotIndex, resultSlot)
+            }
+        }
         if (iid == IID_IAGILEOBJECT && agileEnabled) {
             return writeInterfacePointer(0, resultSlot)
         }
@@ -249,11 +265,6 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
         }
         if (iid == IMarshal.iid() && agileEnabled) {
             return weakRefCount.writeObjectMarshaler(resultSlot)
-        }
-        for (descriptor in resolvedDescriptors) {
-            if (descriptor.matchesNonIdentity(iid)) {
-                return writeInterfacePointer(descriptor.slotIndex, resultSlot)
-            }
         }
         if (resultSlot.isNotNull()) {
             unsafe { resultSlot.write(CPointer<Unit>()) }
@@ -293,7 +304,7 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
             if (value.isNull()) {
                 return E_POINTER.value
             }
-            value.write(0i32)
+            value.write(trustLevel)
         }
         S_OK.value
     }
@@ -482,6 +493,15 @@ public class ComObject<T> {
         }
     }
 
+    public init(inner: T, schemas: Array<InterfaceDescriptorSchema>, vtblPtrs: Array<CPointer<Unit>>, agile!: Bool = true) {
+        let supportedIids = supportedIidsFromSchemas(schemas)
+        let resolvedDescriptors = resolveSchemas(schemas)
+        runtime = ComObjectRuntime<T>(inner, supportedIids, resolvedDescriptors)
+        runtime.setAgileEnabled(agile)
+        applyRuntimeTypeFromSchemas(runtime, schemas)
+        attachRuntime(defaultIdentityVtblPtr(supportedIids), vtblPtrs, resolvedDescriptors)
+    }
+
     private init(runtime: ComObjectRuntime<T>, rawView: CPointer<Unit>) {
         this.runtime = runtime
         this.rawView = rawView
@@ -501,6 +521,10 @@ public class ComObject<T> {
 
     public static func new(inner: T, schemas: Array<InterfaceDescriptorSchema>, vtblPtr: CPointer<Unit>, agile!: Bool = true): ComObject<T> {
         ComObject<T>(inner, schemas, vtblPtr, agile: agile)
+    }
+
+    public static func new(inner: T, schemas: Array<InterfaceDescriptorSchema>, vtblPtrs: Array<CPointer<Unit>>, agile!: Bool = true): ComObject<T> {
+        ComObject<T>(inner, schemas, vtblPtrs, agile: agile)
     }
 
     public static func new<I>(inner: T, descriptors: Array<InterfaceDescriptor<I>>, agile!: Bool = true): ComObject<T> where I <: ComInterface {
@@ -699,6 +723,10 @@ public func createComObjectFromSchemas<T>(inner: T, schemas: Array<InterfaceDesc
 
 public func createComObjectFromSchemas<T>(inner: T, schemas: Array<InterfaceDescriptorSchema>, vtblPtr: CPointer<Unit>, agile!: Bool = true): ComObject<T> {
     ComObject<T>(inner, schemas, vtblPtr, agile: agile)
+}
+
+public func createComObjectFromSchemas<T>(inner: T, schemas: Array<InterfaceDescriptorSchema>, vtblPtrs: Array<CPointer<Unit>>, agile!: Bool = true): ComObject<T> {
+    ComObject<T>(inner, schemas, vtblPtrs, agile: agile)
 }
 
 public func createComObjectFromDescriptors<T, I>(inner: T, descriptors: Array<InterfaceDescriptor<I>>, agile!: Bool = true): ComObject<T> where I <: ComInterface {

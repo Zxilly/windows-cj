@@ -4,7 +4,6 @@ package windows_sys.Win32.System.Search.Common
 
 
 @When[Windows_Win32_System_Search_Common == "on"]
-@C
 public struct CONDITION_OPERATION {
     public var value: Int32 = 0
 
@@ -68,7 +67,6 @@ public let CONDITION_OPERATION_COP_WORD_STARTSWITH: CONDITION_OPERATION = CONDIT
 public let CONDITION_OPERATION_COP_APPLICATION_SPECIFIC: CONDITION_OPERATION = CONDITION_OPERATION(14)
 
 @When[Windows_Win32_System_Search_Common == "on"]
-@C
 public struct CONDITION_TYPE {
     public var value: Int32 = 0
 

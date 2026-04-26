@@ -10,46 +10,63 @@ public func writeHighLevelNamespace(
     namespace: String,
     types: ArrayList<BindgenType>,
     features: FeatureCollector,
+    config: BindgenConfig,
+    perTypeFragments: HashMap<String, String>
+): Int64 {
+    // Render every type's fragment in parallel; emit serially in input order
+    // so generated output remains deterministic.
+    return emitRenderedFragments(w, perTypeFragments,
+        renderTypeFragmentsParallel(index, namespace, types, features, config, true))
+}
+
+func emitHighLevelNamespaceItem(
+    w: CodeWriter,
+    index: TypeIndex,
+    namespace: String,
+    ty: BindgenType,
+    features: FeatureCollector,
     config: BindgenConfig
 ): Int64 {
-    var typeCount: Int64 = 0
-    for (ty in types) {
-        let fileIdx = bindgenTypeFileIdx(ty)
-        let row = bindgenTypeRow(ty)
+    let fileIdx = bindgenTypeFileIdx(ty)
+    let row = bindgenTypeRow(ty)
 
-        match (ty) {
-            case HighLevelInterface(_) =>
-                generateWinrtInterface(w, index, fileIdx, row, namespace, config)
-                typeCount += 1
-            case CppInterface(_) =>
-                generateComInterface(w, index, fileIdx, row, namespace)
-                typeCount += 1
-            case Handle(_) =>
-                generateHandle(w, index, fileIdx, row, namespace)
-                typeCount += 1
-            case HighLevelStruct(_) | CppStruct(_) =>
-                generateStruct(w, index, fileIdx, row, namespace)
-                typeCount += 1
-            case HighLevelEnum(_) | CppEnum(_) =>
-                generateEnum(w, index, fileIdx, row, namespace)
-                typeCount += 1
-            case HighLevelDelegate(_) =>
-                generateWinrtDelegate(w, index, fileIdx, row, namespace)
-                typeCount += 1
-            case CppDelegate(_) =>
-                generateDelegate(w, index, fileIdx, row, namespace)
-                typeCount += 1
-            case HighLevelClass(_) =>
-                generateWinrtClass(w, index, fileIdx, row, namespace, config)
-                typeCount += 1
-            case CppFn(_) =>
-                generateFunctions(w, index, fileIdx, row, namespace)
-                generateConstants(w, index, fileIdx, row, namespace)
-                collectFeatures(index, fileIdx, row, namespace, features)
-                typeCount += 1
-            case Attribute(_) =>
-                ()
-        }
+    match (ty) {
+        case HighLevelInterface(_) =>
+            generateWinrtInterface(w, index, fileIdx, row, namespace, config)
+            return 1
+        case CppInterface(_) =>
+            generateComInterface(w, index, fileIdx, row, namespace)
+            return 1
+        case Handle(_) =>
+            generateHandle(w, index, fileIdx, row, namespace)
+            return 1
+        case HighLevelStruct(_) =>
+            generateStruct(w, index, fileIdx, row, namespace, winrtProjection: true)
+            return 1
+        case CppStruct(_) =>
+            generateStruct(w, index, fileIdx, row, namespace, winrtProjection: false)
+            return 1
+        case HighLevelEnum(_) =>
+            generateEnum(w, index, fileIdx, row, namespace, winrtProjection: true)
+            return 1
+        case CppEnum(_) =>
+            generateEnum(w, index, fileIdx, row, namespace, winrtProjection: false)
+            return 1
+        case HighLevelDelegate(_) =>
+            generateWinrtDelegate(w, index, fileIdx, row, namespace)
+            return 1
+        case CppDelegate(_) =>
+            generateDelegate(w, index, fileIdx, row, namespace)
+            return 1
+        case HighLevelClass(_) =>
+            generateWinrtClass(w, index, fileIdx, row, namespace, config)
+            return 1
+        case CppFn(_) =>
+            generateFunctions(w, index, fileIdx, row, namespace)
+            generateConstants(w, index, fileIdx, row, namespace)
+            collectFeatures(index, fileIdx, row, namespace, features)
+            return 1
+        case Attribute(_) =>
+            return 0
     }
-    return typeCount
 }

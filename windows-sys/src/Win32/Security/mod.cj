@@ -2,93 +2,12 @@
 package windows_sys.Win32.Security
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt64, unionWriteInt64}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
-
-@When[Windows_Win32_Security == "on"]
-@C
-public struct ACCESS_ALLOWED_ACE {
-    public var Header: ACE_HEADER = ACE_HEADER()
-    public var Mask: UInt32 = 0
-    public var SidStart: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
-public struct ACCESS_ALLOWED_CALLBACK_ACE {
-    public var Header: ACE_HEADER = ACE_HEADER()
-    public var Mask: UInt32 = 0
-    public var SidStart: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
-public struct ACCESS_ALLOWED_CALLBACK_OBJECT_ACE {
-    public var Header: ACE_HEADER = ACE_HEADER()
-    public var Mask: UInt32 = 0
-    public var Flags: SYSTEM_AUDIT_OBJECT_ACE_FLAGS = SYSTEM_AUDIT_OBJECT_ACE_FLAGS()
-    public var ObjectType: GUID = GUID()
-    public var InheritedObjectType: GUID = GUID()
-    public var SidStart: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
-public struct ACCESS_ALLOWED_OBJECT_ACE {
-    public var Header: ACE_HEADER = ACE_HEADER()
-    public var Mask: UInt32 = 0
-    public var Flags: SYSTEM_AUDIT_OBJECT_ACE_FLAGS = SYSTEM_AUDIT_OBJECT_ACE_FLAGS()
-    public var ObjectType: GUID = GUID()
-    public var InheritedObjectType: GUID = GUID()
-    public var SidStart: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
-public struct ACCESS_DENIED_ACE {
-    public var Header: ACE_HEADER = ACE_HEADER()
-    public var Mask: UInt32 = 0
-    public var SidStart: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
-public struct ACCESS_DENIED_CALLBACK_ACE {
-    public var Header: ACE_HEADER = ACE_HEADER()
-    public var Mask: UInt32 = 0
-    public var SidStart: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
-public struct ACCESS_DENIED_CALLBACK_OBJECT_ACE {
-    public var Header: ACE_HEADER = ACE_HEADER()
-    public var Mask: UInt32 = 0
-    public var Flags: SYSTEM_AUDIT_OBJECT_ACE_FLAGS = SYSTEM_AUDIT_OBJECT_ACE_FLAGS()
-    public var ObjectType: GUID = GUID()
-    public var InheritedObjectType: GUID = GUID()
-    public var SidStart: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
-public struct ACCESS_DENIED_OBJECT_ACE {
-    public var Header: ACE_HEADER = ACE_HEADER()
-    public var Mask: UInt32 = 0
-    public var Flags: SYSTEM_AUDIT_OBJECT_ACE_FLAGS = SYSTEM_AUDIT_OBJECT_ACE_FLAGS()
-    public var ObjectType: GUID = GUID()
-    public var InheritedObjectType: GUID = GUID()
-    public var SidStart: UInt32 = 0
-    public init() {}
-}
 
 @When[Windows_Win32_Security == "on"]
 @C
@@ -98,7 +17,6 @@ public struct ACCESS_REASONS {
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
 public struct ACE_FLAGS {
     public var value: UInt32 = 0
 
@@ -179,7 +97,6 @@ public struct ACE_HEADER {
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
 public struct ACE_REVISION {
     public var value: UInt32 = 0
 
@@ -215,7 +132,6 @@ public struct ACL {
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
 public struct ACL_INFORMATION_CLASS {
     public var value: Int32 = 0
 
@@ -256,7 +172,6 @@ public struct ACL_SIZE_INFORMATION {
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
 public struct AUDIT_EVENT_TYPE {
     public var value: Int32 = 0
 
@@ -281,46 +196,6 @@ public let AUDIT_EVENT_TYPE_AuditEventObjectAccess: AUDIT_EVENT_TYPE = AUDIT_EVE
 public let AUDIT_EVENT_TYPE_AuditEventDirectoryServiceAccess: AUDIT_EVENT_TYPE = AUDIT_EVENT_TYPE(1)
 
 @When[Windows_Win32_Security == "on"]
-@C
-public struct CLAIM_SECURITY_ATTRIBUTES_INFORMATION {
-    public var Version: UInt16 = 0
-    public var Reserved: UInt16 = 0
-    public var AttributeCount: UInt32 = 0
-    public var Attribute: CLAIM_SECURITY_ATTRIBUTES_INFORMATION__Attribute_e__Union = CLAIM_SECURITY_ATTRIBUTES_INFORMATION__Attribute_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct CLAIM_SECURITY_ATTRIBUTES_INFORMATION__Attribute_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func pAttributeV1(): CPointer<CLAIM_SECURITY_ATTRIBUTE_V1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CLAIM_SECURITY_ATTRIBUTE_V1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pAttributeV1(val: CPointer<CLAIM_SECURITY_ATTRIBUTE_V1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CLAIM_SECURITY_ATTRIBUTE_V1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
 public struct CLAIM_SECURITY_ATTRIBUTE_FLAGS {
     public var value: UInt32 = 0
 
@@ -387,257 +262,6 @@ public struct CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE {
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
-public struct CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 {
-    public var Name: UInt32 = 0
-    public var ValueType: CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE = CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE()
-    public var Reserved: UInt16 = 0
-    public var Flags: CLAIM_SECURITY_ATTRIBUTE_FLAGS = CLAIM_SECURITY_ATTRIBUTE_FLAGS()
-    public var ValueCount: UInt32 = 0
-    public var Values: CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1__Values_e__Union = CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1__Values_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1__Values_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
-
-    public func pInt64(): VArray<UInt32, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt32, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pInt64(val: VArray<UInt32, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt32, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pUint64(): VArray<UInt32, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt32, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pUint64(val: VArray<UInt32, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt32, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ppString(): VArray<UInt32, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt32, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ppString(val: VArray<UInt32, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt32, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pFqbn(): VArray<UInt32, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt32, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pFqbn(val: VArray<UInt32, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt32, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pOctetString(): VArray<UInt32, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt32, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pOctetString(val: VArray<UInt32, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt32, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
-public struct CLAIM_SECURITY_ATTRIBUTE_V1 {
-    public var Name: CPointer<UInt16> = CPointer<UInt16>()
-    public var ValueType: CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE = CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE()
-    public var Reserved: UInt16 = 0
-    public var Flags: UInt32 = 0
-    public var ValueCount: UInt32 = 0
-    public var Values: CLAIM_SECURITY_ATTRIBUTE_V1__Values_e__Union = CLAIM_SECURITY_ATTRIBUTE_V1__Values_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct CLAIM_SECURITY_ATTRIBUTE_V1__Values_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func pInt64(): CPointer<Int64> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Int64>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pInt64(val: CPointer<Int64>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Int64>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pUint64(): CPointer<UInt64> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt64>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pUint64(val: CPointer<UInt64>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt64>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ppString(): CPointer<CPointer<UInt16>> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CPointer<UInt16>>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ppString(val: CPointer<CPointer<UInt16>>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CPointer<UInt16>>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pFqbn(): CPointer<CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pFqbn(val: CPointer<CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pOctetString(): CPointer<CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pOctetString(val: CPointer<CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
 public struct CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE {
     public var value: UInt16 = 0
 
@@ -677,7 +301,6 @@ public let CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE_CLAIM_SECURITY_ATTRIBUTE_TYPE_SID
 public let CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE_CLAIM_SECURITY_ATTRIBUTE_TYPE_BOOLEAN: CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE = CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE(6)
 
 @When[Windows_Win32_Security == "on"]
-@C
 public struct CREATE_RESTRICTED_TOKEN_FLAGS {
     public var value: UInt32 = 0
 
@@ -722,7 +345,6 @@ public let CREATE_RESTRICTED_TOKEN_FLAGS_LUA_TOKEN: CREATE_RESTRICTED_TOKEN_FLAG
 public let CREATE_RESTRICTED_TOKEN_FLAGS_WRITE_RESTRICTED: CREATE_RESTRICTED_TOKEN_FLAGS = CREATE_RESTRICTED_TOKEN_FLAGS(8)
 
 @When[Windows_Win32_Security == "on"]
-@C
 public struct ENUM_PERIOD {
     public var value: Int32 = 0
 
@@ -782,53 +404,55 @@ public struct LLFILETIME {
 }
 
 @When[Windows_Win32_Security == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct LLFILETIME__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func ll(): Int64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt64(base, 0)
+    public mut prop ll: Int64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_ll(val: Int64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop ft: Win32_Foundation.FILETIME {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32_Foundation.FILETIME>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func ft(): Win32_Foundation.FILETIME {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_Foundation.FILETIME>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ft(val: Win32_Foundation.FILETIME): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_Foundation.FILETIME>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32_Foundation.FILETIME>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
 public struct LOGON32_LOGON {
     public var value: UInt32 = 0
 
@@ -868,7 +492,6 @@ public let LOGON32_LOGON_LOGON32_LOGON_SERVICE: LOGON32_LOGON = LOGON32_LOGON(5)
 public let LOGON32_LOGON_LOGON32_LOGON_UNLOCK: LOGON32_LOGON = LOGON32_LOGON(7)
 
 @When[Windows_Win32_Security == "on"]
-@C
 public struct LOGON32_PROVIDER {
     public var value: UInt32 = 0
 
@@ -896,15 +519,6 @@ public let LOGON32_PROVIDER_LOGON32_PROVIDER_WINNT50: LOGON32_PROVIDER = LOGON32
 public let LOGON32_PROVIDER_LOGON32_PROVIDER_WINNT40: LOGON32_PROVIDER = LOGON32_PROVIDER(2)
 
 @When[Windows_Win32_Security == "on"]
-@C
-public struct LUID_AND_ATTRIBUTES {
-    public var Luid: Win32_Foundation.LUID = Win32_Foundation.LUID()
-    public var Attributes: TOKEN_PRIVILEGES_ATTRIBUTES = TOKEN_PRIVILEGES_ATTRIBUTES()
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
 public struct MANDATORY_LEVEL {
     public var value: Int32 = 0
 
@@ -950,7 +564,6 @@ public type NCRYPT_DESCRIPTOR_HANDLE = CPointer<Unit>
 public type NCRYPT_STREAM_HANDLE = CPointer<Unit>
 
 @When[Windows_Win32_Security == "on"]
-@C
 public struct OBJECT_SECURITY_INFORMATION {
     public var value: UInt32 = 0
 
@@ -1031,15 +644,6 @@ public struct OBJECT_TYPE_LIST {
 public type PLSA_AP_CALL_PACKAGE_UNTRUSTED = CFunc<(CPointer<CPointer<Unit>>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>, CPointer<UInt32>, CPointer<Int32>) -> Int32>
 
 @When[Windows_Win32_Security == "on"]
-@C
-public struct PRIVILEGE_SET {
-    public var PrivilegeCount: UInt32 = 0
-    public var Control: UInt32 = 0
-    public var Privilege: VArray<LUID_AND_ATTRIBUTES, $1> = VArray<LUID_AND_ATTRIBUTES, $1>(repeat: LUID_AND_ATTRIBUTES())
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
 public type PSECURITY_DESCRIPTOR = CPointer<Unit>
 
 @When[Windows_Win32_Security == "on"]
@@ -1070,7 +674,6 @@ public struct SECURITY_ATTRIBUTES {
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
 public struct SECURITY_AUTO_INHERIT_FLAGS {
     public var value: UInt32 = 0
 
@@ -1136,30 +739,6 @@ public let SECURITY_AUTO_INHERIT_FLAGS_SEF_MACL_NO_WRITE_UP: SECURITY_AUTO_INHER
 public let SECURITY_AUTO_INHERIT_FLAGS_SEF_SACL_AUTO_INHERIT: SECURITY_AUTO_INHERIT_FLAGS = SECURITY_AUTO_INHERIT_FLAGS(2)
 
 @When[Windows_Win32_Security == "on"]
-@C
-public struct SECURITY_CAPABILITIES {
-    public var AppContainerSid: PSID = CPointer<Unit>()
-    public var Capabilities: CPointer<SID_AND_ATTRIBUTES> = CPointer<SID_AND_ATTRIBUTES>()
-    public var CapabilityCount: UInt32 = 0
-    public var Reserved: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
-public struct SECURITY_DESCRIPTOR {
-    public var Revision: UInt8 = 0
-    public var Sbz1: UInt8 = 0
-    public var Control: SECURITY_DESCRIPTOR_CONTROL = SECURITY_DESCRIPTOR_CONTROL()
-    public var Owner: PSID = CPointer<Unit>()
-    public var Group: PSID = CPointer<Unit>()
-    public var Sacl: CPointer<ACL> = CPointer<ACL>()
-    public var Dacl: CPointer<ACL> = CPointer<ACL>()
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
 public struct SECURITY_DESCRIPTOR_CONTROL {
     public var value: UInt16 = 0
 
@@ -1238,7 +817,7 @@ public let SECURITY_DESCRIPTOR_CONTROL_SE_SELF_RELATIVE: SECURITY_DESCRIPTOR_CON
 public struct SECURITY_DESCRIPTOR_RELATIVE {
     public var Revision: UInt8 = 0
     public var Sbz1: UInt8 = 0
-    public var Control: SECURITY_DESCRIPTOR_CONTROL = SECURITY_DESCRIPTOR_CONTROL()
+    public var Control: UInt16 = 0
     public var Owner: UInt32 = 0
     public var Group: UInt32 = 0
     public var Sacl: UInt32 = 0
@@ -1247,7 +826,6 @@ public struct SECURITY_DESCRIPTOR_RELATIVE {
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
 public struct SECURITY_IMPERSONATION_LEVEL {
     public var value: Int32 = 0
 
@@ -1281,9 +859,9 @@ public let SECURITY_IMPERSONATION_LEVEL_SecurityDelegation: SECURITY_IMPERSONATI
 @C
 public struct SECURITY_QUALITY_OF_SERVICE {
     public var Length: UInt32 = 0
-    public var ImpersonationLevel: SECURITY_IMPERSONATION_LEVEL = SECURITY_IMPERSONATION_LEVEL()
+    public var ImpersonationLevel: Int32 = 0
     public var ContextTrackingMode: UInt8 = 0
-    public var EffectiveOnly: Win32_Foundation.BOOLEAN = 0
+    public var EffectiveOnly: UInt8 = 0
     public init() {}
 }
 
@@ -1292,37 +870,11 @@ public type SEC_THREAD_START = CFunc<(CPointer<Unit>) -> UInt32>
 
 @When[Windows_Win32_Security == "on"]
 @C
-public struct SE_ACCESS_REPLY {
-    public var Size: UInt32 = 0
-    public var ResultListCount: UInt32 = 0
-    public var GrantedAccess: CPointer<UInt32> = CPointer<UInt32>()
-    public var AccessStatus: CPointer<UInt32> = CPointer<UInt32>()
-    public var AccessReason: CPointer<ACCESS_REASONS> = CPointer<ACCESS_REASONS>()
-    public var Privileges: CPointer<CPointer<PRIVILEGE_SET>> = CPointer<CPointer<PRIVILEGE_SET>>()
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
-public struct SE_ACCESS_REQUEST {
-    public var Size: UInt32 = 0
-    public var SeSecurityDescriptor: CPointer<SE_SECURITY_DESCRIPTOR> = CPointer<SE_SECURITY_DESCRIPTOR>()
-    public var DesiredAccess: UInt32 = 0
-    public var PreviouslyGrantedAccess: UInt32 = 0
-    public var PrincipalSelfSid: PSID = CPointer<Unit>()
-    public var GenericMapping: CPointer<GENERIC_MAPPING> = CPointer<GENERIC_MAPPING>()
-    public var ObjectTypeListCount: UInt32 = 0
-    public var ObjectTypeList: CPointer<OBJECT_TYPE_LIST> = CPointer<OBJECT_TYPE_LIST>()
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
 public struct SE_IMPERSONATION_STATE {
     public var Token: CPointer<Unit> = CPointer<Unit>()
-    public var CopyOnOpen: Win32_Foundation.BOOLEAN = 0
-    public var EffectiveOnly: Win32_Foundation.BOOLEAN = 0
-    public var Level: SECURITY_IMPERSONATION_LEVEL = SECURITY_IMPERSONATION_LEVEL()
+    public var CopyOnOpen: UInt8 = 0
+    public var EffectiveOnly: UInt8 = 0
+    public var Level: Int32 = 0
     public init() {}
 }
 
@@ -1332,66 +884,6 @@ public struct SE_SECURITY_DESCRIPTOR {
     public var Size: UInt32 = 0
     public var Flags: UInt32 = 0
     public var SecurityDescriptor: PSECURITY_DESCRIPTOR = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct SE_SID {
-    public var _raw: VArray<UInt8, $68> = VArray<UInt8, $68>(repeat: 0)
-
-    public func sid(): SID {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SID>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sid(val: SID): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SID>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func buffer(): VArray<UInt8, $68> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $68>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_buffer(val: VArray<UInt8, $68>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $68>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
-public struct SID {
-    public var Revision: UInt8 = 0
-    public var SubAuthorityCount: UInt8 = 0
-    public var IdentifierAuthority: SID_IDENTIFIER_AUTHORITY = SID_IDENTIFIER_AUTHORITY()
-    public var SubAuthority: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
     public init() {}
 }
 
@@ -1420,7 +912,6 @@ public struct SID_IDENTIFIER_AUTHORITY {
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
 public struct SID_NAME_USE {
     public var value: Int32 = 0
 
@@ -1500,18 +991,6 @@ public struct SYSTEM_ALARM_CALLBACK_ACE {
 
 @When[Windows_Win32_Security == "on"]
 @C
-public struct SYSTEM_ALARM_CALLBACK_OBJECT_ACE {
-    public var Header: ACE_HEADER = ACE_HEADER()
-    public var Mask: UInt32 = 0
-    public var Flags: SYSTEM_AUDIT_OBJECT_ACE_FLAGS = SYSTEM_AUDIT_OBJECT_ACE_FLAGS()
-    public var ObjectType: GUID = GUID()
-    public var InheritedObjectType: GUID = GUID()
-    public var SidStart: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
 public struct SYSTEM_ALARM_OBJECT_ACE {
     public var Header: ACE_HEADER = ACE_HEADER()
     public var Mask: UInt32 = 0
@@ -1541,31 +1020,6 @@ public struct SYSTEM_AUDIT_CALLBACK_ACE {
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
-public struct SYSTEM_AUDIT_CALLBACK_OBJECT_ACE {
-    public var Header: ACE_HEADER = ACE_HEADER()
-    public var Mask: UInt32 = 0
-    public var Flags: SYSTEM_AUDIT_OBJECT_ACE_FLAGS = SYSTEM_AUDIT_OBJECT_ACE_FLAGS()
-    public var ObjectType: GUID = GUID()
-    public var InheritedObjectType: GUID = GUID()
-    public var SidStart: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
-public struct SYSTEM_AUDIT_OBJECT_ACE {
-    public var Header: ACE_HEADER = ACE_HEADER()
-    public var Mask: UInt32 = 0
-    public var Flags: SYSTEM_AUDIT_OBJECT_ACE_FLAGS = SYSTEM_AUDIT_OBJECT_ACE_FLAGS()
-    public var ObjectType: GUID = GUID()
-    public var InheritedObjectType: GUID = GUID()
-    public var SidStart: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
 public struct SYSTEM_AUDIT_OBJECT_ACE_FLAGS {
     public var value: UInt32 = 0
 
@@ -1640,26 +1094,6 @@ public struct SYSTEM_SCOPED_POLICY_ID_ACE {
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
-public struct TOKEN_ACCESS_INFORMATION {
-    public var SidHash: CPointer<SID_AND_ATTRIBUTES_HASH> = CPointer<SID_AND_ATTRIBUTES_HASH>()
-    public var RestrictedSidHash: CPointer<SID_AND_ATTRIBUTES_HASH> = CPointer<SID_AND_ATTRIBUTES_HASH>()
-    public var Privileges: CPointer<TOKEN_PRIVILEGES> = CPointer<TOKEN_PRIVILEGES>()
-    public var AuthenticationId: Win32_Foundation.LUID = Win32_Foundation.LUID()
-    public var TokenType: TOKEN_TYPE = TOKEN_TYPE()
-    public var ImpersonationLevel: SECURITY_IMPERSONATION_LEVEL = SECURITY_IMPERSONATION_LEVEL()
-    public var MandatoryPolicy: TOKEN_MANDATORY_POLICY = TOKEN_MANDATORY_POLICY()
-    public var Flags: UInt32 = 0
-    public var AppContainerNumber: UInt32 = 0
-    public var PackageSid: PSID = CPointer<Unit>()
-    public var CapabilitiesHash: CPointer<SID_AND_ATTRIBUTES_HASH> = CPointer<SID_AND_ATTRIBUTES_HASH>()
-    public var TrustLevelSid: PSID = CPointer<Unit>()
-    public var SecurityAttributes: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
 public struct TOKEN_ACCESS_MASK {
     public var value: UInt32 = 0
 
@@ -1770,16 +1204,6 @@ public struct TOKEN_AUDIT_POLICY {
 
 @When[Windows_Win32_Security == "on"]
 @C
-public struct TOKEN_CONTROL {
-    public var TokenId: Win32_Foundation.LUID = Win32_Foundation.LUID()
-    public var AuthenticationId: Win32_Foundation.LUID = Win32_Foundation.LUID()
-    public var ModifiedId: Win32_Foundation.LUID = Win32_Foundation.LUID()
-    public var TokenSource: TOKEN_SOURCE = TOKEN_SOURCE()
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
 public struct TOKEN_DEFAULT_DACL {
     public var DefaultDacl: CPointer<ACL> = CPointer<ACL>()
     public init() {}
@@ -1800,7 +1224,6 @@ public struct TOKEN_ELEVATION {
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
 public struct TOKEN_ELEVATION_TYPE {
     public var value: Int32 = 0
 
@@ -1836,23 +1259,6 @@ public struct TOKEN_GROUPS {
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
-public struct TOKEN_GROUPS_AND_PRIVILEGES {
-    public var SidCount: UInt32 = 0
-    public var SidLength: UInt32 = 0
-    public var Sids: CPointer<SID_AND_ATTRIBUTES> = CPointer<SID_AND_ATTRIBUTES>()
-    public var RestrictedSidCount: UInt32 = 0
-    public var RestrictedSidLength: UInt32 = 0
-    public var RestrictedSids: CPointer<SID_AND_ATTRIBUTES> = CPointer<SID_AND_ATTRIBUTES>()
-    public var PrivilegeCount: UInt32 = 0
-    public var PrivilegeLength: UInt32 = 0
-    public var Privileges: CPointer<LUID_AND_ATTRIBUTES> = CPointer<LUID_AND_ATTRIBUTES>()
-    public var AuthenticationId: Win32_Foundation.LUID = Win32_Foundation.LUID()
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
 public struct TOKEN_INFORMATION_CLASS {
     public var value: Int32 = 0
 
@@ -2038,14 +1444,6 @@ public struct TOKEN_MANDATORY_LABEL {
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
-public struct TOKEN_MANDATORY_POLICY {
-    public var Policy: TOKEN_MANDATORY_POLICY_ID = TOKEN_MANDATORY_POLICY_ID()
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
 public struct TOKEN_MANDATORY_POLICY_ID {
     public var value: UInt32 = 0
 
@@ -2097,15 +1495,6 @@ public struct TOKEN_PRIMARY_GROUP {
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
-public struct TOKEN_PRIVILEGES {
-    public var PrivilegeCount: UInt32 = 0
-    public var Privileges: VArray<LUID_AND_ATTRIBUTES, $1> = VArray<LUID_AND_ATTRIBUTES, $1>(repeat: LUID_AND_ATTRIBUTES())
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
 public struct TOKEN_PRIVILEGES_ATTRIBUTES {
     public var value: UInt32 = 0
 
@@ -2152,29 +1541,12 @@ public let TOKEN_PRIVILEGES_ATTRIBUTES_SE_PRIVILEGE_USED_FOR_ACCESS: TOKEN_PRIVI
 @When[Windows_Win32_Security == "on"]
 @C
 public struct TOKEN_SOURCE {
-    public var SourceName: VArray<Win32_Foundation.CHAR, $8> = VArray<Win32_Foundation.CHAR, $8>(repeat: 0)
+    public var SourceName: VArray<Int8, $8> = VArray<Int8, $8>(repeat: 0)
     public var SourceIdentifier: Win32_Foundation.LUID = Win32_Foundation.LUID()
     public init() {}
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
-public struct TOKEN_STATISTICS {
-    public var TokenId: Win32_Foundation.LUID = Win32_Foundation.LUID()
-    public var AuthenticationId: Win32_Foundation.LUID = Win32_Foundation.LUID()
-    public var ExpirationTime: Int64 = 0
-    public var TokenType: TOKEN_TYPE = TOKEN_TYPE()
-    public var ImpersonationLevel: SECURITY_IMPERSONATION_LEVEL = SECURITY_IMPERSONATION_LEVEL()
-    public var DynamicCharged: UInt32 = 0
-    public var DynamicAvailable: UInt32 = 0
-    public var GroupCount: UInt32 = 0
-    public var PrivilegeCount: UInt32 = 0
-    public var ModifiedId: Win32_Foundation.LUID = Win32_Foundation.LUID()
-    public init() {}
-}
-
-@When[Windows_Win32_Security == "on"]
-@C
 public struct TOKEN_TYPE {
     public var value: Int32 = 0
 
@@ -2213,7 +1585,6 @@ public struct TOKEN_USER_CLAIMS {
 }
 
 @When[Windows_Win32_Security == "on"]
-@C
 public struct WELL_KNOWN_SID_TYPE {
     public var value: Int32 = 0
 
@@ -2597,6 +1968,634 @@ public let WELL_KNOWN_SID_TYPE_WinBuiltinUserModeHardwareOperatorsSid: WELL_KNOW
 @When[Windows_Win32_Security == "on"]
 public let WELL_KNOWN_SID_TYPE_WinBuiltinOpenSSHUsersSid: WELL_KNOWN_SID_TYPE = WELL_KNOWN_SID_TYPE(121)
 
+@When[Windows_Win32_Security == "on"]
+@C
+public struct ACCESS_ALLOWED_ACE {
+    public var Header: ACE_HEADER = ACE_HEADER()
+    public var Mask: UInt32 = 0
+    public var SidStart: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct ACCESS_ALLOWED_CALLBACK_ACE {
+    public var Header: ACE_HEADER = ACE_HEADER()
+    public var Mask: UInt32 = 0
+    public var SidStart: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct ACCESS_ALLOWED_CALLBACK_OBJECT_ACE {
+    public var Header: ACE_HEADER = ACE_HEADER()
+    public var Mask: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var ObjectType: GUID = GUID()
+    public var InheritedObjectType: GUID = GUID()
+    public var SidStart: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct ACCESS_ALLOWED_OBJECT_ACE {
+    public var Header: ACE_HEADER = ACE_HEADER()
+    public var Mask: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var ObjectType: GUID = GUID()
+    public var InheritedObjectType: GUID = GUID()
+    public var SidStart: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct ACCESS_DENIED_ACE {
+    public var Header: ACE_HEADER = ACE_HEADER()
+    public var Mask: UInt32 = 0
+    public var SidStart: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct ACCESS_DENIED_CALLBACK_ACE {
+    public var Header: ACE_HEADER = ACE_HEADER()
+    public var Mask: UInt32 = 0
+    public var SidStart: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct ACCESS_DENIED_CALLBACK_OBJECT_ACE {
+    public var Header: ACE_HEADER = ACE_HEADER()
+    public var Mask: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var ObjectType: GUID = GUID()
+    public var InheritedObjectType: GUID = GUID()
+    public var SidStart: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct ACCESS_DENIED_OBJECT_ACE {
+    public var Header: ACE_HEADER = ACE_HEADER()
+    public var Mask: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var ObjectType: GUID = GUID()
+    public var InheritedObjectType: GUID = GUID()
+    public var SidStart: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 {
+    public var Name: UInt32 = 0
+    public var ValueType: UInt16 = 0
+    public var Reserved: UInt16 = 0
+    public var Flags: UInt32 = 0
+    public var ValueCount: UInt32 = 0
+    public var Values: CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1__Values_e__Union = CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1__Values_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1__Values_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+
+    public mut prop pInt64: VArray<UInt32, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt32, $1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt32, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pUint64: VArray<UInt32, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt32, $1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt32, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ppString: VArray<UInt32, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt32, $1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt32, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pFqbn: VArray<UInt32, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt32, $1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt32, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pOctetString: VArray<UInt32, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt32, $1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt32, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct CLAIM_SECURITY_ATTRIBUTE_V1 {
+    public var Name: CPointer<UInt16> = CPointer<UInt16>()
+    public var ValueType: UInt16 = 0
+    public var Reserved: UInt16 = 0
+    public var Flags: UInt32 = 0
+    public var ValueCount: UInt32 = 0
+    public var Values: CLAIM_SECURITY_ATTRIBUTE_V1__Values_e__Union = CLAIM_SECURITY_ATTRIBUTE_V1__Values_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct CLAIM_SECURITY_ATTRIBUTE_V1__Values_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop pInt64: CPointer<Int64> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Int64>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Int64>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pUint64: CPointer<UInt64> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt64>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt64>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ppString: CPointer<CPointer<UInt16>> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CPointer<UInt16>>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CPointer<UInt16>>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pFqbn: CPointer<CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pOctetString: CPointer<CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct LUID_AND_ATTRIBUTES {
+    public var Luid: Win32_Foundation.LUID = Win32_Foundation.LUID()
+    public var Attributes: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct PRIVILEGE_SET {
+    public var PrivilegeCount: UInt32 = 0
+    public var Control: UInt32 = 0
+    public var Privilege: VArray<LUID_AND_ATTRIBUTES, $1> = VArray<LUID_AND_ATTRIBUTES, $1>(repeat: LUID_AND_ATTRIBUTES())
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct SECURITY_CAPABILITIES {
+    public var AppContainerSid: PSID = CPointer<Unit>()
+    public var Capabilities: CPointer<SID_AND_ATTRIBUTES> = CPointer<SID_AND_ATTRIBUTES>()
+    public var CapabilityCount: UInt32 = 0
+    public var Reserved: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct SECURITY_DESCRIPTOR {
+    public var Revision: UInt8 = 0
+    public var Sbz1: UInt8 = 0
+    public var Control: UInt16 = 0
+    public var Owner: PSID = CPointer<Unit>()
+    public var Group: PSID = CPointer<Unit>()
+    public var Sacl: CPointer<ACL> = CPointer<ACL>()
+    public var Dacl: CPointer<ACL> = CPointer<ACL>()
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct SE_ACCESS_REPLY {
+    public var Size: UInt32 = 0
+    public var ResultListCount: UInt32 = 0
+    public var GrantedAccess: CPointer<UInt32> = CPointer<UInt32>()
+    public var AccessStatus: CPointer<UInt32> = CPointer<UInt32>()
+    public var AccessReason: CPointer<ACCESS_REASONS> = CPointer<ACCESS_REASONS>()
+    public var Privileges: CPointer<CPointer<PRIVILEGE_SET>> = CPointer<CPointer<PRIVILEGE_SET>>()
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct SE_ACCESS_REQUEST {
+    public var Size: UInt32 = 0
+    public var SeSecurityDescriptor: CPointer<SE_SECURITY_DESCRIPTOR> = CPointer<SE_SECURITY_DESCRIPTOR>()
+    public var DesiredAccess: UInt32 = 0
+    public var PreviouslyGrantedAccess: UInt32 = 0
+    public var PrincipalSelfSid: PSID = CPointer<Unit>()
+    public var GenericMapping: CPointer<GENERIC_MAPPING> = CPointer<GENERIC_MAPPING>()
+    public var ObjectTypeListCount: UInt32 = 0
+    public var ObjectTypeList: CPointer<OBJECT_TYPE_LIST> = CPointer<OBJECT_TYPE_LIST>()
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct SID {
+    public var Revision: UInt8 = 0
+    public var SubAuthorityCount: UInt8 = 0
+    public var IdentifierAuthority: SID_IDENTIFIER_AUTHORITY = SID_IDENTIFIER_AUTHORITY()
+    public var SubAuthority: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct SYSTEM_ALARM_CALLBACK_OBJECT_ACE {
+    public var Header: ACE_HEADER = ACE_HEADER()
+    public var Mask: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var ObjectType: GUID = GUID()
+    public var InheritedObjectType: GUID = GUID()
+    public var SidStart: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct SYSTEM_AUDIT_CALLBACK_OBJECT_ACE {
+    public var Header: ACE_HEADER = ACE_HEADER()
+    public var Mask: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var ObjectType: GUID = GUID()
+    public var InheritedObjectType: GUID = GUID()
+    public var SidStart: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct SYSTEM_AUDIT_OBJECT_ACE {
+    public var Header: ACE_HEADER = ACE_HEADER()
+    public var Mask: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var ObjectType: GUID = GUID()
+    public var InheritedObjectType: GUID = GUID()
+    public var SidStart: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct TOKEN_CONTROL {
+    public var TokenId: Win32_Foundation.LUID = Win32_Foundation.LUID()
+    public var AuthenticationId: Win32_Foundation.LUID = Win32_Foundation.LUID()
+    public var ModifiedId: Win32_Foundation.LUID = Win32_Foundation.LUID()
+    public var TokenSource: TOKEN_SOURCE = TOKEN_SOURCE()
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct TOKEN_GROUPS_AND_PRIVILEGES {
+    public var SidCount: UInt32 = 0
+    public var SidLength: UInt32 = 0
+    public var Sids: CPointer<SID_AND_ATTRIBUTES> = CPointer<SID_AND_ATTRIBUTES>()
+    public var RestrictedSidCount: UInt32 = 0
+    public var RestrictedSidLength: UInt32 = 0
+    public var RestrictedSids: CPointer<SID_AND_ATTRIBUTES> = CPointer<SID_AND_ATTRIBUTES>()
+    public var PrivilegeCount: UInt32 = 0
+    public var PrivilegeLength: UInt32 = 0
+    public var Privileges: CPointer<LUID_AND_ATTRIBUTES> = CPointer<LUID_AND_ATTRIBUTES>()
+    public var AuthenticationId: Win32_Foundation.LUID = Win32_Foundation.LUID()
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct TOKEN_MANDATORY_POLICY {
+    public var Policy: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct TOKEN_PRIVILEGES {
+    public var PrivilegeCount: UInt32 = 0
+    public var Privileges: VArray<LUID_AND_ATTRIBUTES, $1> = VArray<LUID_AND_ATTRIBUTES, $1>(repeat: LUID_AND_ATTRIBUTES())
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct TOKEN_STATISTICS {
+    public var TokenId: Win32_Foundation.LUID = Win32_Foundation.LUID()
+    public var AuthenticationId: Win32_Foundation.LUID = Win32_Foundation.LUID()
+    public var ExpirationTime: Int64 = 0
+    public var TokenType: Int32 = 0
+    public var ImpersonationLevel: Int32 = 0
+    public var DynamicCharged: UInt32 = 0
+    public var DynamicAvailable: UInt32 = 0
+    public var GroupCount: UInt32 = 0
+    public var PrivilegeCount: UInt32 = 0
+    public var ModifiedId: Win32_Foundation.LUID = Win32_Foundation.LUID()
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct CLAIM_SECURITY_ATTRIBUTES_INFORMATION {
+    public var Version: UInt16 = 0
+    public var Reserved: UInt16 = 0
+    public var AttributeCount: UInt32 = 0
+    public var Attribute: CLAIM_SECURITY_ATTRIBUTES_INFORMATION__Attribute_e__Union = CLAIM_SECURITY_ATTRIBUTES_INFORMATION__Attribute_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct CLAIM_SECURITY_ATTRIBUTES_INFORMATION__Attribute_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop pAttributeV1: CPointer<CLAIM_SECURITY_ATTRIBUTE_V1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CLAIM_SECURITY_ATTRIBUTE_V1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CLAIM_SECURITY_ATTRIBUTE_V1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct SE_SID {
+    public var _raw: VArray<UInt32, $17> = VArray<UInt32, $17>(repeat: 0)
+
+    public mut prop sid: SID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop buffer: VArray<UInt8, $68> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $68>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $68>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Security == "on"]
+@C
+public struct TOKEN_ACCESS_INFORMATION {
+    public var SidHash: CPointer<SID_AND_ATTRIBUTES_HASH> = CPointer<SID_AND_ATTRIBUTES_HASH>()
+    public var RestrictedSidHash: CPointer<SID_AND_ATTRIBUTES_HASH> = CPointer<SID_AND_ATTRIBUTES_HASH>()
+    public var Privileges: CPointer<TOKEN_PRIVILEGES> = CPointer<TOKEN_PRIVILEGES>()
+    public var AuthenticationId: Win32_Foundation.LUID = Win32_Foundation.LUID()
+    public var TokenType: Int32 = 0
+    public var ImpersonationLevel: Int32 = 0
+    public var MandatoryPolicy: TOKEN_MANDATORY_POLICY = TOKEN_MANDATORY_POLICY()
+    public var Flags: UInt32 = 0
+    public var AppContainerNumber: UInt32 = 0
+    public var PackageSid: PSID = CPointer<Unit>()
+    public var CapabilitiesHash: CPointer<SID_AND_ATTRIBUTES_HASH> = CPointer<SID_AND_ATTRIBUTES_HASH>()
+    public var TrustLevelSid: PSID = CPointer<Unit>()
+    public var SecurityAttributes: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
 @When[ADVAPI32 == "on"]
 foreign {
     // param-hint: PrivilegeSet bytes=param[5] optional
@@ -2618,11 +2617,11 @@ foreign {
     // param-hint: PrincipalSelfSid optional
     // param-hint: ObjectTypeList len=param[10] optional
     // pinvoke-hint: SetLastError
-    func AccessCheckByTypeAndAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt8>, ObjectName: CPointer<UInt8>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPE, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): Int32
+    func AccessCheckByTypeAndAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt8>, ObjectName: CPointer<UInt8>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: Int32, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): Int32
     // param-hint: ObjectName optional
     // param-hint: PrincipalSelfSid optional
     // param-hint: ObjectTypeList len=param[10] optional
-    func AccessCheckByTypeAndAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt16>, ObjectName: CPointer<UInt16>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPE, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): Int32
+    func AccessCheckByTypeAndAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt16>, ObjectName: CPointer<UInt16>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: Int32, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): Int32
     // param-hint: PrincipalSelfSid optional
     // param-hint: ObjectTypeList len=param[5] optional
     // param-hint: PrivilegeSet bytes=param[8] optional
@@ -2636,57 +2635,57 @@ foreign {
     // param-hint: GrantedAccess len=param[10]
     // param-hint: AccessStatusList len=param[10]
     // pinvoke-hint: SetLastError
-    func AccessCheckByTypeResultListAndAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt8>, ObjectName: CPointer<UInt8>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPE, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Int32
+    func AccessCheckByTypeResultListAndAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt8>, ObjectName: CPointer<UInt8>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: Int32, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Int32
     // param-hint: ObjectName optional
     // param-hint: PrincipalSelfSid optional
     // param-hint: ObjectTypeList len=param[11] optional
     // param-hint: GrantedAccess len=param[11]
     // param-hint: AccessStatusList len=param[11]
     // pinvoke-hint: SetLastError
-    func AccessCheckByTypeResultListAndAuditAlarmByHandleA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ClientToken: CPointer<Unit>, ObjectTypeName: CPointer<UInt8>, ObjectName: CPointer<UInt8>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPE, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Int32
+    func AccessCheckByTypeResultListAndAuditAlarmByHandleA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ClientToken: CPointer<Unit>, ObjectTypeName: CPointer<UInt8>, ObjectName: CPointer<UInt8>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: Int32, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Int32
     // param-hint: ObjectName optional
     // param-hint: PrincipalSelfSid optional
     // param-hint: ObjectTypeList len=param[11] optional
     // param-hint: GrantedAccessList len=param[11]
     // param-hint: AccessStatusList len=param[11]
-    func AccessCheckByTypeResultListAndAuditAlarmByHandleW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ClientToken: CPointer<Unit>, ObjectTypeName: CPointer<UInt16>, ObjectName: CPointer<UInt16>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPE, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Int32, GrantedAccessList: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Int32
+    func AccessCheckByTypeResultListAndAuditAlarmByHandleW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ClientToken: CPointer<Unit>, ObjectTypeName: CPointer<UInt16>, ObjectName: CPointer<UInt16>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: Int32, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Int32, GrantedAccessList: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Int32
     // param-hint: ObjectName optional
     // param-hint: PrincipalSelfSid optional
     // param-hint: ObjectTypeList len=param[10] optional
     // param-hint: GrantedAccessList len=param[10]
     // param-hint: AccessStatusList len=param[10]
-    func AccessCheckByTypeResultListAndAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt16>, ObjectName: CPointer<UInt16>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPE, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Int32, GrantedAccessList: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Int32
+    func AccessCheckByTypeResultListAndAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt16>, ObjectName: CPointer<UInt16>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: Int32, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Int32, GrantedAccessList: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Int32
     // pinvoke-hint: SetLastError
-    func AddAccessAllowedAce(pAcl: CPointer<ACL>, dwAceRevision: ACE_REVISION, AccessMask: UInt32, pSid: PSID): Int32
+    func AddAccessAllowedAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AccessMask: UInt32, pSid: PSID): Int32
     // pinvoke-hint: SetLastError
-    func AddAccessAllowedAceEx(pAcl: CPointer<ACL>, dwAceRevision: ACE_REVISION, AceFlags: ACE_FLAGS, AccessMask: UInt32, pSid: PSID): Int32
+    func AddAccessAllowedAceEx(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, pSid: PSID): Int32
     // param-hint: ObjectTypeGuid optional
     // param-hint: InheritedObjectTypeGuid optional
     // pinvoke-hint: SetLastError
-    func AddAccessAllowedObjectAce(pAcl: CPointer<ACL>, dwAceRevision: ACE_REVISION, AceFlags: ACE_FLAGS, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID): Int32
+    func AddAccessAllowedObjectAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID): Int32
     // pinvoke-hint: SetLastError
-    func AddAccessDeniedAce(pAcl: CPointer<ACL>, dwAceRevision: ACE_REVISION, AccessMask: UInt32, pSid: PSID): Int32
+    func AddAccessDeniedAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AccessMask: UInt32, pSid: PSID): Int32
     // pinvoke-hint: SetLastError
-    func AddAccessDeniedAceEx(pAcl: CPointer<ACL>, dwAceRevision: ACE_REVISION, AceFlags: ACE_FLAGS, AccessMask: UInt32, pSid: PSID): Int32
+    func AddAccessDeniedAceEx(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, pSid: PSID): Int32
     // param-hint: ObjectTypeGuid optional
     // param-hint: InheritedObjectTypeGuid optional
     // pinvoke-hint: SetLastError
-    func AddAccessDeniedObjectAce(pAcl: CPointer<ACL>, dwAceRevision: ACE_REVISION, AceFlags: ACE_FLAGS, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID): Int32
+    func AddAccessDeniedObjectAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID): Int32
     // param-hint: pAceList bytes=param[4]
     // pinvoke-hint: SetLastError
-    func AddAce(pAcl: CPointer<ACL>, dwAceRevision: ACE_REVISION, dwStartingAceIndex: UInt32, pAceList: CPointer<Unit>, nAceListLength: UInt32): Int32
+    func AddAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, dwStartingAceIndex: UInt32, pAceList: CPointer<Unit>, nAceListLength: UInt32): Int32
     // pinvoke-hint: SetLastError
-    func AddAuditAccessAce(pAcl: CPointer<ACL>, dwAceRevision: ACE_REVISION, dwAccessMask: UInt32, pSid: PSID, bAuditSuccess: Int32, bAuditFailure: Int32): Int32
+    func AddAuditAccessAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, dwAccessMask: UInt32, pSid: PSID, bAuditSuccess: Int32, bAuditFailure: Int32): Int32
     // pinvoke-hint: SetLastError
-    func AddAuditAccessAceEx(pAcl: CPointer<ACL>, dwAceRevision: ACE_REVISION, AceFlags: ACE_FLAGS, dwAccessMask: UInt32, pSid: PSID, bAuditSuccess: Int32, bAuditFailure: Int32): Int32
+    func AddAuditAccessAceEx(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, dwAccessMask: UInt32, pSid: PSID, bAuditSuccess: Int32, bAuditFailure: Int32): Int32
     // param-hint: ObjectTypeGuid optional
     // param-hint: InheritedObjectTypeGuid optional
     // pinvoke-hint: SetLastError
-    func AddAuditAccessObjectAce(pAcl: CPointer<ACL>, dwAceRevision: ACE_REVISION, AceFlags: ACE_FLAGS, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID, bAuditSuccess: Int32, bAuditFailure: Int32): Int32
+    func AddAuditAccessObjectAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID, bAuditSuccess: Int32, bAuditFailure: Int32): Int32
     // pinvoke-hint: SetLastError
-    func AddConditionalAce(pAcl: CPointer<ACL>, dwAceRevision: ACE_REVISION, AceFlags: ACE_FLAGS, AceType: UInt8, AccessMask: UInt32, pSid: PSID, ConditionStr: CPointer<UInt16>, ReturnLength: CPointer<UInt32>): Int32
+    func AddConditionalAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AceType: UInt8, AccessMask: UInt32, pSid: PSID, ConditionStr: CPointer<UInt16>, ReturnLength: CPointer<UInt32>): Int32
     // pinvoke-hint: SetLastError
-    func AddMandatoryAce(pAcl: CPointer<ACL>, dwAceRevision: ACE_REVISION, AceFlags: ACE_FLAGS, MandatoryPolicy: UInt32, pLabelSid: PSID): Int32
+    func AddMandatoryAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, MandatoryPolicy: UInt32, pLabelSid: PSID): Int32
     // param-hint: NewState optional
     // param-hint: PreviousState bytes=param[3] optional
     // param-hint: ReturnLength optional
@@ -2709,7 +2708,7 @@ foreign {
     // param-hint: ParentDescriptor optional
     // param-hint: ObjectType optional
     // pinvoke-hint: SetLastError
-    func ConvertToAutoInheritPrivateObjectSecurity(ParentDescriptor: PSECURITY_DESCRIPTOR, CurrentSecurityDescriptor: PSECURITY_DESCRIPTOR, NewSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectType: CPointer<GUID>, IsDirectoryObject: Win32_Foundation.BOOLEAN, GenericMapping: CPointer<GENERIC_MAPPING>): Int32
+    func ConvertToAutoInheritPrivateObjectSecurity(ParentDescriptor: PSECURITY_DESCRIPTOR, CurrentSecurityDescriptor: PSECURITY_DESCRIPTOR, NewSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectType: CPointer<GUID>, IsDirectoryObject: UInt8, GenericMapping: CPointer<GENERIC_MAPPING>): Int32
     // param-hint: pDestinationSid bytes=param[0]
     // pinvoke-hint: SetLastError
     func CopySid(nDestinationSidLength: UInt32, pDestinationSid: PSID, pSourceSid: PSID): Int32
@@ -2723,31 +2722,31 @@ foreign {
     // param-hint: ObjectType optional
     // param-hint: Token optional
     // pinvoke-hint: SetLastError
-    func CreatePrivateObjectSecurityEx(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectType: CPointer<GUID>, IsContainerObject: Int32, AutoInheritFlags: SECURITY_AUTO_INHERIT_FLAGS, Token: CPointer<Unit>, GenericMapping: CPointer<GENERIC_MAPPING>): Int32
+    func CreatePrivateObjectSecurityEx(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectType: CPointer<GUID>, IsContainerObject: Int32, AutoInheritFlags: UInt32, Token: CPointer<Unit>, GenericMapping: CPointer<GENERIC_MAPPING>): Int32
     // param-hint: ParentDescriptor optional
     // param-hint: CreatorDescriptor optional
     // param-hint: ObjectTypes len=param[4] optional
     // param-hint: Token optional
     // pinvoke-hint: SetLastError
-    func CreatePrivateObjectSecurityWithMultipleInheritance(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectTypes: CPointer<CPointer<GUID>>, GuidCount: UInt32, IsContainerObject: Int32, AutoInheritFlags: SECURITY_AUTO_INHERIT_FLAGS, Token: CPointer<Unit>, GenericMapping: CPointer<GENERIC_MAPPING>): Int32
+    func CreatePrivateObjectSecurityWithMultipleInheritance(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectTypes: CPointer<CPointer<GUID>>, GuidCount: UInt32, IsContainerObject: Int32, AutoInheritFlags: UInt32, Token: CPointer<Unit>, GenericMapping: CPointer<GENERIC_MAPPING>): Int32
     // param-hint: SidsToDisable len=param[2] optional
     // param-hint: PrivilegesToDelete len=param[4] optional
     // param-hint: SidsToRestrict len=param[6] optional
     // pinvoke-hint: SetLastError
-    func CreateRestrictedToken(ExistingTokenHandle: CPointer<Unit>, Flags: CREATE_RESTRICTED_TOKEN_FLAGS, DisableSidCount: UInt32, SidsToDisable: CPointer<SID_AND_ATTRIBUTES>, DeletePrivilegeCount: UInt32, PrivilegesToDelete: CPointer<LUID_AND_ATTRIBUTES>, RestrictedSidCount: UInt32, SidsToRestrict: CPointer<SID_AND_ATTRIBUTES>, NewTokenHandle: CPointer<CPointer<Unit>>): Int32
+    func CreateRestrictedToken(ExistingTokenHandle: CPointer<Unit>, Flags: UInt32, DisableSidCount: UInt32, SidsToDisable: CPointer<SID_AND_ATTRIBUTES>, DeletePrivilegeCount: UInt32, PrivilegesToDelete: CPointer<LUID_AND_ATTRIBUTES>, RestrictedSidCount: UInt32, SidsToRestrict: CPointer<SID_AND_ATTRIBUTES>, NewTokenHandle: CPointer<CPointer<Unit>>): Int32
     // param-hint: DomainSid optional
     // param-hint: pSid bytes=param[3] optional
     // pinvoke-hint: SetLastError
-    func CreateWellKnownSid(WellKnownSidType: WELL_KNOWN_SID_TYPE, DomainSid: PSID, pSid: PSID, cbSid: CPointer<UInt32>): Int32
+    func CreateWellKnownSid(WellKnownSidType: Int32, DomainSid: PSID, pSid: PSID, cbSid: CPointer<UInt32>): Int32
     // pinvoke-hint: SetLastError
     func DeleteAce(pAcl: CPointer<ACL>, dwAceIndex: UInt32): Int32
     // pinvoke-hint: SetLastError
     func DestroyPrivateObjectSecurity(ObjectDescriptor: CPointer<PSECURITY_DESCRIPTOR>): Int32
     // pinvoke-hint: SetLastError
-    func DuplicateToken(ExistingTokenHandle: CPointer<Unit>, ImpersonationLevel: SECURITY_IMPERSONATION_LEVEL, DuplicateTokenHandle: CPointer<CPointer<Unit>>): Int32
+    func DuplicateToken(ExistingTokenHandle: CPointer<Unit>, ImpersonationLevel: Int32, DuplicateTokenHandle: CPointer<CPointer<Unit>>): Int32
     // param-hint: lpTokenAttributes optional
     // pinvoke-hint: SetLastError
-    func DuplicateTokenEx(hExistingToken: CPointer<Unit>, dwDesiredAccess: TOKEN_ACCESS_MASK, lpTokenAttributes: CPointer<SECURITY_ATTRIBUTES>, ImpersonationLevel: SECURITY_IMPERSONATION_LEVEL, TokenType: TOKEN_TYPE, phNewToken: CPointer<CPointer<Unit>>): Int32
+    func DuplicateTokenEx(hExistingToken: CPointer<Unit>, dwDesiredAccess: UInt32, lpTokenAttributes: CPointer<SECURITY_ATTRIBUTES>, ImpersonationLevel: Int32, TokenType: Int32, phNewToken: CPointer<CPointer<Unit>>): Int32
     // pinvoke-hint: SetLastError
     func EqualDomainSid(pSid1: PSID, pSid2: PSID, pfEqual: CPointer<Int32>): Int32
     // pinvoke-hint: SetLastError
@@ -2761,7 +2760,7 @@ foreign {
     func GetAce(pAcl: CPointer<ACL>, dwAceIndex: UInt32, pAce: CPointer<CPointer<Unit>>): Int32
     // param-hint: pAclInformation bytes=param[2]
     // pinvoke-hint: SetLastError
-    func GetAclInformation(pAcl: CPointer<ACL>, pAclInformation: CPointer<Unit>, nAclInformationLength: UInt32, dwAclInformationClass: ACL_INFORMATION_CLASS): Int32
+    func GetAclInformation(pAcl: CPointer<ACL>, pAclInformation: CPointer<Unit>, nAclInformationLength: UInt32, dwAclInformationClass: Int32): Int32
     // param-hint: pSecurityDescriptor bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func GetFileSecurityA(lpFileName: CPointer<UInt8>, RequestedInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32
@@ -2774,7 +2773,7 @@ foreign {
     func GetLengthSid(pSid: PSID): UInt32
     // param-hint: ResultantDescriptor bytes=param[3] optional
     // pinvoke-hint: SetLastError
-    func GetPrivateObjectSecurity(ObjectDescriptor: PSECURITY_DESCRIPTOR, SecurityInformation: OBJECT_SECURITY_INFORMATION, ResultantDescriptor: PSECURITY_DESCRIPTOR, DescriptorLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
+    func GetPrivateObjectSecurity(ObjectDescriptor: PSECURITY_DESCRIPTOR, SecurityInformation: UInt32, ResultantDescriptor: PSECURITY_DESCRIPTOR, DescriptorLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
     // pinvoke-hint: SetLastError
     func GetSecurityDescriptorControl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pControl: CPointer<UInt16>, lpdwRevision: CPointer<UInt32>): Int32
     // pinvoke-hint: SetLastError
@@ -2796,7 +2795,7 @@ foreign {
     func GetSidSubAuthorityCount(pSid: PSID): CPointer<UInt8>
     // param-hint: TokenInformation bytes=param[3] optional
     // pinvoke-hint: SetLastError
-    func GetTokenInformation(TokenHandle: CPointer<Unit>, TokenInformationClass: TOKEN_INFORMATION_CLASS, TokenInformation: CPointer<Unit>, TokenInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
+    func GetTokenInformation(TokenHandle: CPointer<Unit>, TokenInformationClass: Int32, TokenInformation: CPointer<Unit>, TokenInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
     // param-hint: pDomainSid bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func GetWindowsAccountDomainSid(pSid: PSID, pDomainSid: PSID, cbDomainSid: CPointer<UInt32>): Int32
@@ -2805,10 +2804,10 @@ foreign {
     // pinvoke-hint: SetLastError
     func ImpersonateLoggedOnUser(hToken: CPointer<Unit>): Int32
     // pinvoke-hint: SetLastError
-    func ImpersonateSelf(ImpersonationLevel: SECURITY_IMPERSONATION_LEVEL): Int32
+    func ImpersonateSelf(ImpersonationLevel: Int32): Int32
     // param-hint: pAcl bytes=param[1]
     // pinvoke-hint: SetLastError
-    func InitializeAcl(pAcl: CPointer<ACL>, nAclLength: UInt32, dwAclRevision: ACE_REVISION): Int32
+    func InitializeAcl(pAcl: CPointer<ACL>, nAclLength: UInt32, dwAclRevision: UInt32): Int32
     // pinvoke-hint: SetLastError
     func InitializeSecurityDescriptor(pSecurityDescriptor: PSECURITY_DESCRIPTOR, dwRevision: UInt32): Int32
     // pinvoke-hint: SetLastError
@@ -2818,20 +2817,11 @@ foreign {
     func IsValidAcl(pAcl: CPointer<ACL>): Int32
     func IsValidSecurityDescriptor(pSecurityDescriptor: PSECURITY_DESCRIPTOR): Int32
     func IsValidSid(pSid: PSID): Int32
-    func IsWellKnownSid(pSid: PSID, WellKnownSidType: WELL_KNOWN_SID_TYPE): Int32
+    func IsWellKnownSid(pSid: PSID, WellKnownSidType: Int32): Int32
     // param-hint: lpszDomain optional
     // param-hint: lpszPassword optional
     // pinvoke-hint: SetLastError
-    func LogonUserA(lpszUsername: CPointer<UInt8>, lpszDomain: CPointer<UInt8>, lpszPassword: CPointer<UInt8>, dwLogonType: LOGON32_LOGON, dwLogonProvider: LOGON32_PROVIDER, phToken: CPointer<CPointer<Unit>>): Int32
-    // param-hint: lpszDomain optional
-    // param-hint: lpszPassword optional
-    // param-hint: phToken optional
-    // param-hint: ppLogonSid optional
-    // param-hint: ppProfileBuffer optional
-    // param-hint: pdwProfileLength optional
-    // param-hint: pQuotaLimits optional
-    // pinvoke-hint: SetLastError
-    func LogonUserExA(lpszUsername: CPointer<UInt8>, lpszDomain: CPointer<UInt8>, lpszPassword: CPointer<UInt8>, dwLogonType: LOGON32_LOGON, dwLogonProvider: LOGON32_PROVIDER, phToken: CPointer<CPointer<Unit>>, ppLogonSid: CPointer<PSID>, ppProfileBuffer: CPointer<CPointer<Unit>>, pdwProfileLength: CPointer<UInt32>, pQuotaLimits: CPointer<QUOTA_LIMITS>): Int32
+    func LogonUserA(lpszUsername: CPointer<UInt8>, lpszDomain: CPointer<UInt8>, lpszPassword: CPointer<UInt8>, dwLogonType: UInt32, dwLogonProvider: UInt32, phToken: CPointer<CPointer<Unit>>): Int32
     // param-hint: lpszDomain optional
     // param-hint: lpszPassword optional
     // param-hint: phToken optional
@@ -2840,31 +2830,40 @@ foreign {
     // param-hint: pdwProfileLength optional
     // param-hint: pQuotaLimits optional
     // pinvoke-hint: SetLastError
-    func LogonUserExW(lpszUsername: CPointer<UInt16>, lpszDomain: CPointer<UInt16>, lpszPassword: CPointer<UInt16>, dwLogonType: LOGON32_LOGON, dwLogonProvider: LOGON32_PROVIDER, phToken: CPointer<CPointer<Unit>>, ppLogonSid: CPointer<PSID>, ppProfileBuffer: CPointer<CPointer<Unit>>, pdwProfileLength: CPointer<UInt32>, pQuotaLimits: CPointer<QUOTA_LIMITS>): Int32
+    func LogonUserExA(lpszUsername: CPointer<UInt8>, lpszDomain: CPointer<UInt8>, lpszPassword: CPointer<UInt8>, dwLogonType: UInt32, dwLogonProvider: UInt32, phToken: CPointer<CPointer<Unit>>, ppLogonSid: CPointer<PSID>, ppProfileBuffer: CPointer<CPointer<Unit>>, pdwProfileLength: CPointer<UInt32>, pQuotaLimits: CPointer<QUOTA_LIMITS>): Int32
+    // param-hint: lpszDomain optional
+    // param-hint: lpszPassword optional
+    // param-hint: phToken optional
+    // param-hint: ppLogonSid optional
+    // param-hint: ppProfileBuffer optional
+    // param-hint: pdwProfileLength optional
+    // param-hint: pQuotaLimits optional
+    // pinvoke-hint: SetLastError
+    func LogonUserExW(lpszUsername: CPointer<UInt16>, lpszDomain: CPointer<UInt16>, lpszPassword: CPointer<UInt16>, dwLogonType: UInt32, dwLogonProvider: UInt32, phToken: CPointer<CPointer<Unit>>, ppLogonSid: CPointer<PSID>, ppProfileBuffer: CPointer<CPointer<Unit>>, pdwProfileLength: CPointer<UInt32>, pQuotaLimits: CPointer<QUOTA_LIMITS>): Int32
     // param-hint: lpszDomain optional
     // param-hint: lpszPassword optional
     // pinvoke-hint: SetLastError
-    func LogonUserW(lpszUsername: CPointer<UInt16>, lpszDomain: CPointer<UInt16>, lpszPassword: CPointer<UInt16>, dwLogonType: LOGON32_LOGON, dwLogonProvider: LOGON32_PROVIDER, phToken: CPointer<CPointer<Unit>>): Int32
+    func LogonUserW(lpszUsername: CPointer<UInt16>, lpszDomain: CPointer<UInt16>, lpszPassword: CPointer<UInt16>, dwLogonType: UInt32, dwLogonProvider: UInt32, phToken: CPointer<CPointer<Unit>>): Int32
     // param-hint: lpSystemName optional
     // param-hint: Sid bytes=param[3] optional
     // param-hint: ReferencedDomainName len=param[5] optional
     // pinvoke-hint: SetLastError
-    func LookupAccountNameA(lpSystemName: CPointer<UInt8>, lpAccountName: CPointer<UInt8>, Sid: PSID, cbSid: CPointer<UInt32>, ReferencedDomainName: CPointer<UInt8>, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<SID_NAME_USE>): Int32
+    func LookupAccountNameA(lpSystemName: CPointer<UInt8>, lpAccountName: CPointer<UInt8>, Sid: PSID, cbSid: CPointer<UInt32>, ReferencedDomainName: CPointer<UInt8>, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<Int32>): Int32
     // param-hint: lpSystemName optional
     // param-hint: Sid bytes=param[3] optional
     // param-hint: ReferencedDomainName len=param[5] optional
     // pinvoke-hint: SetLastError
-    func LookupAccountNameW(lpSystemName: CPointer<UInt16>, lpAccountName: CPointer<UInt16>, Sid: PSID, cbSid: CPointer<UInt32>, ReferencedDomainName: CPointer<UInt16>, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<SID_NAME_USE>): Int32
+    func LookupAccountNameW(lpSystemName: CPointer<UInt16>, lpAccountName: CPointer<UInt16>, Sid: PSID, cbSid: CPointer<UInt32>, ReferencedDomainName: CPointer<UInt16>, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<Int32>): Int32
     // param-hint: lpSystemName optional
     // param-hint: Name len=param[3] optional
     // param-hint: ReferencedDomainName len=param[5] optional
     // pinvoke-hint: SetLastError
-    func LookupAccountSidA(lpSystemName: CPointer<UInt8>, Sid: PSID, Name: CPointer<UInt8>, cchName: CPointer<UInt32>, ReferencedDomainName: CPointer<UInt8>, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<SID_NAME_USE>): Int32
+    func LookupAccountSidA(lpSystemName: CPointer<UInt8>, Sid: PSID, Name: CPointer<UInt8>, cchName: CPointer<UInt32>, ReferencedDomainName: CPointer<UInt8>, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<Int32>): Int32
     // param-hint: lpSystemName optional
     // param-hint: Name len=param[3] optional
     // param-hint: ReferencedDomainName len=param[5] optional
     // pinvoke-hint: SetLastError
-    func LookupAccountSidW(lpSystemName: CPointer<UInt16>, Sid: PSID, Name: CPointer<UInt16>, cchName: CPointer<UInt32>, ReferencedDomainName: CPointer<UInt16>, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<SID_NAME_USE>): Int32
+    func LookupAccountSidW(lpSystemName: CPointer<UInt16>, Sid: PSID, Name: CPointer<UInt16>, cchName: CPointer<UInt32>, ReferencedDomainName: CPointer<UInt16>, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<Int32>): Int32
     // param-hint: lpSystemName optional
     // param-hint: lpDisplayName len=param[3] optional
     // pinvoke-hint: SetLastError
@@ -2919,26 +2918,26 @@ foreign {
     // pinvoke-hint: SetLastError
     func PrivilegedServiceAuditAlarmA(SubsystemName: CPointer<UInt8>, ServiceName: CPointer<UInt8>, ClientToken: CPointer<Unit>, Privileges: CPointer<PRIVILEGE_SET>, AccessGranted: Int32): Int32
     func PrivilegedServiceAuditAlarmW(SubsystemName: CPointer<UInt16>, ServiceName: CPointer<UInt16>, ClientToken: CPointer<Unit>, Privileges: CPointer<PRIVILEGE_SET>, AccessGranted: Int32): Int32
-    func QuerySecurityAccessMask(SecurityInformation: OBJECT_SECURITY_INFORMATION, DesiredAccess: CPointer<UInt32>): Unit
+    func QuerySecurityAccessMask(SecurityInformation: UInt32, DesiredAccess: CPointer<UInt32>): Unit
     // pinvoke-hint: SetLastError
     func RevertToSelf(): Int32
     // param-hint: pAclInformation bytes=param[2]
     // pinvoke-hint: SetLastError
-    func SetAclInformation(pAcl: CPointer<ACL>, pAclInformation: CPointer<Unit>, nAclInformationLength: UInt32, dwAclInformationClass: ACL_INFORMATION_CLASS): Int32
+    func SetAclInformation(pAcl: CPointer<ACL>, pAclInformation: CPointer<Unit>, nAclInformationLength: UInt32, dwAclInformationClass: Int32): Int32
     // pinvoke-hint: SetLastError
-    func SetFileSecurityA(lpFileName: CPointer<UInt8>, SecurityInformation: OBJECT_SECURITY_INFORMATION, pSecurityDescriptor: PSECURITY_DESCRIPTOR): Int32
-    func SetFileSecurityW(lpFileName: CPointer<UInt16>, SecurityInformation: OBJECT_SECURITY_INFORMATION, pSecurityDescriptor: PSECURITY_DESCRIPTOR): Int32
+    func SetFileSecurityA(lpFileName: CPointer<UInt8>, SecurityInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR): Int32
+    func SetFileSecurityW(lpFileName: CPointer<UInt16>, SecurityInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR): Int32
     // pinvoke-hint: SetLastError
-    func SetKernelObjectSecurity(Handle: CPointer<Unit>, SecurityInformation: OBJECT_SECURITY_INFORMATION, SecurityDescriptor: PSECURITY_DESCRIPTOR): Int32
+    func SetKernelObjectSecurity(Handle: CPointer<Unit>, SecurityInformation: UInt32, SecurityDescriptor: PSECURITY_DESCRIPTOR): Int32
     // param-hint: Token optional
     // pinvoke-hint: SetLastError
-    func SetPrivateObjectSecurity(SecurityInformation: OBJECT_SECURITY_INFORMATION, ModificationDescriptor: PSECURITY_DESCRIPTOR, ObjectsSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, GenericMapping: CPointer<GENERIC_MAPPING>, Token: CPointer<Unit>): Int32
+    func SetPrivateObjectSecurity(SecurityInformation: UInt32, ModificationDescriptor: PSECURITY_DESCRIPTOR, ObjectsSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, GenericMapping: CPointer<GENERIC_MAPPING>, Token: CPointer<Unit>): Int32
     // param-hint: Token optional
     // pinvoke-hint: SetLastError
-    func SetPrivateObjectSecurityEx(SecurityInformation: OBJECT_SECURITY_INFORMATION, ModificationDescriptor: PSECURITY_DESCRIPTOR, ObjectsSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, AutoInheritFlags: SECURITY_AUTO_INHERIT_FLAGS, GenericMapping: CPointer<GENERIC_MAPPING>, Token: CPointer<Unit>): Int32
-    func SetSecurityAccessMask(SecurityInformation: OBJECT_SECURITY_INFORMATION, DesiredAccess: CPointer<UInt32>): Unit
+    func SetPrivateObjectSecurityEx(SecurityInformation: UInt32, ModificationDescriptor: PSECURITY_DESCRIPTOR, ObjectsSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, AutoInheritFlags: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, Token: CPointer<Unit>): Int32
+    func SetSecurityAccessMask(SecurityInformation: UInt32, DesiredAccess: CPointer<UInt32>): Unit
     // pinvoke-hint: SetLastError
-    func SetSecurityDescriptorControl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, ControlBitsOfInterest: SECURITY_DESCRIPTOR_CONTROL, ControlBitsToSet: SECURITY_DESCRIPTOR_CONTROL): Int32
+    func SetSecurityDescriptorControl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, ControlBitsOfInterest: UInt16, ControlBitsToSet: UInt16): Int32
     // param-hint: pDacl optional
     // pinvoke-hint: SetLastError
     func SetSecurityDescriptorDacl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, bDaclPresent: Int32, pDacl: CPointer<ACL>, bDaclDefaulted: Int32): Int32
@@ -2955,15 +2954,15 @@ foreign {
     func SetSecurityDescriptorSacl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, bSaclPresent: Int32, pSacl: CPointer<ACL>, bSaclDefaulted: Int32): Int32
     // param-hint: TokenInformation bytes=param[3]
     // pinvoke-hint: SetLastError
-    func SetTokenInformation(TokenHandle: CPointer<Unit>, TokenInformationClass: TOKEN_INFORMATION_CLASS, TokenInformation: CPointer<Unit>, TokenInformationLength: UInt32): Int32
+    func SetTokenInformation(TokenHandle: CPointer<Unit>, TokenInformationClass: Int32, TokenInformation: CPointer<Unit>, TokenInformationLength: UInt32): Int32
 }
 
 @When[KERNEL32 == "on"]
 foreign {
     // pinvoke-hint: SetLastError
-    func AddResourceAttributeAce(pAcl: CPointer<ACL>, dwAceRevision: ACE_REVISION, AceFlags: ACE_FLAGS, AccessMask: UInt32, pSid: PSID, pAttributeInfo: CPointer<CLAIM_SECURITY_ATTRIBUTES_INFORMATION>, pReturnLength: CPointer<UInt32>): Int32
+    func AddResourceAttributeAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, pSid: PSID, pAttributeInfo: CPointer<CLAIM_SECURITY_ATTRIBUTES_INFORMATION>, pReturnLength: CPointer<UInt32>): Int32
     // pinvoke-hint: SetLastError
-    func AddScopedPolicyIDAce(pAcl: CPointer<ACL>, dwAceRevision: ACE_REVISION, AceFlags: ACE_FLAGS, AccessMask: UInt32, pSid: PSID): Int32
+    func AddScopedPolicyIDAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, pSid: PSID): Int32
     // param-hint: TokenHandle optional
     // pinvoke-hint: SetLastError
     func CheckTokenCapability(TokenHandle: CPointer<Unit>, CapabilitySidToCheck: PSID, HasCapability: CPointer<Int32>): Int32
@@ -2987,7 +2986,7 @@ foreign {
     // pinvoke-hint: SetLastError
     func GetUserObjectSecurity(hObj: CPointer<Unit>, pSIRequested: CPointer<UInt32>, pSID: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32
     // pinvoke-hint: SetLastError
-    func SetUserObjectSecurity(hObj: CPointer<Unit>, pSIRequested: CPointer<OBJECT_SECURITY_INFORMATION>, pSID: PSECURITY_DESCRIPTOR): Int32
+    func SetUserObjectSecurity(hObj: CPointer<Unit>, pSIRequested: CPointer<UInt32>, pSID: PSECURITY_DESCRIPTOR): Int32
 }
 
 @When[API_MS_WIN_SECURITY_BASE_L1_2_2 == "on"]
@@ -2998,16 +2997,16 @@ foreign {
 
 @When[NTDLL == "on"]
 foreign {
-    func RtlConvertSidToUnicodeString(UnicodeString: CPointer<Win32_Foundation.UNICODE_STRING>, Sid: PSID, AllocateDestinationString: Win32_Foundation.BOOLEAN): Int32
+    func RtlConvertSidToUnicodeString(UnicodeString: CPointer<Win32_Foundation.UNICODE_STRING>, Sid: PSID, AllocateDestinationString: UInt8): Int32
     // param-hint: NewSecurityDescriptor optional
     // param-hint: NewSecurityDescriptorLength optional
-    func RtlNormalizeSecurityDescriptor(SecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, SecurityDescriptorLength: UInt32, NewSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, NewSecurityDescriptorLength: CPointer<UInt32>, CheckOnly: Win32_Foundation.BOOLEAN): Win32_Foundation.BOOLEAN
+    func RtlNormalizeSecurityDescriptor(SecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, SecurityDescriptorLength: UInt32, NewSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, NewSecurityDescriptorLength: CPointer<UInt32>, CheckOnly: UInt8): UInt8
 }
 
 @When[Windows_Win32_Security == "on"]
-public let SECURITY_DYNAMIC_TRACKING: Win32_Foundation.BOOLEAN = 1u8
+public let SECURITY_DYNAMIC_TRACKING: UInt8 = 1u8
 @When[Windows_Win32_Security == "on"]
-public let SECURITY_STATIC_TRACKING: Win32_Foundation.BOOLEAN = 0u8
+public let SECURITY_STATIC_TRACKING: UInt8 = 0u8
 @When[Windows_Win32_Security == "on"]
 public let SECURITY_MAX_SID_SIZE: UInt32 = 68u32
 @When[Windows_Win32_Security == "on"]

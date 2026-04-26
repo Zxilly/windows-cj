@@ -4,7 +4,6 @@ package windows_sys.ApplicationModel.DataTransfer.DragDrop
 
 
 @When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
-@C
 public struct DragDropModifiers {
     public var value: UInt32 = 0
 

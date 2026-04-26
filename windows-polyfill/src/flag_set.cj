@@ -4,7 +4,7 @@ package windows_polyfill
 // Provides |, &, ! (bitwise NOT), and contains() for the four integer
 // widths used by Win32/WinRT flag enums: U32, U64, I32, I64.
 //
-// NOTE: operator func !() performs bitwise complement (like Rust's ! on integers),
+// NOTE: operator func !() performs bitwise complement,
 // NOT boolean NOT. This matches Win32 flag semantics.
 
 // ---------------------------------------------------------------------------

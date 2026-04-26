@@ -2,19 +2,13 @@
 package windows_sys.Win32.Security.Cryptography.UI
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-import windows_sys.Win32.impl as Win32_impl
+import windows_sys.Win32._impl_l0 as Win32__impl_l0
+import windows_sys.Win32._impl_l1 as Win32__impl_l1
+import windows_sys.Win32._impl_l2 as Win32__impl_l2
 
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
-public struct CERT_FILTER_DATA {
-    public var dwSize: UInt32 = 0
-    public var cExtensionChecks: UInt32 = 0
-    public var arrayExtensionChecks: CPointer<CERT_FILTER_EXTENSION_MATCH> = CPointer<CERT_FILTER_EXTENSION_MATCH>()
-    public var dwCheckingFlags: UInt32 = 0
-    public init() {}
-}
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
 @C
@@ -26,40 +20,16 @@ public struct CERT_FILTER_EXTENSION_MATCH {
     public init() {}
 }
 
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
 @C
 public struct CERT_SELECTUI_INPUT {
-    public var hStore: Win32_impl.HCERTSTORE = CPointer<Unit>()
-    public var prgpChain: CPointer<CPointer<Win32_impl.CERT_CHAIN_CONTEXT>> = CPointer<CPointer<Win32_impl.CERT_CHAIN_CONTEXT>>()
+    public var hStore: Win32__impl_l0.HCERTSTORE = CPointer<Unit>()
+    public var prgpChain: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXT>> = CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXT>>()
     public var cChain: UInt32 = 0
     public init() {}
 }
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
-public struct CERT_SELECT_STRUCT_A {
-    public var dwSize: UInt32 = 0
-    public var hwndParent: CPointer<Unit> = CPointer<Unit>()
-    public var hInstance: CPointer<Unit> = CPointer<Unit>()
-    public var pTemplateName: CPointer<UInt8> = CPointer<UInt8>()
-    public var dwFlags: CERT_SELECT_STRUCT_FLAGS = CERT_SELECT_STRUCT_FLAGS()
-    public var szTitle: CPointer<UInt8> = CPointer<UInt8>()
-    public var cCertStore: UInt32 = 0
-    public var arrayCertStore: CPointer<Win32_impl.HCERTSTORE> = CPointer<Win32_impl.HCERTSTORE>()
-    public var szPurposeOid: CPointer<UInt8> = CPointer<UInt8>()
-    public var cCertContext: UInt32 = 0
-    public var arrayCertContext: CPointer<CPointer<Win32_impl.CERT_CONTEXT>> = CPointer<CPointer<Win32_impl.CERT_CONTEXT>>()
-    public var lCustData: IntNative = 0
-    public var pfnHook: PFNCMHOOKPROC = { _, _, _, _ => 0 }
-    public var pfnFilter: PFNCMFILTERPROC = { _, _, _, _ => 0 }
-    public var szHelpFileName: CPointer<UInt8> = CPointer<UInt8>()
-    public var dwHelpId: UInt32 = 0
-    public var hprov: UIntNative = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
 public struct CERT_SELECT_STRUCT_FLAGS {
     public var value: UInt32 = 0
 
@@ -110,83 +80,6 @@ public let CERT_SELECT_STRUCT_FLAGS_CSS_ENABLETEMPLATE: CERT_SELECT_STRUCT_FLAGS
 public let CERT_SELECT_STRUCT_FLAGS_CSS_ENABLETEMPLATEHANDLE: CERT_SELECT_STRUCT_FLAGS = CERT_SELECT_STRUCT_FLAGS(64)
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
-public struct CERT_SELECT_STRUCT_W {
-    public var dwSize: UInt32 = 0
-    public var hwndParent: CPointer<Unit> = CPointer<Unit>()
-    public var hInstance: CPointer<Unit> = CPointer<Unit>()
-    public var pTemplateName: CPointer<UInt16> = CPointer<UInt16>()
-    public var dwFlags: CERT_SELECT_STRUCT_FLAGS = CERT_SELECT_STRUCT_FLAGS()
-    public var szTitle: CPointer<UInt16> = CPointer<UInt16>()
-    public var cCertStore: UInt32 = 0
-    public var arrayCertStore: CPointer<Win32_impl.HCERTSTORE> = CPointer<Win32_impl.HCERTSTORE>()
-    public var szPurposeOid: CPointer<UInt8> = CPointer<UInt8>()
-    public var cCertContext: UInt32 = 0
-    public var arrayCertContext: CPointer<CPointer<Win32_impl.CERT_CONTEXT>> = CPointer<CPointer<Win32_impl.CERT_CONTEXT>>()
-    public var lCustData: IntNative = 0
-    public var pfnHook: PFNCMHOOKPROC = { _, _, _, _ => 0 }
-    public var pfnFilter: PFNCMFILTERPROC = { _, _, _, _ => 0 }
-    public var szHelpFileName: CPointer<UInt16> = CPointer<UInt16>()
-    public var dwHelpId: UInt32 = 0
-    public var hprov: UIntNative = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
-public struct CERT_VERIFY_CERTIFICATE_TRUST {
-    public var cbSize: UInt32 = 0
-    public var pccert: CPointer<Win32_impl.CERT_CONTEXT> = CPointer<Win32_impl.CERT_CONTEXT>()
-    public var dwFlags: UInt32 = 0
-    public var dwIgnoreErr: UInt32 = 0
-    public var pdwErrors: CPointer<UInt32> = CPointer<UInt32>()
-    public var pszUsageOid: CPointer<UInt8> = CPointer<UInt8>()
-    public var hprov: UIntNative = 0
-    public var cRootStores: UInt32 = 0
-    public var rghstoreRoots: CPointer<Win32_impl.HCERTSTORE> = CPointer<Win32_impl.HCERTSTORE>()
-    public var cStores: UInt32 = 0
-    public var rghstoreCAs: CPointer<Win32_impl.HCERTSTORE> = CPointer<Win32_impl.HCERTSTORE>()
-    public var cTrustStores: UInt32 = 0
-    public var rghstoreTrust: CPointer<Win32_impl.HCERTSTORE> = CPointer<Win32_impl.HCERTSTORE>()
-    public var lCustData: IntNative = 0
-    public var pfnTrustHelper: PFNTRUSTHELPER = { _, _, _, _ => 0 }
-    public var pcChain: CPointer<UInt32> = CPointer<UInt32>()
-    public var prgChain: CPointer<CPointer<CPointer<Win32_impl.CERT_CONTEXT>>> = CPointer<CPointer<CPointer<Win32_impl.CERT_CONTEXT>>>()
-    public var prgdwErrors: CPointer<CPointer<UInt32>> = CPointer<CPointer<UInt32>>()
-    public var prgpbTrustInfo: CPointer<CPointer<Win32_impl.CRYPT_INTEGER_BLOB>> = CPointer<CPointer<Win32_impl.CRYPT_INTEGER_BLOB>>()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
-public struct CERT_VIEWPROPERTIES_STRUCT_A {
-    public var dwSize: UInt32 = 0
-    public var hwndParent: CPointer<Unit> = CPointer<Unit>()
-    public var hInstance: CPointer<Unit> = CPointer<Unit>()
-    public var dwFlags: CERT_VIEWPROPERTIES_STRUCT_FLAGS = CERT_VIEWPROPERTIES_STRUCT_FLAGS()
-    public var szTitle: CPointer<UInt8> = CPointer<UInt8>()
-    public var pCertContext: CPointer<Win32_impl.CERT_CONTEXT> = CPointer<Win32_impl.CERT_CONTEXT>()
-    public var arrayPurposes: CPointer<CPointer<UInt8>> = CPointer<CPointer<UInt8>>()
-    public var cArrayPurposes: UInt32 = 0
-    public var cRootStores: UInt32 = 0
-    public var rghstoreRoots: CPointer<Win32_impl.HCERTSTORE> = CPointer<Win32_impl.HCERTSTORE>()
-    public var cStores: UInt32 = 0
-    public var rghstoreCAs: CPointer<Win32_impl.HCERTSTORE> = CPointer<Win32_impl.HCERTSTORE>()
-    public var cTrustStores: UInt32 = 0
-    public var rghstoreTrust: CPointer<Win32_impl.HCERTSTORE> = CPointer<Win32_impl.HCERTSTORE>()
-    public var hprov: UIntNative = 0
-    public var lCustData: IntNative = 0
-    public var dwPad: UInt32 = 0
-    public var szHelpFileName: CPointer<UInt8> = CPointer<UInt8>()
-    public var dwHelpId: UInt32 = 0
-    public var nStartPage: UInt32 = 0
-    public var cArrayPropSheetPages: UInt32 = 0
-    public var arrayPropSheetPages: CPointer<Win32_impl.PROPSHEETPAGEA> = CPointer<Win32_impl.PROPSHEETPAGEA>()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
 public struct CERT_VIEWPROPERTIES_STRUCT_FLAGS {
     public var value: UInt32 = 0
 
@@ -248,23 +141,23 @@ public let CERT_VIEWPROPERTIES_STRUCT_FLAGS_CM_HIDE_DETAILPAGE: CERT_VIEWPROPERT
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
 public let CERT_VIEWPROPERTIES_STRUCT_FLAGS_CM_ADD_CERT_STORES: CERT_VIEWPROPERTIES_STRUCT_FLAGS = CERT_VIEWPROPERTIES_STRUCT_FLAGS(512)
 
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
+@When[Windows_Win32_Security_Cryptography_UI == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_UI_Controls == "on")]
 @C
 public struct CERT_VIEWPROPERTIES_STRUCT_W {
     public var dwSize: UInt32 = 0
     public var hwndParent: CPointer<Unit> = CPointer<Unit>()
     public var hInstance: CPointer<Unit> = CPointer<Unit>()
-    public var dwFlags: CERT_VIEWPROPERTIES_STRUCT_FLAGS = CERT_VIEWPROPERTIES_STRUCT_FLAGS()
+    public var dwFlags: UInt32 = 0
     public var szTitle: CPointer<UInt16> = CPointer<UInt16>()
-    public var pCertContext: CPointer<Win32_impl.CERT_CONTEXT> = CPointer<Win32_impl.CERT_CONTEXT>()
+    public var pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXT> = CPointer<Win32__impl_l2.CERT_CONTEXT>()
     public var arrayPurposes: CPointer<CPointer<UInt8>> = CPointer<CPointer<UInt8>>()
     public var cArrayPurposes: UInt32 = 0
     public var cRootStores: UInt32 = 0
-    public var rghstoreRoots: CPointer<Win32_impl.HCERTSTORE> = CPointer<Win32_impl.HCERTSTORE>()
+    public var rghstoreRoots: CPointer<Win32__impl_l0.HCERTSTORE> = CPointer<Win32__impl_l0.HCERTSTORE>()
     public var cStores: UInt32 = 0
-    public var rghstoreCAs: CPointer<Win32_impl.HCERTSTORE> = CPointer<Win32_impl.HCERTSTORE>()
+    public var rghstoreCAs: CPointer<Win32__impl_l0.HCERTSTORE> = CPointer<Win32__impl_l0.HCERTSTORE>()
     public var cTrustStores: UInt32 = 0
-    public var rghstoreTrust: CPointer<Win32_impl.HCERTSTORE> = CPointer<Win32_impl.HCERTSTORE>()
+    public var rghstoreTrust: CPointer<Win32__impl_l0.HCERTSTORE> = CPointer<Win32__impl_l0.HCERTSTORE>()
     public var hprov: UIntNative = 0
     public var lCustData: IntNative = 0
     public var dwPad: UInt32 = 0
@@ -272,7 +165,7 @@ public struct CERT_VIEWPROPERTIES_STRUCT_W {
     public var dwHelpId: UInt32 = 0
     public var nStartPage: UInt32 = 0
     public var cArrayPropSheetPages: UInt32 = 0
-    public var arrayPropSheetPages: CPointer<Win32_impl.PROPSHEETPAGEA> = CPointer<Win32_impl.PROPSHEETPAGEA>()
+    public var arrayPropSheetPages: CPointer<Win32__impl_l1.PROPSHEETPAGEA> = CPointer<Win32__impl_l1.PROPSHEETPAGEA>()
     public init() {}
 }
 
@@ -287,16 +180,15 @@ public struct CRYPTUI_CERT_MGR_STRUCT {
     public init() {}
 }
 
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
 @C
 public struct CRYPTUI_INITDIALOG_STRUCT {
     public var lParam: IntNative = 0
-    public var pCertContext: CPointer<Win32_impl.CERT_CONTEXT> = CPointer<Win32_impl.CERT_CONTEXT>()
+    public var pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXT> = CPointer<Win32__impl_l2.CERT_CONTEXT>()
     public init() {}
 }
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
 public struct CRYPTUI_VIEWCERTIFICATE_FLAGS {
     public var value: UInt32 = 0
 
@@ -388,14 +280,14 @@ public let CRYPTUI_VIEWCERTIFICATE_FLAGS_CRYPTUI_DISABLE_ISSUERSTATEMENT: CRYPTU
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
 public let CRYPTUI_VIEWCERTIFICATE_FLAGS_CRYPTUI_CACHE_ONLY_URL_RETRIEVAL: CRYPTUI_VIEWCERTIFICATE_FLAGS = CRYPTUI_VIEWCERTIFICATE_FLAGS(262144)
 
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
+@When[Windows_Win32_Security_Cryptography_UI == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_UI_Controls == "on")]
 @C
 public struct CRYPTUI_VIEWCERTIFICATE_STRUCTA {
     public var dwSize: UInt32 = 0
     public var hwndParent: CPointer<Unit> = CPointer<Unit>()
-    public var dwFlags: CRYPTUI_VIEWCERTIFICATE_FLAGS = CRYPTUI_VIEWCERTIFICATE_FLAGS()
+    public var dwFlags: UInt32 = 0
     public var szTitle: CPointer<UInt8> = CPointer<UInt8>()
-    public var pCertContext: CPointer<Win32_impl.CERT_CONTEXT> = CPointer<Win32_impl.CERT_CONTEXT>()
+    public var pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXT> = CPointer<Win32__impl_l2.CERT_CONTEXT>()
     public var rgszPurposes: CPointer<CPointer<UInt8>> = CPointer<CPointer<UInt8>>()
     public var cPurposes: UInt32 = 0
     public var Anonymous: CRYPTUI_VIEWCERTIFICATE_STRUCTA__Anonymous_e__Union = CRYPTUI_VIEWCERTIFICATE_STRUCTA__Anonymous_e__Union()
@@ -405,71 +297,74 @@ public struct CRYPTUI_VIEWCERTIFICATE_STRUCTA {
     public var fCounterSigner: Int32 = 0
     public var idxCounterSigner: UInt32 = 0
     public var cStores: UInt32 = 0
-    public var rghStores: CPointer<Win32_impl.HCERTSTORE> = CPointer<Win32_impl.HCERTSTORE>()
+    public var rghStores: CPointer<Win32__impl_l0.HCERTSTORE> = CPointer<Win32__impl_l0.HCERTSTORE>()
     public var cPropSheetPages: UInt32 = 0
-    public var rgPropSheetPages: CPointer<Win32_impl.PROPSHEETPAGEA> = CPointer<Win32_impl.PROPSHEETPAGEA>()
+    public var rgPropSheetPages: CPointer<Win32__impl_l1.PROPSHEETPAGEA> = CPointer<Win32__impl_l1.PROPSHEETPAGEA>()
     public var nStartPage: UInt32 = 0
     public init() {}
 }
 
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+@When[Windows_Win32_Security_Cryptography_UI == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_UI_Controls == "on")]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct CRYPTUI_VIEWCERTIFICATE_STRUCTA__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func pCryptProviderData(): CPointer<Win32_impl.CRYPT_PROVIDER_DATA> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CRYPT_PROVIDER_DATA>>(p)
-            return ptr.read()
+    public mut prop pCryptProviderData: CPointer<Win32__impl_l2.CRYPT_PROVIDER_DATA> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CRYPT_PROVIDER_DATA>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CRYPT_PROVIDER_DATA>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_pCryptProviderData(val: CPointer<Win32_impl.CRYPT_PROVIDER_DATA>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CRYPT_PROVIDER_DATA>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop hwvtStateData: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func hwvtStateData(): CPointer<Unit> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_hwvtStateData(val: CPointer<Unit>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
+@When[Windows_Win32_Security_Cryptography_UI == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_UI_Controls == "on")]
 @C
 public struct CRYPTUI_VIEWCERTIFICATE_STRUCTW {
     public var dwSize: UInt32 = 0
     public var hwndParent: CPointer<Unit> = CPointer<Unit>()
-    public var dwFlags: CRYPTUI_VIEWCERTIFICATE_FLAGS = CRYPTUI_VIEWCERTIFICATE_FLAGS()
+    public var dwFlags: UInt32 = 0
     public var szTitle: CPointer<UInt16> = CPointer<UInt16>()
-    public var pCertContext: CPointer<Win32_impl.CERT_CONTEXT> = CPointer<Win32_impl.CERT_CONTEXT>()
+    public var pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXT> = CPointer<Win32__impl_l2.CERT_CONTEXT>()
     public var rgszPurposes: CPointer<CPointer<UInt8>> = CPointer<CPointer<UInt8>>()
     public var cPurposes: UInt32 = 0
     public var Anonymous: CRYPTUI_VIEWCERTIFICATE_STRUCTW__Anonymous_e__Union = CRYPTUI_VIEWCERTIFICATE_STRUCTW__Anonymous_e__Union()
@@ -479,65 +374,67 @@ public struct CRYPTUI_VIEWCERTIFICATE_STRUCTW {
     public var fCounterSigner: Int32 = 0
     public var idxCounterSigner: UInt32 = 0
     public var cStores: UInt32 = 0
-    public var rghStores: CPointer<Win32_impl.HCERTSTORE> = CPointer<Win32_impl.HCERTSTORE>()
+    public var rghStores: CPointer<Win32__impl_l0.HCERTSTORE> = CPointer<Win32__impl_l0.HCERTSTORE>()
     public var cPropSheetPages: UInt32 = 0
-    public var rgPropSheetPages: CPointer<Win32_impl.PROPSHEETPAGEW> = CPointer<Win32_impl.PROPSHEETPAGEW>()
+    public var rgPropSheetPages: CPointer<Win32__impl_l1.PROPSHEETPAGEW> = CPointer<Win32__impl_l1.PROPSHEETPAGEW>()
     public var nStartPage: UInt32 = 0
     public init() {}
 }
 
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+@When[Windows_Win32_Security_Cryptography_UI == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_UI_Controls == "on")]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct CRYPTUI_VIEWCERTIFICATE_STRUCTW__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func pCryptProviderData(): CPointer<Win32_impl.CRYPT_PROVIDER_DATA> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CRYPT_PROVIDER_DATA>>(p)
-            return ptr.read()
+    public mut prop pCryptProviderData: CPointer<Win32__impl_l2.CRYPT_PROVIDER_DATA> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CRYPT_PROVIDER_DATA>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CRYPT_PROVIDER_DATA>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_pCryptProviderData(val: CPointer<Win32_impl.CRYPT_PROVIDER_DATA>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CRYPT_PROVIDER_DATA>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop hwvtStateData: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func hwvtStateData(): CPointer<Unit> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_hwvtStateData(val: CPointer<Unit>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
 public struct CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE {
     public var value: UInt32 = 0
 
@@ -565,7 +462,6 @@ public let CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE_CRYPTUI_WIZ_DIGITAL_SIGN_A
 public let CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE_CRYPTUI_WIZ_DIGITAL_SIGN_ADD_NONE: CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE = CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE(0)
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
 public struct CRYPTUI_WIZ_DIGITAL_SIGN {
     public var value: UInt32 = 0
 
@@ -608,220 +504,10 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO {
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
 @C
-public struct CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO {
-    public var dwSize: UInt32 = 0
-    public var pwszSigningCertFileName: CPointer<UInt16> = CPointer<UInt16>()
-    public var dwPvkChoice: CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION = CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION()
-    public var Anonymous: CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO__Anonymous_e__Union = CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func pPvkFileInfo(): CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pPvkFileInfo(val: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pPvkProvInfo(): CPointer<Win32_impl.CRYPT_KEY_PROV_INFO> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CRYPT_KEY_PROV_INFO>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pPvkProvInfo(val: CPointer<Win32_impl.CRYPT_KEY_PROV_INFO>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CRYPT_KEY_PROV_INFO>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
 public struct CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT {
     public var dwSize: UInt32 = 0
     public var cbBlob: UInt32 = 0
     public var pbBlob: CPointer<UInt8> = CPointer<UInt8>()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
-public struct CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO {
-    public var dwSize: UInt32 = 0
-    public var dwAttrFlags: CRYPTUI_WIZ_DIGITAL_SIGN_SIG_TYPE = CRYPTUI_WIZ_DIGITAL_SIGN_SIG_TYPE()
-    public var pwszDescription: CPointer<UInt16> = CPointer<UInt16>()
-    public var pwszMoreInfoLocation: CPointer<UInt16> = CPointer<UInt16>()
-    public var pszHashAlg: CPointer<UInt8> = CPointer<UInt8>()
-    public var pwszSigningCertDisplayString: CPointer<UInt16> = CPointer<UInt16>()
-    public var hAdditionalCertStore: Win32_impl.HCERTSTORE = CPointer<Unit>()
-    public var psAuthenticated: CPointer<Win32_impl.CRYPT_ATTRIBUTES> = CPointer<Win32_impl.CRYPT_ATTRIBUTES>()
-    public var psUnauthenticated: CPointer<Win32_impl.CRYPT_ATTRIBUTES> = CPointer<Win32_impl.CRYPT_ATTRIBUTES>()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
-public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO {
-    public var dwSize: UInt32 = 0
-    public var dwSubjectChoice: CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT = CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT()
-    public var Anonymous1: CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous1_e__Union = CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous1_e__Union()
-    public var dwSigningCertChoice: CRYPTUI_WIZ_DIGITAL_SIGN = CRYPTUI_WIZ_DIGITAL_SIGN()
-    public var Anonymous2: CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous2_e__Union = CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous2_e__Union()
-    public var pwszTimestampURL: CPointer<UInt16> = CPointer<UInt16>()
-    public var dwAdditionalCertChoice: CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE = CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE()
-    public var pSignExtInfo: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO> = CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO>()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func pwszFileName(): CPointer<UInt16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pwszFileName(val: CPointer<UInt16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pSignBlobInfo(): CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pSignBlobInfo(val: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func pSigningCertContext(): CPointer<Win32_impl.CERT_CONTEXT> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CERT_CONTEXT>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pSigningCertContext(val: CPointer<Win32_impl.CERT_CONTEXT>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CERT_CONTEXT>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pSigningCertStore(): CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pSigningCertStore(val: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pSigningCertPvkInfo(): CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pSigningCertPvkInfo(val: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
     public init() {}
 }
 
@@ -836,7 +522,6 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO {
 }
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
 public struct CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION {
     public var value: UInt32 = 0
 
@@ -861,7 +546,6 @@ public let CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION_CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE
 public let CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION_CRYPTUI_WIZ_DIGITAL_SIGN_PVK_PROV: CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION = CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION(2)
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
 public struct CRYPTUI_WIZ_DIGITAL_SIGN_SIG_TYPE {
     public var value: UInt32 = 0
 
@@ -886,18 +570,6 @@ public let CRYPTUI_WIZ_DIGITAL_SIGN_SIG_TYPE_CRYPTUI_WIZ_DIGITAL_SIGN_COMMERCIAL
 public let CRYPTUI_WIZ_DIGITAL_SIGN_SIG_TYPE_CRYPTUI_WIZ_DIGITAL_SIGN_INDIVIDUAL: CRYPTUI_WIZ_DIGITAL_SIGN_SIG_TYPE = CRYPTUI_WIZ_DIGITAL_SIGN_SIG_TYPE(2)
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
-public struct CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO {
-    public var dwSize: UInt32 = 0
-    public var cCertStore: UInt32 = 0
-    public var rghCertStore: CPointer<Win32_impl.HCERTSTORE> = CPointer<Win32_impl.HCERTSTORE>()
-    public var pFilterCallback: PFNCFILTERPROC = { _, _, _ => 0 }
-    public var pvCallbackData: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
 public struct CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT {
     public var value: UInt32 = 0
 
@@ -925,19 +597,6 @@ public let CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_FIL
 public let CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_NONE: CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT = CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT(0)
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
-public struct CRYPTUI_WIZ_EXPORT_CERTCONTEXT_INFO {
-    public var dwSize: UInt32 = 0
-    public var dwExportFormat: CRYPTUI_WIZ_EXPORT_FORMAT = CRYPTUI_WIZ_EXPORT_FORMAT()
-    public var fExportChain: Int32 = 0
-    public var fExportPrivateKeys: Int32 = 0
-    public var pwszPassword: CPointer<UInt16> = CPointer<UInt16>()
-    public var fStrongEncryption: Int32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
 public struct CRYPTUI_WIZ_EXPORT_FORMAT {
     public var value: UInt32 = 0
 
@@ -974,111 +633,6 @@ public let CRYPTUI_WIZ_EXPORT_FORMAT_CRYPTUI_WIZ_EXPORT_FORMAT_CRL: CRYPTUI_WIZ_
 public let CRYPTUI_WIZ_EXPORT_FORMAT_CRYPTUI_WIZ_EXPORT_FORMAT_CTL: CRYPTUI_WIZ_EXPORT_FORMAT = CRYPTUI_WIZ_EXPORT_FORMAT(7)
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
-public struct CRYPTUI_WIZ_EXPORT_INFO {
-    public var dwSize: UInt32 = 0
-    public var pwszExportFileName: CPointer<UInt16> = CPointer<UInt16>()
-    public var dwSubjectChoice: CRYPTUI_WIZ_EXPORT_SUBJECT = CRYPTUI_WIZ_EXPORT_SUBJECT()
-    public var Anonymous: CRYPTUI_WIZ_EXPORT_INFO__Anonymous_e__Union = CRYPTUI_WIZ_EXPORT_INFO__Anonymous_e__Union()
-    public var cStores: UInt32 = 0
-    public var rghStores: CPointer<Win32_impl.HCERTSTORE> = CPointer<Win32_impl.HCERTSTORE>()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct CRYPTUI_WIZ_EXPORT_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func pCertContext(): CPointer<Win32_impl.CERT_CONTEXT> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CERT_CONTEXT>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pCertContext(val: CPointer<Win32_impl.CERT_CONTEXT>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CERT_CONTEXT>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pctlContext(): CPointer<Win32_impl.CTL_CONTEXT> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CTL_CONTEXT>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pctlContext(val: CPointer<Win32_impl.CTL_CONTEXT>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CTL_CONTEXT>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pcrlContext(): CPointer<Win32_impl.CRL_CONTEXT> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CRL_CONTEXT>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pcrlContext(val: CPointer<Win32_impl.CRL_CONTEXT>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CRL_CONTEXT>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func hCertStore(): Win32_impl.HCERTSTORE {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_impl.HCERTSTORE>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_hCertStore(val: Win32_impl.HCERTSTORE): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_impl.HCERTSTORE>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
 public struct CRYPTUI_WIZ_EXPORT_SUBJECT {
     public var value: UInt32 = 0
 
@@ -1112,7 +666,6 @@ public let CRYPTUI_WIZ_EXPORT_SUBJECT_CRYPTUI_WIZ_EXPORT_CERT_STORE: CRYPTUI_WIZ
 public let CRYPTUI_WIZ_EXPORT_SUBJECT_CRYPTUI_WIZ_EXPORT_CERT_STORE_CERTIFICATES_ONLY: CRYPTUI_WIZ_EXPORT_SUBJECT = CRYPTUI_WIZ_EXPORT_SUBJECT(5)
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
 public struct CRYPTUI_WIZ_FLAGS {
     public var value: UInt32 = 0
 
@@ -1181,131 +734,6 @@ public let CRYPTUI_WIZ_FLAGS_CRYPTUI_WIZ_EXPORT_PRIVATE_KEY: CRYPTUI_WIZ_FLAGS =
 public let CRYPTUI_WIZ_FLAGS_CRYPTUI_WIZ_EXPORT_NO_DELETE_PRIVATE_KEY: CRYPTUI_WIZ_FLAGS = CRYPTUI_WIZ_FLAGS(512)
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
-public struct CRYPTUI_WIZ_IMPORT_SRC_INFO {
-    public var dwSize: UInt32 = 0
-    public var dwSubjectChoice: CRYPTUI_WIZ_IMPORT_SUBJECT_OPTION = CRYPTUI_WIZ_IMPORT_SUBJECT_OPTION()
-    public var Anonymous: CRYPTUI_WIZ_IMPORT_SRC_INFO__Anonymous_e__Union = CRYPTUI_WIZ_IMPORT_SRC_INFO__Anonymous_e__Union()
-    public var dwFlags: Win32_impl.CRYPT_KEY_FLAGS = Win32_impl.CRYPT_KEY_FLAGS()
-    public var pwszPassword: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct CRYPTUI_WIZ_IMPORT_SRC_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func pwszFileName(): CPointer<UInt16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pwszFileName(val: CPointer<UInt16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pCertContext(): CPointer<Win32_impl.CERT_CONTEXT> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CERT_CONTEXT>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pCertContext(val: CPointer<Win32_impl.CERT_CONTEXT>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CERT_CONTEXT>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pctlContext(): CPointer<Win32_impl.CTL_CONTEXT> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CTL_CONTEXT>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pctlContext(val: CPointer<Win32_impl.CTL_CONTEXT>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CTL_CONTEXT>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pcrlContext(): CPointer<Win32_impl.CRL_CONTEXT> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CRL_CONTEXT>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pcrlContext(val: CPointer<Win32_impl.CRL_CONTEXT>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_impl.CRL_CONTEXT>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func hCertStore(): Win32_impl.HCERTSTORE {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_impl.HCERTSTORE>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_hCertStore(val: Win32_impl.HCERTSTORE): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_impl.HCERTSTORE>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
 public struct CRYPTUI_WIZ_IMPORT_SUBJECT_OPTION {
     public var value: UInt32 = 0
 
@@ -1339,16 +767,6 @@ public let CRYPTUI_WIZ_IMPORT_SUBJECT_OPTION_CRYPTUI_WIZ_IMPORT_SUBJECT_CRL_CONT
 public let CRYPTUI_WIZ_IMPORT_SUBJECT_OPTION_CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_STORE: CRYPTUI_WIZ_IMPORT_SUBJECT_OPTION = CRYPTUI_WIZ_IMPORT_SUBJECT_OPTION(5)
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
-public struct CTL_MODIFY_REQUEST {
-    public var pccert: CPointer<Win32_impl.CERT_CONTEXT> = CPointer<Win32_impl.CERT_CONTEXT>()
-    public var dwOperation: CTL_MODIFY_REQUEST_OPERATION = CTL_MODIFY_REQUEST_OPERATION()
-    public var dwError: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-@C
 public struct CTL_MODIFY_REQUEST_OPERATION {
     public var value: UInt32 = 0
 
@@ -1375,33 +793,642 @@ public let CTL_MODIFY_REQUEST_OPERATION_CTL_MODIFY_REQUEST_ADD_NOT_TRUSTED: CTL_
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
 public let CTL_MODIFY_REQUEST_OPERATION_CTL_MODIFY_REQUEST_REMOVE: CTL_MODIFY_REQUEST_OPERATION = CTL_MODIFY_REQUEST_OPERATION(2)
 
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-public type PFNCFILTERPROC = CFunc<(CPointer<Win32_impl.CERT_CONTEXT>, CPointer<Int32>, CPointer<Unit>) -> Int32>
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+public type PFNCFILTERPROC = CFunc<(CPointer<Win32__impl_l2.CERT_CONTEXT>, CPointer<Int32>, CPointer<Unit>) -> Int32>
 
-@When[Windows_Win32_Security_Cryptography_UI == "on"]
-public type PFNCMFILTERPROC = CFunc<(CPointer<Win32_impl.CERT_CONTEXT>, IntNative, UInt32, UInt32) -> Int32>
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+public type PFNCMFILTERPROC = CFunc<(CPointer<Win32__impl_l2.CERT_CONTEXT>, IntNative, UInt32, UInt32) -> Int32>
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
 public type PFNCMHOOKPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> UInt32>
 
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+public type PFNTRUSTHELPER = CFunc<(CPointer<Win32__impl_l2.CERT_CONTEXT>, IntNative, Int32, CPointer<UInt8>) -> Int32>
+
 @When[Windows_Win32_Security_Cryptography_UI == "on"]
-public type PFNTRUSTHELPER = CFunc<(CPointer<Win32_impl.CERT_CONTEXT>, IntNative, Int32, CPointer<UInt8>) -> Int32>
+@C
+public struct CERT_FILTER_DATA {
+    public var dwSize: UInt32 = 0
+    public var cExtensionChecks: UInt32 = 0
+    public var arrayExtensionChecks: CPointer<CERT_FILTER_EXTENSION_MATCH> = CPointer<CERT_FILTER_EXTENSION_MATCH>()
+    public var dwCheckingFlags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct CERT_SELECT_STRUCT_A {
+    public var dwSize: UInt32 = 0
+    public var hwndParent: CPointer<Unit> = CPointer<Unit>()
+    public var hInstance: CPointer<Unit> = CPointer<Unit>()
+    public var pTemplateName: CPointer<UInt8> = CPointer<UInt8>()
+    public var dwFlags: UInt32 = 0
+    public var szTitle: CPointer<UInt8> = CPointer<UInt8>()
+    public var cCertStore: UInt32 = 0
+    public var arrayCertStore: CPointer<Win32__impl_l0.HCERTSTORE> = CPointer<Win32__impl_l0.HCERTSTORE>()
+    public var szPurposeOid: CPointer<UInt8> = CPointer<UInt8>()
+    public var cCertContext: UInt32 = 0
+    public var arrayCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>> = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>>()
+    public var lCustData: IntNative = 0
+    public var pfnHook: PFNCMHOOKPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var pfnFilter: PFNCMFILTERPROC = CFunc<(CPointer<Win32__impl_l2.CERT_CONTEXT>, IntNative, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public var szHelpFileName: CPointer<UInt8> = CPointer<UInt8>()
+    public var dwHelpId: UInt32 = 0
+    public var hprov: UIntNative = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct CERT_SELECT_STRUCT_W {
+    public var dwSize: UInt32 = 0
+    public var hwndParent: CPointer<Unit> = CPointer<Unit>()
+    public var hInstance: CPointer<Unit> = CPointer<Unit>()
+    public var pTemplateName: CPointer<UInt16> = CPointer<UInt16>()
+    public var dwFlags: UInt32 = 0
+    public var szTitle: CPointer<UInt16> = CPointer<UInt16>()
+    public var cCertStore: UInt32 = 0
+    public var arrayCertStore: CPointer<Win32__impl_l0.HCERTSTORE> = CPointer<Win32__impl_l0.HCERTSTORE>()
+    public var szPurposeOid: CPointer<UInt8> = CPointer<UInt8>()
+    public var cCertContext: UInt32 = 0
+    public var arrayCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>> = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>>()
+    public var lCustData: IntNative = 0
+    public var pfnHook: PFNCMHOOKPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var pfnFilter: PFNCMFILTERPROC = CFunc<(CPointer<Win32__impl_l2.CERT_CONTEXT>, IntNative, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public var szHelpFileName: CPointer<UInt16> = CPointer<UInt16>()
+    public var dwHelpId: UInt32 = 0
+    public var hprov: UIntNative = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct CERT_VERIFY_CERTIFICATE_TRUST {
+    public var cbSize: UInt32 = 0
+    public var pccert: CPointer<Win32__impl_l2.CERT_CONTEXT> = CPointer<Win32__impl_l2.CERT_CONTEXT>()
+    public var dwFlags: UInt32 = 0
+    public var dwIgnoreErr: UInt32 = 0
+    public var pdwErrors: CPointer<UInt32> = CPointer<UInt32>()
+    public var pszUsageOid: CPointer<UInt8> = CPointer<UInt8>()
+    public var hprov: UIntNative = 0
+    public var cRootStores: UInt32 = 0
+    public var rghstoreRoots: CPointer<Win32__impl_l0.HCERTSTORE> = CPointer<Win32__impl_l0.HCERTSTORE>()
+    public var cStores: UInt32 = 0
+    public var rghstoreCAs: CPointer<Win32__impl_l0.HCERTSTORE> = CPointer<Win32__impl_l0.HCERTSTORE>()
+    public var cTrustStores: UInt32 = 0
+    public var rghstoreTrust: CPointer<Win32__impl_l0.HCERTSTORE> = CPointer<Win32__impl_l0.HCERTSTORE>()
+    public var lCustData: IntNative = 0
+    public var pfnTrustHelper: PFNTRUSTHELPER = CFunc<(CPointer<Win32__impl_l2.CERT_CONTEXT>, IntNative, Int32, CPointer<UInt8>) -> Int32>(CPointer<Unit>())
+    public var pcChain: CPointer<UInt32> = CPointer<UInt32>()
+    public var prgChain: CPointer<CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>>> = CPointer<CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>>>()
+    public var prgdwErrors: CPointer<CPointer<UInt32>> = CPointer<CPointer<UInt32>>()
+    public var prgpbTrustInfo: CPointer<CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOB>> = CPointer<CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOB>>()
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_UI_Controls == "on")]
+@C
+public struct CERT_VIEWPROPERTIES_STRUCT_A {
+    public var dwSize: UInt32 = 0
+    public var hwndParent: CPointer<Unit> = CPointer<Unit>()
+    public var hInstance: CPointer<Unit> = CPointer<Unit>()
+    public var dwFlags: UInt32 = 0
+    public var szTitle: CPointer<UInt8> = CPointer<UInt8>()
+    public var pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXT> = CPointer<Win32__impl_l2.CERT_CONTEXT>()
+    public var arrayPurposes: CPointer<CPointer<UInt8>> = CPointer<CPointer<UInt8>>()
+    public var cArrayPurposes: UInt32 = 0
+    public var cRootStores: UInt32 = 0
+    public var rghstoreRoots: CPointer<Win32__impl_l0.HCERTSTORE> = CPointer<Win32__impl_l0.HCERTSTORE>()
+    public var cStores: UInt32 = 0
+    public var rghstoreCAs: CPointer<Win32__impl_l0.HCERTSTORE> = CPointer<Win32__impl_l0.HCERTSTORE>()
+    public var cTrustStores: UInt32 = 0
+    public var rghstoreTrust: CPointer<Win32__impl_l0.HCERTSTORE> = CPointer<Win32__impl_l0.HCERTSTORE>()
+    public var hprov: UIntNative = 0
+    public var lCustData: IntNative = 0
+    public var dwPad: UInt32 = 0
+    public var szHelpFileName: CPointer<UInt8> = CPointer<UInt8>()
+    public var dwHelpId: UInt32 = 0
+    public var nStartPage: UInt32 = 0
+    public var cArrayPropSheetPages: UInt32 = 0
+    public var arrayPropSheetPages: CPointer<Win32__impl_l1.PROPSHEETPAGEA> = CPointer<Win32__impl_l1.PROPSHEETPAGEA>()
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO {
+    public var dwSize: UInt32 = 0
+    public var pwszSigningCertFileName: CPointer<UInt16> = CPointer<UInt16>()
+    public var dwPvkChoice: UInt32 = 0
+    public var Anonymous: CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO__Anonymous_e__Union = CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop pPvkFileInfo: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pPvkProvInfo: CPointer<Win32__impl_l1.CRYPT_KEY_PROV_INFO> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l1.CRYPT_KEY_PROV_INFO>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l1.CRYPT_KEY_PROV_INFO>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO {
+    public var dwSize: UInt32 = 0
+    public var dwAttrFlags: UInt32 = 0
+    public var pwszDescription: CPointer<UInt16> = CPointer<UInt16>()
+    public var pwszMoreInfoLocation: CPointer<UInt16> = CPointer<UInt16>()
+    public var pszHashAlg: CPointer<UInt8> = CPointer<UInt8>()
+    public var pwszSigningCertDisplayString: CPointer<UInt16> = CPointer<UInt16>()
+    public var hAdditionalCertStore: Win32__impl_l0.HCERTSTORE = CPointer<Unit>()
+    public var psAuthenticated: CPointer<Win32__impl_l1.CRYPT_ATTRIBUTES> = CPointer<Win32__impl_l1.CRYPT_ATTRIBUTES>()
+    public var psUnauthenticated: CPointer<Win32__impl_l1.CRYPT_ATTRIBUTES> = CPointer<Win32__impl_l1.CRYPT_ATTRIBUTES>()
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO {
+    public var dwSize: UInt32 = 0
+    public var cCertStore: UInt32 = 0
+    public var rghCertStore: CPointer<Win32__impl_l0.HCERTSTORE> = CPointer<Win32__impl_l0.HCERTSTORE>()
+    public var pFilterCallback: PFNCFILTERPROC = CFunc<(CPointer<Win32__impl_l2.CERT_CONTEXT>, CPointer<Int32>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var pvCallbackData: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on"]
+@C
+public struct CRYPTUI_WIZ_EXPORT_CERTCONTEXT_INFO {
+    public var dwSize: UInt32 = 0
+    public var dwExportFormat: UInt32 = 0
+    public var fExportChain: Int32 = 0
+    public var fExportPrivateKeys: Int32 = 0
+    public var pwszPassword: CPointer<UInt16> = CPointer<UInt16>()
+    public var fStrongEncryption: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct CRYPTUI_WIZ_EXPORT_INFO {
+    public var dwSize: UInt32 = 0
+    public var pwszExportFileName: CPointer<UInt16> = CPointer<UInt16>()
+    public var dwSubjectChoice: UInt32 = 0
+    public var Anonymous: CRYPTUI_WIZ_EXPORT_INFO__Anonymous_e__Union = CRYPTUI_WIZ_EXPORT_INFO__Anonymous_e__Union()
+    public var cStores: UInt32 = 0
+    public var rghStores: CPointer<Win32__impl_l0.HCERTSTORE> = CPointer<Win32__impl_l0.HCERTSTORE>()
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct CRYPTUI_WIZ_EXPORT_INFO__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXT> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pctlContext: CPointer<Win32__impl_l2.CTL_CONTEXT> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CTL_CONTEXT>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CTL_CONTEXT>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pcrlContext: CPointer<Win32__impl_l2.CRL_CONTEXT> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CRL_CONTEXT>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CRL_CONTEXT>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop hCertStore: Win32__impl_l0.HCERTSTORE {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32__impl_l0.HCERTSTORE>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32__impl_l0.HCERTSTORE>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct CRYPTUI_WIZ_IMPORT_SRC_INFO {
+    public var dwSize: UInt32 = 0
+    public var dwSubjectChoice: UInt32 = 0
+    public var Anonymous: CRYPTUI_WIZ_IMPORT_SRC_INFO__Anonymous_e__Union = CRYPTUI_WIZ_IMPORT_SRC_INFO__Anonymous_e__Union()
+    public var dwFlags: UInt32 = 0
+    public var pwszPassword: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct CRYPTUI_WIZ_IMPORT_SRC_INFO__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop pwszFileName: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXT> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pctlContext: CPointer<Win32__impl_l2.CTL_CONTEXT> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CTL_CONTEXT>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CTL_CONTEXT>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pcrlContext: CPointer<Win32__impl_l2.CRL_CONTEXT> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CRL_CONTEXT>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CRL_CONTEXT>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop hCertStore: Win32__impl_l0.HCERTSTORE {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32__impl_l0.HCERTSTORE>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32__impl_l0.HCERTSTORE>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct CTL_MODIFY_REQUEST {
+    public var pccert: CPointer<Win32__impl_l2.CERT_CONTEXT> = CPointer<Win32__impl_l2.CERT_CONTEXT>()
+    public var dwOperation: UInt32 = 0
+    public var dwError: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO {
+    public var dwSize: UInt32 = 0
+    public var dwSubjectChoice: UInt32 = 0
+    public var Anonymous1: CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous1_e__Union = CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous1_e__Union()
+    public var dwSigningCertChoice: UInt32 = 0
+    public var Anonymous2: CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous2_e__Union = CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous2_e__Union()
+    public var pwszTimestampURL: CPointer<UInt16> = CPointer<UInt16>()
+    public var dwAdditionalCertChoice: UInt32 = 0
+    public var pSignExtInfo: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO> = CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO>()
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous1_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop pwszFileName: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pSignBlobInfo: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && Windows_Win32_Security_Cryptography == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous2_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop pSigningCertContext: CPointer<Win32__impl_l2.CERT_CONTEXT> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pSigningCertStore: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pSigningCertPvkInfo: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
 
 @When[CRYPTUI == "on"]
 foreign {
-    func CertSelectionGetSerializedBlob(pcsi: CPointer<CERT_SELECTUI_INPUT>, ppOutBuffer: CPointer<CPointer<Unit>>, pulOutBufferSize: CPointer<UInt32>): Int32
     func CryptUIDlgCertMgr(pCryptUICertMgr: CPointer<CRYPTUI_CERT_MGR_STRUCT>): Int32
     // param-hint: hwnd optional
     // param-hint: pwszTitle optional
-    // param-hint: pwszDisplayString optional
-    func CryptUIDlgSelectCertificateFromStore(hCertStore: Win32_impl.HCERTSTORE, hwnd: CPointer<Unit>, pwszTitle: CPointer<UInt16>, pwszDisplayString: CPointer<UInt16>, dwDontUseColumn: UInt32, dwFlags: UInt32, pvReserved: CPointer<Unit>): CPointer<Win32_impl.CERT_CONTEXT>
+    func CryptUIDlgViewContext(dwContextType: UInt32, pvContext: CPointer<Unit>, hwnd: CPointer<Unit>, pwszTitle: CPointer<UInt16>, dwFlags: UInt32, pvReserved: CPointer<Unit>): Int32
+    func CryptUIWizFreeDigitalSignContext(pSignContext: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT>): Int32
+}
+
+@When[CRYPTUI == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_UI_Controls == "on")]
+foreign {
     // pinvoke-hint: SetLastError
     func CryptUIDlgViewCertificateA(pCertViewInfo: CPointer<CRYPTUI_VIEWCERTIFICATE_STRUCTA>, pfPropertiesChanged: CPointer<Int32>): Int32
     // pinvoke-hint: SetLastError
     func CryptUIDlgViewCertificateW(pCertViewInfo: CPointer<CRYPTUI_VIEWCERTIFICATE_STRUCTW>, pfPropertiesChanged: CPointer<Int32>): Int32
+}
+
+@When[CRYPTUI == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func CertSelectionGetSerializedBlob(pcsi: CPointer<CERT_SELECTUI_INPUT>, ppOutBuffer: CPointer<CPointer<Unit>>, pulOutBufferSize: CPointer<UInt32>): Int32
     // param-hint: hwnd optional
     // param-hint: pwszTitle optional
-    func CryptUIDlgViewContext(dwContextType: UInt32, pvContext: CPointer<Unit>, hwnd: CPointer<Unit>, pwszTitle: CPointer<UInt16>, dwFlags: UInt32, pvReserved: CPointer<Unit>): Int32
+    // param-hint: pwszDisplayString optional
+    func CryptUIDlgSelectCertificateFromStore(hCertStore: Win32__impl_l0.HCERTSTORE, hwnd: CPointer<Unit>, pwszTitle: CPointer<UInt16>, pwszDisplayString: CPointer<UInt16>, dwDontUseColumn: UInt32, dwFlags: UInt32, pvReserved: CPointer<Unit>): CPointer<Win32__impl_l2.CERT_CONTEXT>
     // param-hint: hwndParent optional
     // param-hint: pwszWizardTitle optional
     // param-hint: ppSignContext optional
@@ -1410,14 +1437,13 @@ foreign {
     // param-hint: pwszWizardTitle optional
     // param-hint: pvoid optional
     // pinvoke-hint: SetLastError
-    func CryptUIWizExport(dwFlags: CRYPTUI_WIZ_FLAGS, hwndParent: CPointer<Unit>, pwszWizardTitle: CPointer<UInt16>, pExportInfo: CPointer<CRYPTUI_WIZ_EXPORT_INFO>, pvoid: CPointer<Unit>): Int32
-    func CryptUIWizFreeDigitalSignContext(pSignContext: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT>): Int32
+    func CryptUIWizExport(dwFlags: UInt32, hwndParent: CPointer<Unit>, pwszWizardTitle: CPointer<UInt16>, pExportInfo: CPointer<CRYPTUI_WIZ_EXPORT_INFO>, pvoid: CPointer<Unit>): Int32
     // param-hint: hwndParent optional
     // param-hint: pwszWizardTitle optional
     // param-hint: pImportSrc optional
     // param-hint: hDestCertStore optional
     // pinvoke-hint: SetLastError
-    func CryptUIWizImport(dwFlags: CRYPTUI_WIZ_FLAGS, hwndParent: CPointer<Unit>, pwszWizardTitle: CPointer<UInt16>, pImportSrc: CPointer<CRYPTUI_WIZ_IMPORT_SRC_INFO>, hDestCertStore: Win32_impl.HCERTSTORE): Int32
+    func CryptUIWizImport(dwFlags: UInt32, hwndParent: CPointer<Unit>, pwszWizardTitle: CPointer<UInt16>, pImportSrc: CPointer<CRYPTUI_WIZ_IMPORT_SRC_INFO>, hDestCertStore: Win32__impl_l0.HCERTSTORE): Int32
 }
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]

@@ -1,0 +1,13 @@
+[package]
+  name = "windows_numerics"
+  version = "0.1.0"
+  description = "WinRT numerics helpers and projections for Cangjie"
+  output-type = "static"
+  cjc-version = "1.1.0"
+  compile-option = "--cfg . -Woff unused -Woff package-import"
+
+[dependencies]
+  windows_core = { path = "../windows-core" }
+
+[windows-cj]
+  features = ["Windows_Foundation_Numerics"]

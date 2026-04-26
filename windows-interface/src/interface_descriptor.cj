@@ -26,6 +26,26 @@ func expandedAncestorIids(baseDescriptor: InterfaceDescriptorBase): Array<GUID> 
     values.toArray()
 }
 
+// Same as expandedAncestorIids but appends a list of "extra" ancestor IIDs
+// after the base chain. Used by WinRT interfaces whose required interfaces
+// are reached via QueryInterface (not inlined into the vtbl): the direct
+// base remains IInspectable, but the required interface IIDs still need to
+// participate in QI matching.
+func expandedAncestorIidsWithExtras(
+    baseDescriptor: InterfaceDescriptorBase,
+    extraAncestorIids: Array<GUID>
+): Array<GUID> {
+    let values = ArrayList<GUID>()
+    appendUniqueGuid(values, baseDescriptor.descriptorIid())
+    for (ancestor in baseDescriptor.descriptorAncestorIids()) {
+        appendUniqueGuid(values, ancestor)
+    }
+    for (extra in extraAncestorIids) {
+        appendUniqueGuid(values, extra)
+    }
+    values.toArray()
+}
+
 public interface AbiPointerBacked {
     func asAbiPointer(): CPointer<Unit>
 }
@@ -255,6 +275,29 @@ public class InterfaceDescriptor<T> <: InterfaceDescriptorBase & AbiReferenceDes
         this.name = name
         this.iid = iid
         this.ancestorIids = expandedAncestorIids(baseDescriptor)
+        this.ownMethodCount = 0
+        this.directBaseName_ = Some(baseDescriptor.descriptorName())
+        this.directBaseDescriptor_ = Some(baseDescriptor)
+        this.takeFromAbi_ = takeFromAbi
+        this.viewOf_ = viewOf
+    }
+
+    // Variant used by WinRT interface descriptors: the direct base is always
+    // IInspectable so own-method slot counting via descriptorOwnMethodCount
+    // remains correct, but the required-interface IIDs still need to take
+    // part in QI matching. extraAncestorIids carries those IIDs and is
+    // appended after the IInspectable chain expansion.
+    public init(
+        name: String,
+        iid: GUID,
+        baseDescriptor: InterfaceDescriptorBase,
+        extraAncestorIids: Array<GUID>,
+        takeFromAbi: (CPointer<Unit>) -> T,
+        viewOf: (CPointer<Unit>) -> T
+    ) {
+        this.name = name
+        this.iid = iid
+        this.ancestorIids = expandedAncestorIidsWithExtras(baseDescriptor, extraAncestorIids)
         this.ownMethodCount = 0
         this.directBaseName_ = Some(baseDescriptor.descriptorName())
         this.directBaseDescriptor_ = Some(baseDescriptor)

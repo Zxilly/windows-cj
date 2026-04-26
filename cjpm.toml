@@ -2,7 +2,7 @@
 members = [
     "windows-metadata",
     "windows-bindgen",
-    "windows-sync",
+    "windows-cfggen",
     "windows-sys",
     "windows-result",
     "windows-strings",
@@ -10,10 +10,16 @@ members = [
     "windows-implement",
     "windows-core",
     "windows-polyfill",
+    "windows-future",
+    "windows-collections",
+    "windows-numerics",
+    "windows-threading",
+    "windows-version",
+    "windows-targets",
+    "windows-registry",
+    "windows-services",
     "windows"
 ]
-
-compile-option = "--cfg ./windows-cj"
 
 [windows-cj]
 features = []

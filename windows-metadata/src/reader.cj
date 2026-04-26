@@ -1,7 +1,6 @@
 package windows_metadata
 
 import std.fs.*
-import std.collection.*
 
 // WinmdFile represents a parsed .winmd file with direct access to metadata tables
 public class WinmdFile {
@@ -52,12 +51,11 @@ public class WinmdFile {
         // Stream headers start right after
         var view = streamsCountOffset + 2
         var tablesDataOffset: Int64 = 0
-        var tablesDataSize: Int64 = 0
 
         var si: Int64 = 0
         while (si < streamsCount) {
             let streamOffset = Int64(br.readUInt32(view))
-            let streamLen = Int64(br.readUInt32(view + 4))
+            let _ = Int64(br.readUInt32(view + 4))
             let streamName = br.readNullTermBytes(view + 8)
             let nameStr = String.fromUtf8(streamName)
 
@@ -67,7 +65,6 @@ public class WinmdFile {
                 result.blobs = metadataOffset + streamOffset
             } else if (nameStr == "#~") {
                 tablesDataOffset = metadataOffset + streamOffset
-                tablesDataSize = streamLen
             }
             // #GUID and #US are ignored
 

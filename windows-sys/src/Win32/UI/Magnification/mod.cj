@@ -2,7 +2,10 @@
 package windows_sys.Win32.UI.Magnification
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 
 
@@ -33,7 +36,6 @@ public struct MAGTRANSFORM {
 }
 
 @When[Windows_Win32_UI_Magnification == "on"]
-@C
 public struct MW_FILTERMODE {
     public var value: UInt32 = 0
 
@@ -57,7 +59,7 @@ public let MW_FILTERMODE_MW_FILTERMODE_EXCLUDE: MW_FILTERMODE = MW_FILTERMODE(0)
 @When[Windows_Win32_UI_Magnification == "on"]
 public let MW_FILTERMODE_MW_FILTERMODE_INCLUDE: MW_FILTERMODE = MW_FILTERMODE(1)
 
-@When[Windows_Win32_UI_Magnification == "on"]
+@When[Windows_Win32_UI_Magnification == "on" && Windows_Win32_Graphics_Gdi == "on"]
 public type MagImageScalingCallback = CFunc<(CPointer<Unit>, CPointer<Unit>, MAGIMAGEHEADER, CPointer<Unit>, MAGIMAGEHEADER, Win32_Foundation.RECT, Win32_Foundation.RECT, Win32_Graphics_Gdi.HRGN) -> Int32>
 
 @When[MAGNIFICATION == "on"]
@@ -65,23 +67,27 @@ foreign {
     func MagGetColorEffect(hwnd: CPointer<Unit>, pEffect: CPointer<MAGCOLOREFFECT>): Int32
     func MagGetFullscreenColorEffect(pEffect: CPointer<MAGCOLOREFFECT>): Int32
     func MagGetFullscreenTransform(pMagLevel: CPointer<Float32>, pxOffset: CPointer<Int32>, pyOffset: CPointer<Int32>): Int32
-    func MagGetImageScalingCallback(hwnd: CPointer<Unit>): MagImageScalingCallback
     func MagGetInputTransform(pfEnabled: CPointer<Int32>, pRectSource: CPointer<Win32_Foundation.RECT>, pRectDest: CPointer<Win32_Foundation.RECT>): Int32
-    func MagGetWindowFilterList(hwnd: CPointer<Unit>, pdwFilterMode: CPointer<MW_FILTERMODE>, count: Int32, pHWND: CPointer<CPointer<Unit>>): Int32
+    func MagGetWindowFilterList(hwnd: CPointer<Unit>, pdwFilterMode: CPointer<UInt32>, count: Int32, pHWND: CPointer<CPointer<Unit>>): Int32
     func MagGetWindowSource(hwnd: CPointer<Unit>, pRect: CPointer<Win32_Foundation.RECT>): Int32
     func MagGetWindowTransform(hwnd: CPointer<Unit>, pTransform: CPointer<MAGTRANSFORM>): Int32
     func MagInitialize(): Int32
     func MagSetColorEffect(hwnd: CPointer<Unit>, pEffect: CPointer<MAGCOLOREFFECT>): Int32
     func MagSetFullscreenColorEffect(pEffect: CPointer<MAGCOLOREFFECT>): Int32
     func MagSetFullscreenTransform(magLevel: Float32, xOffset: Int32, yOffset: Int32): Int32
-    func MagSetImageScalingCallback(hwnd: CPointer<Unit>, callback: MagImageScalingCallback): Int32
     // pinvoke-hint: SetLastError
     func MagSetInputTransform(fEnabled: Int32, pRectSource: CPointer<Win32_Foundation.RECT>, pRectDest: CPointer<Win32_Foundation.RECT>): Int32
-    func MagSetWindowFilterList(hwnd: CPointer<Unit>, dwFilterMode: MW_FILTERMODE, count: Int32, pHWND: CPointer<CPointer<Unit>>): Int32
+    func MagSetWindowFilterList(hwnd: CPointer<Unit>, dwFilterMode: UInt32, count: Int32, pHWND: CPointer<CPointer<Unit>>): Int32
     func MagSetWindowSource(hwnd: CPointer<Unit>, rect: Win32_Foundation.RECT): Int32
     func MagSetWindowTransform(hwnd: CPointer<Unit>, pTransform: CPointer<MAGTRANSFORM>): Int32
     func MagShowSystemCursor(fShowCursor: Int32): Int32
     func MagUninitialize(): Int32
+}
+
+@When[MAGNIFICATION == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func MagGetImageScalingCallback(hwnd: CPointer<Unit>): MagImageScalingCallback
+    func MagSetImageScalingCallback(hwnd: CPointer<Unit>, callback: MagImageScalingCallback): Int32
 }
 
 @When[Windows_Win32_UI_Magnification == "on"]

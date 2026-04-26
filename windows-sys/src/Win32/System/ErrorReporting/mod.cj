@@ -2,12 +2,15 @@
 package windows_sys.Win32.System.ErrorReporting
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-import windows_sys.Win32.impl as Win32_impl
+import windows_sys.Win32._impl_l0 as Win32__impl_l0
+import windows_sys.Win32._impl_l1 as Win32__impl_l1
+import windows_sys.Win32._impl_l2 as Win32__impl_l2
 
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
-@C
 public struct EFaultRepRetVal {
     public var value: Int32 = 0
 
@@ -65,16 +68,6 @@ public type HREPORT = CPointer<Unit>
 public type HREPORTSTORE = CPointer<Unit>
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
-public type PFN_WER_RUNTIME_EXCEPTION_DEBUGGER_LAUNCH = CFunc<(CPointer<Unit>, CPointer<WER_RUNTIME_EXCEPTION_INFORMATION>, CPointer<Int32>, CPointer<UInt16>, CPointer<UInt32>, CPointer<Int32>) -> Int32>
-
-@When[Windows_Win32_System_ErrorReporting == "on"]
-public type PFN_WER_RUNTIME_EXCEPTION_EVENT = CFunc<(CPointer<Unit>, CPointer<WER_RUNTIME_EXCEPTION_INFORMATION>, CPointer<Int32>, CPointer<UInt16>, CPointer<UInt32>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_System_ErrorReporting == "on"]
-public type PFN_WER_RUNTIME_EXCEPTION_EVENT_SIGNATURE = CFunc<(CPointer<Unit>, CPointer<WER_RUNTIME_EXCEPTION_INFORMATION>, UInt32, CPointer<UInt16>, CPointer<UInt32>, CPointer<UInt16>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_System_ErrorReporting == "on"]
-@C
 public struct REPORT_STORE_TYPES {
     public var value: Int32 = 0
 
@@ -108,7 +101,6 @@ public let REPORT_STORE_TYPES_E_STORE_MACHINE_QUEUE: REPORT_STORE_TYPES = REPORT
 public let REPORT_STORE_TYPES_E_STORE_INVALID: REPORT_STORE_TYPES = REPORT_STORE_TYPES(4)
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
-@C
 public struct WER_CONSENT {
     public var value: Int32 = 0
 
@@ -200,7 +192,6 @@ public struct WER_DUMP_CUSTOM_OPTIONS_V3 {
 }
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
-@C
 public struct WER_DUMP_TYPE {
     public var value: Int32 = 0
 
@@ -236,16 +227,15 @@ public let WER_DUMP_TYPE_WerDumpTypeTriageDump: WER_DUMP_TYPE = WER_DUMP_TYPE(4)
 @When[Windows_Win32_System_ErrorReporting == "on"]
 public let WER_DUMP_TYPE_WerDumpTypeMax: WER_DUMP_TYPE = WER_DUMP_TYPE(5)
 
-@When[Windows_Win32_System_ErrorReporting == "on"]
+@When[Windows_Win32_System_ErrorReporting == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
 @C
 public struct WER_EXCEPTION_INFORMATION {
-    public var pExceptionPointers: CPointer<Win32_impl.EXCEPTION_POINTERS> = CPointer<Win32_impl.EXCEPTION_POINTERS>()
+    public var pExceptionPointers: CPointer<Win32__impl_l2.EXCEPTION_POINTERS> = CPointer<Win32__impl_l2.EXCEPTION_POINTERS>()
     public var bClientPointers: Int32 = 0
     public init() {}
 }
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
-@C
 public struct WER_FAULT_REPORTING {
     public var value: UInt32 = 0
 
@@ -293,7 +283,6 @@ public let WER_FAULT_REPORTING_WER_FAULT_REPORTING_FLAG_QUEUE_UPLOAD: WER_FAULT_
 public let WER_FAULT_REPORTING_WER_FAULT_REPORTING_ALWAYS_SHOW_UI: WER_FAULT_REPORTING = WER_FAULT_REPORTING(16)
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
-@C
 public struct WER_FILE {
     public var value: UInt32 = 0
 
@@ -332,7 +321,6 @@ public let WER_FILE_WER_FILE_ANONYMOUS_DATA: WER_FILE = WER_FILE(2)
 public let WER_FILE_WER_FILE_DELETE_WHEN_DONE: WER_FILE = WER_FILE(1)
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
-@C
 public struct WER_FILE_TYPE {
     public var value: Int32 = 0
 
@@ -384,7 +372,6 @@ public let WER_FILE_TYPE_WerFileTypeAuxiliaryHeapDump: WER_FILE_TYPE = WER_FILE_
 public let WER_FILE_TYPE_WerFileTypeMax: WER_FILE_TYPE = WER_FILE_TYPE(11)
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
-@C
 public struct WER_REGISTER_FILE_TYPE {
     public var value: Int32 = 0
 
@@ -462,77 +449,6 @@ public struct WER_REPORT_INFORMATION_V4 {
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
 @C
-public struct WER_REPORT_INFORMATION_V5 {
-    public var dwSize: UInt32 = 0
-    public var hProcess: CPointer<Unit> = CPointer<Unit>()
-    public var wzConsentKey: VArray<UInt16, $64> = VArray<UInt16, $64>(repeat: 0)
-    public var wzFriendlyEventName: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0)
-    public var wzApplicationName: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0)
-    public var wzApplicationPath: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
-    public var wzDescription: VArray<UInt16, $512> = VArray<UInt16, $512>(repeat: 0)
-    public var hwndParent: CPointer<Unit> = CPointer<Unit>()
-    public var wzNamespacePartner: VArray<UInt16, $64> = VArray<UInt16, $64>(repeat: 0)
-    public var wzNamespaceGroup: VArray<UInt16, $64> = VArray<UInt16, $64>(repeat: 0)
-    public var rgbApplicationIdentity: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var hSnapshot: CPointer<Unit> = CPointer<Unit>()
-    public var hDeleteFilesImpersonationToken: CPointer<Unit> = CPointer<Unit>()
-    public var submitResultMax: WER_SUBMIT_RESULT = WER_SUBMIT_RESULT()
-    public init() {}
-}
-
-@When[Windows_Win32_System_ErrorReporting == "on"]
-@C
-public struct WER_REPORT_METADATA_V1 {
-    public var Signature: WER_REPORT_SIGNATURE = WER_REPORT_SIGNATURE()
-    public var BucketId: GUID = GUID()
-    public var ReportId: GUID = GUID()
-    public var CreationTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var SizeInBytes: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_ErrorReporting == "on"]
-@C
-public struct WER_REPORT_METADATA_V2 {
-    public var Signature: WER_REPORT_SIGNATURE = WER_REPORT_SIGNATURE()
-    public var BucketId: GUID = GUID()
-    public var ReportId: GUID = GUID()
-    public var CreationTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var SizeInBytes: UInt64 = 0
-    public var CabId: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
-    public var ReportStatus: UInt32 = 0
-    public var ReportIntegratorId: GUID = GUID()
-    public var NumberOfFiles: UInt32 = 0
-    public var SizeOfFileNames: UInt32 = 0
-    public var FileNames: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_ErrorReporting == "on"]
-@C
-public struct WER_REPORT_METADATA_V3 {
-    public var Signature: WER_REPORT_SIGNATURE = WER_REPORT_SIGNATURE()
-    public var BucketId: GUID = GUID()
-    public var ReportId: GUID = GUID()
-    public var CreationTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var SizeInBytes: UInt64 = 0
-    public var CabId: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
-    public var ReportStatus: UInt32 = 0
-    public var ReportIntegratorId: GUID = GUID()
-    public var NumberOfFiles: UInt32 = 0
-    public var SizeOfFileNames: UInt32 = 0
-    public var FileNames: CPointer<UInt16> = CPointer<UInt16>()
-    public var FriendlyEventName: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0)
-    public var ApplicationName: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0)
-    public var ApplicationPath: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
-    public var Description: VArray<UInt16, $512> = VArray<UInt16, $512>(repeat: 0)
-    public var BucketIdString: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
-    public var LegacyBucketId: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_ErrorReporting == "on"]
-@C
 public struct WER_REPORT_PARAMETER {
     public var Name: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
     public var Value: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
@@ -548,7 +464,6 @@ public struct WER_REPORT_SIGNATURE {
 }
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
-@C
 public struct WER_REPORT_TYPE {
     public var value: Int32 = 0
 
@@ -585,7 +500,6 @@ public let WER_REPORT_TYPE_WerReportKernel: WER_REPORT_TYPE = WER_REPORT_TYPE(4)
 public let WER_REPORT_TYPE_WerReportInvalid: WER_REPORT_TYPE = WER_REPORT_TYPE(5)
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
-@C
 public struct WER_REPORT_UI {
     public var value: Int32 = 0
 
@@ -636,14 +550,14 @@ public let WER_REPORT_UI_WerUICloseDlgButtonText: WER_REPORT_UI = WER_REPORT_UI(
 @When[Windows_Win32_System_ErrorReporting == "on"]
 public let WER_REPORT_UI_WerUIMax: WER_REPORT_UI = WER_REPORT_UI(11)
 
-@When[Windows_Win32_System_ErrorReporting == "on"]
+@When[Windows_Win32_System_ErrorReporting == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
 @C
 public struct WER_RUNTIME_EXCEPTION_INFORMATION {
     public var dwSize: UInt32 = 0
     public var hProcess: CPointer<Unit> = CPointer<Unit>()
     public var hThread: CPointer<Unit> = CPointer<Unit>()
-    public var exceptionRecord: Win32_impl.EXCEPTION_RECORD = Win32_impl.EXCEPTION_RECORD()
-    public var context: Win32_impl.CONTEXT = Win32_impl.CONTEXT()
+    public var exceptionRecord: Win32__impl_l0.EXCEPTION_RECORD = Win32__impl_l0.EXCEPTION_RECORD()
+    public var context: Win32__impl_l1.CONTEXT = Win32__impl_l1.CONTEXT()
     public var pwszReportId: CPointer<UInt16> = CPointer<UInt16>()
     public var bIsFatal: Int32 = 0
     public var dwReserved: UInt32 = 0
@@ -651,7 +565,6 @@ public struct WER_RUNTIME_EXCEPTION_INFORMATION {
 }
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
-@C
 public struct WER_SUBMIT_FLAGS {
     public var value: UInt32 = 0
 
@@ -726,7 +639,6 @@ public let WER_SUBMIT_FLAGS_WER_SUBMIT_ARCHIVE_PARAMETERS_ONLY: WER_SUBMIT_FLAGS
 public let WER_SUBMIT_FLAGS_WER_SUBMIT_REPORT_MACHINE_ID: WER_SUBMIT_FLAGS = WER_SUBMIT_FLAGS(8192)
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
-@C
 public struct WER_SUBMIT_RESULT {
     public var value: Int32 = 0
 
@@ -784,25 +696,105 @@ public let WER_SUBMIT_RESULT_WerStorageLocationNotFound: WER_SUBMIT_RESULT = WER
 public let WER_SUBMIT_RESULT_WerSubmitResultMax: WER_SUBMIT_RESULT = WER_SUBMIT_RESULT(13)
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
-public type pfn_ADDEREXCLUDEDAPPLICATIONA = CFunc<(CPointer<UInt8>) -> EFaultRepRetVal>
+public type pfn_ADDEREXCLUDEDAPPLICATIONA = CFunc<(CPointer<UInt8>) -> Int32>
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
-public type pfn_ADDEREXCLUDEDAPPLICATIONW = CFunc<(CPointer<UInt16>) -> EFaultRepRetVal>
+public type pfn_ADDEREXCLUDEDAPPLICATIONW = CFunc<(CPointer<UInt16>) -> Int32>
+
+@When[Windows_Win32_System_ErrorReporting == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
+public type pfn_REPORTFAULT = CFunc<(CPointer<Win32__impl_l2.EXCEPTION_POINTERS>, UInt32) -> Int32>
+
+@When[Windows_Win32_System_ErrorReporting == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
+public type PFN_WER_RUNTIME_EXCEPTION_DEBUGGER_LAUNCH = CFunc<(CPointer<Unit>, CPointer<WER_RUNTIME_EXCEPTION_INFORMATION>, CPointer<Int32>, CPointer<UInt16>, CPointer<UInt32>, CPointer<Int32>) -> Int32>
+
+@When[Windows_Win32_System_ErrorReporting == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
+public type PFN_WER_RUNTIME_EXCEPTION_EVENT = CFunc<(CPointer<Unit>, CPointer<WER_RUNTIME_EXCEPTION_INFORMATION>, CPointer<Int32>, CPointer<UInt16>, CPointer<UInt32>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_System_ErrorReporting == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
+public type PFN_WER_RUNTIME_EXCEPTION_EVENT_SIGNATURE = CFunc<(CPointer<Unit>, CPointer<WER_RUNTIME_EXCEPTION_INFORMATION>, UInt32, CPointer<UInt16>, CPointer<UInt32>, CPointer<UInt16>, CPointer<UInt32>) -> Int32>
 
 @When[Windows_Win32_System_ErrorReporting == "on"]
-public type pfn_REPORTFAULT = CFunc<(CPointer<Win32_impl.EXCEPTION_POINTERS>, UInt32) -> EFaultRepRetVal>
+@C
+public struct WER_REPORT_INFORMATION_V5 {
+    public var dwSize: UInt32 = 0
+    public var hProcess: CPointer<Unit> = CPointer<Unit>()
+    public var wzConsentKey: VArray<UInt16, $64> = VArray<UInt16, $64>(repeat: 0)
+    public var wzFriendlyEventName: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0)
+    public var wzApplicationName: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0)
+    public var wzApplicationPath: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
+    public var wzDescription: VArray<UInt16, $512> = VArray<UInt16, $512>(repeat: 0)
+    public var hwndParent: CPointer<Unit> = CPointer<Unit>()
+    public var wzNamespacePartner: VArray<UInt16, $64> = VArray<UInt16, $64>(repeat: 0)
+    public var wzNamespaceGroup: VArray<UInt16, $64> = VArray<UInt16, $64>(repeat: 0)
+    public var rgbApplicationIdentity: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var hSnapshot: CPointer<Unit> = CPointer<Unit>()
+    public var hDeleteFilesImpersonationToken: CPointer<Unit> = CPointer<Unit>()
+    public var submitResultMax: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on"]
+@C
+public struct WER_REPORT_METADATA_V1 {
+    public var Signature: WER_REPORT_SIGNATURE = WER_REPORT_SIGNATURE()
+    public var BucketId: GUID = GUID()
+    public var ReportId: GUID = GUID()
+    public var CreationTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var SizeInBytes: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on"]
+@C
+public struct WER_REPORT_METADATA_V2 {
+    public var Signature: WER_REPORT_SIGNATURE = WER_REPORT_SIGNATURE()
+    public var BucketId: GUID = GUID()
+    public var ReportId: GUID = GUID()
+    public var CreationTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var SizeInBytes: UInt64 = 0
+    public var CabId: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
+    public var ReportStatus: UInt32 = 0
+    public var ReportIntegratorId: GUID = GUID()
+    public var NumberOfFiles: UInt32 = 0
+    public var SizeOfFileNames: UInt32 = 0
+    public var FileNames: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on"]
+@C
+public struct WER_REPORT_METADATA_V3 {
+    public var Signature: WER_REPORT_SIGNATURE = WER_REPORT_SIGNATURE()
+    public var BucketId: GUID = GUID()
+    public var ReportId: GUID = GUID()
+    public var CreationTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var SizeInBytes: UInt64 = 0
+    public var CabId: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
+    public var ReportStatus: UInt32 = 0
+    public var ReportIntegratorId: GUID = GUID()
+    public var NumberOfFiles: UInt32 = 0
+    public var SizeOfFileNames: UInt32 = 0
+    public var FileNames: CPointer<UInt16> = CPointer<UInt16>()
+    public var FriendlyEventName: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0)
+    public var ApplicationName: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0)
+    public var ApplicationPath: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
+    public var Description: VArray<UInt16, $512> = VArray<UInt16, $512>(repeat: 0)
+    public var BucketIdString: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
+    public var LegacyBucketId: UInt64 = 0
+    public init() {}
+}
 
 @When[KERNEL32 == "on"]
 foreign {
-    func WerGetFlags(hProcess: CPointer<Unit>, pdwFlags: CPointer<WER_FAULT_REPORTING>): Int32
+    func WerGetFlags(hProcess: CPointer<Unit>, pdwFlags: CPointer<UInt32>): Int32
     func WerRegisterAdditionalProcess(processId: UInt32, captureExtraInfoForThreadId: UInt32): Int32
     func WerRegisterAppLocalDump(localAppDataRelativePath: CPointer<UInt16>): Int32
     func WerRegisterCustomMetadata(key: CPointer<UInt16>, value: CPointer<UInt16>): Int32
     func WerRegisterExcludedMemoryBlock(address: CPointer<Unit>, size: UInt32): Int32
-    func WerRegisterFile(pwzFile: CPointer<UInt16>, regFileType: WER_REGISTER_FILE_TYPE, dwFlags: WER_FILE): Int32
+    func WerRegisterFile(pwzFile: CPointer<UInt16>, regFileType: Int32, dwFlags: UInt32): Int32
     func WerRegisterMemoryBlock(pvAddress: CPointer<Unit>, dwSize: UInt32): Int32
     func WerRegisterRuntimeExceptionModule(pwszOutOfProcessCallbackDll: CPointer<UInt16>, pContext: CPointer<Unit>): Int32
-    func WerSetFlags(dwFlags: WER_FAULT_REPORTING): Int32
+    func WerSetFlags(dwFlags: UInt32): Int32
     func WerUnregisterAdditionalProcess(processId: UInt32): Int32
     func WerUnregisterAppLocalDump(): Int32
     func WerUnregisterCustomMetadata(key: CPointer<UInt16>): Int32
@@ -818,9 +810,13 @@ foreign {
     func AddERExcludedApplicationA(szApplication: CPointer<UInt8>): Int32
     // pinvoke-hint: SetLastError
     func AddERExcludedApplicationW(wszApplication: CPointer<UInt16>): Int32
-    func ReportFault(pep: CPointer<Win32_impl.EXCEPTION_POINTERS>, dwOpt: UInt32): EFaultRepRetVal
     // param-hint: pwzHungApplicationName optional
     func WerReportHang(hwndHungApp: CPointer<Unit>, pwzHungApplicationName: CPointer<UInt16>): Int32
+}
+
+@When[FAULTREP == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
+foreign {
+    func ReportFault(pep: CPointer<Win32__impl_l2.EXCEPTION_POINTERS>, dwOpt: UInt32): Int32
 }
 
 @When[WER == "on"]
@@ -828,19 +824,15 @@ foreign {
     func WerAddExcludedApplication(pwzExeName: CPointer<UInt16>, bAllUsers: Int32): Int32
     func WerFreeString(pwszStr: CPointer<UInt16>): Unit
     func WerRemoveExcludedApplication(pwzExeName: CPointer<UInt16>, bAllUsers: Int32): Int32
-    // param-hint: hThread optional
-    // param-hint: pExceptionParam optional
-    // param-hint: pDumpCustomOptions optional
-    func WerReportAddDump(hReportHandle: HREPORT, hProcess: CPointer<Unit>, hThread: CPointer<Unit>, dumpType: WER_DUMP_TYPE, pExceptionParam: CPointer<WER_EXCEPTION_INFORMATION>, pDumpCustomOptions: CPointer<WER_DUMP_CUSTOM_OPTIONS>, dwFlags: UInt32): Int32
-    func WerReportAddFile(hReportHandle: HREPORT, pwzPath: CPointer<UInt16>, repFileType: WER_FILE_TYPE, dwFileFlags: WER_FILE): Int32
+    func WerReportAddFile(hReportHandle: HREPORT, pwzPath: CPointer<UInt16>, repFileType: Int32, dwFileFlags: UInt32): Int32
     func WerReportCloseHandle(hReportHandle: HREPORT): Int32
     // param-hint: pReportInformation optional
-    func WerReportCreate(pwzEventType: CPointer<UInt16>, repType: WER_REPORT_TYPE, pReportInformation: CPointer<WER_REPORT_INFORMATION>, phReportHandle: CPointer<HREPORT>): Int32
+    func WerReportCreate(pwzEventType: CPointer<UInt16>, repType: Int32, pReportInformation: CPointer<WER_REPORT_INFORMATION>, phReportHandle: CPointer<HREPORT>): Int32
     // param-hint: pwzName optional
     func WerReportSetParameter(hReportHandle: HREPORT, dwparamID: UInt32, pwzName: CPointer<UInt16>, pwzValue: CPointer<UInt16>): Int32
-    func WerReportSetUIOption(hReportHandle: HREPORT, repUITypeID: WER_REPORT_UI, pwzValue: CPointer<UInt16>): Int32
+    func WerReportSetUIOption(hReportHandle: HREPORT, repUITypeID: Int32, pwzValue: CPointer<UInt16>): Int32
     // param-hint: pSubmitResult optional
-    func WerReportSubmit(hReportHandle: HREPORT, consent: WER_CONSENT, dwFlags: WER_SUBMIT_FLAGS, pSubmitResult: CPointer<WER_SUBMIT_RESULT>): Int32
+    func WerReportSubmit(hReportHandle: HREPORT, consent: Int32, dwFlags: UInt32, pSubmitResult: CPointer<Int32>): Int32
     // param-hint: hReportStore optional
     func WerStoreClose(hReportStore: HREPORTSTORE): Unit
     // param-hint: ppszReportKey optional
@@ -849,13 +841,21 @@ foreign {
     func WerStoreGetNextReportKey(hReportStore: HREPORTSTORE, ppszReportKey: CPointer<CPointer<UInt16>>): Int32
     func WerStoreGetReportCount(hReportStore: HREPORTSTORE, pdwReportCount: CPointer<UInt32>): Int32
     func WerStoreGetSizeOnDisk(hReportStore: HREPORTSTORE, pqwSizeInBytes: CPointer<UInt64>): Int32
-    func WerStoreOpen(repStoreType: REPORT_STORE_TYPES, phReportStore: CPointer<HREPORTSTORE>): Int32
+    func WerStoreOpen(repStoreType: Int32, phReportStore: CPointer<HREPORTSTORE>): Int32
     func WerStorePurge(): Int32
     func WerStoreQueryReportMetadataV1(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, pReportMetadata: CPointer<WER_REPORT_METADATA_V1>): Int32
     func WerStoreQueryReportMetadataV2(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, pReportMetadata: CPointer<WER_REPORT_METADATA_V2>): Int32
     func WerStoreQueryReportMetadataV3(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, pReportMetadata: CPointer<WER_REPORT_METADATA_V3>): Int32
     // param-hint: pSubmitResult optional
-    func WerStoreUploadReport(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, dwFlags: UInt32, pSubmitResult: CPointer<WER_SUBMIT_RESULT>): Int32
+    func WerStoreUploadReport(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, dwFlags: UInt32, pSubmitResult: CPointer<Int32>): Int32
+}
+
+@When[WER == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
+foreign {
+    // param-hint: hThread optional
+    // param-hint: pExceptionParam optional
+    // param-hint: pDumpCustomOptions optional
+    func WerReportAddDump(hReportHandle: HREPORT, hProcess: CPointer<Unit>, hThread: CPointer<Unit>, dumpType: Int32, pExceptionParam: CPointer<WER_EXCEPTION_INFORMATION>, pDumpCustomOptions: CPointer<WER_DUMP_CUSTOM_OPTIONS>, dwFlags: UInt32): Int32
 }
 
 @When[Windows_Win32_System_ErrorReporting == "on"]

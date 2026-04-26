@@ -2,6 +2,8 @@
 package windows_sys.Win32.NetworkManagement.Dhcp
 
 import windows_polyfill.{unionReadInt32, unionReadUInt16, unionReadUInt32, unionReadUInt8, unionWriteInt32, unionWriteUInt16, unionWriteUInt32, unionWriteUInt8}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -65,69 +67,6 @@ public struct DHCPDS_SERVERS {
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
 @C
-public struct DHCPV4_FAILOVER_CLIENT_INFO {
-    public var ClientIpAddress: UInt32 = 0
-    public var SubnetMask: UInt32 = 0
-    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
-    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
-    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
-    public var bClientType: UInt8 = 0
-    public var AddressState: UInt8 = 0
-    public var Status: QuarantineStatus = QuarantineStatus()
-    public var ProbationEnds: DATE_TIME = DATE_TIME()
-    public var QuarantineCapable: Int32 = 0
-    public var SentPotExpTime: UInt32 = 0
-    public var AckPotExpTime: UInt32 = 0
-    public var RecvPotExpTime: UInt32 = 0
-    public var StartTime: UInt32 = 0
-    public var CltLastTransTime: UInt32 = 0
-    public var LastBndUpdTime: UInt32 = 0
-    public var BndMsgStatus: UInt32 = 0
-    public var PolicyName: CPointer<UInt16> = CPointer<UInt16>()
-    public var Flags: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCPV4_FAILOVER_CLIENT_INFO_ARRAY {
-    public var NumElements: UInt32 = 0
-    public var Clients: CPointer<CPointer<DHCPV4_FAILOVER_CLIENT_INFO>> = CPointer<CPointer<DHCPV4_FAILOVER_CLIENT_INFO>>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCPV4_FAILOVER_CLIENT_INFO_EX {
-    public var ClientIpAddress: UInt32 = 0
-    public var SubnetMask: UInt32 = 0
-    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
-    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
-    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
-    public var bClientType: UInt8 = 0
-    public var AddressState: UInt8 = 0
-    public var Status: QuarantineStatus = QuarantineStatus()
-    public var ProbationEnds: DATE_TIME = DATE_TIME()
-    public var QuarantineCapable: Int32 = 0
-    public var SentPotExpTime: UInt32 = 0
-    public var AckPotExpTime: UInt32 = 0
-    public var RecvPotExpTime: UInt32 = 0
-    public var StartTime: UInt32 = 0
-    public var CltLastTransTime: UInt32 = 0
-    public var LastBndUpdTime: UInt32 = 0
-    public var BndMsgStatus: UInt32 = 0
-    public var PolicyName: CPointer<UInt16> = CPointer<UInt16>()
-    public var Flags: UInt8 = 0
-    public var AddressStateEx: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCPV6CAPI_CLASSID {
     public var Flags: UInt32 = 0
     public var Data: CPointer<UInt8> = CPointer<UInt8>()
@@ -156,63 +95,6 @@ public struct DHCPV6CAPI_PARAMS_ARRAY {
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
 @C
-public struct DHCPV6Prefix {
-    public var prefix: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var prefixLength: UInt32 = 0
-    public var preferredLifeTime: UInt32 = 0
-    public var validLifeTime: UInt32 = 0
-    public var status: StatusCode = StatusCode()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCPV6PrefixLeaseInformation {
-    public var nPrefixes: UInt32 = 0
-    public var prefixArray: CPointer<DHCPV6Prefix> = CPointer<DHCPV6Prefix>()
-    public var iaid: UInt32 = 0
-    public var T1: Int64 = 0
-    public var T2: Int64 = 0
-    public var MaxLeaseExpirationTime: Int64 = 0
-    public var LastRenewalTime: Int64 = 0
-    public var status: StatusCode = StatusCode()
-    public var ServerId: CPointer<UInt8> = CPointer<UInt8>()
-    public var ServerIdLen: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCPV6_BIND_ELEMENT {
-    public var Flags: UInt32 = 0
-    public var fBoundToDHCPServer: Int32 = 0
-    public var AdapterPrimaryAddress: DHCP_IPV6_ADDRESS = DHCP_IPV6_ADDRESS()
-    public var AdapterSubnetAddress: DHCP_IPV6_ADDRESS = DHCP_IPV6_ADDRESS()
-    public var IfDescription: CPointer<UInt16> = CPointer<UInt16>()
-    public var IpV6IfIndex: UInt32 = 0
-    public var IfIdSize: UInt32 = 0
-    public var IfId: CPointer<UInt8> = CPointer<UInt8>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCPV6_BIND_ELEMENT_ARRAY {
-    public var NumElements: UInt32 = 0
-    public var Elements: CPointer<DHCPV6_BIND_ELEMENT> = CPointer<DHCPV6_BIND_ELEMENT>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCPV6_IP_ARRAY {
-    public var NumElements: UInt32 = 0
-    public var Elements: CPointer<DHCP_IPV6_ADDRESS> = CPointer<DHCP_IPV6_ADDRESS>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCPV6_STATELESS_PARAMS {
     public var Status: Int32 = 0
     public var PurgeInterval: UInt32 = 0
@@ -220,7 +102,6 @@ public struct DHCPV6_STATELESS_PARAMS {
 }
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCPV6_STATELESS_PARAM_TYPE {
     public var value: Int32 = 0
 
@@ -246,86 +127,12 @@ public let DHCPV6_STATELESS_PARAM_TYPE_DhcpStatelessStatus: DHCPV6_STATELESS_PAR
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
 @C
-public struct DHCPV6_STATELESS_SCOPE_STATS {
-    public var SubnetAddress: DHCP_IPV6_ADDRESS = DHCP_IPV6_ADDRESS()
-    public var NumStatelessClientsAdded: UInt64 = 0
-    public var NumStatelessClientsRemoved: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCPV6_STATELESS_STATS {
-    public var NumScopes: UInt32 = 0
-    public var ScopeStats: CPointer<DHCPV6_STATELESS_SCOPE_STATS> = CPointer<DHCPV6_STATELESS_SCOPE_STATS>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_ADDR_PATTERN {
     public var MatchHWType: Int32 = 0
     public var HWType: UInt8 = 0
     public var IsWildcard: Int32 = 0
     public var Length: UInt8 = 0
     public var Pattern: VArray<UInt8, $255> = VArray<UInt8, $255>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_ALL_OPTIONS {
-    public var Flags: UInt32 = 0
-    public var NonVendorOptions: CPointer<DHCP_OPTION_ARRAY> = CPointer<DHCP_OPTION_ARRAY>()
-    public var NumVendorOptions: UInt32 = 0
-    public var VendorOptions: CPointer<DHCP_ALL_OPTIONS__Anonymous_e__Struct> = CPointer<DHCP_ALL_OPTIONS__Anonymous_e__Struct>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_ALL_OPTIONS__Anonymous_e__Struct {
-    public var Option: DHCP_OPTION = DHCP_OPTION()
-    public var VendorName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClassName: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_ALL_OPTION_VALUES {
-    public var Flags: UInt32 = 0
-    public var NumElements: UInt32 = 0
-    public var Options: CPointer<DHCP_ALL_OPTION_VALUES__Anonymous_e__Struct> = CPointer<DHCP_ALL_OPTION_VALUES__Anonymous_e__Struct>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_ALL_OPTION_VALUES__Anonymous_e__Struct {
-    public var ClassName: CPointer<UInt16> = CPointer<UInt16>()
-    public var VendorName: CPointer<UInt16> = CPointer<UInt16>()
-    public var IsVendor: Int32 = 0
-    public var OptionsArray: CPointer<DHCP_OPTION_VALUE_ARRAY> = CPointer<DHCP_OPTION_VALUE_ARRAY>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_ALL_OPTION_VALUES_PB {
-    public var Flags: UInt32 = 0
-    public var NumElements: UInt32 = 0
-    public var Options: CPointer<DHCP_ALL_OPTION_VALUES_PB__Anonymous_e__Struct> = CPointer<DHCP_ALL_OPTION_VALUES_PB__Anonymous_e__Struct>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_ALL_OPTION_VALUES_PB__Anonymous_e__Struct {
-    public var PolicyName: CPointer<UInt16> = CPointer<UInt16>()
-    public var VendorName: CPointer<UInt16> = CPointer<UInt16>()
-    public var IsVendor: Int32 = 0
-    public var OptionsArray: CPointer<DHCP_OPTION_VALUE_ARRAY> = CPointer<DHCP_OPTION_VALUE_ARRAY>()
     public init() {}
 }
 
@@ -339,42 +146,45 @@ public struct DHCP_ATTRIB {
 }
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct DHCP_ATTRIB__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func dhcpAttribBool(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
+    public mut prop dhcpAttribBool: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dhcpAttribBool(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop dhcpAttribUlong: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
         }
-    }
-
-    public func dhcpAttribUlong(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_dhcpAttribUlong(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -429,22 +239,6 @@ public struct DHCP_BOOTP_IP_RANGE {
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
 @C
-public struct DHCP_CALLOUT_TABLE {
-    public var DhcpControlHook: LPDHCP_CONTROL = { _, _ => 0 }
-    public var DhcpNewPktHook: LPDHCP_NEWPKT = { _, _, _, _, _, _ => 0 }
-    public var DhcpPktDropHook: LPDHCP_DROP_SEND = { _, _, _, _, _, _ => 0 }
-    public var DhcpPktSendHook: LPDHCP_DROP_SEND = { _, _, _, _, _, _ => 0 }
-    public var DhcpAddressDelHook: LPDHCP_PROB = { _, _, _, _, _, _, _ => 0 }
-    public var DhcpAddressOfferHook: LPDHCP_GIVE_ADDRESS = { _, _, _, _, _, _, _, _, _ => 0 }
-    public var DhcpHandleOptionsHook: LPDHCP_HANDLE_OPTIONS = { _, _, _, _, _ => 0 }
-    public var DhcpDeleteClientHook: LPDHCP_DELETE_CLIENT = { _, _, _, _, _ => 0 }
-    public var DhcpExtensionHook: CPointer<Unit> = CPointer<Unit>()
-    public var DhcpReservedHook: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_CLASS_INFO {
     public var ClassName: CPointer<UInt16> = CPointer<UInt16>()
     public var ClassComment: CPointer<UInt16> = CPointer<UInt16>()
@@ -465,14 +259,6 @@ public struct DHCP_CLASS_INFO_ARRAY {
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
 @C
-public struct DHCP_CLASS_INFO_ARRAY_V6 {
-    public var NumElements: UInt32 = 0
-    public var Classes: CPointer<DHCP_CLASS_INFO_V6> = CPointer<DHCP_CLASS_INFO_V6>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_CLASS_INFO_V6 {
     public var ClassName: CPointer<UInt16> = CPointer<UInt16>()
     public var ClassComment: CPointer<UInt16> = CPointer<UInt16>()
@@ -485,206 +271,6 @@ public struct DHCP_CLASS_INFO_V6 {
 }
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_CLIENT_FILTER_STATUS_INFO {
-    public var ClientIpAddress: UInt32 = 0
-    public var SubnetMask: UInt32 = 0
-    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
-    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
-    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
-    public var bClientType: UInt8 = 0
-    public var AddressState: UInt8 = 0
-    public var Status: QuarantineStatus = QuarantineStatus()
-    public var ProbationEnds: DATE_TIME = DATE_TIME()
-    public var QuarantineCapable: Int32 = 0
-    public var FilterStatus: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_CLIENT_FILTER_STATUS_INFO_ARRAY {
-    public var NumElements: UInt32 = 0
-    public var Clients: CPointer<CPointer<DHCP_CLIENT_FILTER_STATUS_INFO>> = CPointer<CPointer<DHCP_CLIENT_FILTER_STATUS_INFO>>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_CLIENT_INFO {
-    public var ClientIpAddress: UInt32 = 0
-    public var SubnetMask: UInt32 = 0
-    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
-    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
-    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_CLIENT_INFO_ARRAY {
-    public var NumElements: UInt32 = 0
-    public var Clients: CPointer<CPointer<DHCP_CLIENT_INFO>> = CPointer<CPointer<DHCP_CLIENT_INFO>>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_CLIENT_INFO_ARRAY_V4 {
-    public var NumElements: UInt32 = 0
-    public var Clients: CPointer<CPointer<DHCP_CLIENT_INFO_V4>> = CPointer<CPointer<DHCP_CLIENT_INFO_V4>>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_CLIENT_INFO_ARRAY_V5 {
-    public var NumElements: UInt32 = 0
-    public var Clients: CPointer<CPointer<DHCP_CLIENT_INFO_V5>> = CPointer<CPointer<DHCP_CLIENT_INFO_V5>>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_CLIENT_INFO_ARRAY_V6 {
-    public var NumElements: UInt32 = 0
-    public var Clients: CPointer<CPointer<DHCP_CLIENT_INFO_V6>> = CPointer<CPointer<DHCP_CLIENT_INFO_V6>>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_CLIENT_INFO_ARRAY_VQ {
-    public var NumElements: UInt32 = 0
-    public var Clients: CPointer<CPointer<DHCP_CLIENT_INFO_VQ>> = CPointer<CPointer<DHCP_CLIENT_INFO_VQ>>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_CLIENT_INFO_EX {
-    public var ClientIpAddress: UInt32 = 0
-    public var SubnetMask: UInt32 = 0
-    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
-    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
-    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
-    public var bClientType: UInt8 = 0
-    public var AddressState: UInt8 = 0
-    public var Status: QuarantineStatus = QuarantineStatus()
-    public var ProbationEnds: DATE_TIME = DATE_TIME()
-    public var QuarantineCapable: Int32 = 0
-    public var FilterStatus: UInt32 = 0
-    public var PolicyName: CPointer<UInt16> = CPointer<UInt16>()
-    public var Properties: CPointer<DHCP_PROPERTY_ARRAY> = CPointer<DHCP_PROPERTY_ARRAY>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_CLIENT_INFO_EX_ARRAY {
-    public var NumElements: UInt32 = 0
-    public var Clients: CPointer<CPointer<DHCP_CLIENT_INFO_EX>> = CPointer<CPointer<DHCP_CLIENT_INFO_EX>>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_CLIENT_INFO_PB {
-    public var ClientIpAddress: UInt32 = 0
-    public var SubnetMask: UInt32 = 0
-    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
-    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
-    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
-    public var bClientType: UInt8 = 0
-    public var AddressState: UInt8 = 0
-    public var Status: QuarantineStatus = QuarantineStatus()
-    public var ProbationEnds: DATE_TIME = DATE_TIME()
-    public var QuarantineCapable: Int32 = 0
-    public var FilterStatus: UInt32 = 0
-    public var PolicyName: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_CLIENT_INFO_PB_ARRAY {
-    public var NumElements: UInt32 = 0
-    public var Clients: CPointer<CPointer<DHCP_CLIENT_INFO_PB>> = CPointer<CPointer<DHCP_CLIENT_INFO_PB>>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_CLIENT_INFO_V4 {
-    public var ClientIpAddress: UInt32 = 0
-    public var SubnetMask: UInt32 = 0
-    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
-    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
-    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
-    public var bClientType: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_CLIENT_INFO_V5 {
-    public var ClientIpAddress: UInt32 = 0
-    public var SubnetMask: UInt32 = 0
-    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
-    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
-    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
-    public var bClientType: UInt8 = 0
-    public var AddressState: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_CLIENT_INFO_V6 {
-    public var ClientIpAddress: DHCP_IPV6_ADDRESS = DHCP_IPV6_ADDRESS()
-    public var ClientDUID: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
-    public var AddressType: UInt32 = 0
-    public var IAID: UInt32 = 0
-    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientValidLeaseExpires: DATE_TIME = DATE_TIME()
-    public var ClientPrefLeaseExpires: DATE_TIME = DATE_TIME()
-    public var OwnerHost: DHCP_HOST_INFO_V6 = DHCP_HOST_INFO_V6()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_CLIENT_INFO_VQ {
-    public var ClientIpAddress: UInt32 = 0
-    public var SubnetMask: UInt32 = 0
-    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
-    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
-    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
-    public var bClientType: UInt8 = 0
-    public var AddressState: UInt8 = 0
-    public var Status: QuarantineStatus = QuarantineStatus()
-    public var ProbationEnds: DATE_TIME = DATE_TIME()
-    public var QuarantineCapable: Int32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_FAILOVER_MODE {
     public var value: Int32 = 0
 
@@ -709,35 +295,6 @@ public let DHCP_FAILOVER_MODE_LoadBalance: DHCP_FAILOVER_MODE = DHCP_FAILOVER_MO
 public let DHCP_FAILOVER_MODE_HotStandby: DHCP_FAILOVER_MODE = DHCP_FAILOVER_MODE(1)
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_FAILOVER_RELATIONSHIP {
-    public var PrimaryServer: UInt32 = 0
-    public var SecondaryServer: UInt32 = 0
-    public var Mode: DHCP_FAILOVER_MODE = DHCP_FAILOVER_MODE()
-    public var ServerType: DHCP_FAILOVER_SERVER = DHCP_FAILOVER_SERVER()
-    public var State: FSM_STATE = FSM_STATE()
-    public var PrevState: FSM_STATE = FSM_STATE()
-    public var Mclt: UInt32 = 0
-    public var SafePeriod: UInt32 = 0
-    public var RelationshipName: CPointer<UInt16> = CPointer<UInt16>()
-    public var PrimaryServerName: CPointer<UInt16> = CPointer<UInt16>()
-    public var SecondaryServerName: CPointer<UInt16> = CPointer<UInt16>()
-    public var pScopes: CPointer<DHCP_IP_ARRAY> = CPointer<DHCP_IP_ARRAY>()
-    public var Percentage: UInt8 = 0
-    public var SharedSecret: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_FAILOVER_RELATIONSHIP_ARRAY {
-    public var NumElements: UInt32 = 0
-    public var pRelationships: CPointer<DHCP_FAILOVER_RELATIONSHIP> = CPointer<DHCP_FAILOVER_RELATIONSHIP>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_FAILOVER_SERVER {
     public var value: Int32 = 0
 
@@ -776,23 +333,6 @@ public struct DHCP_FAILOVER_STATISTICS {
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
 @C
-public struct DHCP_FILTER_ADD_INFO {
-    public var AddrPatt: DHCP_ADDR_PATTERN = DHCP_ADDR_PATTERN()
-    public var Comment: CPointer<UInt16> = CPointer<UInt16>()
-    public var ListType: DHCP_FILTER_LIST_TYPE = DHCP_FILTER_LIST_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_FILTER_ENUM_INFO {
-    public var NumElements: UInt32 = 0
-    public var pEnumRecords: CPointer<DHCP_FILTER_RECORD> = CPointer<DHCP_FILTER_RECORD>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_FILTER_GLOBAL_INFO {
     public var EnforceAllowList: Int32 = 0
     public var EnforceDenyList: Int32 = 0
@@ -800,7 +340,6 @@ public struct DHCP_FILTER_GLOBAL_INFO {
 }
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_FILTER_LIST_TYPE {
     public var value: Int32 = 0
 
@@ -833,7 +372,6 @@ public struct DHCP_FILTER_RECORD {
 }
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_FORCE_FLAG {
     public var value: Int32 = 0
 
@@ -864,15 +402,6 @@ public let DHCP_FORCE_FLAG_DhcpFailoverForce: DHCP_FORCE_FLAG = DHCP_FORCE_FLAG(
 @C
 public struct DHCP_HOST_INFO {
     public var IpAddress: UInt32 = 0
-    public var NetBiosName: CPointer<UInt16> = CPointer<UInt16>()
-    public var HostName: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_HOST_INFO_V6 {
-    public var IpAddress: DHCP_IPV6_ADDRESS = DHCP_IPV6_ADDRESS()
     public var NetBiosName: CPointer<UInt16> = CPointer<UInt16>()
     public var HostName: CPointer<UInt16> = CPointer<UInt16>()
     public init() {}
@@ -965,306 +494,6 @@ public struct DHCP_IP_RESERVATION_V6 {
 }
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_MIB_INFO {
-    public var Discovers: UInt32 = 0
-    public var Offers: UInt32 = 0
-    public var Requests: UInt32 = 0
-    public var Acks: UInt32 = 0
-    public var Naks: UInt32 = 0
-    public var Declines: UInt32 = 0
-    public var Releases: UInt32 = 0
-    public var ServerStartTime: DATE_TIME = DATE_TIME()
-    public var Scopes: UInt32 = 0
-    public var ScopeInfo: CPointer<SCOPE_MIB_INFO> = CPointer<SCOPE_MIB_INFO>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_MIB_INFO_V5 {
-    public var Discovers: UInt32 = 0
-    public var Offers: UInt32 = 0
-    public var Requests: UInt32 = 0
-    public var Acks: UInt32 = 0
-    public var Naks: UInt32 = 0
-    public var Declines: UInt32 = 0
-    public var Releases: UInt32 = 0
-    public var ServerStartTime: DATE_TIME = DATE_TIME()
-    public var QtnNumLeases: UInt32 = 0
-    public var QtnPctQtnLeases: UInt32 = 0
-    public var QtnProbationLeases: UInt32 = 0
-    public var QtnNonQtnLeases: UInt32 = 0
-    public var QtnExemptLeases: UInt32 = 0
-    public var QtnCapableClients: UInt32 = 0
-    public var QtnIASErrors: UInt32 = 0
-    public var DelayedOffers: UInt32 = 0
-    public var ScopesWithDelayedOffers: UInt32 = 0
-    public var Scopes: UInt32 = 0
-    public var ScopeInfo: CPointer<SCOPE_MIB_INFO_V5> = CPointer<SCOPE_MIB_INFO_V5>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_MIB_INFO_V6 {
-    public var Solicits: UInt32 = 0
-    public var Advertises: UInt32 = 0
-    public var Requests: UInt32 = 0
-    public var Renews: UInt32 = 0
-    public var Rebinds: UInt32 = 0
-    public var Replies: UInt32 = 0
-    public var Confirms: UInt32 = 0
-    public var Declines: UInt32 = 0
-    public var Releases: UInt32 = 0
-    public var Informs: UInt32 = 0
-    public var ServerStartTime: DATE_TIME = DATE_TIME()
-    public var Scopes: UInt32 = 0
-    public var ScopeInfo: CPointer<SCOPE_MIB_INFO_V6> = CPointer<SCOPE_MIB_INFO_V6>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_MIB_INFO_VQ {
-    public var Discovers: UInt32 = 0
-    public var Offers: UInt32 = 0
-    public var Requests: UInt32 = 0
-    public var Acks: UInt32 = 0
-    public var Naks: UInt32 = 0
-    public var Declines: UInt32 = 0
-    public var Releases: UInt32 = 0
-    public var ServerStartTime: DATE_TIME = DATE_TIME()
-    public var QtnNumLeases: UInt32 = 0
-    public var QtnPctQtnLeases: UInt32 = 0
-    public var QtnProbationLeases: UInt32 = 0
-    public var QtnNonQtnLeases: UInt32 = 0
-    public var QtnExemptLeases: UInt32 = 0
-    public var QtnCapableClients: UInt32 = 0
-    public var QtnIASErrors: UInt32 = 0
-    public var Scopes: UInt32 = 0
-    public var ScopeInfo: CPointer<SCOPE_MIB_INFO_VQ> = CPointer<SCOPE_MIB_INFO_VQ>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_OPTION {
-    public var OptionID: UInt32 = 0
-    public var OptionName: CPointer<UInt16> = CPointer<UInt16>()
-    public var OptionComment: CPointer<UInt16> = CPointer<UInt16>()
-    public var DefaultValue: DHCP_OPTION_DATA = DHCP_OPTION_DATA()
-    public var OptionType: DHCP_OPTION_TYPE = DHCP_OPTION_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_OPTION_ARRAY {
-    public var NumElements: UInt32 = 0
-    public var Options: CPointer<DHCP_OPTION> = CPointer<DHCP_OPTION>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_OPTION_DATA {
-    public var NumElements: UInt32 = 0
-    public var Elements: CPointer<DHCP_OPTION_DATA_ELEMENT> = CPointer<DHCP_OPTION_DATA_ELEMENT>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_OPTION_DATA_ELEMENT {
-    public var OptionType: DHCP_OPTION_DATA_TYPE = DHCP_OPTION_DATA_TYPE()
-    public var Element: DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION = DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func byteOption(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
-        }
-    }
-
-    public mut func set_byteOption(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func wordOption(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
-        }
-    }
-
-    public mut func set_wordOption(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dWordOption(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_dWordOption(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dWordDWordOption(): DWORD_DWORD {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DWORD_DWORD>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_dWordDWordOption(val: DWORD_DWORD): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DWORD_DWORD>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ipAddressOption(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_ipAddressOption(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func stringDataOption(): CPointer<UInt16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_stringDataOption(val: CPointer<UInt16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func binaryDataOption(): DHCP_BINARY_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_BINARY_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_binaryDataOption(val: DHCP_BINARY_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_BINARY_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func encapsulatedDataOption(): DHCP_BINARY_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_BINARY_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_encapsulatedDataOption(val: DHCP_BINARY_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_BINARY_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ipv6AddressDataOption(): CPointer<UInt16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ipv6AddressDataOption(val: CPointer<UInt16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_OPTION_DATA_TYPE {
     public var value: Int32 = 0
 
@@ -1310,211 +539,6 @@ public let DHCP_OPTION_DATA_TYPE_DhcpEncapsulatedDataOption: DHCP_OPTION_DATA_TY
 public let DHCP_OPTION_DATA_TYPE_DhcpIpv6AddressOption: DHCP_OPTION_DATA_TYPE = DHCP_OPTION_DATA_TYPE(8)
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_OPTION_LIST {
-    public var NumOptions: UInt32 = 0
-    public var Options: CPointer<DHCP_OPTION_VALUE> = CPointer<DHCP_OPTION_VALUE>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_OPTION_SCOPE_INFO {
-    public var ScopeType: DHCP_OPTION_SCOPE_TYPE = DHCP_OPTION_SCOPE_TYPE()
-    public var ScopeInfo: DHCP_OPTION_SCOPE_INFO__DHCP_OPTION_SCOPE_UNION = DHCP_OPTION_SCOPE_INFO__DHCP_OPTION_SCOPE_UNION()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DHCP_OPTION_SCOPE_INFO__DHCP_OPTION_SCOPE_UNION {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func defaultScopeInfo(): CPointer<Unit> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_defaultScopeInfo(val: CPointer<Unit>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func globalScopeInfo(): CPointer<Unit> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_globalScopeInfo(val: CPointer<Unit>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func subnetScopeInfo(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_subnetScopeInfo(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func reservedScopeInfo(): DHCP_RESERVED_SCOPE {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_RESERVED_SCOPE>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_reservedScopeInfo(val: DHCP_RESERVED_SCOPE): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_RESERVED_SCOPE>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func mScopeInfo(): CPointer<UInt16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_mScopeInfo(val: CPointer<UInt16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_OPTION_SCOPE_INFO6 {
-    public var ScopeType: DHCP_OPTION_SCOPE_TYPE6 = DHCP_OPTION_SCOPE_TYPE6()
-    public var ScopeInfo: DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 = DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 {
-    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-
-    public func defaultScopeInfo(): CPointer<Unit> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_defaultScopeInfo(val: CPointer<Unit>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func subnetScopeInfo(): DHCP_IPV6_ADDRESS {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_IPV6_ADDRESS>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_subnetScopeInfo(val: DHCP_IPV6_ADDRESS): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_IPV6_ADDRESS>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func reservedScopeInfo(): DHCP_RESERVED_SCOPE6 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_RESERVED_SCOPE6>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_reservedScopeInfo(val: DHCP_RESERVED_SCOPE6): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_RESERVED_SCOPE6>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_OPTION_SCOPE_TYPE {
     public var value: Int32 = 0
 
@@ -1548,7 +572,6 @@ public let DHCP_OPTION_SCOPE_TYPE_DhcpReservedOptions: DHCP_OPTION_SCOPE_TYPE = 
 public let DHCP_OPTION_SCOPE_TYPE_DhcpMScopeOptions: DHCP_OPTION_SCOPE_TYPE = DHCP_OPTION_SCOPE_TYPE(4)
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_OPTION_SCOPE_TYPE6 {
     public var value: Int32 = 0
 
@@ -1579,7 +602,6 @@ public let DHCP_OPTION_SCOPE_TYPE6_DhcpReservedOptions6: DHCP_OPTION_SCOPE_TYPE6
 public let DHCP_OPTION_SCOPE_TYPE6_DhcpGlobalOptions6: DHCP_OPTION_SCOPE_TYPE6 = DHCP_OPTION_SCOPE_TYPE6(3)
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_OPTION_TYPE {
     public var value: Int32 = 0
 
@@ -1602,22 +624,6 @@ public let DHCP_OPTION_TYPE_DhcpUnaryElementTypeOption: DHCP_OPTION_TYPE = DHCP_
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
 public let DHCP_OPTION_TYPE_DhcpArrayTypeOption: DHCP_OPTION_TYPE = DHCP_OPTION_TYPE(1)
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_OPTION_VALUE {
-    public var OptionID: UInt32 = 0
-    public var Value: DHCP_OPTION_DATA = DHCP_OPTION_DATA()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_OPTION_VALUE_ARRAY {
-    public var NumElements: UInt32 = 0
-    public var Values: CPointer<DHCP_OPTION_VALUE> = CPointer<DHCP_OPTION_VALUE>()
-    public init() {}
-}
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
 @C
@@ -1645,54 +651,6 @@ public struct DHCP_PERF_STATS {
 }
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_POLICY {
-    public var PolicyName: CPointer<UInt16> = CPointer<UInt16>()
-    public var IsGlobalPolicy: Int32 = 0
-    public var Subnet: UInt32 = 0
-    public var ProcessingOrder: UInt32 = 0
-    public var Conditions: CPointer<DHCP_POL_COND_ARRAY> = CPointer<DHCP_POL_COND_ARRAY>()
-    public var Expressions: CPointer<DHCP_POL_EXPR_ARRAY> = CPointer<DHCP_POL_EXPR_ARRAY>()
-    public var Ranges: CPointer<DHCP_IP_RANGE_ARRAY> = CPointer<DHCP_IP_RANGE_ARRAY>()
-    public var Description: CPointer<UInt16> = CPointer<UInt16>()
-    public var Enabled: Int32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_POLICY_ARRAY {
-    public var NumElements: UInt32 = 0
-    public var Elements: CPointer<DHCP_POLICY> = CPointer<DHCP_POLICY>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_POLICY_EX {
-    public var PolicyName: CPointer<UInt16> = CPointer<UInt16>()
-    public var IsGlobalPolicy: Int32 = 0
-    public var Subnet: UInt32 = 0
-    public var ProcessingOrder: UInt32 = 0
-    public var Conditions: CPointer<DHCP_POL_COND_ARRAY> = CPointer<DHCP_POL_COND_ARRAY>()
-    public var Expressions: CPointer<DHCP_POL_EXPR_ARRAY> = CPointer<DHCP_POL_EXPR_ARRAY>()
-    public var Ranges: CPointer<DHCP_IP_RANGE_ARRAY> = CPointer<DHCP_IP_RANGE_ARRAY>()
-    public var Description: CPointer<UInt16> = CPointer<UInt16>()
-    public var Enabled: Int32 = 0
-    public var Properties: CPointer<DHCP_PROPERTY_ARRAY> = CPointer<DHCP_PROPERTY_ARRAY>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_POLICY_EX_ARRAY {
-    public var NumElements: UInt32 = 0
-    public var Elements: CPointer<DHCP_POLICY_EX> = CPointer<DHCP_POLICY_EX>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_POLICY_FIELDS_TO_UPDATE {
     public var value: Int32 = 0
 
@@ -1732,7 +690,6 @@ public let DHCP_POLICY_FIELDS_TO_UPDATE_DhcpUpdatePolicyStatus: DHCP_POLICY_FIEL
 public let DHCP_POLICY_FIELDS_TO_UPDATE_DhcpUpdatePolicyDnsSuffix: DHCP_POLICY_FIELDS_TO_UPDATE = DHCP_POLICY_FIELDS_TO_UPDATE(64)
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_POL_ATTR_TYPE {
     public var value: Int32 = 0
 
@@ -1766,7 +723,6 @@ public let DHCP_POL_ATTR_TYPE_DhcpAttrFqdn: DHCP_POL_ATTR_TYPE = DHCP_POL_ATTR_T
 public let DHCP_POL_ATTR_TYPE_DhcpAttrFqdnSingleLabel: DHCP_POL_ATTR_TYPE = DHCP_POL_ATTR_TYPE(4)
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_POL_COMPARATOR {
     public var value: Int32 = 0
 
@@ -1806,11 +762,11 @@ public let DHCP_POL_COMPARATOR_DhcpCompNotEndWith: DHCP_POL_COMPARATOR = DHCP_PO
 @C
 public struct DHCP_POL_COND {
     public var ParentExpr: UInt32 = 0
-    public var Type: DHCP_POL_ATTR_TYPE = DHCP_POL_ATTR_TYPE()
+    public var Type: Int32 = 0
     public var OptionID: UInt32 = 0
     public var SubOptionID: UInt32 = 0
     public var VendorName: CPointer<UInt16> = CPointer<UInt16>()
-    public var Operator: DHCP_POL_COMPARATOR = DHCP_POL_COMPARATOR()
+    public var Operator: Int32 = 0
     public var Value: CPointer<UInt8> = CPointer<UInt8>()
     public var ValueLength: UInt32 = 0
     public init() {}
@@ -1825,23 +781,6 @@ public struct DHCP_POL_COND_ARRAY {
 }
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_POL_EXPR {
-    public var ParentExpr: UInt32 = 0
-    public var Operator: DHCP_POL_LOGIC_OPER = DHCP_POL_LOGIC_OPER()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_POL_EXPR_ARRAY {
-    public var NumElements: UInt32 = 0
-    public var Elements: CPointer<DHCP_POL_EXPR> = CPointer<DHCP_POL_EXPR>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_POL_LOGIC_OPER {
     public var value: Int32 = 0
 
@@ -1866,125 +805,6 @@ public let DHCP_POL_LOGIC_OPER_DhcpLogicalOr: DHCP_POL_LOGIC_OPER = DHCP_POL_LOG
 public let DHCP_POL_LOGIC_OPER_DhcpLogicalAnd: DHCP_POL_LOGIC_OPER = DHCP_POL_LOGIC_OPER(1)
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_PROPERTY {
-    public var ID: DHCP_PROPERTY_ID = DHCP_PROPERTY_ID()
-    public var Type: DHCP_PROPERTY_TYPE = DHCP_PROPERTY_TYPE()
-    public var Value: DHCP_PROPERTY__DHCP_PROPERTY_VALUE_UNION = DHCP_PROPERTY__DHCP_PROPERTY_VALUE_UNION()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DHCP_PROPERTY__DHCP_PROPERTY_VALUE_UNION {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func byteValue(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
-        }
-    }
-
-    public mut func set_byteValue(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func wordValue(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
-        }
-    }
-
-    public mut func set_wordValue(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dWordValue(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_dWordValue(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func stringValue(): CPointer<UInt16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_stringValue(val: CPointer<UInt16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func binaryValue(): DHCP_BINARY_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_BINARY_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_binaryValue(val: DHCP_BINARY_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_BINARY_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_PROPERTY_ARRAY {
-    public var NumElements: UInt32 = 0
-    public var Elements: CPointer<DHCP_PROPERTY> = CPointer<DHCP_PROPERTY>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_PROPERTY_ID {
     public var value: Int32 = 0
 
@@ -2009,7 +829,6 @@ public let DHCP_PROPERTY_ID_DhcpPropIdPolicyDnsSuffix: DHCP_PROPERTY_ID = DHCP_P
 public let DHCP_PROPERTY_ID_DhcpPropIdClientAddressStateEx: DHCP_PROPERTY_ID = DHCP_PROPERTY_ID(1)
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_PROPERTY_TYPE {
     public var value: Int32 = 0
 
@@ -2067,7 +886,6 @@ public struct DHCP_RESERVED_SCOPE6 {
 }
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_SCAN_FLAG {
     public var value: Int32 = 0
 
@@ -2095,7 +913,7 @@ public let DHCP_SCAN_FLAG_DhcpDatabaseFix: DHCP_SCAN_FLAG = DHCP_SCAN_FLAG(1)
 @C
 public struct DHCP_SCAN_ITEM {
     public var IpAddress: UInt32 = 0
-    public var ScanFlag: DHCP_SCAN_FLAG = DHCP_SCAN_FLAG()
+    public var ScanFlag: Int32 = 0
     public init() {}
 }
 
@@ -2108,82 +926,6 @@ public struct DHCP_SCAN_LIST {
 }
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_SEARCH_INFO {
-    public var SearchType: DHCP_SEARCH_INFO_TYPE = DHCP_SEARCH_INFO_TYPE()
-    public var SearchInfo: DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION = DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func clientIpAddress(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_clientIpAddress(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func clientHardwareAddress(): DHCP_BINARY_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_BINARY_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_clientHardwareAddress(val: DHCP_BINARY_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_BINARY_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func clientName(): CPointer<UInt16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_clientName(val: CPointer<UInt16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_SEARCH_INFO_TYPE {
     public var value: Int32 = 0
 
@@ -2211,7 +953,6 @@ public let DHCP_SEARCH_INFO_TYPE_DhcpClientHardwareAddress: DHCP_SEARCH_INFO_TYP
 public let DHCP_SEARCH_INFO_TYPE_DhcpClientName: DHCP_SEARCH_INFO_TYPE = DHCP_SEARCH_INFO_TYPE(2)
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_SEARCH_INFO_TYPE_V6 {
     public var value: Int32 = 0
 
@@ -2241,77 +982,81 @@ public let DHCP_SEARCH_INFO_TYPE_V6_Dhcpv6ClientName: DHCP_SEARCH_INFO_TYPE_V6 =
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
 @C
 public struct DHCP_SEARCH_INFO_V6 {
-    public var SearchType: DHCP_SEARCH_INFO_TYPE_V6 = DHCP_SEARCH_INFO_TYPE_V6()
+    public var SearchType: Int32 = 0
     public var SearchInfo: DHCP_SEARCH_INFO_V6__DHCP_CLIENT_SEARCH_UNION_V6 = DHCP_SEARCH_INFO_V6__DHCP_CLIENT_SEARCH_UNION_V6()
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct DHCP_SEARCH_INFO_V6__DHCP_CLIENT_SEARCH_UNION_V6 {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
 
-    public func clientIpAddress(): DHCP_IPV6_ADDRESS {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_IPV6_ADDRESS>(p)
-            return ptr.read()
+    public mut prop clientIpAddress: DHCP_IPV6_ADDRESS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_IPV6_ADDRESS>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_IPV6_ADDRESS>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_clientIpAddress(val: DHCP_IPV6_ADDRESS): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_IPV6_ADDRESS>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop clientDUID: DHCP_BINARY_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_BINARY_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_BINARY_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func clientDUID(): DHCP_BINARY_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_BINARY_DATA>(p)
-            return ptr.read()
+    public mut prop clientName: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_clientDUID(val: DHCP_BINARY_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DHCP_BINARY_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func clientName(): CPointer<UInt16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_clientName(val: CPointer<UInt16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2412,7 +1157,7 @@ public struct DHCP_SERVER_OPTIONS {
     public var DNSFlags: UInt32 = 0
     public var DNSNameLength: UInt32 = 0
     public var DNSName: CPointer<UInt8> = CPointer<UInt8>()
-    public var DSDomainNameRequested: Win32_Foundation.BOOLEAN = 0
+    public var DSDomainNameRequested: UInt8 = 0
     public var DSDomainName: CPointer<UInt8> = CPointer<UInt8>()
     public var DSDomainNameLen: UInt32 = 0
     public var ScopeId: CPointer<UInt32> = CPointer<UInt32>()
@@ -2428,481 +1173,6 @@ public struct DHCP_SERVER_SPECIFIC_STRINGS {
 }
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_SUBNET_ELEMENT_DATA {
-    public var ElementType: DHCP_SUBNET_ELEMENT_TYPE = DHCP_SUBNET_ELEMENT_TYPE()
-    public var Element: DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION = DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func ipRange(): CPointer<DHCP_IP_RANGE> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ipRange(val: CPointer<DHCP_IP_RANGE>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func secondaryHost(): CPointer<DHCP_HOST_INFO> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_secondaryHost(val: CPointer<DHCP_HOST_INFO>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func reservedIp(): CPointer<DHCP_IP_RESERVATION> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RESERVATION>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_reservedIp(val: CPointer<DHCP_IP_RESERVATION>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RESERVATION>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func excludeIpRange(): CPointer<DHCP_IP_RANGE> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_excludeIpRange(val: CPointer<DHCP_IP_RANGE>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ipUsedCluster(): CPointer<DHCP_IP_CLUSTER> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ipUsedCluster(val: CPointer<DHCP_IP_CLUSTER>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_SUBNET_ELEMENT_DATA_V4 {
-    public var ElementType: DHCP_SUBNET_ELEMENT_TYPE = DHCP_SUBNET_ELEMENT_TYPE()
-    public var Element: DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 = DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func ipRange(): CPointer<DHCP_IP_RANGE> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ipRange(val: CPointer<DHCP_IP_RANGE>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func secondaryHost(): CPointer<DHCP_HOST_INFO> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_secondaryHost(val: CPointer<DHCP_HOST_INFO>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func reservedIp(): CPointer<DHCP_IP_RESERVATION_V4> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V4>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_reservedIp(val: CPointer<DHCP_IP_RESERVATION_V4>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V4>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func excludeIpRange(): CPointer<DHCP_IP_RANGE> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_excludeIpRange(val: CPointer<DHCP_IP_RANGE>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ipUsedCluster(): CPointer<DHCP_IP_CLUSTER> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ipUsedCluster(val: CPointer<DHCP_IP_CLUSTER>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_SUBNET_ELEMENT_DATA_V5 {
-    public var ElementType: DHCP_SUBNET_ELEMENT_TYPE = DHCP_SUBNET_ELEMENT_TYPE()
-    public var Element: DHCP_SUBNET_ELEMENT_DATA_V5__DHCP_SUBNET_ELEMENT_UNION_V5 = DHCP_SUBNET_ELEMENT_DATA_V5__DHCP_SUBNET_ELEMENT_UNION_V5()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DHCP_SUBNET_ELEMENT_DATA_V5__DHCP_SUBNET_ELEMENT_UNION_V5 {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func ipRange(): CPointer<DHCP_BOOTP_IP_RANGE> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_BOOTP_IP_RANGE>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ipRange(val: CPointer<DHCP_BOOTP_IP_RANGE>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_BOOTP_IP_RANGE>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func secondaryHost(): CPointer<DHCP_HOST_INFO> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_secondaryHost(val: CPointer<DHCP_HOST_INFO>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func reservedIp(): CPointer<DHCP_IP_RESERVATION_V4> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V4>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_reservedIp(val: CPointer<DHCP_IP_RESERVATION_V4>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V4>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func excludeIpRange(): CPointer<DHCP_IP_RANGE> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_excludeIpRange(val: CPointer<DHCP_IP_RANGE>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ipUsedCluster(): CPointer<DHCP_IP_CLUSTER> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ipUsedCluster(val: CPointer<DHCP_IP_CLUSTER>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_SUBNET_ELEMENT_DATA_V6 {
-    public var ElementType: DHCP_SUBNET_ELEMENT_TYPE_V6 = DHCP_SUBNET_ELEMENT_TYPE_V6()
-    public var Element: DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 = DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func ipRange(): CPointer<DHCP_IP_RANGE_V6> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RANGE_V6>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ipRange(val: CPointer<DHCP_IP_RANGE_V6>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RANGE_V6>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func reservedIp(): CPointer<DHCP_IP_RESERVATION_V6> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V6>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_reservedIp(val: CPointer<DHCP_IP_RESERVATION_V6>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V6>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func excludeIpRange(): CPointer<DHCP_IP_RANGE_V6> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RANGE_V6>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_excludeIpRange(val: CPointer<DHCP_IP_RANGE_V6>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<DHCP_IP_RANGE_V6>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_SUBNET_ELEMENT_INFO_ARRAY {
-    public var NumElements: UInt32 = 0
-    public var Elements: CPointer<DHCP_SUBNET_ELEMENT_DATA> = CPointer<DHCP_SUBNET_ELEMENT_DATA>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4 {
-    public var NumElements: UInt32 = 0
-    public var Elements: CPointer<DHCP_SUBNET_ELEMENT_DATA_V4> = CPointer<DHCP_SUBNET_ELEMENT_DATA_V4>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5 {
-    public var NumElements: UInt32 = 0
-    public var Elements: CPointer<DHCP_SUBNET_ELEMENT_DATA_V5> = CPointer<DHCP_SUBNET_ELEMENT_DATA_V5>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6 {
-    public var NumElements: UInt32 = 0
-    public var Elements: CPointer<DHCP_SUBNET_ELEMENT_DATA_V6> = CPointer<DHCP_SUBNET_ELEMENT_DATA_V6>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_SUBNET_ELEMENT_TYPE {
     public var value: Int32 = 0
 
@@ -2945,7 +1215,6 @@ public let DHCP_SUBNET_ELEMENT_TYPE_DhcpIpRangesDhcpBootp: DHCP_SUBNET_ELEMENT_T
 public let DHCP_SUBNET_ELEMENT_TYPE_DhcpIpRangesBootpOnly: DHCP_SUBNET_ELEMENT_TYPE = DHCP_SUBNET_ELEMENT_TYPE(7)
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_SUBNET_ELEMENT_TYPE_V6 {
     public var value: Int32 = 0
 
@@ -2974,18 +1243,6 @@ public let DHCP_SUBNET_ELEMENT_TYPE_V6_Dhcpv6ExcludedIpRanges: DHCP_SUBNET_ELEME
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
 @C
-public struct DHCP_SUBNET_INFO {
-    public var SubnetAddress: UInt32 = 0
-    public var SubnetMask: UInt32 = 0
-    public var SubnetName: CPointer<UInt16> = CPointer<UInt16>()
-    public var SubnetComment: CPointer<UInt16> = CPointer<UInt16>()
-    public var PrimaryHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
-    public var SubnetState: DHCP_SUBNET_STATE = DHCP_SUBNET_STATE()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_SUBNET_INFO_V6 {
     public var SubnetAddress: DHCP_IPV6_ADDRESS = DHCP_IPV6_ADDRESS()
     public var Prefix: UInt32 = 0
@@ -2998,24 +1255,6 @@ public struct DHCP_SUBNET_INFO_V6 {
 }
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
-public struct DHCP_SUBNET_INFO_VQ {
-    public var SubnetAddress: UInt32 = 0
-    public var SubnetMask: UInt32 = 0
-    public var SubnetName: CPointer<UInt16> = CPointer<UInt16>()
-    public var SubnetComment: CPointer<UInt16> = CPointer<UInt16>()
-    public var PrimaryHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
-    public var SubnetState: DHCP_SUBNET_STATE = DHCP_SUBNET_STATE()
-    public var QuarantineOn: UInt32 = 0
-    public var Reserved1: UInt32 = 0
-    public var Reserved2: UInt32 = 0
-    public var Reserved3: Int64 = 0
-    public var Reserved4: Int64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_SUBNET_STATE {
     public var value: Int32 = 0
 
@@ -3050,14 +1289,6 @@ public let DHCP_SUBNET_STATE_DhcpSubnetInvalidState: DHCP_SUBNET_STATE = DHCP_SU
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
 @C
-public struct DHCP_SUPER_SCOPE_TABLE {
-    public var cEntries: UInt32 = 0
-    public var pEntries: CPointer<DHCP_SUPER_SCOPE_TABLE_ENTRY> = CPointer<DHCP_SUPER_SCOPE_TABLE_ENTRY>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct DHCP_SUPER_SCOPE_TABLE_ENTRY {
     public var SubnetAddress: UInt32 = 0
     public var SuperScopeNumber: UInt32 = 0
@@ -3075,7 +1306,6 @@ public struct DWORD_DWORD {
 }
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct FSM_STATE {
     public var value: Int32 = 0
 
@@ -3145,9 +1375,6 @@ public type LPDHCP_DELETE_CLIENT = CFunc<(UInt32, CPointer<UInt8>, UInt32, UInt3
 public type LPDHCP_DROP_SEND = CFunc<(CPointer<CPointer<UInt8>>, CPointer<UInt32>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-public type LPDHCP_ENTRY_POINT_FUNC = CFunc<(CPointer<UInt16>, UInt32, CPointer<DHCP_CALLOUT_TABLE>) -> UInt32>
-
-@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
 public type LPDHCP_GIVE_ADDRESS = CFunc<(CPointer<UInt8>, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
@@ -3160,7 +1387,6 @@ public type LPDHCP_NEWPKT = CFunc<(CPointer<CPointer<UInt8>>, CPointer<UInt32>, 
 public type LPDHCP_PROB = CFunc<(CPointer<UInt8>, UInt32, UInt32, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct QuarantineStatus {
     public var value: Int32 = 0
 
@@ -3246,7 +1472,6 @@ public struct SCOPE_MIB_INFO_VQ {
 }
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
-@C
 public struct StatusCode {
     public var value: Int32 = 0
 
@@ -3275,6 +1500,1818 @@ public let StatusCode_STATUS_NO_BINDING: StatusCode = StatusCode(3)
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]
 public let StatusCode_STATUS_NOPREFIX_AVAIL: StatusCode = StatusCode(6)
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCPV4_FAILOVER_CLIENT_INFO {
+    public var ClientIpAddress: UInt32 = 0
+    public var SubnetMask: UInt32 = 0
+    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
+    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
+    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
+    public var bClientType: UInt8 = 0
+    public var AddressState: UInt8 = 0
+    public var Status: Int32 = 0
+    public var ProbationEnds: DATE_TIME = DATE_TIME()
+    public var QuarantineCapable: Int32 = 0
+    public var SentPotExpTime: UInt32 = 0
+    public var AckPotExpTime: UInt32 = 0
+    public var RecvPotExpTime: UInt32 = 0
+    public var StartTime: UInt32 = 0
+    public var CltLastTransTime: UInt32 = 0
+    public var LastBndUpdTime: UInt32 = 0
+    public var BndMsgStatus: UInt32 = 0
+    public var PolicyName: CPointer<UInt16> = CPointer<UInt16>()
+    public var Flags: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCPV4_FAILOVER_CLIENT_INFO_ARRAY {
+    public var NumElements: UInt32 = 0
+    public var Clients: CPointer<CPointer<DHCPV4_FAILOVER_CLIENT_INFO>> = CPointer<CPointer<DHCPV4_FAILOVER_CLIENT_INFO>>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCPV4_FAILOVER_CLIENT_INFO_EX {
+    public var ClientIpAddress: UInt32 = 0
+    public var SubnetMask: UInt32 = 0
+    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
+    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
+    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
+    public var bClientType: UInt8 = 0
+    public var AddressState: UInt8 = 0
+    public var Status: Int32 = 0
+    public var ProbationEnds: DATE_TIME = DATE_TIME()
+    public var QuarantineCapable: Int32 = 0
+    public var SentPotExpTime: UInt32 = 0
+    public var AckPotExpTime: UInt32 = 0
+    public var RecvPotExpTime: UInt32 = 0
+    public var StartTime: UInt32 = 0
+    public var CltLastTransTime: UInt32 = 0
+    public var LastBndUpdTime: UInt32 = 0
+    public var BndMsgStatus: UInt32 = 0
+    public var PolicyName: CPointer<UInt16> = CPointer<UInt16>()
+    public var Flags: UInt8 = 0
+    public var AddressStateEx: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCPV6Prefix {
+    public var prefix: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var prefixLength: UInt32 = 0
+    public var preferredLifeTime: UInt32 = 0
+    public var validLifeTime: UInt32 = 0
+    public var status: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCPV6PrefixLeaseInformation {
+    public var nPrefixes: UInt32 = 0
+    public var prefixArray: CPointer<DHCPV6Prefix> = CPointer<DHCPV6Prefix>()
+    public var iaid: UInt32 = 0
+    public var T1: Int64 = 0
+    public var T2: Int64 = 0
+    public var MaxLeaseExpirationTime: Int64 = 0
+    public var LastRenewalTime: Int64 = 0
+    public var status: Int32 = 0
+    public var ServerId: CPointer<UInt8> = CPointer<UInt8>()
+    public var ServerIdLen: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCPV6_BIND_ELEMENT {
+    public var Flags: UInt32 = 0
+    public var fBoundToDHCPServer: Int32 = 0
+    public var AdapterPrimaryAddress: DHCP_IPV6_ADDRESS = DHCP_IPV6_ADDRESS()
+    public var AdapterSubnetAddress: DHCP_IPV6_ADDRESS = DHCP_IPV6_ADDRESS()
+    public var IfDescription: CPointer<UInt16> = CPointer<UInt16>()
+    public var IpV6IfIndex: UInt32 = 0
+    public var IfIdSize: UInt32 = 0
+    public var IfId: CPointer<UInt8> = CPointer<UInt8>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCPV6_BIND_ELEMENT_ARRAY {
+    public var NumElements: UInt32 = 0
+    public var Elements: CPointer<DHCPV6_BIND_ELEMENT> = CPointer<DHCPV6_BIND_ELEMENT>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCPV6_IP_ARRAY {
+    public var NumElements: UInt32 = 0
+    public var Elements: CPointer<DHCP_IPV6_ADDRESS> = CPointer<DHCP_IPV6_ADDRESS>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCPV6_STATELESS_SCOPE_STATS {
+    public var SubnetAddress: DHCP_IPV6_ADDRESS = DHCP_IPV6_ADDRESS()
+    public var NumStatelessClientsAdded: UInt64 = 0
+    public var NumStatelessClientsRemoved: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCPV6_STATELESS_STATS {
+    public var NumScopes: UInt32 = 0
+    public var ScopeStats: CPointer<DHCPV6_STATELESS_SCOPE_STATS> = CPointer<DHCPV6_STATELESS_SCOPE_STATS>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CALLOUT_TABLE {
+    public var DhcpControlHook: LPDHCP_CONTROL = CFunc<(UInt32, CPointer<Unit>) -> UInt32>(CPointer<Unit>())
+    public var DhcpNewPktHook: LPDHCP_NEWPKT = CFunc<(CPointer<CPointer<UInt8>>, CPointer<UInt32>, UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<Int32>) -> UInt32>(CPointer<Unit>())
+    public var DhcpPktDropHook: LPDHCP_DROP_SEND = CFunc<(CPointer<CPointer<UInt8>>, CPointer<UInt32>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>(CPointer<Unit>())
+    public var DhcpPktSendHook: LPDHCP_DROP_SEND = CFunc<(CPointer<CPointer<UInt8>>, CPointer<UInt32>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>(CPointer<Unit>())
+    public var DhcpAddressDelHook: LPDHCP_PROB = CFunc<(CPointer<UInt8>, UInt32, UInt32, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>(CPointer<Unit>())
+    public var DhcpAddressOfferHook: LPDHCP_GIVE_ADDRESS = CFunc<(CPointer<UInt8>, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>(CPointer<Unit>())
+    public var DhcpHandleOptionsHook: LPDHCP_HANDLE_OPTIONS = CFunc<(CPointer<UInt8>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<DHCP_SERVER_OPTIONS>) -> UInt32>(CPointer<Unit>())
+    public var DhcpDeleteClientHook: LPDHCP_DELETE_CLIENT = CFunc<(UInt32, CPointer<UInt8>, UInt32, UInt32, UInt32) -> UInt32>(CPointer<Unit>())
+    public var DhcpExtensionHook: CPointer<Unit> = CPointer<Unit>()
+    public var DhcpReservedHook: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLASS_INFO_ARRAY_V6 {
+    public var NumElements: UInt32 = 0
+    public var Classes: CPointer<DHCP_CLASS_INFO_V6> = CPointer<DHCP_CLASS_INFO_V6>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLIENT_FILTER_STATUS_INFO {
+    public var ClientIpAddress: UInt32 = 0
+    public var SubnetMask: UInt32 = 0
+    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
+    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
+    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
+    public var bClientType: UInt8 = 0
+    public var AddressState: UInt8 = 0
+    public var Status: Int32 = 0
+    public var ProbationEnds: DATE_TIME = DATE_TIME()
+    public var QuarantineCapable: Int32 = 0
+    public var FilterStatus: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLIENT_FILTER_STATUS_INFO_ARRAY {
+    public var NumElements: UInt32 = 0
+    public var Clients: CPointer<CPointer<DHCP_CLIENT_FILTER_STATUS_INFO>> = CPointer<CPointer<DHCP_CLIENT_FILTER_STATUS_INFO>>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLIENT_INFO {
+    public var ClientIpAddress: UInt32 = 0
+    public var SubnetMask: UInt32 = 0
+    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
+    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
+    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLIENT_INFO_ARRAY {
+    public var NumElements: UInt32 = 0
+    public var Clients: CPointer<CPointer<DHCP_CLIENT_INFO>> = CPointer<CPointer<DHCP_CLIENT_INFO>>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLIENT_INFO_PB {
+    public var ClientIpAddress: UInt32 = 0
+    public var SubnetMask: UInt32 = 0
+    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
+    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
+    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
+    public var bClientType: UInt8 = 0
+    public var AddressState: UInt8 = 0
+    public var Status: Int32 = 0
+    public var ProbationEnds: DATE_TIME = DATE_TIME()
+    public var QuarantineCapable: Int32 = 0
+    public var FilterStatus: UInt32 = 0
+    public var PolicyName: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLIENT_INFO_PB_ARRAY {
+    public var NumElements: UInt32 = 0
+    public var Clients: CPointer<CPointer<DHCP_CLIENT_INFO_PB>> = CPointer<CPointer<DHCP_CLIENT_INFO_PB>>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLIENT_INFO_V4 {
+    public var ClientIpAddress: UInt32 = 0
+    public var SubnetMask: UInt32 = 0
+    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
+    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
+    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
+    public var bClientType: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLIENT_INFO_V5 {
+    public var ClientIpAddress: UInt32 = 0
+    public var SubnetMask: UInt32 = 0
+    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
+    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
+    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
+    public var bClientType: UInt8 = 0
+    public var AddressState: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLIENT_INFO_VQ {
+    public var ClientIpAddress: UInt32 = 0
+    public var SubnetMask: UInt32 = 0
+    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
+    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
+    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
+    public var bClientType: UInt8 = 0
+    public var AddressState: UInt8 = 0
+    public var Status: Int32 = 0
+    public var ProbationEnds: DATE_TIME = DATE_TIME()
+    public var QuarantineCapable: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_FAILOVER_RELATIONSHIP {
+    public var PrimaryServer: UInt32 = 0
+    public var SecondaryServer: UInt32 = 0
+    public var Mode: Int32 = 0
+    public var ServerType: Int32 = 0
+    public var State: Int32 = 0
+    public var PrevState: Int32 = 0
+    public var Mclt: UInt32 = 0
+    public var SafePeriod: UInt32 = 0
+    public var RelationshipName: CPointer<UInt16> = CPointer<UInt16>()
+    public var PrimaryServerName: CPointer<UInt16> = CPointer<UInt16>()
+    public var SecondaryServerName: CPointer<UInt16> = CPointer<UInt16>()
+    public var pScopes: CPointer<DHCP_IP_ARRAY> = CPointer<DHCP_IP_ARRAY>()
+    public var Percentage: UInt8 = 0
+    public var SharedSecret: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_FAILOVER_RELATIONSHIP_ARRAY {
+    public var NumElements: UInt32 = 0
+    public var pRelationships: CPointer<DHCP_FAILOVER_RELATIONSHIP> = CPointer<DHCP_FAILOVER_RELATIONSHIP>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_FILTER_ADD_INFO {
+    public var AddrPatt: DHCP_ADDR_PATTERN = DHCP_ADDR_PATTERN()
+    public var Comment: CPointer<UInt16> = CPointer<UInt16>()
+    public var ListType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_FILTER_ENUM_INFO {
+    public var NumElements: UInt32 = 0
+    public var pEnumRecords: CPointer<DHCP_FILTER_RECORD> = CPointer<DHCP_FILTER_RECORD>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_HOST_INFO_V6 {
+    public var IpAddress: DHCP_IPV6_ADDRESS = DHCP_IPV6_ADDRESS()
+    public var NetBiosName: CPointer<UInt16> = CPointer<UInt16>()
+    public var HostName: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_MIB_INFO {
+    public var Discovers: UInt32 = 0
+    public var Offers: UInt32 = 0
+    public var Requests: UInt32 = 0
+    public var Acks: UInt32 = 0
+    public var Naks: UInt32 = 0
+    public var Declines: UInt32 = 0
+    public var Releases: UInt32 = 0
+    public var ServerStartTime: DATE_TIME = DATE_TIME()
+    public var Scopes: UInt32 = 0
+    public var ScopeInfo: CPointer<SCOPE_MIB_INFO> = CPointer<SCOPE_MIB_INFO>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_MIB_INFO_V5 {
+    public var Discovers: UInt32 = 0
+    public var Offers: UInt32 = 0
+    public var Requests: UInt32 = 0
+    public var Acks: UInt32 = 0
+    public var Naks: UInt32 = 0
+    public var Declines: UInt32 = 0
+    public var Releases: UInt32 = 0
+    public var ServerStartTime: DATE_TIME = DATE_TIME()
+    public var QtnNumLeases: UInt32 = 0
+    public var QtnPctQtnLeases: UInt32 = 0
+    public var QtnProbationLeases: UInt32 = 0
+    public var QtnNonQtnLeases: UInt32 = 0
+    public var QtnExemptLeases: UInt32 = 0
+    public var QtnCapableClients: UInt32 = 0
+    public var QtnIASErrors: UInt32 = 0
+    public var DelayedOffers: UInt32 = 0
+    public var ScopesWithDelayedOffers: UInt32 = 0
+    public var Scopes: UInt32 = 0
+    public var ScopeInfo: CPointer<SCOPE_MIB_INFO_V5> = CPointer<SCOPE_MIB_INFO_V5>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_MIB_INFO_V6 {
+    public var Solicits: UInt32 = 0
+    public var Advertises: UInt32 = 0
+    public var Requests: UInt32 = 0
+    public var Renews: UInt32 = 0
+    public var Rebinds: UInt32 = 0
+    public var Replies: UInt32 = 0
+    public var Confirms: UInt32 = 0
+    public var Declines: UInt32 = 0
+    public var Releases: UInt32 = 0
+    public var Informs: UInt32 = 0
+    public var ServerStartTime: DATE_TIME = DATE_TIME()
+    public var Scopes: UInt32 = 0
+    public var ScopeInfo: CPointer<SCOPE_MIB_INFO_V6> = CPointer<SCOPE_MIB_INFO_V6>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_MIB_INFO_VQ {
+    public var Discovers: UInt32 = 0
+    public var Offers: UInt32 = 0
+    public var Requests: UInt32 = 0
+    public var Acks: UInt32 = 0
+    public var Naks: UInt32 = 0
+    public var Declines: UInt32 = 0
+    public var Releases: UInt32 = 0
+    public var ServerStartTime: DATE_TIME = DATE_TIME()
+    public var QtnNumLeases: UInt32 = 0
+    public var QtnPctQtnLeases: UInt32 = 0
+    public var QtnProbationLeases: UInt32 = 0
+    public var QtnNonQtnLeases: UInt32 = 0
+    public var QtnExemptLeases: UInt32 = 0
+    public var QtnCapableClients: UInt32 = 0
+    public var QtnIASErrors: UInt32 = 0
+    public var Scopes: UInt32 = 0
+    public var ScopeInfo: CPointer<SCOPE_MIB_INFO_VQ> = CPointer<SCOPE_MIB_INFO_VQ>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_OPTION_DATA_ELEMENT {
+    public var OptionType: Int32 = 0
+    public var Element: DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION = DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop byteOption: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop wordOption: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dWordOption: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dWordDWordOption: DWORD_DWORD {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DWORD_DWORD>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DWORD_DWORD>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipAddressOption: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop stringDataOption: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop binaryDataOption: DHCP_BINARY_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_BINARY_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_BINARY_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop encapsulatedDataOption: DHCP_BINARY_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_BINARY_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_BINARY_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipv6AddressDataOption: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_OPTION_SCOPE_INFO {
+    public var ScopeType: Int32 = 0
+    public var ScopeInfo: DHCP_OPTION_SCOPE_INFO__DHCP_OPTION_SCOPE_UNION = DHCP_OPTION_SCOPE_INFO__DHCP_OPTION_SCOPE_UNION()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DHCP_OPTION_SCOPE_INFO__DHCP_OPTION_SCOPE_UNION {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop defaultScopeInfo: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop globalScopeInfo: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop subnetScopeInfo: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reservedScopeInfo: DHCP_RESERVED_SCOPE {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_RESERVED_SCOPE>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_RESERVED_SCOPE>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop mScopeInfo: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_OPTION_SCOPE_INFO6 {
+    public var ScopeType: Int32 = 0
+    public var ScopeInfo: DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 = DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 {
+    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+
+    public mut prop defaultScopeInfo: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop subnetScopeInfo: DHCP_IPV6_ADDRESS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_IPV6_ADDRESS>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_IPV6_ADDRESS>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reservedScopeInfo: DHCP_RESERVED_SCOPE6 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_RESERVED_SCOPE6>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_RESERVED_SCOPE6>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_POL_EXPR {
+    public var ParentExpr: UInt32 = 0
+    public var Operator: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_POL_EXPR_ARRAY {
+    public var NumElements: UInt32 = 0
+    public var Elements: CPointer<DHCP_POL_EXPR> = CPointer<DHCP_POL_EXPR>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_PROPERTY {
+    public var ID: Int32 = 0
+    public var Type: Int32 = 0
+    public var Value: DHCP_PROPERTY__DHCP_PROPERTY_VALUE_UNION = DHCP_PROPERTY__DHCP_PROPERTY_VALUE_UNION()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DHCP_PROPERTY__DHCP_PROPERTY_VALUE_UNION {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop byteValue: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop wordValue: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dWordValue: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop stringValue: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop binaryValue: DHCP_BINARY_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_BINARY_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_BINARY_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_PROPERTY_ARRAY {
+    public var NumElements: UInt32 = 0
+    public var Elements: CPointer<DHCP_PROPERTY> = CPointer<DHCP_PROPERTY>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_SEARCH_INFO {
+    public var SearchType: Int32 = 0
+    public var SearchInfo: DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION = DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop clientIpAddress: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop clientHardwareAddress: DHCP_BINARY_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_BINARY_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DHCP_BINARY_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop clientName: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_SUBNET_ELEMENT_DATA {
+    public var ElementType: Int32 = 0
+    public var Element: DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION = DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop ipRange: CPointer<DHCP_IP_RANGE> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop secondaryHost: CPointer<DHCP_HOST_INFO> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reservedIp: CPointer<DHCP_IP_RESERVATION> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RESERVATION>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RESERVATION>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop excludeIpRange: CPointer<DHCP_IP_RANGE> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipUsedCluster: CPointer<DHCP_IP_CLUSTER> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_SUBNET_ELEMENT_DATA_V4 {
+    public var ElementType: Int32 = 0
+    public var Element: DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 = DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop ipRange: CPointer<DHCP_IP_RANGE> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop secondaryHost: CPointer<DHCP_HOST_INFO> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reservedIp: CPointer<DHCP_IP_RESERVATION_V4> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V4>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V4>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop excludeIpRange: CPointer<DHCP_IP_RANGE> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipUsedCluster: CPointer<DHCP_IP_CLUSTER> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_SUBNET_ELEMENT_DATA_V5 {
+    public var ElementType: Int32 = 0
+    public var Element: DHCP_SUBNET_ELEMENT_DATA_V5__DHCP_SUBNET_ELEMENT_UNION_V5 = DHCP_SUBNET_ELEMENT_DATA_V5__DHCP_SUBNET_ELEMENT_UNION_V5()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DHCP_SUBNET_ELEMENT_DATA_V5__DHCP_SUBNET_ELEMENT_UNION_V5 {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop ipRange: CPointer<DHCP_BOOTP_IP_RANGE> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_BOOTP_IP_RANGE>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_BOOTP_IP_RANGE>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop secondaryHost: CPointer<DHCP_HOST_INFO> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reservedIp: CPointer<DHCP_IP_RESERVATION_V4> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V4>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V4>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop excludeIpRange: CPointer<DHCP_IP_RANGE> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipUsedCluster: CPointer<DHCP_IP_CLUSTER> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_SUBNET_ELEMENT_DATA_V6 {
+    public var ElementType: Int32 = 0
+    public var Element: DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 = DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop ipRange: CPointer<DHCP_IP_RANGE_V6> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RANGE_V6>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RANGE_V6>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reservedIp: CPointer<DHCP_IP_RESERVATION_V6> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V6>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V6>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop excludeIpRange: CPointer<DHCP_IP_RANGE_V6> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RANGE_V6>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<DHCP_IP_RANGE_V6>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_SUBNET_ELEMENT_INFO_ARRAY {
+    public var NumElements: UInt32 = 0
+    public var Elements: CPointer<DHCP_SUBNET_ELEMENT_DATA> = CPointer<DHCP_SUBNET_ELEMENT_DATA>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4 {
+    public var NumElements: UInt32 = 0
+    public var Elements: CPointer<DHCP_SUBNET_ELEMENT_DATA_V4> = CPointer<DHCP_SUBNET_ELEMENT_DATA_V4>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5 {
+    public var NumElements: UInt32 = 0
+    public var Elements: CPointer<DHCP_SUBNET_ELEMENT_DATA_V5> = CPointer<DHCP_SUBNET_ELEMENT_DATA_V5>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6 {
+    public var NumElements: UInt32 = 0
+    public var Elements: CPointer<DHCP_SUBNET_ELEMENT_DATA_V6> = CPointer<DHCP_SUBNET_ELEMENT_DATA_V6>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_SUBNET_INFO {
+    public var SubnetAddress: UInt32 = 0
+    public var SubnetMask: UInt32 = 0
+    public var SubnetName: CPointer<UInt16> = CPointer<UInt16>()
+    public var SubnetComment: CPointer<UInt16> = CPointer<UInt16>()
+    public var PrimaryHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
+    public var SubnetState: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_SUBNET_INFO_VQ {
+    public var SubnetAddress: UInt32 = 0
+    public var SubnetMask: UInt32 = 0
+    public var SubnetName: CPointer<UInt16> = CPointer<UInt16>()
+    public var SubnetComment: CPointer<UInt16> = CPointer<UInt16>()
+    public var PrimaryHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
+    public var SubnetState: Int32 = 0
+    public var QuarantineOn: UInt32 = 0
+    public var Reserved1: UInt32 = 0
+    public var Reserved2: UInt32 = 0
+    public var Reserved3: Int64 = 0
+    public var Reserved4: Int64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_SUPER_SCOPE_TABLE {
+    public var cEntries: UInt32 = 0
+    public var pEntries: CPointer<DHCP_SUPER_SCOPE_TABLE_ENTRY> = CPointer<DHCP_SUPER_SCOPE_TABLE_ENTRY>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+public type LPDHCP_ENTRY_POINT_FUNC = CFunc<(CPointer<UInt16>, UInt32, CPointer<DHCP_CALLOUT_TABLE>) -> UInt32>
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLIENT_INFO_ARRAY_V4 {
+    public var NumElements: UInt32 = 0
+    public var Clients: CPointer<CPointer<DHCP_CLIENT_INFO_V4>> = CPointer<CPointer<DHCP_CLIENT_INFO_V4>>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLIENT_INFO_ARRAY_V5 {
+    public var NumElements: UInt32 = 0
+    public var Clients: CPointer<CPointer<DHCP_CLIENT_INFO_V5>> = CPointer<CPointer<DHCP_CLIENT_INFO_V5>>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLIENT_INFO_ARRAY_VQ {
+    public var NumElements: UInt32 = 0
+    public var Clients: CPointer<CPointer<DHCP_CLIENT_INFO_VQ>> = CPointer<CPointer<DHCP_CLIENT_INFO_VQ>>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLIENT_INFO_EX {
+    public var ClientIpAddress: UInt32 = 0
+    public var SubnetMask: UInt32 = 0
+    public var ClientHardwareAddress: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
+    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientLeaseExpires: DATE_TIME = DATE_TIME()
+    public var OwnerHost: DHCP_HOST_INFO = DHCP_HOST_INFO()
+    public var bClientType: UInt8 = 0
+    public var AddressState: UInt8 = 0
+    public var Status: Int32 = 0
+    public var ProbationEnds: DATE_TIME = DATE_TIME()
+    public var QuarantineCapable: Int32 = 0
+    public var FilterStatus: UInt32 = 0
+    public var PolicyName: CPointer<UInt16> = CPointer<UInt16>()
+    public var Properties: CPointer<DHCP_PROPERTY_ARRAY> = CPointer<DHCP_PROPERTY_ARRAY>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLIENT_INFO_EX_ARRAY {
+    public var NumElements: UInt32 = 0
+    public var Clients: CPointer<CPointer<DHCP_CLIENT_INFO_EX>> = CPointer<CPointer<DHCP_CLIENT_INFO_EX>>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLIENT_INFO_V6 {
+    public var ClientIpAddress: DHCP_IPV6_ADDRESS = DHCP_IPV6_ADDRESS()
+    public var ClientDUID: DHCP_BINARY_DATA = DHCP_BINARY_DATA()
+    public var AddressType: UInt32 = 0
+    public var IAID: UInt32 = 0
+    public var ClientName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientComment: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientValidLeaseExpires: DATE_TIME = DATE_TIME()
+    public var ClientPrefLeaseExpires: DATE_TIME = DATE_TIME()
+    public var OwnerHost: DHCP_HOST_INFO_V6 = DHCP_HOST_INFO_V6()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_OPTION_DATA {
+    public var NumElements: UInt32 = 0
+    public var Elements: CPointer<DHCP_OPTION_DATA_ELEMENT> = CPointer<DHCP_OPTION_DATA_ELEMENT>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_OPTION_VALUE {
+    public var OptionID: UInt32 = 0
+    public var Value: DHCP_OPTION_DATA = DHCP_OPTION_DATA()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_OPTION_VALUE_ARRAY {
+    public var NumElements: UInt32 = 0
+    public var Values: CPointer<DHCP_OPTION_VALUE> = CPointer<DHCP_OPTION_VALUE>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_POLICY {
+    public var PolicyName: CPointer<UInt16> = CPointer<UInt16>()
+    public var IsGlobalPolicy: Int32 = 0
+    public var Subnet: UInt32 = 0
+    public var ProcessingOrder: UInt32 = 0
+    public var Conditions: CPointer<DHCP_POL_COND_ARRAY> = CPointer<DHCP_POL_COND_ARRAY>()
+    public var Expressions: CPointer<DHCP_POL_EXPR_ARRAY> = CPointer<DHCP_POL_EXPR_ARRAY>()
+    public var Ranges: CPointer<DHCP_IP_RANGE_ARRAY> = CPointer<DHCP_IP_RANGE_ARRAY>()
+    public var Description: CPointer<UInt16> = CPointer<UInt16>()
+    public var Enabled: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_POLICY_ARRAY {
+    public var NumElements: UInt32 = 0
+    public var Elements: CPointer<DHCP_POLICY> = CPointer<DHCP_POLICY>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_POLICY_EX {
+    public var PolicyName: CPointer<UInt16> = CPointer<UInt16>()
+    public var IsGlobalPolicy: Int32 = 0
+    public var Subnet: UInt32 = 0
+    public var ProcessingOrder: UInt32 = 0
+    public var Conditions: CPointer<DHCP_POL_COND_ARRAY> = CPointer<DHCP_POL_COND_ARRAY>()
+    public var Expressions: CPointer<DHCP_POL_EXPR_ARRAY> = CPointer<DHCP_POL_EXPR_ARRAY>()
+    public var Ranges: CPointer<DHCP_IP_RANGE_ARRAY> = CPointer<DHCP_IP_RANGE_ARRAY>()
+    public var Description: CPointer<UInt16> = CPointer<UInt16>()
+    public var Enabled: Int32 = 0
+    public var Properties: CPointer<DHCP_PROPERTY_ARRAY> = CPointer<DHCP_PROPERTY_ARRAY>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_POLICY_EX_ARRAY {
+    public var NumElements: UInt32 = 0
+    public var Elements: CPointer<DHCP_POLICY_EX> = CPointer<DHCP_POLICY_EX>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_ALL_OPTION_VALUES {
+    public var Flags: UInt32 = 0
+    public var NumElements: UInt32 = 0
+    public var Options: CPointer<DHCP_ALL_OPTION_VALUES__Anonymous_e__Struct> = CPointer<DHCP_ALL_OPTION_VALUES__Anonymous_e__Struct>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_ALL_OPTION_VALUES__Anonymous_e__Struct {
+    public var ClassName: CPointer<UInt16> = CPointer<UInt16>()
+    public var VendorName: CPointer<UInt16> = CPointer<UInt16>()
+    public var IsVendor: Int32 = 0
+    public var OptionsArray: CPointer<DHCP_OPTION_VALUE_ARRAY> = CPointer<DHCP_OPTION_VALUE_ARRAY>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_ALL_OPTION_VALUES_PB {
+    public var Flags: UInt32 = 0
+    public var NumElements: UInt32 = 0
+    public var Options: CPointer<DHCP_ALL_OPTION_VALUES_PB__Anonymous_e__Struct> = CPointer<DHCP_ALL_OPTION_VALUES_PB__Anonymous_e__Struct>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_ALL_OPTION_VALUES_PB__Anonymous_e__Struct {
+    public var PolicyName: CPointer<UInt16> = CPointer<UInt16>()
+    public var VendorName: CPointer<UInt16> = CPointer<UInt16>()
+    public var IsVendor: Int32 = 0
+    public var OptionsArray: CPointer<DHCP_OPTION_VALUE_ARRAY> = CPointer<DHCP_OPTION_VALUE_ARRAY>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_CLIENT_INFO_ARRAY_V6 {
+    public var NumElements: UInt32 = 0
+    public var Clients: CPointer<CPointer<DHCP_CLIENT_INFO_V6>> = CPointer<CPointer<DHCP_CLIENT_INFO_V6>>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_OPTION {
+    public var OptionID: UInt32 = 0
+    public var OptionName: CPointer<UInt16> = CPointer<UInt16>()
+    public var OptionComment: CPointer<UInt16> = CPointer<UInt16>()
+    public var DefaultValue: DHCP_OPTION_DATA = DHCP_OPTION_DATA()
+    public var OptionType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_OPTION_ARRAY {
+    public var NumElements: UInt32 = 0
+    public var Options: CPointer<DHCP_OPTION> = CPointer<DHCP_OPTION>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_OPTION_LIST {
+    public var NumOptions: UInt32 = 0
+    public var Options: CPointer<DHCP_OPTION_VALUE> = CPointer<DHCP_OPTION_VALUE>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_ALL_OPTIONS {
+    public var Flags: UInt32 = 0
+    public var NonVendorOptions: CPointer<DHCP_OPTION_ARRAY> = CPointer<DHCP_OPTION_ARRAY>()
+    public var NumVendorOptions: UInt32 = 0
+    public var VendorOptions: CPointer<DHCP_ALL_OPTIONS__Anonymous_e__Struct> = CPointer<DHCP_ALL_OPTIONS__Anonymous_e__Struct>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on"]
+@C
+public struct DHCP_ALL_OPTIONS__Anonymous_e__Struct {
+    public var Option: DHCP_OPTION = DHCP_OPTION()
+    public var VendorName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClassName: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
 
 @When[DHCPSAPI == "on"]
 foreign {
@@ -3334,9 +3371,9 @@ foreign {
     func DhcpDeleteFilterV4(ServerIpAddress: CPointer<UInt16>, DeleteFilterInfo: CPointer<DHCP_ADDR_PATTERN>): UInt32
     func DhcpDeleteServer(Flags: UInt32, IdInfo: CPointer<Unit>, NewServer: CPointer<DHCPDS_SERVER>, CallbackFn: CPointer<Unit>, CallbackData: CPointer<Unit>): UInt32
     // param-hint: ServerIpAddress optional
-    func DhcpDeleteSubnet(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ForceFlag: DHCP_FORCE_FLAG): UInt32
+    func DhcpDeleteSubnet(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ForceFlag: Int32): UInt32
     // param-hint: ServerIpAddress optional
-    func DhcpDeleteSubnetV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, ForceFlag: DHCP_FORCE_FLAG): UInt32
+    func DhcpDeleteSubnetV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, ForceFlag: Int32): UInt32
     // param-hint: ServerIpAddress optional
     func DhcpDeleteSuperScopeV4(ServerIpAddress: CPointer<UInt16>, SuperScopeName: CPointer<UInt16>): UInt32
     func DhcpDsCleanup(): Unit
@@ -3346,7 +3383,7 @@ foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumClassesV6(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClassInfoArray: CPointer<CPointer<DHCP_CLASS_INFO_ARRAY_V6>>, nRead: CPointer<UInt32>, nTotal: CPointer<UInt32>): UInt32
     // param-hint: ServerIpAddress optional
-    func DhcpEnumFilterV4(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<DHCP_ADDR_PATTERN>, PreferredMaximum: UInt32, ListType: DHCP_FILTER_LIST_TYPE, EnumFilterInfo: CPointer<CPointer<DHCP_FILTER_ENUM_INFO>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
+    func DhcpEnumFilterV4(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<DHCP_ADDR_PATTERN>, PreferredMaximum: UInt32, ListType: Int32, EnumFilterInfo: CPointer<CPointer<DHCP_FILTER_ENUM_INFO>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
     // param-hint: ServerIpAddress optional
     func DhcpEnumOptionValues(ServerIpAddress: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, OptionValues: CPointer<CPointer<DHCP_OPTION_VALUE_ARRAY>>, OptionsRead: CPointer<UInt32>, OptionsTotal: CPointer<UInt32>): UInt32
     // param-hint: ServerIpAddress optional
@@ -3381,13 +3418,13 @@ foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumSubnetClientsVQ(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_ARRAY_VQ>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32
     // param-hint: ServerIpAddress optional
-    func DhcpEnumSubnetElements(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, EnumElementType: DHCP_SUBNET_ELEMENT_TYPE, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_SUBNET_ELEMENT_INFO_ARRAY>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
+    func DhcpEnumSubnetElements(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, EnumElementType: Int32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_SUBNET_ELEMENT_INFO_ARRAY>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
     // param-hint: ServerIpAddress optional
-    func DhcpEnumSubnetElementsV4(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, EnumElementType: DHCP_SUBNET_ELEMENT_TYPE, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
+    func DhcpEnumSubnetElementsV4(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, EnumElementType: Int32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
     // param-hint: ServerIpAddress optional
-    func DhcpEnumSubnetElementsV5(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, EnumElementType: DHCP_SUBNET_ELEMENT_TYPE, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
+    func DhcpEnumSubnetElementsV5(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, EnumElementType: Int32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
     // param-hint: ServerIpAddress optional
-    func DhcpEnumSubnetElementsV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, EnumElementType: DHCP_SUBNET_ELEMENT_TYPE_V6, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
+    func DhcpEnumSubnetElementsV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, EnumElementType: Int32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
     // param-hint: ServerIpAddress optional
     func DhcpEnumSubnets(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumInfo: CPointer<CPointer<DHCP_IP_ARRAY>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
     // param-hint: ServerIpAddress optional
@@ -3461,12 +3498,12 @@ foreign {
     func DhcpGetVersion(ServerIpAddress: CPointer<UInt16>, MajorVersion: CPointer<UInt32>, MinorVersion: CPointer<UInt32>): UInt32
     // param-hint: VendorName optional
     // param-hint: Value bytes=param[8]
-    func DhcpHlprAddV4PolicyCondition(Policy: CPointer<DHCP_POLICY>, ParentExpr: UInt32, Type: DHCP_POL_ATTR_TYPE, OptionID: UInt32, SubOptionID: UInt32, VendorName: CPointer<UInt16>, Operator: DHCP_POL_COMPARATOR, Value: CPointer<UInt8>, ValueLength: UInt32, ConditionIndex: CPointer<UInt32>): UInt32
-    func DhcpHlprAddV4PolicyExpr(Policy: CPointer<DHCP_POLICY>, ParentExpr: UInt32, Operator: DHCP_POL_LOGIC_OPER, ExprIndex: CPointer<UInt32>): UInt32
+    func DhcpHlprAddV4PolicyCondition(Policy: CPointer<DHCP_POLICY>, ParentExpr: UInt32, Type: Int32, OptionID: UInt32, SubOptionID: UInt32, VendorName: CPointer<UInt16>, Operator: Int32, Value: CPointer<UInt8>, ValueLength: UInt32, ConditionIndex: CPointer<UInt32>): UInt32
+    func DhcpHlprAddV4PolicyExpr(Policy: CPointer<DHCP_POLICY>, ParentExpr: UInt32, Operator: Int32, ExprIndex: CPointer<UInt32>): UInt32
     func DhcpHlprAddV4PolicyRange(Policy: CPointer<DHCP_POLICY>, Range: CPointer<DHCP_IP_RANGE>): UInt32
-    func DhcpHlprCreateV4Policy(PolicyName: CPointer<UInt16>, fGlobalPolicy: Int32, Subnet: UInt32, ProcessingOrder: UInt32, RootOperator: DHCP_POL_LOGIC_OPER, Description: CPointer<UInt16>, Enabled: Int32, Policy: CPointer<CPointer<DHCP_POLICY>>): UInt32
-    func DhcpHlprCreateV4PolicyEx(PolicyName: CPointer<UInt16>, fGlobalPolicy: Int32, Subnet: UInt32, ProcessingOrder: UInt32, RootOperator: DHCP_POL_LOGIC_OPER, Description: CPointer<UInt16>, Enabled: Int32, Policy: CPointer<CPointer<DHCP_POLICY_EX>>): UInt32
-    func DhcpHlprFindV4DhcpProperty(PropertyArray: CPointer<DHCP_PROPERTY_ARRAY>, ID: DHCP_PROPERTY_ID, Type: DHCP_PROPERTY_TYPE): CPointer<DHCP_PROPERTY>
+    func DhcpHlprCreateV4Policy(PolicyName: CPointer<UInt16>, fGlobalPolicy: Int32, Subnet: UInt32, ProcessingOrder: UInt32, RootOperator: Int32, Description: CPointer<UInt16>, Enabled: Int32, Policy: CPointer<CPointer<DHCP_POLICY>>): UInt32
+    func DhcpHlprCreateV4PolicyEx(PolicyName: CPointer<UInt16>, fGlobalPolicy: Int32, Subnet: UInt32, ProcessingOrder: UInt32, RootOperator: Int32, Description: CPointer<UInt16>, Enabled: Int32, Policy: CPointer<CPointer<DHCP_POLICY_EX>>): UInt32
+    func DhcpHlprFindV4DhcpProperty(PropertyArray: CPointer<DHCP_PROPERTY_ARRAY>, ID: Int32, Type: Int32): CPointer<DHCP_PROPERTY>
     func DhcpHlprFreeV4DhcpProperty(Property: CPointer<DHCP_PROPERTY>): Unit
     func DhcpHlprFreeV4DhcpPropertyArray(PropertyArray: CPointer<DHCP_PROPERTY_ARRAY>): Unit
     func DhcpHlprFreeV4Policy(Policy: CPointer<DHCP_POLICY>): Unit
@@ -3476,7 +3513,7 @@ foreign {
     func DhcpHlprIsV4PolicySingleUC(Policy: CPointer<DHCP_POLICY>): Int32
     func DhcpHlprIsV4PolicyValid(pPolicy: CPointer<DHCP_POLICY>): UInt32
     func DhcpHlprIsV4PolicyWellFormed(pPolicy: CPointer<DHCP_POLICY>): Int32
-    func DhcpHlprModifyV4PolicyExpr(Policy: CPointer<DHCP_POLICY>, Operator: DHCP_POL_LOGIC_OPER): UInt32
+    func DhcpHlprModifyV4PolicyExpr(Policy: CPointer<DHCP_POLICY>, Operator: Int32): UInt32
     func DhcpHlprResetV4PolicyExpr(Policy: CPointer<DHCP_POLICY>): UInt32
     // param-hint: ServerIpAddress optional
     func DhcpModifyClass(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ClassInfo: CPointer<DHCP_CLASS_INFO>): UInt32
@@ -3503,13 +3540,13 @@ foreign {
     // param-hint: VendorName optional
     func DhcpRemoveOptionValueV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO6>): UInt32
     // param-hint: ServerIpAddress optional
-    func DhcpRemoveSubnetElement(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, RemoveElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA>, ForceFlag: DHCP_FORCE_FLAG): UInt32
+    func DhcpRemoveSubnetElement(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, RemoveElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA>, ForceFlag: Int32): UInt32
     // param-hint: ServerIpAddress optional
-    func DhcpRemoveSubnetElementV4(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, RemoveElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V4>, ForceFlag: DHCP_FORCE_FLAG): UInt32
+    func DhcpRemoveSubnetElementV4(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, RemoveElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V4>, ForceFlag: Int32): UInt32
     // param-hint: ServerIpAddress optional
-    func DhcpRemoveSubnetElementV5(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, RemoveElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V5>, ForceFlag: DHCP_FORCE_FLAG): UInt32
+    func DhcpRemoveSubnetElementV5(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, RemoveElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V5>, ForceFlag: Int32): UInt32
     // param-hint: ServerIpAddress optional
-    func DhcpRemoveSubnetElementV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, RemoveElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V6>, ForceFlag: DHCP_FORCE_FLAG): UInt32
+    func DhcpRemoveSubnetElementV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, RemoveElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V6>, ForceFlag: Int32): UInt32
     func DhcpRpcFreeMemory(BufferPointer: CPointer<Unit>): Unit
     // param-hint: ServerIpAddress optional
     func DhcpScanDatabase(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, FixFlag: UInt32, ScanList: CPointer<CPointer<DHCP_SCAN_LIST>>): UInt32

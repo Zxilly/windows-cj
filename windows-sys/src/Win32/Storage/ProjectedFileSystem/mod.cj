@@ -2,42 +2,12 @@
 package windows_sys.Win32.Storage.ProjectedFileSystem
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
 @When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
-public struct PRJ_CALLBACKS {
-    public var StartDirectoryEnumerationCallback: PRJ_START_DIRECTORY_ENUMERATION_CB = { _, _ => 0 }
-    public var EndDirectoryEnumerationCallback: PRJ_END_DIRECTORY_ENUMERATION_CB = { _, _ => 0 }
-    public var GetDirectoryEnumerationCallback: PRJ_GET_DIRECTORY_ENUMERATION_CB = { _, _, _, _ => 0 }
-    public var GetPlaceholderInfoCallback: PRJ_GET_PLACEHOLDER_INFO_CB = { _ => 0 }
-    public var GetFileDataCallback: PRJ_GET_FILE_DATA_CB = { _, _, _ => 0 }
-    public var QueryFileNameCallback: PRJ_QUERY_FILE_NAME_CB = { _ => 0 }
-    public var NotificationCallback: PRJ_NOTIFICATION_CB = { _, _, _, _, _ => 0 }
-    public var CancelCommandCallback: PRJ_CANCEL_COMMAND_CB = { _ => () }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
-public struct PRJ_CALLBACK_DATA {
-    public var Size: UInt32 = 0
-    public var Flags: PRJ_CALLBACK_DATA_FLAGS = PRJ_CALLBACK_DATA_FLAGS()
-    public var NamespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT = CPointer<Unit>()
-    public var CommandId: Int32 = 0
-    public var FileId: GUID = GUID()
-    public var DataStreamId: GUID = GUID()
-    public var FilePathName: CPointer<UInt16> = CPointer<UInt16>()
-    public var VersionInfo: CPointer<PRJ_PLACEHOLDER_VERSION_INFO> = CPointer<PRJ_PLACEHOLDER_VERSION_INFO>()
-    public var TriggeringProcessId: UInt32 = 0
-    public var TriggeringProcessImageFileName: CPointer<UInt16> = CPointer<UInt16>()
-    public var InstanceContext: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
 public struct PRJ_CALLBACK_DATA_FLAGS {
     public var value: Int32 = 0
 
@@ -62,82 +32,6 @@ public let PRJ_CALLBACK_DATA_FLAGS_PRJ_CB_DATA_FLAG_ENUM_RESTART_SCAN: PRJ_CALLB
 public let PRJ_CALLBACK_DATA_FLAGS_PRJ_CB_DATA_FLAG_ENUM_RETURN_SINGLE_ENTRY: PRJ_CALLBACK_DATA_FLAGS = PRJ_CALLBACK_DATA_FLAGS(2)
 
 @When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-public type PRJ_CANCEL_COMMAND_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>) -> Unit>
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
-public struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS {
-    public var CommandType: PRJ_COMPLETE_COMMAND_TYPE = PRJ_COMPLETE_COMMAND_TYPE()
-    public var Anonymous: PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union = PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func notification(): PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Notification_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Notification_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_notification(val: PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Notification_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Notification_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func enumeration(): PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Enumeration_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Enumeration_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_enumeration(val: PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Enumeration_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Enumeration_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
-public struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Notification_e__Struct {
-    public var NotificationMask: PRJ_NOTIFY_TYPES = PRJ_NOTIFY_TYPES()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
-public struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Enumeration_e__Struct {
-    public var DirEntryBufferHandle: PRJ_DIR_ENTRY_BUFFER_HANDLE = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
 public struct PRJ_COMPLETE_COMMAND_TYPE {
     public var value: Int32 = 0
 
@@ -165,55 +59,6 @@ public let PRJ_COMPLETE_COMMAND_TYPE_PRJ_COMPLETE_COMMAND_TYPE_ENUMERATION: PRJ_
 public type PRJ_DIR_ENTRY_BUFFER_HANDLE = CPointer<Unit>
 
 @When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-public type PRJ_END_DIRECTORY_ENUMERATION_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>, CPointer<GUID>) -> Int32>
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
-public struct PRJ_EXTENDED_INFO {
-    public var InfoType: PRJ_EXT_INFO_TYPE = PRJ_EXT_INFO_TYPE()
-    public var NextInfoOffset: UInt32 = 0
-    public var Anonymous: PRJ_EXTENDED_INFO__Anonymous_e__Union = PRJ_EXTENDED_INFO__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct PRJ_EXTENDED_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func symlink(): PRJ_EXTENDED_INFO__Anonymous_e__Union__Symlink_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PRJ_EXTENDED_INFO__Anonymous_e__Union__Symlink_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_symlink(val: PRJ_EXTENDED_INFO__Anonymous_e__Union__Symlink_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PRJ_EXTENDED_INFO__Anonymous_e__Union__Symlink_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
-public struct PRJ_EXTENDED_INFO__Anonymous_e__Union__Symlink_e__Struct {
-    public var TargetName: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
 public struct PRJ_EXT_INFO_TYPE {
     public var value: Int32 = 0
 
@@ -237,7 +82,7 @@ public let PRJ_EXT_INFO_TYPE_PRJ_EXT_INFO_TYPE_SYMLINK: PRJ_EXT_INFO_TYPE = PRJ_
 @When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
 @C
 public struct PRJ_FILE_BASIC_INFO {
-    public var IsDirectory: Win32_Foundation.BOOLEAN = 0
+    public var IsDirectory: UInt8 = 0
     public var FileSize: Int64 = 0
     public var CreationTime: Int64 = 0
     public var LastAccessTime: Int64 = 0
@@ -248,7 +93,6 @@ public struct PRJ_FILE_BASIC_INFO {
 }
 
 @When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
 public struct PRJ_FILE_STATE {
     public var value: Int32 = 0
 
@@ -296,19 +140,9 @@ public let PRJ_FILE_STATE_PRJ_FILE_STATE_FULL: PRJ_FILE_STATE = PRJ_FILE_STATE(8
 public let PRJ_FILE_STATE_PRJ_FILE_STATE_TOMBSTONE: PRJ_FILE_STATE = PRJ_FILE_STATE(16)
 
 @When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-public type PRJ_GET_DIRECTORY_ENUMERATION_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>, CPointer<GUID>, CPointer<UInt16>, PRJ_DIR_ENTRY_BUFFER_HANDLE) -> Int32>
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-public type PRJ_GET_FILE_DATA_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>, UInt64, UInt32) -> Int32>
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-public type PRJ_GET_PLACEHOLDER_INFO_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>) -> Int32>
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
 public type PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT = CPointer<Unit>
 
 @When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
 public struct PRJ_NOTIFICATION {
     public var value: Int32 = 0
 
@@ -363,110 +197,6 @@ public let PRJ_NOTIFICATION_PRJ_NOTIFICATION_FILE_HANDLE_CLOSED_FILE_DELETED: PR
 public let PRJ_NOTIFICATION_PRJ_NOTIFICATION_FILE_PRE_CONVERT_TO_FULL: PRJ_NOTIFICATION = PRJ_NOTIFICATION(4096)
 
 @When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-public type PRJ_NOTIFICATION_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>, Win32_Foundation.BOOLEAN, PRJ_NOTIFICATION, CPointer<UInt16>, CPointer<PRJ_NOTIFICATION_PARAMETERS>) -> Int32>
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
-public struct PRJ_NOTIFICATION_MAPPING {
-    public var NotificationBitMask: PRJ_NOTIFY_TYPES = PRJ_NOTIFY_TYPES()
-    public var NotificationRoot: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct PRJ_NOTIFICATION_PARAMETERS {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
-
-    public func postCreate(): PRJ_NOTIFICATION_PARAMETERS__PostCreate_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__PostCreate_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_postCreate(val: PRJ_NOTIFICATION_PARAMETERS__PostCreate_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__PostCreate_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func fileRenamed(): PRJ_NOTIFICATION_PARAMETERS__FileRenamed_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__FileRenamed_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fileRenamed(val: PRJ_NOTIFICATION_PARAMETERS__FileRenamed_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__FileRenamed_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func fileDeletedOnHandleClose(): PRJ_NOTIFICATION_PARAMETERS__FileDeletedOnHandleClose_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__FileDeletedOnHandleClose_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fileDeletedOnHandleClose(val: PRJ_NOTIFICATION_PARAMETERS__FileDeletedOnHandleClose_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__FileDeletedOnHandleClose_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
-public struct PRJ_NOTIFICATION_PARAMETERS__PostCreate_e__Struct {
-    public var NotificationMask: PRJ_NOTIFY_TYPES = PRJ_NOTIFY_TYPES()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
-public struct PRJ_NOTIFICATION_PARAMETERS__FileRenamed_e__Struct {
-    public var NotificationMask: PRJ_NOTIFY_TYPES = PRJ_NOTIFY_TYPES()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
-public struct PRJ_NOTIFICATION_PARAMETERS__FileDeletedOnHandleClose_e__Struct {
-    public var IsFileModified: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
 public struct PRJ_NOTIFY_TYPES {
     public var value: UInt32 = 0
 
@@ -544,7 +274,6 @@ public let PRJ_NOTIFY_TYPES_PRJ_NOTIFY_FILE_PRE_CONVERT_TO_FULL: PRJ_NOTIFY_TYPE
 public let PRJ_NOTIFY_TYPES_PRJ_NOTIFY_USE_EXISTING_MASK: PRJ_NOTIFY_TYPES = PRJ_NOTIFY_TYPES(4294967295)
 
 @When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
 public struct PRJ_PLACEHOLDER_ID {
     public var value: Int32 = 0
 
@@ -567,42 +296,6 @@ public let PRJ_PLACEHOLDER_ID_PRJ_PLACEHOLDER_ID_LENGTH: PRJ_PLACEHOLDER_ID = PR
 
 @When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
 @C
-public struct PRJ_PLACEHOLDER_INFO {
-    public var FileBasicInfo: PRJ_FILE_BASIC_INFO = PRJ_FILE_BASIC_INFO()
-    public var EaInformation: PRJ_PLACEHOLDER_INFO__EaInformation_e__Struct = PRJ_PLACEHOLDER_INFO__EaInformation_e__Struct()
-    public var SecurityInformation: PRJ_PLACEHOLDER_INFO__SecurityInformation_e__Struct = PRJ_PLACEHOLDER_INFO__SecurityInformation_e__Struct()
-    public var StreamsInformation: PRJ_PLACEHOLDER_INFO__StreamsInformation_e__Struct = PRJ_PLACEHOLDER_INFO__StreamsInformation_e__Struct()
-    public var VersionInfo: PRJ_PLACEHOLDER_VERSION_INFO = PRJ_PLACEHOLDER_VERSION_INFO()
-    public var VariableData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
-public struct PRJ_PLACEHOLDER_INFO__EaInformation_e__Struct {
-    public var EaBufferSize: UInt32 = 0
-    public var OffsetToFirstEa: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
-public struct PRJ_PLACEHOLDER_INFO__SecurityInformation_e__Struct {
-    public var SecurityBufferSize: UInt32 = 0
-    public var OffsetToSecurityDescriptor: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
-public struct PRJ_PLACEHOLDER_INFO__StreamsInformation_e__Struct {
-    public var StreamsInfoBufferSize: UInt32 = 0
-    public var OffsetToFirstStreamInfo: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
 public struct PRJ_PLACEHOLDER_VERSION_INFO {
     public var ProviderID: VArray<UInt8, $128> = VArray<UInt8, $128>(repeat: 0)
     public var ContentID: VArray<UInt8, $128> = VArray<UInt8, $128>(repeat: 0)
@@ -610,10 +303,6 @@ public struct PRJ_PLACEHOLDER_VERSION_INFO {
 }
 
 @When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-public type PRJ_QUERY_FILE_NAME_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>) -> Int32>
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
 public struct PRJ_STARTVIRTUALIZING_FLAGS {
     public var value: Int32 = 0
 
@@ -652,21 +341,6 @@ public let PRJ_STARTVIRTUALIZING_FLAGS_PRJ_FLAG_NONE: PRJ_STARTVIRTUALIZING_FLAG
 public let PRJ_STARTVIRTUALIZING_FLAGS_PRJ_FLAG_USE_NEGATIVE_PATH_CACHE: PRJ_STARTVIRTUALIZING_FLAGS = PRJ_STARTVIRTUALIZING_FLAGS(1)
 
 @When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
-public struct PRJ_STARTVIRTUALIZING_OPTIONS {
-    public var Flags: PRJ_STARTVIRTUALIZING_FLAGS = PRJ_STARTVIRTUALIZING_FLAGS()
-    public var PoolThreadCount: UInt32 = 0
-    public var ConcurrentThreadCount: UInt32 = 0
-    public var NotificationMappings: CPointer<PRJ_NOTIFICATION_MAPPING> = CPointer<PRJ_NOTIFICATION_MAPPING>()
-    public var NotificationMappingsCount: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-public type PRJ_START_DIRECTORY_ENUMERATION_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>, CPointer<GUID>) -> Int32>
-
-@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
 public struct PRJ_UPDATE_FAILURE_CAUSES {
     public var value: Int32 = 0
 
@@ -714,7 +388,6 @@ public let PRJ_UPDATE_FAILURE_CAUSES_PRJ_UPDATE_FAILURE_CAUSE_TOMBSTONE: PRJ_UPD
 public let PRJ_UPDATE_FAILURE_CAUSES_PRJ_UPDATE_FAILURE_CAUSE_READ_ONLY: PRJ_UPDATE_FAILURE_CAUSES = PRJ_UPDATE_FAILURE_CAUSES(8)
 
 @When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
-@C
 public struct PRJ_UPDATE_TYPES {
     public var value: Int32 = 0
 
@@ -778,6 +451,334 @@ public struct PRJ_VIRTUALIZATION_INSTANCE_INFO {
     public init() {}
 }
 
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+@C
+public struct PRJ_CALLBACK_DATA {
+    public var Size: UInt32 = 0
+    public var Flags: Int32 = 0
+    public var NamespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT = CPointer<Unit>()
+    public var CommandId: Int32 = 0
+    public var FileId: GUID = GUID()
+    public var DataStreamId: GUID = GUID()
+    public var FilePathName: CPointer<UInt16> = CPointer<UInt16>()
+    public var VersionInfo: CPointer<PRJ_PLACEHOLDER_VERSION_INFO> = CPointer<PRJ_PLACEHOLDER_VERSION_INFO>()
+    public var TriggeringProcessId: UInt32 = 0
+    public var TriggeringProcessImageFileName: CPointer<UInt16> = CPointer<UInt16>()
+    public var InstanceContext: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+public type PRJ_CANCEL_COMMAND_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>) -> Unit>
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+@C
+public struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS {
+    public var CommandType: Int32 = 0
+    public var Anonymous: PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union = PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop notification: PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Notification_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Notification_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Notification_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop enumeration: PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Enumeration_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Enumeration_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Enumeration_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+@C
+public struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Notification_e__Struct {
+    public var NotificationMask: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+@C
+public struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Enumeration_e__Struct {
+    public var DirEntryBufferHandle: PRJ_DIR_ENTRY_BUFFER_HANDLE = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+public type PRJ_END_DIRECTORY_ENUMERATION_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>, CPointer<GUID>) -> Int32>
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+@C
+public struct PRJ_EXTENDED_INFO {
+    public var InfoType: Int32 = 0
+    public var NextInfoOffset: UInt32 = 0
+    public var Anonymous: PRJ_EXTENDED_INFO__Anonymous_e__Union = PRJ_EXTENDED_INFO__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct PRJ_EXTENDED_INFO__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop symlink: PRJ_EXTENDED_INFO__Anonymous_e__Union__Symlink_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PRJ_EXTENDED_INFO__Anonymous_e__Union__Symlink_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PRJ_EXTENDED_INFO__Anonymous_e__Union__Symlink_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+@C
+public struct PRJ_EXTENDED_INFO__Anonymous_e__Union__Symlink_e__Struct {
+    public var TargetName: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+public type PRJ_GET_DIRECTORY_ENUMERATION_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>, CPointer<GUID>, CPointer<UInt16>, PRJ_DIR_ENTRY_BUFFER_HANDLE) -> Int32>
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+public type PRJ_GET_FILE_DATA_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>, UInt64, UInt32) -> Int32>
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+public type PRJ_GET_PLACEHOLDER_INFO_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>) -> Int32>
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+@C
+public struct PRJ_NOTIFICATION_MAPPING {
+    public var NotificationBitMask: UInt32 = 0
+    public var NotificationRoot: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct PRJ_NOTIFICATION_PARAMETERS {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+
+    public mut prop postCreate: PRJ_NOTIFICATION_PARAMETERS__PostCreate_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__PostCreate_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__PostCreate_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop fileRenamed: PRJ_NOTIFICATION_PARAMETERS__FileRenamed_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__FileRenamed_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__FileRenamed_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop fileDeletedOnHandleClose: PRJ_NOTIFICATION_PARAMETERS__FileDeletedOnHandleClose_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__FileDeletedOnHandleClose_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__FileDeletedOnHandleClose_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+@C
+public struct PRJ_NOTIFICATION_PARAMETERS__PostCreate_e__Struct {
+    public var NotificationMask: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+@C
+public struct PRJ_NOTIFICATION_PARAMETERS__FileRenamed_e__Struct {
+    public var NotificationMask: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+@C
+public struct PRJ_NOTIFICATION_PARAMETERS__FileDeletedOnHandleClose_e__Struct {
+    public var IsFileModified: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+@C
+public struct PRJ_PLACEHOLDER_INFO {
+    public var FileBasicInfo: PRJ_FILE_BASIC_INFO = PRJ_FILE_BASIC_INFO()
+    public var EaInformation: PRJ_PLACEHOLDER_INFO__EaInformation_e__Struct = PRJ_PLACEHOLDER_INFO__EaInformation_e__Struct()
+    public var SecurityInformation: PRJ_PLACEHOLDER_INFO__SecurityInformation_e__Struct = PRJ_PLACEHOLDER_INFO__SecurityInformation_e__Struct()
+    public var StreamsInformation: PRJ_PLACEHOLDER_INFO__StreamsInformation_e__Struct = PRJ_PLACEHOLDER_INFO__StreamsInformation_e__Struct()
+    public var VersionInfo: PRJ_PLACEHOLDER_VERSION_INFO = PRJ_PLACEHOLDER_VERSION_INFO()
+    public var VariableData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+@C
+public struct PRJ_PLACEHOLDER_INFO__EaInformation_e__Struct {
+    public var EaBufferSize: UInt32 = 0
+    public var OffsetToFirstEa: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+@C
+public struct PRJ_PLACEHOLDER_INFO__SecurityInformation_e__Struct {
+    public var SecurityBufferSize: UInt32 = 0
+    public var OffsetToSecurityDescriptor: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+@C
+public struct PRJ_PLACEHOLDER_INFO__StreamsInformation_e__Struct {
+    public var StreamsInfoBufferSize: UInt32 = 0
+    public var OffsetToFirstStreamInfo: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+public type PRJ_QUERY_FILE_NAME_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>) -> Int32>
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+@C
+public struct PRJ_STARTVIRTUALIZING_OPTIONS {
+    public var Flags: Int32 = 0
+    public var PoolThreadCount: UInt32 = 0
+    public var ConcurrentThreadCount: UInt32 = 0
+    public var NotificationMappings: CPointer<PRJ_NOTIFICATION_MAPPING> = CPointer<PRJ_NOTIFICATION_MAPPING>()
+    public var NotificationMappingsCount: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+public type PRJ_START_DIRECTORY_ENUMERATION_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>, CPointer<GUID>) -> Int32>
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+public type PRJ_NOTIFICATION_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>, UInt8, Int32, CPointer<UInt16>, CPointer<PRJ_NOTIFICATION_PARAMETERS>) -> Int32>
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on"]
+@C
+public struct PRJ_CALLBACKS {
+    public var StartDirectoryEnumerationCallback: PRJ_START_DIRECTORY_ENUMERATION_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>, CPointer<GUID>) -> Int32>(CPointer<Unit>())
+    public var EndDirectoryEnumerationCallback: PRJ_END_DIRECTORY_ENUMERATION_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>, CPointer<GUID>) -> Int32>(CPointer<Unit>())
+    public var GetDirectoryEnumerationCallback: PRJ_GET_DIRECTORY_ENUMERATION_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>, CPointer<GUID>, CPointer<UInt16>, PRJ_DIR_ENTRY_BUFFER_HANDLE) -> Int32>(CPointer<Unit>())
+    public var GetPlaceholderInfoCallback: PRJ_GET_PLACEHOLDER_INFO_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>) -> Int32>(CPointer<Unit>())
+    public var GetFileDataCallback: PRJ_GET_FILE_DATA_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>, UInt64, UInt32) -> Int32>(CPointer<Unit>())
+    public var QueryFileNameCallback: PRJ_QUERY_FILE_NAME_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>) -> Int32>(CPointer<Unit>())
+    public var NotificationCallback: PRJ_NOTIFICATION_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>, UInt8, Int32, CPointer<UInt16>, CPointer<PRJ_NOTIFICATION_PARAMETERS>) -> Int32>(CPointer<Unit>())
+    public var CancelCommandCallback: PRJ_CANCEL_COMMAND_CB = CFunc<(CPointer<PRJ_CALLBACK_DATA>) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
 @When[PROJECTEDFSLIB == "on"]
 foreign {
     func PrjAllocateAlignedBuffer(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, size: UIntNative): CPointer<Unit>
@@ -787,17 +788,17 @@ foreign {
     func PrjCompleteCommand(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, commandId: Int32, completionResult: Int32, extendedParameters: CPointer<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS>): Int32
     // param-hint: updateFlags optional
     // param-hint: failureReason optional
-    func PrjDeleteFile(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName: CPointer<UInt16>, updateFlags: PRJ_UPDATE_TYPES, failureReason: CPointer<PRJ_UPDATE_FAILURE_CAUSES>): Int32
-    func PrjDoesNameContainWildCards(fileName: CPointer<UInt16>): Win32_Foundation.BOOLEAN
+    func PrjDeleteFile(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName: CPointer<UInt16>, updateFlags: Int32, failureReason: CPointer<Int32>): Int32
+    func PrjDoesNameContainWildCards(fileName: CPointer<UInt16>): UInt8
     func PrjFileNameCompare(fileName1: CPointer<UInt16>, fileName2: CPointer<UInt16>): Int32
-    func PrjFileNameMatch(fileNameToCheck: CPointer<UInt16>, pattern: CPointer<UInt16>): Win32_Foundation.BOOLEAN
+    func PrjFileNameMatch(fileNameToCheck: CPointer<UInt16>, pattern: CPointer<UInt16>): UInt8
     // param-hint: fileBasicInfo optional
     func PrjFillDirEntryBuffer(fileName: CPointer<UInt16>, fileBasicInfo: CPointer<PRJ_FILE_BASIC_INFO>, dirEntryBufferHandle: PRJ_DIR_ENTRY_BUFFER_HANDLE): Int32
     // param-hint: fileBasicInfo optional
     // param-hint: extendedInfo optional
     func PrjFillDirEntryBuffer2(dirEntryBufferHandle: PRJ_DIR_ENTRY_BUFFER_HANDLE, fileName: CPointer<UInt16>, fileBasicInfo: CPointer<PRJ_FILE_BASIC_INFO>, extendedInfo: CPointer<PRJ_EXTENDED_INFO>): Int32
     func PrjFreeAlignedBuffer(buffer: CPointer<Unit>): Unit
-    func PrjGetOnDiskFileState(destinationFileName: CPointer<UInt16>, fileState: CPointer<PRJ_FILE_STATE>): Int32
+    func PrjGetOnDiskFileState(destinationFileName: CPointer<UInt16>, fileState: CPointer<Int32>): Int32
     func PrjGetVirtualizationInstanceInfo(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, virtualizationInstanceInfo: CPointer<PRJ_VIRTUALIZATION_INSTANCE_INFO>): Int32
     // param-hint: targetPathName optional
     // param-hint: versionInfo optional
@@ -809,7 +810,7 @@ foreign {
     // param-hint: placeholderInfo bytes=param[3]
     // param-hint: updateFlags optional
     // param-hint: failureReason optional
-    func PrjUpdateFileIfNeeded(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName: CPointer<UInt16>, placeholderInfo: CPointer<PRJ_PLACEHOLDER_INFO>, placeholderInfoSize: UInt32, updateFlags: PRJ_UPDATE_TYPES, failureReason: CPointer<PRJ_UPDATE_FAILURE_CAUSES>): Int32
+    func PrjUpdateFileIfNeeded(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName: CPointer<UInt16>, placeholderInfo: CPointer<PRJ_PLACEHOLDER_INFO>, placeholderInfoSize: UInt32, updateFlags: Int32, failureReason: CPointer<Int32>): Int32
     // param-hint: buffer bytes=param[4]
     func PrjWriteFileData(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, dataStreamId: CPointer<GUID>, buffer: CPointer<Unit>, byteOffset: UInt64, length: UInt32): Int32
     // param-hint: placeholderInfo bytes=param[3]

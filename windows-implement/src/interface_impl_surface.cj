@@ -267,7 +267,13 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
             if (value.isNull()) {
                 return E_POINTER
             }
-            value.write(runtimeClassNameRaw())
+            match (runtimeClassName) {
+                case Some(cached) =>
+                    let fresh = cached.clone()
+                    value.write(fresh.intoRaw())
+                case None =>
+                    value.write(CPointer<Unit>())
+            }
         }
         S_OK
     }

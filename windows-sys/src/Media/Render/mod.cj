@@ -4,7 +4,6 @@ package windows_sys.Media.Render
 
 
 @When[Windows_Media_Render == "on"]
-@C
 public struct AudioRenderCategory {
     public var value: Int32 = 0
 

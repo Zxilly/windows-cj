@@ -1501,485 +1501,497 @@ deps = []
 cfg = "WTSAPI32"
 deps = []
 
+[features.Windows_AI]
+cfg = "Windows_AI"
+deps = ["Windows_Foundation"]
+
 [features.Windows_AI_Actions]
 cfg = "Windows_AI_Actions"
-deps = []
+deps = ["Windows_AI"]
 
 [features.Windows_AI_Actions_Hosting]
 cfg = "Windows_AI_Actions_Hosting"
-deps = []
+deps = ["Windows_AI_Actions"]
 
 [features.Windows_AI_Actions_Provider]
 cfg = "Windows_AI_Actions_Provider"
-deps = []
+deps = ["Windows_AI_Actions"]
 
 [features.Windows_AI_Agents]
 cfg = "Windows_AI_Agents"
-deps = []
+deps = ["Windows_AI"]
 
 [features.Windows_AI_Agents_Mcp]
 cfg = "Windows_AI_Agents_Mcp"
-deps = []
+deps = ["Windows_AI_Agents"]
 
 [features.Windows_AI_MachineLearning]
 cfg = "Windows_AI_MachineLearning"
-deps = []
+deps = ["Windows_AI"]
 
 [features.Windows_AI_MachineLearning_Preview]
 cfg = "Windows_AI_MachineLearning_Preview"
-deps = []
+deps = ["Windows_AI_MachineLearning"]
 
 [features.Windows_ApplicationModel]
 cfg = "Windows_ApplicationModel"
-deps = []
+deps = ["Windows_Foundation"]
 
 [features.Windows_ApplicationModel_Activation]
 cfg = "Windows_ApplicationModel_Activation"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_AppExtensions]
 cfg = "Windows_ApplicationModel_AppExtensions"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_AppService]
 cfg = "Windows_ApplicationModel_AppService"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_Appointments]
 cfg = "Windows_ApplicationModel_Appointments"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_Appointments_AppointmentsProvider]
 cfg = "Windows_ApplicationModel_Appointments_AppointmentsProvider"
-deps = []
+deps = ["Windows_ApplicationModel_Appointments"]
 
 [features.Windows_ApplicationModel_Appointments_DataProvider]
 cfg = "Windows_ApplicationModel_Appointments_DataProvider"
-deps = []
+deps = ["Windows_ApplicationModel_Appointments"]
 
 [features.Windows_ApplicationModel_Background]
 cfg = "Windows_ApplicationModel_Background"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_Calls]
 cfg = "Windows_ApplicationModel_Calls"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_Calls_Background]
 cfg = "Windows_ApplicationModel_Calls_Background"
-deps = []
+deps = ["Windows_ApplicationModel_Calls"]
 
 [features.Windows_ApplicationModel_Calls_Provider]
 cfg = "Windows_ApplicationModel_Calls_Provider"
-deps = []
+deps = ["Windows_ApplicationModel_Calls"]
 
 [features.Windows_ApplicationModel_Chat]
 cfg = "Windows_ApplicationModel_Chat"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_CommunicationBlocking]
 cfg = "Windows_ApplicationModel_CommunicationBlocking"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_Contacts]
 cfg = "Windows_ApplicationModel_Contacts"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_Contacts_DataProvider]
 cfg = "Windows_ApplicationModel_Contacts_DataProvider"
-deps = []
+deps = ["Windows_ApplicationModel_Contacts"]
 
 [features.Windows_ApplicationModel_Contacts_Provider]
 cfg = "Windows_ApplicationModel_Contacts_Provider"
-deps = []
+deps = ["Windows_ApplicationModel_Contacts"]
 
 [features.Windows_ApplicationModel_ConversationalAgent]
 cfg = "Windows_ApplicationModel_ConversationalAgent"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_Core]
 cfg = "Windows_ApplicationModel_Core"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_DataTransfer]
 cfg = "Windows_ApplicationModel_DataTransfer"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_DataTransfer_DragDrop]
 cfg = "Windows_ApplicationModel_DataTransfer_DragDrop"
-deps = []
+deps = ["Windows_ApplicationModel_DataTransfer"]
 
 [features.Windows_ApplicationModel_DataTransfer_DragDrop_Core]
 cfg = "Windows_ApplicationModel_DataTransfer_DragDrop_Core"
-deps = []
+deps = ["Windows_ApplicationModel_DataTransfer_DragDrop"]
 
 [features.Windows_ApplicationModel_DataTransfer_ShareTarget]
 cfg = "Windows_ApplicationModel_DataTransfer_ShareTarget"
-deps = []
+deps = ["Windows_ApplicationModel_DataTransfer"]
 
 [features.Windows_ApplicationModel_Email]
 cfg = "Windows_ApplicationModel_Email"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_Email_DataProvider]
 cfg = "Windows_ApplicationModel_Email_DataProvider"
-deps = []
+deps = ["Windows_ApplicationModel_Email"]
 
 [features.Windows_ApplicationModel_ExtendedExecution]
 cfg = "Windows_ApplicationModel_ExtendedExecution"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_ExtendedExecution_Foreground]
 cfg = "Windows_ApplicationModel_ExtendedExecution_Foreground"
-deps = []
+deps = ["Windows_ApplicationModel_ExtendedExecution"]
 
 [features.Windows_ApplicationModel_Holographic]
 cfg = "Windows_ApplicationModel_Holographic"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_LockScreen]
 cfg = "Windows_ApplicationModel_LockScreen"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_PackageExtensions]
 cfg = "Windows_ApplicationModel_PackageExtensions"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_Payments]
 cfg = "Windows_ApplicationModel_Payments"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_Payments_Provider]
 cfg = "Windows_ApplicationModel_Payments_Provider"
-deps = []
+deps = ["Windows_ApplicationModel_Payments"]
 
 [features.Windows_ApplicationModel_Preview]
 cfg = "Windows_ApplicationModel_Preview"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_Preview_Holographic]
 cfg = "Windows_ApplicationModel_Preview_Holographic"
-deps = []
+deps = ["Windows_ApplicationModel_Preview"]
 
 [features.Windows_ApplicationModel_Preview_InkWorkspace]
 cfg = "Windows_ApplicationModel_Preview_InkWorkspace"
-deps = []
+deps = ["Windows_ApplicationModel_Preview"]
 
 [features.Windows_ApplicationModel_Preview_Notes]
 cfg = "Windows_ApplicationModel_Preview_Notes"
-deps = []
+deps = ["Windows_ApplicationModel_Preview"]
 
 [features.Windows_ApplicationModel_Resources]
 cfg = "Windows_ApplicationModel_Resources"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_Resources_Core]
 cfg = "Windows_ApplicationModel_Resources_Core"
-deps = []
+deps = ["Windows_ApplicationModel_Resources"]
 
 [features.Windows_ApplicationModel_Resources_Management]
 cfg = "Windows_ApplicationModel_Resources_Management"
-deps = []
+deps = ["Windows_ApplicationModel_Resources"]
 
 [features.Windows_ApplicationModel_Search]
 cfg = "Windows_ApplicationModel_Search"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_Search_Core]
 cfg = "Windows_ApplicationModel_Search_Core"
-deps = []
+deps = ["Windows_ApplicationModel_Search"]
 
 [features.Windows_ApplicationModel_SocialInfo]
 cfg = "Windows_ApplicationModel_SocialInfo"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_SocialInfo_Provider]
 cfg = "Windows_ApplicationModel_SocialInfo_Provider"
-deps = []
+deps = ["Windows_ApplicationModel_SocialInfo"]
 
 [features.Windows_ApplicationModel_Store]
 cfg = "Windows_ApplicationModel_Store"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_Store_LicenseManagement]
 cfg = "Windows_ApplicationModel_Store_LicenseManagement"
-deps = []
+deps = ["Windows_ApplicationModel_Store"]
 
 [features.Windows_ApplicationModel_Store_Preview]
 cfg = "Windows_ApplicationModel_Store_Preview"
-deps = []
+deps = ["Windows_ApplicationModel_Store"]
 
 [features.Windows_ApplicationModel_Store_Preview_InstallControl]
 cfg = "Windows_ApplicationModel_Store_Preview_InstallControl"
-deps = []
+deps = ["Windows_ApplicationModel_Store_Preview"]
 
 [features.Windows_ApplicationModel_UserActivities]
 cfg = "Windows_ApplicationModel_UserActivities"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_UserActivities_Core]
 cfg = "Windows_ApplicationModel_UserActivities_Core"
-deps = []
+deps = ["Windows_ApplicationModel_UserActivities"]
 
 [features.Windows_ApplicationModel_UserDataAccounts]
 cfg = "Windows_ApplicationModel_UserDataAccounts"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_UserDataAccounts_Provider]
 cfg = "Windows_ApplicationModel_UserDataAccounts_Provider"
-deps = []
+deps = ["Windows_ApplicationModel_UserDataAccounts"]
 
 [features.Windows_ApplicationModel_UserDataAccounts_SystemAccess]
 cfg = "Windows_ApplicationModel_UserDataAccounts_SystemAccess"
-deps = []
+deps = ["Windows_ApplicationModel_UserDataAccounts"]
 
 [features.Windows_ApplicationModel_UserDataTasks]
 cfg = "Windows_ApplicationModel_UserDataTasks"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_UserDataTasks_DataProvider]
 cfg = "Windows_ApplicationModel_UserDataTasks_DataProvider"
-deps = []
+deps = ["Windows_ApplicationModel_UserDataTasks"]
 
 [features.Windows_ApplicationModel_VoiceCommands]
 cfg = "Windows_ApplicationModel_VoiceCommands"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_Wallet]
 cfg = "Windows_ApplicationModel_Wallet"
-deps = []
+deps = ["Windows_ApplicationModel"]
 
 [features.Windows_ApplicationModel_Wallet_System]
 cfg = "Windows_ApplicationModel_Wallet_System"
-deps = []
+deps = ["Windows_ApplicationModel_Wallet"]
+
+[features.Windows_Data]
+cfg = "Windows_Data"
+deps = ["Windows_Foundation"]
 
 [features.Windows_Data_Html]
 cfg = "Windows_Data_Html"
-deps = []
+deps = ["Windows_Data"]
 
 [features.Windows_Data_Json]
 cfg = "Windows_Data_Json"
-deps = []
+deps = ["Windows_Data"]
 
 [features.Windows_Data_Pdf]
 cfg = "Windows_Data_Pdf"
-deps = []
+deps = ["Windows_Data"]
 
 [features.Windows_Data_Text]
 cfg = "Windows_Data_Text"
-deps = []
+deps = ["Windows_Data"]
+
+[features.Windows_Data_Xml]
+cfg = "Windows_Data_Xml"
+deps = ["Windows_Data"]
 
 [features.Windows_Data_Xml_Dom]
 cfg = "Windows_Data_Xml_Dom"
-deps = []
+deps = ["Windows_Data_Xml"]
 
 [features.Windows_Data_Xml_Xsl]
 cfg = "Windows_Data_Xml_Xsl"
-deps = []
+deps = ["Windows_Data_Xml"]
 
 [features.Windows_Devices]
 cfg = "Windows_Devices"
-deps = []
+deps = ["Windows_Foundation"]
 
 [features.Windows_Devices_Adc]
 cfg = "Windows_Devices_Adc"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Adc_Provider]
 cfg = "Windows_Devices_Adc_Provider"
-deps = []
+deps = ["Windows_Devices_Adc"]
 
 [features.Windows_Devices_Background]
 cfg = "Windows_Devices_Background"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Bluetooth]
 cfg = "Windows_Devices_Bluetooth"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Bluetooth_Advertisement]
 cfg = "Windows_Devices_Bluetooth_Advertisement"
-deps = []
+deps = ["Windows_Devices_Bluetooth"]
 
 [features.Windows_Devices_Bluetooth_Background]
 cfg = "Windows_Devices_Bluetooth_Background"
-deps = []
+deps = ["Windows_Devices_Bluetooth"]
 
 [features.Windows_Devices_Bluetooth_GenericAttributeProfile]
 cfg = "Windows_Devices_Bluetooth_GenericAttributeProfile"
-deps = []
+deps = ["Windows_Devices_Bluetooth"]
 
 [features.Windows_Devices_Bluetooth_Rfcomm]
 cfg = "Windows_Devices_Bluetooth_Rfcomm"
-deps = []
+deps = ["Windows_Devices_Bluetooth"]
 
 [features.Windows_Devices_Custom]
 cfg = "Windows_Devices_Custom"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Display]
 cfg = "Windows_Devices_Display"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Display_Core]
 cfg = "Windows_Devices_Display_Core"
-deps = []
+deps = ["Windows_Devices_Display"]
 
 [features.Windows_Devices_Enumeration]
 cfg = "Windows_Devices_Enumeration"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Enumeration_Pnp]
 cfg = "Windows_Devices_Enumeration_Pnp"
-deps = []
+deps = ["Windows_Devices_Enumeration"]
 
 [features.Windows_Devices_Geolocation]
 cfg = "Windows_Devices_Geolocation"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Geolocation_Geofencing]
 cfg = "Windows_Devices_Geolocation_Geofencing"
-deps = []
+deps = ["Windows_Devices_Geolocation"]
 
 [features.Windows_Devices_Geolocation_Provider]
 cfg = "Windows_Devices_Geolocation_Provider"
-deps = []
+deps = ["Windows_Devices_Geolocation"]
 
 [features.Windows_Devices_Gpio]
 cfg = "Windows_Devices_Gpio"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Gpio_Provider]
 cfg = "Windows_Devices_Gpio_Provider"
-deps = []
+deps = ["Windows_Devices_Gpio"]
 
 [features.Windows_Devices_Haptics]
 cfg = "Windows_Devices_Haptics"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_HumanInterfaceDevice]
 cfg = "Windows_Devices_HumanInterfaceDevice"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_I2c]
 cfg = "Windows_Devices_I2c"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_I2c_Provider]
 cfg = "Windows_Devices_I2c_Provider"
-deps = []
+deps = ["Windows_Devices_I2c"]
 
 [features.Windows_Devices_Input]
 cfg = "Windows_Devices_Input"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Input_Preview]
 cfg = "Windows_Devices_Input_Preview"
-deps = []
+deps = ["Windows_Devices_Input"]
 
 [features.Windows_Devices_Lights]
 cfg = "Windows_Devices_Lights"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Lights_Effects]
 cfg = "Windows_Devices_Lights_Effects"
-deps = []
+deps = ["Windows_Devices_Lights"]
 
 [features.Windows_Devices_Midi]
 cfg = "Windows_Devices_Midi"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Perception]
 cfg = "Windows_Devices_Perception"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Perception_Provider]
 cfg = "Windows_Devices_Perception_Provider"
-deps = []
+deps = ["Windows_Devices_Perception"]
 
 [features.Windows_Devices_PointOfService]
 cfg = "Windows_Devices_PointOfService"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_PointOfService_Provider]
 cfg = "Windows_Devices_PointOfService_Provider"
-deps = []
+deps = ["Windows_Devices_PointOfService"]
 
 [features.Windows_Devices_Portable]
 cfg = "Windows_Devices_Portable"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Power]
 cfg = "Windows_Devices_Power"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Printers]
 cfg = "Windows_Devices_Printers"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Printers_Extensions]
 cfg = "Windows_Devices_Printers_Extensions"
-deps = []
+deps = ["Windows_Devices_Printers"]
 
 [features.Windows_Devices_Pwm]
 cfg = "Windows_Devices_Pwm"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Pwm_Provider]
 cfg = "Windows_Devices_Pwm_Provider"
-deps = []
+deps = ["Windows_Devices_Pwm"]
 
 [features.Windows_Devices_Radios]
 cfg = "Windows_Devices_Radios"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Scanners]
 cfg = "Windows_Devices_Scanners"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Sensors]
 cfg = "Windows_Devices_Sensors"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Sensors_Custom]
 cfg = "Windows_Devices_Sensors_Custom"
-deps = []
+deps = ["Windows_Devices_Sensors"]
 
 [features.Windows_Devices_SerialCommunication]
 cfg = "Windows_Devices_SerialCommunication"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_SmartCards]
 cfg = "Windows_Devices_SmartCards"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Sms]
 cfg = "Windows_Devices_Sms"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Spi]
 cfg = "Windows_Devices_Spi"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_Spi_Provider]
 cfg = "Windows_Devices_Spi_Provider"
-deps = []
+deps = ["Windows_Devices_Spi"]
 
 [features.Windows_Devices_Usb]
 cfg = "Windows_Devices_Usb"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_WiFi]
 cfg = "Windows_Devices_WiFi"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_WiFiDirect]
 cfg = "Windows_Devices_WiFiDirect"
-deps = []
+deps = ["Windows_Devices"]
 
 [features.Windows_Devices_WiFiDirect_Services]
 cfg = "Windows_Devices_WiFiDirect_Services"
-deps = []
+deps = ["Windows_Devices_WiFiDirect"]
 
 [features.Windows_Foundation]
 cfg = "Windows_Foundation"
@@ -1987,2247 +1999,2387 @@ deps = []
 
 [features.Windows_Foundation_Collections]
 cfg = "Windows_Foundation_Collections"
-deps = []
+deps = ["Windows_Foundation"]
 
 [features.Windows_Foundation_Diagnostics]
 cfg = "Windows_Foundation_Diagnostics"
-deps = []
+deps = ["Windows_Foundation"]
 
 [features.Windows_Foundation_Metadata]
 cfg = "Windows_Foundation_Metadata"
-deps = []
+deps = ["Windows_Foundation"]
 
 [features.Windows_Foundation_Numerics]
 cfg = "Windows_Foundation_Numerics"
-deps = []
+deps = ["Windows_Foundation"]
+
+[features.Windows_Gaming]
+cfg = "Windows_Gaming"
+deps = ["Windows_Foundation"]
 
 [features.Windows_Gaming_Input]
 cfg = "Windows_Gaming_Input"
-deps = []
+deps = ["Windows_Gaming"]
 
 [features.Windows_Gaming_Input_Custom]
 cfg = "Windows_Gaming_Input_Custom"
-deps = []
+deps = ["Windows_Gaming_Input"]
 
 [features.Windows_Gaming_Input_ForceFeedback]
 cfg = "Windows_Gaming_Input_ForceFeedback"
-deps = []
+deps = ["Windows_Gaming_Input"]
 
 [features.Windows_Gaming_Input_Preview]
 cfg = "Windows_Gaming_Input_Preview"
-deps = []
+deps = ["Windows_Gaming_Input"]
 
 [features.Windows_Gaming_Preview]
 cfg = "Windows_Gaming_Preview"
-deps = []
+deps = ["Windows_Gaming"]
 
 [features.Windows_Gaming_Preview_GamesEnumeration]
 cfg = "Windows_Gaming_Preview_GamesEnumeration"
-deps = []
+deps = ["Windows_Gaming_Preview"]
 
 [features.Windows_Gaming_UI]
 cfg = "Windows_Gaming_UI"
-deps = []
+deps = ["Windows_Gaming"]
 
 [features.Windows_Gaming_XboxLive]
 cfg = "Windows_Gaming_XboxLive"
-deps = []
+deps = ["Windows_Gaming"]
 
 [features.Windows_Gaming_XboxLive_Storage]
 cfg = "Windows_Gaming_XboxLive_Storage"
-deps = []
+deps = ["Windows_Gaming_XboxLive"]
 
 [features.Windows_Globalization]
 cfg = "Windows_Globalization"
-deps = []
+deps = ["Windows_Foundation"]
 
 [features.Windows_Globalization_Collation]
 cfg = "Windows_Globalization_Collation"
-deps = []
+deps = ["Windows_Globalization"]
 
 [features.Windows_Globalization_DateTimeFormatting]
 cfg = "Windows_Globalization_DateTimeFormatting"
-deps = []
+deps = ["Windows_Globalization"]
 
 [features.Windows_Globalization_Fonts]
 cfg = "Windows_Globalization_Fonts"
-deps = []
+deps = ["Windows_Globalization"]
 
 [features.Windows_Globalization_NumberFormatting]
 cfg = "Windows_Globalization_NumberFormatting"
-deps = []
+deps = ["Windows_Globalization"]
 
 [features.Windows_Globalization_PhoneNumberFormatting]
 cfg = "Windows_Globalization_PhoneNumberFormatting"
-deps = []
+deps = ["Windows_Globalization"]
 
 [features.Windows_Graphics]
 cfg = "Windows_Graphics"
-deps = []
+deps = ["Windows_Foundation"]
 
 [features.Windows_Graphics_Capture]
 cfg = "Windows_Graphics_Capture"
-deps = []
+deps = ["Windows_Graphics"]
 
 [features.Windows_Graphics_DirectX]
 cfg = "Windows_Graphics_DirectX"
-deps = []
+deps = ["Windows_Graphics"]
 
 [features.Windows_Graphics_DirectX_Direct3D11]
 cfg = "Windows_Graphics_DirectX_Direct3D11"
-deps = []
+deps = ["Windows_Graphics_DirectX"]
 
 [features.Windows_Graphics_Display]
 cfg = "Windows_Graphics_Display"
-deps = []
+deps = ["Windows_Graphics"]
 
 [features.Windows_Graphics_Display_Core]
 cfg = "Windows_Graphics_Display_Core"
-deps = []
+deps = ["Windows_Graphics_Display"]
 
 [features.Windows_Graphics_Effects]
 cfg = "Windows_Graphics_Effects"
-deps = []
+deps = ["Windows_Graphics"]
 
 [features.Windows_Graphics_Holographic]
 cfg = "Windows_Graphics_Holographic"
-deps = []
+deps = ["Windows_Graphics"]
 
 [features.Windows_Graphics_Imaging]
 cfg = "Windows_Graphics_Imaging"
-deps = []
+deps = ["Windows_Graphics"]
 
 [features.Windows_Graphics_Printing]
 cfg = "Windows_Graphics_Printing"
-deps = []
+deps = ["Windows_Graphics"]
 
 [features.Windows_Graphics_Printing3D]
 cfg = "Windows_Graphics_Printing3D"
-deps = []
+deps = ["Windows_Graphics"]
 
 [features.Windows_Graphics_Printing_OptionDetails]
 cfg = "Windows_Graphics_Printing_OptionDetails"
-deps = []
+deps = ["Windows_Graphics_Printing"]
 
 [features.Windows_Graphics_Printing_PrintSupport]
 cfg = "Windows_Graphics_Printing_PrintSupport"
-deps = []
+deps = ["Windows_Graphics_Printing"]
 
 [features.Windows_Graphics_Printing_PrintTicket]
 cfg = "Windows_Graphics_Printing_PrintTicket"
-deps = []
+deps = ["Windows_Graphics_Printing"]
 
 [features.Windows_Graphics_Printing_ProtectedPrint]
 cfg = "Windows_Graphics_Printing_ProtectedPrint"
-deps = []
+deps = ["Windows_Graphics_Printing"]
 
 [features.Windows_Graphics_Printing_Workflow]
 cfg = "Windows_Graphics_Printing_Workflow"
-deps = []
+deps = ["Windows_Graphics_Printing"]
 
 [features.Windows_Management]
 cfg = "Windows_Management"
-deps = []
+deps = ["Windows_Foundation"]
 
 [features.Windows_Management_Core]
 cfg = "Windows_Management_Core"
-deps = []
+deps = ["Windows_Management"]
 
 [features.Windows_Management_Deployment]
 cfg = "Windows_Management_Deployment"
-deps = []
+deps = ["Windows_Management"]
 
 [features.Windows_Management_Deployment_Preview]
 cfg = "Windows_Management_Deployment_Preview"
-deps = []
+deps = ["Windows_Management_Deployment"]
 
 [features.Windows_Management_Policies]
 cfg = "Windows_Management_Policies"
-deps = []
+deps = ["Windows_Management"]
 
 [features.Windows_Management_Setup]
 cfg = "Windows_Management_Setup"
-deps = []
+deps = ["Windows_Management"]
 
 [features.Windows_Management_Update]
 cfg = "Windows_Management_Update"
-deps = []
+deps = ["Windows_Management"]
 
 [features.Windows_Management_Workplace]
 cfg = "Windows_Management_Workplace"
-deps = []
+deps = ["Windows_Management"]
 
 [features.Windows_Media]
 cfg = "Windows_Media"
-deps = []
+deps = ["Windows_Foundation"]
 
 [features.Windows_Media_AppBroadcasting]
 cfg = "Windows_Media_AppBroadcasting"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_AppRecording]
 cfg = "Windows_Media_AppRecording"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Audio]
 cfg = "Windows_Media_Audio"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Capture]
 cfg = "Windows_Media_Capture"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Capture_Core]
 cfg = "Windows_Media_Capture_Core"
-deps = []
+deps = ["Windows_Media_Capture"]
 
 [features.Windows_Media_Capture_Frames]
 cfg = "Windows_Media_Capture_Frames"
-deps = []
+deps = ["Windows_Media_Capture"]
 
 [features.Windows_Media_Casting]
 cfg = "Windows_Media_Casting"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_ClosedCaptioning]
 cfg = "Windows_Media_ClosedCaptioning"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_ContentRestrictions]
 cfg = "Windows_Media_ContentRestrictions"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Control]
 cfg = "Windows_Media_Control"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Core]
 cfg = "Windows_Media_Core"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Core_Preview]
 cfg = "Windows_Media_Core_Preview"
-deps = []
+deps = ["Windows_Media_Core"]
 
 [features.Windows_Media_Devices]
 cfg = "Windows_Media_Devices"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Devices_Core]
 cfg = "Windows_Media_Devices_Core"
-deps = []
+deps = ["Windows_Media_Devices"]
 
 [features.Windows_Media_DialProtocol]
 cfg = "Windows_Media_DialProtocol"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Editing]
 cfg = "Windows_Media_Editing"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Effects]
 cfg = "Windows_Media_Effects"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_FaceAnalysis]
 cfg = "Windows_Media_FaceAnalysis"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Import]
 cfg = "Windows_Media_Import"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_MediaProperties]
 cfg = "Windows_Media_MediaProperties"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Miracast]
 cfg = "Windows_Media_Miracast"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Ocr]
 cfg = "Windows_Media_Ocr"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_PlayTo]
 cfg = "Windows_Media_PlayTo"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Playback]
 cfg = "Windows_Media_Playback"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Playlists]
 cfg = "Windows_Media_Playlists"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Protection]
 cfg = "Windows_Media_Protection"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Protection_PlayReady]
 cfg = "Windows_Media_Protection_PlayReady"
-deps = []
+deps = ["Windows_Media_Protection"]
 
 [features.Windows_Media_Render]
 cfg = "Windows_Media_Render"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_SpeechRecognition]
 cfg = "Windows_Media_SpeechRecognition"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Media_SpeechSynthesis]
 cfg = "Windows_Media_SpeechSynthesis"
-deps = []
+deps = ["Windows_Media"]
+
+[features.Windows_Media_Streaming]
+cfg = "Windows_Media_Streaming"
+deps = ["Windows_Media"]
 
 [features.Windows_Media_Streaming_Adaptive]
 cfg = "Windows_Media_Streaming_Adaptive"
-deps = []
+deps = ["Windows_Media_Streaming"]
 
 [features.Windows_Media_Transcoding]
 cfg = "Windows_Media_Transcoding"
-deps = []
+deps = ["Windows_Media"]
 
 [features.Windows_Networking]
 cfg = "Windows_Networking"
-deps = []
+deps = ["Windows_Foundation"]
 
 [features.Windows_Networking_BackgroundTransfer]
 cfg = "Windows_Networking_BackgroundTransfer"
-deps = []
+deps = ["Windows_Networking"]
 
 [features.Windows_Networking_Connectivity]
 cfg = "Windows_Networking_Connectivity"
-deps = []
+deps = ["Windows_Networking"]
 
 [features.Windows_Networking_NetworkOperators]
 cfg = "Windows_Networking_NetworkOperators"
-deps = []
+deps = ["Windows_Networking"]
 
 [features.Windows_Networking_Proximity]
 cfg = "Windows_Networking_Proximity"
-deps = []
+deps = ["Windows_Networking"]
 
 [features.Windows_Networking_PushNotifications]
 cfg = "Windows_Networking_PushNotifications"
-deps = []
+deps = ["Windows_Networking"]
+
+[features.Windows_Networking_ServiceDiscovery]
+cfg = "Windows_Networking_ServiceDiscovery"
+deps = ["Windows_Networking"]
 
 [features.Windows_Networking_ServiceDiscovery_Dnssd]
 cfg = "Windows_Networking_ServiceDiscovery_Dnssd"
-deps = []
+deps = ["Windows_Networking_ServiceDiscovery"]
 
 [features.Windows_Networking_Sockets]
 cfg = "Windows_Networking_Sockets"
-deps = []
+deps = ["Windows_Networking"]
 
 [features.Windows_Networking_Vpn]
 cfg = "Windows_Networking_Vpn"
-deps = []
+deps = ["Windows_Networking"]
 
 [features.Windows_Networking_XboxLive]
 cfg = "Windows_Networking_XboxLive"
-deps = []
+deps = ["Windows_Networking"]
 
 [features.Windows_Perception]
 cfg = "Windows_Perception"
-deps = []
+deps = ["Windows_Foundation"]
+
+[features.Windows_Perception_Automation]
+cfg = "Windows_Perception_Automation"
+deps = ["Windows_Perception"]
 
 [features.Windows_Perception_Automation_Core]
 cfg = "Windows_Perception_Automation_Core"
-deps = []
+deps = ["Windows_Perception_Automation"]
 
 [features.Windows_Perception_People]
 cfg = "Windows_Perception_People"
-deps = []
+deps = ["Windows_Perception"]
 
 [features.Windows_Perception_Spatial]
 cfg = "Windows_Perception_Spatial"
-deps = []
+deps = ["Windows_Perception"]
 
 [features.Windows_Perception_Spatial_Preview]
 cfg = "Windows_Perception_Spatial_Preview"
-deps = []
+deps = ["Windows_Perception_Spatial"]
 
 [features.Windows_Perception_Spatial_Surfaces]
 cfg = "Windows_Perception_Spatial_Surfaces"
-deps = []
+deps = ["Windows_Perception_Spatial"]
+
+[features.Windows_Security]
+cfg = "Windows_Security"
+deps = ["Windows_Foundation"]
+
+[features.Windows_Security_Authentication]
+cfg = "Windows_Security_Authentication"
+deps = ["Windows_Security"]
 
 [features.Windows_Security_Authentication_Identity]
 cfg = "Windows_Security_Authentication_Identity"
-deps = []
+deps = ["Windows_Security_Authentication"]
 
 [features.Windows_Security_Authentication_Identity_Core]
 cfg = "Windows_Security_Authentication_Identity_Core"
-deps = []
+deps = ["Windows_Security_Authentication_Identity"]
 
 [features.Windows_Security_Authentication_Identity_Provider]
 cfg = "Windows_Security_Authentication_Identity_Provider"
-deps = []
+deps = ["Windows_Security_Authentication_Identity"]
 
 [features.Windows_Security_Authentication_OnlineId]
 cfg = "Windows_Security_Authentication_OnlineId"
-deps = []
+deps = ["Windows_Security_Authentication"]
 
 [features.Windows_Security_Authentication_Web]
 cfg = "Windows_Security_Authentication_Web"
-deps = []
+deps = ["Windows_Security_Authentication"]
 
 [features.Windows_Security_Authentication_Web_Core]
 cfg = "Windows_Security_Authentication_Web_Core"
-deps = []
+deps = ["Windows_Security_Authentication_Web"]
 
 [features.Windows_Security_Authentication_Web_Provider]
 cfg = "Windows_Security_Authentication_Web_Provider"
-deps = []
+deps = ["Windows_Security_Authentication_Web"]
+
+[features.Windows_Security_Authorization]
+cfg = "Windows_Security_Authorization"
+deps = ["Windows_Security"]
 
 [features.Windows_Security_Authorization_AppCapabilityAccess]
 cfg = "Windows_Security_Authorization_AppCapabilityAccess"
-deps = []
+deps = ["Windows_Security_Authorization"]
 
 [features.Windows_Security_Credentials]
 cfg = "Windows_Security_Credentials"
-deps = []
+deps = ["Windows_Security"]
 
 [features.Windows_Security_Credentials_UI]
 cfg = "Windows_Security_Credentials_UI"
-deps = []
+deps = ["Windows_Security_Credentials"]
 
 [features.Windows_Security_Cryptography]
 cfg = "Windows_Security_Cryptography"
-deps = []
+deps = ["Windows_Security"]
 
 [features.Windows_Security_Cryptography_Certificates]
 cfg = "Windows_Security_Cryptography_Certificates"
-deps = []
+deps = ["Windows_Security_Cryptography"]
 
 [features.Windows_Security_Cryptography_Core]
 cfg = "Windows_Security_Cryptography_Core"
-deps = []
+deps = ["Windows_Security_Cryptography"]
 
 [features.Windows_Security_Cryptography_DataProtection]
 cfg = "Windows_Security_Cryptography_DataProtection"
-deps = []
+deps = ["Windows_Security_Cryptography"]
 
 [features.Windows_Security_DataProtection]
 cfg = "Windows_Security_DataProtection"
-deps = []
+deps = ["Windows_Security"]
 
 [features.Windows_Security_EnterpriseData]
 cfg = "Windows_Security_EnterpriseData"
-deps = []
+deps = ["Windows_Security"]
 
 [features.Windows_Security_ExchangeActiveSyncProvisioning]
 cfg = "Windows_Security_ExchangeActiveSyncProvisioning"
-deps = []
+deps = ["Windows_Security"]
 
 [features.Windows_Security_Isolation]
 cfg = "Windows_Security_Isolation"
-deps = []
+deps = ["Windows_Security"]
+
+[features.Windows_Services]
+cfg = "Windows_Services"
+deps = ["Windows_Foundation"]
 
 [features.Windows_Services_Cortana]
 cfg = "Windows_Services_Cortana"
-deps = []
+deps = ["Windows_Services"]
 
 [features.Windows_Services_Maps]
 cfg = "Windows_Services_Maps"
-deps = []
+deps = ["Windows_Services"]
 
 [features.Windows_Services_Maps_Guidance]
 cfg = "Windows_Services_Maps_Guidance"
-deps = []
+deps = ["Windows_Services_Maps"]
 
 [features.Windows_Services_Maps_LocalSearch]
 cfg = "Windows_Services_Maps_LocalSearch"
-deps = []
+deps = ["Windows_Services_Maps"]
 
 [features.Windows_Services_Maps_OfflineMaps]
 cfg = "Windows_Services_Maps_OfflineMaps"
-deps = []
+deps = ["Windows_Services_Maps"]
 
 [features.Windows_Services_Store]
 cfg = "Windows_Services_Store"
-deps = []
+deps = ["Windows_Services"]
 
 [features.Windows_Services_TargetedContent]
 cfg = "Windows_Services_TargetedContent"
-deps = []
+deps = ["Windows_Services"]
 
 [features.Windows_Storage]
 cfg = "Windows_Storage"
-deps = []
+deps = ["Windows_Foundation"]
 
 [features.Windows_Storage_AccessCache]
 cfg = "Windows_Storage_AccessCache"
-deps = []
+deps = ["Windows_Storage"]
 
 [features.Windows_Storage_BulkAccess]
 cfg = "Windows_Storage_BulkAccess"
-deps = []
+deps = ["Windows_Storage"]
 
 [features.Windows_Storage_Compression]
 cfg = "Windows_Storage_Compression"
-deps = []
+deps = ["Windows_Storage"]
 
 [features.Windows_Storage_FileProperties]
 cfg = "Windows_Storage_FileProperties"
-deps = []
+deps = ["Windows_Storage"]
 
 [features.Windows_Storage_Pickers]
 cfg = "Windows_Storage_Pickers"
-deps = []
+deps = ["Windows_Storage"]
 
 [features.Windows_Storage_Pickers_Provider]
 cfg = "Windows_Storage_Pickers_Provider"
-deps = []
+deps = ["Windows_Storage_Pickers"]
 
 [features.Windows_Storage_Provider]
 cfg = "Windows_Storage_Provider"
-deps = []
+deps = ["Windows_Storage"]
 
 [features.Windows_Storage_Search]
 cfg = "Windows_Storage_Search"
-deps = []
+deps = ["Windows_Storage"]
 
 [features.Windows_Storage_Streams]
 cfg = "Windows_Storage_Streams"
-deps = []
+deps = ["Windows_Storage"]
 
 [features.Windows_System]
 cfg = "Windows_System"
-deps = []
+deps = ["Windows_Foundation"]
 
 [features.Windows_System_Diagnostics]
 cfg = "Windows_System_Diagnostics"
-deps = []
+deps = ["Windows_System"]
 
 [features.Windows_System_Diagnostics_DevicePortal]
 cfg = "Windows_System_Diagnostics_DevicePortal"
-deps = []
+deps = ["Windows_System_Diagnostics"]
 
 [features.Windows_System_Diagnostics_Telemetry]
 cfg = "Windows_System_Diagnostics_Telemetry"
-deps = []
+deps = ["Windows_System_Diagnostics"]
 
 [features.Windows_System_Diagnostics_TraceReporting]
 cfg = "Windows_System_Diagnostics_TraceReporting"
-deps = []
+deps = ["Windows_System_Diagnostics"]
 
 [features.Windows_System_Display]
 cfg = "Windows_System_Display"
-deps = []
+deps = ["Windows_System"]
+
+[features.Windows_System_Implementation]
+cfg = "Windows_System_Implementation"
+deps = ["Windows_System"]
 
 [features.Windows_System_Implementation_FileExplorer]
 cfg = "Windows_System_Implementation_FileExplorer"
-deps = []
+deps = ["Windows_System_Implementation"]
 
 [features.Windows_System_Inventory]
 cfg = "Windows_System_Inventory"
-deps = []
+deps = ["Windows_System"]
 
 [features.Windows_System_Power]
 cfg = "Windows_System_Power"
-deps = []
+deps = ["Windows_System"]
 
 [features.Windows_System_Power_Diagnostics]
 cfg = "Windows_System_Power_Diagnostics"
-deps = []
+deps = ["Windows_System_Power"]
 
 [features.Windows_System_Power_Thermal]
 cfg = "Windows_System_Power_Thermal"
-deps = []
+deps = ["Windows_System_Power"]
 
 [features.Windows_System_Preview]
 cfg = "Windows_System_Preview"
-deps = []
+deps = ["Windows_System"]
 
 [features.Windows_System_Profile]
 cfg = "Windows_System_Profile"
-deps = []
+deps = ["Windows_System"]
 
 [features.Windows_System_Profile_SystemManufacturers]
 cfg = "Windows_System_Profile_SystemManufacturers"
-deps = []
+deps = ["Windows_System_Profile"]
 
 [features.Windows_System_RemoteDesktop]
 cfg = "Windows_System_RemoteDesktop"
-deps = []
+deps = ["Windows_System"]
 
 [features.Windows_System_RemoteDesktop_Input]
 cfg = "Windows_System_RemoteDesktop_Input"
-deps = []
+deps = ["Windows_System_RemoteDesktop"]
 
 [features.Windows_System_RemoteDesktop_Provider]
 cfg = "Windows_System_RemoteDesktop_Provider"
-deps = []
+deps = ["Windows_System_RemoteDesktop"]
 
 [features.Windows_System_RemoteSystems]
 cfg = "Windows_System_RemoteSystems"
-deps = []
+deps = ["Windows_System"]
 
 [features.Windows_System_Threading]
 cfg = "Windows_System_Threading"
-deps = []
+deps = ["Windows_System"]
 
 [features.Windows_System_Threading_Core]
 cfg = "Windows_System_Threading_Core"
-deps = []
+deps = ["Windows_System_Threading"]
 
 [features.Windows_System_Update]
 cfg = "Windows_System_Update"
-deps = []
+deps = ["Windows_System"]
 
 [features.Windows_System_UserProfile]
 cfg = "Windows_System_UserProfile"
-deps = []
+deps = ["Windows_System"]
 
 [features.Windows_UI]
 cfg = "Windows_UI"
-deps = []
+deps = ["Windows_Foundation"]
 
 [features.Windows_UI_Accessibility]
 cfg = "Windows_UI_Accessibility"
-deps = []
+deps = ["Windows_UI"]
 
 [features.Windows_UI_ApplicationSettings]
 cfg = "Windows_UI_ApplicationSettings"
-deps = []
+deps = ["Windows_UI"]
 
 [features.Windows_UI_Composition]
 cfg = "Windows_UI_Composition"
-deps = []
+deps = ["Windows_UI"]
 
 [features.Windows_UI_Composition_Core]
 cfg = "Windows_UI_Composition_Core"
-deps = []
+deps = ["Windows_UI_Composition"]
 
 [features.Windows_UI_Composition_Desktop]
 cfg = "Windows_UI_Composition_Desktop"
-deps = []
+deps = ["Windows_UI_Composition"]
 
 [features.Windows_UI_Composition_Diagnostics]
 cfg = "Windows_UI_Composition_Diagnostics"
-deps = []
+deps = ["Windows_UI_Composition"]
 
 [features.Windows_UI_Composition_Effects]
 cfg = "Windows_UI_Composition_Effects"
-deps = []
+deps = ["Windows_UI_Composition"]
 
 [features.Windows_UI_Composition_Interactions]
 cfg = "Windows_UI_Composition_Interactions"
-deps = []
+deps = ["Windows_UI_Composition"]
 
 [features.Windows_UI_Composition_Scenes]
 cfg = "Windows_UI_Composition_Scenes"
-deps = []
+deps = ["Windows_UI_Composition"]
 
 [features.Windows_UI_Core]
 cfg = "Windows_UI_Core"
-deps = []
+deps = ["Windows_UI"]
 
 [features.Windows_UI_Core_AnimationMetrics]
 cfg = "Windows_UI_Core_AnimationMetrics"
-deps = []
+deps = ["Windows_UI_Core"]
 
 [features.Windows_UI_Core_Preview]
 cfg = "Windows_UI_Core_Preview"
-deps = []
+deps = ["Windows_UI_Core"]
 
 [features.Windows_UI_Input]
 cfg = "Windows_UI_Input"
-deps = []
+deps = ["Windows_UI"]
 
 [features.Windows_UI_Input_Core]
 cfg = "Windows_UI_Input_Core"
-deps = []
+deps = ["Windows_UI_Input"]
 
 [features.Windows_UI_Input_Inking]
 cfg = "Windows_UI_Input_Inking"
-deps = []
+deps = ["Windows_UI_Input"]
 
 [features.Windows_UI_Input_Inking_Analysis]
 cfg = "Windows_UI_Input_Inking_Analysis"
-deps = []
+deps = ["Windows_UI_Input_Inking"]
 
 [features.Windows_UI_Input_Inking_Core]
 cfg = "Windows_UI_Input_Inking_Core"
-deps = []
+deps = ["Windows_UI_Input_Inking"]
 
 [features.Windows_UI_Input_Inking_Preview]
 cfg = "Windows_UI_Input_Inking_Preview"
-deps = []
+deps = ["Windows_UI_Input_Inking"]
 
 [features.Windows_UI_Input_Preview]
 cfg = "Windows_UI_Input_Preview"
-deps = []
+deps = ["Windows_UI_Input"]
 
 [features.Windows_UI_Input_Preview_Injection]
 cfg = "Windows_UI_Input_Preview_Injection"
-deps = []
+deps = ["Windows_UI_Input_Preview"]
 
 [features.Windows_UI_Input_Preview_Text]
 cfg = "Windows_UI_Input_Preview_Text"
-deps = []
+deps = ["Windows_UI_Input_Preview"]
 
 [features.Windows_UI_Input_Spatial]
 cfg = "Windows_UI_Input_Spatial"
-deps = []
+deps = ["Windows_UI_Input"]
 
 [features.Windows_UI_Notifications]
 cfg = "Windows_UI_Notifications"
-deps = []
+deps = ["Windows_UI"]
 
 [features.Windows_UI_Notifications_Management]
 cfg = "Windows_UI_Notifications_Management"
-deps = []
+deps = ["Windows_UI_Notifications"]
 
 [features.Windows_UI_Notifications_Preview]
 cfg = "Windows_UI_Notifications_Preview"
-deps = []
+deps = ["Windows_UI_Notifications"]
 
 [features.Windows_UI_Popups]
 cfg = "Windows_UI_Popups"
-deps = []
+deps = ["Windows_UI"]
 
 [features.Windows_UI_Shell]
 cfg = "Windows_UI_Shell"
-deps = []
+deps = ["Windows_UI"]
 
 [features.Windows_UI_Shell_CompanionWindows]
 cfg = "Windows_UI_Shell_CompanionWindows"
-deps = []
+deps = ["Windows_UI_Shell"]
 
 [features.Windows_UI_Shell_Tasks]
 cfg = "Windows_UI_Shell_Tasks"
-deps = []
+deps = ["Windows_UI_Shell"]
 
 [features.Windows_UI_StartScreen]
 cfg = "Windows_UI_StartScreen"
-deps = []
+deps = ["Windows_UI"]
 
 [features.Windows_UI_Text]
 cfg = "Windows_UI_Text"
-deps = []
+deps = ["Windows_UI"]
 
 [features.Windows_UI_Text_Core]
 cfg = "Windows_UI_Text_Core"
-deps = []
+deps = ["Windows_UI_Text"]
 
 [features.Windows_UI_UIAutomation]
 cfg = "Windows_UI_UIAutomation"
-deps = []
+deps = ["Windows_UI"]
 
 [features.Windows_UI_UIAutomation_Core]
 cfg = "Windows_UI_UIAutomation_Core"
-deps = []
+deps = ["Windows_UI_UIAutomation"]
 
 [features.Windows_UI_ViewManagement]
 cfg = "Windows_UI_ViewManagement"
-deps = []
+deps = ["Windows_UI"]
 
 [features.Windows_UI_ViewManagement_Core]
 cfg = "Windows_UI_ViewManagement_Core"
-deps = []
+deps = ["Windows_UI_ViewManagement"]
 
 [features.Windows_UI_WebUI]
 cfg = "Windows_UI_WebUI"
-deps = []
+deps = ["Windows_UI"]
 
 [features.Windows_UI_WindowManagement]
 cfg = "Windows_UI_WindowManagement"
-deps = []
+deps = ["Windows_UI"]
 
 [features.Windows_UI_WindowManagement_Preview]
 cfg = "Windows_UI_WindowManagement_Preview"
-deps = []
+deps = ["Windows_UI_WindowManagement"]
 
 [features.Windows_UI_Xaml]
 cfg = "Windows_UI_Xaml"
-deps = []
+deps = ["Windows_UI"]
 
 [features.Windows_UI_Xaml_Automation]
 cfg = "Windows_UI_Xaml_Automation"
-deps = []
+deps = ["Windows_UI_Xaml"]
 
 [features.Windows_UI_Xaml_Automation_Peers]
 cfg = "Windows_UI_Xaml_Automation_Peers"
-deps = []
+deps = ["Windows_UI_Xaml_Automation"]
 
 [features.Windows_UI_Xaml_Automation_Provider]
 cfg = "Windows_UI_Xaml_Automation_Provider"
-deps = []
+deps = ["Windows_UI_Xaml_Automation"]
 
 [features.Windows_UI_Xaml_Automation_Text]
 cfg = "Windows_UI_Xaml_Automation_Text"
-deps = []
+deps = ["Windows_UI_Xaml_Automation"]
 
 [features.Windows_UI_Xaml_Controls]
 cfg = "Windows_UI_Xaml_Controls"
-deps = []
+deps = ["Windows_UI_Xaml"]
 
 [features.Windows_UI_Xaml_Controls_Maps]
 cfg = "Windows_UI_Xaml_Controls_Maps"
-deps = []
+deps = ["Windows_UI_Xaml_Controls"]
 
 [features.Windows_UI_Xaml_Controls_Primitives]
 cfg = "Windows_UI_Xaml_Controls_Primitives"
-deps = []
+deps = ["Windows_UI_Xaml_Controls"]
+
+[features.Windows_UI_Xaml_Core]
+cfg = "Windows_UI_Xaml_Core"
+deps = ["Windows_UI_Xaml"]
 
 [features.Windows_UI_Xaml_Core_Direct]
 cfg = "Windows_UI_Xaml_Core_Direct"
-deps = []
+deps = ["Windows_UI_Xaml_Core"]
 
 [features.Windows_UI_Xaml_Data]
 cfg = "Windows_UI_Xaml_Data"
-deps = []
+deps = ["Windows_UI_Xaml"]
 
 [features.Windows_UI_Xaml_Documents]
 cfg = "Windows_UI_Xaml_Documents"
-deps = []
+deps = ["Windows_UI_Xaml"]
 
 [features.Windows_UI_Xaml_Hosting]
 cfg = "Windows_UI_Xaml_Hosting"
-deps = []
+deps = ["Windows_UI_Xaml"]
 
 [features.Windows_UI_Xaml_Input]
 cfg = "Windows_UI_Xaml_Input"
-deps = []
+deps = ["Windows_UI_Xaml"]
 
 [features.Windows_UI_Xaml_Interop]
 cfg = "Windows_UI_Xaml_Interop"
-deps = []
+deps = ["Windows_UI_Xaml"]
 
 [features.Windows_UI_Xaml_Markup]
 cfg = "Windows_UI_Xaml_Markup"
-deps = []
+deps = ["Windows_UI_Xaml"]
 
 [features.Windows_UI_Xaml_Media]
 cfg = "Windows_UI_Xaml_Media"
-deps = []
+deps = ["Windows_UI_Xaml"]
 
 [features.Windows_UI_Xaml_Media_Animation]
 cfg = "Windows_UI_Xaml_Media_Animation"
-deps = []
+deps = ["Windows_UI_Xaml_Media"]
 
 [features.Windows_UI_Xaml_Media_Imaging]
 cfg = "Windows_UI_Xaml_Media_Imaging"
-deps = []
+deps = ["Windows_UI_Xaml_Media"]
 
 [features.Windows_UI_Xaml_Media_Media3D]
 cfg = "Windows_UI_Xaml_Media_Media3D"
-deps = []
+deps = ["Windows_UI_Xaml_Media"]
 
 [features.Windows_UI_Xaml_Navigation]
 cfg = "Windows_UI_Xaml_Navigation"
-deps = []
+deps = ["Windows_UI_Xaml"]
 
 [features.Windows_UI_Xaml_Printing]
 cfg = "Windows_UI_Xaml_Printing"
-deps = []
+deps = ["Windows_UI_Xaml"]
 
 [features.Windows_UI_Xaml_Resources]
 cfg = "Windows_UI_Xaml_Resources"
-deps = []
+deps = ["Windows_UI_Xaml"]
 
 [features.Windows_UI_Xaml_Shapes]
 cfg = "Windows_UI_Xaml_Shapes"
-deps = []
+deps = ["Windows_UI_Xaml"]
+
+[features.Windows_Wdk]
+cfg = "Windows_Wdk"
+deps = ["Windows_Win32_Foundation"]
+
+[features.Windows_Wdk_Devices]
+cfg = "Windows_Wdk_Devices"
+deps = ["Windows_Wdk"]
 
 [features.Windows_Wdk_Devices_Bluetooth]
 cfg = "Windows_Wdk_Devices_Bluetooth"
-deps = []
+deps = ["Windows_Wdk_Devices"]
 
 [features.Windows_Wdk_Devices_HumanInterfaceDevice]
 cfg = "Windows_Wdk_Devices_HumanInterfaceDevice"
-deps = ["VHFUM"]
+deps = ["VHFUM", "Windows_Wdk_Devices"]
 
 [features.Windows_Wdk_Foundation]
 cfg = "Windows_Wdk_Foundation"
-deps = ["NTDLL"]
+deps = ["NTDLL", "Windows_Wdk"]
+
+[features.Windows_Wdk_Graphics]
+cfg = "Windows_Wdk_Graphics"
+deps = ["Windows_Wdk"]
 
 [features.Windows_Wdk_Graphics_Direct3D]
 cfg = "Windows_Wdk_Graphics_Direct3D"
-deps = ["API_MS_WIN_DX_D3DKMT_L1_1_4", "API_MS_WIN_DX_D3DKMT_L1_1_6", "GDI32"]
+deps = ["API_MS_WIN_DX_D3DKMT_L1_1_4", "API_MS_WIN_DX_D3DKMT_L1_1_6", "GDI32", "Windows_Wdk_Graphics"]
+
+[features.Windows_Wdk_NetworkManagement]
+cfg = "Windows_Wdk_NetworkManagement"
+deps = ["Windows_Wdk"]
 
 [features.Windows_Wdk_NetworkManagement_Ndis]
 cfg = "Windows_Wdk_NetworkManagement_Ndis"
-deps = ["NDIS_SYS"]
+deps = ["NDIS_SYS", "Windows_Wdk_NetworkManagement"]
 
 [features.Windows_Wdk_NetworkManagement_WindowsFilteringPlatform]
 cfg = "Windows_Wdk_NetworkManagement_WindowsFilteringPlatform"
-deps = ["FWPKCLNT_SYS", "FWPUCLNT"]
+deps = ["FWPKCLNT_SYS", "FWPUCLNT", "Windows_Wdk_NetworkManagement"]
+
+[features.Windows_Wdk_Storage]
+cfg = "Windows_Wdk_Storage"
+deps = ["Windows_Wdk"]
 
 [features.Windows_Wdk_Storage_FileSystem]
 cfg = "Windows_Wdk_Storage_FileSystem"
-deps = ["KSECDD_SYS", "NTDLL", "NTOSKRNL_EXE", "SECUR32"]
+deps = ["KSECDD_SYS", "NTDLL", "NTOSKRNL_EXE", "SECUR32", "Windows_Wdk_Storage"]
 
 [features.Windows_Wdk_Storage_FileSystem_Minifilters]
 cfg = "Windows_Wdk_Storage_FileSystem_Minifilters"
-deps = ["FLTMGR_SYS"]
+deps = ["FLTMGR_SYS", "Windows_Wdk_Storage_FileSystem"]
+
+[features.Windows_Wdk_System]
+cfg = "Windows_Wdk_System"
+deps = ["Windows_Wdk"]
 
 [features.Windows_Wdk_System_IO]
 cfg = "Windows_Wdk_System_IO"
-deps = ["NTDLL"]
+deps = ["NTDLL", "Windows_Wdk_System"]
 
 [features.Windows_Wdk_System_Memory]
 cfg = "Windows_Wdk_System_Memory"
-deps = ["NTDLL"]
+deps = ["NTDLL", "Windows_Wdk_System"]
 
 [features.Windows_Wdk_System_OfflineRegistry]
 cfg = "Windows_Wdk_System_OfflineRegistry"
-deps = ["OFFREG"]
+deps = ["OFFREG", "Windows_Wdk_System"]
 
 [features.Windows_Wdk_System_Registry]
 cfg = "Windows_Wdk_System_Registry"
-deps = ["NTDLL"]
+deps = ["NTDLL", "Windows_Wdk_System"]
 
 [features.Windows_Wdk_System_SystemInformation]
 cfg = "Windows_Wdk_System_SystemInformation"
-deps = ["NTDLL"]
+deps = ["NTDLL", "Windows_Wdk_System"]
 
 [features.Windows_Wdk_System_SystemServices]
 cfg = "Windows_Wdk_System_SystemServices"
-deps = ["CLFS_SYS", "HAL", "NTDLL", "NTOSKRNL_EXE", "PSHED"]
+deps = ["CLFS_SYS", "HAL", "NTDLL", "NTOSKRNL_EXE", "PSHED", "Windows_Wdk_System"]
 
 [features.Windows_Wdk_System_Threading]
 cfg = "Windows_Wdk_System_Threading"
-deps = ["NTDLL"]
+deps = ["NTDLL", "Windows_Wdk_System"]
 
 [features.Windows_Web]
 cfg = "Windows_Web"
-deps = []
+deps = ["Windows_Foundation"]
 
 [features.Windows_Web_AtomPub]
 cfg = "Windows_Web_AtomPub"
-deps = []
+deps = ["Windows_Web"]
 
 [features.Windows_Web_Http]
 cfg = "Windows_Web_Http"
-deps = []
+deps = ["Windows_Web"]
 
 [features.Windows_Web_Http_Diagnostics]
 cfg = "Windows_Web_Http_Diagnostics"
-deps = []
+deps = ["Windows_Web_Http"]
 
 [features.Windows_Web_Http_Filters]
 cfg = "Windows_Web_Http_Filters"
-deps = []
+deps = ["Windows_Web_Http"]
 
 [features.Windows_Web_Http_Headers]
 cfg = "Windows_Web_Http_Headers"
-deps = []
+deps = ["Windows_Web_Http"]
 
 [features.Windows_Web_Syndication]
 cfg = "Windows_Web_Syndication"
-deps = []
+deps = ["Windows_Web"]
 
 [features.Windows_Web_UI]
 cfg = "Windows_Web_UI"
-deps = []
+deps = ["Windows_Web"]
 
 [features.Windows_Web_UI_Interop]
 cfg = "Windows_Web_UI_Interop"
-deps = []
+deps = ["Windows_Web_UI"]
+
+[features.Windows_Win32]
+cfg = "Windows_Win32"
+deps = ["Windows_Win32_Foundation"]
+
+[features.Windows_Win32_AI]
+cfg = "Windows_Win32_AI"
+deps = ["Windows_Win32"]
+
+[features.Windows_Win32_AI_MachineLearning]
+cfg = "Windows_Win32_AI_MachineLearning"
+deps = ["Windows_Win32_AI"]
 
 [features.Windows_Win32_AI_MachineLearning_DirectML]
 cfg = "Windows_Win32_AI_MachineLearning_DirectML"
-deps = ["DIRECTML"]
+deps = ["DIRECTML", "Windows_Win32_AI_MachineLearning"]
 
 [features.Windows_Win32_AI_MachineLearning_WinML]
 cfg = "Windows_Win32_AI_MachineLearning_WinML"
-deps = ["WINDOWS_AI_MACHINELEARNING", "WINML"]
+deps = ["WINDOWS_AI_MACHINELEARNING", "WINML", "Windows_Win32_AI_MachineLearning"]
+
+[features.Windows_Win32_Data]
+cfg = "Windows_Win32_Data"
+deps = ["Windows_Win32"]
 
 [features.Windows_Win32_Data_HtmlHelp]
 cfg = "Windows_Win32_Data_HtmlHelp"
-deps = ["HHCTRL_OCX"]
+deps = ["HHCTRL_OCX", "Windows_Win32_Data"]
 
 [features.Windows_Win32_Data_RightsManagement]
 cfg = "Windows_Win32_Data_RightsManagement"
-deps = ["MSDRM"]
+deps = ["MSDRM", "Windows_Win32_Data"]
+
+[features.Windows_Win32_Data_Xml]
+cfg = "Windows_Win32_Data_Xml"
+deps = ["Windows_Win32_Data"]
 
 [features.Windows_Win32_Data_Xml_MsXml]
 cfg = "Windows_Win32_Data_Xml_MsXml"
-deps = []
+deps = ["Windows_Win32_Data_Xml"]
 
 [features.Windows_Win32_Data_Xml_XmlLite]
 cfg = "Windows_Win32_Data_Xml_XmlLite"
-deps = ["XMLLITE"]
+deps = ["Windows_Win32_Data_Xml", "XMLLITE"]
 
 [features.Windows_Win32_Devices]
 cfg = "Windows_Win32_Devices"
-deps = []
+deps = ["Windows_Win32"]
 
 [features.Windows_Win32_Devices_AllJoyn]
 cfg = "Windows_Win32_Devices_AllJoyn"
-deps = ["MSAJAPI"]
+deps = ["MSAJAPI", "Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_Beep]
 cfg = "Windows_Win32_Devices_Beep"
-deps = []
+deps = ["Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_BiometricFramework]
 cfg = "Windows_Win32_Devices_BiometricFramework"
-deps = ["WINBIO"]
+deps = ["WINBIO", "Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_Bluetooth]
 cfg = "Windows_Win32_Devices_Bluetooth"
-deps = ["BLUETOOTHAPIS", "BTHPROPS_CPL"]
+deps = ["BLUETOOTHAPIS", "BTHPROPS_CPL", "Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_Cdrom]
 cfg = "Windows_Win32_Devices_Cdrom"
-deps = []
+deps = ["Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_Communication]
 cfg = "Windows_Win32_Devices_Communication"
-deps = ["API_MS_WIN_CORE_COMM_L1_1_1", "API_MS_WIN_CORE_COMM_L1_1_2", "KERNEL32"]
+deps = ["API_MS_WIN_CORE_COMM_L1_1_1", "API_MS_WIN_CORE_COMM_L1_1_2", "KERNEL32", "Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_DeviceAccess]
 cfg = "Windows_Win32_Devices_DeviceAccess"
-deps = ["DEVICEACCESS"]
+deps = ["DEVICEACCESS", "Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_DeviceAndDriverInstallation]
 cfg = "Windows_Win32_Devices_DeviceAndDriverInstallation"
-deps = ["CFGMGR32", "NEWDEV", "SETUPAPI"]
+deps = ["CFGMGR32", "NEWDEV", "SETUPAPI", "Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_DeviceQuery]
 cfg = "Windows_Win32_Devices_DeviceQuery"
-deps = ["API_MS_WIN_DEVICES_QUERY_L1_1_0", "API_MS_WIN_DEVICES_QUERY_L1_1_1"]
+deps = ["API_MS_WIN_DEVICES_QUERY_L1_1_0", "API_MS_WIN_DEVICES_QUERY_L1_1_1", "Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_Display]
 cfg = "Windows_Win32_Devices_Display"
-deps = ["DXVA2", "GDI32", "USER32"]
+deps = ["DXVA2", "GDI32", "USER32", "Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_Dvd]
 cfg = "Windows_Win32_Devices_Dvd"
-deps = []
+deps = ["Windows_Win32_Devices"]
+
+[features.Windows_Win32_Devices_Enumeration]
+cfg = "Windows_Win32_Devices_Enumeration"
+deps = ["Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_Enumeration_Pnp]
 cfg = "Windows_Win32_Devices_Enumeration_Pnp"
-deps = ["CFGMGR32"]
+deps = ["CFGMGR32", "Windows_Win32_Devices_Enumeration"]
 
 [features.Windows_Win32_Devices_Fax]
 cfg = "Windows_Win32_Devices_Fax"
-deps = ["FXSUTILITY", "STI", "WINFAX"]
+deps = ["FXSUTILITY", "STI", "WINFAX", "Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_FunctionDiscovery]
 cfg = "Windows_Win32_Devices_FunctionDiscovery"
-deps = []
+deps = ["Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_Geolocation]
 cfg = "Windows_Win32_Devices_Geolocation"
-deps = []
+deps = ["Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_HumanInterfaceDevice]
 cfg = "Windows_Win32_Devices_HumanInterfaceDevice"
-deps = ["DINPUT8", "HID", "WINMM"]
+deps = ["DINPUT8", "HID", "WINMM", "Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_ImageAcquisition]
 cfg = "Windows_Win32_Devices_ImageAcquisition"
-deps = []
+deps = ["Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_Nfc]
 cfg = "Windows_Win32_Devices_Nfc"
-deps = []
+deps = ["Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_Nfp]
 cfg = "Windows_Win32_Devices_Nfp"
-deps = []
+deps = ["Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_PortableDevices]
 cfg = "Windows_Win32_Devices_PortableDevices"
-deps = ["DMPROCESSXMLFILTERED"]
+deps = ["DMPROCESSXMLFILTERED", "Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_Properties]
 cfg = "Windows_Win32_Devices_Properties"
-deps = []
+deps = ["Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_Pwm]
 cfg = "Windows_Win32_Devices_Pwm"
-deps = []
+deps = ["Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_Sensors]
 cfg = "Windows_Win32_Devices_Sensors"
-deps = ["SENSORSUTILSV2"]
+deps = ["SENSORSUTILSV2", "Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_SerialCommunication]
 cfg = "Windows_Win32_Devices_SerialCommunication"
-deps = ["MSPORTS"]
+deps = ["MSPORTS", "Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_Tapi]
 cfg = "Windows_Win32_Devices_Tapi"
-deps = ["MAPI32", "TAPI32"]
+deps = ["MAPI32", "TAPI32", "Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_Usb]
 cfg = "Windows_Win32_Devices_Usb"
-deps = ["WINUSB"]
+deps = ["WINUSB", "Windows_Win32_Devices"]
 
 [features.Windows_Win32_Devices_WebServicesOnDevices]
 cfg = "Windows_Win32_Devices_WebServicesOnDevices"
-deps = ["WSDAPI"]
+deps = ["WSDAPI", "Windows_Win32_Devices"]
 
 [features.Windows_Win32_Foundation]
 cfg = "Windows_Win32_Foundation"
-deps = ["API_MS_WIN_CORE_HANDLE_L1_1_0", "KERNEL32", "NTDLL", "OLEAUT32", "USER32"]
+deps = ["API_MS_WIN_CORE_HANDLE_L1_1_0", "KERNEL32", "NTDLL", "OLEAUT32", "USER32", "Windows_Win32"]
 
 [features.Windows_Win32_Foundation_Metadata]
 cfg = "Windows_Win32_Foundation_Metadata"
-deps = []
+deps = ["Windows_Win32_Foundation"]
 
 [features.Windows_Win32_Gaming]
 cfg = "Windows_Win32_Gaming"
-deps = ["API_MS_WIN_GAMING_DEVICEINFORMATION_L1_1_0", "API_MS_WIN_GAMING_EXPANDEDRESOURCES_L1_1_0", "API_MS_WIN_GAMING_TCUI_L1_1_0", "API_MS_WIN_GAMING_TCUI_L1_1_1", "API_MS_WIN_GAMING_TCUI_L1_1_2", "API_MS_WIN_GAMING_TCUI_L1_1_3", "API_MS_WIN_GAMING_TCUI_L1_1_4"]
+deps = ["API_MS_WIN_GAMING_DEVICEINFORMATION_L1_1_0", "API_MS_WIN_GAMING_EXPANDEDRESOURCES_L1_1_0", "API_MS_WIN_GAMING_TCUI_L1_1_0", "API_MS_WIN_GAMING_TCUI_L1_1_1", "API_MS_WIN_GAMING_TCUI_L1_1_2", "API_MS_WIN_GAMING_TCUI_L1_1_3", "API_MS_WIN_GAMING_TCUI_L1_1_4", "Windows_Win32"]
 
 [features.Windows_Win32_Globalization]
 cfg = "Windows_Win32_Globalization"
-deps = ["ADVAPI32", "BCP47MRM", "ELSCORE", "GDI32", "ICU", "ICUIN", "ICUUC", "KERNEL32", "NORMALIZ", "USP10"]
+deps = ["ADVAPI32", "BCP47MRM", "ELSCORE", "GDI32", "ICU", "ICUIN", "ICUUC", "KERNEL32", "NORMALIZ", "USP10", "Windows_Win32"]
+
+[features.Windows_Win32_Graphics]
+cfg = "Windows_Win32_Graphics"
+deps = ["Windows_Win32"]
 
 [features.Windows_Win32_Graphics_CompositionSwapchain]
 cfg = "Windows_Win32_Graphics_CompositionSwapchain"
-deps = ["DCOMP"]
+deps = ["DCOMP", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_DXCore]
 cfg = "Windows_Win32_Graphics_DXCore"
-deps = ["DXCORE"]
+deps = ["DXCORE", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Direct2D]
 cfg = "Windows_Win32_Graphics_Direct2D"
-deps = ["D2D1"]
+deps = ["D2D1", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Direct2D_Common]
 cfg = "Windows_Win32_Graphics_Direct2D_Common"
-deps = []
+deps = ["Windows_Win32_Graphics_Direct2D"]
 
 [features.Windows_Win32_Graphics_Direct3D]
 cfg = "Windows_Win32_Graphics_Direct3D"
-deps = []
+deps = ["Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Direct3D10]
 cfg = "Windows_Win32_Graphics_Direct3D10"
-deps = ["D3D10", "D3D10_1"]
+deps = ["D3D10", "D3D10_1", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Direct3D11]
 cfg = "Windows_Win32_Graphics_Direct3D11"
-deps = ["D3D11", "D3DCOMPILER_47", "D3DCSX"]
+deps = ["D3D11", "D3DCOMPILER_47", "D3DCSX", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Direct3D11on12]
 cfg = "Windows_Win32_Graphics_Direct3D11on12"
-deps = ["D3D11"]
+deps = ["D3D11", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Direct3D12]
 cfg = "Windows_Win32_Graphics_Direct3D12"
-deps = ["D3D12"]
+deps = ["D3D12", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Direct3D9]
 cfg = "Windows_Win32_Graphics_Direct3D9"
-deps = ["D3D9"]
+deps = ["D3D9", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Direct3D9on12]
 cfg = "Windows_Win32_Graphics_Direct3D9on12"
-deps = ["D3D9"]
+deps = ["D3D9", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Direct3D_Dxc]
 cfg = "Windows_Win32_Graphics_Direct3D_Dxc"
-deps = ["DXCOMPILER"]
+deps = ["DXCOMPILER", "Windows_Win32_Graphics_Direct3D"]
 
 [features.Windows_Win32_Graphics_Direct3D_Fxc]
 cfg = "Windows_Win32_Graphics_Direct3D_Fxc"
-deps = ["D3DCOMPILER_47"]
+deps = ["D3DCOMPILER_47", "Windows_Win32_Graphics_Direct3D"]
 
 [features.Windows_Win32_Graphics_DirectComposition]
 cfg = "Windows_Win32_Graphics_DirectComposition"
-deps = ["DCOMP"]
+deps = ["DCOMP", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_DirectDraw]
 cfg = "Windows_Win32_Graphics_DirectDraw"
-deps = ["DDRAW"]
+deps = ["DDRAW", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_DirectManipulation]
 cfg = "Windows_Win32_Graphics_DirectManipulation"
-deps = []
+deps = ["Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_DirectWrite]
 cfg = "Windows_Win32_Graphics_DirectWrite"
-deps = ["DWRITE"]
+deps = ["DWRITE", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Dwm]
 cfg = "Windows_Win32_Graphics_Dwm"
-deps = ["DWMAPI"]
+deps = ["DWMAPI", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Dxgi]
 cfg = "Windows_Win32_Graphics_Dxgi"
-deps = ["DXGI"]
+deps = ["DXGI", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Dxgi_Common]
 cfg = "Windows_Win32_Graphics_Dxgi_Common"
-deps = []
+deps = ["Windows_Win32_Graphics_Dxgi"]
 
 [features.Windows_Win32_Graphics_Gdi]
 cfg = "Windows_Win32_Graphics_Gdi"
-deps = ["FONTSUB", "GDI32", "MSIMG32", "OPENGL32", "T2EMBED", "USER32"]
+deps = ["FONTSUB", "GDI32", "MSIMG32", "OPENGL32", "T2EMBED", "USER32", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_GdiPlus]
 cfg = "Windows_Win32_Graphics_GdiPlus"
-deps = ["GDIPLUS"]
+deps = ["GDIPLUS", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Hlsl]
 cfg = "Windows_Win32_Graphics_Hlsl"
-deps = []
+deps = ["Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Imaging]
 cfg = "Windows_Win32_Graphics_Imaging"
-deps = ["WINDOWSCODECS"]
+deps = ["WINDOWSCODECS", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Imaging_D2D]
 cfg = "Windows_Win32_Graphics_Imaging_D2D"
-deps = []
+deps = ["Windows_Win32_Graphics_Imaging"]
 
 [features.Windows_Win32_Graphics_OpenGL]
 cfg = "Windows_Win32_Graphics_OpenGL"
-deps = ["GDI32", "GLU32", "OPENGL32"]
+deps = ["GDI32", "GLU32", "OPENGL32", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Printing]
 cfg = "Windows_Win32_Graphics_Printing"
-deps = ["COMPSTUI", "GDI32", "MSCMS", "SPOOLSS", "WINSPOOL_DRV"]
+deps = ["COMPSTUI", "GDI32", "MSCMS", "SPOOLSS", "WINSPOOL_DRV", "Windows_Win32_Graphics"]
 
 [features.Windows_Win32_Graphics_Printing_PrintTicket]
 cfg = "Windows_Win32_Graphics_Printing_PrintTicket"
-deps = ["PRNTVPT"]
+deps = ["PRNTVPT", "Windows_Win32_Graphics_Printing"]
+
+[features.Windows_Win32_Management]
+cfg = "Windows_Win32_Management"
+deps = ["Windows_Win32"]
 
 [features.Windows_Win32_Management_MobileDeviceManagementRegistration]
 cfg = "Windows_Win32_Management_MobileDeviceManagementRegistration"
-deps = ["MDMLOCALMANAGEMENT", "MDMREGISTRATION"]
+deps = ["MDMLOCALMANAGEMENT", "MDMREGISTRATION", "Windows_Win32_Management"]
 
 [features.Windows_Win32_Media]
 cfg = "Windows_Win32_Media"
-deps = ["WINMM"]
+deps = ["WINMM", "Windows_Win32"]
 
 [features.Windows_Win32_Media_Audio]
 cfg = "Windows_Win32_Media_Audio"
-deps = ["MMDEVAPI", "MSACM32", "OLE32", "WINDOWS_MEDIA_MEDIACONTROL", "WINMM"]
+deps = ["MMDEVAPI", "MSACM32", "OLE32", "WINDOWS_MEDIA_MEDIACONTROL", "WINMM", "Windows_Win32_Media"]
 
 [features.Windows_Win32_Media_Audio_Apo]
 cfg = "Windows_Win32_Media_Audio_Apo"
-deps = []
+deps = ["Windows_Win32_Media_Audio"]
 
 [features.Windows_Win32_Media_Audio_DirectMusic]
 cfg = "Windows_Win32_Media_Audio_DirectMusic"
-deps = []
+deps = ["Windows_Win32_Media_Audio"]
 
 [features.Windows_Win32_Media_Audio_DirectSound]
 cfg = "Windows_Win32_Media_Audio_DirectSound"
-deps = ["DSOUND"]
+deps = ["DSOUND", "Windows_Win32_Media_Audio"]
 
 [features.Windows_Win32_Media_Audio_Endpoints]
 cfg = "Windows_Win32_Media_Audio_Endpoints"
-deps = []
+deps = ["Windows_Win32_Media_Audio"]
 
 [features.Windows_Win32_Media_Audio_XAudio2]
 cfg = "Windows_Win32_Media_Audio_XAudio2"
-deps = ["HRTFAPO", "XAUDIO2_8"]
+deps = ["HRTFAPO", "Windows_Win32_Media_Audio", "XAUDIO2_8"]
 
 [features.Windows_Win32_Media_DeviceManager]
 cfg = "Windows_Win32_Media_DeviceManager"
-deps = []
+deps = ["Windows_Win32_Media"]
 
 [features.Windows_Win32_Media_DirectShow]
 cfg = "Windows_Win32_Media_DirectShow"
-deps = ["QUARTZ"]
+deps = ["QUARTZ", "Windows_Win32_Media"]
 
 [features.Windows_Win32_Media_DirectShow_Tv]
 cfg = "Windows_Win32_Media_DirectShow_Tv"
-deps = []
+deps = ["Windows_Win32_Media_DirectShow"]
 
 [features.Windows_Win32_Media_DirectShow_Xml]
 cfg = "Windows_Win32_Media_DirectShow_Xml"
-deps = []
+deps = ["Windows_Win32_Media_DirectShow"]
 
 [features.Windows_Win32_Media_DxMediaObjects]
 cfg = "Windows_Win32_Media_DxMediaObjects"
-deps = ["MSDMO"]
+deps = ["MSDMO", "Windows_Win32_Media"]
 
 [features.Windows_Win32_Media_KernelStreaming]
 cfg = "Windows_Win32_Media_KernelStreaming"
-deps = ["KSPROXY_AX", "KSUSER"]
+deps = ["KSPROXY_AX", "KSUSER", "Windows_Win32_Media"]
 
 [features.Windows_Win32_Media_LibrarySharingServices]
 cfg = "Windows_Win32_Media_LibrarySharingServices"
-deps = []
+deps = ["Windows_Win32_Media"]
 
 [features.Windows_Win32_Media_MediaFoundation]
 cfg = "Windows_Win32_Media_MediaFoundation"
-deps = ["DXVA2", "EVR", "MF", "MFCORE", "MFPLAT", "MFPLAY", "MFREADWRITE", "MFSENSORGROUP", "MFSRCSNK", "OPMXBOX"]
+deps = ["DXVA2", "EVR", "MF", "MFCORE", "MFPLAT", "MFPLAY", "MFREADWRITE", "MFSENSORGROUP", "MFSRCSNK", "OPMXBOX", "Windows_Win32_Media"]
 
 [features.Windows_Win32_Media_MediaPlayer]
 cfg = "Windows_Win32_Media_MediaPlayer"
-deps = []
+deps = ["Windows_Win32_Media"]
 
 [features.Windows_Win32_Media_Multimedia]
 cfg = "Windows_Win32_Media_Multimedia"
-deps = ["API_MS_WIN_MM_MISC_L1_1_1", "AVICAP32", "AVIFIL32", "MSVFW32", "WINMM"]
+deps = ["API_MS_WIN_MM_MISC_L1_1_1", "AVICAP32", "AVIFIL32", "MSVFW32", "WINMM", "Windows_Win32_Media"]
 
 [features.Windows_Win32_Media_PictureAcquisition]
 cfg = "Windows_Win32_Media_PictureAcquisition"
-deps = []
+deps = ["Windows_Win32_Media"]
 
 [features.Windows_Win32_Media_Speech]
 cfg = "Windows_Win32_Media_Speech"
-deps = []
+deps = ["Windows_Win32_Media"]
 
 [features.Windows_Win32_Media_Streaming]
 cfg = "Windows_Win32_Media_Streaming"
-deps = []
+deps = ["Windows_Win32_Media"]
 
 [features.Windows_Win32_Media_WindowsMediaFormat]
 cfg = "Windows_Win32_Media_WindowsMediaFormat"
-deps = ["WMVCORE"]
+deps = ["WMVCORE", "Windows_Win32_Media"]
+
+[features.Windows_Win32_NetworkManagement]
+cfg = "Windows_Win32_NetworkManagement"
+deps = ["Windows_Win32"]
 
 [features.Windows_Win32_NetworkManagement_Dhcp]
 cfg = "Windows_Win32_NetworkManagement_Dhcp"
-deps = ["DHCPCSVC", "DHCPCSVC6", "DHCPSAPI"]
+deps = ["DHCPCSVC", "DHCPCSVC6", "DHCPSAPI", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_Dns]
 cfg = "Windows_Win32_NetworkManagement_Dns"
-deps = ["DNSAPI"]
+deps = ["DNSAPI", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_InternetConnectionWizard]
 cfg = "Windows_Win32_NetworkManagement_InternetConnectionWizard"
-deps = []
+deps = ["Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_IpHelper]
 cfg = "Windows_Win32_NetworkManagement_IpHelper"
-deps = ["IPHLPAPI"]
+deps = ["IPHLPAPI", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_MobileBroadband]
 cfg = "Windows_Win32_NetworkManagement_MobileBroadband"
-deps = []
+deps = ["Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_Multicast]
 cfg = "Windows_Win32_NetworkManagement_Multicast"
-deps = ["DHCPCSVC"]
+deps = ["DHCPCSVC", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_Ndis]
 cfg = "Windows_Win32_NetworkManagement_Ndis"
-deps = []
+deps = ["Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_NetBios]
 cfg = "Windows_Win32_NetworkManagement_NetBios"
-deps = ["NETAPI32"]
+deps = ["NETAPI32", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_NetManagement]
 cfg = "Windows_Win32_NetworkManagement_NetManagement"
-deps = ["MSTASK", "NETAPI32", "RTUTILS"]
+deps = ["MSTASK", "NETAPI32", "RTUTILS", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_NetShell]
 cfg = "Windows_Win32_NetworkManagement_NetShell"
-deps = ["NETSH"]
+deps = ["NETSH", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework]
 cfg = "Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework"
-deps = ["NDFAPI"]
+deps = ["NDFAPI", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_NetworkPolicyServer]
 cfg = "Windows_Win32_NetworkManagement_NetworkPolicyServer"
-deps = []
+deps = ["Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_P2P]
 cfg = "Windows_Win32_NetworkManagement_P2P"
-deps = ["DRT", "DRTPROV", "DRTTRANSPORT", "P2P", "P2PGRAPH", "PEERDIST"]
+deps = ["DRT", "DRTPROV", "DRTTRANSPORT", "P2P", "P2PGRAPH", "PEERDIST", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_QoS]
 cfg = "Windows_Win32_NetworkManagement_QoS"
-deps = ["QWAVE", "TRAFFIC"]
+deps = ["QWAVE", "TRAFFIC", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_Rras]
 cfg = "Windows_Win32_NetworkManagement_Rras"
-deps = ["MPRAPI", "RASAPI32", "RASDLG", "RTM"]
+deps = ["MPRAPI", "RASAPI32", "RASDLG", "RTM", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_Snmp]
 cfg = "Windows_Win32_NetworkManagement_Snmp"
-deps = ["MGMTAPI", "SNMPAPI", "WSNMP32"]
+deps = ["MGMTAPI", "SNMPAPI", "WSNMP32", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_WNet]
 cfg = "Windows_Win32_NetworkManagement_WNet"
-deps = ["DAVCLNT", "MPR", "NTLANMAN"]
+deps = ["DAVCLNT", "MPR", "NTLANMAN", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_WebDav]
 cfg = "Windows_Win32_NetworkManagement_WebDav"
-deps = ["DAVCLNT", "NETAPI32"]
+deps = ["DAVCLNT", "NETAPI32", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_WiFi]
 cfg = "Windows_Win32_NetworkManagement_WiFi"
-deps = ["WLANAPI", "WLANUI"]
+deps = ["WLANAPI", "WLANUI", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_WindowsConnectNow]
 cfg = "Windows_Win32_NetworkManagement_WindowsConnectNow"
-deps = []
+deps = ["Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_WindowsConnectionManager]
 cfg = "Windows_Win32_NetworkManagement_WindowsConnectionManager"
-deps = ["ONDEMANDCONNROUTEHELPER", "WCMAPI"]
+deps = ["ONDEMANDCONNROUTEHELPER", "WCMAPI", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_WindowsFilteringPlatform]
 cfg = "Windows_Win32_NetworkManagement_WindowsFilteringPlatform"
-deps = ["FWPUCLNT"]
+deps = ["FWPUCLNT", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_WindowsFirewall]
 cfg = "Windows_Win32_NetworkManagement_WindowsFirewall"
-deps = ["API_MS_WIN_NET_ISOLATION_L1_1_0", "FIREWALLAPI", "NETSHELL"]
+deps = ["API_MS_WIN_NET_ISOLATION_L1_1_0", "FIREWALLAPI", "NETSHELL", "Windows_Win32_NetworkManagement"]
 
 [features.Windows_Win32_NetworkManagement_WindowsNetworkVirtualization]
 cfg = "Windows_Win32_NetworkManagement_WindowsNetworkVirtualization"
-deps = ["WNVAPI"]
+deps = ["WNVAPI", "Windows_Win32_NetworkManagement"]
+
+[features.Windows_Win32_Networking]
+cfg = "Windows_Win32_Networking"
+deps = ["Windows_Win32"]
 
 [features.Windows_Win32_Networking_ActiveDirectory]
 cfg = "Windows_Win32_Networking_ActiveDirectory"
-deps = ["ACTIVEDS", "DSPARSE", "DSPROP", "DSUIEXT", "NETAPI32", "NTDSAPI"]
+deps = ["ACTIVEDS", "DSPARSE", "DSPROP", "DSUIEXT", "NETAPI32", "NTDSAPI", "Windows_Win32_Networking"]
 
 [features.Windows_Win32_Networking_BackgroundIntelligentTransferService]
 cfg = "Windows_Win32_Networking_BackgroundIntelligentTransferService"
-deps = []
+deps = ["Windows_Win32_Networking"]
 
 [features.Windows_Win32_Networking_Clustering]
 cfg = "Windows_Win32_Networking_Clustering"
-deps = ["CLUSAPI", "NTLANMAN", "RESUTILS"]
+deps = ["CLUSAPI", "NTLANMAN", "RESUTILS", "Windows_Win32_Networking"]
 
 [features.Windows_Win32_Networking_DeliveryOptimization]
 cfg = "Windows_Win32_Networking_DeliveryOptimization"
-deps = []
+deps = ["Windows_Win32_Networking"]
 
 [features.Windows_Win32_Networking_HttpServer]
 cfg = "Windows_Win32_Networking_HttpServer"
-deps = ["HTTPAPI"]
+deps = ["HTTPAPI", "Windows_Win32_Networking"]
 
 [features.Windows_Win32_Networking_Ldap]
 cfg = "Windows_Win32_Networking_Ldap"
-deps = ["WLDAP32"]
+deps = ["WLDAP32", "Windows_Win32_Networking"]
 
 [features.Windows_Win32_Networking_NetworkListManager]
 cfg = "Windows_Win32_Networking_NetworkListManager"
-deps = []
+deps = ["Windows_Win32_Networking"]
 
 [features.Windows_Win32_Networking_RemoteDifferentialCompression]
 cfg = "Windows_Win32_Networking_RemoteDifferentialCompression"
-deps = []
+deps = ["Windows_Win32_Networking"]
 
 [features.Windows_Win32_Networking_WebSocket]
 cfg = "Windows_Win32_Networking_WebSocket"
-deps = ["WEBSOCKET"]
+deps = ["WEBSOCKET", "Windows_Win32_Networking"]
 
 [features.Windows_Win32_Networking_WinHttp]
 cfg = "Windows_Win32_Networking_WinHttp"
-deps = ["WINHTTP"]
+deps = ["WINHTTP", "Windows_Win32_Networking"]
 
 [features.Windows_Win32_Networking_WinInet]
 cfg = "Windows_Win32_Networking_WinInet"
-deps = ["WININET"]
+deps = ["WININET", "Windows_Win32_Networking"]
 
 [features.Windows_Win32_Networking_WinSock]
 cfg = "Windows_Win32_Networking_WinSock"
-deps = ["FWPUCLNT", "MSWSOCK", "NTDLL", "WINDOWS_NETWORKING", "WS2_32"]
+deps = ["FWPUCLNT", "MSWSOCK", "NTDLL", "WINDOWS_NETWORKING", "WS2_32", "Windows_Win32_Networking"]
 
 [features.Windows_Win32_Networking_WindowsWebServices]
 cfg = "Windows_Win32_Networking_WindowsWebServices"
-deps = ["WEBSERVICES"]
+deps = ["WEBSERVICES", "Windows_Win32_Networking"]
 
 [features.Windows_Win32_Security]
 cfg = "Windows_Win32_Security"
-deps = ["ADVAPI32", "API_MS_WIN_SECURITY_BASE_L1_2_2", "KERNEL32", "NTDLL", "USER32"]
+deps = ["ADVAPI32", "API_MS_WIN_SECURITY_BASE_L1_2_2", "KERNEL32", "NTDLL", "USER32", "Windows_Win32"]
 
 [features.Windows_Win32_Security_AppLocker]
 cfg = "Windows_Win32_Security_AppLocker"
-deps = ["ADVAPI32"]
+deps = ["ADVAPI32", "Windows_Win32_Security"]
+
+[features.Windows_Win32_Security_Authentication]
+cfg = "Windows_Win32_Security_Authentication"
+deps = ["Windows_Win32_Security"]
 
 [features.Windows_Win32_Security_Authentication_Identity]
 cfg = "Windows_Win32_Security_Authentication_Identity"
-deps = ["ADVAPI32", "API_MS_WIN_CORE_SLAPI_L1_1_0", "CREDUI", "SAS", "SCHANNEL", "SECUR32", "SLC", "SLCEXT", "SLWGA", "SSPICLI", "TOKENBINDING"]
+deps = ["ADVAPI32", "API_MS_WIN_CORE_SLAPI_L1_1_0", "CREDUI", "SAS", "SCHANNEL", "SECUR32", "SLC", "SLCEXT", "SLWGA", "SSPICLI", "TOKENBINDING", "Windows_Win32_Security_Authentication"]
 
 [features.Windows_Win32_Security_Authentication_Identity_Provider]
 cfg = "Windows_Win32_Security_Authentication_Identity_Provider"
-deps = []
+deps = ["Windows_Win32_Security_Authentication_Identity"]
 
 [features.Windows_Win32_Security_Authentication_WebAuthn]
 cfg = "Windows_Win32_Security_Authentication_WebAuthn"
-deps = ["WEBAUTHN"]
+deps = ["WEBAUTHN", "Windows_Win32_Security_Authentication"]
 
 [features.Windows_Win32_Security_Authorization]
 cfg = "Windows_Win32_Security_Authorization"
-deps = ["ADVAPI32", "AUTHZ"]
+deps = ["ADVAPI32", "AUTHZ", "Windows_Win32_Security"]
 
 [features.Windows_Win32_Security_Authorization_UI]
 cfg = "Windows_Win32_Security_Authorization_UI"
-deps = ["ACLUI"]
+deps = ["ACLUI", "Windows_Win32_Security_Authorization"]
 
 [features.Windows_Win32_Security_ConfigurationSnapin]
 cfg = "Windows_Win32_Security_ConfigurationSnapin"
-deps = []
+deps = ["Windows_Win32_Security"]
 
 [features.Windows_Win32_Security_Credentials]
 cfg = "Windows_Win32_Security_Credentials"
-deps = ["ADVAPI32", "CREDUI", "KEYCREDMGR", "SCARDDLG", "WINSCARD"]
+deps = ["ADVAPI32", "CREDUI", "KEYCREDMGR", "SCARDDLG", "WINSCARD", "Windows_Win32_Security"]
 
 [features.Windows_Win32_Security_Cryptography]
 cfg = "Windows_Win32_Security_Cryptography"
-deps = ["ADVAPI32", "BCRYPT", "BCRYPTPRIMITIVES", "CRYPT32", "CRYPTNET", "CRYPTXML", "INFOCARDAPI", "MSSIGN32", "NCRYPT", "WINTRUST"]
+deps = ["ADVAPI32", "BCRYPT", "BCRYPTPRIMITIVES", "CRYPT32", "CRYPTNET", "CRYPTXML", "INFOCARDAPI", "MSSIGN32", "NCRYPT", "WINTRUST", "Windows_Win32_Security"]
 
 [features.Windows_Win32_Security_Cryptography_Catalog]
 cfg = "Windows_Win32_Security_Cryptography_Catalog"
-deps = ["WINTRUST"]
+deps = ["WINTRUST", "Windows_Win32_Security_Cryptography"]
 
 [features.Windows_Win32_Security_Cryptography_Certificates]
 cfg = "Windows_Win32_Security_Cryptography_Certificates"
-deps = ["CERTADM", "CERTPOLENG"]
+deps = ["CERTADM", "CERTPOLENG", "Windows_Win32_Security_Cryptography"]
 
 [features.Windows_Win32_Security_Cryptography_Sip]
 cfg = "Windows_Win32_Security_Cryptography_Sip"
-deps = ["CRYPT32", "WINTRUST"]
+deps = ["CRYPT32", "WINTRUST", "Windows_Win32_Security_Cryptography"]
 
 [features.Windows_Win32_Security_Cryptography_UI]
 cfg = "Windows_Win32_Security_Cryptography_UI"
-deps = ["CRYPTUI"]
+deps = ["CRYPTUI", "Windows_Win32_Security_Cryptography"]
 
 [features.Windows_Win32_Security_DiagnosticDataQuery]
 cfg = "Windows_Win32_Security_DiagnosticDataQuery"
-deps = ["DIAGNOSTICDATAQUERY"]
+deps = ["DIAGNOSTICDATAQUERY", "Windows_Win32_Security"]
 
 [features.Windows_Win32_Security_DirectoryServices]
 cfg = "Windows_Win32_Security_DirectoryServices"
-deps = ["DSSEC"]
+deps = ["DSSEC", "Windows_Win32_Security"]
 
 [features.Windows_Win32_Security_EnterpriseData]
 cfg = "Windows_Win32_Security_EnterpriseData"
-deps = ["EFSWRT", "SRPAPI"]
+deps = ["EFSWRT", "SRPAPI", "Windows_Win32_Security"]
 
 [features.Windows_Win32_Security_ExtensibleAuthenticationProtocol]
 cfg = "Windows_Win32_Security_ExtensibleAuthenticationProtocol"
-deps = ["EAPPCFG", "EAPPPRXY"]
+deps = ["EAPPCFG", "EAPPPRXY", "Windows_Win32_Security"]
 
 [features.Windows_Win32_Security_Isolation]
 cfg = "Windows_Win32_Security_Isolation"
-deps = ["API_MS_WIN_SECURITY_ISOLATEDCONTAINER_L1_1_0", "API_MS_WIN_SECURITY_ISOLATEDCONTAINER_L1_1_1", "ISOLATEDWINDOWSENVIRONMENTUTILS", "KERNEL32", "USERENV"]
+deps = ["API_MS_WIN_SECURITY_ISOLATEDCONTAINER_L1_1_0", "API_MS_WIN_SECURITY_ISOLATEDCONTAINER_L1_1_1", "ISOLATEDWINDOWSENVIRONMENTUTILS", "KERNEL32", "USERENV", "Windows_Win32_Security"]
 
 [features.Windows_Win32_Security_LicenseProtection]
 cfg = "Windows_Win32_Security_LicenseProtection"
-deps = ["LICENSEPROTECTION"]
+deps = ["LICENSEPROTECTION", "Windows_Win32_Security"]
 
 [features.Windows_Win32_Security_NetworkAccessProtection]
 cfg = "Windows_Win32_Security_NetworkAccessProtection"
-deps = []
+deps = ["Windows_Win32_Security"]
 
 [features.Windows_Win32_Security_Tpm]
 cfg = "Windows_Win32_Security_Tpm"
-deps = []
+deps = ["Windows_Win32_Security"]
 
 [features.Windows_Win32_Security_WinTrust]
 cfg = "Windows_Win32_Security_WinTrust"
-deps = ["WINTRUST"]
+deps = ["WINTRUST", "Windows_Win32_Security"]
 
 [features.Windows_Win32_Security_WinWlx]
 cfg = "Windows_Win32_Security_WinWlx"
-deps = []
+deps = ["Windows_Win32_Security"]
+
+[features.Windows_Win32_Storage]
+cfg = "Windows_Win32_Storage"
+deps = ["Windows_Win32"]
 
 [features.Windows_Win32_Storage_Cabinets]
 cfg = "Windows_Win32_Storage_Cabinets"
-deps = ["CABINET"]
+deps = ["CABINET", "Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_CloudFilters]
 cfg = "Windows_Win32_Storage_CloudFilters"
-deps = ["CLDAPI"]
+deps = ["CLDAPI", "Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_Compression]
 cfg = "Windows_Win32_Storage_Compression"
-deps = ["CABINET"]
+deps = ["CABINET", "Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_DataDeduplication]
 cfg = "Windows_Win32_Storage_DataDeduplication"
-deps = []
+deps = ["Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_DistributedFileSystem]
 cfg = "Windows_Win32_Storage_DistributedFileSystem"
-deps = ["NETAPI32"]
+deps = ["NETAPI32", "Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_EnhancedStorage]
 cfg = "Windows_Win32_Storage_EnhancedStorage"
-deps = []
+deps = ["Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_FileHistory]
 cfg = "Windows_Win32_Storage_FileHistory"
-deps = ["FHSVCCTL"]
+deps = ["FHSVCCTL", "Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_FileServerResourceManager]
 cfg = "Windows_Win32_Storage_FileServerResourceManager"
-deps = []
+deps = ["Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_FileSystem]
 cfg = "Windows_Win32_Storage_FileSystem"
-deps = ["ADVAPI32", "API_MS_WIN_CORE_FILE_FROMAPP_L1_1_0", "API_MS_WIN_CORE_IORING_L1_1_0", "BINDFLTAPI", "CLFSW32", "KERNEL32", "KTMW32", "NETAPI32", "TXFW32", "VERSION", "WOFUTIL"]
+deps = ["ADVAPI32", "API_MS_WIN_CORE_FILE_FROMAPP_L1_1_0", "API_MS_WIN_CORE_IORING_L1_1_0", "BINDFLTAPI", "CLFSW32", "KERNEL32", "KTMW32", "NETAPI32", "TXFW32", "VERSION", "WOFUTIL", "Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_Imapi]
 cfg = "Windows_Win32_Storage_Imapi"
-deps = ["MAPI32"]
+deps = ["MAPI32", "Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_IndexServer]
 cfg = "Windows_Win32_Storage_IndexServer"
-deps = ["QUERY"]
+deps = ["QUERY", "Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_InstallableFileSystems]
 cfg = "Windows_Win32_Storage_InstallableFileSystems"
-deps = ["FLTLIB"]
+deps = ["FLTLIB", "Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_IscsiDisc]
 cfg = "Windows_Win32_Storage_IscsiDisc"
-deps = ["ISCSIDSC"]
+deps = ["ISCSIDSC", "Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_Jet]
 cfg = "Windows_Win32_Storage_Jet"
-deps = ["ESENT"]
+deps = ["ESENT", "Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_Nvme]
 cfg = "Windows_Win32_Storage_Nvme"
-deps = []
+deps = ["Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_OfflineFiles]
 cfg = "Windows_Win32_Storage_OfflineFiles"
-deps = ["CSCAPI"]
+deps = ["CSCAPI", "Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_OperationRecorder]
 cfg = "Windows_Win32_Storage_OperationRecorder"
-deps = ["ADVAPI32"]
+deps = ["ADVAPI32", "Windows_Win32_Storage"]
+
+[features.Windows_Win32_Storage_Packaging]
+cfg = "Windows_Win32_Storage_Packaging"
+deps = ["Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_Packaging_Appx]
 cfg = "Windows_Win32_Storage_Packaging_Appx"
-deps = ["API_MS_WIN_APPMODEL_RUNTIME_L1_1_1", "API_MS_WIN_APPMODEL_RUNTIME_L1_1_3", "API_MS_WIN_APPMODEL_RUNTIME_L1_1_6", "API_MS_WIN_APPMODEL_RUNTIME_L1_1_7", "KERNEL32", "KERNELBASE"]
+deps = ["API_MS_WIN_APPMODEL_RUNTIME_L1_1_1", "API_MS_WIN_APPMODEL_RUNTIME_L1_1_3", "API_MS_WIN_APPMODEL_RUNTIME_L1_1_6", "API_MS_WIN_APPMODEL_RUNTIME_L1_1_7", "KERNEL32", "KERNELBASE", "Windows_Win32_Storage_Packaging"]
 
 [features.Windows_Win32_Storage_Packaging_Opc]
 cfg = "Windows_Win32_Storage_Packaging_Opc"
-deps = []
+deps = ["Windows_Win32_Storage_Packaging"]
 
 [features.Windows_Win32_Storage_ProjectedFileSystem]
 cfg = "Windows_Win32_Storage_ProjectedFileSystem"
-deps = ["PROJECTEDFSLIB"]
+deps = ["PROJECTEDFSLIB", "Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_StructuredStorage]
 cfg = "Windows_Win32_Storage_StructuredStorage"
-deps = []
+deps = ["Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_Vhd]
 cfg = "Windows_Win32_Storage_Vhd"
-deps = ["VIRTDISK"]
+deps = ["VIRTDISK", "Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_VirtualDiskService]
 cfg = "Windows_Win32_Storage_VirtualDiskService"
-deps = []
+deps = ["Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_Vss]
 cfg = "Windows_Win32_Storage_Vss"
-deps = ["VSSAPI"]
+deps = ["VSSAPI", "Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_Xps]
 cfg = "Windows_Win32_Storage_Xps"
-deps = ["GDI32", "USER32", "WINSPOOL_DRV"]
+deps = ["GDI32", "USER32", "WINSPOOL_DRV", "Windows_Win32_Storage"]
 
 [features.Windows_Win32_Storage_Xps_Printing]
 cfg = "Windows_Win32_Storage_Xps_Printing"
-deps = ["XPSPRINT"]
+deps = ["Windows_Win32_Storage_Xps", "XPSPRINT"]
+
+[features.Windows_Win32_System]
+cfg = "Windows_Win32_System"
+deps = ["Windows_Win32"]
 
 [features.Windows_Win32_System_AddressBook]
 cfg = "Windows_Win32_System_AddressBook"
-deps = ["MAPI32", "RTM"]
+deps = ["MAPI32", "RTM", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Antimalware]
 cfg = "Windows_Win32_System_Antimalware"
-deps = ["AMSI", "KERNEL32"]
+deps = ["AMSI", "KERNEL32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_ApplicationInstallationAndServicing]
 cfg = "Windows_Win32_System_ApplicationInstallationAndServicing"
-deps = ["KERNEL32", "MSDELTA", "MSI", "MSPATCHA", "MSPATCHC", "SFC"]
+deps = ["KERNEL32", "MSDELTA", "MSI", "MSPATCHA", "MSPATCHC", "SFC", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_ApplicationVerifier]
 cfg = "Windows_Win32_System_ApplicationVerifier"
-deps = ["VERIFIER"]
+deps = ["VERIFIER", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_AssessmentTool]
 cfg = "Windows_Win32_System_AssessmentTool"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_ClrHosting]
 cfg = "Windows_Win32_System_ClrHosting"
-deps = ["MSCOREE"]
+deps = ["MSCOREE", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Com]
 cfg = "Windows_Win32_System_Com"
-deps = ["OLE32", "OLEAUT32", "URLMON"]
+deps = ["OLE32", "OLEAUT32", "URLMON", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Com_CallObj]
 cfg = "Windows_Win32_System_Com_CallObj"
-deps = ["OLE32"]
+deps = ["OLE32", "Windows_Win32_System_Com"]
 
 [features.Windows_Win32_System_Com_ChannelCredentials]
 cfg = "Windows_Win32_System_Com_ChannelCredentials"
-deps = []
+deps = ["Windows_Win32_System_Com"]
 
 [features.Windows_Win32_System_Com_Events]
 cfg = "Windows_Win32_System_Com_Events"
-deps = []
+deps = ["Windows_Win32_System_Com"]
 
 [features.Windows_Win32_System_Com_Marshal]
 cfg = "Windows_Win32_System_Com_Marshal"
-deps = ["OLE32", "OLEAUT32"]
+deps = ["OLE32", "OLEAUT32", "Windows_Win32_System_Com"]
 
 [features.Windows_Win32_System_Com_StructuredStorage]
 cfg = "Windows_Win32_System_Com_StructuredStorage"
-deps = ["DFLAYOUT", "OLE32", "PROPSYS"]
+deps = ["DFLAYOUT", "OLE32", "PROPSYS", "Windows_Win32_System_Com"]
 
 [features.Windows_Win32_System_Com_UI]
 cfg = "Windows_Win32_System_Com_UI"
-deps = []
+deps = ["Windows_Win32_System_Com"]
 
 [features.Windows_Win32_System_Com_Urlmon]
 cfg = "Windows_Win32_System_Com_Urlmon"
-deps = ["URLMON"]
+deps = ["URLMON", "Windows_Win32_System_Com"]
 
 [features.Windows_Win32_System_ComponentServices]
 cfg = "Windows_Win32_System_ComponentServices"
-deps = ["COMSVCS", "MTXDM", "OLE32"]
+deps = ["COMSVCS", "MTXDM", "OLE32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Console]
 cfg = "Windows_Win32_System_Console"
-deps = ["KERNEL32", "USER32"]
+deps = ["KERNEL32", "USER32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Contacts]
 cfg = "Windows_Win32_System_Contacts"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_CorrelationVector]
 cfg = "Windows_Win32_System_CorrelationVector"
-deps = ["NTDLL"]
+deps = ["NTDLL", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_DataExchange]
 cfg = "Windows_Win32_System_DataExchange"
-deps = ["GDI32", "KERNEL32", "USER32"]
+deps = ["GDI32", "KERNEL32", "USER32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_DeploymentServices]
 cfg = "Windows_Win32_System_DeploymentServices"
-deps = ["WDSBP", "WDSCLIENTAPI", "WDSMC", "WDSPXE", "WDSTPTC"]
+deps = ["WDSBP", "WDSCLIENTAPI", "WDSMC", "WDSPXE", "WDSTPTC", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_DesktopSharing]
 cfg = "Windows_Win32_System_DesktopSharing"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_DeveloperLicensing]
 cfg = "Windows_Win32_System_DeveloperLicensing"
-deps = ["WSCLIENT"]
+deps = ["WSCLIENT", "Windows_Win32_System"]
+
+[features.Windows_Win32_System_Diagnostics]
+cfg = "Windows_Win32_System_Diagnostics"
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_Diagnostics_Ceip]
 cfg = "Windows_Win32_System_Diagnostics_Ceip"
-deps = ["KERNEL32"]
+deps = ["KERNEL32", "Windows_Win32_System_Diagnostics"]
 
 [features.Windows_Win32_System_Diagnostics_ClrProfiling]
 cfg = "Windows_Win32_System_Diagnostics_ClrProfiling"
-deps = []
+deps = ["Windows_Win32_System_Diagnostics"]
 
 [features.Windows_Win32_System_Diagnostics_Debug]
 cfg = "Windows_Win32_System_Diagnostics_Debug"
-deps = ["ADVAPI32", "API_MS_WIN_CORE_ERRORHANDLING_L1_1_3", "API_MS_WIN_CORE_UTIL_L1_1_1", "DBGHELP", "IMAGEHLP", "KERNEL32", "NTDLL", "USER32"]
+deps = ["ADVAPI32", "API_MS_WIN_CORE_ERRORHANDLING_L1_1_3", "API_MS_WIN_CORE_UTIL_L1_1_1", "DBGHELP", "IMAGEHLP", "KERNEL32", "NTDLL", "USER32", "Windows_Win32_System_Diagnostics"]
 
 [features.Windows_Win32_System_Diagnostics_Debug_ActiveScript]
 cfg = "Windows_Win32_System_Diagnostics_Debug_ActiveScript"
-deps = []
+deps = ["Windows_Win32_System_Diagnostics_Debug"]
 
 [features.Windows_Win32_System_Diagnostics_Debug_Extensions]
 cfg = "Windows_Win32_System_Diagnostics_Debug_Extensions"
-deps = ["DBGENG", "DBGMODEL"]
+deps = ["DBGENG", "DBGMODEL", "Windows_Win32_System_Diagnostics_Debug"]
 
 [features.Windows_Win32_System_Diagnostics_Debug_WebApp]
 cfg = "Windows_Win32_System_Diagnostics_Debug_WebApp"
-deps = []
+deps = ["Windows_Win32_System_Diagnostics_Debug"]
 
 [features.Windows_Win32_System_Diagnostics_Etw]
 cfg = "Windows_Win32_System_Diagnostics_Etw"
-deps = ["ADVAPI32", "TDH"]
+deps = ["ADVAPI32", "TDH", "Windows_Win32_System_Diagnostics"]
 
 [features.Windows_Win32_System_Diagnostics_ProcessSnapshotting]
 cfg = "Windows_Win32_System_Diagnostics_ProcessSnapshotting"
-deps = ["KERNEL32"]
+deps = ["KERNEL32", "Windows_Win32_System_Diagnostics"]
 
 [features.Windows_Win32_System_Diagnostics_ToolHelp]
 cfg = "Windows_Win32_System_Diagnostics_ToolHelp"
-deps = ["KERNEL32"]
+deps = ["KERNEL32", "Windows_Win32_System_Diagnostics"]
 
 [features.Windows_Win32_System_Diagnostics_TraceLogging]
 cfg = "Windows_Win32_System_Diagnostics_TraceLogging"
-deps = []
+deps = ["Windows_Win32_System_Diagnostics"]
 
 [features.Windows_Win32_System_DistributedTransactionCoordinator]
 cfg = "Windows_Win32_System_DistributedTransactionCoordinator"
-deps = ["XOLEHLP"]
+deps = ["Windows_Win32_System", "XOLEHLP"]
 
 [features.Windows_Win32_System_Environment]
 cfg = "Windows_Win32_System_Environment"
-deps = ["API_MS_WIN_CORE_ENCLAVE_L1_1_1", "KERNEL32", "USERENV", "VERTDLL"]
+deps = ["API_MS_WIN_CORE_ENCLAVE_L1_1_1", "KERNEL32", "USERENV", "VERTDLL", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_ErrorReporting]
 cfg = "Windows_Win32_System_ErrorReporting"
-deps = ["FAULTREP", "KERNEL32", "WER"]
+deps = ["FAULTREP", "KERNEL32", "WER", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_EventCollector]
 cfg = "Windows_Win32_System_EventCollector"
-deps = ["WECAPI"]
+deps = ["WECAPI", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_EventLog]
 cfg = "Windows_Win32_System_EventLog"
-deps = ["ADVAPI32", "WEVTAPI"]
+deps = ["ADVAPI32", "WEVTAPI", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_EventNotificationService]
 cfg = "Windows_Win32_System_EventNotificationService"
-deps = ["SENSAPI"]
+deps = ["SENSAPI", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_GroupPolicy]
 cfg = "Windows_Win32_System_GroupPolicy"
-deps = ["ADVAPI32", "GPEDIT", "USERENV"]
+deps = ["ADVAPI32", "GPEDIT", "USERENV", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_HostCompute]
 cfg = "Windows_Win32_System_HostCompute"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_HostComputeNetwork]
 cfg = "Windows_Win32_System_HostComputeNetwork"
-deps = ["COMPUTENETWORK"]
+deps = ["COMPUTENETWORK", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_HostComputeSystem]
 cfg = "Windows_Win32_System_HostComputeSystem"
-deps = ["COMPUTECORE", "COMPUTESTORAGE"]
+deps = ["COMPUTECORE", "COMPUTESTORAGE", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Hypervisor]
 cfg = "Windows_Win32_System_Hypervisor"
-deps = ["VMDEVICEHOST", "VMSAVEDSTATEDUMPPROVIDER", "WINHVEMULATION", "WINHVPLATFORM"]
+deps = ["VMDEVICEHOST", "VMSAVEDSTATEDUMPPROVIDER", "WINHVEMULATION", "WINHVPLATFORM", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_IO]
 cfg = "Windows_Win32_System_IO"
-deps = ["KERNEL32"]
+deps = ["KERNEL32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Iis]
 cfg = "Windows_Win32_System_Iis"
-deps = ["RPCPROXY"]
+deps = ["RPCPROXY", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Ioctl]
 cfg = "Windows_Win32_System_Ioctl"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_JobObjects]
 cfg = "Windows_Win32_System_JobObjects"
-deps = ["KERNEL32", "USER32"]
+deps = ["KERNEL32", "USER32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Js]
 cfg = "Windows_Win32_System_Js"
-deps = ["CHAKRA"]
+deps = ["CHAKRA", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Kernel]
 cfg = "Windows_Win32_System_Kernel"
-deps = ["NTDLL"]
+deps = ["NTDLL", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_LibraryLoader]
 cfg = "Windows_Win32_System_LibraryLoader"
-deps = ["API_MS_WIN_CORE_LIBRARYLOADER_L2_1_0", "KERNEL32"]
+deps = ["API_MS_WIN_CORE_LIBRARYLOADER_L2_1_0", "KERNEL32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Mailslots]
 cfg = "Windows_Win32_System_Mailslots"
-deps = ["KERNEL32"]
+deps = ["KERNEL32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Mapi]
 cfg = "Windows_Win32_System_Mapi"
-deps = ["MAPI32"]
+deps = ["MAPI32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Memory]
 cfg = "Windows_Win32_System_Memory"
-deps = ["API_MS_WIN_CORE_MEMORY_L1_1_3", "API_MS_WIN_CORE_MEMORY_L1_1_4", "API_MS_WIN_CORE_MEMORY_L1_1_5", "API_MS_WIN_CORE_MEMORY_L1_1_6", "API_MS_WIN_CORE_MEMORY_L1_1_7", "API_MS_WIN_CORE_MEMORY_L1_1_8", "API_MS_WIN_CORE_MEMORY_L1_1_9", "KERNEL32", "NTDLL"]
+deps = ["API_MS_WIN_CORE_MEMORY_L1_1_3", "API_MS_WIN_CORE_MEMORY_L1_1_4", "API_MS_WIN_CORE_MEMORY_L1_1_5", "API_MS_WIN_CORE_MEMORY_L1_1_6", "API_MS_WIN_CORE_MEMORY_L1_1_7", "API_MS_WIN_CORE_MEMORY_L1_1_8", "API_MS_WIN_CORE_MEMORY_L1_1_9", "KERNEL32", "NTDLL", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Memory_NonVolatile]
 cfg = "Windows_Win32_System_Memory_NonVolatile"
-deps = ["NTDLL"]
+deps = ["NTDLL", "Windows_Win32_System_Memory"]
 
 [features.Windows_Win32_System_MessageQueuing]
 cfg = "Windows_Win32_System_MessageQueuing"
-deps = ["MQRT"]
+deps = ["MQRT", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_MixedReality]
 cfg = "Windows_Win32_System_MixedReality"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_Mmc]
 cfg = "Windows_Win32_System_Mmc"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_Ole]
 cfg = "Windows_Win32_System_Ole"
-deps = ["API_MS_WIN_CORE_MARSHAL_L1_1_0", "OLE32", "OLEAUT32", "OLEDLG"]
+deps = ["API_MS_WIN_CORE_MARSHAL_L1_1_0", "OLE32", "OLEAUT32", "OLEDLG", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_ParentalControls]
 cfg = "Windows_Win32_System_ParentalControls"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_PasswordManagement]
 cfg = "Windows_Win32_System_PasswordManagement"
-deps = ["ADVAPI32"]
+deps = ["ADVAPI32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Performance]
 cfg = "Windows_Win32_System_Performance"
-deps = ["ADVAPI32", "KERNEL32", "LOADPERF", "PDH"]
+deps = ["ADVAPI32", "KERNEL32", "LOADPERF", "PDH", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Performance_HardwareCounterProfiling]
 cfg = "Windows_Win32_System_Performance_HardwareCounterProfiling"
-deps = ["KERNEL32"]
+deps = ["KERNEL32", "Windows_Win32_System_Performance"]
 
 [features.Windows_Win32_System_Pipes]
 cfg = "Windows_Win32_System_Pipes"
-deps = ["ADVAPI32", "KERNEL32"]
+deps = ["ADVAPI32", "KERNEL32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Power]
 cfg = "Windows_Win32_System_Power"
-deps = ["KERNEL32", "POWRPROF", "USER32"]
+deps = ["KERNEL32", "POWRPROF", "USER32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_ProcessStatus]
 cfg = "Windows_Win32_System_ProcessStatus"
-deps = ["KERNEL32", "PSAPI"]
+deps = ["KERNEL32", "PSAPI", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_RealTimeCommunications]
 cfg = "Windows_Win32_System_RealTimeCommunications"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_Recovery]
 cfg = "Windows_Win32_System_Recovery"
-deps = ["KERNEL32"]
+deps = ["KERNEL32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Registry]
 cfg = "Windows_Win32_System_Registry"
-deps = ["ADVAPI32", "API_MS_WIN_CORE_STATE_HELPERS_L1_1_0"]
+deps = ["ADVAPI32", "API_MS_WIN_CORE_STATE_HELPERS_L1_1_0", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_RemoteAssistance]
 cfg = "Windows_Win32_System_RemoteAssistance"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_RemoteDesktop]
 cfg = "Windows_Win32_System_RemoteDesktop"
-deps = ["KERNEL32", "WTSAPI32"]
+deps = ["KERNEL32", "WTSAPI32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_RemoteManagement]
 cfg = "Windows_Win32_System_RemoteManagement"
-deps = ["WSMSVC"]
+deps = ["WSMSVC", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_RestartManager]
 cfg = "Windows_Win32_System_RestartManager"
-deps = ["RSTRTMGR"]
+deps = ["RSTRTMGR", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Restore]
 cfg = "Windows_Win32_System_Restore"
-deps = ["SFC", "SRCLIENT"]
+deps = ["SFC", "SRCLIENT", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Rpc]
 cfg = "Windows_Win32_System_Rpc"
-deps = ["RPCNS4", "RPCRT4"]
+deps = ["RPCNS4", "RPCRT4", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Search]
 cfg = "Windows_Win32_System_Search"
-deps = ["ODBC32", "ODBCBCP"]
+deps = ["ODBC32", "ODBCBCP", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Search_Common]
 cfg = "Windows_Win32_System_Search_Common"
-deps = []
+deps = ["Windows_Win32_System_Search"]
 
 [features.Windows_Win32_System_SecurityCenter]
 cfg = "Windows_Win32_System_SecurityCenter"
-deps = ["WSCAPI"]
+deps = ["WSCAPI", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_ServerBackup]
 cfg = "Windows_Win32_System_ServerBackup"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_Services]
 cfg = "Windows_Win32_System_Services"
-deps = ["ADVAPI32", "API_MS_WIN_SERVICE_CORE_L1_1_3", "API_MS_WIN_SERVICE_CORE_L1_1_4", "API_MS_WIN_SERVICE_CORE_L1_1_5", "SECHOST"]
+deps = ["ADVAPI32", "API_MS_WIN_SERVICE_CORE_L1_1_3", "API_MS_WIN_SERVICE_CORE_L1_1_4", "API_MS_WIN_SERVICE_CORE_L1_1_5", "SECHOST", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_SettingsManagementInfrastructure]
 cfg = "Windows_Win32_System_SettingsManagementInfrastructure"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_SetupAndMigration]
 cfg = "Windows_Win32_System_SetupAndMigration"
-deps = ["KERNEL32"]
+deps = ["KERNEL32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Shutdown]
 cfg = "Windows_Win32_System_Shutdown"
-deps = ["ADVAPI32", "USER32"]
+deps = ["ADVAPI32", "USER32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_SideShow]
 cfg = "Windows_Win32_System_SideShow"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_StationsAndDesktops]
 cfg = "Windows_Win32_System_StationsAndDesktops"
-deps = ["USER32"]
+deps = ["USER32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_SubsystemForLinux]
 cfg = "Windows_Win32_System_SubsystemForLinux"
-deps = ["API_MS_WIN_WSL_API_L1_1_0"]
+deps = ["API_MS_WIN_WSL_API_L1_1_0", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_SystemInformation]
 cfg = "Windows_Win32_System_SystemInformation"
-deps = ["API_MS_WIN_CORE_SYSINFO_L1_2_0", "API_MS_WIN_CORE_SYSINFO_L1_2_3", "API_MS_WIN_CORE_SYSINFO_L1_2_4", "API_MS_WIN_CORE_SYSINFO_L1_2_6", "API_MS_WIN_CORE_WOW64_L1_1_1", "KERNEL32", "NTDLL", "NTDLLK"]
+deps = ["API_MS_WIN_CORE_SYSINFO_L1_2_0", "API_MS_WIN_CORE_SYSINFO_L1_2_3", "API_MS_WIN_CORE_SYSINFO_L1_2_4", "API_MS_WIN_CORE_SYSINFO_L1_2_6", "API_MS_WIN_CORE_WOW64_L1_1_1", "KERNEL32", "NTDLL", "NTDLLK", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_SystemServices]
 cfg = "Windows_Win32_System_SystemServices"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_TaskScheduler]
 cfg = "Windows_Win32_System_TaskScheduler"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_Threading]
 cfg = "Windows_Win32_System_Threading"
-deps = ["ADVAPI32", "API_MS_WIN_CORE_SYNCH_L1_2_0", "API_MS_WIN_CORE_WOW64_L1_1_1", "AVRT", "FORCEINLINE", "KERNEL32", "OLEACC", "RTWORKQ", "USER32"]
+deps = ["ADVAPI32", "API_MS_WIN_CORE_SYNCH_L1_2_0", "API_MS_WIN_CORE_WOW64_L1_1_1", "AVRT", "FORCEINLINE", "KERNEL32", "OLEACC", "RTWORKQ", "USER32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Time]
 cfg = "Windows_Win32_System_Time"
-deps = ["ADVAPI32", "KERNEL32"]
+deps = ["ADVAPI32", "KERNEL32", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_TpmBaseServices]
 cfg = "Windows_Win32_System_TpmBaseServices"
-deps = ["TBS"]
+deps = ["TBS", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_TransactionServer]
 cfg = "Windows_Win32_System_TransactionServer"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_UpdateAgent]
 cfg = "Windows_Win32_System_UpdateAgent"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_UpdateAssessment]
 cfg = "Windows_Win32_System_UpdateAssessment"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_UserAccessLogging]
 cfg = "Windows_Win32_System_UserAccessLogging"
-deps = ["UALAPI"]
+deps = ["UALAPI", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_Variant]
 cfg = "Windows_Win32_System_Variant"
-deps = ["OLEAUT32", "PROPSYS"]
+deps = ["OLEAUT32", "PROPSYS", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_VirtualDosMachines]
 cfg = "Windows_Win32_System_VirtualDosMachines"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_WinRT]
 cfg = "Windows_Win32_System_WinRT"
-deps = ["API_MS_WIN_CORE_WINRT_ERROR_L1_1_0", "API_MS_WIN_CORE_WINRT_ERROR_L1_1_1", "API_MS_WIN_CORE_WINRT_L1_1_0", "API_MS_WIN_CORE_WINRT_REGISTRATION_L1_1_0", "API_MS_WIN_CORE_WINRT_ROBUFFER_L1_1_0", "API_MS_WIN_CORE_WINRT_STRING_L1_1_0", "API_MS_WIN_CORE_WINRT_STRING_L1_1_1", "API_MS_WIN_SHCORE_STREAM_WINRT_L1_1_0", "COREMESSAGING", "OLE32", "WINDOWS_UI"]
+deps = ["API_MS_WIN_CORE_WINRT_ERROR_L1_1_0", "API_MS_WIN_CORE_WINRT_ERROR_L1_1_1", "API_MS_WIN_CORE_WINRT_L1_1_0", "API_MS_WIN_CORE_WINRT_REGISTRATION_L1_1_0", "API_MS_WIN_CORE_WINRT_ROBUFFER_L1_1_0", "API_MS_WIN_CORE_WINRT_STRING_L1_1_0", "API_MS_WIN_CORE_WINRT_STRING_L1_1_1", "API_MS_WIN_SHCORE_STREAM_WINRT_L1_1_0", "COREMESSAGING", "OLE32", "WINDOWS_UI", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_WinRT_AllJoyn]
 cfg = "Windows_Win32_System_WinRT_AllJoyn"
-deps = []
+deps = ["Windows_Win32_System_WinRT"]
 
 [features.Windows_Win32_System_WinRT_Composition]
 cfg = "Windows_Win32_System_WinRT_Composition"
-deps = []
+deps = ["Windows_Win32_System_WinRT"]
 
 [features.Windows_Win32_System_WinRT_CoreInputView]
 cfg = "Windows_Win32_System_WinRT_CoreInputView"
-deps = []
+deps = ["Windows_Win32_System_WinRT"]
 
 [features.Windows_Win32_System_WinRT_Direct3D11]
 cfg = "Windows_Win32_System_WinRT_Direct3D11"
-deps = ["D3D11"]
+deps = ["D3D11", "Windows_Win32_System_WinRT"]
 
 [features.Windows_Win32_System_WinRT_Display]
 cfg = "Windows_Win32_System_WinRT_Display"
-deps = []
+deps = ["Windows_Win32_System_WinRT"]
+
+[features.Windows_Win32_System_WinRT_Graphics]
+cfg = "Windows_Win32_System_WinRT_Graphics"
+deps = ["Windows_Win32_System_WinRT"]
 
 [features.Windows_Win32_System_WinRT_Graphics_Capture]
 cfg = "Windows_Win32_System_WinRT_Graphics_Capture"
-deps = []
+deps = ["Windows_Win32_System_WinRT_Graphics"]
 
 [features.Windows_Win32_System_WinRT_Graphics_Direct2D]
 cfg = "Windows_Win32_System_WinRT_Graphics_Direct2D"
-deps = []
+deps = ["Windows_Win32_System_WinRT_Graphics"]
 
 [features.Windows_Win32_System_WinRT_Graphics_Imaging]
 cfg = "Windows_Win32_System_WinRT_Graphics_Imaging"
-deps = []
+deps = ["Windows_Win32_System_WinRT_Graphics"]
 
 [features.Windows_Win32_System_WinRT_Holographic]
 cfg = "Windows_Win32_System_WinRT_Holographic"
-deps = []
+deps = ["Windows_Win32_System_WinRT"]
 
 [features.Windows_Win32_System_WinRT_Isolation]
 cfg = "Windows_Win32_System_WinRT_Isolation"
-deps = []
+deps = ["Windows_Win32_System_WinRT"]
 
 [features.Windows_Win32_System_WinRT_ML]
 cfg = "Windows_Win32_System_WinRT_ML"
-deps = []
+deps = ["Windows_Win32_System_WinRT"]
 
 [features.Windows_Win32_System_WinRT_Media]
 cfg = "Windows_Win32_System_WinRT_Media"
-deps = []
+deps = ["Windows_Win32_System_WinRT"]
 
 [features.Windows_Win32_System_WinRT_Metadata]
 cfg = "Windows_Win32_System_WinRT_Metadata"
-deps = ["API_MS_WIN_CORE_WINRT_ROPARAMETERIZEDIID_L1_1_0", "API_MS_WIN_RO_TYPERESOLUTION_L1_1_0", "API_MS_WIN_RO_TYPERESOLUTION_L1_1_1", "ROMETADATA"]
+deps = ["API_MS_WIN_CORE_WINRT_ROPARAMETERIZEDIID_L1_1_0", "API_MS_WIN_RO_TYPERESOLUTION_L1_1_0", "API_MS_WIN_RO_TYPERESOLUTION_L1_1_1", "ROMETADATA", "Windows_Win32_System_WinRT"]
 
 [features.Windows_Win32_System_WinRT_Pdf]
 cfg = "Windows_Win32_System_WinRT_Pdf"
-deps = ["WINDOWS_DATA_PDF"]
+deps = ["WINDOWS_DATA_PDF", "Windows_Win32_System_WinRT"]
 
 [features.Windows_Win32_System_WinRT_Printing]
 cfg = "Windows_Win32_System_WinRT_Printing"
-deps = []
+deps = ["Windows_Win32_System_WinRT"]
 
 [features.Windows_Win32_System_WinRT_Shell]
 cfg = "Windows_Win32_System_WinRT_Shell"
-deps = []
+deps = ["Windows_Win32_System_WinRT"]
 
 [features.Windows_Win32_System_WinRT_Storage]
 cfg = "Windows_Win32_System_WinRT_Storage"
-deps = []
+deps = ["Windows_Win32_System_WinRT"]
 
 [features.Windows_Win32_System_WinRT_Xaml]
 cfg = "Windows_Win32_System_WinRT_Xaml"
-deps = []
+deps = ["Windows_Win32_System_WinRT"]
 
 [features.Windows_Win32_System_WindowsProgramming]
 cfg = "Windows_Win32_System_WindowsProgramming"
-deps = ["ADVAPI32", "ADVPACK", "API_MS_WIN_CORE_APIQUERY_L2_1_0", "API_MS_WIN_CORE_APIQUERY_L2_1_1", "API_MS_WIN_CORE_BACKGROUNDTASK_L1_1_0", "API_MS_WIN_CORE_FEATURESTAGING_L1_1_0", "API_MS_WIN_CORE_FEATURESTAGING_L1_1_1", "API_MS_WIN_CORE_REALTIME_L1_1_1", "API_MS_WIN_CORE_REALTIME_L1_1_2", "API_MS_WIN_DX_D3DKMT_L1_1_0", "APPHELP", "DCIMAN32", "KERNEL32", "NTDLL", "USER32", "WLDP"]
+deps = ["ADVAPI32", "ADVPACK", "API_MS_WIN_CORE_APIQUERY_L2_1_0", "API_MS_WIN_CORE_APIQUERY_L2_1_1", "API_MS_WIN_CORE_BACKGROUNDTASK_L1_1_0", "API_MS_WIN_CORE_FEATURESTAGING_L1_1_0", "API_MS_WIN_CORE_FEATURESTAGING_L1_1_1", "API_MS_WIN_CORE_REALTIME_L1_1_1", "API_MS_WIN_CORE_REALTIME_L1_1_2", "API_MS_WIN_DX_D3DKMT_L1_1_0", "APPHELP", "DCIMAN32", "KERNEL32", "NTDLL", "USER32", "WLDP", "Windows_Win32_System"]
 
 [features.Windows_Win32_System_WindowsSync]
 cfg = "Windows_Win32_System_WindowsSync"
-deps = []
+deps = ["Windows_Win32_System"]
 
 [features.Windows_Win32_System_Wmi]
 cfg = "Windows_Win32_System_Wmi"
-deps = ["MI"]
+deps = ["MI", "Windows_Win32_System"]
+
+[features.Windows_Win32_UI]
+cfg = "Windows_Win32_UI"
+deps = ["Windows_Win32"]
 
 [features.Windows_Win32_UI_Accessibility]
 cfg = "Windows_Win32_UI_Accessibility"
-deps = ["OLEACC", "UIAUTOMATIONCORE", "USER32"]
+deps = ["OLEACC", "UIAUTOMATIONCORE", "USER32", "Windows_Win32_UI"]
 
 [features.Windows_Win32_UI_Animation]
 cfg = "Windows_Win32_UI_Animation"
-deps = []
+deps = ["Windows_Win32_UI"]
 
 [features.Windows_Win32_UI_ColorSystem]
 cfg = "Windows_Win32_UI_ColorSystem"
-deps = ["GDI32", "ICM32", "ICMUI", "MSCMS"]
+deps = ["GDI32", "ICM32", "ICMUI", "MSCMS", "Windows_Win32_UI"]
 
 [features.Windows_Win32_UI_Controls]
 cfg = "Windows_Win32_UI_Controls"
-deps = ["COMCTL32", "USER32", "UXTHEME"]
+deps = ["COMCTL32", "USER32", "UXTHEME", "Windows_Win32_UI"]
 
 [features.Windows_Win32_UI_Controls_Dialogs]
 cfg = "Windows_Win32_UI_Controls_Dialogs"
-deps = ["COMDLG32"]
+deps = ["COMDLG32", "Windows_Win32_UI_Controls"]
 
 [features.Windows_Win32_UI_Controls_RichEdit]
 cfg = "Windows_Win32_UI_Controls_RichEdit"
-deps = []
+deps = ["Windows_Win32_UI_Controls"]
 
 [features.Windows_Win32_UI_HiDpi]
 cfg = "Windows_Win32_UI_HiDpi"
-deps = ["API_MS_WIN_SHCORE_SCALING_L1_1_1", "USER32", "UXTHEME"]
+deps = ["API_MS_WIN_SHCORE_SCALING_L1_1_1", "USER32", "UXTHEME", "Windows_Win32_UI"]
 
 [features.Windows_Win32_UI_Input]
 cfg = "Windows_Win32_UI_Input"
-deps = ["USER32"]
+deps = ["USER32", "Windows_Win32_UI"]
 
 [features.Windows_Win32_UI_Input_GameInput]
 cfg = "Windows_Win32_UI_Input_GameInput"
-deps = ["GAMEINPUT"]
+deps = ["GAMEINPUT", "Windows_Win32_UI_Input"]
 
 [features.Windows_Win32_UI_Input_Ime]
 cfg = "Windows_Win32_UI_Input_Ime"
-deps = ["IMM32"]
+deps = ["IMM32", "Windows_Win32_UI_Input"]
 
 [features.Windows_Win32_UI_Input_Ink]
 cfg = "Windows_Win32_UI_Input_Ink"
-deps = []
+deps = ["Windows_Win32_UI_Input"]
 
 [features.Windows_Win32_UI_Input_KeyboardAndMouse]
 cfg = "Windows_Win32_UI_Input_KeyboardAndMouse"
-deps = ["COMCTL32", "USER32"]
+deps = ["COMCTL32", "USER32", "Windows_Win32_UI_Input"]
 
 [features.Windows_Win32_UI_Input_Pointer]
 cfg = "Windows_Win32_UI_Input_Pointer"
-deps = ["USER32"]
+deps = ["USER32", "Windows_Win32_UI_Input"]
 
 [features.Windows_Win32_UI_Input_Radial]
 cfg = "Windows_Win32_UI_Input_Radial"
-deps = []
+deps = ["Windows_Win32_UI_Input"]
 
 [features.Windows_Win32_UI_Input_Touch]
 cfg = "Windows_Win32_UI_Input_Touch"
-deps = ["USER32"]
+deps = ["USER32", "Windows_Win32_UI_Input"]
 
 [features.Windows_Win32_UI_Input_XboxController]
 cfg = "Windows_Win32_UI_Input_XboxController"
-deps = ["XINPUT1_4"]
+deps = ["Windows_Win32_UI_Input", "XINPUT1_4"]
 
 [features.Windows_Win32_UI_InteractionContext]
 cfg = "Windows_Win32_UI_InteractionContext"
-deps = ["NINPUT"]
+deps = ["NINPUT", "Windows_Win32_UI"]
 
 [features.Windows_Win32_UI_LegacyWindowsEnvironmentFeatures]
 cfg = "Windows_Win32_UI_LegacyWindowsEnvironmentFeatures"
-deps = []
+deps = ["Windows_Win32_UI"]
 
 [features.Windows_Win32_UI_Magnification]
 cfg = "Windows_Win32_UI_Magnification"
-deps = ["MAGNIFICATION"]
+deps = ["MAGNIFICATION", "Windows_Win32_UI"]
 
 [features.Windows_Win32_UI_Notifications]
 cfg = "Windows_Win32_UI_Notifications"
-deps = []
+deps = ["Windows_Win32_UI"]
 
 [features.Windows_Win32_UI_Ribbon]
 cfg = "Windows_Win32_UI_Ribbon"
-deps = []
+deps = ["Windows_Win32_UI"]
 
 [features.Windows_Win32_UI_Shell]
 cfg = "Windows_Win32_UI_Shell"
-deps = ["API_MS_WIN_CORE_PATH_L1_1_0", "API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_0", "API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_1", "API_MS_WIN_SHCORE_SCALING_L1_1_0", "API_MS_WIN_SHCORE_SCALING_L1_1_1", "API_MS_WIN_SHCORE_SCALING_L1_1_2", "COMCTL32", "HLINK", "OLE32", "PROPSYS", "SHDOCVW", "SHELL32", "SHLWAPI", "USER32", "USERENV"]
+deps = ["API_MS_WIN_CORE_PATH_L1_1_0", "API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_0", "API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_1", "API_MS_WIN_SHCORE_SCALING_L1_1_0", "API_MS_WIN_SHCORE_SCALING_L1_1_1", "API_MS_WIN_SHCORE_SCALING_L1_1_2", "COMCTL32", "HLINK", "KERNEL32", "OLE32", "PROPSYS", "SHDOCVW", "SHELL32", "SHLWAPI", "USER32", "USERENV", "Windows_Win32_UI"]
 
 [features.Windows_Win32_UI_Shell_Common]
 cfg = "Windows_Win32_UI_Shell_Common"
-deps = []
+deps = ["Windows_Win32_UI_Shell"]
 
 [features.Windows_Win32_UI_Shell_PropertiesSystem]
 cfg = "Windows_Win32_UI_Shell_PropertiesSystem"
-deps = ["PROPSYS", "SHELL32"]
+deps = ["PROPSYS", "SHELL32", "Windows_Win32_UI_Shell"]
 
 [features.Windows_Win32_UI_TabletPC]
 cfg = "Windows_Win32_UI_TabletPC"
-deps = ["INKOBJCORE"]
+deps = ["INKOBJCORE", "Windows_Win32_UI"]
 
 [features.Windows_Win32_UI_TextServices]
 cfg = "Windows_Win32_UI_TextServices"
-deps = ["MSCTFMONITOR"]
+deps = ["MSCTFMONITOR", "Windows_Win32_UI"]
 
 [features.Windows_Win32_UI_WindowsAndMessaging]
 cfg = "Windows_Win32_UI_WindowsAndMessaging"
-deps = ["MRMSUPPORT", "USER32"]
+deps = ["MRMSUPPORT", "USER32", "Windows_Win32_UI"]
 
 [features.Windows_Win32_UI_Wpf]
 cfg = "Windows_Win32_UI_Wpf"
-deps = []
+deps = ["Windows_Win32_UI"]
+
+[features.Windows_Win32_UI_Xaml]
+cfg = "Windows_Win32_UI_Xaml"
+deps = ["Windows_Win32_UI"]
 
 [features.Windows_Win32_UI_Xaml_Diagnostics]
 cfg = "Windows_Win32_UI_Xaml_Diagnostics"
-deps = ["WINDOWS_UI_XAML"]
+deps = ["WINDOWS_UI_XAML", "Windows_Win32_UI_Xaml"]
+
+[features.Windows_Win32_Web]
+cfg = "Windows_Win32_Web"
+deps = ["Windows_Win32"]
 
 [features.Windows_Win32_Web_InternetExplorer]
 cfg = "Windows_Win32_Web_InternetExplorer"
-deps = ["IEFRAME", "IMGUTIL", "MSRATING"]
+deps = ["IEFRAME", "IMGUTIL", "MSRATING", "Windows_Win32_Web"]
 
 [features.Windows_Win32_Web_MsHtml]
 cfg = "Windows_Win32_Web_MsHtml"
-deps = ["SHDOCVW"]
+deps = ["SHDOCVW", "Windows_Win32_Web"]
 
 [features.XAUDIO2_8]
 cfg = "XAUDIO2_8"

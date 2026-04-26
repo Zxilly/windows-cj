@@ -44,6 +44,17 @@ public class HString <: Resource & Equatable<HString> & ToString & Hashable & Co
         HString()
     }
 
+    public static func fromAbiTake(raw: CPointer<Unit>): HString {
+        HString(raw)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): HString {
+        if (raw.isNull()) {
+            return HString()
+        }
+        HString(hStringDuplicate(raw))
+    }
+
     public static func fromWide(data: Array<UInt16>, length!: Int64 = -1): HString {
         HString(CPointer<Unit>(hStringAllocFromWide(data, length: length)))
     }

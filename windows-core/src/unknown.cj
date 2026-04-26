@@ -58,10 +58,6 @@ extend<T> ComObjectRuntime<T> <: IUnknownImpl {
         releaseBase(identityPointer().toUIntNative())
     }
 
-    public func isReferenceCountOne(): Bool {
-        isReferenceCountOne()
-    }
-
     public func GetTrustLevel(value: CPointer<Int32>): Int32 {
         getTrustLevelBase(value)
     }

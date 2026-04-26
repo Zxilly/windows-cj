@@ -20,11 +20,11 @@ public class LibraryCollector {
                 while (methodRow < mEnd) {
                     match (index.methodDefImplMap(entry.fileIdx, methodRow)) {
                         case Some((_, importName, moduleName)) =>
-                            let library = stripDllExtension(moduleName)
-                            if (!libraries_.contains(library)) {
-                                libraries_[library] = ArrayList<String>()
+                            addLibraryFunction(stripDllExtension(moduleName), importName)
+                            if (functionRequiresRuntimeEntryPointResolver(index, entry.fileIdx, methodRow)) {
+                                addLibraryFunction("kernel32", "GetProcAddress")
+                                addLibraryFunction("kernel32", "LoadLibraryA")
                             }
-                            addUnique(libraries_[library], importName)
                         case None => ()
                     }
                     methodRow += 1
@@ -77,5 +77,12 @@ public class LibraryCollector {
         }
         builder.append("]\n")
         return builder.toString()
+    }
+
+    private func addLibraryFunction(library: String, functionName: String): Unit {
+        if (!libraries_.contains(library)) {
+            libraries_[library] = ArrayList<String>()
+        }
+        addUnique(libraries_[library], functionName)
     }
 }

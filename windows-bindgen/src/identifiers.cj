@@ -71,3 +71,25 @@ public func escapeSourceIdentifier(name: String): String {
     }
     return sanitizeIdentifier(name)
 }
+
+public func unescapeSourceIdentifier(name: String): String {
+    if (name.startsWith("`") && name.endsWith("`")) {
+        let arr = name.toArray()
+        if (arr.size >= 2) {
+            return String.fromUtf8(arr[1..Int64(arr.size) - 1])
+        }
+    }
+    return name
+}
+
+public func appendSourceIdentifierSuffix(path: String, suffix: String): String {
+    let parts = splitString(path, b'.')
+    if (parts.isEmpty()) {
+        return escapeSourceIdentifier(suffix)
+    }
+
+    let leafIndex = parts.size - 1
+    let leaf = unescapeSourceIdentifier(parts[leafIndex])
+    parts[leafIndex] = escapeSourceIdentifier("${leaf}${suffix}")
+    return joinStrings(parts, ".")
+}

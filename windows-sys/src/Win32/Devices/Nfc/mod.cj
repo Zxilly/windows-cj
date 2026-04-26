@@ -2,22 +2,25 @@
 package windows_sys.Win32.Devices.Nfc
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt8, unionWriteUInt8}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
 @When[Windows_Win32_Devices_Nfc == "on"]
 @C
 public struct NFCRM_RADIO_STATE {
-    public var MediaRadioOn: Win32_Foundation.BOOLEAN = 0
+    public var MediaRadioOn: UInt8 = 0
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Nfc == "on"]
 @C
 public struct NFCRM_SET_RADIO_STATE {
-    public var SystemStateUpdate: Win32_Foundation.BOOLEAN = 0
-    public var MediaRadioOn: Win32_Foundation.BOOLEAN = 0
+    public var SystemStateUpdate: UInt8 = 0
+    public var MediaRadioOn: UInt8 = 0
     public init() {}
 }
 
@@ -30,7 +33,6 @@ public struct NFC_DATA_BUFFER {
 }
 
 @When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct NFC_DEVICE_TYPE {
     public var value: Int32 = 0
 
@@ -76,12 +78,11 @@ public struct NFC_LLCP_CONFIG {
     public var uWKS: UInt16 = 0
     public var bLTO: UInt8 = 0
     public var bOptions: UInt8 = 0
-    public var fAutoActivate: Win32_Foundation.BOOLEAN = 0
+    public var fAutoActivate: UInt8 = 0
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct NFC_LLCP_LINK_STATUS {
     public var value: Int32 = 0
 
@@ -107,15 +108,6 @@ public let NFC_LLCP_LINK_STATUS_LinkDeactivated: NFC_LLCP_LINK_STATUS = NFC_LLCP
 
 @When[Windows_Win32_Devices_Nfc == "on"]
 @C
-public struct NFC_LLCP_SERVICE_DISCOVER_REQUEST {
-    public var hRemoteDev: IntNative = 0
-    public var NumberOfEntries: UInt32 = 0
-    public var ServiceNameEntries: VArray<NFC_LLCP_SERVICE_NAME_ENTRY, $1> = VArray<NFC_LLCP_SERVICE_NAME_ENTRY, $1>(repeat: NFC_LLCP_SERVICE_NAME_ENTRY())
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct NFC_LLCP_SERVICE_DISCOVER_SAP {
     public var NumberOfEntries: UInt32 = 0
     public var SAPEntries: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
@@ -132,14 +124,6 @@ public struct NFC_LLCP_SERVICE_NAME_ENTRY {
 
 @When[Windows_Win32_Devices_Nfc == "on"]
 @C
-public struct NFC_LLCP_SOCKET_ACCEPT_INFO {
-    public var hSocket: IntNative = 0
-    public var sSocketOption: NFC_LLCP_SOCKET_OPTION = NFC_LLCP_SOCKET_OPTION()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct NFC_LLCP_SOCKET_CL_PAYLOAD {
     public var hSocket: IntNative = 0
     public var bSAP: UInt8 = 0
@@ -148,63 +132,6 @@ public struct NFC_LLCP_SOCKET_CL_PAYLOAD {
 }
 
 @When[Windows_Win32_Devices_Nfc == "on"]
-@C
-public struct NFC_LLCP_SOCKET_CONNECT_INFO {
-    public var hRemoteDev: IntNative = 0
-    public var hSocket: IntNative = 0
-    public var eConnectType: NFC_LLCP_SOCKET_CONNECT_TYPE = NFC_LLCP_SOCKET_CONNECT_TYPE()
-    public var Anonymous: NFC_LLCP_SOCKET_CONNECT_INFO__Anonymous_e__Union = NFC_LLCP_SOCKET_CONNECT_INFO__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct NFC_LLCP_SOCKET_CONNECT_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func bsap(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
-        }
-    }
-
-    public mut func set_bsap(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func sServiceName(): NFC_LLCP_SERVICE_NAME_ENTRY {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NFC_LLCP_SERVICE_NAME_ENTRY>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sServiceName(val: NFC_LLCP_SERVICE_NAME_ENTRY): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NFC_LLCP_SERVICE_NAME_ENTRY>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct NFC_LLCP_SOCKET_CONNECT_TYPE {
     public var value: Int32 = 0
 
@@ -229,7 +156,6 @@ public let NFC_LLCP_SOCKET_CONNECT_TYPE_NfcConnectBySap: NFC_LLCP_SOCKET_CONNECT
 public let NFC_LLCP_SOCKET_CONNECT_TYPE_NfcConnectByUri: NFC_LLCP_SOCKET_CONNECT_TYPE = NFC_LLCP_SOCKET_CONNECT_TYPE(1)
 
 @When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct NFC_LLCP_SOCKET_ERROR {
     public var value: Int32 = 0
 
@@ -263,15 +189,7 @@ public let NFC_LLCP_SOCKET_ERROR_NfcLlcpErrorNotBusyCondition: NFC_LLCP_SOCKET_E
 @C
 public struct NFC_LLCP_SOCKET_ERROR_INFO {
     public var hSocket: IntNative = 0
-    public var eSocketError: NFC_LLCP_SOCKET_ERROR = NFC_LLCP_SOCKET_ERROR()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
-public struct NFC_LLCP_SOCKET_INFO {
-    public var eSocketType: NFC_LLCP_SOCKET_TYPE = NFC_LLCP_SOCKET_TYPE()
-    public var sSocketOption: NFC_LLCP_SOCKET_OPTION = NFC_LLCP_SOCKET_OPTION()
+    public var eSocketError: Int32 = 0
     public init() {}
 }
 
@@ -302,7 +220,6 @@ public struct NFC_LLCP_SOCKET_SERVICE_INFO {
 }
 
 @When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct NFC_LLCP_SOCKET_TYPE {
     public var value: Int32 = 0
 
@@ -329,15 +246,14 @@ public let NFC_LLCP_SOCKET_TYPE_Connectionless: NFC_LLCP_SOCKET_TYPE = NFC_LLCP_
 @When[Windows_Win32_Devices_Nfc == "on"]
 @C
 public struct NFC_NDEF_INFO {
-    public var fIsNdefFormatted: Win32_Foundation.BOOLEAN = 0
-    public var fIsReadOnly: Win32_Foundation.BOOLEAN = 0
+    public var fIsNdefFormatted: UInt8 = 0
+    public var fIsReadOnly: UInt8 = 0
     public var dwActualMessageLength: UInt32 = 0
     public var dwMaxMessageLength: UInt32 = 0
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct NFC_P2P_MODE {
     public var value: Int32 = 0
 
@@ -367,14 +283,13 @@ public let NFC_P2P_MODE_NfcDepListen: NFC_P2P_MODE = NFC_P2P_MODE(2)
 @When[Windows_Win32_Devices_Nfc == "on"]
 @C
 public struct NFC_P2P_PARAM_CONFIG {
-    public var eP2pMode: NFC_P2P_MODE = NFC_P2P_MODE()
+    public var eP2pMode: Int32 = 0
     public var cbGeneralBytes: UInt8 = 0
     public var pbGeneralBytes: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct NFC_RELEASE_TYPE {
     public var value: Int32 = 0
 
@@ -405,7 +320,7 @@ public let NFC_RELEASE_TYPE_Discovery: NFC_RELEASE_TYPE = NFC_RELEASE_TYPE(2)
 @C
 public struct NFC_REMOTE_DEVICE_DISCONNET {
     public var hRemoteDev: IntNative = 0
-    public var eReleaseType: NFC_RELEASE_TYPE = NFC_RELEASE_TYPE()
+    public var eReleaseType: Int32 = 0
     public init() {}
 }
 
@@ -413,7 +328,7 @@ public struct NFC_REMOTE_DEVICE_DISCONNET {
 @C
 public struct NFC_REMOTE_DEV_INFO {
     public var hRemoteDev: IntNative = 0
-    public var eType: NFC_DEVICE_TYPE = NFC_DEVICE_TYPE()
+    public var eType: Int32 = 0
     public var eRFTech: UInt8 = 0
     public var eProtocol: UInt8 = 0
     public var cbUid: UInt8 = 0
@@ -439,25 +354,6 @@ public struct NFC_REMOTE_DEV_SEND_INFO {
 }
 
 @When[Windows_Win32_Devices_Nfc == "on"]
-@C
-public struct NFC_RF_DISCOVERY_CONFIG {
-    public var usTotalDuration: UInt16 = 0
-    public var ulPollConfig: UInt32 = 0
-    public var fDisableCardEmulation: Win32_Foundation.BOOLEAN = 0
-    public var ucNfcIPMode: UInt8 = 0
-    public var fNfcIPTgtModeDisable: Win32_Foundation.BOOLEAN = 0
-    public var ucNfcIPTgtMode: UInt8 = 0
-    public var ucNfcCEMode: UInt8 = 0
-    public var ucBailoutConfig: UInt8 = 0
-    public var ucSystemCode: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
-    public var ucRequestCode: UInt8 = 0
-    public var ucTimeSlotNumber: UInt8 = 0
-    public var eRfDiscoveryMode: NFC_RF_DISCOVERY_MODE = NFC_RF_DISCOVERY_MODE()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct NFC_RF_DISCOVERY_MODE {
     public var value: Int32 = 0
 
@@ -495,7 +391,6 @@ public struct NFC_SE_AID_ROUTING_INFO {
 }
 
 @When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct NFC_SE_EMULATION_MODE {
     public var value: Int32 = 0
 
@@ -523,33 +418,7 @@ public let NFC_SE_EMULATION_MODE_EmulationEnabled: NFC_SE_EMULATION_MODE = NFC_S
 @C
 public struct NFC_SE_EMULATION_MODE_INFO {
     public var hSecureElement: IntNative = 0
-    public var eMode: NFC_SE_EMULATION_MODE = NFC_SE_EMULATION_MODE()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
-public struct NFC_SE_EVENT_INFO {
-    public var hSecureElement: IntNative = 0
-    public var eEventType: SECURE_ELEMENT_EVENT_TYPE = SECURE_ELEMENT_EVENT_TYPE()
-    public var cbEventData: UInt32 = 0
-    public var pbEventData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
-public struct NFC_SE_INFO {
-    public var hSecureElement: IntNative = 0
-    public var eSecureElementType: SECURE_ELEMENT_TYPE = SECURE_ELEMENT_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
-public struct NFC_SE_LIST {
-    public var NumberOfEndpoints: UInt32 = 0
-    public var EndpointList: VArray<NFC_SE_INFO, $1> = VArray<NFC_SE_INFO, $1>(repeat: NFC_SE_INFO())
+    public var eMode: Int32 = 0
     public init() {}
 }
 
@@ -559,93 +428,6 @@ public struct NFC_SE_PROTO_ROUTING_INFO {
     public var hSecureElement: IntNative = 0
     public var bPowerState: UInt8 = 0
     public var eRfProtocolType: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
-public struct NFC_SE_ROUTING_TABLE {
-    public var NumberOfEntries: UInt32 = 0
-    public var TableEntries: VArray<NFC_SE_ROUTING_TABLE_ENTRY, $1> = VArray<NFC_SE_ROUTING_TABLE_ENTRY, $1>(repeat: NFC_SE_ROUTING_TABLE_ENTRY())
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
-public struct NFC_SE_ROUTING_TABLE_ENTRY {
-    public var eRoutingType: SECURE_ELEMENT_ROUTING_TYPE = SECURE_ELEMENT_ROUTING_TYPE()
-    public var Anonymous: NFC_SE_ROUTING_TABLE_ENTRY__Anonymous_e__Union = NFC_SE_ROUTING_TABLE_ENTRY__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct NFC_SE_ROUTING_TABLE_ENTRY__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-
-    public func techRoutingInfo(): NFC_SE_TECH_ROUTING_INFO {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NFC_SE_TECH_ROUTING_INFO>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_techRoutingInfo(val: NFC_SE_TECH_ROUTING_INFO): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NFC_SE_TECH_ROUTING_INFO>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func protoRoutingInfo(): NFC_SE_PROTO_ROUTING_INFO {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NFC_SE_PROTO_ROUTING_INFO>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_protoRoutingInfo(val: NFC_SE_PROTO_ROUTING_INFO): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NFC_SE_PROTO_ROUTING_INFO>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func aidRoutingInfo(): NFC_SE_AID_ROUTING_INFO {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NFC_SE_AID_ROUTING_INFO>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_aidRoutingInfo(val: NFC_SE_AID_ROUTING_INFO): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NFC_SE_AID_ROUTING_INFO>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
     public init() {}
 }
 
@@ -668,16 +450,6 @@ public struct NFC_SNEP_CLIENT_GET_INFO {
 
 @When[Windows_Win32_Devices_Nfc == "on"]
 @C
-public struct NFC_SNEP_CLIENT_INFO {
-    public var hRemoteDev: IntNative = 0
-    public var eServerType: NFC_SNEP_SERVER_TYPE = NFC_SNEP_SERVER_TYPE()
-    public var sSocketOption: NFC_LLCP_SOCKET_OPTION = NFC_LLCP_SOCKET_OPTION()
-    public var sService: NFC_LLCP_SERVICE_NAME_ENTRY = NFC_LLCP_SERVICE_NAME_ENTRY()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct NFC_SNEP_CLIENT_PUT_INFO {
     public var hSnepClient: IntNative = 0
     public var sPutPayload: NFC_DATA_BUFFER = NFC_DATA_BUFFER()
@@ -685,7 +457,6 @@ public struct NFC_SNEP_CLIENT_PUT_INFO {
 }
 
 @When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct NFC_SNEP_REQUEST_TYPE {
     public var value: Int32 = 0
 
@@ -720,21 +491,10 @@ public struct NFC_SNEP_SERVER_ACCEPT_INFO {
 
 @When[Windows_Win32_Devices_Nfc == "on"]
 @C
-public struct NFC_SNEP_SERVER_INFO {
-    public var eServerType: NFC_SNEP_SERVER_TYPE = NFC_SNEP_SERVER_TYPE()
-    public var sSocketOption: NFC_LLCP_SOCKET_OPTION = NFC_LLCP_SOCKET_OPTION()
-    public var usInboxSize: UInt16 = 0
-    public var bSAP: UInt8 = 0
-    public var sService: NFC_LLCP_SERVICE_NAME_ENTRY = NFC_LLCP_SERVICE_NAME_ENTRY()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct NFC_SNEP_SERVER_REQUEST {
     public var hSnepServer: IntNative = 0
     public var hConnection: IntNative = 0
-    public var eRequestType: NFC_SNEP_REQUEST_TYPE = NFC_SNEP_REQUEST_TYPE()
+    public var eRequestType: Int32 = 0
     public var sRequestPayload: NFC_DATA_BUFFER = NFC_DATA_BUFFER()
     public init() {}
 }
@@ -750,7 +510,6 @@ public struct NFC_SNEP_SERVER_RESPONSE_INFO {
 }
 
 @When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct NFC_SNEP_SERVER_TYPE {
     public var value: Int32 = 0
 
@@ -784,7 +543,6 @@ public struct SECURE_ELEMENT_AID_ROUTING_INFO {
 }
 
 @When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct SECURE_ELEMENT_CARD_EMULATION_MODE {
     public var value: Int32 = 0
 
@@ -815,41 +573,6 @@ public let SECURE_ELEMENT_CARD_EMULATION_MODE_EmulationOnPowerDependent: SECURE_
 public let SECURE_ELEMENT_CARD_EMULATION_MODE_EmulationStealthListen: SECURE_ELEMENT_CARD_EMULATION_MODE = SECURE_ELEMENT_CARD_EMULATION_MODE(3)
 
 @When[Windows_Win32_Devices_Nfc == "on"]
-@C
-public struct SECURE_ELEMENT_ENDPOINT_INFO {
-    public var guidSecureElementId: GUID = GUID()
-    public var eSecureElementType: SECURE_ELEMENT_TYPE = SECURE_ELEMENT_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
-public struct SECURE_ELEMENT_ENDPOINT_LIST {
-    public var NumberOfEndpoints: UInt32 = 0
-    public var EndpointList: VArray<SECURE_ELEMENT_ENDPOINT_INFO, $1> = VArray<SECURE_ELEMENT_ENDPOINT_INFO, $1>(repeat: SECURE_ELEMENT_ENDPOINT_INFO())
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
-public struct SECURE_ELEMENT_EVENT_INFO {
-    public var guidSecureElementId: GUID = GUID()
-    public var eEventType: SECURE_ELEMENT_EVENT_TYPE = SECURE_ELEMENT_EVENT_TYPE()
-    public var cbEventData: UInt32 = 0
-    public var pbEventData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
-public struct SECURE_ELEMENT_EVENT_SUBSCRIPTION_INFO {
-    public var guidSecureElementId: GUID = GUID()
-    public var eEventType: SECURE_ELEMENT_EVENT_TYPE = SECURE_ELEMENT_EVENT_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct SECURE_ELEMENT_EVENT_TYPE {
     public var value: Int32 = 0
 
@@ -913,14 +636,13 @@ public struct SECURE_ELEMENT_HCE_DATA_PACKET {
 @C
 public struct SECURE_ELEMENT_NFCC_CAPABILITIES {
     public var cbMaxRoutingTableSize: UInt16 = 0
-    public var IsAidRoutingSupported: Win32_Foundation.BOOLEAN = 0
-    public var IsProtocolRoutingSupported: Win32_Foundation.BOOLEAN = 0
-    public var IsTechRoutingSupported: Win32_Foundation.BOOLEAN = 0
+    public var IsAidRoutingSupported: UInt8 = 0
+    public var IsProtocolRoutingSupported: UInt8 = 0
+    public var IsTechRoutingSupported: UInt8 = 0
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct SECURE_ELEMENT_POWER_MODE {
     public var value: Int32 = 0
 
@@ -953,94 +675,6 @@ public struct SECURE_ELEMENT_PROTO_ROUTING_INFO {
 }
 
 @When[Windows_Win32_Devices_Nfc == "on"]
-@C
-public struct SECURE_ELEMENT_ROUTING_TABLE {
-    public var NumberOfEntries: UInt32 = 0
-    public var TableEntries: VArray<SECURE_ELEMENT_ROUTING_TABLE_ENTRY, $1> = VArray<SECURE_ELEMENT_ROUTING_TABLE_ENTRY, $1>(repeat: SECURE_ELEMENT_ROUTING_TABLE_ENTRY())
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
-public struct SECURE_ELEMENT_ROUTING_TABLE_ENTRY {
-    public var eRoutingType: SECURE_ELEMENT_ROUTING_TYPE = SECURE_ELEMENT_ROUTING_TYPE()
-    public var Anonymous: SECURE_ELEMENT_ROUTING_TABLE_ENTRY__Anonymous_e__Union = SECURE_ELEMENT_ROUTING_TABLE_ENTRY__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct SECURE_ELEMENT_ROUTING_TABLE_ENTRY__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
-
-    public func techRoutingInfo(): SECURE_ELEMENT_TECH_ROUTING_INFO {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SECURE_ELEMENT_TECH_ROUTING_INFO>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_techRoutingInfo(val: SECURE_ELEMENT_TECH_ROUTING_INFO): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SECURE_ELEMENT_TECH_ROUTING_INFO>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func protoRoutingInfo(): SECURE_ELEMENT_PROTO_ROUTING_INFO {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SECURE_ELEMENT_PROTO_ROUTING_INFO>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_protoRoutingInfo(val: SECURE_ELEMENT_PROTO_ROUTING_INFO): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SECURE_ELEMENT_PROTO_ROUTING_INFO>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func aidRoutingInfo(): SECURE_ELEMENT_AID_ROUTING_INFO {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SECURE_ELEMENT_AID_ROUTING_INFO>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_aidRoutingInfo(val: SECURE_ELEMENT_AID_ROUTING_INFO): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SECURE_ELEMENT_AID_ROUTING_INFO>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct SECURE_ELEMENT_ROUTING_TYPE {
     public var value: Int32 = 0
 
@@ -1071,7 +705,7 @@ public let SECURE_ELEMENT_ROUTING_TYPE_RoutingTypeAid: SECURE_ELEMENT_ROUTING_TY
 @C
 public struct SECURE_ELEMENT_SET_CARD_EMULATION_MODE_INFO {
     public var guidSecureElementId: GUID = GUID()
-    public var eMode: SECURE_ELEMENT_CARD_EMULATION_MODE = SECURE_ELEMENT_CARD_EMULATION_MODE()
+    public var eMode: Int32 = 0
     public init() {}
 }
 
@@ -1079,7 +713,7 @@ public struct SECURE_ELEMENT_SET_CARD_EMULATION_MODE_INFO {
 @C
 public struct SECURE_ELEMENT_SET_POWER_MODE_INFO {
     public var guidSecureElementId: GUID = GUID()
-    public var powerMode: SECURE_ELEMENT_POWER_MODE = SECURE_ELEMENT_POWER_MODE()
+    public var powerMode: Int32 = 0
     public init() {}
 }
 
@@ -1092,7 +726,6 @@ public struct SECURE_ELEMENT_TECH_ROUTING_INFO {
 }
 
 @When[Windows_Win32_Devices_Nfc == "on"]
-@C
 public struct SECURE_ELEMENT_TYPE {
     public var value: Int32 = 0
 
@@ -1118,6 +751,371 @@ public let SECURE_ELEMENT_TYPE_External: SECURE_ELEMENT_TYPE = SECURE_ELEMENT_TY
 
 @When[Windows_Win32_Devices_Nfc == "on"]
 public let SECURE_ELEMENT_TYPE_DeviceHost: SECURE_ELEMENT_TYPE = SECURE_ELEMENT_TYPE(2)
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct NFC_LLCP_SERVICE_DISCOVER_REQUEST {
+    public var hRemoteDev: IntNative = 0
+    public var NumberOfEntries: UInt32 = 0
+    public var ServiceNameEntries: VArray<NFC_LLCP_SERVICE_NAME_ENTRY, $1> = VArray<NFC_LLCP_SERVICE_NAME_ENTRY, $1>(repeat: NFC_LLCP_SERVICE_NAME_ENTRY())
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct NFC_LLCP_SOCKET_ACCEPT_INFO {
+    public var hSocket: IntNative = 0
+    public var sSocketOption: NFC_LLCP_SOCKET_OPTION = NFC_LLCP_SOCKET_OPTION()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct NFC_LLCP_SOCKET_CONNECT_INFO {
+    public var hRemoteDev: IntNative = 0
+    public var hSocket: IntNative = 0
+    public var eConnectType: Int32 = 0
+    public var Anonymous: NFC_LLCP_SOCKET_CONNECT_INFO__Anonymous_e__Union = NFC_LLCP_SOCKET_CONNECT_INFO__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct NFC_LLCP_SOCKET_CONNECT_INFO__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+
+    public mut prop bsap: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop sServiceName: NFC_LLCP_SERVICE_NAME_ENTRY {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NFC_LLCP_SERVICE_NAME_ENTRY>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NFC_LLCP_SERVICE_NAME_ENTRY>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct NFC_LLCP_SOCKET_INFO {
+    public var eSocketType: Int32 = 0
+    public var sSocketOption: NFC_LLCP_SOCKET_OPTION = NFC_LLCP_SOCKET_OPTION()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct NFC_RF_DISCOVERY_CONFIG {
+    public var usTotalDuration: UInt16 = 0
+    public var ulPollConfig: UInt32 = 0
+    public var fDisableCardEmulation: UInt8 = 0
+    public var ucNfcIPMode: UInt8 = 0
+    public var fNfcIPTgtModeDisable: UInt8 = 0
+    public var ucNfcIPTgtMode: UInt8 = 0
+    public var ucNfcCEMode: UInt8 = 0
+    public var ucBailoutConfig: UInt8 = 0
+    public var ucSystemCode: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var ucRequestCode: UInt8 = 0
+    public var ucTimeSlotNumber: UInt8 = 0
+    public var eRfDiscoveryMode: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct NFC_SE_EVENT_INFO {
+    public var hSecureElement: IntNative = 0
+    public var eEventType: Int32 = 0
+    public var cbEventData: UInt32 = 0
+    public var pbEventData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct NFC_SE_INFO {
+    public var hSecureElement: IntNative = 0
+    public var eSecureElementType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct NFC_SE_LIST {
+    public var NumberOfEndpoints: UInt32 = 0
+    public var EndpointList: VArray<NFC_SE_INFO, $1> = VArray<NFC_SE_INFO, $1>(repeat: NFC_SE_INFO())
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct NFC_SE_ROUTING_TABLE_ENTRY {
+    public var eRoutingType: Int32 = 0
+    public var Anonymous: NFC_SE_ROUTING_TABLE_ENTRY__Anonymous_e__Union = NFC_SE_ROUTING_TABLE_ENTRY__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct NFC_SE_ROUTING_TABLE_ENTRY__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+
+    public mut prop techRoutingInfo: NFC_SE_TECH_ROUTING_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NFC_SE_TECH_ROUTING_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NFC_SE_TECH_ROUTING_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop protoRoutingInfo: NFC_SE_PROTO_ROUTING_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NFC_SE_PROTO_ROUTING_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NFC_SE_PROTO_ROUTING_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop aidRoutingInfo: NFC_SE_AID_ROUTING_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NFC_SE_AID_ROUTING_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NFC_SE_AID_ROUTING_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct NFC_SNEP_CLIENT_INFO {
+    public var hRemoteDev: IntNative = 0
+    public var eServerType: Int32 = 0
+    public var sSocketOption: NFC_LLCP_SOCKET_OPTION = NFC_LLCP_SOCKET_OPTION()
+    public var sService: NFC_LLCP_SERVICE_NAME_ENTRY = NFC_LLCP_SERVICE_NAME_ENTRY()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct NFC_SNEP_SERVER_INFO {
+    public var eServerType: Int32 = 0
+    public var sSocketOption: NFC_LLCP_SOCKET_OPTION = NFC_LLCP_SOCKET_OPTION()
+    public var usInboxSize: UInt16 = 0
+    public var bSAP: UInt8 = 0
+    public var sService: NFC_LLCP_SERVICE_NAME_ENTRY = NFC_LLCP_SERVICE_NAME_ENTRY()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct SECURE_ELEMENT_ENDPOINT_INFO {
+    public var guidSecureElementId: GUID = GUID()
+    public var eSecureElementType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct SECURE_ELEMENT_ENDPOINT_LIST {
+    public var NumberOfEndpoints: UInt32 = 0
+    public var EndpointList: VArray<SECURE_ELEMENT_ENDPOINT_INFO, $1> = VArray<SECURE_ELEMENT_ENDPOINT_INFO, $1>(repeat: SECURE_ELEMENT_ENDPOINT_INFO())
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct SECURE_ELEMENT_EVENT_INFO {
+    public var guidSecureElementId: GUID = GUID()
+    public var eEventType: Int32 = 0
+    public var cbEventData: UInt32 = 0
+    public var pbEventData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct SECURE_ELEMENT_EVENT_SUBSCRIPTION_INFO {
+    public var guidSecureElementId: GUID = GUID()
+    public var eEventType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct SECURE_ELEMENT_ROUTING_TABLE_ENTRY {
+    public var eRoutingType: Int32 = 0
+    public var Anonymous: SECURE_ELEMENT_ROUTING_TABLE_ENTRY__Anonymous_e__Union = SECURE_ELEMENT_ROUTING_TABLE_ENTRY__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct SECURE_ELEMENT_ROUTING_TABLE_ENTRY__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $9> = VArray<UInt32, $9>(repeat: 0)
+
+    public mut prop techRoutingInfo: SECURE_ELEMENT_TECH_ROUTING_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SECURE_ELEMENT_TECH_ROUTING_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SECURE_ELEMENT_TECH_ROUTING_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop protoRoutingInfo: SECURE_ELEMENT_PROTO_ROUTING_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SECURE_ELEMENT_PROTO_ROUTING_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SECURE_ELEMENT_PROTO_ROUTING_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop aidRoutingInfo: SECURE_ELEMENT_AID_ROUTING_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SECURE_ELEMENT_AID_ROUTING_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SECURE_ELEMENT_AID_ROUTING_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct NFC_SE_ROUTING_TABLE {
+    public var NumberOfEntries: UInt32 = 0
+    public var TableEntries: VArray<NFC_SE_ROUTING_TABLE_ENTRY, $1> = VArray<NFC_SE_ROUTING_TABLE_ENTRY, $1>(repeat: NFC_SE_ROUTING_TABLE_ENTRY())
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Nfc == "on"]
+@C
+public struct SECURE_ELEMENT_ROUTING_TABLE {
+    public var NumberOfEntries: UInt32 = 0
+    public var TableEntries: VArray<SECURE_ELEMENT_ROUTING_TABLE_ENTRY, $1> = VArray<SECURE_ELEMENT_ROUTING_TABLE_ENTRY, $1>(repeat: SECURE_ELEMENT_ROUTING_TABLE_ENTRY())
+    public init() {}
+}
 
 @When[Windows_Win32_Devices_Nfc == "on"]
 public let IOCTL_NFCDTA_CONFIG_RF_DISCOVERY: UInt32 = 2233344u32

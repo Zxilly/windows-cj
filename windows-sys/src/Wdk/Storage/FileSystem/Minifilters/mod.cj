@@ -2,103 +2,22 @@
 package windows_sys.Wdk.Storage.FileSystem.Minifilters
 
 import windows_interface.{GUID}
-import windows_polyfill.{packedReadInt64, packedReadUInt16, packedReadUInt32, packedWriteInt64, packedWriteUInt16, packedWriteUInt32, unionReadUInt32, unionWriteUInt32}
-import windows_sys.Wdk.impl as Wdk_impl
+import windows_interface as windows_interface
+import windows_polyfill.{packedReadInt64, packedReadUInt16, packedReadUInt32, packedReadUInt8, packedReadValue, packedWriteInt64, packedWriteUInt16, packedWriteUInt32, packedWriteUInt8, packedWriteValue, unionReadUInt32, unionWriteUInt32}
+import windows_polyfill as windows_polyfill
+import windows_sys.Wdk._impl_l0 as Wdk__impl_l0
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
+@When[Windows_Win32_Storage_InstallableFileSystems == "on"]
 import windows_sys.Win32.Storage.InstallableFileSystems as Win32_Storage_InstallableFileSystems
+@When[Windows_Win32_System_IO == "on"]
 import windows_sys.Win32.System.IO as Win32_System_IO
-import windows_sys.Win32.impl as Win32_impl
+import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-@C
-public struct FLT_CALLBACK_DATA {
-    public var Flags: UInt32 = 0
-    public var Thread: Wdk_impl.PETHREAD = CPointer<Unit>()
-    public var Iopb: CPointer<FLT_IO_PARAMETER_BLOCK> = CPointer<FLT_IO_PARAMETER_BLOCK>()
-    public var IoStatus: Win32_System_IO.IO_STATUS_BLOCK = Win32_System_IO.IO_STATUS_BLOCK()
-    public var TagData: CPointer<FLT_TAG_DATA_BUFFER> = CPointer<FLT_TAG_DATA_BUFFER>()
-    public var Anonymous: FLT_CALLBACK_DATA__Anonymous_e__Union = FLT_CALLBACK_DATA__Anonymous_e__Union()
-    public var RequestorMode: Int8 = 0
-    public init() {}
-}
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FLT_CALLBACK_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-
-    public func anonymous(): FLT_CALLBACK_DATA__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_CALLBACK_DATA__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: FLT_CALLBACK_DATA__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_CALLBACK_DATA__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func filterContext(): VArray<CPointer<Unit>, $4> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<CPointer<Unit>, $4>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_filterContext(val: VArray<CPointer<Unit>, $4>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<CPointer<Unit>, $4>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-@C
-public struct FLT_CALLBACK_DATA__Anonymous_e__Union__Anonymous_e__Struct {
-    public var QueueLinks: Win32_impl.LIST_ENTRY = Win32_impl.LIST_ENTRY()
-    public var QueueContext: VArray<CPointer<Unit>, $2> = VArray<CPointer<Unit>, $2>(repeat: CPointer<Unit>())
-    public init() {}
-}
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-@C
-public struct FLT_CALLBACK_DATA_QUEUE {
-    public var Csq: Wdk_impl.IO_CSQ = Wdk_impl.IO_CSQ()
-    public var Flags: FLT_CALLBACK_DATA_QUEUE_FLAGS = FLT_CALLBACK_DATA_QUEUE_FLAGS()
-    public var Instance: PFLT_INSTANCE = CPointer<Unit>()
-    public var InsertIo: PFLT_CALLBACK_DATA_QUEUE_INSERT_IO = { _, _, _ => 0 }
-    public var RemoveIo: PFLT_CALLBACK_DATA_QUEUE_REMOVE_IO = { _, _ => () }
-    public var PeekNextIo: PFLT_CALLBACK_DATA_QUEUE_PEEK_NEXT_IO = { _, _, _ => CPointer<FLT_CALLBACK_DATA>() }
-    public var Acquire: PFLT_CALLBACK_DATA_QUEUE_ACQUIRE = { _, _ => () }
-    public var Release: PFLT_CALLBACK_DATA_QUEUE_RELEASE = { _, _ => () }
-    public var CompleteCanceledIo: PFLT_CALLBACK_DATA_QUEUE_COMPLETE_CANCELED_IO = { _, _ => () }
-    public init() {}
-}
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-@C
 public struct FLT_CALLBACK_DATA_QUEUE_FLAGS {
     public var value: Int32 = 0
 
@@ -114,30 +33,6 @@ public struct FLT_CALLBACK_DATA_QUEUE_FLAGS {
     public operator func !=(other: FLT_CALLBACK_DATA_QUEUE_FLAGS): Bool {
         return this.value != other.value
     }
-}
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-@C
-public struct FLT_CONTEXT_REGISTRATION {
-    public var ContextType: UInt16 = 0
-    public var Flags: UInt16 = 0
-    public var ContextCleanupCallback: PFLT_CONTEXT_CLEANUP_CALLBACK = { _, _ => () }
-    public var Size: UIntNative = 0
-    public var PoolTag: UInt32 = 0
-    public var ContextAllocateCallback: PFLT_CONTEXT_ALLOCATE_CALLBACK = { _, _, _ => CPointer<Unit>() }
-    public var ContextFreeCallback: PFLT_CONTEXT_FREE_CALLBACK = { _, _ => () }
-    public var Reserved1: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-@C
-public struct FLT_CREATEFILE_TARGET_ECP_CONTEXT {
-    public var Instance: PFLT_INSTANCE = CPointer<Unit>()
-    public var Volume: PFLT_VOLUME = CPointer<Unit>()
-    public var FileNameInformation: CPointer<FLT_FILE_NAME_INFORMATION> = CPointer<FLT_FILE_NAME_INFORMATION>()
-    public var Flags: UInt16 = 0
-    public init() {}
 }
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
@@ -158,837 +53,886 @@ public struct FLT_FILE_NAME_INFORMATION {
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
 @C
-public struct FLT_IO_PARAMETER_BLOCK {
-    public var IrpFlags: UInt32 = 0
-    public var MajorFunction: UInt8 = 0
-    public var MinorFunction: UInt8 = 0
-    public var OperationFlags: UInt8 = 0
-    public var Reserved: UInt8 = 0
-    public var TargetFileObject: CPointer<Wdk_impl.FILE_OBJECT> = CPointer<Wdk_impl.FILE_OBJECT>()
-    public var TargetInstance: PFLT_INSTANCE = CPointer<Unit>()
-    public var Parameters: FLT_PARAMETERS = FLT_PARAMETERS()
-    public init() {}
-}
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-@C
 public struct FLT_NAME_CONTROL {
     public var Name: Win32_Foundation.UNICODE_STRING = Win32_Foundation.UNICODE_STRING()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-@C
-public struct FLT_OPERATION_REGISTRATION {
-    public var MajorFunction: UInt8 = 0
-    public var Flags: UInt32 = 0
-    public var PreOperation: PFLT_PRE_OPERATION_CALLBACK = { _, _, _ => FLT_PREOP_CALLBACK_STATUS() }
-    public var PostOperation: PFLT_POST_OPERATION_CALLBACK = { _, _, _, _ => FLT_POSTOP_CALLBACK_STATUS() }
-    public var Reserved1: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct FLT_PARAMETERS {
-    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
-
-    public func create(): FLT_PARAMETERS__Create_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Create_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_create(val: FLT_PARAMETERS__Create_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Create_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func createPipe(): FLT_PARAMETERS__CreatePipe_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__CreatePipe_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_createPipe(val: FLT_PARAMETERS__CreatePipe_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__CreatePipe_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func createMailslot(): FLT_PARAMETERS__CreateMailslot_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__CreateMailslot_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_createMailslot(val: FLT_PARAMETERS__CreateMailslot_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__CreateMailslot_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func read(): FLT_PARAMETERS__Read_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Read_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_read(val: FLT_PARAMETERS__Read_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Read_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func write(): FLT_PARAMETERS__Write_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Write_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_write(val: FLT_PARAMETERS__Write_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Write_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func queryFileInformation(): FLT_PARAMETERS__QueryFileInformation_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__QueryFileInformation_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_queryFileInformation(val: FLT_PARAMETERS__QueryFileInformation_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__QueryFileInformation_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func setFileInformation(): FLT_PARAMETERS__SetFileInformation_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__SetFileInformation_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_setFileInformation(val: FLT_PARAMETERS__SetFileInformation_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__SetFileInformation_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func queryEa(): FLT_PARAMETERS__QueryEa_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__QueryEa_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_queryEa(val: FLT_PARAMETERS__QueryEa_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__QueryEa_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func setEa(): FLT_PARAMETERS__SetEa_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__SetEa_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_setEa(val: FLT_PARAMETERS__SetEa_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__SetEa_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func queryVolumeInformation(): FLT_PARAMETERS__QueryVolumeInformation_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__QueryVolumeInformation_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_queryVolumeInformation(val: FLT_PARAMETERS__QueryVolumeInformation_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__QueryVolumeInformation_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func setVolumeInformation(): FLT_PARAMETERS__SetVolumeInformation_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__SetVolumeInformation_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_setVolumeInformation(val: FLT_PARAMETERS__SetVolumeInformation_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__SetVolumeInformation_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func directoryControl(): FLT_PARAMETERS__DirectoryControl_e__Union {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_directoryControl(val: FLT_PARAMETERS__DirectoryControl_e__Union): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func fileSystemControl(): FLT_PARAMETERS__FileSystemControl_e__Union {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fileSystemControl(val: FLT_PARAMETERS__FileSystemControl_e__Union): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func deviceIoControl(): FLT_PARAMETERS__DeviceIoControl_e__Union {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_deviceIoControl(val: FLT_PARAMETERS__DeviceIoControl_e__Union): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func lockControl(): FLT_PARAMETERS__LockControl_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__LockControl_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_lockControl(val: FLT_PARAMETERS__LockControl_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__LockControl_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func querySecurity(): FLT_PARAMETERS__QuerySecurity_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__QuerySecurity_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_querySecurity(val: FLT_PARAMETERS__QuerySecurity_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__QuerySecurity_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func setSecurity(): FLT_PARAMETERS__SetSecurity_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__SetSecurity_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_setSecurity(val: FLT_PARAMETERS__SetSecurity_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__SetSecurity_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func wmi(): FLT_PARAMETERS__WMI_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__WMI_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_wmi(val: FLT_PARAMETERS__WMI_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__WMI_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func queryQuota(): FLT_PARAMETERS__QueryQuota_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__QueryQuota_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_queryQuota(val: FLT_PARAMETERS__QueryQuota_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__QueryQuota_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func setQuota(): FLT_PARAMETERS__SetQuota_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__SetQuota_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_setQuota(val: FLT_PARAMETERS__SetQuota_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__SetQuota_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pnp(): FLT_PARAMETERS__Pnp_e__Union {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pnp(val: FLT_PARAMETERS__Pnp_e__Union): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func acquireForSectionSynchronization(): FLT_PARAMETERS__AcquireForSectionSynchronization_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__AcquireForSectionSynchronization_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_acquireForSectionSynchronization(val: FLT_PARAMETERS__AcquireForSectionSynchronization_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__AcquireForSectionSynchronization_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func acquireForModifiedPageWriter(): FLT_PARAMETERS__AcquireForModifiedPageWriter_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__AcquireForModifiedPageWriter_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_acquireForModifiedPageWriter(val: FLT_PARAMETERS__AcquireForModifiedPageWriter_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__AcquireForModifiedPageWriter_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func releaseForModifiedPageWriter(): FLT_PARAMETERS__ReleaseForModifiedPageWriter_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__ReleaseForModifiedPageWriter_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_releaseForModifiedPageWriter(val: FLT_PARAMETERS__ReleaseForModifiedPageWriter_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__ReleaseForModifiedPageWriter_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func queryOpen(): FLT_PARAMETERS__QueryOpen_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__QueryOpen_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_queryOpen(val: FLT_PARAMETERS__QueryOpen_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__QueryOpen_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func fastIoCheckIfPossible(): FLT_PARAMETERS__FastIoCheckIfPossible_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__FastIoCheckIfPossible_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fastIoCheckIfPossible(val: FLT_PARAMETERS__FastIoCheckIfPossible_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__FastIoCheckIfPossible_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func networkQueryOpen(): FLT_PARAMETERS__NetworkQueryOpen_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__NetworkQueryOpen_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_networkQueryOpen(val: FLT_PARAMETERS__NetworkQueryOpen_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__NetworkQueryOpen_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func mdlRead(): FLT_PARAMETERS__MdlRead_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__MdlRead_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_mdlRead(val: FLT_PARAMETERS__MdlRead_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__MdlRead_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func mdlReadComplete(): FLT_PARAMETERS__MdlReadComplete_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__MdlReadComplete_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_mdlReadComplete(val: FLT_PARAMETERS__MdlReadComplete_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__MdlReadComplete_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func prepareMdlWrite(): FLT_PARAMETERS__PrepareMdlWrite_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__PrepareMdlWrite_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_prepareMdlWrite(val: FLT_PARAMETERS__PrepareMdlWrite_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__PrepareMdlWrite_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func mdlWriteComplete(): FLT_PARAMETERS__MdlWriteComplete_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__MdlWriteComplete_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_mdlWriteComplete(val: FLT_PARAMETERS__MdlWriteComplete_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__MdlWriteComplete_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func mountVolume(): FLT_PARAMETERS__MountVolume_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__MountVolume_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_mountVolume(val: FLT_PARAMETERS__MountVolume_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__MountVolume_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func others(): FLT_PARAMETERS__Others_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Others_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_others(val: FLT_PARAMETERS__Others_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Others_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+
+    public mut prop create: FLT_PARAMETERS__Create_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Create_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Create_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop createPipe: FLT_PARAMETERS__CreatePipe_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__CreatePipe_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__CreatePipe_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop createMailslot: FLT_PARAMETERS__CreateMailslot_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__CreateMailslot_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__CreateMailslot_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop read: FLT_PARAMETERS__Read_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Read_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Read_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop write: FLT_PARAMETERS__Write_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Write_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Write_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop queryFileInformation: FLT_PARAMETERS__QueryFileInformation_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__QueryFileInformation_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__QueryFileInformation_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop setFileInformation: FLT_PARAMETERS__SetFileInformation_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__SetFileInformation_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__SetFileInformation_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop queryEa: FLT_PARAMETERS__QueryEa_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__QueryEa_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__QueryEa_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop setEa: FLT_PARAMETERS__SetEa_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__SetEa_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__SetEa_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop queryVolumeInformation: FLT_PARAMETERS__QueryVolumeInformation_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__QueryVolumeInformation_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__QueryVolumeInformation_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop setVolumeInformation: FLT_PARAMETERS__SetVolumeInformation_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__SetVolumeInformation_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__SetVolumeInformation_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop directoryControl: FLT_PARAMETERS__DirectoryControl_e__Union {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop fileSystemControl: FLT_PARAMETERS__FileSystemControl_e__Union {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop deviceIoControl: FLT_PARAMETERS__DeviceIoControl_e__Union {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop lockControl: FLT_PARAMETERS__LockControl_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__LockControl_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__LockControl_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop querySecurity: FLT_PARAMETERS__QuerySecurity_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__QuerySecurity_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__QuerySecurity_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop setSecurity: FLT_PARAMETERS__SetSecurity_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__SetSecurity_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__SetSecurity_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop wmi: FLT_PARAMETERS__WMI_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__WMI_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__WMI_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop queryQuota: FLT_PARAMETERS__QueryQuota_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__QueryQuota_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__QueryQuota_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop setQuota: FLT_PARAMETERS__SetQuota_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__SetQuota_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__SetQuota_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pnp: FLT_PARAMETERS__Pnp_e__Union {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop acquireForSectionSynchronization: FLT_PARAMETERS__AcquireForSectionSynchronization_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__AcquireForSectionSynchronization_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__AcquireForSectionSynchronization_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop acquireForModifiedPageWriter: FLT_PARAMETERS__AcquireForModifiedPageWriter_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__AcquireForModifiedPageWriter_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__AcquireForModifiedPageWriter_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop releaseForModifiedPageWriter: FLT_PARAMETERS__ReleaseForModifiedPageWriter_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__ReleaseForModifiedPageWriter_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__ReleaseForModifiedPageWriter_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop queryOpen: FLT_PARAMETERS__QueryOpen_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__QueryOpen_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__QueryOpen_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop fastIoCheckIfPossible: FLT_PARAMETERS__FastIoCheckIfPossible_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__FastIoCheckIfPossible_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__FastIoCheckIfPossible_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop networkQueryOpen: FLT_PARAMETERS__NetworkQueryOpen_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__NetworkQueryOpen_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__NetworkQueryOpen_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop mdlRead: FLT_PARAMETERS__MdlRead_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__MdlRead_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__MdlRead_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop mdlReadComplete: FLT_PARAMETERS__MdlReadComplete_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__MdlReadComplete_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__MdlReadComplete_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop prepareMdlWrite: FLT_PARAMETERS__PrepareMdlWrite_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__PrepareMdlWrite_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__PrepareMdlWrite_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop mdlWriteComplete: FLT_PARAMETERS__MdlWriteComplete_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__MdlWriteComplete_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__MdlWriteComplete_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop mountVolume: FLT_PARAMETERS__MountVolume_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__MountVolume_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__MountVolume_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop others: FLT_PARAMETERS__Others_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Others_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Others_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+// packed(4)
 @C
 public struct FLT_PARAMETERS__Create_e__Struct {
     public var _raw: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0u8)
 
-    // packed field `SecurityContext`: type `CPointer<Wdk_impl.IO_SECURITY_CONTEXT>` not supported by polyfill; skipped
-
-    public func options(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 8)
+    public mut prop securityContext: CPointer<Wdk__impl_l0.IO_SECURITY_CONTEXT> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Wdk__impl_l0.IO_SECURITY_CONTEXT> = CPointer<Wdk__impl_l0.IO_SECURITY_CONTEXT>()
+                return packedReadValue<CPointer<Wdk__impl_l0.IO_SECURITY_CONTEXT>>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_options(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 8, val)
-            _raw = rawStorage
+    public mut prop options: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func fileAttributes(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 12)
+    public mut prop fileAttributes: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_fileAttributes(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 12, val)
-            _raw = rawStorage
+    public mut prop shareAccess: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 14)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 14, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func shareAccess(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 14)
+    public mut prop eaLength: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_shareAccess(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 14, val)
-            _raw = rawStorage
+    public mut prop eaBuffer: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Unit> = CPointer<Unit>()
+                return packedReadValue<CPointer<Unit>>(base, 20, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 20, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func eaLength(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 16)
+    public mut prop allocationSize: Int64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt64(base, 28)
+            }
         }
-    }
-
-    public mut func set_eaLength(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 16, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `EaBuffer`: type `CPointer<Unit>` not supported by polyfill; skipped
-
-    public func allocationSize(): Int64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt64(base, 28)
-        }
-    }
-
-    public mut func set_allocationSize(val: Int64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt64(base, 28, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt64(base, 28, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__CreatePipe_e__Struct {
-    public var SecurityContext: CPointer<Wdk_impl.IO_SECURITY_CONTEXT> = CPointer<Wdk_impl.IO_SECURITY_CONTEXT>()
+    public var SecurityContext: CPointer<Wdk__impl_l0.IO_SECURITY_CONTEXT> = CPointer<Wdk__impl_l0.IO_SECURITY_CONTEXT>()
     public var Options: UInt32 = 0
     public var Reserved: UInt16 = 0
     public var ShareAccess: UInt16 = 0
@@ -996,10 +940,10 @@ public struct FLT_PARAMETERS__CreatePipe_e__Struct {
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__CreateMailslot_e__Struct {
-    public var SecurityContext: CPointer<Wdk_impl.IO_SECURITY_CONTEXT> = CPointer<Wdk_impl.IO_SECURITY_CONTEXT>()
+    public var SecurityContext: CPointer<Wdk__impl_l0.IO_SECURITY_CONTEXT> = CPointer<Wdk__impl_l0.IO_SECURITY_CONTEXT>()
     public var Options: UInt32 = 0
     public var Reserved: UInt16 = 0
     public var ShareAccess: UInt16 = 0
@@ -1007,226 +951,306 @@ public struct FLT_PARAMETERS__CreateMailslot_e__Struct {
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+// packed(4)
 @C
 public struct FLT_PARAMETERS__Read_e__Struct {
     public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
 
-    public func length(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop length: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_length(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop key: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func key(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop byteOffset: Int64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt64(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt64(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_key(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
+    public mut prop readBuffer: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Unit> = CPointer<Unit>()
+                return packedReadValue<CPointer<Unit>>(base, 16, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func byteOffset(): Int64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt64(base, 8)
+    public mut prop mdlAddress: CPointer<Wdk__impl_l0.MDL> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Wdk__impl_l0.MDL> = CPointer<Wdk__impl_l0.MDL>()
+                return packedReadValue<CPointer<Wdk__impl_l0.MDL>>(base, 24, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 24, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public mut func set_byteOffset(val: Int64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt64(base, 8, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `ReadBuffer`: type `CPointer<Unit>` not supported by polyfill; skipped
-
-    // packed field `MdlAddress`: type `CPointer<Wdk_impl.MDL>` not supported by polyfill; skipped
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+// packed(4)
 @C
 public struct FLT_PARAMETERS__Write_e__Struct {
     public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
 
-    public func length(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop length: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_length(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop key: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func key(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop byteOffset: Int64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt64(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt64(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_key(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
+    public mut prop writeBuffer: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Unit> = CPointer<Unit>()
+                return packedReadValue<CPointer<Unit>>(base, 16, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func byteOffset(): Int64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt64(base, 8)
+    public mut prop mdlAddress: CPointer<Wdk__impl_l0.MDL> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Wdk__impl_l0.MDL> = CPointer<Wdk__impl_l0.MDL>()
+                return packedReadValue<CPointer<Wdk__impl_l0.MDL>>(base, 24, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 24, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public mut func set_byteOffset(val: Int64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt64(base, 8, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `WriteBuffer`: type `CPointer<Unit>` not supported by polyfill; skipped
-
-    // packed field `MdlAddress`: type `CPointer<Wdk_impl.MDL>` not supported by polyfill; skipped
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__QueryFileInformation_e__Struct {
     public var Length: UInt32 = 0
-    public var FileInformationClass: Wdk_impl.FILE_INFORMATION_CLASS = Wdk_impl.FILE_INFORMATION_CLASS()
+    public var FileInformationClass: Int32 = 0
     public var InfoBuffer: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__SetFileInformation_e__Struct {
     public var Length: UInt32 = 0
-    public var FileInformationClass: Wdk_impl.FILE_INFORMATION_CLASS = Wdk_impl.FILE_INFORMATION_CLASS()
-    public var ParentOfTarget: CPointer<Wdk_impl.FILE_OBJECT> = CPointer<Wdk_impl.FILE_OBJECT>()
+    public var FileInformationClass: Int32 = 0
+    public var ParentOfTarget: CPointer<Wdk__impl_l0.FILE_OBJECT> = CPointer<Wdk__impl_l0.FILE_OBJECT>()
     public var Anonymous: FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union = FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union()
     public var InfoBuffer: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop clusterCount: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func clusterCount(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop deleteHandle: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_clusterCount(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func deleteHandle(): CPointer<Unit> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_deleteHandle(val: CPointer<Unit>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
-    public var ReplaceIfExists: Win32_Foundation.BOOLEAN = 0
-    public var AdvanceOnly: Win32_Foundation.BOOLEAN = 0
+    public var ReplaceIfExists: UInt8 = 0
+    public var AdvanceOnly: UInt8 = 0
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__QueryEa_e__Struct {
     public var Length: UInt32 = 0
@@ -1234,121 +1258,125 @@ public struct FLT_PARAMETERS__QueryEa_e__Struct {
     public var EaListLength: UInt32 = 0
     public var EaIndex: UInt32 = 0
     public var EaBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var MdlAddress: CPointer<Wdk_impl.MDL> = CPointer<Wdk_impl.MDL>()
+    public var MdlAddress: CPointer<Wdk__impl_l0.MDL> = CPointer<Wdk__impl_l0.MDL>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__SetEa_e__Struct {
     public var Length: UInt32 = 0
     public var EaBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var MdlAddress: CPointer<Wdk_impl.MDL> = CPointer<Wdk_impl.MDL>()
+    public var MdlAddress: CPointer<Wdk__impl_l0.MDL> = CPointer<Wdk__impl_l0.MDL>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__QueryVolumeInformation_e__Struct {
     public var Length: UInt32 = 0
-    public var FsInformationClass: Wdk_impl.FS_INFORMATION_CLASS = Wdk_impl.FS_INFORMATION_CLASS()
+    public var FsInformationClass: Int32 = 0
     public var VolumeBuffer: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__SetVolumeInformation_e__Struct {
     public var Length: UInt32 = 0
-    public var FsInformationClass: Wdk_impl.FS_INFORMATION_CLASS = Wdk_impl.FS_INFORMATION_CLASS()
+    public var FsInformationClass: Int32 = 0
     public var VolumeBuffer: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct FLT_PARAMETERS__DirectoryControl_e__Union {
-    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
+    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
 
-    public func queryDirectory(): FLT_PARAMETERS__DirectoryControl_e__Union__QueryDirectory_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__QueryDirectory_e__Struct>(p)
-            return ptr.read()
+    public mut prop queryDirectory: FLT_PARAMETERS__DirectoryControl_e__Union__QueryDirectory_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__QueryDirectory_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__QueryDirectory_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_queryDirectory(val: FLT_PARAMETERS__DirectoryControl_e__Union__QueryDirectory_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__QueryDirectory_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop notifyDirectory: FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectory_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectory_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectory_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func notifyDirectory(): FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectory_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectory_e__Struct>(p)
-            return ptr.read()
+    public mut prop notifyDirectoryEx: FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectoryEx_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectoryEx_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_notifyDirectory(val: FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectory_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectory_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func notifyDirectoryEx(): FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectoryEx_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectoryEx_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_notifyDirectoryEx(val: FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectoryEx_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectoryEx_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectoryEx_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__DirectoryControl_e__Union__QueryDirectory_e__Struct {
     public var Length: UInt32 = 0
     public var FileName: CPointer<Win32_Foundation.UNICODE_STRING> = CPointer<Win32_Foundation.UNICODE_STRING>()
-    public var FileInformationClass: Wdk_impl.FILE_INFORMATION_CLASS = Wdk_impl.FILE_INFORMATION_CLASS()
+    public var FileInformationClass: Int32 = 0
     public var FileIndex: UInt32 = 0
     public var DirectoryBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var MdlAddress: CPointer<Wdk_impl.MDL> = CPointer<Wdk_impl.MDL>()
+    public var MdlAddress: CPointer<Wdk__impl_l0.MDL> = CPointer<Wdk__impl_l0.MDL>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectory_e__Struct {
     public var Length: UInt32 = 0
@@ -1356,144 +1384,150 @@ public struct FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectory_e__Stru
     public var Spare1: UInt32 = 0
     public var Spare2: UInt32 = 0
     public var DirectoryBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var MdlAddress: CPointer<Wdk_impl.MDL> = CPointer<Wdk_impl.MDL>()
+    public var MdlAddress: CPointer<Wdk__impl_l0.MDL> = CPointer<Wdk__impl_l0.MDL>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectoryEx_e__Struct {
     public var Length: UInt32 = 0
     public var CompletionFilter: UInt32 = 0
-    public var DirectoryNotifyInformationClass: Wdk_impl.DIRECTORY_NOTIFY_INFORMATION_CLASS = Wdk_impl.DIRECTORY_NOTIFY_INFORMATION_CLASS()
+    public var DirectoryNotifyInformationClass: Int32 = 0
     public var Spare2: UInt32 = 0
     public var DirectoryBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var MdlAddress: CPointer<Wdk_impl.MDL> = CPointer<Wdk_impl.MDL>()
+    public var MdlAddress: CPointer<Wdk__impl_l0.MDL> = CPointer<Wdk__impl_l0.MDL>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct FLT_PARAMETERS__FileSystemControl_e__Union {
-    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
+    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
 
-    public func verifyVolume(): FLT_PARAMETERS__FileSystemControl_e__Union__VerifyVolume_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__VerifyVolume_e__Struct>(p)
-            return ptr.read()
+    public mut prop verifyVolume: FLT_PARAMETERS__FileSystemControl_e__Union__VerifyVolume_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__VerifyVolume_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__VerifyVolume_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_verifyVolume(val: FLT_PARAMETERS__FileSystemControl_e__Union__VerifyVolume_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__VerifyVolume_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop common: FLT_PARAMETERS__FileSystemControl_e__Union__Common_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Common_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Common_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func common(): FLT_PARAMETERS__FileSystemControl_e__Union__Common_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Common_e__Struct>(p)
-            return ptr.read()
+    public mut prop neither: FLT_PARAMETERS__FileSystemControl_e__Union__Neither_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Neither_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Neither_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_common(val: FLT_PARAMETERS__FileSystemControl_e__Union__Common_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Common_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop buffered: FLT_PARAMETERS__FileSystemControl_e__Union__Buffered_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Buffered_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Buffered_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func neither(): FLT_PARAMETERS__FileSystemControl_e__Union__Neither_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Neither_e__Struct>(p)
-            return ptr.read()
+    public mut prop direct: FLT_PARAMETERS__FileSystemControl_e__Union__Direct_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Direct_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_neither(val: FLT_PARAMETERS__FileSystemControl_e__Union__Neither_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Neither_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func buffered(): FLT_PARAMETERS__FileSystemControl_e__Union__Buffered_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Buffered_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_buffered(val: FLT_PARAMETERS__FileSystemControl_e__Union__Buffered_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Buffered_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func direct(): FLT_PARAMETERS__FileSystemControl_e__Union__Direct_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Direct_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_direct(val: FLT_PARAMETERS__FileSystemControl_e__Union__Direct_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Direct_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Direct_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__FileSystemControl_e__Union__VerifyVolume_e__Struct {
-    public var Vpb: CPointer<Wdk_impl.VPB> = CPointer<Wdk_impl.VPB>()
-    public var DeviceObject: CPointer<Wdk_impl.DEVICE_OBJECT> = CPointer<Wdk_impl.DEVICE_OBJECT>()
+    public var Vpb: CPointer<Wdk__impl_l0.VPB> = CPointer<Wdk__impl_l0.VPB>()
+    public var DeviceObject: CPointer<Wdk__impl_l0.DEVICE_OBJECT> = CPointer<Wdk__impl_l0.DEVICE_OBJECT>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__FileSystemControl_e__Union__Common_e__Struct {
     public var OutputBufferLength: UInt32 = 0
@@ -1502,7 +1536,7 @@ public struct FLT_PARAMETERS__FileSystemControl_e__Union__Common_e__Struct {
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__FileSystemControl_e__Union__Neither_e__Struct {
     public var OutputBufferLength: UInt32 = 0
@@ -1510,11 +1544,11 @@ public struct FLT_PARAMETERS__FileSystemControl_e__Union__Neither_e__Struct {
     public var FsControlCode: UInt32 = 0
     public var InputBuffer: CPointer<Unit> = CPointer<Unit>()
     public var OutputBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var OutputMdlAddress: CPointer<Wdk_impl.MDL> = CPointer<Wdk_impl.MDL>()
+    public var OutputMdlAddress: CPointer<Wdk__impl_l0.MDL> = CPointer<Wdk__impl_l0.MDL>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__FileSystemControl_e__Union__Buffered_e__Struct {
     public var OutputBufferLength: UInt32 = 0
@@ -1524,7 +1558,7 @@ public struct FLT_PARAMETERS__FileSystemControl_e__Union__Buffered_e__Struct {
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__FileSystemControl_e__Union__Direct_e__Struct {
     public var OutputBufferLength: UInt32 = 0
@@ -1532,124 +1566,130 @@ public struct FLT_PARAMETERS__FileSystemControl_e__Union__Direct_e__Struct {
     public var FsControlCode: UInt32 = 0
     public var InputSystemBuffer: CPointer<Unit> = CPointer<Unit>()
     public var OutputBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var OutputMdlAddress: CPointer<Wdk_impl.MDL> = CPointer<Wdk_impl.MDL>()
+    public var OutputMdlAddress: CPointer<Wdk__impl_l0.MDL> = CPointer<Wdk__impl_l0.MDL>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct FLT_PARAMETERS__DeviceIoControl_e__Union {
-    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
+    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
 
-    public func common(): FLT_PARAMETERS__DeviceIoControl_e__Union__Common_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Common_e__Struct>(p)
-            return ptr.read()
+    public mut prop common: FLT_PARAMETERS__DeviceIoControl_e__Union__Common_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Common_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Common_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_common(val: FLT_PARAMETERS__DeviceIoControl_e__Union__Common_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Common_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop neither: FLT_PARAMETERS__DeviceIoControl_e__Union__Neither_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Neither_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Neither_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func neither(): FLT_PARAMETERS__DeviceIoControl_e__Union__Neither_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Neither_e__Struct>(p)
-            return ptr.read()
+    public mut prop buffered: FLT_PARAMETERS__DeviceIoControl_e__Union__Buffered_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Buffered_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Buffered_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_neither(val: FLT_PARAMETERS__DeviceIoControl_e__Union__Neither_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Neither_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop direct: FLT_PARAMETERS__DeviceIoControl_e__Union__Direct_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Direct_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Direct_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func buffered(): FLT_PARAMETERS__DeviceIoControl_e__Union__Buffered_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Buffered_e__Struct>(p)
-            return ptr.read()
+    public mut prop fastIo: FLT_PARAMETERS__DeviceIoControl_e__Union__FastIo_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__FastIo_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_buffered(val: FLT_PARAMETERS__DeviceIoControl_e__Union__Buffered_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Buffered_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func direct(): FLT_PARAMETERS__DeviceIoControl_e__Union__Direct_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Direct_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_direct(val: FLT_PARAMETERS__DeviceIoControl_e__Union__Direct_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Direct_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func fastIo(): FLT_PARAMETERS__DeviceIoControl_e__Union__FastIo_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__FastIo_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fastIo(val: FLT_PARAMETERS__DeviceIoControl_e__Union__FastIo_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__FastIo_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__FastIo_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__DeviceIoControl_e__Union__Common_e__Struct {
     public var OutputBufferLength: UInt32 = 0
@@ -1658,7 +1698,7 @@ public struct FLT_PARAMETERS__DeviceIoControl_e__Union__Common_e__Struct {
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__DeviceIoControl_e__Union__Neither_e__Struct {
     public var OutputBufferLength: UInt32 = 0
@@ -1666,11 +1706,11 @@ public struct FLT_PARAMETERS__DeviceIoControl_e__Union__Neither_e__Struct {
     public var IoControlCode: UInt32 = 0
     public var InputBuffer: CPointer<Unit> = CPointer<Unit>()
     public var OutputBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var OutputMdlAddress: CPointer<Wdk_impl.MDL> = CPointer<Wdk_impl.MDL>()
+    public var OutputMdlAddress: CPointer<Wdk__impl_l0.MDL> = CPointer<Wdk__impl_l0.MDL>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__DeviceIoControl_e__Union__Buffered_e__Struct {
     public var OutputBufferLength: UInt32 = 0
@@ -1680,7 +1720,7 @@ public struct FLT_PARAMETERS__DeviceIoControl_e__Union__Buffered_e__Struct {
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__DeviceIoControl_e__Union__Direct_e__Struct {
     public var OutputBufferLength: UInt32 = 0
@@ -1688,11 +1728,11 @@ public struct FLT_PARAMETERS__DeviceIoControl_e__Union__Direct_e__Struct {
     public var IoControlCode: UInt32 = 0
     public var InputSystemBuffer: CPointer<Unit> = CPointer<Unit>()
     public var OutputBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var OutputMdlAddress: CPointer<Wdk_impl.MDL> = CPointer<Wdk_impl.MDL>()
+    public var OutputMdlAddress: CPointer<Wdk__impl_l0.MDL> = CPointer<Wdk__impl_l0.MDL>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__DeviceIoControl_e__Union__FastIo_e__Struct {
     public var OutputBufferLength: UInt32 = 0
@@ -1703,66 +1743,135 @@ public struct FLT_PARAMETERS__DeviceIoControl_e__Union__FastIo_e__Struct {
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+// packed(4)
 @C
 public struct FLT_PARAMETERS__LockControl_e__Struct {
     public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
 
-    // packed field `Length`: type `CPointer<Int64>` not supported by polyfill; skipped
-
-    public func key(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 8)
+    public mut prop length: CPointer<Int64> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Int64> = CPointer<Int64>()
+                return packedReadValue<CPointer<Int64>>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_key(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 8, val)
-            _raw = rawStorage
+    public mut prop key: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func byteOffset(): Int64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt64(base, 12)
+    public mut prop byteOffset: Int64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt64(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt64(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_byteOffset(val: Int64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt64(base, 12, val)
-            _raw = rawStorage
+    public mut prop processId: Wdk__impl_l0.PEPROCESS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: Wdk__impl_l0.PEPROCESS = Wdk__impl_l0.PEPROCESS()
+                return packedReadValue<Wdk__impl_l0.PEPROCESS>(base, 20, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 20, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `ProcessId`: type `Wdk_impl.PEPROCESS` not supported by polyfill; skipped
+    public mut prop failImmediately: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 28)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 28, val)
+                _raw = rawStorage
+            }
+        }
+    }
 
-    // packed field `FailImmediately`: type `Win32_Foundation.BOOLEAN` not supported by polyfill; skipped
-
-    // packed field `ExclusiveLock`: type `Win32_Foundation.BOOLEAN` not supported by polyfill; skipped
+    public mut prop exclusiveLock: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 29)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 29, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__QuerySecurity_e__Struct {
     public var SecurityInformation: UInt32 = 0
     public var Length: UInt32 = 0
     public var SecurityBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var MdlAddress: CPointer<Wdk_impl.MDL> = CPointer<Wdk_impl.MDL>()
+    public var MdlAddress: CPointer<Wdk__impl_l0.MDL> = CPointer<Wdk__impl_l0.MDL>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__SetSecurity_e__Struct {
     public var SecurityInformation: UInt32 = 0
@@ -1770,7 +1879,7 @@ public struct FLT_PARAMETERS__SetSecurity_e__Struct {
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__WMI_e__Struct {
     public var ProviderId: UIntNative = 0
@@ -1780,286 +1889,297 @@ public struct FLT_PARAMETERS__WMI_e__Struct {
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__QueryQuota_e__Struct {
     public var Length: UInt32 = 0
     public var StartSid: Win32_Security.PSID = CPointer<Unit>()
-    public var SidList: CPointer<Wdk_impl.FILE_GET_QUOTA_INFORMATION> = CPointer<Wdk_impl.FILE_GET_QUOTA_INFORMATION>()
+    public var SidList: CPointer<Wdk__impl_l0.FILE_GET_QUOTA_INFORMATION> = CPointer<Wdk__impl_l0.FILE_GET_QUOTA_INFORMATION>()
     public var SidListLength: UInt32 = 0
     public var QuotaBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var MdlAddress: CPointer<Wdk_impl.MDL> = CPointer<Wdk_impl.MDL>()
+    public var MdlAddress: CPointer<Wdk__impl_l0.MDL> = CPointer<Wdk__impl_l0.MDL>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__SetQuota_e__Struct {
     public var Length: UInt32 = 0
     public var QuotaBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var MdlAddress: CPointer<Wdk_impl.MDL> = CPointer<Wdk_impl.MDL>()
+    public var MdlAddress: CPointer<Wdk__impl_l0.MDL> = CPointer<Wdk__impl_l0.MDL>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct FLT_PARAMETERS__Pnp_e__Union {
-    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
+    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
 
-    public func startDevice(): FLT_PARAMETERS__Pnp_e__Union__StartDevice_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__StartDevice_e__Struct>(p)
-            return ptr.read()
+    public mut prop startDevice: FLT_PARAMETERS__Pnp_e__Union__StartDevice_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__StartDevice_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__StartDevice_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_startDevice(val: FLT_PARAMETERS__Pnp_e__Union__StartDevice_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__StartDevice_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop queryDeviceRelations: FLT_PARAMETERS__Pnp_e__Union__QueryDeviceRelations_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryDeviceRelations_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryDeviceRelations_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func queryDeviceRelations(): FLT_PARAMETERS__Pnp_e__Union__QueryDeviceRelations_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryDeviceRelations_e__Struct>(p)
-            return ptr.read()
+    public mut prop queryInterface: FLT_PARAMETERS__Pnp_e__Union__QueryInterface_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryInterface_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryInterface_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_queryDeviceRelations(val: FLT_PARAMETERS__Pnp_e__Union__QueryDeviceRelations_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryDeviceRelations_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop deviceCapabilities: FLT_PARAMETERS__Pnp_e__Union__DeviceCapabilities_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__DeviceCapabilities_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__DeviceCapabilities_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func queryInterface(): FLT_PARAMETERS__Pnp_e__Union__QueryInterface_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryInterface_e__Struct>(p)
-            return ptr.read()
+    public mut prop filterResourceRequirements: FLT_PARAMETERS__Pnp_e__Union__FilterResourceRequirements_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__FilterResourceRequirements_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__FilterResourceRequirements_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_queryInterface(val: FLT_PARAMETERS__Pnp_e__Union__QueryInterface_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryInterface_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop readWriteConfig: FLT_PARAMETERS__Pnp_e__Union__ReadWriteConfig_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__ReadWriteConfig_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__ReadWriteConfig_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func deviceCapabilities(): FLT_PARAMETERS__Pnp_e__Union__DeviceCapabilities_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__DeviceCapabilities_e__Struct>(p)
-            return ptr.read()
+    public mut prop setLock: FLT_PARAMETERS__Pnp_e__Union__SetLock_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__SetLock_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__SetLock_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_deviceCapabilities(val: FLT_PARAMETERS__Pnp_e__Union__DeviceCapabilities_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__DeviceCapabilities_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop queryId: FLT_PARAMETERS__Pnp_e__Union__QueryId_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryId_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryId_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func filterResourceRequirements(): FLT_PARAMETERS__Pnp_e__Union__FilterResourceRequirements_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__FilterResourceRequirements_e__Struct>(p)
-            return ptr.read()
+    public mut prop queryDeviceText: FLT_PARAMETERS__Pnp_e__Union__QueryDeviceText_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryDeviceText_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryDeviceText_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_filterResourceRequirements(val: FLT_PARAMETERS__Pnp_e__Union__FilterResourceRequirements_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__FilterResourceRequirements_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop usageNotification: FLT_PARAMETERS__Pnp_e__Union__UsageNotification_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__UsageNotification_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func readWriteConfig(): FLT_PARAMETERS__Pnp_e__Union__ReadWriteConfig_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__ReadWriteConfig_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_readWriteConfig(val: FLT_PARAMETERS__Pnp_e__Union__ReadWriteConfig_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__ReadWriteConfig_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func setLock(): FLT_PARAMETERS__Pnp_e__Union__SetLock_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__SetLock_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_setLock(val: FLT_PARAMETERS__Pnp_e__Union__SetLock_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__SetLock_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func queryId(): FLT_PARAMETERS__Pnp_e__Union__QueryId_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryId_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_queryId(val: FLT_PARAMETERS__Pnp_e__Union__QueryId_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryId_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func queryDeviceText(): FLT_PARAMETERS__Pnp_e__Union__QueryDeviceText_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryDeviceText_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_queryDeviceText(val: FLT_PARAMETERS__Pnp_e__Union__QueryDeviceText_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryDeviceText_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func usageNotification(): FLT_PARAMETERS__Pnp_e__Union__UsageNotification_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__UsageNotification_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_usageNotification(val: FLT_PARAMETERS__Pnp_e__Union__UsageNotification_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__UsageNotification_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__UsageNotification_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__Pnp_e__Union__StartDevice_e__Struct {
-    public var AllocatedResources: CPointer<Wdk_impl.CM_RESOURCE_LIST> = CPointer<Wdk_impl.CM_RESOURCE_LIST>()
-    public var AllocatedResourcesTranslated: CPointer<Wdk_impl.CM_RESOURCE_LIST> = CPointer<Wdk_impl.CM_RESOURCE_LIST>()
+    public var AllocatedResources: CPointer<Wdk__impl_l0.CM_RESOURCE_LIST> = CPointer<Wdk__impl_l0.CM_RESOURCE_LIST>()
+    public var AllocatedResourcesTranslated: CPointer<Wdk__impl_l0.CM_RESOURCE_LIST> = CPointer<Wdk__impl_l0.CM_RESOURCE_LIST>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__Pnp_e__Union__QueryDeviceRelations_e__Struct {
-    public var Type: Wdk_impl.DEVICE_RELATION_TYPE = Wdk_impl.DEVICE_RELATION_TYPE()
+    public var Type: Int32 = 0
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__Pnp_e__Union__QueryInterface_e__Struct {
     public var InterfaceType: CPointer<GUID> = CPointer<GUID>()
     public var Size: UInt16 = 0
     public var Version: UInt16 = 0
-    public var Interface: CPointer<Wdk_impl.INTERFACE> = CPointer<Wdk_impl.INTERFACE>()
+    public var Interface: CPointer<Wdk__impl_l0.INTERFACE> = CPointer<Wdk__impl_l0.INTERFACE>()
     public var InterfaceSpecificData: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__Pnp_e__Union__DeviceCapabilities_e__Struct {
-    public var Capabilities: CPointer<Wdk_impl.DEVICE_CAPABILITIES> = CPointer<Wdk_impl.DEVICE_CAPABILITIES>()
+    public var Capabilities: CPointer<Wdk__impl_l0.DEVICE_CAPABILITIES> = CPointer<Wdk__impl_l0.DEVICE_CAPABILITIES>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__Pnp_e__Union__FilterResourceRequirements_e__Struct {
-    public var IoResourceRequirementList: CPointer<Wdk_impl.IO_RESOURCE_REQUIREMENTS_LIST> = CPointer<Wdk_impl.IO_RESOURCE_REQUIREMENTS_LIST>()
+    public var IoResourceRequirementList: CPointer<Wdk__impl_l0.IO_RESOURCE_REQUIREMENTS_LIST> = CPointer<Wdk__impl_l0.IO_RESOURCE_REQUIREMENTS_LIST>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__Pnp_e__Union__ReadWriteConfig_e__Struct {
     public var WhichSpace: UInt32 = 0
@@ -2069,337 +2189,504 @@ public struct FLT_PARAMETERS__Pnp_e__Union__ReadWriteConfig_e__Struct {
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__Pnp_e__Union__SetLock_e__Struct {
-    public var Lock: Win32_Foundation.BOOLEAN = 0
+    public var Lock: UInt8 = 0
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__Pnp_e__Union__QueryId_e__Struct {
-    public var IdType: Wdk_impl.BUS_QUERY_ID_TYPE = Wdk_impl.BUS_QUERY_ID_TYPE()
+    public var IdType: Int32 = 0
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__Pnp_e__Union__QueryDeviceText_e__Struct {
-    public var DeviceTextType: Wdk_impl.DEVICE_TEXT_TYPE = Wdk_impl.DEVICE_TEXT_TYPE()
+    public var DeviceTextType: Int32 = 0
     public var LocaleId: UInt32 = 0
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__Pnp_e__Union__UsageNotification_e__Struct {
-    public var InPath: Win32_Foundation.BOOLEAN = 0
-    public var Reserved: VArray<Win32_Foundation.BOOLEAN, $3> = VArray<Win32_Foundation.BOOLEAN, $3>(repeat: 0)
-    public var Type: Wdk_impl.DEVICE_USAGE_NOTIFICATION_TYPE = Wdk_impl.DEVICE_USAGE_NOTIFICATION_TYPE()
+    public var InPath: UInt8 = 0
+    public var Reserved: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
+    public var Type: Int32 = 0
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__AcquireForSectionSynchronization_e__Struct {
-    public var SyncType: Wdk_impl.FS_FILTER_SECTION_SYNC_TYPE = Wdk_impl.FS_FILTER_SECTION_SYNC_TYPE()
+    public var SyncType: Int32 = 0
     public var PageProtection: UInt32 = 0
-    public var OutputInformation: CPointer<Wdk_impl.FS_FILTER_SECTION_SYNC_OUTPUT> = CPointer<Wdk_impl.FS_FILTER_SECTION_SYNC_OUTPUT>()
+    public var OutputInformation: CPointer<Wdk__impl_l0.FS_FILTER_SECTION_SYNC_OUTPUT> = CPointer<Wdk__impl_l0.FS_FILTER_SECTION_SYNC_OUTPUT>()
     public var Flags: UInt32 = 0
     public var AllocationAttributes: UInt32 = 0
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__AcquireForModifiedPageWriter_e__Struct {
     public var EndingOffset: CPointer<Int64> = CPointer<Int64>()
-    public var ResourceToRelease: CPointer<CPointer<Wdk_impl.ERESOURCE>> = CPointer<CPointer<Wdk_impl.ERESOURCE>>()
+    public var ResourceToRelease: CPointer<CPointer<Wdk__impl_l0.ERESOURCE>> = CPointer<CPointer<Wdk__impl_l0.ERESOURCE>>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__ReleaseForModifiedPageWriter_e__Struct {
-    public var ResourceToRelease: CPointer<Wdk_impl.ERESOURCE> = CPointer<Wdk_impl.ERESOURCE>()
+    public var ResourceToRelease: CPointer<Wdk__impl_l0.ERESOURCE> = CPointer<Wdk__impl_l0.ERESOURCE>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__QueryOpen_e__Struct {
-    public var Irp: CPointer<Wdk_impl.IRP> = CPointer<Wdk_impl.IRP>()
+    public var Irp: CPointer<Wdk__impl_l0.IRP> = CPointer<Wdk__impl_l0.IRP>()
     public var FileInformation: CPointer<Unit> = CPointer<Unit>()
     public var Length: CPointer<UInt32> = CPointer<UInt32>()
-    public var FileInformationClass: Wdk_impl.FILE_INFORMATION_CLASS = Wdk_impl.FILE_INFORMATION_CLASS()
+    public var FileInformationClass: Int32 = 0
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+// packed(4)
 @C
 public struct FLT_PARAMETERS__FastIoCheckIfPossible_e__Struct {
     public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
 
-    public func fileOffset(): Int64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt64(base, 0)
+    public mut prop fileOffset: Int64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_fileOffset(val: Int64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop length: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func length(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 8)
+    public mut prop lockKey: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_length(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 8, val)
-            _raw = rawStorage
+    public mut prop checkForReadOperation: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public func lockKey(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
-        }
-    }
-
-    public mut func set_lockKey(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `CheckForReadOperation`: type `Win32_Foundation.BOOLEAN` not supported by polyfill; skipped
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__NetworkQueryOpen_e__Struct {
-    public var Irp: CPointer<Wdk_impl.IRP> = CPointer<Wdk_impl.IRP>()
-    public var NetworkInformation: CPointer<Wdk_impl.FILE_NETWORK_OPEN_INFORMATION> = CPointer<Wdk_impl.FILE_NETWORK_OPEN_INFORMATION>()
+    public var Irp: CPointer<Wdk__impl_l0.IRP> = CPointer<Wdk__impl_l0.IRP>()
+    public var NetworkInformation: CPointer<Wdk__impl_l0.FILE_NETWORK_OPEN_INFORMATION> = CPointer<Wdk__impl_l0.FILE_NETWORK_OPEN_INFORMATION>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+// packed(4)
 @C
 public struct FLT_PARAMETERS__MdlRead_e__Struct {
     public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
 
-    public func fileOffset(): Int64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt64(base, 0)
+    public mut prop fileOffset: Int64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_fileOffset(val: Int64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop length: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func length(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 8)
+    public mut prop key: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_length(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 8, val)
-            _raw = rawStorage
+    public mut prop mdlChain: CPointer<CPointer<Wdk__impl_l0.MDL>> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<CPointer<Wdk__impl_l0.MDL>> = CPointer<CPointer<Wdk__impl_l0.MDL>>()
+                return packedReadValue<CPointer<CPointer<Wdk__impl_l0.MDL>>>(base, 16, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public func key(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
-        }
-    }
-
-    public mut func set_key(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `MdlChain`: type `CPointer<CPointer<Wdk_impl.MDL>>` not supported by polyfill; skipped
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__MdlReadComplete_e__Struct {
-    public var MdlChain: CPointer<Wdk_impl.MDL> = CPointer<Wdk_impl.MDL>()
+    public var MdlChain: CPointer<Wdk__impl_l0.MDL> = CPointer<Wdk__impl_l0.MDL>()
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+// packed(4)
 @C
 public struct FLT_PARAMETERS__PrepareMdlWrite_e__Struct {
     public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
 
-    public func fileOffset(): Int64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt64(base, 0)
+    public mut prop fileOffset: Int64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_fileOffset(val: Int64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop length: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func length(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 8)
+    public mut prop key: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_length(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 8, val)
-            _raw = rawStorage
+    public mut prop mdlChain: CPointer<CPointer<Wdk__impl_l0.MDL>> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<CPointer<Wdk__impl_l0.MDL>> = CPointer<CPointer<Wdk__impl_l0.MDL>>()
+                return packedReadValue<CPointer<CPointer<Wdk__impl_l0.MDL>>>(base, 16, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public func key(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
-        }
-    }
-
-    public mut func set_key(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `MdlChain`: type `CPointer<CPointer<Wdk_impl.MDL>>` not supported by polyfill; skipped
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+// packed(4)
 @C
 public struct FLT_PARAMETERS__MdlWriteComplete_e__Struct {
     public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
 
-    public func fileOffset(): Int64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt64(base, 0)
+    public mut prop fileOffset: Int64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_fileOffset(val: Int64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop mdlChain: CPointer<Wdk__impl_l0.MDL> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Wdk__impl_l0.MDL> = CPointer<Wdk__impl_l0.MDL>()
+                return packedReadValue<CPointer<Wdk__impl_l0.MDL>>(base, 8, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    // packed field `MdlChain`: type `CPointer<Wdk_impl.MDL>` not supported by polyfill; skipped
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
 @C
 public struct FLT_PARAMETERS__MountVolume_e__Struct {
     public var DeviceType: UInt32 = 0
     public init() {}
 }
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+// packed(4)
 @C
 public struct FLT_PARAMETERS__Others_e__Struct {
     public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0u8)
 
-    // packed field `Argument1`: type `CPointer<Unit>` not supported by polyfill; skipped
-
-    // packed field `Argument2`: type `CPointer<Unit>` not supported by polyfill; skipped
-
-    // packed field `Argument3`: type `CPointer<Unit>` not supported by polyfill; skipped
-
-    // packed field `Argument4`: type `CPointer<Unit>` not supported by polyfill; skipped
-
-    // packed field `Argument5`: type `CPointer<Unit>` not supported by polyfill; skipped
-
-    public func argument6(): Int64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt64(base, 40)
+    public mut prop argument1: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Unit> = CPointer<Unit>()
+                return packedReadValue<CPointer<Unit>>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_argument6(val: Int64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt64(base, 40, val)
-            _raw = rawStorage
+    public mut prop argument2: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Unit> = CPointer<Unit>()
+                return packedReadValue<CPointer<Unit>>(base, 8, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 8, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop argument3: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Unit> = CPointer<Unit>()
+                return packedReadValue<CPointer<Unit>>(base, 16, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 16, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop argument4: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Unit> = CPointer<Unit>()
+                return packedReadValue<CPointer<Unit>>(base, 24, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 24, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop argument5: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Unit> = CPointer<Unit>()
+                return packedReadValue<CPointer<Unit>>(base, 32, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 32, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop argument6: Int64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt64(base, 40)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt64(base, 40, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-@C
 public struct FLT_POSTOP_CALLBACK_STATUS {
     public var value: Int32 = 0
 
@@ -2427,7 +2714,6 @@ public let FLT_POSTOP_CALLBACK_STATUS_FLT_POSTOP_MORE_PROCESSING_REQUIRED: FLT_P
 public let FLT_POSTOP_CALLBACK_STATUS_FLT_POSTOP_DISALLOW_FSFILTER_IO: FLT_POSTOP_CALLBACK_STATUS = FLT_POSTOP_CALLBACK_STATUS(2)
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-@C
 public struct FLT_PREOP_CALLBACK_STATUS {
     public var value: Int32 = 0
 
@@ -2467,67 +2753,6 @@ public let FLT_PREOP_CALLBACK_STATUS_FLT_PREOP_SYNCHRONIZE: FLT_PREOP_CALLBACK_S
 public let FLT_PREOP_CALLBACK_STATUS_FLT_PREOP_DISALLOW_FSFILTER_IO: FLT_PREOP_CALLBACK_STATUS = FLT_PREOP_CALLBACK_STATUS(6)
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-@C
-public struct FLT_REGISTRATION {
-    public var Size: UInt16 = 0
-    public var Version: UInt16 = 0
-    public var Flags: UInt32 = 0
-    public var ContextRegistration: CPointer<FLT_CONTEXT_REGISTRATION> = CPointer<FLT_CONTEXT_REGISTRATION>()
-    public var OperationRegistration: CPointer<FLT_OPERATION_REGISTRATION> = CPointer<FLT_OPERATION_REGISTRATION>()
-    public var FilterUnloadCallback: PFLT_FILTER_UNLOAD_CALLBACK = { _ => 0 }
-    public var InstanceSetupCallback: PFLT_INSTANCE_SETUP_CALLBACK = { _, _, _, _ => 0 }
-    public var InstanceQueryTeardownCallback: PFLT_INSTANCE_QUERY_TEARDOWN_CALLBACK = { _, _ => 0 }
-    public var InstanceTeardownStartCallback: PFLT_INSTANCE_TEARDOWN_CALLBACK = { _, _ => () }
-    public var InstanceTeardownCompleteCallback: PFLT_INSTANCE_TEARDOWN_CALLBACK = { _, _ => () }
-    public var GenerateFileNameCallback: PFLT_GENERATE_FILE_NAME = { _, _, _, _, _, _ => 0 }
-    public var NormalizeNameComponentCallback: PFLT_NORMALIZE_NAME_COMPONENT = { _, _, _, _, _, _, _, _ => 0 }
-    public var NormalizeContextCleanupCallback: PFLT_NORMALIZE_CONTEXT_CLEANUP = { _ => () }
-    public var TransactionNotificationCallback: PFLT_TRANSACTION_NOTIFICATION_CALLBACK = { _, _, _ => 0 }
-    public var NormalizeNameComponentExCallback: PFLT_NORMALIZE_NAME_COMPONENT_EX = { _, _, _, _, _, _, _, _, _ => 0 }
-    public var SectionNotificationCallback: PFLT_SECTION_CONFLICT_NOTIFICATION_CALLBACK = { _, _, _ => 0 }
-    public init() {}
-}
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-@C
-public struct FLT_RELATED_CONTEXTS {
-    public var VolumeContext: PFLT_CONTEXT = CPointer<Unit>()
-    public var InstanceContext: PFLT_CONTEXT = CPointer<Unit>()
-    public var FileContext: PFLT_CONTEXT = CPointer<Unit>()
-    public var StreamContext: PFLT_CONTEXT = CPointer<Unit>()
-    public var StreamHandleContext: PFLT_CONTEXT = CPointer<Unit>()
-    public var TransactionContext: PFLT_CONTEXT = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-@C
-public struct FLT_RELATED_CONTEXTS_EX {
-    public var VolumeContext: PFLT_CONTEXT = CPointer<Unit>()
-    public var InstanceContext: PFLT_CONTEXT = CPointer<Unit>()
-    public var FileContext: PFLT_CONTEXT = CPointer<Unit>()
-    public var StreamContext: PFLT_CONTEXT = CPointer<Unit>()
-    public var StreamHandleContext: PFLT_CONTEXT = CPointer<Unit>()
-    public var TransactionContext: PFLT_CONTEXT = CPointer<Unit>()
-    public var SectionContext: PFLT_CONTEXT = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-@C
-public struct FLT_RELATED_OBJECTS {
-    public var Size: UInt16 = 0
-    public var TransactionContext: UInt16 = 0
-    public var Filter: PFLT_FILTER = CPointer<Unit>()
-    public var Volume: PFLT_VOLUME = CPointer<Unit>()
-    public var Instance: PFLT_INSTANCE = CPointer<Unit>()
-    public var FileObject: CPointer<Wdk_impl.FILE_OBJECT> = CPointer<Wdk_impl.FILE_OBJECT>()
-    public var Transaction: CPointer<Wdk_impl.KTRANSACTION> = CPointer<Wdk_impl.KTRANSACTION>()
-    public init() {}
-}
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-@C
 public struct FLT_SET_CONTEXT_OPERATION {
     public var value: Int32 = 0
 
@@ -2562,92 +2787,97 @@ public struct FLT_TAG_DATA_BUFFER {
 }
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct FLT_TAG_DATA_BUFFER__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt32, $5> = VArray<UInt32, $5>(repeat: 0)
 
-    public func symbolicLinkReparseBuffer(): FLT_TAG_DATA_BUFFER__Anonymous_e__Union__SymbolicLinkReparseBuffer_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__SymbolicLinkReparseBuffer_e__Struct>(p)
-            return ptr.read()
+    public mut prop symbolicLinkReparseBuffer: FLT_TAG_DATA_BUFFER__Anonymous_e__Union__SymbolicLinkReparseBuffer_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__SymbolicLinkReparseBuffer_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__SymbolicLinkReparseBuffer_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_symbolicLinkReparseBuffer(val: FLT_TAG_DATA_BUFFER__Anonymous_e__Union__SymbolicLinkReparseBuffer_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__SymbolicLinkReparseBuffer_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop mountPointReparseBuffer: FLT_TAG_DATA_BUFFER__Anonymous_e__Union__MountPointReparseBuffer_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__MountPointReparseBuffer_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__MountPointReparseBuffer_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func mountPointReparseBuffer(): FLT_TAG_DATA_BUFFER__Anonymous_e__Union__MountPointReparseBuffer_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__MountPointReparseBuffer_e__Struct>(p)
-            return ptr.read()
+    public mut prop genericReparseBuffer: FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericReparseBuffer_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericReparseBuffer_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericReparseBuffer_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_mountPointReparseBuffer(val: FLT_TAG_DATA_BUFFER__Anonymous_e__Union__MountPointReparseBuffer_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__MountPointReparseBuffer_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop genericGUIDReparseBuffer: FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericGUIDReparseBuffer_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericGUIDReparseBuffer_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func genericReparseBuffer(): FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericReparseBuffer_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericReparseBuffer_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_genericReparseBuffer(val: FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericReparseBuffer_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericReparseBuffer_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func genericGUIDReparseBuffer(): FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericGUIDReparseBuffer_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericGUIDReparseBuffer_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_genericGUIDReparseBuffer(val: FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericGUIDReparseBuffer_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericGUIDReparseBuffer_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericGUIDReparseBuffer_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2707,46 +2937,14 @@ public struct FLT_VOLUME_PROPERTIES {
 }
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLTOPLOCK_PREPOST_CALLBACKDATA_ROUTINE = CFunc<(CPointer<FLT_CALLBACK_DATA>, CPointer<Unit>) -> Unit>
+@C
+public struct PFLT_CONTEXT {
+    public var Value: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLTOPLOCK_WAIT_COMPLETE_ROUTINE = CFunc<(CPointer<FLT_CALLBACK_DATA>, CPointer<Unit>) -> Unit>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_CALLBACK_DATA_QUEUE_ACQUIRE = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, CPointer<UInt8>) -> Unit>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_CALLBACK_DATA_QUEUE_COMPLETE_CANCELED_IO = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, CPointer<FLT_CALLBACK_DATA>) -> Unit>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_CALLBACK_DATA_QUEUE_INSERT_IO = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, CPointer<FLT_CALLBACK_DATA>, CPointer<Unit>) -> Int32>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_CALLBACK_DATA_QUEUE_PEEK_NEXT_IO = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, CPointer<FLT_CALLBACK_DATA>, CPointer<Unit>) -> CPointer<FLT_CALLBACK_DATA>>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_CALLBACK_DATA_QUEUE_RELEASE = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, UInt8) -> Unit>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_CALLBACK_DATA_QUEUE_REMOVE_IO = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, CPointer<FLT_CALLBACK_DATA>) -> Unit>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_COMPLETED_ASYNC_IO_CALLBACK = CFunc<(CPointer<FLT_CALLBACK_DATA>, PFLT_CONTEXT) -> Unit>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_COMPLETE_CANCELED_CALLBACK = CFunc<(CPointer<FLT_CALLBACK_DATA>) -> Unit>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_COMPLETE_LOCK_CALLBACK_DATA_ROUTINE = CFunc<(CPointer<Unit>, CPointer<FLT_CALLBACK_DATA>) -> Int32>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_CONNECT_NOTIFY = CFunc<(PFLT_PORT, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_CONTEXT = CPointer<Unit>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_CONTEXT_ALLOCATE_CALLBACK = CFunc<(Wdk_impl.POOL_TYPE, UIntNative, UInt16) -> CPointer<Unit>>
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && Windows_Wdk_Foundation == "on"]
+public type PFLT_CONTEXT_ALLOCATE_CALLBACK = CFunc<(Int32, UIntNative, UInt16) -> CPointer<Unit>>
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
 public type PFLT_CONTEXT_CLEANUP_CALLBACK = CFunc<(PFLT_CONTEXT, UInt16) -> Unit>
@@ -2755,43 +2953,41 @@ public type PFLT_CONTEXT_CLEANUP_CALLBACK = CFunc<(PFLT_CONTEXT, UInt16) -> Unit
 public type PFLT_CONTEXT_FREE_CALLBACK = CFunc<(CPointer<Unit>, UInt16) -> Unit>
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_DEFERRED_IO_WORKITEM = CPointer<Unit>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_DEFERRED_IO_WORKITEM_ROUTINE = CFunc<(PFLT_DEFERRED_IO_WORKITEM, CPointer<FLT_CALLBACK_DATA>, CPointer<Unit>) -> Unit>
+@C
+public struct PFLT_DEFERRED_IO_WORKITEM {
+    public var Value: IntNative = 0
+    public init() {}
+}
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
 public type PFLT_DISCONNECT_NOTIFY = CFunc<(CPointer<Unit>) -> Unit>
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_FILTER = CPointer<Unit>
+@C
+public struct PFLT_FILTER {
+    public var Value: IntNative = 0
+    public init() {}
+}
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
 public type PFLT_FILTER_UNLOAD_CALLBACK = CFunc<(UInt32) -> Int32>
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_GENERATE_FILE_NAME = CFunc<(PFLT_INSTANCE, CPointer<Wdk_impl.FILE_OBJECT>, CPointer<FLT_CALLBACK_DATA>, UInt32, CPointer<Win32_Foundation.BOOLEAN>, CPointer<FLT_NAME_CONTROL>) -> Int32>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_GENERIC_WORKITEM = CPointer<Unit>
+@C
+public struct PFLT_GENERIC_WORKITEM {
+    public var Value: IntNative = 0
+    public init() {}
+}
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
 public type PFLT_GENERIC_WORKITEM_ROUTINE = CFunc<(PFLT_GENERIC_WORKITEM, CPointer<Unit>, CPointer<Unit>) -> Unit>
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_GET_OPERATION_STATUS_CALLBACK = CFunc<(CPointer<FLT_RELATED_OBJECTS>, CPointer<FLT_IO_PARAMETER_BLOCK>, Int32, CPointer<Unit>) -> Unit>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_INSTANCE = CPointer<Unit>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_INSTANCE_QUERY_TEARDOWN_CALLBACK = CFunc<(CPointer<FLT_RELATED_OBJECTS>, UInt32) -> Int32>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_INSTANCE_SETUP_CALLBACK = CFunc<(CPointer<FLT_RELATED_OBJECTS>, UInt32, UInt32, Win32_Storage_InstallableFileSystems.FLT_FILESYSTEM_TYPE) -> Int32>
-
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_INSTANCE_TEARDOWN_CALLBACK = CFunc<(CPointer<FLT_RELATED_OBJECTS>, UInt32) -> Unit>
+@C
+public struct PFLT_INSTANCE {
+    public var Value: IntNative = 0
+    public init() {}
+}
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
 public type PFLT_MESSAGE_NOTIFY = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32>
@@ -2799,29 +2995,289 @@ public type PFLT_MESSAGE_NOTIFY = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32,
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
 public type PFLT_NORMALIZE_CONTEXT_CLEANUP = CFunc<(CPointer<CPointer<Unit>>) -> Unit>
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_NORMALIZE_NAME_COMPONENT = CFunc<(PFLT_INSTANCE, CPointer<Win32_Foundation.UNICODE_STRING>, UInt16, CPointer<Win32_Foundation.UNICODE_STRING>, CPointer<Wdk_impl.FILE_NAMES_INFORMATION>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32>
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && Windows_Wdk_Storage_FileSystem == "on"]
+public type PFLT_NORMALIZE_NAME_COMPONENT = CFunc<(PFLT_INSTANCE, CPointer<Win32_Foundation.UNICODE_STRING>, UInt16, CPointer<Win32_Foundation.UNICODE_STRING>, CPointer<Wdk__impl_l0.FILE_NAMES_INFORMATION>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on")]
+public type PFLT_NORMALIZE_NAME_COMPONENT_EX = CFunc<(PFLT_INSTANCE, CPointer<Wdk__impl_l0.FILE_OBJECT>, CPointer<Win32_Foundation.UNICODE_STRING>, UInt16, CPointer<Win32_Foundation.UNICODE_STRING>, CPointer<Wdk__impl_l0.FILE_NAMES_INFORMATION>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32>
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_NORMALIZE_NAME_COMPONENT_EX = CFunc<(PFLT_INSTANCE, CPointer<Wdk_impl.FILE_OBJECT>, CPointer<Win32_Foundation.UNICODE_STRING>, UInt16, CPointer<Win32_Foundation.UNICODE_STRING>, CPointer<Wdk_impl.FILE_NAMES_INFORMATION>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32>
+@C
+public struct PFLT_PORT {
+    public var Value: IntNative = 0
+    public init() {}
+}
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_PORT = CPointer<Unit>
+@C
+public struct PFLT_VOLUME {
+    public var Value: IntNative = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && Windows_Wdk_Foundation == "on"]
+@C
+public struct FLT_CONTEXT_REGISTRATION {
+    public var ContextType: UInt16 = 0
+    public var Flags: UInt16 = 0
+    public var ContextCleanupCallback: PFLT_CONTEXT_CLEANUP_CALLBACK = CFunc<(PFLT_CONTEXT, UInt16) -> Unit>(CPointer<Unit>())
+    public var Size: UIntNative = 0
+    public var PoolTag: UInt32 = 0
+    public var ContextAllocateCallback: PFLT_CONTEXT_ALLOCATE_CALLBACK = CFunc<(Int32, UIntNative, UInt16) -> CPointer<Unit>>(CPointer<Unit>())
+    public var ContextFreeCallback: PFLT_CONTEXT_FREE_CALLBACK = CFunc<(CPointer<Unit>, UInt16) -> Unit>(CPointer<Unit>())
+    public var Reserved1: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_POST_OPERATION_CALLBACK = CFunc<(CPointer<FLT_CALLBACK_DATA>, CPointer<FLT_RELATED_OBJECTS>, CPointer<Unit>, UInt32) -> FLT_POSTOP_CALLBACK_STATUS>
+@C
+public struct FLT_CREATEFILE_TARGET_ECP_CONTEXT {
+    public var Instance: PFLT_INSTANCE = PFLT_INSTANCE()
+    public var Volume: PFLT_VOLUME = PFLT_VOLUME()
+    public var FileNameInformation: CPointer<FLT_FILE_NAME_INFORMATION> = CPointer<FLT_FILE_NAME_INFORMATION>()
+    public var Flags: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+@C
+public struct FLT_IO_PARAMETER_BLOCK {
+    public var IrpFlags: UInt32 = 0
+    public var MajorFunction: UInt8 = 0
+    public var MinorFunction: UInt8 = 0
+    public var OperationFlags: UInt8 = 0
+    public var Reserved: UInt8 = 0
+    public var TargetFileObject: CPointer<Wdk__impl_l0.FILE_OBJECT> = CPointer<Wdk__impl_l0.FILE_OBJECT>()
+    public var TargetInstance: PFLT_INSTANCE = PFLT_INSTANCE()
+    public var Parameters: FLT_PARAMETERS = FLT_PARAMETERS()
+    public init() {}
+}
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_PRE_OPERATION_CALLBACK = CFunc<(CPointer<FLT_CALLBACK_DATA>, CPointer<FLT_RELATED_OBJECTS>, CPointer<CPointer<Unit>>) -> FLT_PREOP_CALLBACK_STATUS>
+@C
+public struct FLT_RELATED_CONTEXTS {
+    public var VolumeContext: PFLT_CONTEXT = PFLT_CONTEXT()
+    public var InstanceContext: PFLT_CONTEXT = PFLT_CONTEXT()
+    public var FileContext: PFLT_CONTEXT = PFLT_CONTEXT()
+    public var StreamContext: PFLT_CONTEXT = PFLT_CONTEXT()
+    public var StreamHandleContext: PFLT_CONTEXT = PFLT_CONTEXT()
+    public var TransactionContext: PFLT_CONTEXT = PFLT_CONTEXT()
+    public init() {}
+}
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_SECTION_CONFLICT_NOTIFICATION_CALLBACK = CFunc<(PFLT_INSTANCE, PFLT_CONTEXT, CPointer<FLT_CALLBACK_DATA>) -> Int32>
+@C
+public struct FLT_RELATED_CONTEXTS_EX {
+    public var VolumeContext: PFLT_CONTEXT = PFLT_CONTEXT()
+    public var InstanceContext: PFLT_CONTEXT = PFLT_CONTEXT()
+    public var FileContext: PFLT_CONTEXT = PFLT_CONTEXT()
+    public var StreamContext: PFLT_CONTEXT = PFLT_CONTEXT()
+    public var StreamHandleContext: PFLT_CONTEXT = PFLT_CONTEXT()
+    public var TransactionContext: PFLT_CONTEXT = PFLT_CONTEXT()
+    public var SectionContext: PFLT_CONTEXT = PFLT_CONTEXT()
+    public init() {}
+}
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on")]
+@C
+public struct FLT_RELATED_OBJECTS {
+    public var Size: UInt16 = 0
+    public var TransactionContext: UInt16 = 0
+    public var Filter: PFLT_FILTER = PFLT_FILTER()
+    public var Volume: PFLT_VOLUME = PFLT_VOLUME()
+    public var Instance: PFLT_INSTANCE = PFLT_INSTANCE()
+    public var FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT> = CPointer<Wdk__impl_l0.FILE_OBJECT>()
+    public var Transaction: CPointer<Wdk__impl_l0.KTRANSACTION> = CPointer<Wdk__impl_l0.KTRANSACTION>()
+    public init() {}
+}
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
+public type PFLT_CONNECT_NOTIFY = CFunc<(PFLT_PORT, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on")]
+public type PFLT_GET_OPERATION_STATUS_CALLBACK = CFunc<(CPointer<FLT_RELATED_OBJECTS>, CPointer<FLT_IO_PARAMETER_BLOCK>, Int32, CPointer<Unit>) -> Unit>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on")]
+public type PFLT_INSTANCE_QUERY_TEARDOWN_CALLBACK = CFunc<(CPointer<FLT_RELATED_OBJECTS>, UInt32) -> Int32>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_Storage_InstallableFileSystems == "on")]
+public type PFLT_INSTANCE_SETUP_CALLBACK = CFunc<(CPointer<FLT_RELATED_OBJECTS>, UInt32, UInt32, Int32) -> Int32>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on")]
+public type PFLT_INSTANCE_TEARDOWN_CALLBACK = CFunc<(CPointer<FLT_RELATED_OBJECTS>, UInt32) -> Unit>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on")]
 public type PFLT_TRANSACTION_NOTIFICATION_CALLBACK = CFunc<(CPointer<FLT_RELATED_OBJECTS>, PFLT_CONTEXT, UInt32) -> Int32>
 
-@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-public type PFLT_VOLUME = CPointer<Unit>
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+@C
+public struct FLT_CALLBACK_DATA {
+    public var Flags: UInt32 = 0
+    public var Thread: Wdk__impl_l0.PETHREAD = Wdk__impl_l0.PETHREAD()
+    public var Iopb: CPointer<FLT_IO_PARAMETER_BLOCK> = CPointer<FLT_IO_PARAMETER_BLOCK>()
+    public var IoStatus: Win32_System_IO.IO_STATUS_BLOCK = Win32_System_IO.IO_STATUS_BLOCK()
+    public var TagData: CPointer<FLT_TAG_DATA_BUFFER> = CPointer<FLT_TAG_DATA_BUFFER>()
+    public var Anonymous: FLT_CALLBACK_DATA__Anonymous_e__Union = FLT_CALLBACK_DATA__Anonymous_e__Union()
+    public var RequestorMode: Int8 = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FLT_CALLBACK_DATA__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+
+    public mut prop anonymous: FLT_CALLBACK_DATA__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_CALLBACK_DATA__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FLT_CALLBACK_DATA__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop filterContext: VArray<CPointer<Unit>, $4> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<CPointer<Unit>, $4>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<CPointer<Unit>, $4>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+@C
+public struct FLT_CALLBACK_DATA__Anonymous_e__Union__Anonymous_e__Struct {
+    public var QueueLinks: Win32__impl_l0.LIST_ENTRY = Win32__impl_l0.LIST_ENTRY()
+    public var QueueContext: VArray<CPointer<Unit>, $2> = VArray<CPointer<Unit>, $2>(repeat: CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+public type PFLTOPLOCK_PREPOST_CALLBACKDATA_ROUTINE = CFunc<(CPointer<FLT_CALLBACK_DATA>, CPointer<Unit>) -> Unit>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+public type PFLTOPLOCK_WAIT_COMPLETE_ROUTINE = CFunc<(CPointer<FLT_CALLBACK_DATA>, CPointer<Unit>) -> Unit>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+public type PFLT_COMPLETED_ASYNC_IO_CALLBACK = CFunc<(CPointer<FLT_CALLBACK_DATA>, PFLT_CONTEXT) -> Unit>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+public type PFLT_COMPLETE_CANCELED_CALLBACK = CFunc<(CPointer<FLT_CALLBACK_DATA>) -> Unit>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+public type PFLT_COMPLETE_LOCK_CALLBACK_DATA_ROUTINE = CFunc<(CPointer<Unit>, CPointer<FLT_CALLBACK_DATA>) -> Int32>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+public type PFLT_DEFERRED_IO_WORKITEM_ROUTINE = CFunc<(PFLT_DEFERRED_IO_WORKITEM, CPointer<FLT_CALLBACK_DATA>, CPointer<Unit>) -> Unit>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+public type PFLT_GENERATE_FILE_NAME = CFunc<(PFLT_INSTANCE, CPointer<Wdk__impl_l0.FILE_OBJECT>, CPointer<FLT_CALLBACK_DATA>, UInt32, CPointer<UInt8>, CPointer<FLT_NAME_CONTROL>) -> Int32>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+public type PFLT_POST_OPERATION_CALLBACK = CFunc<(CPointer<FLT_CALLBACK_DATA>, CPointer<FLT_RELATED_OBJECTS>, CPointer<Unit>, UInt32) -> Int32>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+public type PFLT_PRE_OPERATION_CALLBACK = CFunc<(CPointer<FLT_CALLBACK_DATA>, CPointer<FLT_RELATED_OBJECTS>, CPointer<CPointer<Unit>>) -> Int32>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+public type PFLT_SECTION_CONFLICT_NOTIFICATION_CALLBACK = CFunc<(PFLT_INSTANCE, PFLT_CONTEXT, CPointer<FLT_CALLBACK_DATA>) -> Int32>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+@C
+public struct FLT_OPERATION_REGISTRATION {
+    public var MajorFunction: UInt8 = 0
+    public var Flags: UInt32 = 0
+    public var PreOperation: PFLT_PRE_OPERATION_CALLBACK = CFunc<(CPointer<FLT_CALLBACK_DATA>, CPointer<FLT_RELATED_OBJECTS>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
+    public var PostOperation: PFLT_POST_OPERATION_CALLBACK = CFunc<(CPointer<FLT_CALLBACK_DATA>, CPointer<FLT_RELATED_OBJECTS>, CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var Reserved1: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_Storage_InstallableFileSystems == "on")]
+@C
+public struct FLT_REGISTRATION {
+    public var Size: UInt16 = 0
+    public var Version: UInt16 = 0
+    public var Flags: UInt32 = 0
+    public var ContextRegistration: CPointer<FLT_CONTEXT_REGISTRATION> = CPointer<FLT_CONTEXT_REGISTRATION>()
+    public var OperationRegistration: CPointer<FLT_OPERATION_REGISTRATION> = CPointer<FLT_OPERATION_REGISTRATION>()
+    public var FilterUnloadCallback: PFLT_FILTER_UNLOAD_CALLBACK = CFunc<(UInt32) -> Int32>(CPointer<Unit>())
+    public var InstanceSetupCallback: PFLT_INSTANCE_SETUP_CALLBACK = CFunc<(CPointer<FLT_RELATED_OBJECTS>, UInt32, UInt32, Int32) -> Int32>(CPointer<Unit>())
+    public var InstanceQueryTeardownCallback: PFLT_INSTANCE_QUERY_TEARDOWN_CALLBACK = CFunc<(CPointer<FLT_RELATED_OBJECTS>, UInt32) -> Int32>(CPointer<Unit>())
+    public var InstanceTeardownStartCallback: PFLT_INSTANCE_TEARDOWN_CALLBACK = CFunc<(CPointer<FLT_RELATED_OBJECTS>, UInt32) -> Unit>(CPointer<Unit>())
+    public var InstanceTeardownCompleteCallback: PFLT_INSTANCE_TEARDOWN_CALLBACK = CFunc<(CPointer<FLT_RELATED_OBJECTS>, UInt32) -> Unit>(CPointer<Unit>())
+    public var GenerateFileNameCallback: PFLT_GENERATE_FILE_NAME = CFunc<(PFLT_INSTANCE, CPointer<Wdk__impl_l0.FILE_OBJECT>, CPointer<FLT_CALLBACK_DATA>, UInt32, CPointer<UInt8>, CPointer<FLT_NAME_CONTROL>) -> Int32>(CPointer<Unit>())
+    public var NormalizeNameComponentCallback: PFLT_NORMALIZE_NAME_COMPONENT = CFunc<(PFLT_INSTANCE, CPointer<Win32_Foundation.UNICODE_STRING>, UInt16, CPointer<Win32_Foundation.UNICODE_STRING>, CPointer<Wdk__impl_l0.FILE_NAMES_INFORMATION>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
+    public var NormalizeContextCleanupCallback: PFLT_NORMALIZE_CONTEXT_CLEANUP = CFunc<(CPointer<CPointer<Unit>>) -> Unit>(CPointer<Unit>())
+    public var TransactionNotificationCallback: PFLT_TRANSACTION_NOTIFICATION_CALLBACK = CFunc<(CPointer<FLT_RELATED_OBJECTS>, PFLT_CONTEXT, UInt32) -> Int32>(CPointer<Unit>())
+    public var NormalizeNameComponentExCallback: PFLT_NORMALIZE_NAME_COMPONENT_EX = CFunc<(PFLT_INSTANCE, CPointer<Wdk__impl_l0.FILE_OBJECT>, CPointer<Win32_Foundation.UNICODE_STRING>, UInt16, CPointer<Win32_Foundation.UNICODE_STRING>, CPointer<Wdk__impl_l0.FILE_NAMES_INFORMATION>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
+    public var SectionNotificationCallback: PFLT_SECTION_CONFLICT_NOTIFICATION_CALLBACK = CFunc<(PFLT_INSTANCE, PFLT_CONTEXT, CPointer<FLT_CALLBACK_DATA>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_System_SystemServices == "on")]
+@C
+public struct FLT_CALLBACK_DATA_QUEUE {
+    public var Csq: Wdk__impl_l0.IO_CSQ = Wdk__impl_l0.IO_CSQ()
+    public var Flags: Int32 = 0
+    public var Instance: PFLT_INSTANCE = PFLT_INSTANCE()
+    public var InsertIo: PFLT_CALLBACK_DATA_QUEUE_INSERT_IO = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, CPointer<FLT_CALLBACK_DATA>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var RemoveIo: PFLT_CALLBACK_DATA_QUEUE_REMOVE_IO = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, CPointer<FLT_CALLBACK_DATA>) -> Unit>(CPointer<Unit>())
+    public var PeekNextIo: PFLT_CALLBACK_DATA_QUEUE_PEEK_NEXT_IO = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, CPointer<FLT_CALLBACK_DATA>, CPointer<Unit>) -> CPointer<FLT_CALLBACK_DATA>>(CPointer<Unit>())
+    public var Acquire: PFLT_CALLBACK_DATA_QUEUE_ACQUIRE = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, CPointer<UInt8>) -> Unit>(CPointer<Unit>())
+    public var Release: PFLT_CALLBACK_DATA_QUEUE_RELEASE = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, UInt8) -> Unit>(CPointer<Unit>())
+    public var CompleteCanceledIo: PFLT_CALLBACK_DATA_QUEUE_COMPLETE_CANCELED_IO = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, CPointer<FLT_CALLBACK_DATA>) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on")]
+public type PFLT_CALLBACK_DATA_QUEUE_ACQUIRE = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, CPointer<UInt8>) -> Unit>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on")]
+public type PFLT_CALLBACK_DATA_QUEUE_COMPLETE_CANCELED_IO = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, CPointer<FLT_CALLBACK_DATA>) -> Unit>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on")]
+public type PFLT_CALLBACK_DATA_QUEUE_INSERT_IO = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, CPointer<FLT_CALLBACK_DATA>, CPointer<Unit>) -> Int32>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_System_SystemServices == "on")]
+public type PFLT_CALLBACK_DATA_QUEUE_PEEK_NEXT_IO = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, CPointer<FLT_CALLBACK_DATA>, CPointer<Unit>) -> CPointer<FLT_CALLBACK_DATA>>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on")]
+public type PFLT_CALLBACK_DATA_QUEUE_RELEASE = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, UInt8) -> Unit>
+
+@When[Windows_Wdk_Storage_FileSystem_Minifilters == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on")]
+public type PFLT_CALLBACK_DATA_QUEUE_REMOVE_IO = CFunc<(CPointer<FLT_CALLBACK_DATA_QUEUE>, CPointer<FLT_CALLBACK_DATA>) -> Unit>
 
 @When[FLTMGR_SYS == "on"]
 foreign {
@@ -2830,247 +3286,63 @@ foreign {
     func FltAcquirePushLockExclusiveEx(PushLock: CPointer<UIntNative>, Flags: UInt32): Unit
     func FltAcquirePushLockShared(PushLock: CPointer<UIntNative>): Unit
     func FltAcquirePushLockSharedEx(PushLock: CPointer<UIntNative>, Flags: UInt32): Unit
-    func FltAcquireResourceExclusive(Resource: CPointer<Wdk_impl.ERESOURCE>): Unit
-    func FltAcquireResourceShared(Resource: CPointer<Wdk_impl.ERESOURCE>): Unit
-    func FltAddOpenReparseEntry(Filter: PFLT_FILTER, Data: CPointer<FLT_CALLBACK_DATA>, OpenReparseEntry: CPointer<Wdk_impl.OPEN_REPARSE_LIST_ENTRY>): Int32
     // param-hint: SourceDeviceStackSizeModified optional
-    func FltAdjustDeviceStackSizeForIoRedirection(SourceInstance: PFLT_INSTANCE, TargetInstance: PFLT_INSTANCE, SourceDeviceStackSizeModified: CPointer<Win32_Foundation.BOOLEAN>): Int32
-    // param-hint: FileObject optional
-    func FltAllocateCallbackData(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, RetNewCallbackData: CPointer<CPointer<FLT_CALLBACK_DATA>>): Int32
-    // param-hint: FileObject optional
-    func FltAllocateCallbackDataEx(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, Flags: UInt32, RetNewCallbackData: CPointer<CPointer<FLT_CALLBACK_DATA>>): Int32
-    func FltAllocateContext(Filter: PFLT_FILTER, ContextType: UInt16, ContextSize: UIntNative, PoolType: Wdk_impl.POOL_TYPE, ReturnedContext: CPointer<PFLT_CONTEXT>): Int32
+    func FltAdjustDeviceStackSizeForIoRedirection(SourceInstance: PFLT_INSTANCE, TargetInstance: PFLT_INSTANCE, SourceDeviceStackSizeModified: CPointer<UInt8>): Int32
     func FltAllocateDeferredIoWorkItem(): PFLT_DEFERRED_IO_WORKITEM
-    // param-hint: CleanupCallback optional
-    func FltAllocateExtraCreateParameter(Filter: PFLT_FILTER, EcpType: CPointer<GUID>, SizeOfContext: UInt32, Flags: UInt32, CleanupCallback: Wdk_impl.PFSRTL_EXTRA_CREATE_PARAMETER_CLEANUP_CALLBACK, PoolTag: UInt32, EcpContext: CPointer<CPointer<Unit>>): Int32
-    // param-hint: CleanupCallback optional
-    func FltAllocateExtraCreateParameterFromLookasideList(Filter: PFLT_FILTER, EcpType: CPointer<GUID>, SizeOfContext: UInt32, Flags: UInt32, CleanupCallback: Wdk_impl.PFSRTL_EXTRA_CREATE_PARAMETER_CLEANUP_CALLBACK, LookasideList: CPointer<Unit>, EcpContext: CPointer<CPointer<Unit>>): Int32
-    func FltAllocateExtraCreateParameterList(Filter: PFLT_FILTER, Flags: UInt32, EcpList: CPointer<CPointer<Wdk_impl.ECP_LIST>>): Int32
-    // param-hint: CompleteLockCallbackDataRoutine optional
-    // param-hint: UnlockRoutine optional
-    func FltAllocateFileLock(CompleteLockCallbackDataRoutine: PFLT_COMPLETE_LOCK_CALLBACK_DATA_ROUTINE, UnlockRoutine: Wdk_impl.PUNLOCK_ROUTINE): CPointer<Wdk_impl.FILE_LOCK>
     func FltAllocateGenericWorkItem(): PFLT_GENERIC_WORKITEM
-    func FltAllocatePoolAlignedWithTag(Instance: PFLT_INSTANCE, PoolType: Wdk_impl.POOL_TYPE, NumberOfBytes: UIntNative, Tag: UInt32): CPointer<Unit>
-    // param-hint: OutputPriorityInfo optional
-    func FltApplyPriorityInfoThread(InputPriorityInfo: CPointer<Wdk_impl.IO_PRIORITY_INFO>, OutputPriorityInfo: CPointer<Wdk_impl.IO_PRIORITY_INFO>, Thread: Wdk_impl.PETHREAD): Int32
     // param-hint: InstanceName optional
     // param-hint: RetInstance optional
     func FltAttachVolume(Filter: PFLT_FILTER, Volume: PFLT_VOLUME, InstanceName: CPointer<Win32_Foundation.UNICODE_STRING>, RetInstance: CPointer<PFLT_INSTANCE>): Int32
     // param-hint: InstanceName optional
     // param-hint: RetInstance optional
     func FltAttachVolumeAtAltitude(Filter: PFLT_FILTER, Volume: PFLT_VOLUME, Altitude: CPointer<Win32_Foundation.UNICODE_STRING>, InstanceName: CPointer<Win32_Foundation.UNICODE_STRING>, RetInstance: CPointer<PFLT_INSTANCE>): Int32
-    func FltBuildDefaultSecurityDescriptor(SecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, DesiredAccess: UInt32): Int32
-    func FltCancelFileOpen(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>): Unit
-    func FltCancelIo(CallbackData: CPointer<FLT_CALLBACK_DATA>): Win32_Foundation.BOOLEAN
-    // param-hint: ObjectArray len=param[0]
-    // param-hint: Timeout optional
-    // param-hint: WaitBlockArray optional
-    func FltCancellableWaitForMultipleObjects(Count: UInt32, ObjectArray: CPointer<CPointer<Unit>>, WaitType: Win32_impl.WAIT_TYPE, Timeout: CPointer<Int64>, WaitBlockArray: CPointer<Wdk_impl.KWAIT_BLOCK>, CallbackData: CPointer<FLT_CALLBACK_DATA>): Int32
-    // param-hint: Timeout optional
-    // param-hint: CallbackData optional
-    func FltCancellableWaitForSingleObject(Object: CPointer<Unit>, Timeout: CPointer<Int64>, CallbackData: CPointer<FLT_CALLBACK_DATA>): Int32
-    func FltCbdqDisable(Cbdq: CPointer<FLT_CALLBACK_DATA_QUEUE>): Unit
-    func FltCbdqEnable(Cbdq: CPointer<FLT_CALLBACK_DATA_QUEUE>): Unit
-    func FltCbdqInitialize(Instance: PFLT_INSTANCE, Cbdq: CPointer<FLT_CALLBACK_DATA_QUEUE>, CbdqInsertIo: PFLT_CALLBACK_DATA_QUEUE_INSERT_IO, CbdqRemoveIo: PFLT_CALLBACK_DATA_QUEUE_REMOVE_IO, CbdqPeekNextIo: PFLT_CALLBACK_DATA_QUEUE_PEEK_NEXT_IO, CbdqAcquire: PFLT_CALLBACK_DATA_QUEUE_ACQUIRE, CbdqRelease: PFLT_CALLBACK_DATA_QUEUE_RELEASE, CbdqCompleteCanceledIo: PFLT_CALLBACK_DATA_QUEUE_COMPLETE_CANCELED_IO): Int32
-    // param-hint: Context optional
-    // param-hint: InsertContext optional
-    func FltCbdqInsertIo(Cbdq: CPointer<FLT_CALLBACK_DATA_QUEUE>, Cbd: CPointer<FLT_CALLBACK_DATA>, Context: CPointer<Wdk_impl.IO_CSQ_IRP_CONTEXT>, InsertContext: CPointer<Unit>): Int32
-    func FltCbdqRemoveIo(Cbdq: CPointer<FLT_CALLBACK_DATA_QUEUE>, Context: CPointer<Wdk_impl.IO_CSQ_IRP_CONTEXT>): CPointer<FLT_CALLBACK_DATA>
-    // param-hint: PeekContext optional
-    func FltCbdqRemoveNextIo(Cbdq: CPointer<FLT_CALLBACK_DATA_QUEUE>, PeekContext: CPointer<Unit>): CPointer<FLT_CALLBACK_DATA>
     func FltCheckAndGrowNameControl(NameCtrl: CPointer<FLT_NAME_CONTROL>, NewSize: UInt16): Int32
-    func FltCheckLockForReadAccess(FileLock: CPointer<Wdk_impl.FILE_LOCK>, CallbackData: CPointer<FLT_CALLBACK_DATA>): Win32_Foundation.BOOLEAN
-    func FltCheckLockForWriteAccess(FileLock: CPointer<Wdk_impl.FILE_LOCK>, CallbackData: CPointer<FLT_CALLBACK_DATA>): Win32_Foundation.BOOLEAN
-    // param-hint: Context optional
-    // param-hint: WaitCompletionRoutine optional
-    // param-hint: PrePostCallbackDataRoutine optional
-    func FltCheckOplock(Oplock: CPointer<CPointer<Unit>>, CallbackData: CPointer<FLT_CALLBACK_DATA>, Context: CPointer<Unit>, WaitCompletionRoutine: PFLTOPLOCK_WAIT_COMPLETE_ROUTINE, PrePostCallbackDataRoutine: PFLTOPLOCK_PREPOST_CALLBACKDATA_ROUTINE): FLT_PREOP_CALLBACK_STATUS
-    // param-hint: Context optional
-    // param-hint: WaitCompletionRoutine optional
-    // param-hint: PrePostCallbackDataRoutine optional
-    func FltCheckOplockEx(Oplock: CPointer<CPointer<Unit>>, CallbackData: CPointer<FLT_CALLBACK_DATA>, Flags: UInt32, Context: CPointer<Unit>, WaitCompletionRoutine: PFLTOPLOCK_WAIT_COMPLETE_ROUTINE, PrePostCallbackDataRoutine: PFLTOPLOCK_PREPOST_CALLBACKDATA_ROUTINE): FLT_PREOP_CALLBACK_STATUS
-    func FltClearCallbackDataDirty(Data: CPointer<FLT_CALLBACK_DATA>): Unit
-    func FltClearCancelCompletion(CallbackData: CPointer<FLT_CALLBACK_DATA>): Int32
     func FltClose(FileHandle: CPointer<Unit>): Int32
     func FltCloseClientPort(Filter: PFLT_FILTER, ClientPort: CPointer<PFLT_PORT>): Unit
     func FltCloseCommunicationPort(ServerPort: PFLT_PORT): Unit
     func FltCloseSectionForDataScan(SectionContext: PFLT_CONTEXT): Int32
-    // param-hint: TransactionContext optional
-    func FltCommitComplete(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk_impl.KTRANSACTION>, TransactionContext: PFLT_CONTEXT): Int32
-    // param-hint: TransactionContext optional
-    func FltCommitFinalizeComplete(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk_impl.KTRANSACTION>, TransactionContext: PFLT_CONTEXT): Int32
     func FltCompareInstanceAltitudes(Instance1: PFLT_INSTANCE, Instance2: PFLT_INSTANCE): Int32
-    func FltCompletePendedPostOperation(CallbackData: CPointer<FLT_CALLBACK_DATA>): Unit
-    // param-hint: Context optional
-    func FltCompletePendedPreOperation(CallbackData: CPointer<FLT_CALLBACK_DATA>, CallbackStatus: FLT_PREOP_CALLBACK_STATUS, Context: CPointer<Unit>): Unit
-    func FltCopyOpenReparseList(Filter: PFLT_FILTER, Data: CPointer<FLT_CALLBACK_DATA>, EcpList: CPointer<Wdk_impl.ECP_LIST>): Int32
-    // param-hint: ServerPortCookie optional
-    // param-hint: MessageNotifyCallback optional
-    func FltCreateCommunicationPort(Filter: PFLT_FILTER, ServerPort: CPointer<PFLT_PORT>, ObjectAttributes: CPointer<Wdk_impl.OBJECT_ATTRIBUTES>, ServerPortCookie: CPointer<Unit>, ConnectNotifyCallback: PFLT_CONNECT_NOTIFY, DisconnectNotifyCallback: PFLT_DISCONNECT_NOTIFY, MessageNotifyCallback: PFLT_MESSAGE_NOTIFY, MaxConnections: Int32): Int32
-    // param-hint: Instance optional
-    // param-hint: AllocationSize optional
-    // param-hint: EaBuffer bytes=param[12] optional
-    func FltCreateFile(Filter: PFLT_FILTER, Instance: PFLT_INSTANCE, FileHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl.OBJECT_ATTRIBUTES>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, AllocationSize: CPointer<Int64>, FileAttributes: UInt32, ShareAccess: UInt32, CreateDisposition: UInt32, CreateOptions: UInt32, EaBuffer: CPointer<Unit>, EaLength: UInt32, Flags: UInt32): Int32
-    // param-hint: Instance optional
-    // param-hint: FileObject optional
-    // param-hint: AllocationSize optional
-    // param-hint: EaBuffer bytes=param[13] optional
-    func FltCreateFileEx(Filter: PFLT_FILTER, Instance: PFLT_INSTANCE, FileHandle: CPointer<CPointer<Unit>>, FileObject: CPointer<CPointer<Wdk_impl.FILE_OBJECT>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl.OBJECT_ATTRIBUTES>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, AllocationSize: CPointer<Int64>, FileAttributes: UInt32, ShareAccess: UInt32, CreateDisposition: UInt32, CreateOptions: UInt32, EaBuffer: CPointer<Unit>, EaLength: UInt32, Flags: UInt32): Int32
-    // param-hint: Instance optional
-    // param-hint: FileObject optional
-    // param-hint: AllocationSize optional
-    // param-hint: EaBuffer bytes=param[13] optional
-    // param-hint: DriverContext optional
-    func FltCreateFileEx2(Filter: PFLT_FILTER, Instance: PFLT_INSTANCE, FileHandle: CPointer<CPointer<Unit>>, FileObject: CPointer<CPointer<Wdk_impl.FILE_OBJECT>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl.OBJECT_ATTRIBUTES>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, AllocationSize: CPointer<Int64>, FileAttributes: UInt32, ShareAccess: UInt32, CreateDisposition: UInt32, CreateOptions: UInt32, EaBuffer: CPointer<Unit>, EaLength: UInt32, Flags: UInt32, DriverContext: CPointer<Wdk_impl.IO_DRIVER_CREATE_CONTEXT>): Int32
-    // param-hint: Instance optional
-    // param-hint: FileObject optional
-    // param-hint: DriverContext optional
-    func FltCreateMailslotFile(Filter: PFLT_FILTER, Instance: PFLT_INSTANCE, FileHandle: CPointer<CPointer<Unit>>, FileObject: CPointer<CPointer<Wdk_impl.FILE_OBJECT>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl.OBJECT_ATTRIBUTES>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, CreateOptions: UInt32, MailslotQuota: UInt32, MaximumMessageSize: UInt32, ReadTimeout: CPointer<Int64>, DriverContext: CPointer<Wdk_impl.IO_DRIVER_CREATE_CONTEXT>): Int32
-    // param-hint: Instance optional
-    // param-hint: FileObject optional
-    // param-hint: DefaultTimeout optional
-    // param-hint: DriverContext optional
-    func FltCreateNamedPipeFile(Filter: PFLT_FILTER, Instance: PFLT_INSTANCE, FileHandle: CPointer<CPointer<Unit>>, FileObject: CPointer<CPointer<Wdk_impl.FILE_OBJECT>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl.OBJECT_ATTRIBUTES>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, ShareAccess: UInt32, CreateDisposition: UInt32, CreateOptions: UInt32, NamedPipeType: UInt32, ReadMode: UInt32, CompletionMode: UInt32, MaximumInstances: UInt32, InboundQuota: UInt32, OutboundQuota: UInt32, DefaultTimeout: CPointer<Int64>, DriverContext: CPointer<Wdk_impl.IO_DRIVER_CREATE_CONTEXT>): Int32
-    // param-hint: ObjectAttributes optional
-    // param-hint: MaximumSize optional
-    // param-hint: SectionFileSize optional
-    func FltCreateSectionForDataScan(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, SectionContext: PFLT_CONTEXT, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk_impl.OBJECT_ATTRIBUTES>, MaximumSize: CPointer<Int64>, SectionPageProtection: UInt32, AllocationAttributes: UInt32, Flags: UInt32, SectionHandle: CPointer<CPointer<Unit>>, SectionObject: CPointer<CPointer<Unit>>, SectionFileSize: CPointer<Int64>): Int32
     func FltCreateSystemVolumeInformationFolder(Instance: PFLT_INSTANCE): Int32
-    func FltCurrentBatchOplock(Oplock: CPointer<CPointer<Unit>>): Win32_Foundation.BOOLEAN
-    func FltCurrentOplock(Oplock: CPointer<CPointer<Unit>>): Win32_Foundation.BOOLEAN
-    func FltCurrentOplockH(Oplock: CPointer<CPointer<Unit>>): Win32_Foundation.BOOLEAN
-    // param-hint: MdlAddressPointer optional
-    // param-hint: Buffer optional
-    // param-hint: Length optional
-    // param-hint: DesiredAccess optional
-    func FltDecodeParameters(CallbackData: CPointer<FLT_CALLBACK_DATA>, MdlAddressPointer: CPointer<CPointer<CPointer<Wdk_impl.MDL>>>, Buffer: CPointer<CPointer<CPointer<Unit>>>, Length: CPointer<CPointer<UInt32>>, DesiredAccess: CPointer<Wdk_impl.LOCK_OPERATION>): Int32
+    func FltCurrentBatchOplock(Oplock: CPointer<CPointer<Unit>>): UInt8
+    func FltCurrentOplock(Oplock: CPointer<CPointer<Unit>>): UInt8
+    func FltCurrentOplockH(Oplock: CPointer<CPointer<Unit>>): UInt8
     func FltDeleteContext(Context: PFLT_CONTEXT): Unit
     // param-hint: Filter optional
     func FltDeleteExtraCreateParameterLookasideList(Filter: PFLT_FILTER, Lookaside: CPointer<Unit>, Flags: UInt32): Unit
     // param-hint: OldContext optional
-    func FltDeleteFileContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, OldContext: CPointer<PFLT_CONTEXT>): Int32
-    // param-hint: OldContext optional
     func FltDeleteInstanceContext(Instance: PFLT_INSTANCE, OldContext: CPointer<PFLT_CONTEXT>): Int32
     func FltDeletePushLock(PushLock: CPointer<UIntNative>): Unit
-    // param-hint: OldContext optional
-    func FltDeleteStreamContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, OldContext: CPointer<PFLT_CONTEXT>): Int32
-    // param-hint: OldContext optional
-    func FltDeleteStreamHandleContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, OldContext: CPointer<PFLT_CONTEXT>): Int32
-    // param-hint: OldContext optional
-    func FltDeleteTransactionContext(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk_impl.KTRANSACTION>, OldContext: CPointer<PFLT_CONTEXT>): Int32
     // param-hint: OldContext optional
     func FltDeleteVolumeContext(Filter: PFLT_FILTER, Volume: PFLT_VOLUME, OldContext: CPointer<PFLT_CONTEXT>): Int32
     // param-hint: InstanceName optional
     func FltDetachVolume(Filter: PFLT_FILTER, Volume: PFLT_VOLUME, InstanceName: CPointer<Win32_Foundation.UNICODE_STRING>): Int32
-    // param-hint: InputBuffer bytes=param[4] optional
-    // param-hint: OutputBuffer bytes=param[6] optional
-    // param-hint: LengthReturned optional
-    func FltDeviceIoControlFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, IoControlCode: UInt32, InputBuffer: CPointer<Unit>, InputBufferLength: UInt32, OutputBuffer: CPointer<Unit>, OutputBufferLength: UInt32, LengthReturned: CPointer<UInt32>): Int32
-    // param-hint: CompletionContext optional
-    func FltDoCompletionProcessingWhenSafe(Data: CPointer<FLT_CALLBACK_DATA>, FltObjects: CPointer<FLT_RELATED_OBJECTS>, CompletionContext: CPointer<Unit>, Flags: UInt32, SafePostCallback: PFLT_POST_OPERATION_CALLBACK, RetPostOperationStatus: CPointer<FLT_POSTOP_CALLBACK_STATUS>): Win32_Foundation.BOOLEAN
-    func FltEnlistInTransaction(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk_impl.KTRANSACTION>, TransactionContext: PFLT_CONTEXT, NotificationMask: UInt32): Int32
-    // param-hint: Buffer bytes=param[3] optional
-    func FltEnumerateFilterInformation(Index: UInt32, InformationClass: Win32_Storage_InstallableFileSystems.FILTER_INFORMATION_CLASS, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
     // param-hint: FilterList len=param[1] optional
     func FltEnumerateFilters(FilterList: CPointer<PFLT_FILTER>, FilterListSize: UInt32, NumberFiltersReturned: CPointer<UInt32>): Int32
-    // param-hint: Buffer bytes=param[4] optional
-    func FltEnumerateInstanceInformationByDeviceObject(DeviceObject: CPointer<Wdk_impl.DEVICE_OBJECT>, Index: UInt32, InformationClass: Win32_Storage_InstallableFileSystems.INSTANCE_INFORMATION_CLASS, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
-    // param-hint: Buffer bytes=param[4] optional
-    func FltEnumerateInstanceInformationByFilter(Filter: PFLT_FILTER, Index: UInt32, InformationClass: Win32_Storage_InstallableFileSystems.INSTANCE_INFORMATION_CLASS, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
-    // param-hint: Buffer bytes=param[4] optional
-    func FltEnumerateInstanceInformationByVolume(Volume: PFLT_VOLUME, Index: UInt32, InformationClass: Win32_Storage_InstallableFileSystems.INSTANCE_INFORMATION_CLASS, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
-    // param-hint: Buffer bytes=param[4] optional
-    func FltEnumerateInstanceInformationByVolumeName(VolumeName: CPointer<Win32_Foundation.UNICODE_STRING>, Index: UInt32, InformationClass: Win32_Storage_InstallableFileSystems.INSTANCE_INFORMATION_CLASS, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
     // param-hint: Volume optional
     // param-hint: Filter optional
     // param-hint: InstanceList len=param[3] optional
     func FltEnumerateInstances(Volume: PFLT_VOLUME, Filter: PFLT_FILTER, InstanceList: CPointer<PFLT_INSTANCE>, InstanceListSize: UInt32, NumberInstancesReturned: CPointer<UInt32>): Int32
-    // param-hint: Buffer bytes=param[4] optional
-    func FltEnumerateVolumeInformation(Filter: PFLT_FILTER, Index: UInt32, InformationClass: Win32_Storage_InstallableFileSystems.FILTER_VOLUME_INFORMATION_CLASS, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
     // param-hint: VolumeList len=param[2] optional
     func FltEnumerateVolumes(Filter: PFLT_FILTER, VolumeList: CPointer<PFLT_VOLUME>, VolumeListSize: UInt32, NumberVolumesReturned: CPointer<UInt32>): Int32
-    func FltFastIoMdlRead(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, FileOffset: CPointer<Int64>, Length: UInt32, LockKey: UInt32, MdlChain: CPointer<CPointer<Wdk_impl.MDL>>, IoStatus: CPointer<Win32_System_IO.IO_STATUS_BLOCK>): Win32_Foundation.BOOLEAN
-    func FltFastIoMdlReadComplete(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, MdlChain: CPointer<Wdk_impl.MDL>): Win32_Foundation.BOOLEAN
-    func FltFastIoMdlWriteComplete(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, FileOffset: CPointer<Int64>, MdlChain: CPointer<Wdk_impl.MDL>): Win32_Foundation.BOOLEAN
-    func FltFastIoPrepareMdlWrite(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, FileOffset: CPointer<Int64>, Length: UInt32, LockKey: UInt32, MdlChain: CPointer<CPointer<Wdk_impl.MDL>>, IoStatus: CPointer<Win32_System_IO.IO_STATUS_BLOCK>): Win32_Foundation.BOOLEAN
-    // param-hint: EcpContext optional
-    // param-hint: EcpContextSize optional
-    func FltFindExtraCreateParameter(Filter: PFLT_FILTER, EcpList: CPointer<Wdk_impl.ECP_LIST>, EcpType: CPointer<GUID>, EcpContext: CPointer<CPointer<Unit>>, EcpContextSize: CPointer<UInt32>): Int32
-    func FltFlushBuffers(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>): Int32
-    // param-hint: CallbackData optional
-    func FltFlushBuffers2(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, FlushType: UInt32, CallbackData: CPointer<FLT_CALLBACK_DATA>): Int32
-    func FltFreeCallbackData(CallbackData: CPointer<FLT_CALLBACK_DATA>): Unit
     func FltFreeDeferredIoWorkItem(FltWorkItem: PFLT_DEFERRED_IO_WORKITEM): Unit
     func FltFreeExtraCreateParameter(Filter: PFLT_FILTER, EcpContext: CPointer<Unit>): Unit
-    func FltFreeExtraCreateParameterList(Filter: PFLT_FILTER, EcpList: CPointer<Wdk_impl.ECP_LIST>): Unit
-    func FltFreeFileLock(FileLock: CPointer<Wdk_impl.FILE_LOCK>): Unit
     func FltFreeGenericWorkItem(FltWorkItem: PFLT_GENERIC_WORKITEM): Unit
-    func FltFreeOpenReparseList(Filter: PFLT_FILTER, EcpList: CPointer<Wdk_impl.ECP_LIST>): Unit
     func FltFreePoolAlignedWithTag(Instance: PFLT_INSTANCE, Buffer: CPointer<Unit>, Tag: UInt32): Unit
-    func FltFreeSecurityDescriptor(SecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Unit
-    // param-hint: InputBuffer bytes=param[4] optional
-    // param-hint: OutputBuffer bytes=param[6] optional
-    // param-hint: LengthReturned optional
-    func FltFsControlFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, FsControlCode: UInt32, InputBuffer: CPointer<Unit>, InputBufferLength: UInt32, OutputBuffer: CPointer<Unit>, OutputBufferLength: UInt32, LengthReturned: CPointer<UInt32>): Int32
-    func FltGetActivityIdCallbackData(CallbackData: CPointer<FLT_CALLBACK_DATA>, Guid: CPointer<GUID>): Int32
     func FltGetBottomInstance(Volume: PFLT_VOLUME, Instance: CPointer<PFLT_INSTANCE>): Int32
-    func FltGetContexts(FltObjects: CPointer<FLT_RELATED_OBJECTS>, DesiredContexts: UInt16, Contexts: CPointer<FLT_RELATED_CONTEXTS>): Unit
-    func FltGetContextsEx(FltObjects: CPointer<FLT_RELATED_OBJECTS>, DesiredContexts: UInt16, ContextsSize: UIntNative, Contexts: CPointer<FLT_RELATED_CONTEXTS_EX>): Int32
-    // param-hint: RootDirectory optional
-    // param-hint: FileName bytes=param[4]
-    func FltGetDestinationFileNameInformation(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, RootDirectory: CPointer<Unit>, FileName: CPointer<UInt16>, FileNameLength: UInt32, NameOptions: UInt32, RetFileNameInformation: CPointer<CPointer<FLT_FILE_NAME_INFORMATION>>): Int32
-    func FltGetDeviceObject(Volume: PFLT_VOLUME, DeviceObject: CPointer<CPointer<Wdk_impl.DEVICE_OBJECT>>): Int32
-    func FltGetDiskDeviceObject(Volume: PFLT_VOLUME, DiskDeviceObject: CPointer<CPointer<Wdk_impl.DEVICE_OBJECT>>): Int32
-    func FltGetEcpListFromCallbackData(Filter: PFLT_FILTER, CallbackData: CPointer<FLT_CALLBACK_DATA>, EcpList: CPointer<CPointer<Wdk_impl.ECP_LIST>>): Int32
-    func FltGetFileContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, Context: CPointer<PFLT_CONTEXT>): Int32
-    func FltGetFileNameInformation(CallbackData: CPointer<FLT_CALLBACK_DATA>, NameOptions: UInt32, FileNameInformation: CPointer<CPointer<FLT_FILE_NAME_INFORMATION>>): Int32
-    // param-hint: Instance optional
-    func FltGetFileNameInformationUnsafe(FileObject: CPointer<Wdk_impl.FILE_OBJECT>, Instance: PFLT_INSTANCE, NameOptions: UInt32, FileNameInformation: CPointer<CPointer<FLT_FILE_NAME_INFORMATION>>): Int32
-    func FltGetFileSystemType(FltObject: CPointer<Unit>, FileSystemType: CPointer<Win32_Storage_InstallableFileSystems.FLT_FILESYSTEM_TYPE>): Int32
     func FltGetFilterFromInstance(Instance: PFLT_INSTANCE, RetFilter: CPointer<PFLT_FILTER>): Int32
     func FltGetFilterFromName(FilterName: CPointer<Win32_Foundation.UNICODE_STRING>, RetFilter: CPointer<PFLT_FILTER>): Int32
-    // param-hint: Buffer bytes=param[3] optional
-    func FltGetFilterInformation(Filter: PFLT_FILTER, InformationClass: Win32_Storage_InstallableFileSystems.FILTER_INFORMATION_CLASS, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
-    func FltGetFsZeroingOffset(Data: CPointer<FLT_CALLBACK_DATA>, ZeroingOffset: CPointer<UInt32>): Int32
     func FltGetInstanceContext(Instance: PFLT_INSTANCE, Context: CPointer<PFLT_CONTEXT>): Int32
-    // param-hint: Buffer bytes=param[3] optional
-    func FltGetInstanceInformation(Instance: PFLT_INSTANCE, InformationClass: Win32_Storage_InstallableFileSystems.INSTANCE_INFORMATION_CLASS, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
-    func FltGetIoAttributionHandleFromCallbackData(Data: CPointer<FLT_CALLBACK_DATA>): CPointer<Unit>
-    func FltGetIoPriorityHint(Data: CPointer<FLT_CALLBACK_DATA>): Wdk_impl.IO_PRIORITY_HINT
-    func FltGetIoPriorityHintFromCallbackData(Data: CPointer<FLT_CALLBACK_DATA>): Wdk_impl.IO_PRIORITY_HINT
-    func FltGetIoPriorityHintFromFileObject(FileObject: CPointer<Wdk_impl.FILE_OBJECT>): Wdk_impl.IO_PRIORITY_HINT
-    func FltGetIoPriorityHintFromThread(Thread: Wdk_impl.PETHREAD): Wdk_impl.IO_PRIORITY_HINT
     func FltGetIrpName(IrpMajorCode: UInt8): CPointer<UInt8>
     func FltGetLowerInstance(CurrentInstance: PFLT_INSTANCE, LowerInstance: CPointer<PFLT_INSTANCE>): Int32
-    func FltGetNewSystemBufferAddress(CallbackData: CPointer<FLT_CALLBACK_DATA>): CPointer<Unit>
-    // param-hint: CurrentEcpContext optional
-    // param-hint: NextEcpType optional
-    // param-hint: NextEcpContext optional
-    // param-hint: NextEcpContextSize optional
-    func FltGetNextExtraCreateParameter(Filter: PFLT_FILTER, EcpList: CPointer<Wdk_impl.ECP_LIST>, CurrentEcpContext: CPointer<Unit>, NextEcpType: CPointer<GUID>, NextEcpContext: CPointer<CPointer<Unit>>, NextEcpContextSize: CPointer<UInt32>): Int32
-    func FltGetRequestorProcess(CallbackData: CPointer<FLT_CALLBACK_DATA>): Wdk_impl.PEPROCESS
-    func FltGetRequestorProcessId(CallbackData: CPointer<FLT_CALLBACK_DATA>): UInt32
-    func FltGetRequestorProcessIdEx(CallbackData: CPointer<FLT_CALLBACK_DATA>): CPointer<Unit>
-    func FltGetRequestorSessionId(CallbackData: CPointer<FLT_CALLBACK_DATA>, SessionId: CPointer<UInt32>): Int32
     func FltGetRoutineAddress(FltMgrRoutineName: CPointer<UInt8>): CPointer<Unit>
-    func FltGetSectionContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, Context: CPointer<PFLT_CONTEXT>): Int32
-    func FltGetStreamContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, Context: CPointer<PFLT_CONTEXT>): Int32
-    func FltGetStreamHandleContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, Context: CPointer<PFLT_CONTEXT>): Int32
-    func FltGetSwappedBufferMdlAddress(CallbackData: CPointer<FLT_CALLBACK_DATA>): CPointer<Wdk_impl.MDL>
     func FltGetTopInstance(Volume: PFLT_VOLUME, Instance: CPointer<PFLT_INSTANCE>): Int32
-    func FltGetTransactionContext(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk_impl.KTRANSACTION>, Context: CPointer<PFLT_CONTEXT>): Int32
-    func FltGetTunneledName(CallbackData: CPointer<FLT_CALLBACK_DATA>, FileNameInformation: CPointer<FLT_FILE_NAME_INFORMATION>, RetTunneledFileNameInformation: CPointer<CPointer<FLT_FILE_NAME_INFORMATION>>): Int32
     func FltGetUpperInstance(CurrentInstance: PFLT_INSTANCE, UpperInstance: CPointer<PFLT_INSTANCE>): Int32
     func FltGetVolumeContext(Filter: PFLT_FILTER, Volume: PFLT_VOLUME, Context: CPointer<PFLT_CONTEXT>): Int32
-    func FltGetVolumeFromDeviceObject(Filter: PFLT_FILTER, DeviceObject: CPointer<Wdk_impl.DEVICE_OBJECT>, RetVolume: CPointer<PFLT_VOLUME>): Int32
-    func FltGetVolumeFromFileObject(Filter: PFLT_FILTER, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, RetVolume: CPointer<PFLT_VOLUME>): Int32
     func FltGetVolumeFromInstance(Instance: PFLT_INSTANCE, RetVolume: CPointer<PFLT_VOLUME>): Int32
     func FltGetVolumeFromName(Filter: PFLT_FILTER, VolumeName: CPointer<Win32_Foundation.UNICODE_STRING>, RetVolume: CPointer<PFLT_VOLUME>): Int32
     // param-hint: VolumeGuidName optional
     // param-hint: BufferSizeNeeded optional
     func FltGetVolumeGuidName(Volume: PFLT_VOLUME, VolumeGuidName: CPointer<Win32_Foundation.UNICODE_STRING>, BufferSizeNeeded: CPointer<UInt32>): Int32
-    // param-hint: Buffer bytes=param[3] optional
-    func FltGetVolumeInformation(Volume: PFLT_VOLUME, InformationClass: Win32_Storage_InstallableFileSystems.FILTER_VOLUME_INFORMATION_CLASS, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
     // param-hint: Filter optional
     // param-hint: InstanceName optional
     func FltGetVolumeInstanceFromName(Filter: PFLT_FILTER, Volume: PFLT_VOLUME, InstanceName: CPointer<Win32_Foundation.UNICODE_STRING>, RetInstance: CPointer<PFLT_INSTANCE>): Int32
@@ -3080,213 +3352,217 @@ foreign {
     // param-hint: VolumeProperties bytes=param[2] optional
     func FltGetVolumeProperties(Volume: PFLT_VOLUME, VolumeProperties: CPointer<FLT_VOLUME_PROPERTIES>, VolumePropertiesLength: UInt32, LengthReturned: CPointer<UInt32>): Int32
     func FltInitExtraCreateParameterLookasideList(Filter: PFLT_FILTER, Lookaside: CPointer<Unit>, Flags: UInt32, Size: UIntNative, Tag: UInt32): Unit
-    func FltInitializeFileLock(FileLock: CPointer<Wdk_impl.FILE_LOCK>): Unit
     func FltInitializeOplock(Oplock: CPointer<CPointer<Unit>>): Unit
     func FltInitializePushLock(PushLock: CPointer<UIntNative>): Unit
-    func FltInsertExtraCreateParameter(Filter: PFLT_FILTER, EcpList: CPointer<Wdk_impl.ECP_LIST>, EcpContext: CPointer<Unit>): Int32
-    // param-hint: CallbackData optional
-    func FltIs32bitProcess(CallbackData: CPointer<FLT_CALLBACK_DATA>): Win32_Foundation.BOOLEAN
-    func FltIsCallbackDataDirty(Data: CPointer<FLT_CALLBACK_DATA>): Win32_Foundation.BOOLEAN
-    func FltIsDirectory(FileObject: CPointer<Wdk_impl.FILE_OBJECT>, Instance: PFLT_INSTANCE, IsDirectory: CPointer<Win32_Foundation.BOOLEAN>): Int32
-    func FltIsEcpAcknowledged(Filter: PFLT_FILTER, EcpContext: CPointer<Unit>): Win32_Foundation.BOOLEAN
-    func FltIsEcpFromUserMode(Filter: PFLT_FILTER, EcpContext: CPointer<Unit>): Win32_Foundation.BOOLEAN
-    func FltIsFltMgrVolumeDeviceObject(DeviceObject: CPointer<Wdk_impl.DEVICE_OBJECT>): Win32_Foundation.BOOLEAN
-    func FltIsIoCanceled(CallbackData: CPointer<FLT_CALLBACK_DATA>): Win32_Foundation.BOOLEAN
-    func FltIsIoRedirectionAllowed(SourceInstance: PFLT_INSTANCE, TargetInstance: PFLT_INSTANCE, RedirectionAllowed: CPointer<Win32_Foundation.BOOLEAN>): Int32
-    // param-hint: RedirectionAllowedAllIo optional
-    func FltIsIoRedirectionAllowedForOperation(Data: CPointer<FLT_CALLBACK_DATA>, TargetInstance: PFLT_INSTANCE, RedirectionAllowedThisIo: CPointer<Win32_Foundation.BOOLEAN>, RedirectionAllowedAllIo: CPointer<Win32_Foundation.BOOLEAN>): Int32
-    func FltIsOperationSynchronous(CallbackData: CPointer<FLT_CALLBACK_DATA>): Win32_Foundation.BOOLEAN
-    func FltIsVolumeSnapshot(FltObject: CPointer<Unit>, IsSnapshotVolume: CPointer<Win32_Foundation.BOOLEAN>): Int32
-    func FltIsVolumeWritable(FltObject: CPointer<Unit>, IsWritable: CPointer<Win32_Foundation.BOOLEAN>): Int32
+    func FltIsEcpAcknowledged(Filter: PFLT_FILTER, EcpContext: CPointer<Unit>): UInt8
+    func FltIsEcpFromUserMode(Filter: PFLT_FILTER, EcpContext: CPointer<Unit>): UInt8
+    func FltIsIoRedirectionAllowed(SourceInstance: PFLT_INSTANCE, TargetInstance: PFLT_INSTANCE, RedirectionAllowed: CPointer<UInt8>): Int32
+    func FltIsVolumeSnapshot(FltObject: CPointer<Unit>, IsSnapshotVolume: CPointer<UInt8>): Int32
+    func FltIsVolumeWritable(FltObject: CPointer<Unit>, IsWritable: CPointer<UInt8>): Int32
     func FltLoadFilter(FilterName: CPointer<Win32_Foundation.UNICODE_STRING>): Int32
-    func FltLockUserBuffer(CallbackData: CPointer<FLT_CALLBACK_DATA>): Int32
-    // param-hint: TraverseCallback optional
-    // param-hint: SubjectContext optional
-    // param-hint: FilterCallback optional
-    func FltNotifyFilterChangeDirectory(NotifySync: Wdk_impl.PNOTIFY_SYNC, NotifyList: CPointer<Win32_impl.LIST_ENTRY>, FsContext: CPointer<Unit>, FullDirectoryName: CPointer<Win32_impl.STRING>, WatchTree: Win32_Foundation.BOOLEAN, IgnoreBuffer: Win32_Foundation.BOOLEAN, CompletionFilter: UInt32, NotifyCallbackData: CPointer<FLT_CALLBACK_DATA>, TraverseCallback: Wdk_impl.PCHECK_FOR_TRAVERSE_ACCESS, SubjectContext: CPointer<Wdk_impl.SECURITY_SUBJECT_CONTEXT>, FilterCallback: Wdk_impl.PFILTER_REPORT_CHANGE): Unit
     func FltObjectDereference(FltObject: CPointer<Unit>): Unit
     func FltObjectReference(FltObject: CPointer<Unit>): Int32
-    // param-hint: VolumeFileObject optional
-    func FltOpenVolume(Instance: PFLT_INSTANCE, VolumeHandle: CPointer<CPointer<Unit>>, VolumeFileObject: CPointer<CPointer<Wdk_impl.FILE_OBJECT>>): Int32
-    // param-hint: Context optional
-    // param-hint: WaitCompletionRoutine optional
-    // param-hint: PrePostCallbackDataRoutine optional
-    func FltOplockBreakH(Oplock: CPointer<CPointer<Unit>>, CallbackData: CPointer<FLT_CALLBACK_DATA>, Flags: UInt32, Context: CPointer<Unit>, WaitCompletionRoutine: PFLTOPLOCK_WAIT_COMPLETE_ROUTINE, PrePostCallbackDataRoutine: PFLTOPLOCK_PREPOST_CALLBACKDATA_ROUTINE): FLT_PREOP_CALLBACK_STATUS
-    // param-hint: Context optional
-    // param-hint: WaitCompletionRoutine optional
-    // param-hint: PrePostCallbackDataRoutine optional
-    func FltOplockBreakToNone(Oplock: CPointer<CPointer<Unit>>, CallbackData: CPointer<FLT_CALLBACK_DATA>, Context: CPointer<Unit>, WaitCompletionRoutine: PFLTOPLOCK_WAIT_COMPLETE_ROUTINE, PrePostCallbackDataRoutine: PFLTOPLOCK_PREPOST_CALLBACKDATA_ROUTINE): FLT_PREOP_CALLBACK_STATUS
-    // param-hint: Context optional
-    // param-hint: WaitCompletionRoutine optional
-    // param-hint: PrePostCallbackDataRoutine optional
-    func FltOplockBreakToNoneEx(Oplock: CPointer<CPointer<Unit>>, CallbackData: CPointer<FLT_CALLBACK_DATA>, Flags: UInt32, Context: CPointer<Unit>, WaitCompletionRoutine: PFLTOPLOCK_WAIT_COMPLETE_ROUTINE, PrePostCallbackDataRoutine: PFLTOPLOCK_PREPOST_CALLBACKDATA_ROUTINE): FLT_PREOP_CALLBACK_STATUS
-    func FltOplockFsctrl(Oplock: CPointer<CPointer<Unit>>, CallbackData: CPointer<FLT_CALLBACK_DATA>, OpenCount: UInt32): FLT_PREOP_CALLBACK_STATUS
-    func FltOplockFsctrlEx(Oplock: CPointer<CPointer<Unit>>, CallbackData: CPointer<FLT_CALLBACK_DATA>, OpenCount: UInt32, Flags: UInt32): FLT_PREOP_CALLBACK_STATUS
-    func FltOplockIsFastIoPossible(Oplock: CPointer<CPointer<Unit>>): Win32_Foundation.BOOLEAN
-    func FltOplockIsSharedRequest(CallbackData: CPointer<FLT_CALLBACK_DATA>): Win32_Foundation.BOOLEAN
-    // param-hint: Fo1 optional
-    // param-hint: Fo2 optional
-    func FltOplockKeysEqual(Fo1: CPointer<Wdk_impl.FILE_OBJECT>, Fo2: CPointer<Wdk_impl.FILE_OBJECT>): Win32_Foundation.BOOLEAN
+    func FltOplockIsFastIoPossible(Oplock: CPointer<CPointer<Unit>>): UInt8
     // param-hint: Extension optional
     // param-hint: Stream optional
     // param-hint: FinalComponent optional
     func FltParseFileName(FileName: CPointer<Win32_Foundation.UNICODE_STRING>, Extension: CPointer<Win32_Foundation.UNICODE_STRING>, Stream: CPointer<Win32_Foundation.UNICODE_STRING>, FinalComponent: CPointer<Win32_Foundation.UNICODE_STRING>): Int32
     func FltParseFileNameInformation(FileNameInformation: CPointer<FLT_FILE_NAME_INFORMATION>): Int32
-    func FltPerformAsynchronousIo(CallbackData: CPointer<FLT_CALLBACK_DATA>, CallbackRoutine: PFLT_COMPLETED_ASYNC_IO_CALLBACK, CallbackContext: CPointer<Unit>): Int32
-    func FltPerformSynchronousIo(CallbackData: CPointer<FLT_CALLBACK_DATA>): Unit
-    // param-hint: TransactionContext optional
-    func FltPrePrepareComplete(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk_impl.KTRANSACTION>, TransactionContext: PFLT_CONTEXT): Int32
-    // param-hint: TransactionContext optional
-    func FltPrepareComplete(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk_impl.KTRANSACTION>, TransactionContext: PFLT_CONTEXT): Int32
     func FltPrepareToReuseEcp(Filter: PFLT_FILTER, EcpContext: CPointer<Unit>): Unit
-    // param-hint: Context optional
-    func FltProcessFileLock(FileLock: CPointer<Wdk_impl.FILE_LOCK>, CallbackData: CPointer<FLT_CALLBACK_DATA>, Context: CPointer<Unit>): FLT_PREOP_CALLBACK_STATUS
-    func FltPropagateActivityIdToThread(CallbackData: CPointer<FLT_CALLBACK_DATA>, PropagateId: CPointer<GUID>, OriginalId: CPointer<CPointer<GUID>>): Int32
-    func FltPropagateIrpExtension(SourceData: CPointer<FLT_CALLBACK_DATA>, TargetData: CPointer<FLT_CALLBACK_DATA>, Flags: UInt32): Int32
-    // param-hint: FileObject optional
-    func FltPurgeFileNameInformationCache(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>): Int32
-    // param-hint: FileInformation bytes=param[3]
-    // param-hint: FileName optional
-    // param-hint: LengthReturned optional
-    func FltQueryDirectoryFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, FileInformation: CPointer<Unit>, Length: UInt32, FileInformationClass: Wdk_impl.FILE_INFORMATION_CLASS, ReturnSingleEntry: Win32_Foundation.BOOLEAN, FileName: CPointer<Win32_Foundation.UNICODE_STRING>, RestartScan: Win32_Foundation.BOOLEAN, LengthReturned: CPointer<UInt32>): Int32
-    // param-hint: FileInformation bytes=param[3]
-    // param-hint: FileName optional
-    // param-hint: LengthReturned optional
-    func FltQueryDirectoryFileEx(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, FileInformation: CPointer<Unit>, Length: UInt32, FileInformationClass: Wdk_impl.FILE_INFORMATION_CLASS, QueryFlags: UInt32, FileName: CPointer<Win32_Foundation.UNICODE_STRING>, LengthReturned: CPointer<UInt32>): Int32
-    // param-hint: ReturnedEaData bytes=param[3]
-    // param-hint: EaList bytes=param[6] optional
-    // param-hint: EaIndex optional
-    // param-hint: LengthReturned optional
-    func FltQueryEaFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, ReturnedEaData: CPointer<Unit>, Length: UInt32, ReturnSingleEntry: Win32_Foundation.BOOLEAN, EaList: CPointer<Unit>, EaListLength: UInt32, EaIndex: CPointer<UInt32>, RestartScan: Win32_Foundation.BOOLEAN, LengthReturned: CPointer<UInt32>): Int32
-    // param-hint: Instance optional
-    // param-hint: FileInformation bytes=param[5]
-    // param-hint: DriverContext optional
-    func FltQueryInformationByName(Filter: PFLT_FILTER, Instance: PFLT_INSTANCE, ObjectAttributes: CPointer<Wdk_impl.OBJECT_ATTRIBUTES>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, FileInformation: CPointer<Unit>, Length: UInt32, FileInformationClass: Wdk_impl.FILE_INFORMATION_CLASS, DriverContext: CPointer<Wdk_impl.IO_DRIVER_CREATE_CONTEXT>): Int32
-    // param-hint: FileInformation bytes=param[3]
-    // param-hint: LengthReturned optional
-    func FltQueryInformationFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, FileInformation: CPointer<Unit>, Length: UInt32, FileInformationClass: Wdk_impl.FILE_INFORMATION_CLASS, LengthReturned: CPointer<UInt32>): Int32
-    // param-hint: Buffer bytes=param[4]
-    // param-hint: SidList bytes=param[7] optional
-    // param-hint: StartSid optional
-    // param-hint: LengthReturned optional
-    func FltQueryQuotaInformationFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, Buffer: CPointer<Unit>, Length: UInt32, ReturnSingleEntry: Win32_Foundation.BOOLEAN, SidList: CPointer<Unit>, SidListLength: UInt32, StartSid: CPointer<UInt32>, RestartScan: Win32_Foundation.BOOLEAN, LengthReturned: CPointer<UInt32>): Int32
-    // param-hint: SecurityDescriptor bytes=param[4] optional
-    // param-hint: LengthNeeded optional
-    func FltQuerySecurityObject(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, SecurityInformation: UInt32, SecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, Length: UInt32, LengthNeeded: CPointer<UInt32>): Int32
-    // param-hint: FsInformation bytes=param[3]
-    func FltQueryVolumeInformation(Instance: PFLT_INSTANCE, Iosb: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, FsInformation: CPointer<Unit>, Length: UInt32, FsInformationClass: Wdk_impl.FS_INFORMATION_CLASS): Int32
-    // param-hint: FsInformation bytes=param[3]
-    // param-hint: LengthReturned optional
-    func FltQueryVolumeInformationFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, FsInformation: CPointer<Unit>, Length: UInt32, FsInformationClass: Wdk_impl.FS_INFORMATION_CLASS, LengthReturned: CPointer<UInt32>): Int32
-    func FltQueueDeferredIoWorkItem(FltWorkItem: PFLT_DEFERRED_IO_WORKITEM, Data: CPointer<FLT_CALLBACK_DATA>, WorkerRoutine: PFLT_DEFERRED_IO_WORKITEM_ROUTINE, QueueType: Wdk_impl.WORK_QUEUE_TYPE, Context: CPointer<Unit>): Int32
-    // param-hint: Context optional
-    func FltQueueGenericWorkItem(FltWorkItem: PFLT_GENERIC_WORKITEM, FltObject: CPointer<Unit>, WorkerRoutine: PFLT_GENERIC_WORKITEM_ROUTINE, QueueType: Wdk_impl.WORK_QUEUE_TYPE, Context: CPointer<Unit>): Int32
-    // param-hint: ByteOffset optional
-    // param-hint: Buffer bytes=param[3]
-    // param-hint: BytesRead optional
-    // param-hint: CallbackRoutine optional
-    // param-hint: CallbackContext optional
-    func FltReadFile(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, ByteOffset: CPointer<Int64>, Length: UInt32, Buffer: CPointer<Unit>, Flags: UInt32, BytesRead: CPointer<UInt32>, CallbackRoutine: PFLT_COMPLETED_ASYNC_IO_CALLBACK, CallbackContext: CPointer<Unit>): Int32
-    // param-hint: ByteOffset optional
-    // param-hint: Buffer bytes=param[3] optional
-    // param-hint: BytesRead optional
-    // param-hint: CallbackRoutine optional
-    // param-hint: CallbackContext optional
-    // param-hint: Key optional
-    // param-hint: Mdl optional
-    func FltReadFileEx(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, ByteOffset: CPointer<Int64>, Length: UInt32, Buffer: CPointer<Unit>, Flags: UInt32, BytesRead: CPointer<UInt32>, CallbackRoutine: PFLT_COMPLETED_ASYNC_IO_CALLBACK, CallbackContext: CPointer<Unit>, Key: CPointer<UInt32>, Mdl: CPointer<Wdk_impl.MDL>): Int32
     func FltReferenceContext(Context: PFLT_CONTEXT): Unit
     func FltReferenceFileNameInformation(FileNameInformation: CPointer<FLT_FILE_NAME_INFORMATION>): Unit
-    func FltRegisterFilter(Driver: CPointer<Wdk_impl.DRIVER_OBJECT>, Registration: CPointer<FLT_REGISTRATION>, RetFilter: CPointer<PFLT_FILTER>): Int32
     func FltRegisterForDataScan(Instance: PFLT_INSTANCE): Int32
-    func FltReissueSynchronousIo(InitiatingInstance: PFLT_INSTANCE, CallbackData: CPointer<FLT_CALLBACK_DATA>): Unit
     func FltReleaseContext(Context: PFLT_CONTEXT): Unit
     func FltReleaseContexts(Contexts: CPointer<FLT_RELATED_CONTEXTS>): Unit
     func FltReleaseContextsEx(ContextsSize: UIntNative, Contexts: CPointer<FLT_RELATED_CONTEXTS_EX>): Unit
     func FltReleaseFileNameInformation(FileNameInformation: CPointer<FLT_FILE_NAME_INFORMATION>): Unit
     func FltReleasePushLock(PushLock: CPointer<UIntNative>): Unit
     func FltReleasePushLockEx(PushLock: CPointer<UIntNative>, Flags: UInt32): Unit
-    func FltReleaseResource(Resource: CPointer<Wdk_impl.ERESOURCE>): Unit
-    // param-hint: EcpContextSize optional
-    func FltRemoveExtraCreateParameter(Filter: PFLT_FILTER, EcpList: CPointer<Wdk_impl.ECP_LIST>, EcpType: CPointer<GUID>, EcpContext: CPointer<CPointer<Unit>>, EcpContextSize: CPointer<UInt32>): Int32
-    func FltRemoveOpenReparseEntry(Filter: PFLT_FILTER, Data: CPointer<FLT_CALLBACK_DATA>, OpenReparseEntry: CPointer<Wdk_impl.OPEN_REPARSE_LIST_ENTRY>): Unit
-    func FltRequestFileInfoOnCreateCompletion(Filter: PFLT_FILTER, Data: CPointer<FLT_CALLBACK_DATA>, InfoClassFlags: UInt32): Int32
-    // param-hint: RequesterContext optional
-    func FltRequestOperationStatusCallback(Data: CPointer<FLT_CALLBACK_DATA>, CallbackRoutine: PFLT_GET_OPERATION_STATUS_CALLBACK, RequesterContext: CPointer<Unit>): Int32
-    func FltRetainSwappedBufferMdlAddress(CallbackData: CPointer<FLT_CALLBACK_DATA>): Unit
-    func FltRetrieveFileInfoOnCreateCompletion(Filter: PFLT_FILTER, Data: CPointer<FLT_CALLBACK_DATA>, InfoClass: UInt32, Size: CPointer<UInt32>): CPointer<Unit>
-    func FltRetrieveFileInfoOnCreateCompletionEx(Filter: PFLT_FILTER, Data: CPointer<FLT_CALLBACK_DATA>, InfoClass: UInt32, RetInfoSize: CPointer<UInt32>, RetInfoBuffer: CPointer<CPointer<Unit>>): Int32
-    // param-hint: Data optional
-    // param-hint: FileObject optional
-    // param-hint: Thread optional
-    func FltRetrieveIoPriorityInfo(Data: CPointer<FLT_CALLBACK_DATA>, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, Thread: Wdk_impl.PETHREAD, PriorityInfo: CPointer<Wdk_impl.IO_PRIORITY_INFO>): Int32
-    func FltReuseCallbackData(CallbackData: CPointer<FLT_CALLBACK_DATA>): Unit
-    // param-hint: TransactionContext optional
-    func FltRollbackComplete(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk_impl.KTRANSACTION>, TransactionContext: PFLT_CONTEXT): Int32
-    // param-hint: TransactionContext optional
-    func FltRollbackEnlistment(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk_impl.KTRANSACTION>, TransactionContext: PFLT_CONTEXT): Int32
     // param-hint: SenderBuffer bytes=param[3]
     // param-hint: ReplyBuffer bytes=param[5] optional
     // param-hint: ReplyLength optional
     // param-hint: Timeout optional
     func FltSendMessage(Filter: PFLT_FILTER, ClientPort: CPointer<PFLT_PORT>, SenderBuffer: CPointer<Unit>, SenderBufferLength: UInt32, ReplyBuffer: CPointer<Unit>, ReplyLength: CPointer<UInt32>, Timeout: CPointer<Int64>): Int32
+    // param-hint: OldContext optional
+    func FltSetInstanceContext(Instance: PFLT_INSTANCE, Operation: Int32, NewContext: PFLT_CONTEXT, OldContext: CPointer<PFLT_CONTEXT>): Int32
+    // param-hint: OldContext optional
+    func FltSetVolumeContext(Volume: PFLT_VOLUME, Operation: Int32, NewContext: PFLT_CONTEXT, OldContext: CPointer<PFLT_CONTEXT>): Int32
+    func FltStartFiltering(Filter: PFLT_FILTER): Int32
+    func FltUninitializeOplock(Oplock: CPointer<CPointer<Unit>>): Unit
+    func FltUnloadFilter(FilterName: CPointer<Win32_Foundation.UNICODE_STRING>): Int32
+    func FltUnregisterFilter(Filter: PFLT_FILTER): Unit
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // param-hint: TraverseCallback optional
+    // param-hint: SubjectContext optional
+    // param-hint: FilterCallback optional
+    func FltNotifyFilterChangeDirectory(NotifySync: Wdk__impl_l0.PNOTIFY_SYNC, NotifyList: CPointer<Win32__impl_l0.LIST_ENTRY>, FsContext: CPointer<Unit>, FullDirectoryName: CPointer<Win32__impl_l0.STRING>, WatchTree: UInt8, IgnoreBuffer: UInt8, CompletionFilter: UInt32, NotifyCallbackData: CPointer<FLT_CALLBACK_DATA>, TraverseCallback: Wdk__impl_l0.PCHECK_FOR_TRAVERSE_ACCESS, SubjectContext: CPointer<Wdk__impl_l0.SECURITY_SUBJECT_CONTEXT>, FilterCallback: Wdk__impl_l0.PFILTER_REPORT_CHANGE): Unit
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on")]
+foreign {
+    // param-hint: Data optional
+    // param-hint: FileObject optional
+    // param-hint: Thread optional
+    func FltRetrieveIoPriorityInfo(Data: CPointer<FLT_CALLBACK_DATA>, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, Thread: Wdk__impl_l0.PETHREAD, PriorityInfo: CPointer<Wdk__impl_l0.IO_PRIORITY_INFO>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on")]
+foreign {
+    // param-hint: MdlAddressPointer optional
+    // param-hint: Buffer optional
+    // param-hint: Length optional
+    // param-hint: DesiredAccess optional
+    func FltDecodeParameters(CallbackData: CPointer<FLT_CALLBACK_DATA>, MdlAddressPointer: CPointer<CPointer<CPointer<Wdk__impl_l0.MDL>>>, Buffer: CPointer<CPointer<CPointer<Unit>>>, Length: CPointer<CPointer<UInt32>>, DesiredAccess: CPointer<Int32>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+foreign {
+    func FltCopyOpenReparseList(Filter: PFLT_FILTER, Data: CPointer<FLT_CALLBACK_DATA>, EcpList: CPointer<Wdk__impl_l0.ECP_LIST>): Int32
+    // param-hint: CompletionContext optional
+    func FltDoCompletionProcessingWhenSafe(Data: CPointer<FLT_CALLBACK_DATA>, FltObjects: CPointer<FLT_RELATED_OBJECTS>, CompletionContext: CPointer<Unit>, Flags: UInt32, SafePostCallback: PFLT_POST_OPERATION_CALLBACK, RetPostOperationStatus: CPointer<Int32>): UInt8
+    func FltGetEcpListFromCallbackData(Filter: PFLT_FILTER, CallbackData: CPointer<FLT_CALLBACK_DATA>, EcpList: CPointer<CPointer<Wdk__impl_l0.ECP_LIST>>): Int32
+    func FltGetIoPriorityHint(Data: CPointer<FLT_CALLBACK_DATA>): Int32
+    func FltGetIoPriorityHintFromCallbackData(Data: CPointer<FLT_CALLBACK_DATA>): Int32
+    func FltGetRequestorProcess(CallbackData: CPointer<FLT_CALLBACK_DATA>): Wdk__impl_l0.PEPROCESS
+    func FltGetSwappedBufferMdlAddress(CallbackData: CPointer<FLT_CALLBACK_DATA>): CPointer<Wdk__impl_l0.MDL>
+    // param-hint: RequesterContext optional
+    func FltRequestOperationStatusCallback(Data: CPointer<FLT_CALLBACK_DATA>, CallbackRoutine: PFLT_GET_OPERATION_STATUS_CALLBACK, RequesterContext: CPointer<Unit>): Int32
+    func FltSetEcpListIntoCallbackData(Filter: PFLT_FILTER, CallbackData: CPointer<FLT_CALLBACK_DATA>, EcpList: CPointer<Wdk__impl_l0.ECP_LIST>): Int32
+    func FltSetIoPriorityHintIntoCallbackData(Data: CPointer<FLT_CALLBACK_DATA>, PriorityHint: Int32): Int32
+    func FltVetoBypassIo(CallbackData: CPointer<FLT_CALLBACK_DATA>, FltObjects: CPointer<FLT_RELATED_OBJECTS>, OperationStatus: Int32, FailureReason: CPointer<Win32_Foundation.UNICODE_STRING>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // param-hint: ObjectArray len=param[0]
+    // param-hint: Timeout optional
+    // param-hint: WaitBlockArray optional
+    func FltCancellableWaitForMultipleObjects(Count: UInt32, ObjectArray: CPointer<CPointer<Unit>>, WaitType: Int32, Timeout: CPointer<Int64>, WaitBlockArray: CPointer<Wdk__impl_l0.KWAIT_BLOCK>, CallbackData: CPointer<FLT_CALLBACK_DATA>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_System_SystemServices == "on")]
+foreign {
+    func FltCbdqRemoveIo(Cbdq: CPointer<FLT_CALLBACK_DATA_QUEUE>, Context: CPointer<Wdk__impl_l0.IO_CSQ_IRP_CONTEXT>): CPointer<FLT_CALLBACK_DATA>
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_System_SystemServices == "on")]
+foreign {
+    // param-hint: PeekContext optional
+    func FltCbdqRemoveNextIo(Cbdq: CPointer<FLT_CALLBACK_DATA_QUEUE>, PeekContext: CPointer<Unit>): CPointer<FLT_CALLBACK_DATA>
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_Kernel == "on")]
+foreign {
+    func FltAddOpenReparseEntry(Filter: PFLT_FILTER, Data: CPointer<FLT_CALLBACK_DATA>, OpenReparseEntry: CPointer<Wdk__impl_l0.OPEN_REPARSE_LIST_ENTRY>): Int32
+    func FltRemoveOpenReparseEntry(Filter: PFLT_FILTER, Data: CPointer<FLT_CALLBACK_DATA>, OpenReparseEntry: CPointer<Wdk__impl_l0.OPEN_REPARSE_LIST_ENTRY>): Unit
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on")]
+foreign {
+    func FltQueueDeferredIoWorkItem(FltWorkItem: PFLT_DEFERRED_IO_WORKITEM, Data: CPointer<FLT_CALLBACK_DATA>, WorkerRoutine: PFLT_DEFERRED_IO_WORKITEM_ROUTINE, QueueType: Int32, Context: CPointer<Unit>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+foreign {
+    func FltCancelIo(CallbackData: CPointer<FLT_CALLBACK_DATA>): UInt8
+    // param-hint: Timeout optional
+    // param-hint: CallbackData optional
+    func FltCancellableWaitForSingleObject(Object: CPointer<Unit>, Timeout: CPointer<Int64>, CallbackData: CPointer<FLT_CALLBACK_DATA>): Int32
+    // param-hint: Context optional
+    // param-hint: WaitCompletionRoutine optional
+    // param-hint: PrePostCallbackDataRoutine optional
+    func FltCheckOplock(Oplock: CPointer<CPointer<Unit>>, CallbackData: CPointer<FLT_CALLBACK_DATA>, Context: CPointer<Unit>, WaitCompletionRoutine: PFLTOPLOCK_WAIT_COMPLETE_ROUTINE, PrePostCallbackDataRoutine: PFLTOPLOCK_PREPOST_CALLBACKDATA_ROUTINE): Int32
+    // param-hint: Context optional
+    // param-hint: WaitCompletionRoutine optional
+    // param-hint: PrePostCallbackDataRoutine optional
+    func FltCheckOplockEx(Oplock: CPointer<CPointer<Unit>>, CallbackData: CPointer<FLT_CALLBACK_DATA>, Flags: UInt32, Context: CPointer<Unit>, WaitCompletionRoutine: PFLTOPLOCK_WAIT_COMPLETE_ROUTINE, PrePostCallbackDataRoutine: PFLTOPLOCK_PREPOST_CALLBACKDATA_ROUTINE): Int32
+    func FltClearCallbackDataDirty(Data: CPointer<FLT_CALLBACK_DATA>): Unit
+    func FltClearCancelCompletion(CallbackData: CPointer<FLT_CALLBACK_DATA>): Int32
+    func FltCompletePendedPostOperation(CallbackData: CPointer<FLT_CALLBACK_DATA>): Unit
+    // param-hint: Context optional
+    func FltCompletePendedPreOperation(CallbackData: CPointer<FLT_CALLBACK_DATA>, CallbackStatus: Int32, Context: CPointer<Unit>): Unit
+    func FltFreeCallbackData(CallbackData: CPointer<FLT_CALLBACK_DATA>): Unit
+    func FltGetActivityIdCallbackData(CallbackData: CPointer<FLT_CALLBACK_DATA>, Guid: CPointer<GUID>): Int32
+    func FltGetFileNameInformation(CallbackData: CPointer<FLT_CALLBACK_DATA>, NameOptions: UInt32, FileNameInformation: CPointer<CPointer<FLT_FILE_NAME_INFORMATION>>): Int32
+    func FltGetFsZeroingOffset(Data: CPointer<FLT_CALLBACK_DATA>, ZeroingOffset: CPointer<UInt32>): Int32
+    func FltGetIoAttributionHandleFromCallbackData(Data: CPointer<FLT_CALLBACK_DATA>): CPointer<Unit>
+    func FltGetNewSystemBufferAddress(CallbackData: CPointer<FLT_CALLBACK_DATA>): CPointer<Unit>
+    func FltGetRequestorProcessId(CallbackData: CPointer<FLT_CALLBACK_DATA>): UInt32
+    func FltGetRequestorProcessIdEx(CallbackData: CPointer<FLT_CALLBACK_DATA>): CPointer<Unit>
+    func FltGetRequestorSessionId(CallbackData: CPointer<FLT_CALLBACK_DATA>, SessionId: CPointer<UInt32>): Int32
+    func FltGetTunneledName(CallbackData: CPointer<FLT_CALLBACK_DATA>, FileNameInformation: CPointer<FLT_FILE_NAME_INFORMATION>, RetTunneledFileNameInformation: CPointer<CPointer<FLT_FILE_NAME_INFORMATION>>): Int32
+    // param-hint: CallbackData optional
+    func FltIs32bitProcess(CallbackData: CPointer<FLT_CALLBACK_DATA>): UInt8
+    func FltIsCallbackDataDirty(Data: CPointer<FLT_CALLBACK_DATA>): UInt8
+    func FltIsIoCanceled(CallbackData: CPointer<FLT_CALLBACK_DATA>): UInt8
+    // param-hint: RedirectionAllowedAllIo optional
+    func FltIsIoRedirectionAllowedForOperation(Data: CPointer<FLT_CALLBACK_DATA>, TargetInstance: PFLT_INSTANCE, RedirectionAllowedThisIo: CPointer<UInt8>, RedirectionAllowedAllIo: CPointer<UInt8>): Int32
+    func FltIsOperationSynchronous(CallbackData: CPointer<FLT_CALLBACK_DATA>): UInt8
+    func FltLockUserBuffer(CallbackData: CPointer<FLT_CALLBACK_DATA>): Int32
+    // param-hint: Context optional
+    // param-hint: WaitCompletionRoutine optional
+    // param-hint: PrePostCallbackDataRoutine optional
+    func FltOplockBreakH(Oplock: CPointer<CPointer<Unit>>, CallbackData: CPointer<FLT_CALLBACK_DATA>, Flags: UInt32, Context: CPointer<Unit>, WaitCompletionRoutine: PFLTOPLOCK_WAIT_COMPLETE_ROUTINE, PrePostCallbackDataRoutine: PFLTOPLOCK_PREPOST_CALLBACKDATA_ROUTINE): Int32
+    // param-hint: Context optional
+    // param-hint: WaitCompletionRoutine optional
+    // param-hint: PrePostCallbackDataRoutine optional
+    func FltOplockBreakToNone(Oplock: CPointer<CPointer<Unit>>, CallbackData: CPointer<FLT_CALLBACK_DATA>, Context: CPointer<Unit>, WaitCompletionRoutine: PFLTOPLOCK_WAIT_COMPLETE_ROUTINE, PrePostCallbackDataRoutine: PFLTOPLOCK_PREPOST_CALLBACKDATA_ROUTINE): Int32
+    // param-hint: Context optional
+    // param-hint: WaitCompletionRoutine optional
+    // param-hint: PrePostCallbackDataRoutine optional
+    func FltOplockBreakToNoneEx(Oplock: CPointer<CPointer<Unit>>, CallbackData: CPointer<FLT_CALLBACK_DATA>, Flags: UInt32, Context: CPointer<Unit>, WaitCompletionRoutine: PFLTOPLOCK_WAIT_COMPLETE_ROUTINE, PrePostCallbackDataRoutine: PFLTOPLOCK_PREPOST_CALLBACKDATA_ROUTINE): Int32
+    func FltOplockFsctrl(Oplock: CPointer<CPointer<Unit>>, CallbackData: CPointer<FLT_CALLBACK_DATA>, OpenCount: UInt32): Int32
+    func FltOplockFsctrlEx(Oplock: CPointer<CPointer<Unit>>, CallbackData: CPointer<FLT_CALLBACK_DATA>, OpenCount: UInt32, Flags: UInt32): Int32
+    func FltOplockIsSharedRequest(CallbackData: CPointer<FLT_CALLBACK_DATA>): UInt8
+    func FltPerformAsynchronousIo(CallbackData: CPointer<FLT_CALLBACK_DATA>, CallbackRoutine: PFLT_COMPLETED_ASYNC_IO_CALLBACK, CallbackContext: CPointer<Unit>): Int32
+    func FltPerformSynchronousIo(CallbackData: CPointer<FLT_CALLBACK_DATA>): Unit
+    func FltPropagateActivityIdToThread(CallbackData: CPointer<FLT_CALLBACK_DATA>, PropagateId: CPointer<GUID>, OriginalId: CPointer<CPointer<GUID>>): Int32
+    func FltPropagateIrpExtension(SourceData: CPointer<FLT_CALLBACK_DATA>, TargetData: CPointer<FLT_CALLBACK_DATA>, Flags: UInt32): Int32
+    func FltReissueSynchronousIo(InitiatingInstance: PFLT_INSTANCE, CallbackData: CPointer<FLT_CALLBACK_DATA>): Unit
+    func FltRequestFileInfoOnCreateCompletion(Filter: PFLT_FILTER, Data: CPointer<FLT_CALLBACK_DATA>, InfoClassFlags: UInt32): Int32
+    func FltRetainSwappedBufferMdlAddress(CallbackData: CPointer<FLT_CALLBACK_DATA>): Unit
+    func FltRetrieveFileInfoOnCreateCompletion(Filter: PFLT_FILTER, Data: CPointer<FLT_CALLBACK_DATA>, InfoClass: UInt32, Size: CPointer<UInt32>): CPointer<Unit>
+    func FltRetrieveFileInfoOnCreateCompletionEx(Filter: PFLT_FILTER, Data: CPointer<FLT_CALLBACK_DATA>, InfoClass: UInt32, RetInfoSize: CPointer<UInt32>, RetInfoBuffer: CPointer<CPointer<Unit>>): Int32
+    func FltReuseCallbackData(CallbackData: CPointer<FLT_CALLBACK_DATA>): Unit
     // param-hint: Guid optional
     func FltSetActivityIdCallbackData(CallbackData: CPointer<FLT_CALLBACK_DATA>, Guid: CPointer<GUID>): Int32
     func FltSetCallbackDataDirty(Data: CPointer<FLT_CALLBACK_DATA>): Unit
     func FltSetCancelCompletion(CallbackData: CPointer<FLT_CALLBACK_DATA>, CanceledCallback: PFLT_COMPLETE_CANCELED_CALLBACK): Int32
-    // param-hint: EaBuffer bytes=param[3]
-    func FltSetEaFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, EaBuffer: CPointer<Unit>, Length: UInt32): Int32
-    func FltSetEcpListIntoCallbackData(Filter: PFLT_FILTER, CallbackData: CPointer<FLT_CALLBACK_DATA>, EcpList: CPointer<Wdk_impl.ECP_LIST>): Int32
-    // param-hint: OldContext optional
-    func FltSetFileContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, Operation: FLT_SET_CONTEXT_OPERATION, NewContext: PFLT_CONTEXT, OldContext: CPointer<PFLT_CONTEXT>): Int32
     func FltSetFsZeroingOffset(Data: CPointer<FLT_CALLBACK_DATA>, ZeroingOffset: UInt32): Int32
     func FltSetFsZeroingOffsetRequired(Data: CPointer<FLT_CALLBACK_DATA>): Int32
-    // param-hint: FileInformation bytes=param[3]
-    func FltSetInformationFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, FileInformation: CPointer<Unit>, Length: UInt32, FileInformationClass: Wdk_impl.FILE_INFORMATION_CLASS): Int32
-    // param-hint: OldContext optional
-    func FltSetInstanceContext(Instance: PFLT_INSTANCE, Operation: FLT_SET_CONTEXT_OPERATION, NewContext: PFLT_CONTEXT, OldContext: CPointer<PFLT_CONTEXT>): Int32
-    func FltSetIoPriorityHintIntoCallbackData(Data: CPointer<FLT_CALLBACK_DATA>, PriorityHint: Wdk_impl.IO_PRIORITY_HINT): Int32
-    func FltSetIoPriorityHintIntoFileObject(FileObject: CPointer<Wdk_impl.FILE_OBJECT>, PriorityHint: Wdk_impl.IO_PRIORITY_HINT): Int32
-    func FltSetIoPriorityHintIntoThread(Thread: Wdk_impl.PETHREAD, PriorityHint: Wdk_impl.IO_PRIORITY_HINT): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // param-hint: FileObject optional
+    func FltAllocateCallbackData(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, RetNewCallbackData: CPointer<CPointer<FLT_CALLBACK_DATA>>): Int32
+    // param-hint: FileObject optional
+    func FltAllocateCallbackDataEx(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, Flags: UInt32, RetNewCallbackData: CPointer<CPointer<FLT_CALLBACK_DATA>>): Int32
+    // param-hint: CallbackData optional
+    func FltFlushBuffers2(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, FlushType: UInt32, CallbackData: CPointer<FLT_CALLBACK_DATA>): Int32
+    // param-hint: ByteOffset optional
     // param-hint: Buffer bytes=param[3]
-    func FltSetQuotaInformationFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, Buffer: CPointer<Unit>, Length: UInt32): Int32
-    func FltSetSecurityObject(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, SecurityInformation: UInt32, SecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32
-    // param-hint: OldContext optional
-    func FltSetStreamContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, Operation: FLT_SET_CONTEXT_OPERATION, NewContext: PFLT_CONTEXT, OldContext: CPointer<PFLT_CONTEXT>): Int32
-    // param-hint: OldContext optional
-    func FltSetStreamHandleContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, Operation: FLT_SET_CONTEXT_OPERATION, NewContext: PFLT_CONTEXT, OldContext: CPointer<PFLT_CONTEXT>): Int32
-    // param-hint: OldContext optional
-    func FltSetTransactionContext(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk_impl.KTRANSACTION>, Operation: FLT_SET_CONTEXT_OPERATION, NewContext: PFLT_CONTEXT, OldContext: CPointer<PFLT_CONTEXT>): Int32
-    // param-hint: OldContext optional
-    func FltSetVolumeContext(Volume: PFLT_VOLUME, Operation: FLT_SET_CONTEXT_OPERATION, NewContext: PFLT_CONTEXT, OldContext: CPointer<PFLT_CONTEXT>): Int32
-    // param-hint: FsInformation bytes=param[3]
-    func FltSetVolumeInformation(Instance: PFLT_INSTANCE, Iosb: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, FsInformation: CPointer<Unit>, Length: UInt32, FsInformationClass: Wdk_impl.FS_INFORMATION_CLASS): Int32
-    func FltStartFiltering(Filter: PFLT_FILTER): Int32
-    func FltSupportsFileContexts(FileObject: CPointer<Wdk_impl.FILE_OBJECT>): Win32_Foundation.BOOLEAN
-    // param-hint: Instance optional
-    func FltSupportsFileContextsEx(FileObject: CPointer<Wdk_impl.FILE_OBJECT>, Instance: PFLT_INSTANCE): Win32_Foundation.BOOLEAN
-    func FltSupportsStreamContexts(FileObject: CPointer<Wdk_impl.FILE_OBJECT>): Win32_Foundation.BOOLEAN
-    func FltSupportsStreamHandleContexts(FileObject: CPointer<Wdk_impl.FILE_OBJECT>): Win32_Foundation.BOOLEAN
-    // param-hint: Guid optional
-    // param-hint: DataBuffer bytes=param[5]
-    func FltTagFile(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, FileTag: UInt32, Guid: CPointer<GUID>, DataBuffer: CPointer<Unit>, DataBufferLength: UInt16): Int32
-    // param-hint: Guid optional
-    // param-hint: DataBuffer bytes=param[5]
-    // param-hint: ExistingGuid optional
-    func FltTagFileEx(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, FileTag: UInt32, Guid: CPointer<GUID>, DataBuffer: CPointer<Unit>, DataBufferLength: UInt16, ExistingFileTag: UInt32, ExistingGuid: CPointer<GUID>, Flags: UInt32): Int32
-    func FltUninitializeFileLock(FileLock: CPointer<Wdk_impl.FILE_LOCK>): Unit
-    func FltUninitializeOplock(Oplock: CPointer<CPointer<Unit>>): Unit
-    func FltUnloadFilter(FilterName: CPointer<Win32_Foundation.UNICODE_STRING>): Int32
-    func FltUnregisterFilter(Filter: PFLT_FILTER): Unit
-    // param-hint: Guid optional
-    func FltUntagFile(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, FileTag: UInt32, Guid: CPointer<GUID>): Int32
-    func FltVetoBypassIo(CallbackData: CPointer<FLT_CALLBACK_DATA>, FltObjects: CPointer<FLT_RELATED_OBJECTS>, OperationStatus: Int32, FailureReason: CPointer<Win32_Foundation.UNICODE_STRING>): Int32
+    // param-hint: BytesRead optional
+    // param-hint: CallbackRoutine optional
+    // param-hint: CallbackContext optional
+    func FltReadFile(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, ByteOffset: CPointer<Int64>, Length: UInt32, Buffer: CPointer<Unit>, Flags: UInt32, BytesRead: CPointer<UInt32>, CallbackRoutine: PFLT_COMPLETED_ASYNC_IO_CALLBACK, CallbackContext: CPointer<Unit>): Int32
+    // param-hint: ByteOffset optional
+    // param-hint: Buffer bytes=param[3] optional
+    // param-hint: BytesRead optional
+    // param-hint: CallbackRoutine optional
+    // param-hint: CallbackContext optional
+    // param-hint: Key optional
+    // param-hint: Mdl optional
+    func FltReadFileEx(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, ByteOffset: CPointer<Int64>, Length: UInt32, Buffer: CPointer<Unit>, Flags: UInt32, BytesRead: CPointer<UInt32>, CallbackRoutine: PFLT_COMPLETED_ASYNC_IO_CALLBACK, CallbackContext: CPointer<Unit>, Key: CPointer<UInt32>, Mdl: CPointer<Wdk__impl_l0.MDL>): Int32
     // param-hint: ByteOffset optional
     // param-hint: Buffer bytes=param[3]
     // param-hint: BytesWritten optional
     // param-hint: CallbackRoutine optional
     // param-hint: CallbackContext optional
-    func FltWriteFile(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, ByteOffset: CPointer<Int64>, Length: UInt32, Buffer: CPointer<Unit>, Flags: UInt32, BytesWritten: CPointer<UInt32>, CallbackRoutine: PFLT_COMPLETED_ASYNC_IO_CALLBACK, CallbackContext: CPointer<Unit>): Int32
+    func FltWriteFile(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, ByteOffset: CPointer<Int64>, Length: UInt32, Buffer: CPointer<Unit>, Flags: UInt32, BytesWritten: CPointer<UInt32>, CallbackRoutine: PFLT_COMPLETED_ASYNC_IO_CALLBACK, CallbackContext: CPointer<Unit>): Int32
     // param-hint: ByteOffset optional
     // param-hint: Buffer bytes=param[3] optional
     // param-hint: BytesWritten optional
@@ -3294,8 +3570,328 @@ foreign {
     // param-hint: CallbackContext optional
     // param-hint: Key optional
     // param-hint: Mdl optional
-    func FltWriteFileEx(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk_impl.FILE_OBJECT>, ByteOffset: CPointer<Int64>, Length: UInt32, Buffer: CPointer<Unit>, Flags: UInt32, BytesWritten: CPointer<UInt32>, CallbackRoutine: PFLT_COMPLETED_ASYNC_IO_CALLBACK, CallbackContext: CPointer<Unit>, Key: CPointer<UInt32>, Mdl: CPointer<Wdk_impl.MDL>): Int32
-    func FltpTraceRedirectedFileIo(OriginatingFileObject: CPointer<Wdk_impl.FILE_OBJECT>, ChildCallbackData: CPointer<FLT_CALLBACK_DATA>): Int32
+    func FltWriteFileEx(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, ByteOffset: CPointer<Int64>, Length: UInt32, Buffer: CPointer<Unit>, Flags: UInt32, BytesWritten: CPointer<UInt32>, CallbackRoutine: PFLT_COMPLETED_ASYNC_IO_CALLBACK, CallbackContext: CPointer<Unit>, Key: CPointer<UInt32>, Mdl: CPointer<Wdk__impl_l0.MDL>): Int32
+    func FltpTraceRedirectedFileIo(OriginatingFileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, ChildCallbackData: CPointer<FLT_CALLBACK_DATA>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on")]
+foreign {
+    // param-hint: Instance optional
+    // param-hint: FileObject optional
+    // param-hint: AllocationSize optional
+    // param-hint: EaBuffer bytes=param[13] optional
+    // param-hint: DriverContext optional
+    func FltCreateFileEx2(Filter: PFLT_FILTER, Instance: PFLT_INSTANCE, FileHandle: CPointer<CPointer<Unit>>, FileObject: CPointer<CPointer<Wdk__impl_l0.FILE_OBJECT>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, AllocationSize: CPointer<Int64>, FileAttributes: UInt32, ShareAccess: UInt32, CreateDisposition: UInt32, CreateOptions: UInt32, EaBuffer: CPointer<Unit>, EaLength: UInt32, Flags: UInt32, DriverContext: CPointer<Wdk__impl_l0.IO_DRIVER_CREATE_CONTEXT>): Int32
+    // param-hint: Instance optional
+    // param-hint: FileObject optional
+    // param-hint: DriverContext optional
+    func FltCreateMailslotFile(Filter: PFLT_FILTER, Instance: PFLT_INSTANCE, FileHandle: CPointer<CPointer<Unit>>, FileObject: CPointer<CPointer<Wdk__impl_l0.FILE_OBJECT>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, CreateOptions: UInt32, MailslotQuota: UInt32, MaximumMessageSize: UInt32, ReadTimeout: CPointer<Int64>, DriverContext: CPointer<Wdk__impl_l0.IO_DRIVER_CREATE_CONTEXT>): Int32
+    // param-hint: Instance optional
+    // param-hint: FileObject optional
+    // param-hint: DefaultTimeout optional
+    // param-hint: DriverContext optional
+    func FltCreateNamedPipeFile(Filter: PFLT_FILTER, Instance: PFLT_INSTANCE, FileHandle: CPointer<CPointer<Unit>>, FileObject: CPointer<CPointer<Wdk__impl_l0.FILE_OBJECT>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, ShareAccess: UInt32, CreateDisposition: UInt32, CreateOptions: UInt32, NamedPipeType: UInt32, ReadMode: UInt32, CompletionMode: UInt32, MaximumInstances: UInt32, InboundQuota: UInt32, OutboundQuota: UInt32, DefaultTimeout: CPointer<Int64>, DriverContext: CPointer<Wdk__impl_l0.IO_DRIVER_CREATE_CONTEXT>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on")]
+foreign {
+    // param-hint: FileInformation bytes=param[3]
+    // param-hint: FileName optional
+    // param-hint: LengthReturned optional
+    func FltQueryDirectoryFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, FileInformation: CPointer<Unit>, Length: UInt32, FileInformationClass: Int32, ReturnSingleEntry: UInt8, FileName: CPointer<Win32_Foundation.UNICODE_STRING>, RestartScan: UInt8, LengthReturned: CPointer<UInt32>): Int32
+    // param-hint: FileInformation bytes=param[3]
+    // param-hint: FileName optional
+    // param-hint: LengthReturned optional
+    func FltQueryDirectoryFileEx(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, FileInformation: CPointer<Unit>, Length: UInt32, FileInformationClass: Int32, QueryFlags: UInt32, FileName: CPointer<Win32_Foundation.UNICODE_STRING>, LengthReturned: CPointer<UInt32>): Int32
+    // param-hint: FileInformation bytes=param[3]
+    // param-hint: LengthReturned optional
+    func FltQueryInformationFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, FileInformation: CPointer<Unit>, Length: UInt32, FileInformationClass: Int32, LengthReturned: CPointer<UInt32>): Int32
+    // param-hint: FsInformation bytes=param[3]
+    // param-hint: LengthReturned optional
+    func FltQueryVolumeInformationFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, FsInformation: CPointer<Unit>, Length: UInt32, FsInformationClass: Int32, LengthReturned: CPointer<UInt32>): Int32
+    // param-hint: FileInformation bytes=param[3]
+    func FltSetInformationFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, FileInformation: CPointer<Unit>, Length: UInt32, FileInformationClass: Int32): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on")]
+foreign {
+    // param-hint: Instance optional
+    // param-hint: FileObject optional
+    // param-hint: AllocationSize optional
+    // param-hint: EaBuffer bytes=param[13] optional
+    func FltCreateFileEx(Filter: PFLT_FILTER, Instance: PFLT_INSTANCE, FileHandle: CPointer<CPointer<Unit>>, FileObject: CPointer<CPointer<Wdk__impl_l0.FILE_OBJECT>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, AllocationSize: CPointer<Int64>, FileAttributes: UInt32, ShareAccess: UInt32, CreateDisposition: UInt32, CreateOptions: UInt32, EaBuffer: CPointer<Unit>, EaLength: UInt32, Flags: UInt32): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_Security == "on")]
+foreign {
+    // param-hint: ObjectAttributes optional
+    // param-hint: MaximumSize optional
+    // param-hint: SectionFileSize optional
+    func FltCreateSectionForDataScan(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, SectionContext: PFLT_CONTEXT, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, MaximumSize: CPointer<Int64>, SectionPageProtection: UInt32, AllocationAttributes: UInt32, Flags: UInt32, SectionHandle: CPointer<CPointer<Unit>>, SectionObject: CPointer<CPointer<Unit>>, SectionFileSize: CPointer<Int64>): Int32
+    // param-hint: SecurityDescriptor bytes=param[4] optional
+    // param-hint: LengthNeeded optional
+    func FltQuerySecurityObject(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, SecurityInformation: UInt32, SecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, Length: UInt32, LengthNeeded: CPointer<UInt32>): Int32
+    func FltSetSecurityObject(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, SecurityInformation: UInt32, SecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on")]
+foreign {
+    func FltFastIoMdlRead(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, FileOffset: CPointer<Int64>, Length: UInt32, LockKey: UInt32, MdlChain: CPointer<CPointer<Wdk__impl_l0.MDL>>, IoStatus: CPointer<Win32_System_IO.IO_STATUS_BLOCK>): UInt8
+    func FltFastIoPrepareMdlWrite(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, FileOffset: CPointer<Int64>, Length: UInt32, LockKey: UInt32, MdlChain: CPointer<CPointer<Wdk__impl_l0.MDL>>, IoStatus: CPointer<Win32_System_IO.IO_STATUS_BLOCK>): UInt8
+    // param-hint: Buffer bytes=param[4]
+    // param-hint: SidList bytes=param[7] optional
+    // param-hint: StartSid optional
+    // param-hint: LengthReturned optional
+    func FltQueryQuotaInformationFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, Buffer: CPointer<Unit>, Length: UInt32, ReturnSingleEntry: UInt8, SidList: CPointer<Unit>, SidListLength: UInt32, StartSid: CPointer<UInt32>, RestartScan: UInt8, LengthReturned: CPointer<UInt32>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on")]
+foreign {
+    func FltCancelFileOpen(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>): Unit
+    // param-hint: OldContext optional
+    func FltDeleteFileContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, OldContext: CPointer<PFLT_CONTEXT>): Int32
+    // param-hint: OldContext optional
+    func FltDeleteStreamContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, OldContext: CPointer<PFLT_CONTEXT>): Int32
+    // param-hint: OldContext optional
+    func FltDeleteStreamHandleContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, OldContext: CPointer<PFLT_CONTEXT>): Int32
+    // param-hint: InputBuffer bytes=param[4] optional
+    // param-hint: OutputBuffer bytes=param[6] optional
+    // param-hint: LengthReturned optional
+    func FltDeviceIoControlFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, IoControlCode: UInt32, InputBuffer: CPointer<Unit>, InputBufferLength: UInt32, OutputBuffer: CPointer<Unit>, OutputBufferLength: UInt32, LengthReturned: CPointer<UInt32>): Int32
+    func FltFastIoMdlReadComplete(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, MdlChain: CPointer<Wdk__impl_l0.MDL>): UInt8
+    func FltFastIoMdlWriteComplete(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, FileOffset: CPointer<Int64>, MdlChain: CPointer<Wdk__impl_l0.MDL>): UInt8
+    func FltFlushBuffers(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>): Int32
+    // param-hint: InputBuffer bytes=param[4] optional
+    // param-hint: OutputBuffer bytes=param[6] optional
+    // param-hint: LengthReturned optional
+    func FltFsControlFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, FsControlCode: UInt32, InputBuffer: CPointer<Unit>, InputBufferLength: UInt32, OutputBuffer: CPointer<Unit>, OutputBufferLength: UInt32, LengthReturned: CPointer<UInt32>): Int32
+    func FltGetContexts(FltObjects: CPointer<FLT_RELATED_OBJECTS>, DesiredContexts: UInt16, Contexts: CPointer<FLT_RELATED_CONTEXTS>): Unit
+    func FltGetContextsEx(FltObjects: CPointer<FLT_RELATED_OBJECTS>, DesiredContexts: UInt16, ContextsSize: UIntNative, Contexts: CPointer<FLT_RELATED_CONTEXTS_EX>): Int32
+    // param-hint: RootDirectory optional
+    // param-hint: FileName bytes=param[4]
+    func FltGetDestinationFileNameInformation(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, RootDirectory: CPointer<Unit>, FileName: CPointer<UInt16>, FileNameLength: UInt32, NameOptions: UInt32, RetFileNameInformation: CPointer<CPointer<FLT_FILE_NAME_INFORMATION>>): Int32
+    func FltGetFileContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, Context: CPointer<PFLT_CONTEXT>): Int32
+    // param-hint: Instance optional
+    func FltGetFileNameInformationUnsafe(FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, Instance: PFLT_INSTANCE, NameOptions: UInt32, FileNameInformation: CPointer<CPointer<FLT_FILE_NAME_INFORMATION>>): Int32
+    func FltGetIoPriorityHintFromFileObject(FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>): Int32
+    func FltGetSectionContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, Context: CPointer<PFLT_CONTEXT>): Int32
+    func FltGetStreamContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, Context: CPointer<PFLT_CONTEXT>): Int32
+    func FltGetStreamHandleContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, Context: CPointer<PFLT_CONTEXT>): Int32
+    func FltGetVolumeFromFileObject(Filter: PFLT_FILTER, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, RetVolume: CPointer<PFLT_VOLUME>): Int32
+    func FltIsDirectory(FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, Instance: PFLT_INSTANCE, IsDirectory: CPointer<UInt8>): Int32
+    // param-hint: VolumeFileObject optional
+    func FltOpenVolume(Instance: PFLT_INSTANCE, VolumeHandle: CPointer<CPointer<Unit>>, VolumeFileObject: CPointer<CPointer<Wdk__impl_l0.FILE_OBJECT>>): Int32
+    // param-hint: Fo1 optional
+    // param-hint: Fo2 optional
+    func FltOplockKeysEqual(Fo1: CPointer<Wdk__impl_l0.FILE_OBJECT>, Fo2: CPointer<Wdk__impl_l0.FILE_OBJECT>): UInt8
+    // param-hint: FileObject optional
+    func FltPurgeFileNameInformationCache(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>): Int32
+    // param-hint: ReturnedEaData bytes=param[3]
+    // param-hint: EaList bytes=param[6] optional
+    // param-hint: EaIndex optional
+    // param-hint: LengthReturned optional
+    func FltQueryEaFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, ReturnedEaData: CPointer<Unit>, Length: UInt32, ReturnSingleEntry: UInt8, EaList: CPointer<Unit>, EaListLength: UInt32, EaIndex: CPointer<UInt32>, RestartScan: UInt8, LengthReturned: CPointer<UInt32>): Int32
+    // param-hint: EaBuffer bytes=param[3]
+    func FltSetEaFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, EaBuffer: CPointer<Unit>, Length: UInt32): Int32
+    // param-hint: OldContext optional
+    func FltSetFileContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, Operation: Int32, NewContext: PFLT_CONTEXT, OldContext: CPointer<PFLT_CONTEXT>): Int32
+    func FltSetIoPriorityHintIntoFileObject(FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, PriorityHint: Int32): Int32
+    // param-hint: Buffer bytes=param[3]
+    func FltSetQuotaInformationFile(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, Buffer: CPointer<Unit>, Length: UInt32): Int32
+    // param-hint: OldContext optional
+    func FltSetStreamContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, Operation: Int32, NewContext: PFLT_CONTEXT, OldContext: CPointer<PFLT_CONTEXT>): Int32
+    // param-hint: OldContext optional
+    func FltSetStreamHandleContext(Instance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, Operation: Int32, NewContext: PFLT_CONTEXT, OldContext: CPointer<PFLT_CONTEXT>): Int32
+    func FltSupportsFileContexts(FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>): UInt8
+    // param-hint: Instance optional
+    func FltSupportsFileContextsEx(FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, Instance: PFLT_INSTANCE): UInt8
+    func FltSupportsStreamContexts(FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>): UInt8
+    func FltSupportsStreamHandleContexts(FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>): UInt8
+    // param-hint: Guid optional
+    // param-hint: DataBuffer bytes=param[5]
+    func FltTagFile(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, FileTag: UInt32, Guid: CPointer<GUID>, DataBuffer: CPointer<Unit>, DataBufferLength: UInt16): Int32
+    // param-hint: Guid optional
+    // param-hint: DataBuffer bytes=param[5]
+    // param-hint: ExistingGuid optional
+    func FltTagFileEx(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, FileTag: UInt32, Guid: CPointer<GUID>, DataBuffer: CPointer<Unit>, DataBufferLength: UInt16, ExistingFileTag: UInt32, ExistingGuid: CPointer<GUID>, Flags: UInt32): Int32
+    // param-hint: Guid optional
+    func FltUntagFile(InitiatingInstance: PFLT_INSTANCE, FileObject: CPointer<Wdk__impl_l0.FILE_OBJECT>, FileTag: UInt32, Guid: CPointer<GUID>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_Storage_InstallableFileSystems == "on")]
+foreign {
+    // param-hint: Buffer bytes=param[4] optional
+    func FltEnumerateInstanceInformationByDeviceObject(DeviceObject: CPointer<Wdk__impl_l0.DEVICE_OBJECT>, Index: UInt32, InformationClass: Int32, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on")]
+foreign {
+    func FltGetDeviceObject(Volume: PFLT_VOLUME, DeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECT>>): Int32
+    func FltGetDiskDeviceObject(Volume: PFLT_VOLUME, DiskDeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECT>>): Int32
+    func FltGetVolumeFromDeviceObject(Filter: PFLT_FILTER, DeviceObject: CPointer<Wdk__impl_l0.DEVICE_OBJECT>, RetVolume: CPointer<PFLT_VOLUME>): Int32
+    func FltIsFltMgrVolumeDeviceObject(DeviceObject: CPointer<Wdk__impl_l0.DEVICE_OBJECT>): UInt8
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on")]
+foreign {
+    // param-hint: CompleteLockCallbackDataRoutine optional
+    // param-hint: UnlockRoutine optional
+    func FltAllocateFileLock(CompleteLockCallbackDataRoutine: PFLT_COMPLETE_LOCK_CALLBACK_DATA_ROUTINE, UnlockRoutine: Wdk__impl_l0.PUNLOCK_ROUTINE): CPointer<Wdk__impl_l0.FILE_LOCK>
+    func FltCheckLockForReadAccess(FileLock: CPointer<Wdk__impl_l0.FILE_LOCK>, CallbackData: CPointer<FLT_CALLBACK_DATA>): UInt8
+    func FltCheckLockForWriteAccess(FileLock: CPointer<Wdk__impl_l0.FILE_LOCK>, CallbackData: CPointer<FLT_CALLBACK_DATA>): UInt8
+    // param-hint: Context optional
+    func FltProcessFileLock(FileLock: CPointer<Wdk__impl_l0.FILE_LOCK>, CallbackData: CPointer<FLT_CALLBACK_DATA>, Context: CPointer<Unit>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Storage_FileSystem == "on")]
+foreign {
+    func FltFreeFileLock(FileLock: CPointer<Wdk__impl_l0.FILE_LOCK>): Unit
+    func FltInitializeFileLock(FileLock: CPointer<Wdk__impl_l0.FILE_LOCK>): Unit
+    func FltUninitializeFileLock(FileLock: CPointer<Wdk__impl_l0.FILE_LOCK>): Unit
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_System_SystemServices == "on")]
+foreign {
+    // param-hint: Context optional
+    // param-hint: InsertContext optional
+    func FltCbdqInsertIo(Cbdq: CPointer<FLT_CALLBACK_DATA_QUEUE>, Cbd: CPointer<FLT_CALLBACK_DATA>, Context: CPointer<Wdk__impl_l0.IO_CSQ_IRP_CONTEXT>, InsertContext: CPointer<Unit>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on")]
+foreign {
+    func FltCbdqDisable(Cbdq: CPointer<FLT_CALLBACK_DATA_QUEUE>): Unit
+    func FltCbdqEnable(Cbdq: CPointer<FLT_CALLBACK_DATA_QUEUE>): Unit
+    func FltCbdqInitialize(Instance: PFLT_INSTANCE, Cbdq: CPointer<FLT_CALLBACK_DATA_QUEUE>, CbdqInsertIo: PFLT_CALLBACK_DATA_QUEUE_INSERT_IO, CbdqRemoveIo: PFLT_CALLBACK_DATA_QUEUE_REMOVE_IO, CbdqPeekNextIo: PFLT_CALLBACK_DATA_QUEUE_PEEK_NEXT_IO, CbdqAcquire: PFLT_CALLBACK_DATA_QUEUE_ACQUIRE, CbdqRelease: PFLT_CALLBACK_DATA_QUEUE_RELEASE, CbdqCompleteCanceledIo: PFLT_CALLBACK_DATA_QUEUE_COMPLETE_CANCELED_IO): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_Storage_InstallableFileSystems == "on")]
+foreign {
+    func FltRegisterFilter(Driver: CPointer<Wdk__impl_l0.DRIVER_OBJECT>, Registration: CPointer<FLT_REGISTRATION>, RetFilter: CPointer<PFLT_FILTER>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on")]
+foreign {
+    // param-hint: Instance optional
+    // param-hint: FileInformation bytes=param[5]
+    // param-hint: DriverContext optional
+    func FltQueryInformationByName(Filter: PFLT_FILTER, Instance: PFLT_INSTANCE, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, FileInformation: CPointer<Unit>, Length: UInt32, FileInformationClass: Int32, DriverContext: CPointer<Wdk__impl_l0.IO_DRIVER_CREATE_CONTEXT>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on")]
+foreign {
+    func FltAcquireResourceExclusive(Resource: CPointer<Wdk__impl_l0.ERESOURCE>): Unit
+    func FltAcquireResourceShared(Resource: CPointer<Wdk__impl_l0.ERESOURCE>): Unit
+    func FltReleaseResource(Resource: CPointer<Wdk__impl_l0.ERESOURCE>): Unit
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on")]
+foreign {
+    // param-hint: OutputPriorityInfo optional
+    func FltApplyPriorityInfoThread(InputPriorityInfo: CPointer<Wdk__impl_l0.IO_PRIORITY_INFO>, OutputPriorityInfo: CPointer<Wdk__impl_l0.IO_PRIORITY_INFO>, Thread: Wdk__impl_l0.PETHREAD): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on")]
+foreign {
+    // param-hint: Instance optional
+    // param-hint: AllocationSize optional
+    // param-hint: EaBuffer bytes=param[12] optional
+    func FltCreateFile(Filter: PFLT_FILTER, Instance: PFLT_INSTANCE, FileHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, AllocationSize: CPointer<Int64>, FileAttributes: UInt32, ShareAccess: UInt32, CreateDisposition: UInt32, CreateOptions: UInt32, EaBuffer: CPointer<Unit>, EaLength: UInt32, Flags: UInt32): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on")]
+foreign {
+    // param-hint: ServerPortCookie optional
+    // param-hint: MessageNotifyCallback optional
+    func FltCreateCommunicationPort(Filter: PFLT_FILTER, ServerPort: CPointer<PFLT_PORT>, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, ServerPortCookie: CPointer<Unit>, ConnectNotifyCallback: PFLT_CONNECT_NOTIFY, DisconnectNotifyCallback: PFLT_DISCONNECT_NOTIFY, MessageNotifyCallback: PFLT_MESSAGE_NOTIFY, MaxConnections: Int32): Int32
+}
+
+@When[FLTMGR_SYS == "on" && (Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on")]
+foreign {
+    // param-hint: FsInformation bytes=param[3]
+    func FltQueryVolumeInformation(Instance: PFLT_INSTANCE, Iosb: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, FsInformation: CPointer<Unit>, Length: UInt32, FsInformationClass: Int32): Int32
+    // param-hint: FsInformation bytes=param[3]
+    func FltSetVolumeInformation(Instance: PFLT_INSTANCE, Iosb: CPointer<Win32_System_IO.IO_STATUS_BLOCK>, FsInformation: CPointer<Unit>, Length: UInt32, FsInformationClass: Int32): Int32
+}
+
+@When[FLTMGR_SYS == "on" && Windows_Wdk_Foundation == "on"]
+foreign {
+    func FltAllocateContext(Filter: PFLT_FILTER, ContextType: UInt16, ContextSize: UIntNative, PoolType: Int32, ReturnedContext: CPointer<PFLT_CONTEXT>): Int32
+    func FltAllocateExtraCreateParameterList(Filter: PFLT_FILTER, Flags: UInt32, EcpList: CPointer<CPointer<Wdk__impl_l0.ECP_LIST>>): Int32
+    func FltAllocatePoolAlignedWithTag(Instance: PFLT_INSTANCE, PoolType: Int32, NumberOfBytes: UIntNative, Tag: UInt32): CPointer<Unit>
+    // param-hint: TransactionContext optional
+    func FltCommitComplete(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk__impl_l0.KTRANSACTION>, TransactionContext: PFLT_CONTEXT): Int32
+    // param-hint: TransactionContext optional
+    func FltCommitFinalizeComplete(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk__impl_l0.KTRANSACTION>, TransactionContext: PFLT_CONTEXT): Int32
+    // param-hint: OldContext optional
+    func FltDeleteTransactionContext(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk__impl_l0.KTRANSACTION>, OldContext: CPointer<PFLT_CONTEXT>): Int32
+    func FltEnlistInTransaction(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk__impl_l0.KTRANSACTION>, TransactionContext: PFLT_CONTEXT, NotificationMask: UInt32): Int32
+    // param-hint: EcpContext optional
+    // param-hint: EcpContextSize optional
+    func FltFindExtraCreateParameter(Filter: PFLT_FILTER, EcpList: CPointer<Wdk__impl_l0.ECP_LIST>, EcpType: CPointer<GUID>, EcpContext: CPointer<CPointer<Unit>>, EcpContextSize: CPointer<UInt32>): Int32
+    func FltFreeExtraCreateParameterList(Filter: PFLT_FILTER, EcpList: CPointer<Wdk__impl_l0.ECP_LIST>): Unit
+    func FltFreeOpenReparseList(Filter: PFLT_FILTER, EcpList: CPointer<Wdk__impl_l0.ECP_LIST>): Unit
+    func FltGetIoPriorityHintFromThread(Thread: Wdk__impl_l0.PETHREAD): Int32
+    // param-hint: CurrentEcpContext optional
+    // param-hint: NextEcpType optional
+    // param-hint: NextEcpContext optional
+    // param-hint: NextEcpContextSize optional
+    func FltGetNextExtraCreateParameter(Filter: PFLT_FILTER, EcpList: CPointer<Wdk__impl_l0.ECP_LIST>, CurrentEcpContext: CPointer<Unit>, NextEcpType: CPointer<GUID>, NextEcpContext: CPointer<CPointer<Unit>>, NextEcpContextSize: CPointer<UInt32>): Int32
+    func FltGetTransactionContext(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk__impl_l0.KTRANSACTION>, Context: CPointer<PFLT_CONTEXT>): Int32
+    func FltInsertExtraCreateParameter(Filter: PFLT_FILTER, EcpList: CPointer<Wdk__impl_l0.ECP_LIST>, EcpContext: CPointer<Unit>): Int32
+    // param-hint: TransactionContext optional
+    func FltPrePrepareComplete(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk__impl_l0.KTRANSACTION>, TransactionContext: PFLT_CONTEXT): Int32
+    // param-hint: TransactionContext optional
+    func FltPrepareComplete(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk__impl_l0.KTRANSACTION>, TransactionContext: PFLT_CONTEXT): Int32
+    // param-hint: EcpContextSize optional
+    func FltRemoveExtraCreateParameter(Filter: PFLT_FILTER, EcpList: CPointer<Wdk__impl_l0.ECP_LIST>, EcpType: CPointer<GUID>, EcpContext: CPointer<CPointer<Unit>>, EcpContextSize: CPointer<UInt32>): Int32
+    // param-hint: TransactionContext optional
+    func FltRollbackComplete(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk__impl_l0.KTRANSACTION>, TransactionContext: PFLT_CONTEXT): Int32
+    // param-hint: TransactionContext optional
+    func FltRollbackEnlistment(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk__impl_l0.KTRANSACTION>, TransactionContext: PFLT_CONTEXT): Int32
+    func FltSetIoPriorityHintIntoThread(Thread: Wdk__impl_l0.PETHREAD, PriorityHint: Int32): Int32
+    // param-hint: OldContext optional
+    func FltSetTransactionContext(Instance: PFLT_INSTANCE, Transaction: CPointer<Wdk__impl_l0.KTRANSACTION>, Operation: Int32, NewContext: PFLT_CONTEXT, OldContext: CPointer<PFLT_CONTEXT>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && Windows_Wdk_Storage_FileSystem == "on"]
+foreign {
+    // param-hint: CleanupCallback optional
+    func FltAllocateExtraCreateParameter(Filter: PFLT_FILTER, EcpType: CPointer<GUID>, SizeOfContext: UInt32, Flags: UInt32, CleanupCallback: Wdk__impl_l0.PFSRTL_EXTRA_CREATE_PARAMETER_CLEANUP_CALLBACK, PoolTag: UInt32, EcpContext: CPointer<CPointer<Unit>>): Int32
+    // param-hint: CleanupCallback optional
+    func FltAllocateExtraCreateParameterFromLookasideList(Filter: PFLT_FILTER, EcpType: CPointer<GUID>, SizeOfContext: UInt32, Flags: UInt32, CleanupCallback: Wdk__impl_l0.PFSRTL_EXTRA_CREATE_PARAMETER_CLEANUP_CALLBACK, LookasideList: CPointer<Unit>, EcpContext: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && Windows_Wdk_System_SystemServices == "on"]
+foreign {
+    // param-hint: Context optional
+    func FltQueueGenericWorkItem(FltWorkItem: PFLT_GENERIC_WORKITEM, FltObject: CPointer<Unit>, WorkerRoutine: PFLT_GENERIC_WORKITEM_ROUTINE, QueueType: Int32, Context: CPointer<Unit>): Int32
+}
+
+@When[FLTMGR_SYS == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func FltBuildDefaultSecurityDescriptor(SecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, DesiredAccess: UInt32): Int32
+    func FltFreeSecurityDescriptor(SecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Unit
+}
+
+@When[FLTMGR_SYS == "on" && Windows_Win32_Storage_InstallableFileSystems == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[3] optional
+    func FltEnumerateFilterInformation(Index: UInt32, InformationClass: Int32, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
+    // param-hint: Buffer bytes=param[4] optional
+    func FltEnumerateInstanceInformationByFilter(Filter: PFLT_FILTER, Index: UInt32, InformationClass: Int32, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
+    // param-hint: Buffer bytes=param[4] optional
+    func FltEnumerateInstanceInformationByVolume(Volume: PFLT_VOLUME, Index: UInt32, InformationClass: Int32, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
+    // param-hint: Buffer bytes=param[4] optional
+    func FltEnumerateInstanceInformationByVolumeName(VolumeName: CPointer<Win32_Foundation.UNICODE_STRING>, Index: UInt32, InformationClass: Int32, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
+    // param-hint: Buffer bytes=param[4] optional
+    func FltEnumerateVolumeInformation(Filter: PFLT_FILTER, Index: UInt32, InformationClass: Int32, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
+    func FltGetFileSystemType(FltObject: CPointer<Unit>, FileSystemType: CPointer<Int32>): Int32
+    // param-hint: Buffer bytes=param[3] optional
+    func FltGetFilterInformation(Filter: PFLT_FILTER, InformationClass: Int32, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
+    // param-hint: Buffer bytes=param[3] optional
+    func FltGetInstanceInformation(Instance: PFLT_INSTANCE, InformationClass: Int32, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
+    // param-hint: Buffer bytes=param[3] optional
+    func FltGetVolumeInformation(Volume: PFLT_VOLUME, InformationClass: Int32, Buffer: CPointer<Unit>, BufferSize: UInt32, BytesReturned: CPointer<UInt32>): Int32
 }
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]

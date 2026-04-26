@@ -2,8 +2,12 @@
 package windows_sys.Win32.Storage.IscsiDisc
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt64, unionReadUInt8, unionWriteUInt64, unionWriteUInt8}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_Ioctl == "on"]
 import windows_sys.Win32.System.Ioctl as Win32_System_Ioctl
 
 
@@ -81,71 +85,10 @@ public struct ATA_PASS_THROUGH_EX32 {
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
 @C
-public struct DSM_NOTIFICATION_REQUEST_BLOCK {
-    public var Size: UInt32 = 0
-    public var Version: UInt32 = 0
-    public var NotifyFlags: UInt32 = 0
-    public var DataSetProfile: UInt32 = 0
-    public var Reserved: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0)
-    public var DataSetRangesCount: UInt32 = 0
-    public var DataSetRanges: VArray<MP_DEVICE_DATA_SET_RANGE, $1> = VArray<MP_DEVICE_DATA_SET_RANGE, $1>(repeat: MP_DEVICE_DATA_SET_RANGE())
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
 public struct DUMP_DRIVER {
     public var DumpDriverList: CPointer<Unit> = CPointer<Unit>()
     public var DriverName: VArray<UInt16, $15> = VArray<UInt16, $15>(repeat: 0)
     public var BaseName: VArray<UInt16, $15> = VArray<UInt16, $15>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct DUMP_DRIVER_EX {
-    public var DumpDriverList: CPointer<Unit> = CPointer<Unit>()
-    public var DriverName: VArray<UInt16, $15> = VArray<UInt16, $15>(repeat: 0)
-    public var BaseName: VArray<UInt16, $15> = VArray<UInt16, $15>(repeat: 0)
-    public var DriverFullPath: NTSCSI_UNICODE_STRING = NTSCSI_UNICODE_STRING()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct DUMP_POINTERS {
-    public var AdapterObject: CPointer<_ADAPTER_OBJECT> = CPointer<_ADAPTER_OBJECT>()
-    public var MappedRegisterBase: CPointer<Unit> = CPointer<Unit>()
-    public var DumpData: CPointer<Unit> = CPointer<Unit>()
-    public var CommonBufferVa: CPointer<Unit> = CPointer<Unit>()
-    public var CommonBufferPa: Int64 = 0
-    public var CommonBufferSize: UInt32 = 0
-    public var AllocateCommonBuffers: Win32_Foundation.BOOLEAN = 0
-    public var UseDiskDump: Win32_Foundation.BOOLEAN = 0
-    public var Spare1: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
-    public var DeviceObject: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct DUMP_POINTERS_EX {
-    public var Header: DUMP_POINTERS_VERSION = DUMP_POINTERS_VERSION()
-    public var DumpData: CPointer<Unit> = CPointer<Unit>()
-    public var CommonBufferVa: CPointer<Unit> = CPointer<Unit>()
-    public var CommonBufferSize: UInt32 = 0
-    public var AllocateCommonBuffers: Win32_Foundation.BOOLEAN = 0
-    public var DeviceObject: CPointer<Unit> = CPointer<Unit>()
-    public var DriverList: CPointer<Unit> = CPointer<Unit>()
-    public var dwPortFlags: UInt32 = 0
-    public var MaxDeviceDumpSectionSize: UInt32 = 0
-    public var MaxDeviceDumpLevel: UInt32 = 0
-    public var MaxTransferSize: UInt32 = 0
-    public var AdapterObject: CPointer<Unit> = CPointer<Unit>()
-    public var MappedRegisterBase: CPointer<Unit> = CPointer<Unit>()
-    public var DeviceReady: CPointer<Win32_Foundation.BOOLEAN> = CPointer<Win32_Foundation.BOOLEAN>()
-    public var DumpDevicePowerOn: PDUMP_DEVICE_POWERON_ROUTINE = { _ => 0 }
-    public var DumpDevicePowerOnContext: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
 
@@ -194,53 +137,6 @@ public struct HYBRID_DIRTY_THRESHOLDS {
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
 @C
-public struct HYBRID_INFORMATION {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var HybridSupported: Win32_Foundation.BOOLEAN = 0
-    public var Status: NVCACHE_STATUS = NVCACHE_STATUS()
-    public var CacheTypeEffective: NVCACHE_TYPE = NVCACHE_TYPE()
-    public var CacheTypeDefault: NVCACHE_TYPE = NVCACHE_TYPE()
-    public var FractionBase: UInt32 = 0
-    public var CacheSize: UInt64 = 0
-    public var Attributes: HYBRID_INFORMATION__Attributes_e__Struct = HYBRID_INFORMATION__Attributes_e__Struct()
-    public var Priorities: HYBRID_INFORMATION__Priorities_e__Struct = HYBRID_INFORMATION__Priorities_e__Struct()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct HYBRID_INFORMATION__Attributes_e__Struct {
-    public var _bitfield: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct HYBRID_INFORMATION__Priorities_e__Struct {
-    public var PriorityLevelCount: UInt8 = 0
-    public var MaxPriorityBehavior: Win32_Foundation.BOOLEAN = 0
-    public var OptimalWriteGranularity: UInt8 = 0
-    public var Reserved: UInt8 = 0
-    public var DirtyThresholdLow: UInt32 = 0
-    public var DirtyThresholdHigh: UInt32 = 0
-    public var SupportedCommands: HYBRID_INFORMATION__Priorities_e__Struct__SupportedCommands_e__Struct = HYBRID_INFORMATION__Priorities_e__Struct__SupportedCommands_e__Struct()
-    public var Priority: VArray<NVCACHE_PRIORITY_LEVEL_DESCRIPTOR, $1> = VArray<NVCACHE_PRIORITY_LEVEL_DESCRIPTOR, $1>(repeat: NVCACHE_PRIORITY_LEVEL_DESCRIPTOR())
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct HYBRID_INFORMATION__Priorities_e__Struct__SupportedCommands_e__Struct {
-    public var _bitfield: UInt32 = 0
-    public var MaxEvictCommands: UInt32 = 0
-    public var MaxLbaRangeCountForEvict: UInt32 = 0
-    public var MaxLbaRangeCountForChangeLba: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
 public struct HYBRID_REQUEST_BLOCK {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
@@ -264,44 +160,6 @@ public struct IDE_IO_CONTROL {
 }
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct IKE_AUTHENTICATION_INFORMATION {
-    public var AuthMethod: IKE_AUTHENTICATION_METHOD = IKE_AUTHENTICATION_METHOD()
-    public var Anonymous: IKE_AUTHENTICATION_INFORMATION__Anonymous_e__Union = IKE_AUTHENTICATION_INFORMATION__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IKE_AUTHENTICATION_INFORMATION__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
-
-    public func psKey(): IKE_AUTHENTICATION_PRESHARED_KEY {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKE_AUTHENTICATION_PRESHARED_KEY>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_psKey(val: IKE_AUTHENTICATION_PRESHARED_KEY): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKE_AUTHENTICATION_PRESHARED_KEY>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
 public struct IKE_AUTHENTICATION_METHOD {
     public var value: Int32 = 0
 
@@ -342,14 +200,13 @@ public struct IO_SCSI_CAPABILITIES {
     public var MaximumPhysicalPages: UInt32 = 0
     public var SupportedAsynchronousEvents: UInt32 = 0
     public var AlignmentMask: UInt32 = 0
-    public var TaggedQueuing: Win32_Foundation.BOOLEAN = 0
-    public var AdapterScansDown: Win32_Foundation.BOOLEAN = 0
-    public var AdapterUsesPio: Win32_Foundation.BOOLEAN = 0
+    public var TaggedQueuing: UInt8 = 0
+    public var AdapterScansDown: UInt8 = 0
+    public var AdapterUsesPio: UInt8 = 0
     public init() {}
 }
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
 public struct ISCSI_AUTH_TYPES {
     public var value: Int32 = 0
 
@@ -377,74 +234,6 @@ public let ISCSI_AUTH_TYPES_ISCSI_CHAP_AUTH_TYPE: ISCSI_AUTH_TYPES = ISCSI_AUTH_
 public let ISCSI_AUTH_TYPES_ISCSI_MUTUAL_CHAP_AUTH_TYPE: ISCSI_AUTH_TYPES = ISCSI_AUTH_TYPES(2)
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct ISCSI_CONNECTION_INFOA {
-    public var ConnectionId: ISCSI_UNIQUE_SESSION_ID = ISCSI_UNIQUE_SESSION_ID()
-    public var InitiatorAddress: CPointer<UInt8> = CPointer<UInt8>()
-    public var TargetAddress: CPointer<UInt8> = CPointer<UInt8>()
-    public var InitiatorSocket: UInt16 = 0
-    public var TargetSocket: UInt16 = 0
-    public var CID: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct ISCSI_CONNECTION_INFOW {
-    public var ConnectionId: ISCSI_UNIQUE_SESSION_ID = ISCSI_UNIQUE_SESSION_ID()
-    public var InitiatorAddress: CPointer<UInt16> = CPointer<UInt16>()
-    public var TargetAddress: CPointer<UInt16> = CPointer<UInt16>()
-    public var InitiatorSocket: UInt16 = 0
-    public var TargetSocket: UInt16 = 0
-    public var CID: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct ISCSI_CONNECTION_INFO_EX {
-    public var ConnectionId: ISCSI_UNIQUE_SESSION_ID = ISCSI_UNIQUE_SESSION_ID()
-    public var State: UInt8 = 0
-    public var Protocol: UInt8 = 0
-    public var HeaderDigest: UInt8 = 0
-    public var DataDigest: UInt8 = 0
-    public var MaxRecvDataSegmentLength: UInt32 = 0
-    public var AuthType: ISCSI_AUTH_TYPES = ISCSI_AUTH_TYPES()
-    public var EstimatedThroughput: UInt64 = 0
-    public var MaxDatagramSize: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct ISCSI_DEVICE_ON_SESSIONA {
-    public var InitiatorName: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
-    public var TargetName: VArray<Win32_Foundation.CHAR, $224> = VArray<Win32_Foundation.CHAR, $224>(repeat: 0)
-    public var ScsiAddress: SCSI_ADDRESS = SCSI_ADDRESS()
-    public var DeviceInterfaceType: GUID = GUID()
-    public var DeviceInterfaceName: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
-    public var LegacyName: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
-    public var StorageDeviceNumber: Win32_System_Ioctl.STORAGE_DEVICE_NUMBER = Win32_System_Ioctl.STORAGE_DEVICE_NUMBER()
-    public var DeviceInstance: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct ISCSI_DEVICE_ON_SESSIONW {
-    public var InitiatorName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var TargetName: VArray<UInt16, $224> = VArray<UInt16, $224>(repeat: 0)
-    public var ScsiAddress: SCSI_ADDRESS = SCSI_ADDRESS()
-    public var DeviceInterfaceType: GUID = GUID()
-    public var DeviceInterfaceName: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
-    public var LegacyName: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
-    public var StorageDeviceNumber: Win32_System_Ioctl.STORAGE_DEVICE_NUMBER = Win32_System_Ioctl.STORAGE_DEVICE_NUMBER()
-    public var DeviceInstance: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
 public struct ISCSI_DIGEST_TYPES {
     public var value: Int32 = 0
 
@@ -474,9 +263,9 @@ public struct ISCSI_LOGIN_OPTIONS {
     public var Version: UInt32 = 0
     public var InformationSpecified: UInt32 = 0
     public var LoginFlags: UInt32 = 0
-    public var AuthType: ISCSI_AUTH_TYPES = ISCSI_AUTH_TYPES()
-    public var HeaderDigest: ISCSI_DIGEST_TYPES = ISCSI_DIGEST_TYPES()
-    public var DataDigest: ISCSI_DIGEST_TYPES = ISCSI_DIGEST_TYPES()
+    public var AuthType: Int32 = 0
+    public var HeaderDigest: Int32 = 0
+    public var DataDigest: Int32 = 0
     public var MaximumConnections: UInt32 = 0
     public var DefaultTime2Wait: UInt32 = 0
     public var DefaultTime2Retain: UInt32 = 0
@@ -489,84 +278,9 @@ public struct ISCSI_LOGIN_OPTIONS {
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
 @C
-public struct ISCSI_SESSION_INFOA {
-    public var SessionId: ISCSI_UNIQUE_SESSION_ID = ISCSI_UNIQUE_SESSION_ID()
-    public var InitiatorName: CPointer<UInt8> = CPointer<UInt8>()
-    public var TargetNodeName: CPointer<UInt8> = CPointer<UInt8>()
-    public var TargetName: CPointer<UInt8> = CPointer<UInt8>()
-    public var ISID: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
-    public var TSID: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
-    public var ConnectionCount: UInt32 = 0
-    public var Connections: CPointer<ISCSI_CONNECTION_INFOA> = CPointer<ISCSI_CONNECTION_INFOA>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct ISCSI_SESSION_INFOW {
-    public var SessionId: ISCSI_UNIQUE_SESSION_ID = ISCSI_UNIQUE_SESSION_ID()
-    public var InitiatorName: CPointer<UInt16> = CPointer<UInt16>()
-    public var TargetNodeName: CPointer<UInt16> = CPointer<UInt16>()
-    public var TargetName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ISID: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
-    public var TSID: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
-    public var ConnectionCount: UInt32 = 0
-    public var Connections: CPointer<ISCSI_CONNECTION_INFOW> = CPointer<ISCSI_CONNECTION_INFOW>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct ISCSI_SESSION_INFO_EX {
-    public var SessionId: ISCSI_UNIQUE_SESSION_ID = ISCSI_UNIQUE_SESSION_ID()
-    public var InitialR2t: Win32_Foundation.BOOLEAN = 0
-    public var ImmediateData: Win32_Foundation.BOOLEAN = 0
-    public var Type: UInt8 = 0
-    public var DataSequenceInOrder: Win32_Foundation.BOOLEAN = 0
-    public var DataPduInOrder: Win32_Foundation.BOOLEAN = 0
-    public var ErrorRecoveryLevel: UInt8 = 0
-    public var MaxOutstandingR2t: UInt32 = 0
-    public var FirstBurstLength: UInt32 = 0
-    public var MaxBurstLength: UInt32 = 0
-    public var MaximumConnections: UInt32 = 0
-    public var ConnectionCount: UInt32 = 0
-    public var Connections: CPointer<ISCSI_CONNECTION_INFO_EX> = CPointer<ISCSI_CONNECTION_INFO_EX>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct ISCSI_TARGET_MAPPINGA {
-    public var InitiatorName: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
-    public var TargetName: VArray<Win32_Foundation.CHAR, $224> = VArray<Win32_Foundation.CHAR, $224>(repeat: 0)
-    public var OSDeviceName: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
-    public var SessionId: ISCSI_UNIQUE_SESSION_ID = ISCSI_UNIQUE_SESSION_ID()
-    public var OSBusNumber: UInt32 = 0
-    public var OSTargetNumber: UInt32 = 0
-    public var LUNCount: UInt32 = 0
-    public var LUNList: CPointer<SCSI_LUN_LIST> = CPointer<SCSI_LUN_LIST>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct ISCSI_TARGET_MAPPINGW {
-    public var InitiatorName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var TargetName: VArray<UInt16, $224> = VArray<UInt16, $224>(repeat: 0)
-    public var OSDeviceName: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
-    public var SessionId: ISCSI_UNIQUE_SESSION_ID = ISCSI_UNIQUE_SESSION_ID()
-    public var OSBusNumber: UInt32 = 0
-    public var OSTargetNumber: UInt32 = 0
-    public var LUNCount: UInt32 = 0
-    public var LUNList: CPointer<SCSI_LUN_LIST> = CPointer<SCSI_LUN_LIST>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
 public struct ISCSI_TARGET_PORTALA {
-    public var SymbolicName: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
-    public var Address: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
+    public var SymbolicName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
+    public var Address: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
     public var Socket: UInt16 = 0
     public init() {}
 }
@@ -599,10 +313,10 @@ public struct ISCSI_TARGET_PORTAL_GROUPW {
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
 @C
 public struct ISCSI_TARGET_PORTAL_INFOA {
-    public var InitiatorName: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
+    public var InitiatorName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
     public var InitiatorPortNumber: UInt32 = 0
-    public var SymbolicName: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
-    public var Address: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
+    public var SymbolicName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
+    public var Address: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
     public var Socket: UInt16 = 0
     public init() {}
 }
@@ -621,10 +335,10 @@ public struct ISCSI_TARGET_PORTAL_INFOW {
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
 @C
 public struct ISCSI_TARGET_PORTAL_INFO_EXA {
-    public var InitiatorName: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
+    public var InitiatorName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
     public var InitiatorPortNumber: UInt32 = 0
-    public var SymbolicName: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
-    public var Address: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
+    public var SymbolicName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
+    public var Address: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
     public var Socket: UInt16 = 0
     public var SecurityFlags: UInt64 = 0
     public var LoginOptions: ISCSI_LOGIN_OPTIONS = ISCSI_LOGIN_OPTIONS()
@@ -661,58 +375,10 @@ public struct ISCSI_VERSION_INFO {
     public init() {}
 }
 
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct MPIO_PASS_THROUGH_PATH {
-    public var PassThrough: SCSI_PASS_THROUGH = SCSI_PASS_THROUGH()
-    public var Version: UInt32 = 0
-    public var Length: UInt16 = 0
-    public var Flags: UInt8 = 0
-    public var PortNumber: UInt8 = 0
-    public var MpioPathId: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on" && (arch == "x86_64" || arch == "aarch64")]
-@C
-public struct MPIO_PASS_THROUGH_PATH32 {
-    public var PassThrough: SCSI_PASS_THROUGH32 = SCSI_PASS_THROUGH32()
-    public var Version: UInt32 = 0
-    public var Length: UInt16 = 0
-    public var Flags: UInt8 = 0
-    public var PortNumber: UInt8 = 0
-    public var MpioPathId: UInt64 = 0
-    public init() {}
-}
-
 @When[Windows_Win32_Storage_IscsiDisc == "on" && (arch == "x86_64" || arch == "aarch64")]
 @C
 public struct MPIO_PASS_THROUGH_PATH32_EX {
     public var PassThroughOffset: UInt32 = 0
-    public var Version: UInt32 = 0
-    public var Length: UInt16 = 0
-    public var Flags: UInt8 = 0
-    public var PortNumber: UInt8 = 0
-    public var MpioPathId: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct MPIO_PASS_THROUGH_PATH_DIRECT {
-    public var PassThrough: SCSI_PASS_THROUGH_DIRECT = SCSI_PASS_THROUGH_DIRECT()
-    public var Version: UInt32 = 0
-    public var Length: UInt16 = 0
-    public var Flags: UInt8 = 0
-    public var PortNumber: UInt8 = 0
-    public var MpioPathId: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on" && (arch == "x86_64" || arch == "aarch64")]
-@C
-public struct MPIO_PASS_THROUGH_PATH_DIRECT32 {
-    public var PassThrough: SCSI_PASS_THROUGH_DIRECT32 = SCSI_PASS_THROUGH_DIRECT32()
     public var Version: UInt32 = 0
     public var Length: UInt16 = 0
     public var Flags: UInt8 = 0
@@ -766,7 +432,6 @@ public struct MP_DEVICE_DATA_SET_RANGE {
 }
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
 public struct MP_STORAGE_DIAGNOSTIC_LEVEL {
     public var value: Int32 = 0
 
@@ -791,7 +456,6 @@ public let MP_STORAGE_DIAGNOSTIC_LEVEL_MpStorageDiagnosticLevelDefault: MP_STORA
 public let MP_STORAGE_DIAGNOSTIC_LEVEL_MpStorageDiagnosticLevelMax: MP_STORAGE_DIAGNOSTIC_LEVEL = MP_STORAGE_DIAGNOSTIC_LEVEL(1)
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
 public struct MP_STORAGE_DIAGNOSTIC_TARGET_TYPE {
     public var value: Int32 = 0
 
@@ -878,7 +542,6 @@ public struct NVCACHE_REQUEST_BLOCK {
 }
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
 public struct NVCACHE_STATUS {
     public var value: Int32 = 0
 
@@ -909,7 +572,6 @@ public let NVCACHE_STATUS_NvCacheStatusDisabled: NVCACHE_STATUS = NVCACHE_STATUS
 public let NVCACHE_STATUS_NvCacheStatusEnabled: NVCACHE_STATUS = NVCACHE_STATUS(3)
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
 public struct NVCACHE_TYPE {
     public var value: Int32 = 0
 
@@ -968,46 +630,49 @@ public struct NV_SEP_CACHE_PARAMETER {
 }
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct NV_SEP_CACHE_PARAMETER__Flags_e__Union {
     public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
 
-    public func cacheFlags(): NV_SEP_CACHE_PARAMETER__Flags_e__Union__CacheFlags_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NV_SEP_CACHE_PARAMETER__Flags_e__Union__CacheFlags_e__Struct>(p)
-            return ptr.read()
+    public mut prop cacheFlags: NV_SEP_CACHE_PARAMETER__Flags_e__Union__CacheFlags_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NV_SEP_CACHE_PARAMETER__Flags_e__Union__CacheFlags_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NV_SEP_CACHE_PARAMETER__Flags_e__Union__CacheFlags_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_cacheFlags(val: NV_SEP_CACHE_PARAMETER__Flags_e__Union__CacheFlags_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NV_SEP_CACHE_PARAMETER__Flags_e__Union__CacheFlags_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop cacheFlagsSet: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
         }
-    }
-
-    public func cacheFlagsSet(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
-        }
-    }
-
-    public mut func set_cacheFlagsSet(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1021,7 +686,6 @@ public struct NV_SEP_CACHE_PARAMETER__Flags_e__Union__CacheFlags_e__Struct {
 }
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
 public struct NV_SEP_WRITE_CACHE_TYPE {
     public var value: Int32 = 0
 
@@ -1056,42 +720,6 @@ public type PDUMP_DEVICE_POWERON_ROUTINE = CFunc<(CPointer<Unit>) -> Int32>
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
 @C
-public struct PERSISTENT_ISCSI_LOGIN_INFOA {
-    public var TargetName: VArray<Win32_Foundation.CHAR, $224> = VArray<Win32_Foundation.CHAR, $224>(repeat: 0)
-    public var IsInformationalSession: Win32_Foundation.BOOLEAN = 0
-    public var InitiatorInstance: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
-    public var InitiatorPortNumber: UInt32 = 0
-    public var TargetPortal: ISCSI_TARGET_PORTALA = ISCSI_TARGET_PORTALA()
-    public var SecurityFlags: UInt64 = 0
-    public var Mappings: CPointer<ISCSI_TARGET_MAPPINGA> = CPointer<ISCSI_TARGET_MAPPINGA>()
-    public var LoginOptions: ISCSI_LOGIN_OPTIONS = ISCSI_LOGIN_OPTIONS()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct PERSISTENT_ISCSI_LOGIN_INFOW {
-    public var TargetName: VArray<UInt16, $224> = VArray<UInt16, $224>(repeat: 0)
-    public var IsInformationalSession: Win32_Foundation.BOOLEAN = 0
-    public var InitiatorInstance: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var InitiatorPortNumber: UInt32 = 0
-    public var TargetPortal: ISCSI_TARGET_PORTALW = ISCSI_TARGET_PORTALW()
-    public var SecurityFlags: UInt64 = 0
-    public var Mappings: CPointer<ISCSI_TARGET_MAPPINGW> = CPointer<ISCSI_TARGET_MAPPINGW>()
-    public var LoginOptions: ISCSI_LOGIN_OPTIONS = ISCSI_LOGIN_OPTIONS()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct SCSI_ADAPTER_BUS_INFO {
-    public var NumberOfBuses: UInt8 = 0
-    public var BusData: VArray<SCSI_BUS_DATA, $1> = VArray<SCSI_BUS_DATA, $1>(repeat: SCSI_BUS_DATA())
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
 public struct SCSI_ADDRESS {
     public var Length: UInt32 = 0
     public var PortNumber: UInt8 = 0
@@ -1116,7 +744,7 @@ public struct SCSI_INQUIRY_DATA {
     public var PathId: UInt8 = 0
     public var TargetId: UInt8 = 0
     public var Lun: UInt8 = 0
-    public var DeviceClaimed: Win32_Foundation.BOOLEAN = 0
+    public var DeviceClaimed: UInt8 = 0
     public var InquiryDataLength: UInt32 = 0
     public var NextInquiryDataOffset: UInt32 = 0
     public var InquiryData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
@@ -1312,21 +940,12 @@ public struct SRB_IO_CONTROL {
 public struct STORAGE_DIAGNOSTIC_MP_REQUEST {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
-    public var TargetType: MP_STORAGE_DIAGNOSTIC_TARGET_TYPE = MP_STORAGE_DIAGNOSTIC_TARGET_TYPE()
-    public var Level: MP_STORAGE_DIAGNOSTIC_LEVEL = MP_STORAGE_DIAGNOSTIC_LEVEL()
+    public var TargetType: Int32 = 0
+    public var Level: Int32 = 0
     public var ProviderId: GUID = GUID()
     public var BufferSize: UInt32 = 0
     public var Reserved: UInt32 = 0
     public var DataBuffer: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct STORAGE_ENDURANCE_DATA_DESCRIPTOR {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var EnduranceInfo: STORAGE_ENDURANCE_INFO = STORAGE_ENDURANCE_INFO()
     public init() {}
 }
 
@@ -1386,86 +1005,58 @@ public struct STORAGE_FIRMWARE_DOWNLOAD_V2 {
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
 @C
-public struct STORAGE_FIRMWARE_INFO {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var UpgradeSupport: Win32_Foundation.BOOLEAN = 0
-    public var SlotCount: UInt8 = 0
-    public var ActiveSlot: UInt8 = 0
-    public var PendingActivateSlot: UInt8 = 0
-    public var Reserved: UInt32 = 0
-    public var Slot: VArray<STORAGE_FIRMWARE_SLOT_INFO, $1> = VArray<STORAGE_FIRMWARE_SLOT_INFO, $1>(repeat: STORAGE_FIRMWARE_SLOT_INFO())
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
-public struct STORAGE_FIRMWARE_INFO_V2 {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var UpgradeSupport: Win32_Foundation.BOOLEAN = 0
-    public var SlotCount: UInt8 = 0
-    public var ActiveSlot: UInt8 = 0
-    public var PendingActivateSlot: UInt8 = 0
-    public var FirmwareShared: Win32_Foundation.BOOLEAN = 0
-    public var Reserved: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
-    public var ImagePayloadAlignment: UInt32 = 0
-    public var ImagePayloadMaxSize: UInt32 = 0
-    public var Slot: VArray<STORAGE_FIRMWARE_SLOT_INFO_V2, $1> = VArray<STORAGE_FIRMWARE_SLOT_INFO_V2, $1>(repeat: STORAGE_FIRMWARE_SLOT_INFO_V2())
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
 public struct STORAGE_FIRMWARE_SLOT_INFO {
     public var SlotNumber: UInt8 = 0
-    public var ReadOnly: Win32_Foundation.BOOLEAN = 0
+    public var ReadOnly: UInt8 = 0
     public var Reserved: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
     public var Revision: STORAGE_FIRMWARE_SLOT_INFO__Revision_e__Union = STORAGE_FIRMWARE_SLOT_INFO__Revision_e__Union()
     public init() {}
 }
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct STORAGE_FIRMWARE_SLOT_INFO__Revision_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func info(): VArray<UInt8, $8> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $8>>(p)
-            return ptr.read()
+    public mut prop info: VArray<UInt8, $8> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $8>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $8>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_info(val: VArray<UInt8, $8>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $8>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUlonglong: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func asUlonglong(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUlonglong(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1475,14 +1066,13 @@ public struct STORAGE_FIRMWARE_SLOT_INFO__Revision_e__Union {
 @C
 public struct STORAGE_FIRMWARE_SLOT_INFO_V2 {
     public var SlotNumber: UInt8 = 0
-    public var ReadOnly: Win32_Foundation.BOOLEAN = 0
+    public var ReadOnly: UInt8 = 0
     public var Reserved: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
     public var Revision: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
     public init() {}
 }
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
 public struct TARGETPROTOCOLTYPE {
     public var value: Int32 = 0
 
@@ -1504,7 +1094,6 @@ public struct TARGETPROTOCOLTYPE {
 public let TARGETPROTOCOLTYPE_ISCSI_TCP_PROTOCOL_TYPE: TARGETPROTOCOLTYPE = TARGETPROTOCOLTYPE(0)
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
-@C
 public struct TARGET_INFORMATION_CLASS {
     public var value: Int32 = 0
 
@@ -1549,6 +1138,419 @@ public let TARGET_INFORMATION_CLASS_LoginOptions: TARGET_INFORMATION_CLASS = TAR
 @When[Windows_Win32_Storage_IscsiDisc == "on"]
 public type _ADAPTER_OBJECT = CPointer<Unit>
 
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct DSM_NOTIFICATION_REQUEST_BLOCK {
+    public var Size: UInt32 = 0
+    public var Version: UInt32 = 0
+    public var NotifyFlags: UInt32 = 0
+    public var DataSetProfile: UInt32 = 0
+    public var Reserved: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0)
+    public var DataSetRangesCount: UInt32 = 0
+    public var DataSetRanges: VArray<MP_DEVICE_DATA_SET_RANGE, $1> = VArray<MP_DEVICE_DATA_SET_RANGE, $1>(repeat: MP_DEVICE_DATA_SET_RANGE())
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct DUMP_DRIVER_EX {
+    public var DumpDriverList: CPointer<Unit> = CPointer<Unit>()
+    public var DriverName: VArray<UInt16, $15> = VArray<UInt16, $15>(repeat: 0)
+    public var BaseName: VArray<UInt16, $15> = VArray<UInt16, $15>(repeat: 0)
+    public var DriverFullPath: NTSCSI_UNICODE_STRING = NTSCSI_UNICODE_STRING()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct DUMP_POINTERS {
+    public var AdapterObject: CPointer<_ADAPTER_OBJECT> = CPointer<_ADAPTER_OBJECT>()
+    public var MappedRegisterBase: CPointer<Unit> = CPointer<Unit>()
+    public var DumpData: CPointer<Unit> = CPointer<Unit>()
+    public var CommonBufferVa: CPointer<Unit> = CPointer<Unit>()
+    public var CommonBufferPa: Int64 = 0
+    public var CommonBufferSize: UInt32 = 0
+    public var AllocateCommonBuffers: UInt8 = 0
+    public var UseDiskDump: UInt8 = 0
+    public var Spare1: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var DeviceObject: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct DUMP_POINTERS_EX {
+    public var Header: DUMP_POINTERS_VERSION = DUMP_POINTERS_VERSION()
+    public var DumpData: CPointer<Unit> = CPointer<Unit>()
+    public var CommonBufferVa: CPointer<Unit> = CPointer<Unit>()
+    public var CommonBufferSize: UInt32 = 0
+    public var AllocateCommonBuffers: UInt8 = 0
+    public var DeviceObject: CPointer<Unit> = CPointer<Unit>()
+    public var DriverList: CPointer<Unit> = CPointer<Unit>()
+    public var dwPortFlags: UInt32 = 0
+    public var MaxDeviceDumpSectionSize: UInt32 = 0
+    public var MaxDeviceDumpLevel: UInt32 = 0
+    public var MaxTransferSize: UInt32 = 0
+    public var AdapterObject: CPointer<Unit> = CPointer<Unit>()
+    public var MappedRegisterBase: CPointer<Unit> = CPointer<Unit>()
+    public var DeviceReady: CPointer<UInt8> = CPointer<UInt8>()
+    public var DumpDevicePowerOn: PDUMP_DEVICE_POWERON_ROUTINE = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var DumpDevicePowerOnContext: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct HYBRID_INFORMATION {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var HybridSupported: UInt8 = 0
+    public var Status: Int32 = 0
+    public var CacheTypeEffective: Int32 = 0
+    public var CacheTypeDefault: Int32 = 0
+    public var FractionBase: UInt32 = 0
+    public var CacheSize: UInt64 = 0
+    public var Attributes: HYBRID_INFORMATION__Attributes_e__Struct = HYBRID_INFORMATION__Attributes_e__Struct()
+    public var Priorities: HYBRID_INFORMATION__Priorities_e__Struct = HYBRID_INFORMATION__Priorities_e__Struct()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct HYBRID_INFORMATION__Attributes_e__Struct {
+    public var _bitfield: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct HYBRID_INFORMATION__Priorities_e__Struct {
+    public var PriorityLevelCount: UInt8 = 0
+    public var MaxPriorityBehavior: UInt8 = 0
+    public var OptimalWriteGranularity: UInt8 = 0
+    public var Reserved: UInt8 = 0
+    public var DirtyThresholdLow: UInt32 = 0
+    public var DirtyThresholdHigh: UInt32 = 0
+    public var SupportedCommands: HYBRID_INFORMATION__Priorities_e__Struct__SupportedCommands_e__Struct = HYBRID_INFORMATION__Priorities_e__Struct__SupportedCommands_e__Struct()
+    public var Priority: VArray<NVCACHE_PRIORITY_LEVEL_DESCRIPTOR, $1> = VArray<NVCACHE_PRIORITY_LEVEL_DESCRIPTOR, $1>(repeat: NVCACHE_PRIORITY_LEVEL_DESCRIPTOR())
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct HYBRID_INFORMATION__Priorities_e__Struct__SupportedCommands_e__Struct {
+    public var _bitfield: UInt32 = 0
+    public var MaxEvictCommands: UInt32 = 0
+    public var MaxLbaRangeCountForEvict: UInt32 = 0
+    public var MaxLbaRangeCountForChangeLba: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct IKE_AUTHENTICATION_INFORMATION {
+    public var AuthMethod: Int32 = 0
+    public var Anonymous: IKE_AUTHENTICATION_INFORMATION__Anonymous_e__Union = IKE_AUTHENTICATION_INFORMATION__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IKE_AUTHENTICATION_INFORMATION__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+
+    public mut prop psKey: IKE_AUTHENTICATION_PRESHARED_KEY {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKE_AUTHENTICATION_PRESHARED_KEY>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKE_AUTHENTICATION_PRESHARED_KEY>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct ISCSI_CONNECTION_INFOA {
+    public var ConnectionId: ISCSI_UNIQUE_SESSION_ID = ISCSI_UNIQUE_SESSION_ID()
+    public var InitiatorAddress: CPointer<UInt8> = CPointer<UInt8>()
+    public var TargetAddress: CPointer<UInt8> = CPointer<UInt8>()
+    public var InitiatorSocket: UInt16 = 0
+    public var TargetSocket: UInt16 = 0
+    public var CID: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct ISCSI_CONNECTION_INFOW {
+    public var ConnectionId: ISCSI_UNIQUE_SESSION_ID = ISCSI_UNIQUE_SESSION_ID()
+    public var InitiatorAddress: CPointer<UInt16> = CPointer<UInt16>()
+    public var TargetAddress: CPointer<UInt16> = CPointer<UInt16>()
+    public var InitiatorSocket: UInt16 = 0
+    public var TargetSocket: UInt16 = 0
+    public var CID: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct ISCSI_CONNECTION_INFO_EX {
+    public var ConnectionId: ISCSI_UNIQUE_SESSION_ID = ISCSI_UNIQUE_SESSION_ID()
+    public var State: UInt8 = 0
+    public var Protocol: UInt8 = 0
+    public var HeaderDigest: UInt8 = 0
+    public var DataDigest: UInt8 = 0
+    public var MaxRecvDataSegmentLength: UInt32 = 0
+    public var AuthType: Int32 = 0
+    public var EstimatedThroughput: UInt64 = 0
+    public var MaxDatagramSize: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && Windows_Win32_System_Ioctl == "on"]
+@C
+public struct ISCSI_DEVICE_ON_SESSIONA {
+    public var InitiatorName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
+    public var TargetName: VArray<Int8, $224> = VArray<Int8, $224>(repeat: 0)
+    public var ScsiAddress: SCSI_ADDRESS = SCSI_ADDRESS()
+    public var DeviceInterfaceType: GUID = GUID()
+    public var DeviceInterfaceName: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
+    public var LegacyName: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
+    public var StorageDeviceNumber: Win32_System_Ioctl.STORAGE_DEVICE_NUMBER = Win32_System_Ioctl.STORAGE_DEVICE_NUMBER()
+    public var DeviceInstance: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && Windows_Win32_System_Ioctl == "on"]
+@C
+public struct ISCSI_DEVICE_ON_SESSIONW {
+    public var InitiatorName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var TargetName: VArray<UInt16, $224> = VArray<UInt16, $224>(repeat: 0)
+    public var ScsiAddress: SCSI_ADDRESS = SCSI_ADDRESS()
+    public var DeviceInterfaceType: GUID = GUID()
+    public var DeviceInterfaceName: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
+    public var LegacyName: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
+    public var StorageDeviceNumber: Win32_System_Ioctl.STORAGE_DEVICE_NUMBER = Win32_System_Ioctl.STORAGE_DEVICE_NUMBER()
+    public var DeviceInstance: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct ISCSI_SESSION_INFOA {
+    public var SessionId: ISCSI_UNIQUE_SESSION_ID = ISCSI_UNIQUE_SESSION_ID()
+    public var InitiatorName: CPointer<UInt8> = CPointer<UInt8>()
+    public var TargetNodeName: CPointer<UInt8> = CPointer<UInt8>()
+    public var TargetName: CPointer<UInt8> = CPointer<UInt8>()
+    public var ISID: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
+    public var TSID: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var ConnectionCount: UInt32 = 0
+    public var Connections: CPointer<ISCSI_CONNECTION_INFOA> = CPointer<ISCSI_CONNECTION_INFOA>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct ISCSI_SESSION_INFOW {
+    public var SessionId: ISCSI_UNIQUE_SESSION_ID = ISCSI_UNIQUE_SESSION_ID()
+    public var InitiatorName: CPointer<UInt16> = CPointer<UInt16>()
+    public var TargetNodeName: CPointer<UInt16> = CPointer<UInt16>()
+    public var TargetName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ISID: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
+    public var TSID: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var ConnectionCount: UInt32 = 0
+    public var Connections: CPointer<ISCSI_CONNECTION_INFOW> = CPointer<ISCSI_CONNECTION_INFOW>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct ISCSI_SESSION_INFO_EX {
+    public var SessionId: ISCSI_UNIQUE_SESSION_ID = ISCSI_UNIQUE_SESSION_ID()
+    public var InitialR2t: UInt8 = 0
+    public var ImmediateData: UInt8 = 0
+    public var Type: UInt8 = 0
+    public var DataSequenceInOrder: UInt8 = 0
+    public var DataPduInOrder: UInt8 = 0
+    public var ErrorRecoveryLevel: UInt8 = 0
+    public var MaxOutstandingR2t: UInt32 = 0
+    public var FirstBurstLength: UInt32 = 0
+    public var MaxBurstLength: UInt32 = 0
+    public var MaximumConnections: UInt32 = 0
+    public var ConnectionCount: UInt32 = 0
+    public var Connections: CPointer<ISCSI_CONNECTION_INFO_EX> = CPointer<ISCSI_CONNECTION_INFO_EX>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct ISCSI_TARGET_MAPPINGA {
+    public var InitiatorName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
+    public var TargetName: VArray<Int8, $224> = VArray<Int8, $224>(repeat: 0)
+    public var OSDeviceName: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
+    public var SessionId: ISCSI_UNIQUE_SESSION_ID = ISCSI_UNIQUE_SESSION_ID()
+    public var OSBusNumber: UInt32 = 0
+    public var OSTargetNumber: UInt32 = 0
+    public var LUNCount: UInt32 = 0
+    public var LUNList: CPointer<SCSI_LUN_LIST> = CPointer<SCSI_LUN_LIST>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct ISCSI_TARGET_MAPPINGW {
+    public var InitiatorName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var TargetName: VArray<UInt16, $224> = VArray<UInt16, $224>(repeat: 0)
+    public var OSDeviceName: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
+    public var SessionId: ISCSI_UNIQUE_SESSION_ID = ISCSI_UNIQUE_SESSION_ID()
+    public var OSBusNumber: UInt32 = 0
+    public var OSTargetNumber: UInt32 = 0
+    public var LUNCount: UInt32 = 0
+    public var LUNList: CPointer<SCSI_LUN_LIST> = CPointer<SCSI_LUN_LIST>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct MPIO_PASS_THROUGH_PATH {
+    public var PassThrough: SCSI_PASS_THROUGH = SCSI_PASS_THROUGH()
+    public var Version: UInt32 = 0
+    public var Length: UInt16 = 0
+    public var Flags: UInt8 = 0
+    public var PortNumber: UInt8 = 0
+    public var MpioPathId: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") || arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))]
+@C
+public struct MPIO_PASS_THROUGH_PATH32 {
+    public var PassThrough: SCSI_PASS_THROUGH32 = SCSI_PASS_THROUGH32()
+    public var Version: UInt32 = 0
+    public var Length: UInt16 = 0
+    public var Flags: UInt8 = 0
+    public var PortNumber: UInt8 = 0
+    public var MpioPathId: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct MPIO_PASS_THROUGH_PATH_DIRECT {
+    public var PassThrough: SCSI_PASS_THROUGH_DIRECT = SCSI_PASS_THROUGH_DIRECT()
+    public var Version: UInt32 = 0
+    public var Length: UInt16 = 0
+    public var Flags: UInt8 = 0
+    public var PortNumber: UInt8 = 0
+    public var MpioPathId: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") || arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))]
+@C
+public struct MPIO_PASS_THROUGH_PATH_DIRECT32 {
+    public var PassThrough: SCSI_PASS_THROUGH_DIRECT32 = SCSI_PASS_THROUGH_DIRECT32()
+    public var Version: UInt32 = 0
+    public var Length: UInt16 = 0
+    public var Flags: UInt8 = 0
+    public var PortNumber: UInt8 = 0
+    public var MpioPathId: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct PERSISTENT_ISCSI_LOGIN_INFOA {
+    public var TargetName: VArray<Int8, $224> = VArray<Int8, $224>(repeat: 0)
+    public var IsInformationalSession: UInt8 = 0
+    public var InitiatorInstance: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
+    public var InitiatorPortNumber: UInt32 = 0
+    public var TargetPortal: ISCSI_TARGET_PORTALA = ISCSI_TARGET_PORTALA()
+    public var SecurityFlags: UInt64 = 0
+    public var Mappings: CPointer<ISCSI_TARGET_MAPPINGA> = CPointer<ISCSI_TARGET_MAPPINGA>()
+    public var LoginOptions: ISCSI_LOGIN_OPTIONS = ISCSI_LOGIN_OPTIONS()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct PERSISTENT_ISCSI_LOGIN_INFOW {
+    public var TargetName: VArray<UInt16, $224> = VArray<UInt16, $224>(repeat: 0)
+    public var IsInformationalSession: UInt8 = 0
+    public var InitiatorInstance: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var InitiatorPortNumber: UInt32 = 0
+    public var TargetPortal: ISCSI_TARGET_PORTALW = ISCSI_TARGET_PORTALW()
+    public var SecurityFlags: UInt64 = 0
+    public var Mappings: CPointer<ISCSI_TARGET_MAPPINGW> = CPointer<ISCSI_TARGET_MAPPINGW>()
+    public var LoginOptions: ISCSI_LOGIN_OPTIONS = ISCSI_LOGIN_OPTIONS()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct SCSI_ADAPTER_BUS_INFO {
+    public var NumberOfBuses: UInt8 = 0
+    public var BusData: VArray<SCSI_BUS_DATA, $1> = VArray<SCSI_BUS_DATA, $1>(repeat: SCSI_BUS_DATA())
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct STORAGE_ENDURANCE_DATA_DESCRIPTOR {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var EnduranceInfo: STORAGE_ENDURANCE_INFO = STORAGE_ENDURANCE_INFO()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct STORAGE_FIRMWARE_INFO {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var UpgradeSupport: UInt8 = 0
+    public var SlotCount: UInt8 = 0
+    public var ActiveSlot: UInt8 = 0
+    public var PendingActivateSlot: UInt8 = 0
+    public var Reserved: UInt32 = 0
+    public var Slot: VArray<STORAGE_FIRMWARE_SLOT_INFO, $1> = VArray<STORAGE_FIRMWARE_SLOT_INFO, $1>(repeat: STORAGE_FIRMWARE_SLOT_INFO())
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on"]
+@C
+public struct STORAGE_FIRMWARE_INFO_V2 {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var UpgradeSupport: UInt8 = 0
+    public var SlotCount: UInt8 = 0
+    public var ActiveSlot: UInt8 = 0
+    public var PendingActivateSlot: UInt8 = 0
+    public var FirmwareShared: UInt8 = 0
+    public var Reserved: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
+    public var ImagePayloadAlignment: UInt32 = 0
+    public var ImagePayloadMaxSize: UInt32 = 0
+    public var Slot: VArray<STORAGE_FIRMWARE_SLOT_INFO_V2, $1> = VArray<STORAGE_FIRMWARE_SLOT_INFO_V2, $1>(repeat: STORAGE_FIRMWARE_SLOT_INFO_V2())
+    public init() {}
+}
+
 @When[ISCSIDSC == "on"]
 foreign {
     func AddISNSServerA(Address: CPointer<UInt8>): UInt32
@@ -1562,16 +1564,14 @@ foreign {
     // param-hint: InitiatorInstance optional
     func AddIScsiSendTargetPortalW(InitiatorInstance: CPointer<UInt16>, InitiatorPortNumber: UInt32, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONS>, SecurityFlags: UInt64, Portal: CPointer<ISCSI_TARGET_PORTALW>): UInt32
     // param-hint: TargetAlias optional
-    func AddIScsiStaticTargetA(TargetName: CPointer<UInt8>, TargetAlias: CPointer<UInt8>, TargetFlags: UInt32, Persist: Win32_Foundation.BOOLEAN, Mappings: CPointer<ISCSI_TARGET_MAPPINGA>, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONS>, PortalGroup: CPointer<ISCSI_TARGET_PORTAL_GROUPA>): UInt32
+    func AddIScsiStaticTargetA(TargetName: CPointer<UInt8>, TargetAlias: CPointer<UInt8>, TargetFlags: UInt32, Persist: UInt8, Mappings: CPointer<ISCSI_TARGET_MAPPINGA>, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONS>, PortalGroup: CPointer<ISCSI_TARGET_PORTAL_GROUPA>): UInt32
     // param-hint: TargetAlias optional
-    func AddIScsiStaticTargetW(TargetName: CPointer<UInt16>, TargetAlias: CPointer<UInt16>, TargetFlags: UInt32, Persist: Win32_Foundation.BOOLEAN, Mappings: CPointer<ISCSI_TARGET_MAPPINGW>, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONS>, PortalGroup: CPointer<ISCSI_TARGET_PORTAL_GROUPW>): UInt32
+    func AddIScsiStaticTargetW(TargetName: CPointer<UInt16>, TargetAlias: CPointer<UInt16>, TargetFlags: UInt32, Persist: UInt8, Mappings: CPointer<ISCSI_TARGET_MAPPINGW>, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONS>, PortalGroup: CPointer<ISCSI_TARGET_PORTAL_GROUPW>): UInt32
     func AddPersistentIScsiDeviceA(DevicePath: CPointer<UInt8>): UInt32
     func AddPersistentIScsiDeviceW(DevicePath: CPointer<UInt16>): UInt32
     func AddRadiusServerA(Address: CPointer<UInt8>): UInt32
     func AddRadiusServerW(Address: CPointer<UInt16>): UInt32
     func ClearPersistentIScsiDevices(): UInt32
-    func GetDevicesForIScsiSessionA(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_ID>, DeviceCount: CPointer<UInt32>, Devices: CPointer<ISCSI_DEVICE_ON_SESSIONA>): UInt32
-    func GetDevicesForIScsiSessionW(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_ID>, DeviceCount: CPointer<UInt32>, Devices: CPointer<ISCSI_DEVICE_ON_SESSIONW>): UInt32
     // param-hint: InitiatorName optional
     func GetIScsiIKEInfoA(InitiatorName: CPointer<UInt8>, InitiatorPortNumber: UInt32, Reserved: CPointer<UInt32>, AuthInfo: CPointer<IKE_AUTHENTICATION_INFORMATION>): UInt32
     // param-hint: InitiatorName optional
@@ -1582,16 +1582,16 @@ foreign {
     func GetIScsiSessionListEx(BufferSize: CPointer<UInt32>, SessionCountPtr: CPointer<UInt32>, SessionInfo: CPointer<ISCSI_SESSION_INFO_EX>): UInt32
     func GetIScsiSessionListW(BufferSize: CPointer<UInt32>, SessionCount: CPointer<UInt32>, SessionInfo: CPointer<ISCSI_SESSION_INFOW>): UInt32
     // param-hint: DiscoveryMechanism optional
-    func GetIScsiTargetInformationA(TargetName: CPointer<UInt8>, DiscoveryMechanism: CPointer<UInt8>, InfoClass: TARGET_INFORMATION_CLASS, BufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32
+    func GetIScsiTargetInformationA(TargetName: CPointer<UInt8>, DiscoveryMechanism: CPointer<UInt8>, InfoClass: Int32, BufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32
     // param-hint: DiscoveryMechanism optional
-    func GetIScsiTargetInformationW(TargetName: CPointer<UInt16>, DiscoveryMechanism: CPointer<UInt16>, InfoClass: TARGET_INFORMATION_CLASS, BufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32
+    func GetIScsiTargetInformationW(TargetName: CPointer<UInt16>, DiscoveryMechanism: CPointer<UInt16>, InfoClass: Int32, BufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32
     func GetIScsiVersionInformation(VersionInfo: CPointer<ISCSI_VERSION_INFO>): UInt32
     // param-hint: InitiatorInstance optional
     // param-hint: Key len=param[8] optional
-    func LoginIScsiTargetA(TargetName: CPointer<UInt8>, IsInformationalSession: Win32_Foundation.BOOLEAN, InitiatorInstance: CPointer<UInt8>, InitiatorPortNumber: UInt32, TargetPortal: CPointer<ISCSI_TARGET_PORTALA>, SecurityFlags: UInt64, Mappings: CPointer<ISCSI_TARGET_MAPPINGA>, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONS>, KeySize: UInt32, Key: CPointer<UInt8>, IsPersistent: Win32_Foundation.BOOLEAN, UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_ID>, UniqueConnectionId: CPointer<ISCSI_UNIQUE_SESSION_ID>): UInt32
+    func LoginIScsiTargetA(TargetName: CPointer<UInt8>, IsInformationalSession: UInt8, InitiatorInstance: CPointer<UInt8>, InitiatorPortNumber: UInt32, TargetPortal: CPointer<ISCSI_TARGET_PORTALA>, SecurityFlags: UInt64, Mappings: CPointer<ISCSI_TARGET_MAPPINGA>, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONS>, KeySize: UInt32, Key: CPointer<UInt8>, IsPersistent: UInt8, UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_ID>, UniqueConnectionId: CPointer<ISCSI_UNIQUE_SESSION_ID>): UInt32
     // param-hint: InitiatorInstance optional
     // param-hint: Key len=param[8] optional
-    func LoginIScsiTargetW(TargetName: CPointer<UInt16>, IsInformationalSession: Win32_Foundation.BOOLEAN, InitiatorInstance: CPointer<UInt16>, InitiatorPortNumber: UInt32, TargetPortal: CPointer<ISCSI_TARGET_PORTALW>, SecurityFlags: UInt64, Mappings: CPointer<ISCSI_TARGET_MAPPINGW>, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONS>, KeySize: UInt32, Key: CPointer<UInt8>, IsPersistent: Win32_Foundation.BOOLEAN, UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_ID>, UniqueConnectionId: CPointer<ISCSI_UNIQUE_SESSION_ID>): UInt32
+    func LoginIScsiTargetW(TargetName: CPointer<UInt16>, IsInformationalSession: UInt8, InitiatorInstance: CPointer<UInt16>, InitiatorPortNumber: UInt32, TargetPortal: CPointer<ISCSI_TARGET_PORTALW>, SecurityFlags: UInt64, Mappings: CPointer<ISCSI_TARGET_MAPPINGW>, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONS>, KeySize: UInt32, Key: CPointer<UInt8>, IsPersistent: UInt8, UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_ID>, UniqueConnectionId: CPointer<ISCSI_UNIQUE_SESSION_ID>): UInt32
     func LogoutIScsiTarget(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_ID>): UInt32
     func RefreshISNSServerA(Address: CPointer<UInt8>): UInt32
     func RefreshISNSServerW(Address: CPointer<UInt16>): UInt32
@@ -1635,9 +1635,9 @@ foreign {
     // param-hint: InitiatorName optional
     func ReportIScsiTargetPortalsW(InitiatorName: CPointer<UInt16>, TargetName: CPointer<UInt16>, TargetPortalTag: CPointer<UInt16>, ElementCount: CPointer<UInt32>, Portals: CPointer<ISCSI_TARGET_PORTALW>): UInt32
     // param-hint: Buffer len=param[1] optional
-    func ReportIScsiTargetsA(ForceUpdate: Win32_Foundation.BOOLEAN, BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32
+    func ReportIScsiTargetsA(ForceUpdate: UInt8, BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32
     // param-hint: Buffer len=param[1] optional
-    func ReportIScsiTargetsW(ForceUpdate: Win32_Foundation.BOOLEAN, BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt16>): UInt32
+    func ReportIScsiTargetsW(ForceUpdate: UInt8, BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt16>): UInt32
     // param-hint: Buffer len=param[0] optional
     func ReportPersistentIScsiDevicesA(BufferSizeInChar: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32
     // param-hint: Buffer len=param[0] optional
@@ -1649,11 +1649,11 @@ foreign {
     func SendScsiInquiry(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_ID>, Lun: UInt64, EvpdCmddt: UInt8, PageCode: UInt8, ScsiStatus: CPointer<UInt8>, ResponseSize: CPointer<UInt32>, ResponseBuffer: CPointer<UInt8>, SenseSize: CPointer<UInt32>, SenseBuffer: CPointer<UInt8>): UInt32
     func SendScsiReadCapacity(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_ID>, Lun: UInt64, ScsiStatus: CPointer<UInt8>, ResponseSize: CPointer<UInt32>, ResponseBuffer: CPointer<UInt8>, SenseSize: CPointer<UInt32>, SenseBuffer: CPointer<UInt8>): UInt32
     func SendScsiReportLuns(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_ID>, ScsiStatus: CPointer<UInt8>, ResponseSize: CPointer<UInt32>, ResponseBuffer: CPointer<UInt8>, SenseSize: CPointer<UInt32>, SenseBuffer: CPointer<UInt8>): UInt32
-    func SetIScsiGroupPresharedKey(KeyLength: UInt32, Key: CPointer<UInt8>, Persist: Win32_Foundation.BOOLEAN): UInt32
+    func SetIScsiGroupPresharedKey(KeyLength: UInt32, Key: CPointer<UInt8>, Persist: UInt8): UInt32
     // param-hint: InitiatorName optional
-    func SetIScsiIKEInfoA(InitiatorName: CPointer<UInt8>, InitiatorPortNumber: UInt32, AuthInfo: CPointer<IKE_AUTHENTICATION_INFORMATION>, Persist: Win32_Foundation.BOOLEAN): UInt32
+    func SetIScsiIKEInfoA(InitiatorName: CPointer<UInt8>, InitiatorPortNumber: UInt32, AuthInfo: CPointer<IKE_AUTHENTICATION_INFORMATION>, Persist: UInt8): UInt32
     // param-hint: InitiatorName optional
-    func SetIScsiIKEInfoW(InitiatorName: CPointer<UInt16>, InitiatorPortNumber: UInt32, AuthInfo: CPointer<IKE_AUTHENTICATION_INFORMATION>, Persist: Win32_Foundation.BOOLEAN): UInt32
+    func SetIScsiIKEInfoW(InitiatorName: CPointer<UInt16>, InitiatorPortNumber: UInt32, AuthInfo: CPointer<IKE_AUTHENTICATION_INFORMATION>, Persist: UInt8): UInt32
     func SetIScsiInitiatorCHAPSharedSecret(SharedSecretLength: UInt32, SharedSecret: CPointer<UInt8>): UInt32
     // param-hint: InitiatorNodeName optional
     func SetIScsiInitiatorNodeNameA(InitiatorNodeName: CPointer<UInt8>): UInt32
@@ -1663,13 +1663,19 @@ foreign {
     // param-hint: InitiatorName optional
     // param-hint: DestinationAddress optional
     // param-hint: OuterModeAddress optional
-    func SetIScsiTunnelModeOuterAddressA(InitiatorName: CPointer<UInt8>, InitiatorPortNumber: UInt32, DestinationAddress: CPointer<UInt8>, OuterModeAddress: CPointer<UInt8>, Persist: Win32_Foundation.BOOLEAN): UInt32
+    func SetIScsiTunnelModeOuterAddressA(InitiatorName: CPointer<UInt8>, InitiatorPortNumber: UInt32, DestinationAddress: CPointer<UInt8>, OuterModeAddress: CPointer<UInt8>, Persist: UInt8): UInt32
     // param-hint: InitiatorName optional
     // param-hint: DestinationAddress optional
     // param-hint: OuterModeAddress optional
-    func SetIScsiTunnelModeOuterAddressW(InitiatorName: CPointer<UInt16>, InitiatorPortNumber: UInt32, DestinationAddress: CPointer<UInt16>, OuterModeAddress: CPointer<UInt16>, Persist: Win32_Foundation.BOOLEAN): UInt32
+    func SetIScsiTunnelModeOuterAddressW(InitiatorName: CPointer<UInt16>, InitiatorPortNumber: UInt32, DestinationAddress: CPointer<UInt16>, OuterModeAddress: CPointer<UInt16>, Persist: UInt8): UInt32
     func SetupPersistentIScsiDevices(): UInt32
     func SetupPersistentIScsiVolumes(): UInt32
+}
+
+@When[ISCSIDSC == "on" && Windows_Win32_System_Ioctl == "on"]
+foreign {
+    func GetDevicesForIScsiSessionA(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_ID>, DeviceCount: CPointer<UInt32>, Devices: CPointer<ISCSI_DEVICE_ON_SESSIONA>): UInt32
+    func GetDevicesForIScsiSessionW(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_ID>, DeviceCount: CPointer<UInt32>, Devices: CPointer<ISCSI_DEVICE_ON_SESSIONW>): UInt32
 }
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]

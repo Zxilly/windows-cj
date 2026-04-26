@@ -26,7 +26,8 @@ public func generateWinrtClass(
     let publicInterfaces = filterPublicClassInterfaces(index, interfaces, defaultInterface)
     let factoryInterfaces = collectFactoryInterfaces(index, fileIdx, row)
     let bases = winmdCollectClassBases(index, fileIdx, row)
-    let typeTags = typeAvailabilityTags(namespace, name, fileIdx, row, arches)
+    let ownTypeTags = typeAvailabilityTags(namespace, name, fileIdx, row, arches)
+    let typeTags = ownTypeTags
     let agile = isAgileType(index, fileIdx, row)
     let hasDefaultConstructor = hasDefaultActivatableConstructor(index, fileIdx, row)
 
@@ -39,9 +40,11 @@ public func generateWinrtClass(
     useSupportSymbol("windows_interface", "GUID")
     useSupportSymbol("windows_interface", "IActivationFactory")
     useSupportSymbol("windows_interface", "IInspectable")
+    useSupportSymbol("windows_interface", "IUnknown")
+    useSupportSymbol("windows_core", "IGenericFactory")
     useSupportSymbol("windows_core", "RuntimeType")
+    useSupportSymbol("windows_core", "HRESULT")
     useSupportSymbol("windows_polyfill", "FactoryCache")
-    useSupportSymbol("windows_polyfill", "HRESULT")
 
     match (defaultInterface) {
         case Some(defaultType) =>
@@ -52,12 +55,27 @@ public func generateWinrtClass(
                 w.writeLine("public type ${name} = ${defaultProjection}")
                 return
             }
-        case None => ()
+        case None =>
+            writeStaticWinrtClass(
+                w,
+                index,
+                fileIdx,
+                row,
+                name,
+                typeName,
+                runtimeName,
+                genericDecl,
+                genericWhere,
+                feature,
+                typeTags,
+                factoryInterfaces
+            )
+            return
     }
 
     w.writeBlankLine()
     writeAvailabilityForTags(w, feature, typeTags)
-    w.writeBlock("public class ${name}${genericDecl} <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType${genericWhere}", { =>
+    w.writeBlock("public class ${name}${genericDecl} <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType${genericWhere}", { =>
         w.writeLine("public init(raw: CPointer<Unit>) {")
         w.writeLine("    super(raw)")
         w.writeLine("}")
@@ -88,9 +106,7 @@ public func generateWinrtClass(
                 w.writeLine("    return InterfaceDescriptor<${typeName}>(\"${name}\", ${defaultProjection}.iid(), ancestors, { raw => ${typeName}.fromAbiTake(raw) }, { raw => ${typeName}.viewOf(raw) })")
                 w.writeLine("}")
                 w.writeBlankLine()
-                w.writeLine("public func defaultInterface(): ${defaultProjection} {")
-                w.writeLine("    ${defaultProjection}.viewOf(asRaw())")
-                w.writeLine("}")
+                writeWinrtClassQueryAccessor(w, "defaultInterface", defaultProjection)
             case None =>
                 w.writeLine("public static func descriptor(): InterfaceDescriptor<${typeName}> {")
                 w.writeLine("    return InterfaceDescriptor<${typeName}>(\"${name}\", GUID(), [IInspectable.iid(), IUnknown.iid()], { raw => ${typeName}.fromAbiTake(raw) }, { raw => ${typeName}.viewOf(raw) })")
@@ -101,22 +117,25 @@ public func generateWinrtClass(
         w.writeLine("    \"CPointer<Unit>\"")
         w.writeLine("}")
         w.writeBlankLine()
-        writeWinrtClassSignatureMethod(w, index, fileIdx, row)
-        w.writeBlankLine()
         match (defaultInterface) {
             case Some(defaultType) =>
+                writeWinrtClassSignatureMethod(w, index, fileIdx, row)
+                w.writeBlankLine()
                 let defaultProjection = typeNameToProjectionCj(index, defaultType)
                 w.writeLine("public static func runtimeType(): RuntimeTypeContract {")
                 w.writeLine("    RuntimeTypeContract(\"${runtimeName}\", ${typeName}.signature(), ${defaultProjection}.iid())")
                 w.writeLine("}")
             case None =>
+                // No default interface: rely on RuntimeName trait default `signature()` (returns runtimeName())
+                // and emit a runtimeType() that uses the bare runtime name on both sides. This matches the
+                // "no RuntimeType registration for static-only / non-activatable WinRT classes" contract.
                 w.writeLine("public static func runtimeType(): RuntimeTypeContract {")
-                w.writeLine("    RuntimeTypeContract(\"${runtimeName}\", ${typeName}.signature())")
+                w.writeLine("    RuntimeTypeContract(\"${runtimeName}\", \"${runtimeName}\")")
                 w.writeLine("}")
         }
         w.writeBlankLine()
         w.writeLine("public static func activationFactory(): Option<IActivationFactory> {")
-        w.writeLine("    windows_interface.getActivationFactoryByName<IActivationFactory>(${typeName}.runtimeName(), IActivationFactory.descriptor()).ok()")
+        w.writeLine("    windows_core.activationFactory<${typeName}>().ok()")
         w.writeLine("}")
         if (agile) {
             w.writeBlankLine()
@@ -127,8 +146,13 @@ public func generateWinrtClass(
         if (hasDefaultConstructor) {
             w.writeBlankLine()
             w.writeLine("public static func new(): ${typeName} {")
-            w.writeLine("    try (factory = windows_interface.getActivationFactoryByName<IGenericFactory>(${typeName}.runtimeName(), IGenericFactory.descriptor()).unwrap()) {")
-            w.writeLine("        return unsafe { factory.ActivateInstance<${typeName}>(${typeName}.descriptor()).unwrap() }")
+            w.writeLine("    var created__: Option<${typeName}> = Option<${typeName}>.None")
+            w.writeLine("    try (factory__ = windows_core.factory<${typeName}, IGenericFactory>().unwrap()) {")
+            w.writeLine("        created__ = Some(unsafe { factory__.ActivateInstance<${typeName}>(${typeName}.descriptor()).unwrap() })")
+            w.writeLine("    }")
+            w.writeLine("    match (created__) {")
+            w.writeLine("        case Some(value) => return value")
+            w.writeLine("        case None => throw IllegalStateException(\"Activation factory did not produce ${typeName}\")")
             w.writeLine("    }")
             w.writeLine("}")
         }
@@ -137,18 +161,20 @@ public func generateWinrtClass(
         w.writeLine("    IInspectable.viewOf(asRaw())")
         w.writeLine("}")
 
+        let interfaceAccessorNames = HashMap<TypeName, String>()
+        let usedAccessorNames = HashMap<String, Bool>()
+        usedAccessorNames["asIInspectable"] = true
         match (defaultInterface) {
             case Some(defaultType) =>
                 let defaultProjection = typeNameToProjectionCj(index, defaultType)
+                let accessorName = winrtClassAsAccessorName(defaultType, usedAccessorNames)
+                interfaceAccessorNames[defaultType] = accessorName
                 w.writeBlankLine()
-                w.writeLine("public func as${trimTick(defaultType.name)}(): ${defaultProjection} {")
-                w.writeLine("    ${defaultProjection}(asRaw())")
-                w.writeLine("}")
+                writeWinrtClassQueryAccessor(w, accessorName, defaultProjection)
             case None => ()
         }
 
         for (iface in publicInterfaces) {
-            let ifaceLeaf = trimTick(iface.name)
             match (defaultInterface) {
                 case Some(defaultType) =>
                     if (iface == defaultType) {
@@ -157,53 +183,20 @@ public func generateWinrtClass(
                 case None => ()
             }
             let ifaceProjection = typeNameToProjectionCj(index, iface)
+            let accessorName = winrtClassAsAccessorName(iface, usedAccessorNames)
+            interfaceAccessorNames[iface] = accessorName
             w.writeBlankLine()
-            w.writeLine("public func as${ifaceLeaf}(): ${ifaceProjection} {")
-            w.writeLine("    ${ifaceProjection}(asRaw())")
-            w.writeLine("}")
+            writeWinrtClassQueryAccessor(w, accessorName, ifaceProjection)
         }
 
         for (baseType in bases) {
-            let baseLeaf = trimTick(baseType.name)
             let baseProjection = typeNameToProjectionCj(index, baseType)
+            let accessorName = winrtClassAsAccessorName(baseType, usedAccessorNames)
             w.writeBlankLine()
-            w.writeLine("public func as${baseLeaf}(): ${baseProjection} {")
-            w.writeLine("    ${baseProjection}(asRaw())")
-            w.writeLine("}")
+            writeWinrtClassQueryAccessor(w, accessorName, baseProjection)
         }
 
         writeClassIteratorProjectionMembers(w, index, publicInterfaces)
-
-        for (factoryInfo in factoryInterfaces) {
-            let factoryProjection = typeNameToProjectionCj(index, factoryInfo.typeName)
-            let factoryCandidates = index.get(factoryInfo.typeName.namespace, trimTick(factoryInfo.typeName.name))
-            if (factoryCandidates.isEmpty()) {
-                continue
-            }
-            let (factoryFileIdx, factoryRow) = factoryCandidates[0]
-            let factoryMethodNames = buildNormalizedMethodNames(index, factoryFileIdx, factoryRow)
-            let factoryGenerics = winmdBuildGenericArray(index, factoryFileIdx, winmdRowGenericStart(index, factoryFileIdx, factoryRow), winmdRowGenericEnd(index, factoryFileIdx, factoryRow))
-            let (fmStart, fmEnd) = index.typeDefMethods(factoryFileIdx, factoryRow)
-            var factoryMethodRow = fmStart
-            while (factoryMethodRow < fmEnd) {
-                let factoryMethodName = factoryMethodNames[factoryMethodRow]
-                let factorySig = index.methodDefSignature(factoryFileIdx, factoryMethodRow, factoryGenerics)
-                let (fpStart, fpEnd) = index.methodDefParams(factoryFileIdx, factoryMethodRow)
-                let missing = missingMethodDependencies(index, factoryFileIdx, factoryMethodRow, factoryGenerics)
-                if (!missing.isEmpty()) {
-                    warnMissingMethodDependencies(index, factoryFileIdx, factoryMethodRow, missing)
-                    factoryMethodRow += 1
-                    continue
-                }
-                let methodTags = itemAvailabilityTags(TABLE_METHOD_DEF, factoryFileIdx, factoryMethodRow)
-                w.writeBlankLine()
-                if (!methodTags.isEmpty()) {
-                    writeAvailabilityForTags(w, "", methodTags)
-                }
-                writeWinrtClassFactoryMethod(w, index, factoryFileIdx, typeName, factoryProjection, factoryMethodName, factorySig, fpStart, fpEnd)
-                factoryMethodRow += 1
-            }
-        }
 
         let classMethodNames = MethodNames()
         let emittedMethodNames = HashMap<String, Bool>()
@@ -237,12 +230,177 @@ public func generateWinrtClass(
                 namespace,
                 name,
                 iface,
-                "as${trimTick(iface.name)}()",
+                "${interfaceAccessorNames[iface]}()",
                 classMethodNames,
                 emittedMethodNames
             )
         }
+
+        let emittedFactoryMethodNames = HashMap<String, Bool>()
+        for (factoryInfo in factoryInterfaces) {
+            let factoryProjection = typeNameToProjectionCj(index, factoryInfo.typeName)
+            let factoryCandidates = index.get(factoryInfo.typeName.namespace, trimTick(factoryInfo.typeName.name))
+            if (factoryCandidates.isEmpty()) {
+                continue
+            }
+            let (factoryFileIdx, factoryRow) = factoryCandidates[0]
+            let factoryTypeTags = winrtClassTypeAvailabilityTags(index, factoryInfo.typeName)
+            let factoryGenerics = winmdBuildGenericArray(index, factoryFileIdx, winmdRowGenericStart(index, factoryFileIdx, factoryRow), winmdRowGenericEnd(index, factoryFileIdx, factoryRow))
+            let factoryMethodNames = buildWinrtMethodNames(index, factoryFileIdx, factoryRow, factoryGenerics)
+            let (fmStart, fmEnd) = index.typeDefMethods(factoryFileIdx, factoryRow)
+            var factoryMethodRow = fmStart
+            while (factoryMethodRow < fmEnd) {
+                let factoryMethodName = factoryMethodNames[factoryMethodRow]
+                let emittedFactoryMethodName = disambiguateWinrtClassFactoryMethodName(
+                    factoryMethodName,
+                    emittedMethodNames,
+                    emittedFactoryMethodNames
+                )
+                let factorySig = index.methodDefSignature(factoryFileIdx, factoryMethodRow, factoryGenerics)
+                let (fpStart, fpEnd) = index.methodDefParams(factoryFileIdx, factoryMethodRow)
+                let missing = missingMethodDependencies(index, factoryFileIdx, factoryMethodRow, factoryGenerics)
+                if (!missing.isEmpty()) {
+                    warnMissingMethodDependencies(index, factoryFileIdx, factoryMethodRow, missing)
+                    factoryMethodRow += 1
+                    continue
+                }
+                emittedFactoryMethodNames[emittedFactoryMethodName] = true
+                let methodTags = mergeAvailabilityTagsAsAnd(
+                    itemAvailabilityTags(TABLE_METHOD_DEF, factoryFileIdx, factoryMethodRow),
+                    factoryTypeTags
+                )
+                w.writeBlankLine()
+                if (!methodTags.isEmpty()) {
+                    writeAvailabilityForTags(w, "", methodTags)
+                }
+                writeWinrtClassFactoryMethod(
+                    w,
+                    index,
+                    factoryFileIdx,
+                    typeName,
+                    factoryProjection,
+                    emittedFactoryMethodName,
+                    factoryMethodName,
+                    factorySig,
+                    fpStart,
+                    fpEnd,
+                    factoryInfo.kind
+                )
+                factoryMethodRow += 1
+            }
+        }
     })
+    w.writeBlankLine()
+    writeAvailabilityForTags(w, feature, typeTags)
+    w.writeBlock("extend${genericDecl} ${typeName} <: windows_core.HandleWinrtType<${typeName}>${genericWhere}", { =>
+        w.writeLine("public static func intoWinrtHandle(value: ${typeName}): CPointer<Unit> {")
+        w.writeLine("    value.asRaw()")
+        w.writeLine("}")
+        w.writeBlankLine()
+        w.writeLine("public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ${typeName} {")
+        w.writeLine("    if (raw.isNull()) {")
+        w.writeLine("        throw windows_core.WindowsException(windows_core.E_POINTER)")
+        w.writeLine("    }")
+        w.writeLine("    ${typeName}.fromAbiTake(raw)")
+        w.writeLine("}")
+        w.writeBlankLine()
+        w.writeLine("public static func viewWinrtHandle(raw: CPointer<Unit>): ${typeName} {")
+        w.writeLine("    ${typeName}.viewOf(raw)")
+        w.writeLine("}")
+    })
+}
+
+func writeWinrtClassQueryAccessor(
+    w: CodeWriter,
+    accessorName: String,
+    projection: String
+): Unit {
+    w.writeLine("public func ${accessorName}(): ${projection} {")
+    w.writeLine("    match (unsafe { query(${projection}.descriptor()) }) {")
+    w.writeLine("        case Some(value) => value")
+    w.writeLine("        case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)")
+    w.writeLine("    }")
+    w.writeLine("}")
+}
+
+func winrtClassSurfaceAvailabilityTags(
+    index: TypeIndex,
+    ownTags: ArrayList<String>,
+    defaultInterface: Option<TypeName>,
+    publicInterfaces: ArrayList<TypeName>,
+    bases: ArrayList<TypeName>
+): ArrayList<String> {
+    var result = copyAvailabilityTags(ownTags)
+    match (defaultInterface) {
+        case Some(defaultType) =>
+            result = mergeAvailabilityTagsAsAnd(result, winrtClassTypeAvailabilityTags(index, defaultType))
+        case None => ()
+    }
+    for (iface in publicInterfaces) {
+        match (defaultInterface) {
+            case Some(defaultType) =>
+                if (iface == defaultType) {
+                    continue
+                }
+            case None => ()
+        }
+        result = mergeAvailabilityTagsAsAnd(result, winrtClassTypeAvailabilityTags(index, iface))
+    }
+    for (baseType in bases) {
+        result = mergeAvailabilityTagsAsAnd(result, winrtClassTypeAvailabilityTags(index, baseType))
+    }
+    return result
+}
+
+func winrtClassTypeAvailabilityTags(index: TypeIndex, typeName: TypeName): ArrayList<String> {
+    let candidates = index.get(typeName.namespace, trimTick(typeName.name))
+    if (candidates.isEmpty()) {
+        return ArrayList<String>()
+    }
+
+    let (fileIdx, row) = candidates[0]
+    return typeAvailabilityTags(
+        typeName.namespace,
+        trimTick(typeName.name),
+        fileIdx,
+        row,
+        index.arches(TABLE_TYPE_DEF, fileIdx, row)
+    )
+}
+
+func mergeAvailabilityTagsAsAnd(first: ArrayList<String>, second: ArrayList<String>): ArrayList<String> {
+    if (first.isEmpty()) {
+        return copyAvailabilityTags(second)
+    }
+    if (second.isEmpty()) {
+        return copyAvailabilityTags(first)
+    }
+
+    let left = availabilityCondition("", first)
+    let right = availabilityCondition("", second)
+    if (left.isEmpty()) {
+        return copyAvailabilityTags(second)
+    }
+    if (right.isEmpty()) {
+        return copyAvailabilityTags(first)
+    }
+    if (left == right) {
+        let same = ArrayList<String>()
+        same.add(left)
+        return same
+    }
+
+    let result = ArrayList<String>()
+    result.add("(${left}) && (${right})")
+    return result
+}
+
+func copyAvailabilityTags(tags: ArrayList<String>): ArrayList<String> {
+    let result = ArrayList<String>()
+    for (tag in tags) {
+        result.add(tag)
+    }
+    return result
 }
 
 func writeWinrtClassIidMethod(
@@ -274,6 +432,100 @@ func writeWinrtClassSignatureMethod(
     w.writeLine("}")
 }
 
+func writeStaticWinrtClass(
+    w: CodeWriter,
+    index: TypeIndex,
+    fileIdx: Int64,
+    row: Int64,
+    name: String,
+    typeName: String,
+    runtimeName: String,
+    genericDecl: String,
+    genericWhere: String,
+    feature: String,
+    typeTags: ArrayList<String>,
+    factoryInterfaces: ArrayList<WinrtFactoryInterface>
+): Unit {
+    w.writeBlankLine()
+    writeAvailabilityForTags(w, feature, typeTags)
+    w.writeBlock("public class ${name}${genericDecl} <: windows_interface.RuntimeName & windows_core.RuntimeName${genericWhere}", { =>
+        w.writeLine("private init() {}")
+        w.writeBlankLine()
+        w.writeLine("public static func runtimeName(): String {")
+        w.writeLine("    \"${runtimeName}\"")
+        w.writeLine("}")
+        w.writeBlankLine()
+        // Disambiguate signature() and runtimeType() between windows_interface.RuntimeName and
+        // windows_core.RuntimeName (both inherit them as defaulted methods). Static-only WinRT
+        // classes never carry a default-interface signature, so use the bare runtime name.
+        w.writeLine("public static func signature(): String {")
+        w.writeLine("    \"${runtimeName}\"")
+        w.writeLine("}")
+        w.writeBlankLine()
+        w.writeLine("public static func runtimeType(): RuntimeTypeContract {")
+        w.writeLine("    RuntimeTypeContract(\"${runtimeName}\", \"${runtimeName}\")")
+        w.writeLine("}")
+        w.writeBlankLine()
+        w.writeLine("public static func activationFactory(): Option<IActivationFactory> {")
+        w.writeLine("    windows_core.activationFactory<${typeName}>().ok()")
+        w.writeLine("}")
+
+        let emittedFactoryMethodNames = HashMap<String, Bool>()
+        for (factoryInfo in factoryInterfaces) {
+            let factoryProjection = typeNameToProjectionCj(index, factoryInfo.typeName)
+            let factoryCandidates = index.get(factoryInfo.typeName.namespace, trimTick(factoryInfo.typeName.name))
+            if (factoryCandidates.isEmpty()) {
+                continue
+            }
+            let (factoryFileIdx, factoryRow) = factoryCandidates[0]
+            let factoryTypeTags = winrtClassTypeAvailabilityTags(index, factoryInfo.typeName)
+            let factoryGenerics = winmdBuildGenericArray(index, factoryFileIdx, winmdRowGenericStart(index, factoryFileIdx, factoryRow), winmdRowGenericEnd(index, factoryFileIdx, factoryRow))
+            let factoryMethodNames = buildWinrtMethodNames(index, factoryFileIdx, factoryRow, factoryGenerics)
+            let (fmStart, fmEnd) = index.typeDefMethods(factoryFileIdx, factoryRow)
+            var factoryMethodRow = fmStart
+            while (factoryMethodRow < fmEnd) {
+                let factoryMethodName = factoryMethodNames[factoryMethodRow]
+                let emittedFactoryMethodName = disambiguateWinrtClassFactoryMethodName(
+                    factoryMethodName,
+                    HashMap<String, Bool>(),
+                    emittedFactoryMethodNames
+                )
+                let factorySig = index.methodDefSignature(factoryFileIdx, factoryMethodRow, factoryGenerics)
+                let (fpStart, fpEnd) = index.methodDefParams(factoryFileIdx, factoryMethodRow)
+                let missing = missingMethodDependencies(index, factoryFileIdx, factoryMethodRow, factoryGenerics)
+                if (!missing.isEmpty()) {
+                    warnMissingMethodDependencies(index, factoryFileIdx, factoryMethodRow, missing)
+                    factoryMethodRow += 1
+                    continue
+                }
+                emittedFactoryMethodNames[emittedFactoryMethodName] = true
+                let methodTags = mergeAvailabilityTagsAsAnd(
+                    itemAvailabilityTags(TABLE_METHOD_DEF, factoryFileIdx, factoryMethodRow),
+                    factoryTypeTags
+                )
+                w.writeBlankLine()
+                if (!methodTags.isEmpty()) {
+                    writeAvailabilityForTags(w, "", methodTags)
+                }
+                writeWinrtClassFactoryMethod(
+                    w,
+                    index,
+                    factoryFileIdx,
+                    typeName,
+                    factoryProjection,
+                    emittedFactoryMethodName,
+                    factoryMethodName,
+                    factorySig,
+                    fpStart,
+                    fpEnd,
+                    factoryInfo.kind
+                )
+                factoryMethodRow += 1
+            }
+        }
+    })
+}
+
 func writeWinrtClassMethodsForInterface(
     w: CodeWriter,
     index: TypeIndex,
@@ -290,19 +542,21 @@ func writeWinrtClassMethodsForInterface(
     }
 
     let (ifaceFileIdx, ifaceRow) = candidates[0]
-    let targetMethodNames = buildNormalizedMethodNames(index, ifaceFileIdx, ifaceRow)
+    let ifaceTypeTags = winrtClassTypeAvailabilityTags(index, iface)
     let ifaceGenerics = winmdBuildGenericArray(index, ifaceFileIdx, winmdRowGenericStart(index, ifaceFileIdx, ifaceRow), winmdRowGenericEnd(index, ifaceFileIdx, ifaceRow))
+    let targetMethodNames = buildWinrtMethodNames(index, ifaceFileIdx, ifaceRow, ifaceGenerics)
     let (mStart, mEnd) = index.typeDefMethods(ifaceFileIdx, ifaceRow)
     var methodRow = mStart
     while (methodRow < mEnd) {
-        let classMethodName = classMethodNames.add(index, ifaceFileIdx, methodRow)
+        let sig = index.methodDefSignature(ifaceFileIdx, methodRow, ifaceGenerics)
+        let classSig = substituteMethodSignature(sig, iface.generics)
+        let classMethodName = disambiguateWinrtMethodName(index, classMethodNames.add(index, ifaceFileIdx, methodRow), classSig)
         if (emittedMethodNames.contains(classMethodName)) {
             methodRow += 1
             continue
         }
 
         let targetMethodName = targetMethodNames[methodRow]
-        let sig = index.methodDefSignature(ifaceFileIdx, methodRow, ifaceGenerics)
         let (pStart, pEnd) = index.methodDefParams(ifaceFileIdx, methodRow)
         let missing = missingMethodDependencies(index, ifaceFileIdx, methodRow, ifaceGenerics)
         if (!missing.isEmpty()) {
@@ -312,12 +566,15 @@ func writeWinrtClassMethodsForInterface(
         }
 
         emittedMethodNames[classMethodName] = true
-        let methodTags = itemAvailabilityTags(TABLE_METHOD_DEF, ifaceFileIdx, methodRow)
+        let methodTags = mergeAvailabilityTagsAsAnd(
+            itemAvailabilityTags(TABLE_METHOD_DEF, ifaceFileIdx, methodRow),
+            ifaceTypeTags
+        )
         w.writeBlankLine()
         if (!methodTags.isEmpty()) {
             writeAvailabilityForTags(w, "", methodTags)
         }
-        writeWinrtClassForwardMethod(w, index, ifaceFileIdx, sig, classMethodName, targetMethodName, accessorExpr, pStart, pEnd)
+        writeWinrtClassForwardMethod(w, index, ifaceFileIdx, classSig, sig, classMethodName, targetMethodName, accessorExpr, pStart, pEnd)
         methodRow += 1
     }
 }
@@ -327,31 +584,39 @@ func writeWinrtClassForwardMethod(
     index: TypeIndex,
     fileIdx: Int64,
     sig: MethodSignature,
+    targetSig: MethodSignature,
     methodName: String,
     targetMethodName: String,
     accessorExpr: String,
     pStart: Int64,
     pEnd: Int64
 ): Unit {
-    let params = ArrayList<String>()
+    let seqToName = parameterNameMap(index, fileIdx, pStart, pEnd)
+    let params = winrtPublicParameterDecls(index, sig, seqToName)
     let args = ArrayList<String>()
     var i: Int64 = 0
-    var paramRow = pStart
     while (i < Int64(sig.paramTypes.size)) {
-        var paramName = "param${i}"
-        if (paramRow < pEnd) {
-            let candidate = index.paramName(fileIdx, paramRow)
-            if (!candidate.isEmpty()) {
-                paramName = sanitizeIdentifier(candidate)
-            }
-            paramRow += 1
+        let seq = i + 1
+        let paramName = if (seqToName.contains(seq)) {
+            seqToName[seq]
+        } else {
+            "param${i}"
         }
-        params.add("${paramName}: ${highLevelType(index, sig.paramTypes[i])}")
-        args.add(paramName)
+        match (sig.paramTypes[i]) {
+            case MetadataType.MdArray(_) =>
+                args.add("${paramName}Size")
+                match (targetSig.paramTypes[i]) {
+                    case MetadataType.MdArray(MetadataType.Generic(_, _)) =>
+                        args.add("CPointer<Unit>(${paramName})")
+                    case _ =>
+                        args.add(paramName)
+                }
+            case _ =>
+                args.add(paramName)
+        }
         i += 1
     }
-
-    let returnType = highLevelType(index, sig.returnType)
+    let returnType = winrtPublicReturnType(index, sig.returnType)
     let paramText = joinStrings(params, ", ")
     let argText = joinStrings(args, ", ")
     if (returnType == "Unit") {
@@ -365,8 +630,28 @@ func writeWinrtClassForwardMethod(
         return
     }
 
+    let needsArrayReturnBridge = match (sig.returnType) {
+        case MetadataType.MdArray(_) =>
+            match (targetSig.returnType) {
+                case MetadataType.MdArray(MetadataType.Generic(_, _)) => true
+                case _ => false
+            }
+        case _ => false
+    }
+
     w.writeLine("public unsafe func ${methodName}(${paramText}): ${returnType} {")
-    if (argText.isEmpty()) {
+    if (needsArrayReturnBridge) {
+        let arrayPointerType = match (sig.returnType) {
+            case MetadataType.MdArray(elem) => winrtPublicArrayPointerType(index, elem)
+            case _ => "CPointer<Unit>"
+        }
+        if (argText.isEmpty()) {
+            w.writeLine("    let (resultSize__, result__) = ${accessorExpr}.${targetMethodName}()")
+        } else {
+            w.writeLine("    let (resultSize__, result__) = ${accessorExpr}.${targetMethodName}(${argText})")
+        }
+        w.writeLine("    return (resultSize__, ${arrayPointerType}(result__))")
+    } else if (argText.isEmpty()) {
         w.writeLine("    return ${accessorExpr}.${targetMethodName}()")
     } else {
         w.writeLine("    return ${accessorExpr}.${targetMethodName}(${argText})")
@@ -512,9 +797,11 @@ func writeWinrtClassFactoryMethod(
     typeName: String,
     factoryProjection: String,
     methodName: String,
+    targetMethodName: String,
     sig: MethodSignature,
     pStart: Int64,
-    pEnd: Int64
+    pEnd: Int64,
+    kind: WinrtFactoryKind
 ): Unit {
     let seqToName = HashMap<Int64, String>()
     var paramRow = pStart
@@ -529,38 +816,146 @@ func writeWinrtClassFactoryMethod(
         paramRow += 1
     }
 
+    // Composable factory methods take 2 trailing params (baseInterface, innerInterface)
+    // that are reserved for inheritance/aggregation. Reference implementation hides
+    // them from the user-facing surface and passes null/null at the call site.
+    let isComposable = match (kind) {
+        case WinrtFactoryKind.Composable => true
+        case _ => false
+    }
+    let totalParams = Int64(sig.paramTypes.size)
+    let userParamCount = if (isComposable && totalParams >= 2) {
+        totalParams - 2
+    } else {
+        totalParams
+    }
+
     let params = ArrayList<String>()
     let args = ArrayList<String>()
     var i: Int64 = 0
-    while (i < Int64(sig.paramTypes.size)) {
+    while (i < userParamCount) {
         let seq = i + 1
         let paramName = if (seqToName.contains(seq)) {
             seqToName[seq]
         } else {
             "param${i}"
         }
-        params.add("${paramName}: ${highLevelType(index, sig.paramTypes[i])}")
-        args.add(paramName)
+        match (sig.paramTypes[i]) {
+            case MetadataType.MdArray(elem) =>
+                params.add("${paramName}Size: UInt32")
+                params.add("${paramName}: ${winrtPublicArrayPointerType(index, elem)}")
+                args.add("${paramName}Size")
+                args.add(winrtArrayThunkBridgeExpr(index, elem, paramName))
+            case _ =>
+                params.add("${paramName}: ${highLevelType(index, sig.paramTypes[i])}")
+                args.add(paramName)
+        }
         i += 1
+    }
+    if (isComposable && totalParams >= 2) {
+        // Pass null IInspectable for baseInterface and the dedicated unused inner
+        // pointer slot for innerInterface; matches the reference implementation.
+        args.add("IInspectable.viewOf(CPointer<Unit>())")
+        args.add("CPointer<CPointer<Unit>>(inout composableInner__)")
     }
 
     let paramText = joinStrings(params, ", ")
     let argText = joinStrings(args, ", ")
-    let returnType = highLevelType(index, sig.returnType)
+    let returnType = winrtPublicReturnType(index, sig.returnType)
     w.writeLine("public static unsafe func ${methodName}(${paramText}): ${returnType} {")
-    w.writeLine("    try (factory = windows_interface.getActivationFactoryByName<${factoryProjection}>(${typeName}.runtimeName(), ${factoryProjection}.descriptor()).unwrap()) {")
+    if (isComposable && totalParams >= 2) {
+        w.writeLine("    var composableInner__: CPointer<Unit> = CPointer<Unit>()")
+    }
+    if (returnType != "Unit") {
+        w.writeLine("    var result__: Option<${returnType}> = Option<${returnType}>.None")
+    }
+    w.writeLine("    try (factory__ = windows_core.factory<${typeName}, ${factoryProjection}>().unwrap()) {")
     if (returnType == "Unit") {
         if (argText.isEmpty()) {
-            w.writeLine("        factory.${methodName}()")
+            w.writeLine("        factory__.${targetMethodName}()")
         } else {
-            w.writeLine("        factory.${methodName}(${argText})")
+            w.writeLine("        factory__.${targetMethodName}(${argText})")
         }
-        w.writeLine("        return ()")
     } else if (argText.isEmpty()) {
-        w.writeLine("        return factory.${methodName}()")
+        w.writeLine("        result__ = Some(factory__.${targetMethodName}())")
     } else {
-        w.writeLine("        return factory.${methodName}(${argText})")
+        w.writeLine("        result__ = Some(factory__.${targetMethodName}(${argText}))")
     }
     w.writeLine("    }")
+    if (returnType == "Unit") {
+        w.writeLine("    return ()")
+    } else {
+        w.writeLine("    match (result__) {")
+        w.writeLine("        case Some(value) => return value")
+        w.writeLine("        case None => throw IllegalStateException(\"Activation factory call `${targetMethodName}` did not return a value\")")
+        w.writeLine("    }")
+    }
     w.writeLine("}")
+}
+
+func winrtClassAsAccessorName(typeName: TypeName, usedNames: HashMap<String, Bool>): String {
+    let leaf = trimTick(typeName.name)
+    let primary = sanitizeIdentifier("as${leaf}")
+    if (!usedNames.contains(primary)) {
+        usedNames[primary] = true
+        return primary
+    }
+
+    let qualified = sanitizeIdentifier("as${winrtClassNamespaceAccessorPrefix(typeName.namespace)}${leaf}")
+    if (!usedNames.contains(qualified)) {
+        usedNames[qualified] = true
+        return qualified
+    }
+
+    var suffix: Int64 = 2
+    while (true) {
+        let candidate = sanitizeIdentifier("${qualified}${suffix}")
+        if (!usedNames.contains(candidate)) {
+            usedNames[candidate] = true
+            return candidate
+        }
+        suffix += 1
+    }
+
+    return qualified
+}
+
+func winrtClassNamespaceAccessorPrefix(namespace: String): String {
+    let parts = splitString(namespace, b'.')
+    let sb = StringBuilder()
+    var i: Int64 = 0
+    if (!parts.isEmpty() && parts[0] == "Windows") {
+        i = 1
+    }
+    while (i < Int64(parts.size)) {
+        sb.append(sanitizeIdentifier(parts[i]))
+        i += 1
+    }
+    return sb.toString()
+}
+
+func disambiguateWinrtClassFactoryMethodName(
+    methodName: String,
+    reservedMethodNames: HashMap<String, Bool>,
+    emittedFactoryMethodNames: HashMap<String, Bool>
+): String {
+    if (!reservedMethodNames.contains(methodName) && !emittedFactoryMethodNames.contains(methodName)) {
+        return methodName
+    }
+
+    let suffixedBase = sanitizeIdentifier("${methodName}Static")
+    if (!reservedMethodNames.contains(suffixedBase) && !emittedFactoryMethodNames.contains(suffixedBase)) {
+        return suffixedBase
+    }
+
+    var suffix: Int64 = 2
+    while (true) {
+        let candidate = sanitizeIdentifier("${suffixedBase}${suffix}")
+        if (!reservedMethodNames.contains(candidate) && !emittedFactoryMethodNames.contains(candidate)) {
+            return candidate
+        }
+        suffix += 1
+    }
+
+    return suffixedBase
 }

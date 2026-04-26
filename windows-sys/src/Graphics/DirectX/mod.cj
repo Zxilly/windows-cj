@@ -4,7 +4,6 @@ package windows_sys.Graphics.DirectX
 
 
 @When[Windows_Graphics_DirectX == "on"]
-@C
 public struct DirectXAlphaMode {
     public var value: Int32 = 0
 
@@ -35,7 +34,6 @@ public let DirectXAlphaMode_Straight: DirectXAlphaMode = DirectXAlphaMode(2)
 public let DirectXAlphaMode_Ignore: DirectXAlphaMode = DirectXAlphaMode(3)
 
 @When[Windows_Graphics_DirectX == "on"]
-@C
 public struct DirectXColorSpace {
     public var value: Int32 = 0
 
@@ -129,7 +127,6 @@ public let DirectXColorSpace_YccStudioG24LeftP2020: DirectXColorSpace = DirectXC
 public let DirectXColorSpace_YccStudioG24TopLeftP2020: DirectXColorSpace = DirectXColorSpace(24)
 
 @When[Windows_Graphics_DirectX == "on"]
-@C
 public struct DirectXPixelFormat {
     public var value: Int32 = 0
 
@@ -514,7 +511,6 @@ public let DirectXPixelFormat_SamplerFeedbackMipRegionUsedOpaque: DirectXPixelFo
 public let DirectXPixelFormat_A4B4G4R4: DirectXPixelFormat = DirectXPixelFormat(191)
 
 @When[Windows_Graphics_DirectX == "on"]
-@C
 public struct DirectXPrimitiveTopology {
     public var value: Int32 = 0
 

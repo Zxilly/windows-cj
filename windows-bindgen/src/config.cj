@@ -24,10 +24,17 @@ public class BindgenConfig {
     public var packageName: String = ""
     public var specificDeps: Bool = false
     public var noDeps: Bool = false
+    public var usesLayeredImpl: Bool = true
+    public var targetBucketSize: Int64 = 2000
+    // 0 means "auto-detect from logical core count" — runBindgen resolves it on
+    // startup. Explicit `--jobs N` overrides this.
+    public var jobs: Int64 = 0
+    public var layerAssignment: Option<LayerAssignment> = None
     public var derivesByType: HashMap<TypeName, Array<String>> = HashMap<TypeName, Array<String>>()
 
     var rawDerivesByType: HashMap<String, Array<String>> = HashMap<String, Array<String>>()
     var deriveTargetOrder: ArrayList<String> = ArrayList<String>()
+    var forcedLocalTypes: HashMap<TypeName, Bool> = HashMap<TypeName, Bool>()
     var inferredOutputRootPackageName: String = ""
     var resolvedOutputRootPackageName: Bool = false
     var inferredOutputPackageRoot: String = ""
@@ -58,8 +65,17 @@ public class BindgenConfig {
                     case "--derive" => kind = ArgKind.Derive
                     case "--link" => kind = ArgKind.Link
                     case "--package" => kind = ArgKind.Package
+                    case "--jobs" => kind = ArgKind.Jobs
+                    case "--bucket-size" => kind = ArgKind.BucketSize
+                    case "--target-bucket-size" => kind = ArgKind.BucketSize
                     case "--specific-deps" =>
                         config.specificDeps = true
+                        kind = ArgKind.None
+                    case "--layered" =>
+                        config.usesLayeredImpl = true
+                        kind = ArgKind.None
+                    case "--no-layered" =>
+                        config.usesLayeredImpl = false
                         kind = ArgKind.None
                     case "--sys" =>
                         config.generateSys = true
@@ -128,12 +144,25 @@ public class BindgenConfig {
                 case Package =>
                     config.packageName = arg
                     kind = ArgKind.None
+                case Jobs =>
+                    config.jobs = parseInt64OrZero(arg)
+                    if (config.jobs <= 0) {
+                        throw Exception("`--jobs` requires a positive integer")
+                    }
+                    kind = ArgKind.None
+                case BucketSize =>
+                    config.targetBucketSize = parseInt64OrZero(arg)
+                    kind = ArgKind.None
             }
             i += 1
         }
 
         if (isPackageArgKind(kind)) {
             config.packageOutput = true
+        }
+        match (kind) {
+            case ArgKind.Jobs => throw Exception("`--jobs` requires a positive integer")
+            case _ => ()
         }
         if (!config.packageName.isEmpty() && !config.flat) {
             throw Exception("`--package <name>` requires `--flat`")
@@ -170,6 +199,18 @@ public class BindgenConfig {
         return FileWriter.namespaceToPackageName(namespace)
     }
 
+    public func packageNameForType(namespace: String, name: String): String {
+        match (layerAssignment) {
+            case Some(assignment) =>
+                match (assignment.packageFor(namespace, name)) {
+                    case Some(packageName) => return packageName
+                    case None => ()
+                }
+            case None => ()
+        }
+        return packageNameForNamespace(namespace)
+    }
+
     public func packageNamespaceForNamespace(namespace: String): String {
         if (usesSubpackageLayout() && generatedPackageNamespaces.contains(namespace)) {
             return generatedPackageNamespaces[namespace]
@@ -192,10 +233,6 @@ public class BindgenConfig {
     }
 
     public func usesSubpackageLayout(): Bool {
-        match (primaryMode()) {
-            case GenerationMode.Sys => ()
-            case _ => return false
-        }
         if (!packageName.isEmpty() || packageOutput) {
             return false
         }
@@ -231,7 +268,44 @@ public class BindgenConfig {
         if (leftNamespace.isEmpty() || rightNamespace.isEmpty()) {
             return false
         }
-        return packageNamespaceForNamespace(leftNamespace) == packageNamespaceForNamespace(rightNamespace)
+        return packageNameForNamespace(leftNamespace) == packageNameForNamespace(rightNamespace)
+    }
+
+    public func namespaceHasLayeredTypes(namespace: String): Bool {
+        match (layerAssignment) {
+            case Some(assignment) => return assignment.namespaceHasLayeredTypes(namespace)
+            case None => return false
+        }
+    }
+
+    public func packageImportAvailabilityTags(packageImport: String): ArrayList<String> {
+        let result = ArrayList<String>()
+        if (!usesSubpackageLayout()) {
+            return result
+        }
+
+        let rootPackage = outputRootPackageName()
+        if (rootPackage.isEmpty()) {
+            return result
+        }
+
+        let prefix = "${rootPackage}."
+        if (!startsWith(packageImport, prefix)) {
+            return result
+        }
+
+        let packageArr = packageImport.toArray()
+        let prefixLen = Int64(prefix.toArray().size)
+        let relative = String.fromUtf8(packageArr[prefixLen..Int64(packageArr.size)])
+        if (relative.isEmpty() || relative == "impl" || relative.endsWith(".impl")) {
+            return result
+        }
+        if (relative.startsWith("_impl_l") || relative.indexOf("._impl_l", 0).isSome()) {
+            return result
+        }
+
+        result.add("${namespaceToFeature("Windows.${relative}")} == \"on\"")
+        return result
     }
 
     public func outputRelativePathForNamespace(namespace: String): String {
@@ -244,14 +318,41 @@ public class BindgenConfig {
             }
             return "${dirPath}/${stem}.cj"
         }
-        let dirPath = FileWriter.namespaceToDirPath(namespace)
         if (flat) {
             return "${sanitizePackageSegment(lastNamespaceComponent(namespace))}.cj"
         }
         if (packageOutput) {
+            let dirPath = FileWriter.namespaceToHierarchicalDirPath(namespace)
+            if (dirPath.isEmpty()) {
+                return "src/mod.cj"
+            }
             return "src/${dirPath}/mod.cj"
         }
+        let dirPath = FileWriter.namespaceToDirPath(namespace)
         return "${dirPath}/mod.cj"
+    }
+
+    public func outputRelativePathForType(namespace: String, name: String): String {
+        match (layerAssignment) {
+            case Some(assignment) =>
+                match (assignment.packageFor(namespace, name)) {
+                    case Some(packageName) =>
+                        match (assignment.bucketStemFor(namespace, name)) {
+                            case Some(_) =>
+                                let relativeDir = FileWriter.packageNameToRelativeDirPath(packageName,
+                                    outputRootPackageName())
+                                let stem = groupedFileStemForNamespace(namespace, packageNamespaceForNamespace(namespace))
+                                if (relativeDir.isEmpty()) {
+                                    return "${stem}.cj"
+                                }
+                                return "${relativeDir}/${stem}.cj"
+                            case None => ()
+                        }
+                    case None => ()
+                }
+            case None => ()
+        }
+        return outputRelativePathForNamespace(namespace)
     }
 
     public func facadeOutputRelativePathForNamespace(namespace: String): String {
@@ -287,6 +388,10 @@ public class BindgenConfig {
             for (namespace in component) {
                 generatedPackageNamespaces[namespace] = mergedNamespace
             }
+        }
+
+        if (usesLayeredImpl) {
+            return
         }
 
         var changed = true
@@ -338,7 +443,8 @@ public class BindgenConfig {
         }
     }
 
-    public func resolveDeriveTargets(index: TypeIndex, typeMap: TypeMap): Unit {
+    public func resolveDeriveTargets(index: TypeIndex, typeMap: TypeMap, references: References): Unit {
+        forcedLocalTypes.clear()
         if (rawDerivesByType.isEmpty()) {
             return
         }
@@ -350,10 +456,22 @@ public class BindgenConfig {
             }
 
             let qualifiedTarget = resolveDeriveTargetName(index, typeMap, rawTarget)
-            resolved[qualifiedTarget] = rawDerivesByType[rawTarget]
+            let erasedTarget = qualifiedTarget.definition()
+            if (!typeMap.containsType(erasedTarget)) {
+                forcedLocalTypes[erasedTarget] = true
+                typeMap.forceIncludeType(index, erasedTarget)
+            } else if (references.containsType(erasedTarget.namespace, trimTick(erasedTarget.name))) {
+                forcedLocalTypes[erasedTarget] = true
+            }
+            validateDeriveTarget(index, typeMap, erasedTarget.namespace, trimTick(erasedTarget.name), rawTarget)
+            resolved[erasedTarget] = rawDerivesByType[rawTarget]
         }
 
         derivesByType = resolved
+    }
+
+    public func isForcedLocalType(namespace: String, name: String): Bool {
+        return forcedLocalTypes.contains(TypeName.named(namespace, trimTick(name)))
     }
 
     public func derivesForType(namespace: String, name: String): Array<String> {
@@ -649,6 +767,8 @@ enum ArgKind {
     | Derive
     | Link
     | Package
+    | Jobs
+    | BucketSize
 }
 
 func isPackageArgKind(kind: ArgKind): Bool {
@@ -747,10 +867,27 @@ func appendDefaultReferenceArgs(config: BindgenConfig, args: ArrayList<String>, 
     }
 
     if (index.containsNamespace("Windows.Foundation")) {
-        args.add("windows_collections,flat,Windows.Foundation.Collections")
-        args.add("windows_numerics,flat,Windows.Foundation.Numerics")
-        args.add("windows_future,flat,Windows.Foundation.Async*")
-        args.add("windows_future,flat,Windows.Foundation.IAsync*")
+        if (config.packageName != "windows_collections") {
+            args.add("windows_collections,flat,Windows.Foundation.Collections")
+            args.add("windows_collections,flat,Windows.Foundation.EventRegistrationToken")
+        }
+        if (config.packageName != "windows_numerics") {
+            args.add("windows_numerics,flat,Windows.Foundation.Numerics")
+        }
+        if (config.packageName != "windows_future") {
+            args.add("windows_future,flat,Windows.Foundation.Async*")
+            args.add("windows_future,flat,Windows.Foundation.IAsync*")
+            args.add("windows_future,flat,Windows.Foundation.AsyncStatus")
+            args.add("windows_future,flat,Windows.Foundation.DateTime")
+            args.add("windows_future,flat,Windows.Foundation.FoundationContract")
+            args.add("windows_future,flat,Windows.Foundation.HResult")
+            args.add("windows_future,flat,Windows.Foundation.Point")
+            args.add("windows_future,flat,Windows.Foundation.PropertyType")
+            args.add("windows_future,flat,Windows.Foundation.Rect")
+            args.add("windows_future,flat,Windows.Foundation.Size")
+            args.add("windows_future,flat,Windows.Foundation.TimeSpan")
+            args.add("windows_future,flat,Windows.Foundation.UniversalApiContract")
+        }
     }
 
     let corePackage = if (config.specificDeps) {
@@ -774,9 +911,7 @@ func resolveDeriveTargetName(index: TypeIndex, typeMap: TypeMap, rawTarget: Stri
     let target = trimAsciiWhitespace(rawTarget)
     match (parseQualifiedTypeName(target)) {
         case Some(typeName) =>
-            let erased = typeName.definition()
-            validateDeriveTarget(index, typeMap, erased.namespace, trimTick(erased.name), target)
-            return erased
+            return typeName.definition()
         case None => return resolveShortDeriveTargetName(index, typeMap, target)
     }
 }
@@ -813,7 +948,10 @@ func resolveShortDeriveTargetName(index: TypeIndex, typeMap: TypeMap, name: Stri
     if (knownMatches.isEmpty()) {
         throw Exception("type not found: `${name}`")
     }
-    throw Exception("type not included: `${name}`")
+    if (knownMatches.size == 1) {
+        return knownMatches[0]
+    }
+    throw Exception("ambiguous derive target: `${name}`")
 }
 
 func validateDeriveTarget(

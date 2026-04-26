@@ -1,9 +1,0 @@
-[package]
-  name = "result_smoke_hidden_api"
-  version = "0.1.0"
-  output-type = "executable"
-  cjc-version = "1.1.0"
-  compile-option = "-loleaut32 -lwindowsapp"
-
-[dependencies]
-  windows_result = { path = "../../../../" }

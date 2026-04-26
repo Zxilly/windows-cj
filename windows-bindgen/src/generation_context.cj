@@ -26,6 +26,7 @@ public class BindgenContext {
 
 var activeBindgenContext_: Option<BindgenContext> = None
 let currentNamespaceTL_: ThreadLocal<String> = ThreadLocal<String>()
+let currentTypeNameTL_: ThreadLocal<String> = ThreadLocal<String>()
 
 public func setBindgenContext(context: BindgenContext): Unit {
     activeBindgenContext_ = Some(context)
@@ -34,6 +35,7 @@ public func setBindgenContext(context: BindgenContext): Unit {
 public func clearBindgenContext(): Unit {
     activeBindgenContext_ = None
     currentNamespaceTL_.set(Option<String>.None)
+    currentTypeNameTL_.set(Option<String>.None)
 }
 
 public func bindgenContext(): Option<BindgenContext> {
@@ -47,6 +49,21 @@ public func setCurrentNamespace(namespace: String): Unit {
 public func currentNamespace(): String {
     match (currentNamespaceTL_.get()) {
         case Some(ns) => ns
+        case None => ""
+    }
+}
+
+public func setCurrentTypeName(name: String): Unit {
+    currentTypeNameTL_.set(Some(name))
+}
+
+public func clearCurrentTypeName(): Unit {
+    currentTypeNameTL_.set(Option<String>.None)
+}
+
+public func currentTypeName(): String {
+    match (currentTypeNameTL_.get()) {
+        case Some(name) => name
         case None => ""
     }
 }

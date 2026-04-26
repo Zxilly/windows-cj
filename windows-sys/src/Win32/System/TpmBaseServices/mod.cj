@@ -2,11 +2,12 @@
 package windows_sys.Win32.System.TpmBaseServices
 
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
 @When[Windows_Win32_System_TpmBaseServices == "on"]
-@C
 public struct TBS_COMMAND_LOCALITY {
     public var value: UInt32 = 0
 
@@ -40,7 +41,6 @@ public let TBS_COMMAND_LOCALITY_TBS_COMMAND_LOCALITY_THREE: TBS_COMMAND_LOCALITY
 public let TBS_COMMAND_LOCALITY_TBS_COMMAND_LOCALITY_FOUR: TBS_COMMAND_LOCALITY = TBS_COMMAND_LOCALITY(4)
 
 @When[Windows_Win32_System_TpmBaseServices == "on"]
-@C
 public struct TBS_COMMAND_PRIORITY {
     public var value: UInt32 = 0
 
@@ -89,46 +89,49 @@ public struct TBS_CONTEXT_PARAMS2 {
 }
 
 @When[Windows_Win32_System_TpmBaseServices == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct TBS_CONTEXT_PARAMS2__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func anonymous(): TBS_CONTEXT_PARAMS2__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<TBS_CONTEXT_PARAMS2__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: TBS_CONTEXT_PARAMS2__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<TBS_CONTEXT_PARAMS2__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<TBS_CONTEXT_PARAMS2__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: TBS_CONTEXT_PARAMS2__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<TBS_CONTEXT_PARAMS2__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT32: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
         }
-    }
-
-    public func asUINT32(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_asUINT32(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -187,7 +190,7 @@ foreign {
     func Tbsip_Context_Close(hContext: CPointer<Unit>): UInt32
     // param-hint: pabCommand bytes=param[4]
     // param-hint: pabResult bytes=param[6]
-    func Tbsip_Submit_Command(hContext: CPointer<Unit>, Locality: TBS_COMMAND_LOCALITY, Priority: TBS_COMMAND_PRIORITY, pabCommand: CPointer<UInt8>, cbCommand: UInt32, pabResult: CPointer<UInt8>, pcbResult: CPointer<UInt32>): UInt32
+    func Tbsip_Submit_Command(hContext: CPointer<Unit>, Locality: UInt32, Priority: UInt32, pabCommand: CPointer<UInt8>, cbCommand: UInt32, pabResult: CPointer<UInt8>, pcbResult: CPointer<UInt32>): UInt32
 }
 
 @When[Windows_Win32_System_TpmBaseServices == "on"]

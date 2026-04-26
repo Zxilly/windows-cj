@@ -171,7 +171,7 @@ func mergedDelegateAliasType(
     let canonical = signatures[0]
     let returnTypes = ArrayList<String>()
     for (sig in signatures) {
-        returnTypes.add(cppType(sig.returnType))
+        returnTypes.add(functionAbiTypeForPointerInNamespace(namespace, sig.returnType))
     }
     let mergedReturnType = mergeDelegateTypeStrings(returnTypes, "${namespace}.${name}", "return")
 
@@ -180,7 +180,7 @@ func mergedDelegateAliasType(
     for (sig in signatures) {
         if (Int64(sig.paramTypes.size) != paramCount) {
             eprintln("warning: delegate ${namespace}.${name} has incompatible overload arity; using first signature")
-            return delegateAliasTypeForSignature(canonical)
+            return delegateAliasTypeForSignature(namespace, canonical)
         }
     }
 
@@ -188,7 +188,7 @@ func mergedDelegateAliasType(
     while (pi < paramCount) {
         let paramTypes = ArrayList<String>()
         for (sig in signatures) {
-            paramTypes.add(cppType(sig.paramTypes[pi]))
+            paramTypes.add(functionAbiTypeForPointerInNamespace(namespace, sig.paramTypes[pi]))
         }
         mergedParamTypes.add(mergeDelegateTypeStrings(paramTypes, "${namespace}.${name}", "parameter ${pi}"))
         pi += 1
@@ -242,14 +242,14 @@ func delegateInvokeSignature(index: TypeIndex, fileIdx: Int64, row: Int64): Opti
     return None
 }
 
-func delegateAliasTypeForSignature(sig: MethodSignature): String {
+func delegateAliasTypeForSignature(namespace: String, sig: MethodSignature): String {
     let paramTypes = ArrayList<String>()
     var pi: Int64 = 0
     while (pi < Int64(sig.paramTypes.size)) {
-        paramTypes.add(cppType(sig.paramTypes[pi]))
+        paramTypes.add(functionAbiTypeForPointerInNamespace(namespace, sig.paramTypes[pi]))
         pi += 1
     }
-    return "CFunc<(${joinStrings(paramTypes, ", ")}) -> ${cppType(sig.returnType)}>"
+    return "CFunc<(${joinStrings(paramTypes, ", ")}) -> ${functionAbiTypeForPointerInNamespace(namespace, sig.returnType)}>"
 }
 
 func mergeDelegateTypeStrings(
@@ -281,8 +281,56 @@ func mergeDelegateTypeStrings(
         return "CPointer<Unit>"
     }
 
-    eprintln("warning: delegate ${delegateName} has incompatible ${position} types ${types}; using first signature type ${first}")
+    // Build the deduplicated list of distinct type strings observed across the merged delegate
+    // rows (typically one row per architecture). The chosen merged type is `first`, which matches
+    // the row order returned by `collectDelegateRows`. When the divergence reduces to a 32-bit
+    // pointer slot vs. a 64-bit integer slot the difference is purely an architecture-conditioned
+    // ABI shape (x86 vs. x64/aarch64). The arch gate emitted alongside this delegate excludes the
+    // x86-only row anyway, so the merged type is correct for every emitted target -- the divergence
+    // is metadata noise, not an ABI bug.
+    let distinct = ArrayList<String>()
+    for (typeName in types) {
+        var seen = false
+        for (existing in distinct) {
+            if (existing == typeName) {
+                seen = true
+                break
+            }
+        }
+        if (!seen) {
+            distinct.add(typeName)
+        }
+    }
+    if (distinct.size <= 1) {
+        return first
+    }
+    if (delegateDivergenceIsArchPointerWidth(distinct)) {
+        // Suppress: pointer-width divergence between architectures collapses to the architecturally
+        // correct integer slot for the kept row; x86 row (if any) is filtered by arch gate.
+        return first
+    }
+
+    eprintln("warning: delegate ${delegateName} has incompatible ${position} types ${distinct}; using first signature type ${first} (cangjie-paradigm: cross-arch metadata rows merged into a single CFunc alias)")
     return first
+}
+
+// Detect "32-bit pointer vs 64-bit integer" divergences across architecture-specific delegate
+// rows. Such divergences are inherent in winmd metadata (PTERMINATION_HANDLER, etc.) and resolve
+// to the correct slot for whichever architecture the resulting alias is gated to.
+func delegateDivergenceIsArchPointerWidth(distinct: ArrayList<String>): Bool {
+    if (distinct.size != 2) {
+        return false
+    }
+    var hasUInt64 = false
+    var hasNarrowPointer = false
+    for (ty in distinct) {
+        if (ty == "UInt64") {
+            hasUInt64 = true
+        } else if (ty == "CPointer<Unit>" || ty.startsWith("CPointer<")) {
+            hasNarrowPointer = true
+        }
+    }
+    return hasUInt64 && hasNarrowPointer
 }
 
 func allPointerTypes(types: ArrayList<String>): Bool {

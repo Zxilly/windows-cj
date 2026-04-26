@@ -2,17 +2,17 @@
 package windows_sys.Win32.Storage.CloudFilters
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_CorrelationVector == "on"]
 import windows_sys.Win32.System.CorrelationVector as Win32_System_CorrelationVector
+@When[Windows_Win32_System_IO == "on"]
 import windows_sys.Win32.System.IO as Win32_System_IO
-import windows_sys.Win32.impl as Win32_impl
+import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-public type CF_CALLBACK = CFunc<(CPointer<CF_CALLBACK_INFO>, CPointer<CF_CALLBACK_PARAMETERS>) -> Unit>
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CALLBACK_CANCEL_FLAGS {
     public var value: Int32 = 0
 
@@ -54,7 +54,6 @@ public let CF_CALLBACK_CANCEL_FLAGS_CF_CALLBACK_CANCEL_FLAG_IO_TIMEOUT: CF_CALLB
 public let CF_CALLBACK_CANCEL_FLAGS_CF_CALLBACK_CANCEL_FLAG_IO_ABORTED: CF_CALLBACK_CANCEL_FLAGS = CF_CALLBACK_CANCEL_FLAGS(2)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CALLBACK_CLOSE_COMPLETION_FLAGS {
     public var value: Int32 = 0
 
@@ -93,7 +92,6 @@ public let CF_CALLBACK_CLOSE_COMPLETION_FLAGS_CF_CALLBACK_CLOSE_COMPLETION_FLAG_
 public let CF_CALLBACK_CLOSE_COMPLETION_FLAGS_CF_CALLBACK_CLOSE_COMPLETION_FLAG_DELETED: CF_CALLBACK_CLOSE_COMPLETION_FLAGS = CF_CALLBACK_CLOSE_COMPLETION_FLAGS(1)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS {
     public var value: Int32 = 0
 
@@ -135,7 +133,6 @@ public let CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS_CF_CALLBACK_DEHYDRATE_COMPLETI
 public let CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS_CF_CALLBACK_DEHYDRATE_COMPLETION_FLAG_DEHYDRATED: CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS = CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS(2)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CALLBACK_DEHYDRATE_FLAGS {
     public var value: Int32 = 0
 
@@ -174,7 +171,6 @@ public let CF_CALLBACK_DEHYDRATE_FLAGS_CF_CALLBACK_DEHYDRATE_FLAG_NONE: CF_CALLB
 public let CF_CALLBACK_DEHYDRATE_FLAGS_CF_CALLBACK_DEHYDRATE_FLAG_BACKGROUND: CF_CALLBACK_DEHYDRATE_FLAGS = CF_CALLBACK_DEHYDRATE_FLAGS(1)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CALLBACK_DEHYDRATION_REASON {
     public var value: Int32 = 0
 
@@ -208,7 +204,6 @@ public let CF_CALLBACK_DEHYDRATION_REASON_CF_CALLBACK_DEHYDRATION_REASON_SYSTEM_
 public let CF_CALLBACK_DEHYDRATION_REASON_CF_CALLBACK_DEHYDRATION_REASON_SYSTEM_OS_UPGRADE: CF_CALLBACK_DEHYDRATION_REASON = CF_CALLBACK_DEHYDRATION_REASON(4)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CALLBACK_DELETE_COMPLETION_FLAGS {
     public var value: Int32 = 0
 
@@ -244,7 +239,6 @@ public struct CF_CALLBACK_DELETE_COMPLETION_FLAGS {
 public let CF_CALLBACK_DELETE_COMPLETION_FLAGS_CF_CALLBACK_DELETE_COMPLETION_FLAG_NONE: CF_CALLBACK_DELETE_COMPLETION_FLAGS = CF_CALLBACK_DELETE_COMPLETION_FLAGS(0)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CALLBACK_DELETE_FLAGS {
     public var value: Int32 = 0
 
@@ -286,7 +280,6 @@ public let CF_CALLBACK_DELETE_FLAGS_CF_CALLBACK_DELETE_FLAG_IS_DIRECTORY: CF_CAL
 public let CF_CALLBACK_DELETE_FLAGS_CF_CALLBACK_DELETE_FLAG_IS_UNDELETE: CF_CALLBACK_DELETE_FLAGS = CF_CALLBACK_DELETE_FLAGS(2)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CALLBACK_FETCH_DATA_FLAGS {
     public var value: Int32 = 0
 
@@ -328,7 +321,6 @@ public let CF_CALLBACK_FETCH_DATA_FLAGS_CF_CALLBACK_FETCH_DATA_FLAG_RECOVERY: CF
 public let CF_CALLBACK_FETCH_DATA_FLAGS_CF_CALLBACK_FETCH_DATA_FLAG_EXPLICIT_HYDRATION: CF_CALLBACK_FETCH_DATA_FLAGS = CF_CALLBACK_FETCH_DATA_FLAGS(2)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CALLBACK_FETCH_PLACEHOLDERS_FLAGS {
     public var value: Int32 = 0
 
@@ -364,32 +356,6 @@ public struct CF_CALLBACK_FETCH_PLACEHOLDERS_FLAGS {
 public let CF_CALLBACK_FETCH_PLACEHOLDERS_FLAGS_CF_CALLBACK_FETCH_PLACEHOLDERS_FLAG_NONE: CF_CALLBACK_FETCH_PLACEHOLDERS_FLAGS = CF_CALLBACK_FETCH_PLACEHOLDERS_FLAGS(0)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_CALLBACK_INFO {
-    public var StructSize: UInt32 = 0
-    public var ConnectionKey: CF_CONNECTION_KEY = CPointer<Unit>()
-    public var CallbackContext: CPointer<Unit> = CPointer<Unit>()
-    public var VolumeGuidName: CPointer<UInt16> = CPointer<UInt16>()
-    public var VolumeDosName: CPointer<UInt16> = CPointer<UInt16>()
-    public var VolumeSerialNumber: UInt32 = 0
-    public var SyncRootFileId: Int64 = 0
-    public var SyncRootIdentity: CPointer<Unit> = CPointer<Unit>()
-    public var SyncRootIdentityLength: UInt32 = 0
-    public var FileId: Int64 = 0
-    public var FileSize: Int64 = 0
-    public var FileIdentity: CPointer<Unit> = CPointer<Unit>()
-    public var FileIdentityLength: UInt32 = 0
-    public var NormalizedPath: CPointer<UInt16> = CPointer<UInt16>()
-    public var TransferKey: Int64 = 0
-    public var PriorityHint: UInt8 = 0
-    public var CorrelationVector: CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR> = CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR>()
-    public var ProcessInfo: CPointer<CF_PROCESS_INFO> = CPointer<CF_PROCESS_INFO>()
-    public var RequestKey: Int64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CALLBACK_OPEN_COMPLETION_FLAGS {
     public var value: Int32 = 0
 
@@ -431,418 +397,6 @@ public let CF_CALLBACK_OPEN_COMPLETION_FLAGS_CF_CALLBACK_OPEN_COMPLETION_FLAG_PL
 public let CF_CALLBACK_OPEN_COMPLETION_FLAGS_CF_CALLBACK_OPEN_COMPLETION_FLAG_PLACEHOLDER_UNSUPPORTED: CF_CALLBACK_OPEN_COMPLETION_FLAGS = CF_CALLBACK_OPEN_COMPLETION_FLAGS(2)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_CALLBACK_PARAMETERS {
-    public var ParamSize: UInt32 = 0
-    public var Anonymous: CF_CALLBACK_PARAMETERS__Anonymous_e__Union = CF_CALLBACK_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $56> = VArray<UInt8, $56>(repeat: 0)
-
-    public func cancel(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_cancel(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func fetchData(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchData_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchData_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fetchData(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchData_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchData_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func validateData(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__ValidateData_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__ValidateData_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_validateData(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__ValidateData_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__ValidateData_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func fetchPlaceholders(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchPlaceholders_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchPlaceholders_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fetchPlaceholders(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchPlaceholders_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchPlaceholders_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func openCompletion(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__OpenCompletion_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__OpenCompletion_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_openCompletion(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__OpenCompletion_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__OpenCompletion_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func closeCompletion(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__CloseCompletion_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__CloseCompletion_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_closeCompletion(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__CloseCompletion_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__CloseCompletion_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dehydrate(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Dehydrate_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Dehydrate_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_dehydrate(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Dehydrate_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Dehydrate_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dehydrateCompletion(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DehydrateCompletion_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DehydrateCompletion_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_dehydrateCompletion(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DehydrateCompletion_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DehydrateCompletion_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func delete(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Delete_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Delete_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_delete(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Delete_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Delete_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func deleteCompletion(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DeleteCompletion_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DeleteCompletion_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_deleteCompletion(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DeleteCompletion_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DeleteCompletion_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func rename(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Rename_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Rename_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_rename(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Rename_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Rename_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func renameCompletion(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__RenameCompletion_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__RenameCompletion_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_renameCompletion(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__RenameCompletion_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__RenameCompletion_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct {
-    public var Flags: CF_CALLBACK_CANCEL_FLAGS = CF_CALLBACK_CANCEL_FLAGS()
-    public var Anonymous: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union = CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func fetchData(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union__FetchData_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union__FetchData_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fetchData(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union__FetchData_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union__FetchData_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union__FetchData_e__Struct {
-    public var FileOffset: Int64 = 0
-    public var Length: Int64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchData_e__Struct {
-    public var Flags: CF_CALLBACK_FETCH_DATA_FLAGS = CF_CALLBACK_FETCH_DATA_FLAGS()
-    public var RequiredFileOffset: Int64 = 0
-    public var RequiredLength: Int64 = 0
-    public var OptionalFileOffset: Int64 = 0
-    public var OptionalLength: Int64 = 0
-    public var LastDehydrationTime: Int64 = 0
-    public var LastDehydrationReason: CF_CALLBACK_DEHYDRATION_REASON = CF_CALLBACK_DEHYDRATION_REASON()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__ValidateData_e__Struct {
-    public var Flags: CF_CALLBACK_VALIDATE_DATA_FLAGS = CF_CALLBACK_VALIDATE_DATA_FLAGS()
-    public var RequiredFileOffset: Int64 = 0
-    public var RequiredLength: Int64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchPlaceholders_e__Struct {
-    public var Flags: CF_CALLBACK_FETCH_PLACEHOLDERS_FLAGS = CF_CALLBACK_FETCH_PLACEHOLDERS_FLAGS()
-    public var Pattern: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__OpenCompletion_e__Struct {
-    public var Flags: CF_CALLBACK_OPEN_COMPLETION_FLAGS = CF_CALLBACK_OPEN_COMPLETION_FLAGS()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__CloseCompletion_e__Struct {
-    public var Flags: CF_CALLBACK_CLOSE_COMPLETION_FLAGS = CF_CALLBACK_CLOSE_COMPLETION_FLAGS()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Dehydrate_e__Struct {
-    public var Flags: CF_CALLBACK_DEHYDRATE_FLAGS = CF_CALLBACK_DEHYDRATE_FLAGS()
-    public var Reason: CF_CALLBACK_DEHYDRATION_REASON = CF_CALLBACK_DEHYDRATION_REASON()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DehydrateCompletion_e__Struct {
-    public var Flags: CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS = CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS()
-    public var Reason: CF_CALLBACK_DEHYDRATION_REASON = CF_CALLBACK_DEHYDRATION_REASON()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Delete_e__Struct {
-    public var Flags: CF_CALLBACK_DELETE_FLAGS = CF_CALLBACK_DELETE_FLAGS()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DeleteCompletion_e__Struct {
-    public var Flags: CF_CALLBACK_DELETE_COMPLETION_FLAGS = CF_CALLBACK_DELETE_COMPLETION_FLAGS()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Rename_e__Struct {
-    public var Flags: CF_CALLBACK_RENAME_FLAGS = CF_CALLBACK_RENAME_FLAGS()
-    public var TargetPath: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__RenameCompletion_e__Struct {
-    public var Flags: CF_CALLBACK_RENAME_COMPLETION_FLAGS = CF_CALLBACK_RENAME_COMPLETION_FLAGS()
-    public var SourcePath: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_CALLBACK_REGISTRATION {
-    public var Type: CF_CALLBACK_TYPE = CF_CALLBACK_TYPE()
-    public var Callback: CF_CALLBACK = { _, _ => () }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CALLBACK_RENAME_COMPLETION_FLAGS {
     public var value: Int32 = 0
 
@@ -878,7 +432,6 @@ public struct CF_CALLBACK_RENAME_COMPLETION_FLAGS {
 public let CF_CALLBACK_RENAME_COMPLETION_FLAGS_CF_CALLBACK_RENAME_COMPLETION_FLAG_NONE: CF_CALLBACK_RENAME_COMPLETION_FLAGS = CF_CALLBACK_RENAME_COMPLETION_FLAGS(0)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CALLBACK_RENAME_FLAGS {
     public var value: Int32 = 0
 
@@ -923,7 +476,6 @@ public let CF_CALLBACK_RENAME_FLAGS_CF_CALLBACK_RENAME_FLAG_SOURCE_IN_SCOPE: CF_
 public let CF_CALLBACK_RENAME_FLAGS_CF_CALLBACK_RENAME_FLAG_TARGET_IN_SCOPE: CF_CALLBACK_RENAME_FLAGS = CF_CALLBACK_RENAME_FLAGS(4)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CALLBACK_TYPE {
     public var value: Int32 = 0
 
@@ -984,7 +536,6 @@ public let CF_CALLBACK_TYPE_CF_CALLBACK_TYPE_NOTIFY_RENAME_COMPLETION: CF_CALLBA
 public let CF_CALLBACK_TYPE_CF_CALLBACK_TYPE_NONE: CF_CALLBACK_TYPE = CF_CALLBACK_TYPE(-1)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CALLBACK_VALIDATE_DATA_FLAGS {
     public var value: Int32 = 0
 
@@ -1026,7 +577,6 @@ public let CF_CALLBACK_VALIDATE_DATA_FLAGS_CF_CALLBACK_VALIDATE_DATA_FLAG_EXPLIC
 public type CF_CONNECTION_KEY = CPointer<Unit>
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CONNECT_FLAGS {
     public var value: Int32 = 0
 
@@ -1071,7 +621,6 @@ public let CF_CONNECT_FLAGS_CF_CONNECT_FLAG_REQUIRE_FULL_FILE_PATH: CF_CONNECT_F
 public let CF_CONNECT_FLAGS_CF_CONNECT_FLAG_BLOCK_SELF_IMPLICIT_HYDRATION: CF_CONNECT_FLAGS = CF_CONNECT_FLAGS(8)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CONVERT_FLAGS {
     public var value: Int32 = 0
 
@@ -1122,7 +671,6 @@ public let CF_CONVERT_FLAGS_CF_CONVERT_FLAG_ALWAYS_FULL: CF_CONVERT_FLAGS = CF_C
 public let CF_CONVERT_FLAGS_CF_CONVERT_FLAG_FORCE_CONVERT_TO_CLOUD_FILE: CF_CONVERT_FLAGS = CF_CONVERT_FLAGS(16)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_CREATE_FLAGS {
     public var value: Int32 = 0
 
@@ -1161,7 +709,6 @@ public let CF_CREATE_FLAGS_CF_CREATE_FLAG_NONE: CF_CREATE_FLAGS = CF_CREATE_FLAG
 public let CF_CREATE_FLAGS_CF_CREATE_FLAG_STOP_ON_ERROR: CF_CREATE_FLAGS = CF_CREATE_FLAGS(1)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_DEHYDRATE_FLAGS {
     public var value: Int32 = 0
 
@@ -1207,16 +754,15 @@ public struct CF_FILE_RANGE {
     public init() {}
 }
 
-@When[Windows_Win32_Storage_CloudFilters == "on"]
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_Storage_FileSystem == "on"]
 @C
 public struct CF_FS_METADATA {
-    public var BasicInfo: Win32_impl.FILE_BASIC_INFO = Win32_impl.FILE_BASIC_INFO()
+    public var BasicInfo: Win32__impl_l0.FILE_BASIC_INFO = Win32__impl_l0.FILE_BASIC_INFO()
     public var FileSize: Int64 = 0
     public init() {}
 }
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_HARDLINK_POLICY {
     public var value: Int32 = 0
 
@@ -1255,7 +801,6 @@ public let CF_HARDLINK_POLICY_CF_HARDLINK_POLICY_NONE: CF_HARDLINK_POLICY = CF_H
 public let CF_HARDLINK_POLICY_CF_HARDLINK_POLICY_ALLOWED: CF_HARDLINK_POLICY = CF_HARDLINK_POLICY(1)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_HYDRATE_FLAGS {
     public var value: Int32 = 0
 
@@ -1291,15 +836,6 @@ public struct CF_HYDRATE_FLAGS {
 public let CF_HYDRATE_FLAGS_CF_HYDRATE_FLAG_NONE: CF_HYDRATE_FLAGS = CF_HYDRATE_FLAGS(0)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_HYDRATION_POLICY {
-    public var Primary: CF_HYDRATION_POLICY_PRIMARY = CF_HYDRATION_POLICY_PRIMARY()
-    public var Modifier: CF_HYDRATION_POLICY_MODIFIER = CF_HYDRATION_POLICY_MODIFIER()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_HYDRATION_POLICY_MODIFIER {
     public var value: UInt16 = 0
 
@@ -1347,7 +883,6 @@ public let CF_HYDRATION_POLICY_MODIFIER_CF_HYDRATION_POLICY_MODIFIER_AUTO_DEHYDR
 public let CF_HYDRATION_POLICY_MODIFIER_CF_HYDRATION_POLICY_MODIFIER_ALLOW_FULL_RESTART_HYDRATION: CF_HYDRATION_POLICY_MODIFIER = CF_HYDRATION_POLICY_MODIFIER(8)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_HYDRATION_POLICY_PRIMARY {
     public var value: UInt16 = 0
 
@@ -1378,7 +913,6 @@ public let CF_HYDRATION_POLICY_PRIMARY_CF_HYDRATION_POLICY_FULL: CF_HYDRATION_PO
 public let CF_HYDRATION_POLICY_PRIMARY_CF_HYDRATION_POLICY_ALWAYS_FULL: CF_HYDRATION_POLICY_PRIMARY = CF_HYDRATION_POLICY_PRIMARY(3)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_INSYNC_POLICY {
     public var value: UInt32 = 0
 
@@ -1456,7 +990,6 @@ public let CF_INSYNC_POLICY_CF_INSYNC_POLICY_TRACK_ALL: CF_INSYNC_POLICY = CF_IN
 public let CF_INSYNC_POLICY_CF_INSYNC_POLICY_PRESERVE_INSYNC_FOR_SYNC_ENGINE: CF_INSYNC_POLICY = CF_INSYNC_POLICY(2147483648)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_IN_SYNC_STATE {
     public var value: Int32 = 0
 
@@ -1481,7 +1014,6 @@ public let CF_IN_SYNC_STATE_CF_IN_SYNC_STATE_NOT_IN_SYNC: CF_IN_SYNC_STATE = CF_
 public let CF_IN_SYNC_STATE_CF_IN_SYNC_STATE_IN_SYNC: CF_IN_SYNC_STATE = CF_IN_SYNC_STATE(1)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_OPEN_FILE_FLAGS {
     public var value: Int32 = 0
 
@@ -1529,7 +1061,6 @@ public let CF_OPEN_FILE_FLAGS_CF_OPEN_FILE_FLAG_DELETE_ACCESS: CF_OPEN_FILE_FLAG
 public let CF_OPEN_FILE_FLAGS_CF_OPEN_FILE_FLAG_FOREGROUND: CF_OPEN_FILE_FLAGS = CF_OPEN_FILE_FLAGS(8)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_OPERATION_ACK_DATA_FLAGS {
     public var value: Int32 = 0
 
@@ -1565,7 +1096,6 @@ public struct CF_OPERATION_ACK_DATA_FLAGS {
 public let CF_OPERATION_ACK_DATA_FLAGS_CF_OPERATION_ACK_DATA_FLAG_NONE: CF_OPERATION_ACK_DATA_FLAGS = CF_OPERATION_ACK_DATA_FLAGS(0)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_OPERATION_ACK_DEHYDRATE_FLAGS {
     public var value: Int32 = 0
 
@@ -1601,7 +1131,6 @@ public struct CF_OPERATION_ACK_DEHYDRATE_FLAGS {
 public let CF_OPERATION_ACK_DEHYDRATE_FLAGS_CF_OPERATION_ACK_DEHYDRATE_FLAG_NONE: CF_OPERATION_ACK_DEHYDRATE_FLAGS = CF_OPERATION_ACK_DEHYDRATE_FLAGS(0)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_OPERATION_ACK_DELETE_FLAGS {
     public var value: Int32 = 0
 
@@ -1637,7 +1166,6 @@ public struct CF_OPERATION_ACK_DELETE_FLAGS {
 public let CF_OPERATION_ACK_DELETE_FLAGS_CF_OPERATION_ACK_DELETE_FLAG_NONE: CF_OPERATION_ACK_DELETE_FLAGS = CF_OPERATION_ACK_DELETE_FLAGS(0)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_OPERATION_ACK_RENAME_FLAGS {
     public var value: Int32 = 0
 
@@ -1673,284 +1201,6 @@ public struct CF_OPERATION_ACK_RENAME_FLAGS {
 public let CF_OPERATION_ACK_RENAME_FLAGS_CF_OPERATION_ACK_RENAME_FLAG_NONE: CF_OPERATION_ACK_RENAME_FLAGS = CF_OPERATION_ACK_RENAME_FLAGS(0)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_OPERATION_INFO {
-    public var StructSize: UInt32 = 0
-    public var Type: CF_OPERATION_TYPE = CF_OPERATION_TYPE()
-    public var ConnectionKey: CF_CONNECTION_KEY = CPointer<Unit>()
-    public var TransferKey: Int64 = 0
-    public var CorrelationVector: CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR> = CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR>()
-    public var SyncStatus: CPointer<CF_SYNC_STATUS> = CPointer<CF_SYNC_STATUS>()
-    public var RequestKey: Int64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_OPERATION_PARAMETERS {
-    public var ParamSize: UInt32 = 0
-    public var Anonymous: CF_OPERATION_PARAMETERS__Anonymous_e__Union = CF_OPERATION_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
-
-    public func transferData(): CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferData_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferData_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_transferData(val: CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferData_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferData_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func retrieveData(): CF_OPERATION_PARAMETERS__Anonymous_e__Union__RetrieveData_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__RetrieveData_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_retrieveData(val: CF_OPERATION_PARAMETERS__Anonymous_e__Union__RetrieveData_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__RetrieveData_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ackData(): CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckData_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckData_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ackData(val: CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckData_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckData_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func restartHydration(): CF_OPERATION_PARAMETERS__Anonymous_e__Union__RestartHydration_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__RestartHydration_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_restartHydration(val: CF_OPERATION_PARAMETERS__Anonymous_e__Union__RestartHydration_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__RestartHydration_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func transferPlaceholders(): CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferPlaceholders_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferPlaceholders_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_transferPlaceholders(val: CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferPlaceholders_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferPlaceholders_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ackDehydrate(): CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDehydrate_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDehydrate_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ackDehydrate(val: CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDehydrate_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDehydrate_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ackRename(): CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckRename_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckRename_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ackRename(val: CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckRename_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckRename_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ackDelete(): CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDelete_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDelete_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ackDelete(val: CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDelete_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDelete_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferData_e__Struct {
-    public var Flags: CF_OPERATION_TRANSFER_DATA_FLAGS = CF_OPERATION_TRANSFER_DATA_FLAGS()
-    public var CompletionStatus: Int32 = 0
-    public var Buffer: CPointer<Unit> = CPointer<Unit>()
-    public var Offset: Int64 = 0
-    public var Length: Int64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union__RetrieveData_e__Struct {
-    public var Flags: CF_OPERATION_RETRIEVE_DATA_FLAGS = CF_OPERATION_RETRIEVE_DATA_FLAGS()
-    public var Buffer: CPointer<Unit> = CPointer<Unit>()
-    public var Offset: Int64 = 0
-    public var Length: Int64 = 0
-    public var ReturnedLength: Int64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckData_e__Struct {
-    public var Flags: CF_OPERATION_ACK_DATA_FLAGS = CF_OPERATION_ACK_DATA_FLAGS()
-    public var CompletionStatus: Int32 = 0
-    public var Offset: Int64 = 0
-    public var Length: Int64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union__RestartHydration_e__Struct {
-    public var Flags: CF_OPERATION_RESTART_HYDRATION_FLAGS = CF_OPERATION_RESTART_HYDRATION_FLAGS()
-    public var FsMetadata: CPointer<CF_FS_METADATA> = CPointer<CF_FS_METADATA>()
-    public var FileIdentity: CPointer<Unit> = CPointer<Unit>()
-    public var FileIdentityLength: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferPlaceholders_e__Struct {
-    public var Flags: CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS = CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS()
-    public var CompletionStatus: Int32 = 0
-    public var PlaceholderTotalCount: Int64 = 0
-    public var PlaceholderArray: CPointer<CF_PLACEHOLDER_CREATE_INFO> = CPointer<CF_PLACEHOLDER_CREATE_INFO>()
-    public var PlaceholderCount: UInt32 = 0
-    public var EntriesProcessed: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDehydrate_e__Struct {
-    public var Flags: CF_OPERATION_ACK_DEHYDRATE_FLAGS = CF_OPERATION_ACK_DEHYDRATE_FLAGS()
-    public var CompletionStatus: Int32 = 0
-    public var FileIdentity: CPointer<Unit> = CPointer<Unit>()
-    public var FileIdentityLength: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckRename_e__Struct {
-    public var Flags: CF_OPERATION_ACK_RENAME_FLAGS = CF_OPERATION_ACK_RENAME_FLAGS()
-    public var CompletionStatus: Int32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDelete_e__Struct {
-    public var Flags: CF_OPERATION_ACK_DELETE_FLAGS = CF_OPERATION_ACK_DELETE_FLAGS()
-    public var CompletionStatus: Int32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_OPERATION_RESTART_HYDRATION_FLAGS {
     public var value: Int32 = 0
 
@@ -1989,7 +1239,6 @@ public let CF_OPERATION_RESTART_HYDRATION_FLAGS_CF_OPERATION_RESTART_HYDRATION_F
 public let CF_OPERATION_RESTART_HYDRATION_FLAGS_CF_OPERATION_RESTART_HYDRATION_FLAG_MARK_IN_SYNC: CF_OPERATION_RESTART_HYDRATION_FLAGS = CF_OPERATION_RESTART_HYDRATION_FLAGS(1)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_OPERATION_RETRIEVE_DATA_FLAGS {
     public var value: Int32 = 0
 
@@ -2025,7 +1274,6 @@ public struct CF_OPERATION_RETRIEVE_DATA_FLAGS {
 public let CF_OPERATION_RETRIEVE_DATA_FLAGS_CF_OPERATION_RETRIEVE_DATA_FLAG_NONE: CF_OPERATION_RETRIEVE_DATA_FLAGS = CF_OPERATION_RETRIEVE_DATA_FLAGS(0)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_OPERATION_TRANSFER_DATA_FLAGS {
     public var value: Int32 = 0
 
@@ -2061,7 +1309,6 @@ public struct CF_OPERATION_TRANSFER_DATA_FLAGS {
 public let CF_OPERATION_TRANSFER_DATA_FLAGS_CF_OPERATION_TRANSFER_DATA_FLAG_NONE: CF_OPERATION_TRANSFER_DATA_FLAGS = CF_OPERATION_TRANSFER_DATA_FLAGS(0)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS {
     public var value: Int32 = 0
 
@@ -2103,7 +1350,6 @@ public let CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS_CF_OPERATION_TRANSFER_PLACEH
 public let CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS_CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAG_DISABLE_ON_DEMAND_POPULATION: CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS = CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS(2)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_OPERATION_TYPE {
     public var value: Int32 = 0
 
@@ -2146,7 +1392,6 @@ public let CF_OPERATION_TYPE_CF_OPERATION_TYPE_ACK_DELETE: CF_OPERATION_TYPE = C
 public let CF_OPERATION_TYPE_CF_OPERATION_TYPE_ACK_RENAME: CF_OPERATION_TYPE = CF_OPERATION_TYPE(7)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_PIN_STATE {
     public var value: Int32 = 0
 
@@ -2182,8 +1427,8 @@ public let CF_PIN_STATE_CF_PIN_STATE_INHERIT: CF_PIN_STATE = CF_PIN_STATE(4)
 @When[Windows_Win32_Storage_CloudFilters == "on"]
 @C
 public struct CF_PLACEHOLDER_BASIC_INFO {
-    public var PinState: CF_PIN_STATE = CF_PIN_STATE()
-    public var InSyncState: CF_IN_SYNC_STATE = CF_IN_SYNC_STATE()
+    public var PinState: Int32 = 0
+    public var InSyncState: Int32 = 0
     public var FileId: Int64 = 0
     public var SyncRootFileId: Int64 = 0
     public var FileIdentityLength: UInt32 = 0
@@ -2192,7 +1437,6 @@ public struct CF_PLACEHOLDER_BASIC_INFO {
 }
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_PLACEHOLDER_CREATE_FLAGS {
     public var value: Int32 = 0
 
@@ -2239,21 +1483,20 @@ public let CF_PLACEHOLDER_CREATE_FLAGS_CF_PLACEHOLDER_CREATE_FLAG_SUPERSEDE: CF_
 @When[Windows_Win32_Storage_CloudFilters == "on"]
 public let CF_PLACEHOLDER_CREATE_FLAGS_CF_PLACEHOLDER_CREATE_FLAG_ALWAYS_FULL: CF_PLACEHOLDER_CREATE_FLAGS = CF_PLACEHOLDER_CREATE_FLAGS(8)
 
-@When[Windows_Win32_Storage_CloudFilters == "on"]
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_Storage_FileSystem == "on"]
 @C
 public struct CF_PLACEHOLDER_CREATE_INFO {
     public var RelativeFileName: CPointer<UInt16> = CPointer<UInt16>()
     public var FsMetadata: CF_FS_METADATA = CF_FS_METADATA()
     public var FileIdentity: CPointer<Unit> = CPointer<Unit>()
     public var FileIdentityLength: UInt32 = 0
-    public var Flags: CF_PLACEHOLDER_CREATE_FLAGS = CF_PLACEHOLDER_CREATE_FLAGS()
+    public var Flags: Int32 = 0
     public var Result: Int32 = 0
     public var CreateUsn: Int64 = 0
     public init() {}
 }
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_PLACEHOLDER_INFO_CLASS {
     public var value: Int32 = 0
 
@@ -2278,7 +1521,6 @@ public let CF_PLACEHOLDER_INFO_CLASS_CF_PLACEHOLDER_INFO_BASIC: CF_PLACEHOLDER_I
 public let CF_PLACEHOLDER_INFO_CLASS_CF_PLACEHOLDER_INFO_STANDARD: CF_PLACEHOLDER_INFO_CLASS = CF_PLACEHOLDER_INFO_CLASS(1)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_PLACEHOLDER_MANAGEMENT_POLICY {
     public var value: Int32 = 0
 
@@ -2309,7 +1551,6 @@ public let CF_PLACEHOLDER_MANAGEMENT_POLICY_CF_PLACEHOLDER_MANAGEMENT_POLICY_CON
 public let CF_PLACEHOLDER_MANAGEMENT_POLICY_CF_PLACEHOLDER_MANAGEMENT_POLICY_UPDATE_UNRESTRICTED: CF_PLACEHOLDER_MANAGEMENT_POLICY = CF_PLACEHOLDER_MANAGEMENT_POLICY(4)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_PLACEHOLDER_RANGE_INFO_CLASS {
     public var value: Int32 = 0
 
@@ -2343,8 +1584,8 @@ public struct CF_PLACEHOLDER_STANDARD_INFO {
     public var ValidatedDataSize: Int64 = 0
     public var ModifiedDataSize: Int64 = 0
     public var PropertiesSize: Int64 = 0
-    public var PinState: CF_PIN_STATE = CF_PIN_STATE()
-    public var InSyncState: CF_IN_SYNC_STATE = CF_IN_SYNC_STATE()
+    public var PinState: Int32 = 0
+    public var InSyncState: Int32 = 0
     public var FileId: Int64 = 0
     public var SyncRootFileId: Int64 = 0
     public var FileIdentityLength: UInt32 = 0
@@ -2353,7 +1594,6 @@ public struct CF_PLACEHOLDER_STANDARD_INFO {
 }
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_PLACEHOLDER_STATE {
     public var value: UInt32 = 0
 
@@ -2419,15 +1659,6 @@ public struct CF_PLATFORM_INFO {
 }
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_POPULATION_POLICY {
-    public var Primary: CF_POPULATION_POLICY_PRIMARY = CF_POPULATION_POLICY_PRIMARY()
-    public var Modifier: CF_POPULATION_POLICY_MODIFIER = CF_POPULATION_POLICY_MODIFIER()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_POPULATION_POLICY_MODIFIER {
     public var value: UInt16 = 0
 
@@ -2463,7 +1694,6 @@ public struct CF_POPULATION_POLICY_MODIFIER {
 public let CF_POPULATION_POLICY_MODIFIER_CF_POPULATION_POLICY_MODIFIER_NONE: CF_POPULATION_POLICY_MODIFIER = CF_POPULATION_POLICY_MODIFIER(0)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_POPULATION_POLICY_PRIMARY {
     public var value: UInt16 = 0
 
@@ -2504,7 +1734,6 @@ public struct CF_PROCESS_INFO {
 }
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_REGISTER_FLAGS {
     public var value: Int32 = 0
 
@@ -2549,7 +1778,6 @@ public let CF_REGISTER_FLAGS_CF_REGISTER_FLAG_DISABLE_ON_DEMAND_POPULATION_ON_RO
 public let CF_REGISTER_FLAGS_CF_REGISTER_FLAG_MARK_IN_SYNC_ON_ROOT: CF_REGISTER_FLAGS = CF_REGISTER_FLAGS(4)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_REVERT_FLAGS {
     public var value: Int32 = 0
 
@@ -2585,7 +1813,6 @@ public struct CF_REVERT_FLAGS {
 public let CF_REVERT_FLAGS_CF_REVERT_FLAG_NONE: CF_REVERT_FLAGS = CF_REVERT_FLAGS(0)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_SET_IN_SYNC_FLAGS {
     public var value: Int32 = 0
 
@@ -2621,7 +1848,6 @@ public struct CF_SET_IN_SYNC_FLAGS {
 public let CF_SET_IN_SYNC_FLAGS_CF_SET_IN_SYNC_FLAG_NONE: CF_SET_IN_SYNC_FLAGS = CF_SET_IN_SYNC_FLAGS(0)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_SET_PIN_FLAGS {
     public var value: Int32 = 0
 
@@ -2666,19 +1892,6 @@ public let CF_SET_PIN_FLAGS_CF_SET_PIN_FLAG_RECURSE_ONLY: CF_SET_PIN_FLAGS = CF_
 public let CF_SET_PIN_FLAGS_CF_SET_PIN_FLAG_RECURSE_STOP_ON_ERROR: CF_SET_PIN_FLAGS = CF_SET_PIN_FLAGS(4)
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_SYNC_POLICIES {
-    public var StructSize: UInt32 = 0
-    public var Hydration: CF_HYDRATION_POLICY = CF_HYDRATION_POLICY()
-    public var Population: CF_POPULATION_POLICY = CF_POPULATION_POLICY()
-    public var InSync: CF_INSYNC_POLICY = CF_INSYNC_POLICY()
-    public var HardLink: CF_HARDLINK_POLICY = CF_HARDLINK_POLICY()
-    public var PlaceholderManagement: CF_PLACEHOLDER_MANAGEMENT_POLICY = CF_PLACEHOLDER_MANAGEMENT_POLICY()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_SYNC_PROVIDER_STATUS {
     public var value: UInt32 = 0
 
@@ -2765,7 +1978,6 @@ public struct CF_SYNC_ROOT_BASIC_INFO {
 }
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_SYNC_ROOT_INFO_CLASS {
     public var value: Int32 = 0
 
@@ -2795,25 +2007,9 @@ public let CF_SYNC_ROOT_INFO_CLASS_CF_SYNC_ROOT_INFO_PROVIDER: CF_SYNC_ROOT_INFO
 @When[Windows_Win32_Storage_CloudFilters == "on"]
 @C
 public struct CF_SYNC_ROOT_PROVIDER_INFO {
-    public var ProviderStatus: CF_SYNC_PROVIDER_STATUS = CF_SYNC_PROVIDER_STATUS()
+    public var ProviderStatus: UInt32 = 0
     public var ProviderName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
     public var ProviderVersion: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
-public struct CF_SYNC_ROOT_STANDARD_INFO {
-    public var SyncRootFileId: Int64 = 0
-    public var HydrationPolicy: CF_HYDRATION_POLICY = CF_HYDRATION_POLICY()
-    public var PopulationPolicy: CF_POPULATION_POLICY = CF_POPULATION_POLICY()
-    public var InSyncPolicy: CF_INSYNC_POLICY = CF_INSYNC_POLICY()
-    public var HardLinkPolicy: CF_HARDLINK_POLICY = CF_HARDLINK_POLICY()
-    public var ProviderStatus: CF_SYNC_PROVIDER_STATUS = CF_SYNC_PROVIDER_STATUS()
-    public var ProviderName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var ProviderVersion: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var SyncRootIdentityLength: UInt32 = 0
-    public var SyncRootIdentity: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
     public init() {}
 }
 
@@ -2830,7 +2026,6 @@ public struct CF_SYNC_STATUS {
 }
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]
-@C
 public struct CF_UPDATE_FLAGS {
     public var value: Int32 = 0
 
@@ -2898,69 +2093,873 @@ public let CF_UPDATE_FLAGS_CF_UPDATE_FLAG_ALWAYS_FULL: CF_UPDATE_FLAGS = CF_UPDA
 @When[Windows_Win32_Storage_CloudFilters == "on"]
 public let CF_UPDATE_FLAGS_CF_UPDATE_FLAG_ALLOW_PARTIAL: CF_UPDATE_FLAGS = CF_UPDATE_FLAGS(1024)
 
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_System_CorrelationVector == "on"]
+@C
+public struct CF_CALLBACK_INFO {
+    public var StructSize: UInt32 = 0
+    public var ConnectionKey: CF_CONNECTION_KEY = CPointer<Unit>()
+    public var CallbackContext: CPointer<Unit> = CPointer<Unit>()
+    public var VolumeGuidName: CPointer<UInt16> = CPointer<UInt16>()
+    public var VolumeDosName: CPointer<UInt16> = CPointer<UInt16>()
+    public var VolumeSerialNumber: UInt32 = 0
+    public var SyncRootFileId: Int64 = 0
+    public var SyncRootIdentity: CPointer<Unit> = CPointer<Unit>()
+    public var SyncRootIdentityLength: UInt32 = 0
+    public var FileId: Int64 = 0
+    public var FileSize: Int64 = 0
+    public var FileIdentity: CPointer<Unit> = CPointer<Unit>()
+    public var FileIdentityLength: UInt32 = 0
+    public var NormalizedPath: CPointer<UInt16> = CPointer<UInt16>()
+    public var TransferKey: Int64 = 0
+    public var PriorityHint: UInt8 = 0
+    public var CorrelationVector: CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR> = CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR>()
+    public var ProcessInfo: CPointer<CF_PROCESS_INFO> = CPointer<CF_PROCESS_INFO>()
+    public var RequestKey: Int64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_CALLBACK_PARAMETERS {
+    public var ParamSize: UInt32 = 0
+    public var Anonymous: CF_CALLBACK_PARAMETERS__Anonymous_e__Union = CF_CALLBACK_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $7> = VArray<UInt64, $7>(repeat: 0)
+
+    public mut prop cancel: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop fetchData: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchData_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchData_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchData_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop validateData: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__ValidateData_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__ValidateData_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__ValidateData_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop fetchPlaceholders: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchPlaceholders_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchPlaceholders_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchPlaceholders_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop openCompletion: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__OpenCompletion_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__OpenCompletion_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__OpenCompletion_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop closeCompletion: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__CloseCompletion_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__CloseCompletion_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__CloseCompletion_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dehydrate: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Dehydrate_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Dehydrate_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Dehydrate_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dehydrateCompletion: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DehydrateCompletion_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DehydrateCompletion_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DehydrateCompletion_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop delete: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Delete_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Delete_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Delete_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop deleteCompletion: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DeleteCompletion_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DeleteCompletion_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DeleteCompletion_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop rename: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Rename_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Rename_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Rename_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop renameCompletion: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__RenameCompletion_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__RenameCompletion_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__RenameCompletion_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct {
+    public var Flags: Int32 = 0
+    public var Anonymous: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union = CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop fetchData: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union__FetchData_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union__FetchData_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union__FetchData_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union__FetchData_e__Struct {
+    public var FileOffset: Int64 = 0
+    public var Length: Int64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchData_e__Struct {
+    public var Flags: Int32 = 0
+    public var RequiredFileOffset: Int64 = 0
+    public var RequiredLength: Int64 = 0
+    public var OptionalFileOffset: Int64 = 0
+    public var OptionalLength: Int64 = 0
+    public var LastDehydrationTime: Int64 = 0
+    public var LastDehydrationReason: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__ValidateData_e__Struct {
+    public var Flags: Int32 = 0
+    public var RequiredFileOffset: Int64 = 0
+    public var RequiredLength: Int64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchPlaceholders_e__Struct {
+    public var Flags: Int32 = 0
+    public var Pattern: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__OpenCompletion_e__Struct {
+    public var Flags: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__CloseCompletion_e__Struct {
+    public var Flags: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Dehydrate_e__Struct {
+    public var Flags: Int32 = 0
+    public var Reason: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DehydrateCompletion_e__Struct {
+    public var Flags: Int32 = 0
+    public var Reason: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Delete_e__Struct {
+    public var Flags: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DeleteCompletion_e__Struct {
+    public var Flags: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Rename_e__Struct {
+    public var Flags: Int32 = 0
+    public var TargetPath: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__RenameCompletion_e__Struct {
+    public var Flags: Int32 = 0
+    public var SourcePath: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_HYDRATION_POLICY {
+    public var Primary: UInt16 = 0
+    public var Modifier: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_System_CorrelationVector == "on"]
+@C
+public struct CF_OPERATION_INFO {
+    public var StructSize: UInt32 = 0
+    public var Type: Int32 = 0
+    public var ConnectionKey: CF_CONNECTION_KEY = CPointer<Unit>()
+    public var TransferKey: Int64 = 0
+    public var CorrelationVector: CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR> = CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR>()
+    public var SyncStatus: CPointer<CF_SYNC_STATUS> = CPointer<CF_SYNC_STATUS>()
+    public var RequestKey: Int64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@C
+public struct CF_OPERATION_PARAMETERS {
+    public var ParamSize: UInt32 = 0
+    public var Anonymous: CF_OPERATION_PARAMETERS__Anonymous_e__Union = CF_OPERATION_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_Storage_FileSystem == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+
+    public mut prop transferData: CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferData_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferData_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferData_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop retrieveData: CF_OPERATION_PARAMETERS__Anonymous_e__Union__RetrieveData_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__RetrieveData_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__RetrieveData_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ackData: CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckData_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckData_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckData_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop restartHydration: CF_OPERATION_PARAMETERS__Anonymous_e__Union__RestartHydration_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__RestartHydration_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__RestartHydration_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop transferPlaceholders: CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferPlaceholders_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferPlaceholders_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferPlaceholders_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ackDehydrate: CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDehydrate_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDehydrate_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDehydrate_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ackRename: CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckRename_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckRename_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckRename_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ackDelete: CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDelete_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDelete_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDelete_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@C
+public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferData_e__Struct {
+    public var Flags: Int32 = 0
+    public var CompletionStatus: Int32 = 0
+    public var Buffer: CPointer<Unit> = CPointer<Unit>()
+    public var Offset: Int64 = 0
+    public var Length: Int64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@C
+public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union__RetrieveData_e__Struct {
+    public var Flags: Int32 = 0
+    public var Buffer: CPointer<Unit> = CPointer<Unit>()
+    public var Offset: Int64 = 0
+    public var Length: Int64 = 0
+    public var ReturnedLength: Int64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@C
+public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckData_e__Struct {
+    public var Flags: Int32 = 0
+    public var CompletionStatus: Int32 = 0
+    public var Offset: Int64 = 0
+    public var Length: Int64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@C
+public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union__RestartHydration_e__Struct {
+    public var Flags: Int32 = 0
+    public var FsMetadata: CPointer<CF_FS_METADATA> = CPointer<CF_FS_METADATA>()
+    public var FileIdentity: CPointer<Unit> = CPointer<Unit>()
+    public var FileIdentityLength: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@C
+public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferPlaceholders_e__Struct {
+    public var Flags: Int32 = 0
+    public var CompletionStatus: Int32 = 0
+    public var PlaceholderTotalCount: Int64 = 0
+    public var PlaceholderArray: CPointer<CF_PLACEHOLDER_CREATE_INFO> = CPointer<CF_PLACEHOLDER_CREATE_INFO>()
+    public var PlaceholderCount: UInt32 = 0
+    public var EntriesProcessed: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@C
+public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDehydrate_e__Struct {
+    public var Flags: Int32 = 0
+    public var CompletionStatus: Int32 = 0
+    public var FileIdentity: CPointer<Unit> = CPointer<Unit>()
+    public var FileIdentityLength: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@C
+public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckRename_e__Struct {
+    public var Flags: Int32 = 0
+    public var CompletionStatus: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@C
+public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDelete_e__Struct {
+    public var Flags: Int32 = 0
+    public var CompletionStatus: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_POPULATION_POLICY {
+    public var Primary: UInt16 = 0
+    public var Modifier: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_SYNC_POLICIES {
+    public var StructSize: UInt32 = 0
+    public var Hydration: CF_HYDRATION_POLICY = CF_HYDRATION_POLICY()
+    public var Population: CF_POPULATION_POLICY = CF_POPULATION_POLICY()
+    public var InSync: UInt32 = 0
+    public var HardLink: Int32 = 0
+    public var PlaceholderManagement: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on"]
+@C
+public struct CF_SYNC_ROOT_STANDARD_INFO {
+    public var SyncRootFileId: Int64 = 0
+    public var HydrationPolicy: CF_HYDRATION_POLICY = CF_HYDRATION_POLICY()
+    public var PopulationPolicy: CF_POPULATION_POLICY = CF_POPULATION_POLICY()
+    public var InSyncPolicy: UInt32 = 0
+    public var HardLinkPolicy: Int32 = 0
+    public var ProviderStatus: UInt32 = 0
+    public var ProviderName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var ProviderVersion: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var SyncRootIdentityLength: UInt32 = 0
+    public var SyncRootIdentity: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_System_CorrelationVector == "on"]
+public type CF_CALLBACK = CFunc<(CPointer<CF_CALLBACK_INFO>, CPointer<CF_CALLBACK_PARAMETERS>) -> Unit>
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && Windows_Win32_System_CorrelationVector == "on"]
+@C
+public struct CF_CALLBACK_REGISTRATION {
+    public var Type: Int32 = 0
+    public var Callback: CF_CALLBACK = CFunc<(CPointer<CF_CALLBACK_INFO>, CPointer<CF_CALLBACK_PARAMETERS>) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
 @When[CLDAPI == "on"]
 foreign {
     func CfCloseHandle(FileHandle: CPointer<Unit>): Unit
-    // param-hint: CallbackContext optional
-    func CfConnectSyncRoot(SyncRootPath: CPointer<UInt16>, CallbackTable: CPointer<CF_CALLBACK_REGISTRATION>, CallbackContext: CPointer<Unit>, ConnectFlags: CF_CONNECT_FLAGS, ConnectionKey: CPointer<CF_CONNECTION_KEY>): Int32
-    // param-hint: FileIdentity bytes=param[2] optional
-    // param-hint: ConvertUsn optional
-    // param-hint: Overlapped optional
-    func CfConvertToPlaceholder(FileHandle: CPointer<Unit>, FileIdentity: CPointer<Unit>, FileIdentityLength: UInt32, ConvertFlags: CF_CONVERT_FLAGS, ConvertUsn: CPointer<Int64>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
-    // param-hint: PlaceholderArray len=param[2]
-    // param-hint: EntriesProcessed optional
-    func CfCreatePlaceholders(BaseDirectoryPath: CPointer<UInt16>, PlaceholderArray: CPointer<CF_PLACEHOLDER_CREATE_INFO>, PlaceholderCount: UInt32, CreateFlags: CF_CREATE_FLAGS, EntriesProcessed: CPointer<UInt32>): Int32
-    // param-hint: Overlapped optional
-    func CfDehydratePlaceholder(FileHandle: CPointer<Unit>, StartingOffset: Int64, Length: Int64, DehydrateFlags: CF_DEHYDRATE_FLAGS, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
     func CfDisconnectSyncRoot(ConnectionKey: CF_CONNECTION_KEY): Int32
-    func CfExecute(OpInfo: CPointer<CF_OPERATION_INFO>, OpParams: CPointer<CF_OPERATION_PARAMETERS>): Int32
-    func CfGetCorrelationVector(FileHandle: CPointer<Unit>, CorrelationVector: CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR>): Int32
     // param-hint: InfoBuffer bytes=param[3]
     // param-hint: ReturnedLength optional
-    func CfGetPlaceholderInfo(FileHandle: CPointer<Unit>, InfoClass: CF_PLACEHOLDER_INFO_CLASS, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32
+    func CfGetPlaceholderInfo(FileHandle: CPointer<Unit>, InfoClass: Int32, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32
     // param-hint: InfoBuffer bytes=param[5]
     // param-hint: ReturnedLength optional
-    func CfGetPlaceholderRangeInfo(FileHandle: CPointer<Unit>, InfoClass: CF_PLACEHOLDER_RANGE_INFO_CLASS, StartingOffset: Int64, Length: Int64, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32
+    func CfGetPlaceholderRangeInfo(FileHandle: CPointer<Unit>, InfoClass: Int32, StartingOffset: Int64, Length: Int64, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32
     // param-hint: InfoBuffer bytes=param[7]
     // param-hint: InfoBufferWritten optional
-    func CfGetPlaceholderRangeInfoForHydration(ConnectionKey: CF_CONNECTION_KEY, TransferKey: Int64, FileId: Int64, InfoClass: CF_PLACEHOLDER_RANGE_INFO_CLASS, StartingOffset: Int64, RangeLength: Int64, InfoBuffer: CPointer<Unit>, InfoBufferSize: UInt32, InfoBufferWritten: CPointer<UInt32>): Int32
-    func CfGetPlaceholderStateFromAttributeTag(FileAttributes: UInt32, ReparseTag: UInt32): CF_PLACEHOLDER_STATE
-    func CfGetPlaceholderStateFromFileInfo(InfoBuffer: CPointer<Unit>, InfoClass: Win32_impl.FILE_INFO_BY_HANDLE_CLASS): CF_PLACEHOLDER_STATE
-    func CfGetPlaceholderStateFromFindData(FindData: CPointer<Win32_impl.WIN32_FIND_DATAA>): CF_PLACEHOLDER_STATE
+    func CfGetPlaceholderRangeInfoForHydration(ConnectionKey: CF_CONNECTION_KEY, TransferKey: Int64, FileId: Int64, InfoClass: Int32, StartingOffset: Int64, RangeLength: Int64, InfoBuffer: CPointer<Unit>, InfoBufferSize: UInt32, InfoBufferWritten: CPointer<UInt32>): Int32
+    func CfGetPlaceholderStateFromAttributeTag(FileAttributes: UInt32, ReparseTag: UInt32): UInt32
     func CfGetPlatformInfo(PlatformVersion: CPointer<CF_PLATFORM_INFO>): Int32
     // param-hint: ReturnedLength optional
-    func CfGetSyncRootInfoByHandle(FileHandle: CPointer<Unit>, InfoClass: CF_SYNC_ROOT_INFO_CLASS, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32
+    func CfGetSyncRootInfoByHandle(FileHandle: CPointer<Unit>, InfoClass: Int32, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32
     // param-hint: ReturnedLength optional
-    func CfGetSyncRootInfoByPath(FilePath: CPointer<UInt16>, InfoClass: CF_SYNC_ROOT_INFO_CLASS, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32
+    func CfGetSyncRootInfoByPath(FilePath: CPointer<UInt16>, InfoClass: Int32, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32
     func CfGetTransferKey(FileHandle: CPointer<Unit>, TransferKey: CPointer<Int64>): Int32
     func CfGetWin32HandleFromProtectedHandle(ProtectedHandle: CPointer<Unit>): CPointer<Unit>
-    // param-hint: Overlapped optional
-    func CfHydratePlaceholder(FileHandle: CPointer<Unit>, StartingOffset: Int64, Length: Int64, HydrateFlags: CF_HYDRATE_FLAGS, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
-    func CfOpenFileWithOplock(FilePath: CPointer<UInt16>, Flags: CF_OPEN_FILE_FLAGS, ProtectedHandle: CPointer<CPointer<Unit>>): Int32
-    func CfQuerySyncProviderStatus(ConnectionKey: CF_CONNECTION_KEY, ProviderStatus: CPointer<CF_SYNC_PROVIDER_STATUS>): Int32
-    func CfReferenceProtectedHandle(ProtectedHandle: CPointer<Unit>): Win32_Foundation.BOOLEAN
-    func CfRegisterSyncRoot(SyncRootPath: CPointer<UInt16>, Registration: CPointer<CF_SYNC_REGISTRATION>, Policies: CPointer<CF_SYNC_POLICIES>, RegisterFlags: CF_REGISTER_FLAGS): Int32
+    func CfOpenFileWithOplock(FilePath: CPointer<UInt16>, Flags: Int32, ProtectedHandle: CPointer<CPointer<Unit>>): Int32
+    func CfQuerySyncProviderStatus(ConnectionKey: CF_CONNECTION_KEY, ProviderStatus: CPointer<UInt32>): Int32
+    func CfReferenceProtectedHandle(ProtectedHandle: CPointer<Unit>): UInt8
+    func CfRegisterSyncRoot(SyncRootPath: CPointer<UInt16>, Registration: CPointer<CF_SYNC_REGISTRATION>, Policies: CPointer<CF_SYNC_POLICIES>, RegisterFlags: Int32): Int32
     func CfReleaseProtectedHandle(ProtectedHandle: CPointer<Unit>): Unit
     func CfReleaseTransferKey(FileHandle: CPointer<Unit>, TransferKey: CPointer<Int64>): Unit
     func CfReportProviderProgress(ConnectionKey: CF_CONNECTION_KEY, TransferKey: Int64, ProviderProgressTotal: Int64, ProviderProgressCompleted: Int64): Int32
     func CfReportProviderProgress2(ConnectionKey: CF_CONNECTION_KEY, TransferKey: Int64, RequestKey: Int64, ProviderProgressTotal: Int64, ProviderProgressCompleted: Int64, TargetSessionId: UInt32): Int32
     // param-hint: SyncStatus optional
     func CfReportSyncStatus(SyncRootPath: CPointer<UInt16>, SyncStatus: CPointer<CF_SYNC_STATUS>): Int32
-    // param-hint: Overlapped optional
-    func CfRevertPlaceholder(FileHandle: CPointer<Unit>, RevertFlags: CF_REVERT_FLAGS, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
-    func CfSetCorrelationVector(FileHandle: CPointer<Unit>, CorrelationVector: CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR>): Int32
     // param-hint: InSyncUsn optional
-    func CfSetInSyncState(FileHandle: CPointer<Unit>, InSyncState: CF_IN_SYNC_STATE, InSyncFlags: CF_SET_IN_SYNC_FLAGS, InSyncUsn: CPointer<Int64>): Int32
-    // param-hint: Overlapped optional
-    func CfSetPinState(FileHandle: CPointer<Unit>, PinState: CF_PIN_STATE, PinFlags: CF_SET_PIN_FLAGS, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+    func CfSetInSyncState(FileHandle: CPointer<Unit>, InSyncState: Int32, InSyncFlags: Int32, InSyncUsn: CPointer<Int64>): Int32
     func CfUnregisterSyncRoot(SyncRootPath: CPointer<UInt16>): Int32
+    func CfUpdateSyncProviderStatus(ConnectionKey: CF_CONNECTION_KEY, ProviderStatus: UInt32): Int32
+}
+
+@When[CLDAPI == "on" && (Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_CorrelationVector == "on")]
+foreign {
+    func CfExecute(OpInfo: CPointer<CF_OPERATION_INFO>, OpParams: CPointer<CF_OPERATION_PARAMETERS>): Int32
+}
+
+@When[CLDAPI == "on" && (Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on")]
+foreign {
     // param-hint: FsMetadata optional
     // param-hint: FileIdentity bytes=param[3] optional
     // param-hint: DehydrateRangeArray len=param[5] optional
     // param-hint: UpdateUsn optional
     // param-hint: Overlapped optional
-    func CfUpdatePlaceholder(FileHandle: CPointer<Unit>, FsMetadata: CPointer<CF_FS_METADATA>, FileIdentity: CPointer<Unit>, FileIdentityLength: UInt32, DehydrateRangeArray: CPointer<CF_FILE_RANGE>, DehydrateRangeCount: UInt32, UpdateFlags: CF_UPDATE_FLAGS, UpdateUsn: CPointer<Int64>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
-    func CfUpdateSyncProviderStatus(ConnectionKey: CF_CONNECTION_KEY, ProviderStatus: CF_SYNC_PROVIDER_STATUS): Int32
+    func CfUpdatePlaceholder(FileHandle: CPointer<Unit>, FsMetadata: CPointer<CF_FS_METADATA>, FileIdentity: CPointer<Unit>, FileIdentityLength: UInt32, DehydrateRangeArray: CPointer<CF_FILE_RANGE>, DehydrateRangeCount: UInt32, UpdateFlags: Int32, UpdateUsn: CPointer<Int64>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[CLDAPI == "on" && Windows_Win32_Storage_FileSystem == "on"]
+foreign {
+    // param-hint: PlaceholderArray len=param[2]
+    // param-hint: EntriesProcessed optional
+    func CfCreatePlaceholders(BaseDirectoryPath: CPointer<UInt16>, PlaceholderArray: CPointer<CF_PLACEHOLDER_CREATE_INFO>, PlaceholderCount: UInt32, CreateFlags: Int32, EntriesProcessed: CPointer<UInt32>): Int32
+    func CfGetPlaceholderStateFromFileInfo(InfoBuffer: CPointer<Unit>, InfoClass: Int32): UInt32
+    func CfGetPlaceholderStateFromFindData(FindData: CPointer<Win32__impl_l0.WIN32_FIND_DATAA>): UInt32
+}
+
+@When[CLDAPI == "on" && Windows_Win32_System_CorrelationVector == "on"]
+foreign {
+    // param-hint: CallbackContext optional
+    func CfConnectSyncRoot(SyncRootPath: CPointer<UInt16>, CallbackTable: CPointer<CF_CALLBACK_REGISTRATION>, CallbackContext: CPointer<Unit>, ConnectFlags: Int32, ConnectionKey: CPointer<CF_CONNECTION_KEY>): Int32
+    func CfGetCorrelationVector(FileHandle: CPointer<Unit>, CorrelationVector: CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR>): Int32
+    func CfSetCorrelationVector(FileHandle: CPointer<Unit>, CorrelationVector: CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR>): Int32
+}
+
+@When[CLDAPI == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: FileIdentity bytes=param[2] optional
+    // param-hint: ConvertUsn optional
+    // param-hint: Overlapped optional
+    func CfConvertToPlaceholder(FileHandle: CPointer<Unit>, FileIdentity: CPointer<Unit>, FileIdentityLength: UInt32, ConvertFlags: Int32, ConvertUsn: CPointer<Int64>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+    // param-hint: Overlapped optional
+    func CfDehydratePlaceholder(FileHandle: CPointer<Unit>, StartingOffset: Int64, Length: Int64, DehydrateFlags: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+    // param-hint: Overlapped optional
+    func CfHydratePlaceholder(FileHandle: CPointer<Unit>, StartingOffset: Int64, Length: Int64, HydrateFlags: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+    // param-hint: Overlapped optional
+    func CfRevertPlaceholder(FileHandle: CPointer<Unit>, RevertFlags: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+    // param-hint: Overlapped optional
+    func CfSetPinState(FileHandle: CPointer<Unit>, PinState: Int32, PinFlags: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
 }
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]

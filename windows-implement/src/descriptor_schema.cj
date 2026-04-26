@@ -7,7 +7,9 @@ import std.reflect.*
 
 func emptyMethodSchemas(): Array<InterfaceMethodSchema> {
     Array<InterfaceMethodSchema>(0, { _ =>
-        InterfaceMethodSchema("", 0, Array<String>(0, { _ => "" }), "")
+        InterfaceMethodSchema("", 0, Array<InterfaceParameterSchema>(0, { _ =>
+            InterfaceParameterSchema("", "", "", InterfaceParameterBridgeKind.Value)
+        }), "")
     })
 }
 

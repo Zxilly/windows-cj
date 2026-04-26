@@ -2,6 +2,8 @@
 package windows_sys.Win32.Security.NetworkAccessProtection
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -22,7 +24,6 @@ public struct CountedString {
 }
 
 @When[Windows_Win32_Security_NetworkAccessProtection == "on"]
-@C
 public struct ExtendedIsolationState {
     public var value: Int32 = 0
 
@@ -53,7 +54,6 @@ public let ExtendedIsolationState_extendedIsolationStateInfected: ExtendedIsolat
 public let ExtendedIsolationState_extendedIsolationStateUnknown: ExtendedIsolationState = ExtendedIsolationState(3)
 
 @When[Windows_Win32_Security_NetworkAccessProtection == "on"]
-@C
 public struct FailureCategory {
     public var value: Int32 = 0
 
@@ -97,17 +97,6 @@ public struct FailureCategoryMapping {
 }
 
 @When[Windows_Win32_Security_NetworkAccessProtection == "on"]
-@C
-public struct FixupInfo {
-    public var state: FixupState = FixupState()
-    public var percentage: UInt8 = 0
-    public var resultCodes: ResultCodes = ResultCodes()
-    public var fixupMsgId: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security_NetworkAccessProtection == "on"]
-@C
 public struct FixupState {
     public var value: Int32 = 0
 
@@ -149,26 +138,6 @@ public struct Ipv6Address {
 }
 
 @When[Windows_Win32_Security_NetworkAccessProtection == "on"]
-@C
-public struct IsolationInfo {
-    public var isolationState: IsolationState = IsolationState()
-    public var probEndTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var failureUrl: CountedString = CountedString()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_NetworkAccessProtection == "on"]
-@C
-public struct IsolationInfoEx {
-    public var isolationState: IsolationState = IsolationState()
-    public var extendedIsolationState: ExtendedIsolationState = ExtendedIsolationState()
-    public var probEndTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var failureUrl: CountedString = CountedString()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_NetworkAccessProtection == "on"]
-@C
 public struct IsolationState {
     public var value: Int32 = 0
 
@@ -211,7 +180,6 @@ public struct NapComponentRegistrationInfo {
 }
 
 @When[Windows_Win32_Security_NetworkAccessProtection == "on"]
-@C
 public struct NapNotifyType {
     public var value: Int32 = 0
 
@@ -239,7 +207,6 @@ public let NapNotifyType_napNotifyTypeServiceState: NapNotifyType = NapNotifyTyp
 public let NapNotifyType_napNotifyTypeQuarState: NapNotifyType = NapNotifyType(2)
 
 @When[Windows_Win32_Security_NetworkAccessProtection == "on"]
-@C
 public struct NapTracingLevel {
     public var value: Int32 = 0
 
@@ -286,7 +253,6 @@ public struct PrivateData {
 }
 
 @When[Windows_Win32_Security_NetworkAccessProtection == "on"]
-@C
 public struct RemoteConfigurationType {
     public var value: Int32 = 0
 
@@ -320,14 +286,6 @@ public struct ResultCodes {
 
 @When[Windows_Win32_Security_NetworkAccessProtection == "on"]
 @C
-public struct SoH {
-    public var count: UInt16 = 0
-    public var attributes: CPointer<SoHAttribute> = CPointer<SoHAttribute>()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_NetworkAccessProtection == "on"]
-@C
 public struct SoHAttribute {
     public var type_: UInt16 = 0
     public var size: UInt16 = 0
@@ -337,10 +295,47 @@ public struct SoHAttribute {
 
 @When[Windows_Win32_Security_NetworkAccessProtection == "on"]
 @C
+public struct FixupInfo {
+    public var state: Int32 = 0
+    public var percentage: UInt8 = 0
+    public var resultCodes: ResultCodes = ResultCodes()
+    public var fixupMsgId: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security_NetworkAccessProtection == "on"]
+@C
+public struct IsolationInfo {
+    public var isolationState: Int32 = 0
+    public var probEndTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var failureUrl: CountedString = CountedString()
+    public init() {}
+}
+
+@When[Windows_Win32_Security_NetworkAccessProtection == "on"]
+@C
+public struct IsolationInfoEx {
+    public var isolationState: Int32 = 0
+    public var extendedIsolationState: Int32 = 0
+    public var probEndTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var failureUrl: CountedString = CountedString()
+    public init() {}
+}
+
+@When[Windows_Win32_Security_NetworkAccessProtection == "on"]
+@C
+public struct SoH {
+    public var count: UInt16 = 0
+    public var attributes: CPointer<SoHAttribute> = CPointer<SoHAttribute>()
+    public init() {}
+}
+
+@When[Windows_Win32_Security_NetworkAccessProtection == "on"]
+@C
 public struct SystemHealthAgentState {
     public var id: UInt32 = 0
     public var shaResultCodes: ResultCodes = ResultCodes()
-    public var failureCategory: FailureCategory = FailureCategory()
+    public var failureCategory: Int32 = 0
     public var fixupInfo: FixupInfo = FixupInfo()
     public init() {}
 }

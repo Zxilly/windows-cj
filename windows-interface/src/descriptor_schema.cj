@@ -50,8 +50,6 @@ func expandedAncestorSchemaIids(baseSchema: InterfaceDescriptorSchema): Array<GU
     values.toArray()
 }
 
-// InterfaceMethodSchema is the authoring-side ABI contract that windows-implement
-// will consume when it starts generating vtables and `_Impl` surfaces.
 public enum InterfaceParameterBridgeKind {
     | Value
     | InParam
@@ -77,6 +75,8 @@ public class InterfaceParameterSchema {
     }
 }
 
+// InterfaceMethodSchema is the authoring-side ABI contract that windows-implement
+// consumes when generating vtables and `_Impl` surfaces.
 public class InterfaceMethodSchema {
     public let name: String
     public let abiSlot: Int64
@@ -100,42 +100,6 @@ public class InterfaceMethodSchema {
         this.abiSlot = -1
         this.parameters = parameters
         this.returnType = returnType
-    }
-
-    public init(name: String, abiSlot: Int64, parameterTypes: Array<String>, returnType: String) {
-        this.name = name
-        this.abiSlot = abiSlot
-        this.parameters = Array<InterfaceParameterSchema>(parameterTypes.size, { index =>
-            InterfaceParameterSchema(
-                "arg${index}",
-                parameterTypes[index],
-                parameterTypes[index],
-                InterfaceParameterBridgeKind.Value
-            )
-        })
-        this.returnType = returnType
-    }
-
-    public init(name: String, parameterTypes: Array<String>, returnType: String) {
-        this.name = name
-        this.abiSlot = -1
-        this.parameters = Array<InterfaceParameterSchema>(parameterTypes.size, { index =>
-            InterfaceParameterSchema(
-                "arg${index}",
-                parameterTypes[index],
-                parameterTypes[index],
-                InterfaceParameterBridgeKind.Value
-            )
-        })
-        this.returnType = returnType
-    }
-
-    public prop parameterTypes: Array<String> {
-        get() {
-            Array<String>(parameters.size, { index =>
-                parameters[index].abiType
-            })
-        }
     }
 }
 
@@ -216,6 +180,49 @@ public class InterfaceDescriptorSchema {
         this.directBaseSchema = Some(baseSchema)
         this.ancestorInterfaceNames = expandedAncestorInterfaceNames(baseSchema)
         this.ancestorIids = expandedAncestorSchemaIids(baseSchema)
+        this.vtableTypeName = vtableTypeName
+        this.wrapperTypeName = wrapperTypeName
+        this.implSurfaceName = implSurfaceName
+        this.methods = methods
+    }
+
+    // Variant used by WinRT interface schemas: the direct base is always the
+    // IInspectable schema (so vtable own-method counting via the schema chain
+    // remains correct), and `extraAncestorInterfaceNames`/`extraAncestorIids`
+    // carry the required-interface contracts that participate in QI matching
+    // but are NOT inlined into the vtbl.
+    public init(
+        interfaceName: String,
+        iid: GUID,
+        baseSchema: InterfaceDescriptorSchema,
+        extraAncestorInterfaceNames: Array<String>,
+        extraAncestorIids: Array<GUID>,
+        vtableTypeName: String,
+        wrapperTypeName: String,
+        implSurfaceName: String,
+        methods: Array<InterfaceMethodSchema>
+    ) {
+        this.interfaceName = interfaceName
+        this.iid = iid
+        this.baseInterfaceName = Some(baseSchema.interfaceName)
+        this.baseIid = Some(baseSchema.iid)
+        this.directBaseSchema = Some(baseSchema)
+        let names = ArrayList<String>()
+        for (existing in expandedAncestorInterfaceNames(baseSchema)) {
+            appendUniqueString(names, existing)
+        }
+        for (extra in extraAncestorInterfaceNames) {
+            appendUniqueString(names, extra)
+        }
+        let iids = ArrayList<GUID>()
+        for (existing in expandedAncestorSchemaIids(baseSchema)) {
+            appendUniqueSchemaGuid(iids, existing)
+        }
+        for (extra in extraAncestorIids) {
+            appendUniqueSchemaGuid(iids, extra)
+        }
+        this.ancestorInterfaceNames = names.toArray()
+        this.ancestorIids = iids.toArray()
         this.vtableTypeName = vtableTypeName
         this.wrapperTypeName = wrapperTypeName
         this.implSurfaceName = implSurfaceName

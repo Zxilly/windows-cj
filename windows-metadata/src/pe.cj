@@ -1,6 +1,5 @@
 package windows_metadata
 
-import std.fs.*
 import std.collection.*
 
 // PE/COFF constants

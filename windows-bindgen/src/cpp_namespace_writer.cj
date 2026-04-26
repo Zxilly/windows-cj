@@ -9,24 +9,28 @@ public func writeCppNamespace(
     index: TypeIndex,
     namespace: String,
     types: ArrayList<BindgenType>,
-    features: FeatureCollector
+    features: FeatureCollector,
+    perTypeFragments: HashMap<String, String>,
+    config: BindgenConfig
 ): Int64 {
-    var typeCount: Int64 = 0
+    // Preserve the historical two-phase emission: non-CppFn types first, then
+    // CppFn types. Within each phase render the per-type fragments in
+    // parallel, then serialise them back into `w` in original order so the
+    // generated source is deterministic.
+    let nonFnTypes = ArrayList<BindgenType>()
+    let fnTypes = ArrayList<BindgenType>()
+    for (ty in types) {
+        match (ty) {
+            case CppFn(_) => fnTypes.add(ty)
+            case _ => nonFnTypes.add(ty)
+        }
+    }
 
-    for (ty in types) {
-        match (ty) {
-            case CppFn(_) => ()
-            case _ =>
-                typeCount += emitCppNamespaceItem(w, index, namespace, ty, features)
-        }
-    }
-    for (ty in types) {
-        match (ty) {
-            case CppFn(_) =>
-                typeCount += emitCppNamespaceItem(w, index, namespace, ty, features)
-            case _ => ()
-        }
-    }
+    var typeCount: Int64 = 0
+    typeCount += emitRenderedFragments(w, perTypeFragments,
+        renderTypeFragmentsParallel(index, namespace, nonFnTypes, features, config, false))
+    typeCount += emitRenderedFragments(w, perTypeFragments,
+        renderTypeFragmentsParallel(index, namespace, fnTypes, features, config, false))
     return typeCount
 }
 
@@ -47,10 +51,10 @@ func emitCppNamespaceItem(
             generateHandle(w, index, fileIdx, row, namespace)
             return 1
         case CppStruct(_) =>
-            generateStruct(w, index, fileIdx, row, namespace)
+            generateStruct(w, index, fileIdx, row, namespace, winrtProjection: false)
             return 1
         case CppEnum(_) =>
-            generateEnum(w, index, fileIdx, row, namespace)
+            generateEnum(w, index, fileIdx, row, namespace, winrtProjection: false)
             return 1
         case CppDelegate(_) =>
             generateDelegate(w, index, fileIdx, row, namespace)

@@ -15,6 +15,10 @@ public func highLevelArgumentExpr(index: TypeIndex, ty: MetadataType, expr: Stri
     return winrtArgumentExpr(index, ty, expr)
 }
 
+public func highLevelNeedsInParam(index: TypeIndex, ty: MetadataType): Bool {
+    return winrtNeedsInParam(index, ty)
+}
+
 public func highLevelThunkParamExpr(index: TypeIndex, ty: MetadataType, expr: String): String {
     return winrtThunkParamExpr(index, ty, expr)
 }
@@ -33,4 +37,8 @@ public func highLevelHasResult(sig: MethodSignature): Bool {
 
 public func highLevelResultDefaultExpr(typeName: String): String {
     return winrtResultDefaultExpr(typeName)
+}
+
+public func highLevelDefaultExpr(index: TypeIndex, ty: MetadataType): String {
+    return winrtDefaultExpr(index, ty)
 }

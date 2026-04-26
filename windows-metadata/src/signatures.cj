@@ -332,20 +332,29 @@ public class BlobReader {
             // ELEMENT_TYPE_ARRAY with ArrayShape (II.23.2.13)
             let elemTy = readTypeSignature(file, generics)
             let rank = readCompressed()
-            let numSizes = readCompressed()
-            var arraySize: Int64 = 0
-            if (numSizes >= 1) {
-                arraySize = readCompressed()
+            if (rank != 1) {
+                throw Exception("Unsupported ELEMENT_TYPE_ARRAY rank: ${rank}")
             }
+            let numSizes = readCompressed()
+            if (numSizes != 1) {
+                throw Exception("Unsupported ELEMENT_TYPE_ARRAY size count: ${numSizes}")
+            }
+            let arraySize = readCompressed()
             var si2: Int64 = 1
             while (si2 < numSizes) {
                 readCompressed()
                 si2 += 1
             }
             let numLoBounds = readCompressed()
+            if (numLoBounds != 0 && numLoBounds != 1) {
+                throw Exception("Unsupported ELEMENT_TYPE_ARRAY lower bound count: ${numLoBounds}")
+            }
             var li: Int64 = 0
             while (li < numLoBounds) {
-                readCompressed()
+                let loBound = readCompressed()
+                if (loBound != 0) {
+                    throw Exception("Unsupported ELEMENT_TYPE_ARRAY lower bound: ${loBound}")
+                }
                 li += 1
             }
             return MetadataType.ArrayFixed(elemTy, arraySize)
@@ -353,6 +362,9 @@ public class BlobReader {
 
         if (code == ELEMENT_TYPE_GENERICINST) {
             let typeCode = readU8()
+            if (typeCode != ELEMENT_TYPE_VALUETYPE && typeCode != ELEMENT_TYPE_CLASS) {
+                throw Exception("Invalid ELEMENT_TYPE_GENERICINST type code: ${typeCode}")
+            }
             let coded = readCompressed()
             let (tdrTable, tdrRow) = decodeCodedIndex(coded, CODED_TYPE_DEF_OR_REF_BITS, CODED_TYPE_DEF_OR_REF_MAP)
 
@@ -364,6 +376,10 @@ public class BlobReader {
             } else if (tdrTable == TABLE_TYPE_REF) {
                 ns = file.getString(tdrRow, TABLE_TYPE_REF, 2)
                 nm = file.getString(tdrRow, TABLE_TYPE_REF, 1)
+            } else if (tdrTable == TABLE_TYPE_SPEC) {
+                throw Exception("Unsupported ELEMENT_TYPE_GENERICINST TypeSpec base")
+            } else {
+                throw Exception("Unsupported ELEMENT_TYPE_GENERICINST TypeDefOrRef table: ${tdrTable}")
             }
 
             let genCount = readCompressed()

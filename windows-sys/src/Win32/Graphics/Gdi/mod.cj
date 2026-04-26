@@ -2,6 +2,8 @@
 package windows_sys.Win32.Graphics.Gdi
 
 import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedWriteUInt16, packedWriteUInt32, unionReadUInt32, unionWriteUInt32}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -24,14 +26,6 @@ public struct ABCFLOAT {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct ABORTPATH {
-    public var emr: EMR = EMR()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct ARC_DIRECTION {
     public var value: Int32 = 0
 
@@ -57,24 +51,6 @@ public let ARC_DIRECTION_AD_CLOCKWISE: ARC_DIRECTION = ARC_DIRECTION(2)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
 @C
-public struct AXESLISTA {
-    public var axlReserved: UInt32 = 0
-    public var axlNumAxes: UInt32 = 0
-    public var axlAxisInfo: VArray<AXISINFOA, $16> = VArray<AXISINFOA, $16>(repeat: AXISINFOA())
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct AXESLISTW {
-    public var axlReserved: UInt32 = 0
-    public var axlNumAxes: UInt32 = 0
-    public var axlAxisInfo: VArray<AXISINFOW, $16> = VArray<AXISINFOW, $16>(repeat: AXISINFOW())
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct AXISINFOA {
     public var axMinValue: Int32 = 0
     public var axMaxValue: Int32 = 0
@@ -92,7 +68,6 @@ public struct AXISINFOW {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct BACKGROUND_MODE {
     public var value: UInt32 = 0
 
@@ -141,110 +116,100 @@ public struct BITMAPCOREHEADER {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct BITMAPCOREINFO {
-    public var bmciHeader: BITMAPCOREHEADER = BITMAPCOREHEADER()
-    public var bmciColors: VArray<RGBTRIPLE, $1> = VArray<RGBTRIPLE, $1>(repeat: RGBTRIPLE())
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
+// packed(2)
 @C
 public struct BITMAPFILEHEADER {
     public var _raw: VArray<UInt8, $14> = VArray<UInt8, $14>(repeat: 0u8)
 
-    public func bfType(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 0)
+    public mut prop bfType: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_bfType(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 0, val)
-            _raw = rawStorage
+    public mut prop bfSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 2)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 2, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func bfSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 2)
+    public mut prop bfReserved1: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 6)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 6, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_bfSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 2, val)
-            _raw = rawStorage
+    public mut prop bfReserved2: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func bfReserved1(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 6)
+    public mut prop bfOffBits: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 10)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 10, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public mut func set_bfReserved1(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 6, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func bfReserved2(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 8)
-        }
-    }
-
-    public mut func set_bfReserved2(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 8, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func bfOffBits(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 10)
-        }
-    }
-
-    public mut func set_bfOffBits(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 10, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct BITMAPINFO {
-    public var bmiHeader: BITMAPINFOHEADER = BITMAPINFOHEADER()
-    public var bmiColors: VArray<RGBQUAD, $1> = VArray<RGBQUAD, $1>(repeat: RGBQUAD())
     public init() {}
 }
 
@@ -266,63 +231,6 @@ public struct BITMAPINFOHEADER {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct BITMAPV4HEADER {
-    public var bV4Size: UInt32 = 0
-    public var bV4Width: Int32 = 0
-    public var bV4Height: Int32 = 0
-    public var bV4Planes: UInt16 = 0
-    public var bV4BitCount: UInt16 = 0
-    public var bV4V4Compression: BI_COMPRESSION = BI_COMPRESSION()
-    public var bV4SizeImage: UInt32 = 0
-    public var bV4XPelsPerMeter: Int32 = 0
-    public var bV4YPelsPerMeter: Int32 = 0
-    public var bV4ClrUsed: UInt32 = 0
-    public var bV4ClrImportant: UInt32 = 0
-    public var bV4RedMask: UInt32 = 0
-    public var bV4GreenMask: UInt32 = 0
-    public var bV4BlueMask: UInt32 = 0
-    public var bV4AlphaMask: UInt32 = 0
-    public var bV4CSType: UInt32 = 0
-    public var bV4Endpoints: CIEXYZTRIPLE = CIEXYZTRIPLE()
-    public var bV4GammaRed: UInt32 = 0
-    public var bV4GammaGreen: UInt32 = 0
-    public var bV4GammaBlue: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct BITMAPV5HEADER {
-    public var bV5Size: UInt32 = 0
-    public var bV5Width: Int32 = 0
-    public var bV5Height: Int32 = 0
-    public var bV5Planes: UInt16 = 0
-    public var bV5BitCount: UInt16 = 0
-    public var bV5Compression: BI_COMPRESSION = BI_COMPRESSION()
-    public var bV5SizeImage: UInt32 = 0
-    public var bV5XPelsPerMeter: Int32 = 0
-    public var bV5YPelsPerMeter: Int32 = 0
-    public var bV5ClrUsed: UInt32 = 0
-    public var bV5ClrImportant: UInt32 = 0
-    public var bV5RedMask: UInt32 = 0
-    public var bV5GreenMask: UInt32 = 0
-    public var bV5BlueMask: UInt32 = 0
-    public var bV5AlphaMask: UInt32 = 0
-    public var bV5CSType: UInt32 = 0
-    public var bV5Endpoints: CIEXYZTRIPLE = CIEXYZTRIPLE()
-    public var bV5GammaRed: UInt32 = 0
-    public var bV5GammaGreen: UInt32 = 0
-    public var bV5GammaBlue: UInt32 = 0
-    public var bV5Intent: UInt32 = 0
-    public var bV5ProfileData: UInt32 = 0
-    public var bV5ProfileSize: UInt32 = 0
-    public var bV5Reserved: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct BI_COMPRESSION {
     public var value: UInt32 = 0
 
@@ -369,7 +277,6 @@ public struct BLENDFUNCTION {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct BRUSH_STYLE {
     public var value: UInt32 = 0
 
@@ -421,7 +328,6 @@ public let BRUSH_STYLE_BS_DIBPATTERN8X8: BRUSH_STYLE = BRUSH_STYLE(8)
 public let BRUSH_STYLE_BS_MONOPATTERN: BRUSH_STYLE = BRUSH_STYLE(9)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct CDS_TYPE {
     public var value: UInt32 = 0
 
@@ -532,7 +438,6 @@ public struct COLORADJUSTMENT {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct CREATE_FONT_PACKAGE_SUBSET_ENCODING {
     public var value: Int16 = 0
 
@@ -560,7 +465,6 @@ public let CREATE_FONT_PACKAGE_SUBSET_ENCODING_TTFCFP_SYMBOL_CHAR_SET: CREATE_FO
 public let CREATE_FONT_PACKAGE_SUBSET_ENCODING_TTFCFP_UNICODE_CHAR_SET: CREATE_FONT_PACKAGE_SUBSET_ENCODING = CREATE_FONT_PACKAGE_SUBSET_ENCODING(1)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct CREATE_FONT_PACKAGE_SUBSET_PLATFORM {
     public var value: Int16 = 0
 
@@ -585,7 +489,6 @@ public let CREATE_FONT_PACKAGE_SUBSET_PLATFORM_TTFCFP_UNICODE_PLATFORMID: CREATE
 public let CREATE_FONT_PACKAGE_SUBSET_PLATFORM_TTFCFP_ISO_PLATFORMID: CREATE_FONT_PACKAGE_SUBSET_PLATFORM = CREATE_FONT_PACKAGE_SUBSET_PLATFORM(2)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct CREATE_POLYGON_RGN_MODE {
     public var value: Int32 = 0
 
@@ -610,7 +513,6 @@ public let CREATE_POLYGON_RGN_MODE_ALTERNATE: CREATE_POLYGON_RGN_MODE = CREATE_P
 public let CREATE_POLYGON_RGN_MODE_WINDING: CREATE_POLYGON_RGN_MODE = CREATE_POLYGON_RGN_MODE(2)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DC_LAYOUT {
     public var value: UInt32 = 0
 
@@ -658,303 +560,6 @@ public struct DESIGNVECTOR {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct DEVMODEA {
-    public var dmDeviceName: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-    public var dmSpecVersion: UInt16 = 0
-    public var dmDriverVersion: UInt16 = 0
-    public var dmSize: UInt16 = 0
-    public var dmDriverExtra: UInt16 = 0
-    public var dmFields: DEVMODE_FIELD_FLAGS = DEVMODE_FIELD_FLAGS()
-    public var Anonymous1: DEVMODEA__Anonymous1_e__Union = DEVMODEA__Anonymous1_e__Union()
-    public var dmColor: DEVMODE_COLOR = DEVMODE_COLOR()
-    public var dmDuplex: DEVMODE_DUPLEX = DEVMODE_DUPLEX()
-    public var dmYResolution: Int16 = 0
-    public var dmTTOption: DEVMODE_TRUETYPE_OPTION = DEVMODE_TRUETYPE_OPTION()
-    public var dmCollate: DEVMODE_COLLATE = DEVMODE_COLLATE()
-    public var dmFormName: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-    public var dmLogPixels: UInt16 = 0
-    public var dmBitsPerPel: UInt32 = 0
-    public var dmPelsWidth: UInt32 = 0
-    public var dmPelsHeight: UInt32 = 0
-    public var Anonymous2: DEVMODEA__Anonymous2_e__Union = DEVMODEA__Anonymous2_e__Union()
-    public var dmDisplayFrequency: UInt32 = 0
-    public var dmICMMethod: UInt32 = 0
-    public var dmICMIntent: UInt32 = 0
-    public var dmMediaType: UInt32 = 0
-    public var dmDitherType: UInt32 = 0
-    public var dmReserved1: UInt32 = 0
-    public var dmReserved2: UInt32 = 0
-    public var dmPanningWidth: UInt32 = 0
-    public var dmPanningHeight: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DEVMODEA__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func anonymous1(): DEVMODEA__Anonymous1_e__Union__Anonymous1_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVMODEA__Anonymous1_e__Union__Anonymous1_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous1(val: DEVMODEA__Anonymous1_e__Union__Anonymous1_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVMODEA__Anonymous1_e__Union__Anonymous1_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func anonymous2(): DEVMODEA__Anonymous1_e__Union__Anonymous2_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVMODEA__Anonymous1_e__Union__Anonymous2_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous2(val: DEVMODEA__Anonymous1_e__Union__Anonymous2_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVMODEA__Anonymous1_e__Union__Anonymous2_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct DEVMODEA__Anonymous1_e__Union__Anonymous1_e__Struct {
-    public var dmOrientation: Int16 = 0
-    public var dmPaperSize: Int16 = 0
-    public var dmPaperLength: Int16 = 0
-    public var dmPaperWidth: Int16 = 0
-    public var dmScale: Int16 = 0
-    public var dmCopies: Int16 = 0
-    public var dmDefaultSource: Int16 = 0
-    public var dmPrintQuality: Int16 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct DEVMODEA__Anonymous1_e__Union__Anonymous2_e__Struct {
-    public var dmPosition: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
-    public var dmDisplayOrientation: DEVMODE_DISPLAY_ORIENTATION = DEVMODE_DISPLAY_ORIENTATION()
-    public var dmDisplayFixedOutput: DEVMODE_DISPLAY_FIXED_OUTPUT = DEVMODE_DISPLAY_FIXED_OUTPUT()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DEVMODEA__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
-
-    public func dmDisplayFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_dmDisplayFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dmNup(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_dmNup(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct DEVMODEW {
-    public var dmDeviceName: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0)
-    public var dmSpecVersion: UInt16 = 0
-    public var dmDriverVersion: UInt16 = 0
-    public var dmSize: UInt16 = 0
-    public var dmDriverExtra: UInt16 = 0
-    public var dmFields: DEVMODE_FIELD_FLAGS = DEVMODE_FIELD_FLAGS()
-    public var Anonymous1: DEVMODEW__Anonymous1_e__Union = DEVMODEW__Anonymous1_e__Union()
-    public var dmColor: DEVMODE_COLOR = DEVMODE_COLOR()
-    public var dmDuplex: DEVMODE_DUPLEX = DEVMODE_DUPLEX()
-    public var dmYResolution: Int16 = 0
-    public var dmTTOption: DEVMODE_TRUETYPE_OPTION = DEVMODE_TRUETYPE_OPTION()
-    public var dmCollate: DEVMODE_COLLATE = DEVMODE_COLLATE()
-    public var dmFormName: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0)
-    public var dmLogPixels: UInt16 = 0
-    public var dmBitsPerPel: UInt32 = 0
-    public var dmPelsWidth: UInt32 = 0
-    public var dmPelsHeight: UInt32 = 0
-    public var Anonymous2: DEVMODEW__Anonymous2_e__Union = DEVMODEW__Anonymous2_e__Union()
-    public var dmDisplayFrequency: UInt32 = 0
-    public var dmICMMethod: UInt32 = 0
-    public var dmICMIntent: UInt32 = 0
-    public var dmMediaType: UInt32 = 0
-    public var dmDitherType: UInt32 = 0
-    public var dmReserved1: UInt32 = 0
-    public var dmReserved2: UInt32 = 0
-    public var dmPanningWidth: UInt32 = 0
-    public var dmPanningHeight: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DEVMODEW__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func anonymous1(): DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous1(val: DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func anonymous2(): DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous2(val: DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct {
-    public var dmOrientation: Int16 = 0
-    public var dmPaperSize: Int16 = 0
-    public var dmPaperLength: Int16 = 0
-    public var dmPaperWidth: Int16 = 0
-    public var dmScale: Int16 = 0
-    public var dmCopies: Int16 = 0
-    public var dmDefaultSource: Int16 = 0
-    public var dmPrintQuality: Int16 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct {
-    public var dmPosition: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
-    public var dmDisplayOrientation: DEVMODE_DISPLAY_ORIENTATION = DEVMODE_DISPLAY_ORIENTATION()
-    public var dmDisplayFixedOutput: DEVMODE_DISPLAY_FIXED_OUTPUT = DEVMODE_DISPLAY_FIXED_OUTPUT()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DEVMODEW__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
-
-    public func dmDisplayFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_dmDisplayFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dmNup(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_dmNup(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DEVMODE_COLLATE {
     public var value: Int16 = 0
 
@@ -979,7 +584,6 @@ public let DEVMODE_COLLATE_DMCOLLATE_FALSE: DEVMODE_COLLATE = DEVMODE_COLLATE(0)
 public let DEVMODE_COLLATE_DMCOLLATE_TRUE: DEVMODE_COLLATE = DEVMODE_COLLATE(1)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DEVMODE_COLOR {
     public var value: Int16 = 0
 
@@ -1004,7 +608,6 @@ public let DEVMODE_COLOR_DMCOLOR_MONOCHROME: DEVMODE_COLOR = DEVMODE_COLOR(1)
 public let DEVMODE_COLOR_DMCOLOR_COLOR: DEVMODE_COLOR = DEVMODE_COLOR(2)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DEVMODE_DISPLAY_FIXED_OUTPUT {
     public var value: UInt32 = 0
 
@@ -1032,7 +635,6 @@ public let DEVMODE_DISPLAY_FIXED_OUTPUT_DMDFO_STRETCH: DEVMODE_DISPLAY_FIXED_OUT
 public let DEVMODE_DISPLAY_FIXED_OUTPUT_DMDFO_CENTER: DEVMODE_DISPLAY_FIXED_OUTPUT = DEVMODE_DISPLAY_FIXED_OUTPUT(2)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DEVMODE_DISPLAY_ORIENTATION {
     public var value: UInt32 = 0
 
@@ -1063,7 +665,6 @@ public let DEVMODE_DISPLAY_ORIENTATION_DMDO_180: DEVMODE_DISPLAY_ORIENTATION = D
 public let DEVMODE_DISPLAY_ORIENTATION_DMDO_270: DEVMODE_DISPLAY_ORIENTATION = DEVMODE_DISPLAY_ORIENTATION(3)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DEVMODE_DUPLEX {
     public var value: Int16 = 0
 
@@ -1091,7 +692,6 @@ public let DEVMODE_DUPLEX_DMDUP_VERTICAL: DEVMODE_DUPLEX = DEVMODE_DUPLEX(2)
 public let DEVMODE_DUPLEX_DMDUP_HORIZONTAL: DEVMODE_DUPLEX = DEVMODE_DUPLEX(3)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DEVMODE_FIELD_FLAGS {
     public var value: UInt32 = 0
 
@@ -1244,7 +844,6 @@ public let DEVMODE_FIELD_FLAGS_DM_OUT_BUFFER: DEVMODE_FIELD_FLAGS = DEVMODE_FIEL
 public let DEVMODE_FIELD_FLAGS_DM_OUT_DEFAULT: DEVMODE_FIELD_FLAGS = DEVMODE_FIELD_FLAGS(1)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DEVMODE_TRUETYPE_OPTION {
     public var value: Int16 = 0
 
@@ -1275,7 +874,6 @@ public let DEVMODE_TRUETYPE_OPTION_DMTT_SUBDEV: DEVMODE_TRUETYPE_OPTION = DEVMOD
 public let DEVMODE_TRUETYPE_OPTION_DMTT_DOWNLOAD_OUTLINE: DEVMODE_TRUETYPE_OPTION = DEVMODE_TRUETYPE_OPTION(4)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DFCS_STATE {
     public var value: UInt32 = 0
 
@@ -1398,7 +996,6 @@ public let DFCS_STATE_DFCS_FLAT: DFCS_STATE = DFCS_STATE(16384)
 public let DFCS_STATE_DFCS_MONO: DFCS_STATE = DFCS_STATE(32768)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DFC_TYPE {
     public var value: UInt32 = 0
 
@@ -1443,7 +1040,6 @@ public struct DIBSECTION {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DIB_USAGE {
     public var value: UInt32 = 0
 
@@ -1468,7 +1064,6 @@ public let DIB_USAGE_DIB_RGB_COLORS: DIB_USAGE = DIB_USAGE(0)
 public let DIB_USAGE_DIB_PAL_COLORS: DIB_USAGE = DIB_USAGE(1)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DISPLAYCONFIG_ADVANCED_COLOR_MODE {
     public var value: Int32 = 0
 
@@ -1496,7 +1091,6 @@ public let DISPLAYCONFIG_ADVANCED_COLOR_MODE_DISPLAYCONFIG_ADVANCED_COLOR_MODE_W
 public let DISPLAYCONFIG_ADVANCED_COLOR_MODE_DISPLAYCONFIG_ADVANCED_COLOR_MODE_HDR: DISPLAYCONFIG_ADVANCED_COLOR_MODE = DISPLAYCONFIG_ADVANCED_COLOR_MODE(2)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DISPLAYCONFIG_COLOR_ENCODING {
     public var value: Int32 = 0
 
@@ -1530,31 +1124,6 @@ public let DISPLAYCONFIG_COLOR_ENCODING_DISPLAYCONFIG_COLOR_ENCODING_YCBCR420: D
 public let DISPLAYCONFIG_COLOR_ENCODING_DISPLAYCONFIG_COLOR_ENCODING_INTENSITY: DISPLAYCONFIG_COLOR_ENCODING = DISPLAYCONFIG_COLOR_ENCODING(4)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct DISPLAY_DEVICEA {
-    public var cb: UInt32 = 0
-    public var DeviceName: VArray<Win32_Foundation.CHAR, $32> = VArray<Win32_Foundation.CHAR, $32>(repeat: 0)
-    public var DeviceString: VArray<Win32_Foundation.CHAR, $128> = VArray<Win32_Foundation.CHAR, $128>(repeat: 0)
-    public var StateFlags: DISPLAY_DEVICE_STATE_FLAGS = DISPLAY_DEVICE_STATE_FLAGS()
-    public var DeviceID: VArray<Win32_Foundation.CHAR, $128> = VArray<Win32_Foundation.CHAR, $128>(repeat: 0)
-    public var DeviceKey: VArray<Win32_Foundation.CHAR, $128> = VArray<Win32_Foundation.CHAR, $128>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct DISPLAY_DEVICEW {
-    public var cb: UInt32 = 0
-    public var DeviceName: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0)
-    public var DeviceString: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0)
-    public var StateFlags: DISPLAY_DEVICE_STATE_FLAGS = DISPLAY_DEVICE_STATE_FLAGS()
-    public var DeviceID: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0)
-    public var DeviceKey: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DISPLAY_DEVICE_STATE_FLAGS {
     public var value: UInt32 = 0
 
@@ -1632,7 +1201,6 @@ public let DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_ACTIVE: DISPLAY_DEVICE_STAT
 public let DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_ATTACHED: DISPLAY_DEVICE_STATE_FLAGS = DISPLAY_DEVICE_STATE_FLAGS(2)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DISP_CHANGE {
     public var value: Int32 = 0
 
@@ -1675,7 +1243,6 @@ public let DISP_CHANGE_DISP_CHANGE_BADPARAM: DISP_CHANGE = DISP_CHANGE(-5)
 public let DISP_CHANGE_DISP_CHANGE_BADDUALVIEW: DISP_CHANGE = DISP_CHANGE(-6)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DRAWEDGE_FLAGS {
     public var value: UInt32 = 0
 
@@ -1744,10 +1311,6 @@ public let DRAWEDGE_FLAGS_EDGE_ETCHED: DRAWEDGE_FLAGS = DRAWEDGE_FLAGS(6)
 public let DRAWEDGE_FLAGS_EDGE_BUMP: DRAWEDGE_FLAGS = DRAWEDGE_FLAGS(9)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-public type DRAWSTATEPROC = CFunc<(HDC, IntNative, UIntNative, Int32, Int32) -> Int32>
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DRAWSTATE_FLAGS {
     public var value: UInt32 = 0
 
@@ -1827,7 +1390,6 @@ public struct DRAWTEXTPARAMS {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DRAW_CAPTION_FLAGS {
     public var value: UInt32 = 0
 
@@ -1881,7 +1443,6 @@ public let DRAW_CAPTION_FLAGS_DC_SMALLCAP: DRAW_CAPTION_FLAGS = DRAW_CAPTION_FLA
 public let DRAW_CAPTION_FLAGS_DC_TEXT: DRAW_CAPTION_FLAGS = DRAW_CAPTION_FLAGS(8)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DRAW_EDGE_FLAGS {
     public var value: UInt32 = 0
 
@@ -1971,7 +1532,6 @@ public let DRAW_EDGE_FLAGS_BF_TOPLEFT: DRAW_EDGE_FLAGS = DRAW_EDGE_FLAGS(3)
 public let DRAW_EDGE_FLAGS_BF_TOPRIGHT: DRAW_EDGE_FLAGS = DRAW_EDGE_FLAGS(6)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct DRAW_TEXT_FORMAT {
     public var value: UInt32 = 0
 
@@ -2076,7 +1636,6 @@ public let DRAW_TEXT_FORMAT_DT_WORDBREAK: DRAW_TEXT_FORMAT = DRAW_TEXT_FORMAT(16
 public let DRAW_TEXT_FORMAT_DT_WORD_ELLIPSIS: DRAW_TEXT_FORMAT = DRAW_TEXT_FORMAT(262144)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct EMBEDDED_FONT_PRIV_STATUS {
     public var value: UInt32 = 0
 
@@ -2107,7 +1666,6 @@ public let EMBEDDED_FONT_PRIV_STATUS_EMBED_INSTALLABLE: EMBEDDED_FONT_PRIV_STATU
 public let EMBEDDED_FONT_PRIV_STATUS_EMBED_NOEMBEDDING: EMBEDDED_FONT_PRIV_STATUS = EMBEDDED_FONT_PRIV_STATUS(4)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct EMBED_FONT_CHARSET {
     public var value: UInt32 = 0
 
@@ -2133,735 +1691,11 @@ public let EMBED_FONT_CHARSET_CHARSET_SYMBOL: EMBED_FONT_CHARSET = EMBED_FONT_CH
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
 @C
-public struct EMR {
-    public var iType: ENHANCED_METAFILE_RECORD_TYPE = ENHANCED_METAFILE_RECORD_TYPE()
-    public var nSize: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRALPHABLEND {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var xDest: Int32 = 0
-    public var yDest: Int32 = 0
-    public var cxDest: Int32 = 0
-    public var cyDest: Int32 = 0
-    public var dwRop: UInt32 = 0
-    public var xSrc: Int32 = 0
-    public var ySrc: Int32 = 0
-    public var xformSrc: XFORM = XFORM()
-    public var crBkColorSrc: Win32_Foundation.COLORREF = 0
-    public var iUsageSrc: UInt32 = 0
-    public var offBmiSrc: UInt32 = 0
-    public var cbBmiSrc: UInt32 = 0
-    public var offBitsSrc: UInt32 = 0
-    public var cbBitsSrc: UInt32 = 0
-    public var cxSrc: Int32 = 0
-    public var cySrc: Int32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRANGLEARC {
-    public var emr: EMR = EMR()
-    public var ptlCenter: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
-    public var nRadius: UInt32 = 0
-    public var eStartAngle: Float32 = 0.0
-    public var eSweepAngle: Float32 = 0.0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRARC {
-    public var emr: EMR = EMR()
-    public var rclBox: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var ptlStart: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
-    public var ptlEnd: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRBITBLT {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var xDest: Int32 = 0
-    public var yDest: Int32 = 0
-    public var cxDest: Int32 = 0
-    public var cyDest: Int32 = 0
-    public var dwRop: UInt32 = 0
-    public var xSrc: Int32 = 0
-    public var ySrc: Int32 = 0
-    public var xformSrc: XFORM = XFORM()
-    public var crBkColorSrc: Win32_Foundation.COLORREF = 0
-    public var iUsageSrc: UInt32 = 0
-    public var offBmiSrc: UInt32 = 0
-    public var cbBmiSrc: UInt32 = 0
-    public var offBitsSrc: UInt32 = 0
-    public var cbBitsSrc: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRCOLORCORRECTPALETTE {
-    public var emr: EMR = EMR()
-    public var ihPalette: UInt32 = 0
-    public var nFirstEntry: UInt32 = 0
-    public var nPalEntries: UInt32 = 0
-    public var nReserved: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRCOLORMATCHTOTARGET {
-    public var emr: EMR = EMR()
-    public var dwAction: UInt32 = 0
-    public var dwFlags: UInt32 = 0
-    public var cbName: UInt32 = 0
-    public var cbData: UInt32 = 0
-    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRCREATEBRUSHINDIRECT {
-    public var emr: EMR = EMR()
-    public var ihBrush: UInt32 = 0
-    public var lb: LOGBRUSH32 = LOGBRUSH32()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRCREATEDIBPATTERNBRUSHPT {
-    public var emr: EMR = EMR()
-    public var ihBrush: UInt32 = 0
-    public var iUsage: UInt32 = 0
-    public var offBmi: UInt32 = 0
-    public var cbBmi: UInt32 = 0
-    public var offBits: UInt32 = 0
-    public var cbBits: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRCREATEMONOBRUSH {
-    public var emr: EMR = EMR()
-    public var ihBrush: UInt32 = 0
-    public var iUsage: UInt32 = 0
-    public var offBmi: UInt32 = 0
-    public var cbBmi: UInt32 = 0
-    public var offBits: UInt32 = 0
-    public var cbBits: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRCREATEPALETTE {
-    public var emr: EMR = EMR()
-    public var ihPal: UInt32 = 0
-    public var lgpl: LOGPALETTE = LOGPALETTE()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRCREATEPEN {
-    public var emr: EMR = EMR()
-    public var ihPen: UInt32 = 0
-    public var lopn: LOGPEN = LOGPEN()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRELLIPSE {
-    public var emr: EMR = EMR()
-    public var rclBox: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMREOF {
-    public var emr: EMR = EMR()
-    public var nPalEntries: UInt32 = 0
-    public var offPalEntries: UInt32 = 0
-    public var nSizeLast: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMREXCLUDECLIPRECT {
-    public var emr: EMR = EMR()
-    public var rclClip: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMREXTCREATEFONTINDIRECTW {
-    public var emr: EMR = EMR()
-    public var ihFont: UInt32 = 0
-    public var elfw: EXTLOGFONTW = EXTLOGFONTW()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMREXTCREATEPEN {
-    public var emr: EMR = EMR()
-    public var ihPen: UInt32 = 0
-    public var offBmi: UInt32 = 0
-    public var cbBmi: UInt32 = 0
-    public var offBits: UInt32 = 0
-    public var cbBits: UInt32 = 0
-    public var elp: EXTLOGPEN32 = EXTLOGPEN32()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMREXTESCAPE {
-    public var emr: EMR = EMR()
-    public var iEscape: Int32 = 0
-    public var cbEscData: Int32 = 0
-    public var EscData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMREXTFLOODFILL {
-    public var emr: EMR = EMR()
-    public var ptlStart: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
-    public var crColor: Win32_Foundation.COLORREF = 0
-    public var iMode: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMREXTSELECTCLIPRGN {
-    public var emr: EMR = EMR()
-    public var cbRgnData: UInt32 = 0
-    public var iMode: UInt32 = 0
-    public var RgnData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMREXTTEXTOUTA {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var iGraphicsMode: UInt32 = 0
-    public var exScale: Float32 = 0.0
-    public var eyScale: Float32 = 0.0
-    public var emrtext: EMRTEXT = EMRTEXT()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRFILLPATH {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRFILLRGN {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var cbRgnData: UInt32 = 0
-    public var ihBrush: UInt32 = 0
-    public var RgnData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct EMRFORMAT {
     public var dSignature: UInt32 = 0
     public var nVersion: UInt32 = 0
     public var cbData: UInt32 = 0
     public var offData: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRFRAMERGN {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var cbRgnData: UInt32 = 0
-    public var ihBrush: UInt32 = 0
-    public var szlStroke: Win32_Foundation.SIZE = Win32_Foundation.SIZE()
-    public var RgnData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRGDICOMMENT {
-    public var emr: EMR = EMR()
-    public var cbData: UInt32 = 0
-    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRGLSBOUNDEDRECORD {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var cbData: UInt32 = 0
-    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRGLSRECORD {
-    public var emr: EMR = EMR()
-    public var cbData: UInt32 = 0
-    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRGRADIENTFILL {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var nVer: UInt32 = 0
-    public var nTri: UInt32 = 0
-    public var ulMode: GRADIENT_FILL = GRADIENT_FILL()
-    public var Ver: VArray<TRIVERTEX, $1> = VArray<TRIVERTEX, $1>(repeat: TRIVERTEX())
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRINVERTRGN {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var cbRgnData: UInt32 = 0
-    public var RgnData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRLINETO {
-    public var emr: EMR = EMR()
-    public var ptl: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRMASKBLT {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var xDest: Int32 = 0
-    public var yDest: Int32 = 0
-    public var cxDest: Int32 = 0
-    public var cyDest: Int32 = 0
-    public var dwRop: UInt32 = 0
-    public var xSrc: Int32 = 0
-    public var ySrc: Int32 = 0
-    public var xformSrc: XFORM = XFORM()
-    public var crBkColorSrc: Win32_Foundation.COLORREF = 0
-    public var iUsageSrc: UInt32 = 0
-    public var offBmiSrc: UInt32 = 0
-    public var cbBmiSrc: UInt32 = 0
-    public var offBitsSrc: UInt32 = 0
-    public var cbBitsSrc: UInt32 = 0
-    public var xMask: Int32 = 0
-    public var yMask: Int32 = 0
-    public var iUsageMask: UInt32 = 0
-    public var offBmiMask: UInt32 = 0
-    public var cbBmiMask: UInt32 = 0
-    public var offBitsMask: UInt32 = 0
-    public var cbBitsMask: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRMODIFYWORLDTRANSFORM {
-    public var emr: EMR = EMR()
-    public var xform: XFORM = XFORM()
-    public var iMode: MODIFY_WORLD_TRANSFORM_MODE = MODIFY_WORLD_TRANSFORM_MODE()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRNAMEDESCAPE {
-    public var emr: EMR = EMR()
-    public var iEscape: Int32 = 0
-    public var cbDriver: Int32 = 0
-    public var cbEscData: Int32 = 0
-    public var EscData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMROFFSETCLIPRGN {
-    public var emr: EMR = EMR()
-    public var ptlOffset: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRPLGBLT {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var aptlDest: VArray<Win32_Foundation.POINTL, $3> = VArray<Win32_Foundation.POINTL, $3>(repeat: Win32_Foundation.POINTL())
-    public var xSrc: Int32 = 0
-    public var ySrc: Int32 = 0
-    public var cxSrc: Int32 = 0
-    public var cySrc: Int32 = 0
-    public var xformSrc: XFORM = XFORM()
-    public var crBkColorSrc: Win32_Foundation.COLORREF = 0
-    public var iUsageSrc: UInt32 = 0
-    public var offBmiSrc: UInt32 = 0
-    public var cbBmiSrc: UInt32 = 0
-    public var offBitsSrc: UInt32 = 0
-    public var cbBitsSrc: UInt32 = 0
-    public var xMask: Int32 = 0
-    public var yMask: Int32 = 0
-    public var iUsageMask: UInt32 = 0
-    public var offBmiMask: UInt32 = 0
-    public var cbBmiMask: UInt32 = 0
-    public var offBitsMask: UInt32 = 0
-    public var cbBitsMask: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRPOLYDRAW {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var cptl: UInt32 = 0
-    public var aptl: VArray<Win32_Foundation.POINTL, $1> = VArray<Win32_Foundation.POINTL, $1>(repeat: Win32_Foundation.POINTL())
-    public var abTypes: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRPOLYDRAW16 {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var cpts: UInt32 = 0
-    public var apts: VArray<Win32_Foundation.POINTS, $1> = VArray<Win32_Foundation.POINTS, $1>(repeat: Win32_Foundation.POINTS())
-    public var abTypes: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRPOLYLINE {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var cptl: UInt32 = 0
-    public var aptl: VArray<Win32_Foundation.POINTL, $1> = VArray<Win32_Foundation.POINTL, $1>(repeat: Win32_Foundation.POINTL())
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRPOLYLINE16 {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var cpts: UInt32 = 0
-    public var apts: VArray<Win32_Foundation.POINTS, $1> = VArray<Win32_Foundation.POINTS, $1>(repeat: Win32_Foundation.POINTS())
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRPOLYPOLYLINE {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var nPolys: UInt32 = 0
-    public var cptl: UInt32 = 0
-    public var aPolyCounts: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
-    public var aptl: VArray<Win32_Foundation.POINTL, $1> = VArray<Win32_Foundation.POINTL, $1>(repeat: Win32_Foundation.POINTL())
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRPOLYPOLYLINE16 {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var nPolys: UInt32 = 0
-    public var cpts: UInt32 = 0
-    public var aPolyCounts: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
-    public var apts: VArray<Win32_Foundation.POINTS, $1> = VArray<Win32_Foundation.POINTS, $1>(repeat: Win32_Foundation.POINTS())
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRPOLYTEXTOUTA {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var iGraphicsMode: UInt32 = 0
-    public var exScale: Float32 = 0.0
-    public var eyScale: Float32 = 0.0
-    public var cStrings: Int32 = 0
-    public var aemrtext: VArray<EMRTEXT, $1> = VArray<EMRTEXT, $1>(repeat: EMRTEXT())
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRRESIZEPALETTE {
-    public var emr: EMR = EMR()
-    public var ihPal: UInt32 = 0
-    public var cEntries: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRRESTOREDC {
-    public var emr: EMR = EMR()
-    public var iRelative: Int32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRROUNDRECT {
-    public var emr: EMR = EMR()
-    public var rclBox: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var szlCorner: Win32_Foundation.SIZE = Win32_Foundation.SIZE()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSCALEVIEWPORTEXTEX {
-    public var emr: EMR = EMR()
-    public var xNum: Int32 = 0
-    public var xDenom: Int32 = 0
-    public var yNum: Int32 = 0
-    public var yDenom: Int32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSELECTCLIPPATH {
-    public var emr: EMR = EMR()
-    public var iMode: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSELECTOBJECT {
-    public var emr: EMR = EMR()
-    public var ihObject: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSELECTPALETTE {
-    public var emr: EMR = EMR()
-    public var ihPal: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSETARCDIRECTION {
-    public var emr: EMR = EMR()
-    public var iArcDirection: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSETCOLORADJUSTMENT {
-    public var emr: EMR = EMR()
-    public var ColorAdjustment: COLORADJUSTMENT = COLORADJUSTMENT()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSETCOLORSPACE {
-    public var emr: EMR = EMR()
-    public var ihCS: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSETDIBITSTODEVICE {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var xDest: Int32 = 0
-    public var yDest: Int32 = 0
-    public var xSrc: Int32 = 0
-    public var ySrc: Int32 = 0
-    public var cxSrc: Int32 = 0
-    public var cySrc: Int32 = 0
-    public var offBmiSrc: UInt32 = 0
-    public var cbBmiSrc: UInt32 = 0
-    public var offBitsSrc: UInt32 = 0
-    public var cbBitsSrc: UInt32 = 0
-    public var iUsageSrc: UInt32 = 0
-    public var iStartScan: UInt32 = 0
-    public var cScans: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSETICMPROFILE {
-    public var emr: EMR = EMR()
-    public var dwFlags: UInt32 = 0
-    public var cbName: UInt32 = 0
-    public var cbData: UInt32 = 0
-    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSETMAPPERFLAGS {
-    public var emr: EMR = EMR()
-    public var dwFlags: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSETMITERLIMIT {
-    public var emr: EMR = EMR()
-    public var eMiterLimit: Float32 = 0.0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSETPALETTEENTRIES {
-    public var emr: EMR = EMR()
-    public var ihPal: UInt32 = 0
-    public var iStart: UInt32 = 0
-    public var cEntries: UInt32 = 0
-    public var aPalEntries: VArray<PALETTEENTRY, $1> = VArray<PALETTEENTRY, $1>(repeat: PALETTEENTRY())
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSETPIXELV {
-    public var emr: EMR = EMR()
-    public var ptlPixel: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
-    public var crColor: Win32_Foundation.COLORREF = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSETTEXTCOLOR {
-    public var emr: EMR = EMR()
-    public var crColor: Win32_Foundation.COLORREF = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSETVIEWPORTEXTEX {
-    public var emr: EMR = EMR()
-    public var szlExtent: Win32_Foundation.SIZE = Win32_Foundation.SIZE()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSETVIEWPORTORGEX {
-    public var emr: EMR = EMR()
-    public var ptlOrigin: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSETWORLDTRANSFORM {
-    public var emr: EMR = EMR()
-    public var xform: XFORM = XFORM()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSTRETCHBLT {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var xDest: Int32 = 0
-    public var yDest: Int32 = 0
-    public var cxDest: Int32 = 0
-    public var cyDest: Int32 = 0
-    public var dwRop: UInt32 = 0
-    public var xSrc: Int32 = 0
-    public var ySrc: Int32 = 0
-    public var xformSrc: XFORM = XFORM()
-    public var crBkColorSrc: Win32_Foundation.COLORREF = 0
-    public var iUsageSrc: UInt32 = 0
-    public var offBmiSrc: UInt32 = 0
-    public var cbBmiSrc: UInt32 = 0
-    public var offBitsSrc: UInt32 = 0
-    public var cbBitsSrc: UInt32 = 0
-    public var cxSrc: Int32 = 0
-    public var cySrc: Int32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRSTRETCHDIBITS {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var xDest: Int32 = 0
-    public var yDest: Int32 = 0
-    public var xSrc: Int32 = 0
-    public var ySrc: Int32 = 0
-    public var cxSrc: Int32 = 0
-    public var cySrc: Int32 = 0
-    public var offBmiSrc: UInt32 = 0
-    public var cbBmiSrc: UInt32 = 0
-    public var offBitsSrc: UInt32 = 0
-    public var cbBitsSrc: UInt32 = 0
-    public var iUsageSrc: UInt32 = 0
-    public var dwRop: UInt32 = 0
-    public var cxDest: Int32 = 0
-    public var cyDest: Int32 = 0
     public init() {}
 }
 
@@ -2878,31 +1712,6 @@ public struct EMRTEXT {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EMRTRANSPARENTBLT {
-    public var emr: EMR = EMR()
-    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
-    public var xDest: Int32 = 0
-    public var yDest: Int32 = 0
-    public var cxDest: Int32 = 0
-    public var cyDest: Int32 = 0
-    public var dwRop: UInt32 = 0
-    public var xSrc: Int32 = 0
-    public var ySrc: Int32 = 0
-    public var xformSrc: XFORM = XFORM()
-    public var crBkColorSrc: Win32_Foundation.COLORREF = 0
-    public var iUsageSrc: UInt32 = 0
-    public var offBmiSrc: UInt32 = 0
-    public var cbBmiSrc: UInt32 = 0
-    public var offBitsSrc: UInt32 = 0
-    public var cbBitsSrc: UInt32 = 0
-    public var cxSrc: Int32 = 0
-    public var cySrc: Int32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct ENHANCED_METAFILE_RECORD_TYPE {
     public var value: UInt32 = 0
 
@@ -3317,71 +2126,13 @@ public struct ENHMETAHEADER {
 @When[Windows_Win32_Graphics_Gdi == "on"]
 @C
 public struct ENHMETARECORD {
-    public var iType: ENHANCED_METAFILE_RECORD_TYPE = ENHANCED_METAFILE_RECORD_TYPE()
+    public var iType: UInt32 = 0
     public var nSize: UInt32 = 0
     public var dParm: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
     public init() {}
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-public type ENHMFENUMPROC = CFunc<(HDC, CPointer<HANDLETABLE>, CPointer<ENHMETARECORD>, Int32, IntNative) -> Int32>
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct ENUMLOGFONTA {
-    public var elfLogFont: LOGFONTA = LOGFONTA()
-    public var elfFullName: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
-    public var elfStyle: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct ENUMLOGFONTEXA {
-    public var elfLogFont: LOGFONTA = LOGFONTA()
-    public var elfFullName: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
-    public var elfStyle: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-    public var elfScript: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct ENUMLOGFONTEXDVA {
-    public var elfEnumLogfontEx: ENUMLOGFONTEXA = ENUMLOGFONTEXA()
-    public var elfDesignVector: DESIGNVECTOR = DESIGNVECTOR()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct ENUMLOGFONTEXDVW {
-    public var elfEnumLogfontEx: ENUMLOGFONTEXW = ENUMLOGFONTEXW()
-    public var elfDesignVector: DESIGNVECTOR = DESIGNVECTOR()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct ENUMLOGFONTEXW {
-    public var elfLogFont: LOGFONTW = LOGFONTW()
-    public var elfFullName: VArray<UInt16, $64> = VArray<UInt16, $64>(repeat: 0)
-    public var elfStyle: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0)
-    public var elfScript: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct ENUMLOGFONTW {
-    public var elfLogFont: LOGFONTW = LOGFONTW()
-    public var elfFullName: VArray<UInt16, $64> = VArray<UInt16, $64>(repeat: 0)
-    public var elfStyle: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct ENUM_DISPLAY_SETTINGS_FLAGS {
     public var value: UInt32 = 0
 
@@ -3420,7 +2171,6 @@ public let ENUM_DISPLAY_SETTINGS_FLAGS_EDS_RAWMODE: ENUM_DISPLAY_SETTINGS_FLAGS 
 public let ENUM_DISPLAY_SETTINGS_FLAGS_EDS_ROTATEDMODE: ENUM_DISPLAY_SETTINGS_FLAGS = ENUM_DISPLAY_SETTINGS_FLAGS(4)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct ENUM_DISPLAY_SETTINGS_MODE {
     public var value: UInt32 = 0
 
@@ -3445,7 +2195,6 @@ public let ENUM_DISPLAY_SETTINGS_MODE_ENUM_CURRENT_SETTINGS: ENUM_DISPLAY_SETTIN
 public let ENUM_DISPLAY_SETTINGS_MODE_ENUM_REGISTRY_SETTINGS: ENUM_DISPLAY_SETTINGS_MODE = ENUM_DISPLAY_SETTINGS_MODE(4294967294)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct ETO_OPTIONS {
     public var value: UInt32 = 0
 
@@ -3506,43 +2255,11 @@ public let ETO_OPTIONS_ETO_REVERSE_INDEX_MAP: ETO_OPTIONS = ETO_OPTIONS(65536)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
 @C
-public struct EXTLOGFONTA {
-    public var elfLogFont: LOGFONTA = LOGFONTA()
-    public var elfFullName: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
-    public var elfStyle: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-    public var elfVersion: UInt32 = 0
-    public var elfStyleSize: UInt32 = 0
-    public var elfMatch: UInt32 = 0
-    public var elfReserved: UInt32 = 0
-    public var elfVendorId: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
-    public var elfCulture: UInt32 = 0
-    public var elfPanose: PANOSE = PANOSE()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct EXTLOGFONTW {
-    public var elfLogFont: LOGFONTW = LOGFONTW()
-    public var elfFullName: VArray<UInt16, $64> = VArray<UInt16, $64>(repeat: 0)
-    public var elfStyle: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0)
-    public var elfVersion: UInt32 = 0
-    public var elfStyleSize: UInt32 = 0
-    public var elfMatch: UInt32 = 0
-    public var elfReserved: UInt32 = 0
-    public var elfVendorId: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
-    public var elfCulture: UInt32 = 0
-    public var elfPanose: PANOSE = PANOSE()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct EXTLOGPEN {
     public var elpPenStyle: UInt32 = 0
     public var elpWidth: UInt32 = 0
     public var elpBrushStyle: UInt32 = 0
-    public var elpColor: Win32_Foundation.COLORREF = 0
+    public var elpColor: UInt32 = 0
     public var elpHatch: UIntNative = 0
     public var elpNumEntries: UInt32 = 0
     public var elpStyleEntry: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
@@ -3555,7 +2272,7 @@ public struct EXTLOGPEN32 {
     public var elpPenStyle: UInt32 = 0
     public var elpWidth: UInt32 = 0
     public var elpBrushStyle: UInt32 = 0
-    public var elpColor: Win32_Foundation.COLORREF = 0
+    public var elpColor: UInt32 = 0
     public var elpHatch: UInt32 = 0
     public var elpNumEntries: UInt32 = 0
     public var elpStyleEntry: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
@@ -3563,7 +2280,6 @@ public struct EXTLOGPEN32 {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct EXT_FLOOD_FILL_TYPE {
     public var value: UInt32 = 0
 
@@ -3596,13 +2312,6 @@ public struct FIXED {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-public type FONTENUMPROCA = CFunc<(CPointer<LOGFONTA>, CPointer<TEXTMETRICA>, UInt32, IntNative) -> Int32>
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-public type FONTENUMPROCW = CFunc<(CPointer<LOGFONTW>, CPointer<TEXTMETRICW>, UInt32, IntNative) -> Int32>
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct FONT_CHARSET {
     public var value: UInt8 = 0
 
@@ -3681,7 +2390,6 @@ public let FONT_CHARSET_MAC_CHARSET: FONT_CHARSET = FONT_CHARSET(77)
 public let FONT_CHARSET_BALTIC_CHARSET: FONT_CHARSET = FONT_CHARSET(186)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct FONT_CLIP_PRECISION {
     public var value: UInt8 = 0
 
@@ -3741,7 +2449,6 @@ public let FONT_CLIP_PRECISION_CLIP_EMBEDDED: FONT_CLIP_PRECISION = FONT_CLIP_PR
 public let FONT_CLIP_PRECISION_CLIP_DFA_OVERRIDE: FONT_CLIP_PRECISION = FONT_CLIP_PRECISION(64)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct FONT_FAMILY {
     public var value: UInt8 = 0
 
@@ -3778,7 +2485,6 @@ public let FONT_FAMILY_FF_SCRIPT: FONT_FAMILY = FONT_FAMILY(64)
 public let FONT_FAMILY_FF_SWISS: FONT_FAMILY = FONT_FAMILY(32)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct FONT_LICENSE_PRIVS {
     public var value: UInt32 = 0
 
@@ -3812,7 +2518,6 @@ public let FONT_LICENSE_PRIVS_LICENSE_NOEMBEDDING: FONT_LICENSE_PRIVS = FONT_LIC
 public let FONT_LICENSE_PRIVS_LICENSE_DEFAULT: FONT_LICENSE_PRIVS = FONT_LICENSE_PRIVS(0)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct FONT_OUTPUT_PRECISION {
     public var value: UInt8 = 0
 
@@ -3864,7 +2569,6 @@ public let FONT_OUTPUT_PRECISION_OUT_SCREEN_OUTLINE_PRECIS: FONT_OUTPUT_PRECISIO
 public let FONT_OUTPUT_PRECISION_OUT_PS_ONLY_PRECIS: FONT_OUTPUT_PRECISION = FONT_OUTPUT_PRECISION(10)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct FONT_PITCH {
     public var value: UInt8 = 0
 
@@ -3892,7 +2596,6 @@ public let FONT_PITCH_FIXED_PITCH: FONT_PITCH = FONT_PITCH(1)
 public let FONT_PITCH_VARIABLE_PITCH: FONT_PITCH = FONT_PITCH(2)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct FONT_QUALITY {
     public var value: UInt8 = 0
 
@@ -3929,7 +2632,6 @@ public let FONT_QUALITY_ANTIALIASED_QUALITY: FONT_QUALITY = FONT_QUALITY(4)
 public let FONT_QUALITY_CLEARTYPE_QUALITY: FONT_QUALITY = FONT_QUALITY(5)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct FONT_RESOURCE_CHARACTERISTICS {
     public var value: UInt32 = 0
 
@@ -3954,7 +2656,6 @@ public let FONT_RESOURCE_CHARACTERISTICS_FR_PRIVATE: FONT_RESOURCE_CHARACTERISTI
 public let FONT_RESOURCE_CHARACTERISTICS_FR_NOT_ENUM: FONT_RESOURCE_CHARACTERISTICS = FONT_RESOURCE_CHARACTERISTICS(32)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct FONT_WEIGHT {
     public var value: UInt32 = 0
 
@@ -4048,7 +2749,6 @@ public struct GCP_RESULTSW {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct GDI_REGION_TYPE {
     public var value: Int32 = 0
 
@@ -4079,7 +2779,6 @@ public let GDI_REGION_TYPE_SIMPLEREGION: GDI_REGION_TYPE = GDI_REGION_TYPE(2)
 public let GDI_REGION_TYPE_COMPLEXREGION: GDI_REGION_TYPE = GDI_REGION_TYPE(3)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct GET_CHARACTER_PLACEMENT_FLAGS {
     public var value: UInt32 = 0
 
@@ -4157,7 +2856,6 @@ public let GET_CHARACTER_PLACEMENT_FLAGS_GCP_SYMSWAPOFF: GET_CHARACTER_PLACEMENT
 public let GET_CHARACTER_PLACEMENT_FLAGS_GCP_USEKERNING: GET_CHARACTER_PLACEMENT_FLAGS = GET_CHARACTER_PLACEMENT_FLAGS(8)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct GET_DCX_FLAGS {
     public var value: UInt32 = 0
 
@@ -4223,7 +2921,6 @@ public let GET_DCX_FLAGS_DCX_INTERSECTUPDATE: GET_DCX_FLAGS = GET_DCX_FLAGS(512)
 public let GET_DCX_FLAGS_DCX_VALIDATE: GET_DCX_FLAGS = GET_DCX_FLAGS(2097152)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct GET_DEVICE_CAPS_INDEX {
     public var value: UInt32 = 0
 
@@ -4362,7 +3059,6 @@ public let GET_DEVICE_CAPS_INDEX_SHADEBLENDCAPS: GET_DEVICE_CAPS_INDEX = GET_DEV
 public let GET_DEVICE_CAPS_INDEX_COLORMGMTCAPS: GET_DEVICE_CAPS_INDEX = GET_DEVICE_CAPS_INDEX(121)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct GET_GLYPH_OUTLINE_FORMAT {
     public var value: UInt32 = 0
 
@@ -4408,7 +3104,6 @@ public let GET_GLYPH_OUTLINE_FORMAT_GGO_NATIVE: GET_GLYPH_OUTLINE_FORMAT = GET_G
 public let GET_GLYPH_OUTLINE_FORMAT_GGO_UNHINTED: GET_GLYPH_OUTLINE_FORMAT = GET_GLYPH_OUTLINE_FORMAT(256)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct GET_STOCK_OBJECT_FLAGS {
     public var value: Int32 = 0
 
@@ -4498,21 +3193,9 @@ public struct GLYPHMETRICS {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct GLYPHSET {
-    public var cbThis: UInt32 = 0
-    public var flAccel: UInt32 = 0
-    public var cGlyphsSupported: UInt32 = 0
-    public var cRanges: UInt32 = 0
-    public var ranges: VArray<WCRANGE, $1> = VArray<WCRANGE, $1>(repeat: WCRANGE())
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
 public type GOBJENUMPROC = CFunc<(CPointer<Unit>, IntNative) -> Int32>
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct GRADIENT_FILL {
     public var value: UInt32 = 0
 
@@ -4557,7 +3240,6 @@ public struct GRADIENT_TRIANGLE {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct GRAPHICS_MODE {
     public var value: Int32 = 0
 
@@ -4582,17 +3264,6 @@ public let GRAPHICS_MODE_GM_COMPATIBLE: GRAPHICS_MODE = GRAPHICS_MODE(1)
 public let GRAPHICS_MODE_GM_ADVANCED: GRAPHICS_MODE = GRAPHICS_MODE(2)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-public type GRAYSTRINGPROC = CFunc<(HDC, IntNative, Int32) -> Int32>
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct HANDLETABLE {
-    public var objectHandle: VArray<HGDIOBJ, $1> = VArray<HGDIOBJ, $1>(repeat: CPointer<Unit>())
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct HATCH_BRUSH_STYLE {
     public var value: Int32 = 0
 
@@ -4629,16 +3300,9 @@ public let HATCH_BRUSH_STYLE_HS_HORIZONTAL: HATCH_BRUSH_STYLE = HATCH_BRUSH_STYL
 public let HATCH_BRUSH_STYLE_HS_VERTICAL: HATCH_BRUSH_STYLE = HATCH_BRUSH_STYLE(1)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-public type HBITMAP = CPointer<Unit>
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-public type HBRUSH = CPointer<Unit>
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
 public type HDC = CPointer<Unit>
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct HDC_MAP_MODE {
     public var value: Int32 = 0
 
@@ -4684,9 +3348,6 @@ public let HDC_MAP_MODE_MM_TWIPS: HDC_MAP_MODE = HDC_MAP_MODE(6)
 public type HENHMETAFILE = CPointer<Unit>
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-public type HFONT = CPointer<Unit>
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
 public type HGDIOBJ = CPointer<Unit>
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
@@ -4719,8 +3380,8 @@ public type LINEDDAPROC = CFunc<(Int32, Int32, IntNative) -> Unit>
 @When[Windows_Win32_Graphics_Gdi == "on"]
 @C
 public struct LOGBRUSH {
-    public var lbStyle: BRUSH_STYLE = BRUSH_STYLE()
-    public var lbColor: Win32_Foundation.COLORREF = 0
+    public var lbStyle: UInt32 = 0
+    public var lbColor: UInt32 = 0
     public var lbHatch: UIntNative = 0
     public init() {}
 }
@@ -4728,8 +3389,8 @@ public struct LOGBRUSH {
 @When[Windows_Win32_Graphics_Gdi == "on"]
 @C
 public struct LOGBRUSH32 {
-    public var lbStyle: BRUSH_STYLE = BRUSH_STYLE()
-    public var lbColor: Win32_Foundation.COLORREF = 0
+    public var lbStyle: UInt32 = 0
+    public var lbColor: UInt32 = 0
     public var lbHatch: UInt32 = 0
     public init() {}
 }
@@ -4745,12 +3406,12 @@ public struct LOGFONTA {
     public var lfItalic: UInt8 = 0
     public var lfUnderline: UInt8 = 0
     public var lfStrikeOut: UInt8 = 0
-    public var lfCharSet: FONT_CHARSET = FONT_CHARSET()
-    public var lfOutPrecision: FONT_OUTPUT_PRECISION = FONT_OUTPUT_PRECISION()
-    public var lfClipPrecision: FONT_CLIP_PRECISION = FONT_CLIP_PRECISION()
-    public var lfQuality: FONT_QUALITY = FONT_QUALITY()
+    public var lfCharSet: UInt8 = 0
+    public var lfOutPrecision: UInt8 = 0
+    public var lfClipPrecision: UInt8 = 0
+    public var lfQuality: UInt8 = 0
     public var lfPitchAndFamily: UInt8 = 0
-    public var lfFaceName: VArray<Win32_Foundation.CHAR, $32> = VArray<Win32_Foundation.CHAR, $32>(repeat: 0)
+    public var lfFaceName: VArray<Int8, $32> = VArray<Int8, $32>(repeat: 0)
     public init() {}
 }
 
@@ -4765,21 +3426,12 @@ public struct LOGFONTW {
     public var lfItalic: UInt8 = 0
     public var lfUnderline: UInt8 = 0
     public var lfStrikeOut: UInt8 = 0
-    public var lfCharSet: FONT_CHARSET = FONT_CHARSET()
-    public var lfOutPrecision: FONT_OUTPUT_PRECISION = FONT_OUTPUT_PRECISION()
-    public var lfClipPrecision: FONT_CLIP_PRECISION = FONT_CLIP_PRECISION()
-    public var lfQuality: FONT_QUALITY = FONT_QUALITY()
+    public var lfCharSet: UInt8 = 0
+    public var lfOutPrecision: UInt8 = 0
+    public var lfClipPrecision: UInt8 = 0
+    public var lfQuality: UInt8 = 0
     public var lfPitchAndFamily: UInt8 = 0
     public var lfFaceName: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct LOGPALETTE {
-    public var palVersion: UInt16 = 0
-    public var palNumEntries: UInt16 = 0
-    public var palPalEntry: VArray<PALETTEENTRY, $1> = VArray<PALETTEENTRY, $1>(repeat: PALETTEENTRY())
     public init() {}
 }
 
@@ -4788,15 +3440,9 @@ public struct LOGPALETTE {
 public struct LOGPEN {
     public var lopnStyle: UInt32 = 0
     public var lopnWidth: Win32_Foundation.POINT = Win32_Foundation.POINT()
-    public var lopnColor: Win32_Foundation.COLORREF = 0
+    public var lopnColor: UInt32 = 0
     public init() {}
 }
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-public type LPFNDEVCAPS = CFunc<(CPointer<UInt8>, CPointer<UInt8>, UInt32, CPointer<UInt8>, CPointer<DEVMODEA>) -> UInt32>
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-public type LPFNDEVMODE = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<DEVMODEA>, CPointer<UInt8>, CPointer<UInt8>, CPointer<DEVMODEA>, CPointer<UInt8>, UInt32) -> UInt32>
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
 @C
@@ -4809,126 +3455,134 @@ public struct MAT2 {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
+// packed(2)
 @C
 public struct METAHEADER {
     public var _raw: VArray<UInt8, $18> = VArray<UInt8, $18>(repeat: 0u8)
 
-    public func mtType(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 0)
+    public mut prop mtType: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_mtType(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 0, val)
-            _raw = rawStorage
+    public mut prop mtHeaderSize: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 2)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 2, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func mtHeaderSize(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 2)
+    public mut prop mtVersion: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_mtHeaderSize(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 2, val)
-            _raw = rawStorage
+    public mut prop mtSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 6)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 6, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func mtVersion(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 4)
+    public mut prop mtNoObjects: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 10)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 10, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_mtVersion(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 4, val)
-            _raw = rawStorage
+    public mut prop mtMaxRecord: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func mtSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 6)
+    public mut prop mtNoParameters: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 16)
+            }
         }
-    }
-
-    public mut func set_mtSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 6, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func mtNoObjects(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 10)
-        }
-    }
-
-    public mut func set_mtNoObjects(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 10, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func mtMaxRecord(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
-        }
-    }
-
-    public mut func set_mtMaxRecord(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func mtNoParameters(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 16)
-        }
-    }
-
-    public mut func set_mtNoParameters(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 16, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -4944,10 +3598,6 @@ public struct METARECORD {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-public type MFENUMPROC = CFunc<(HDC, CPointer<HANDLETABLE>, CPointer<METARECORD>, Int32, IntNative) -> Int32>
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct MODIFY_WORLD_TRANSFORM_MODE {
     public var value: UInt32 = 0
 
@@ -4991,7 +3641,7 @@ public struct MONITORINFO {
 @C
 public struct MONITORINFOEXA {
     public var monitorInfo: MONITORINFO = MONITORINFO()
-    public var szDevice: VArray<Win32_Foundation.CHAR, $32> = VArray<Win32_Foundation.CHAR, $32>(repeat: 0)
+    public var szDevice: VArray<Int8, $32> = VArray<Int8, $32>(repeat: 0)
     public init() {}
 }
 
@@ -5004,7 +3654,6 @@ public struct MONITORINFOEXW {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct MONITOR_FROM_FLAGS {
     public var value: UInt32 = 0
 
@@ -5032,67 +3681,6 @@ public let MONITOR_FROM_FLAGS_MONITOR_DEFAULTTONULL: MONITOR_FROM_FLAGS = MONITO
 public let MONITOR_FROM_FLAGS_MONITOR_DEFAULTTOPRIMARY: MONITOR_FROM_FLAGS = MONITOR_FROM_FLAGS(1)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct NEWTEXTMETRICA {
-    public var tmHeight: Int32 = 0
-    public var tmAscent: Int32 = 0
-    public var tmDescent: Int32 = 0
-    public var tmInternalLeading: Int32 = 0
-    public var tmExternalLeading: Int32 = 0
-    public var tmAveCharWidth: Int32 = 0
-    public var tmMaxCharWidth: Int32 = 0
-    public var tmWeight: Int32 = 0
-    public var tmOverhang: Int32 = 0
-    public var tmDigitizedAspectX: Int32 = 0
-    public var tmDigitizedAspectY: Int32 = 0
-    public var tmFirstChar: UInt8 = 0
-    public var tmLastChar: UInt8 = 0
-    public var tmDefaultChar: UInt8 = 0
-    public var tmBreakChar: UInt8 = 0
-    public var tmItalic: UInt8 = 0
-    public var tmUnderlined: UInt8 = 0
-    public var tmStruckOut: UInt8 = 0
-    public var tmPitchAndFamily: TMPF_FLAGS = TMPF_FLAGS()
-    public var tmCharSet: UInt8 = 0
-    public var ntmFlags: UInt32 = 0
-    public var ntmSizeEM: UInt32 = 0
-    public var ntmCellHeight: UInt32 = 0
-    public var ntmAvgWidth: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct NEWTEXTMETRICW {
-    public var tmHeight: Int32 = 0
-    public var tmAscent: Int32 = 0
-    public var tmDescent: Int32 = 0
-    public var tmInternalLeading: Int32 = 0
-    public var tmExternalLeading: Int32 = 0
-    public var tmAveCharWidth: Int32 = 0
-    public var tmMaxCharWidth: Int32 = 0
-    public var tmWeight: Int32 = 0
-    public var tmOverhang: Int32 = 0
-    public var tmDigitizedAspectX: Int32 = 0
-    public var tmDigitizedAspectY: Int32 = 0
-    public var tmFirstChar: UInt16 = 0
-    public var tmLastChar: UInt16 = 0
-    public var tmDefaultChar: UInt16 = 0
-    public var tmBreakChar: UInt16 = 0
-    public var tmItalic: UInt8 = 0
-    public var tmUnderlined: UInt8 = 0
-    public var tmStruckOut: UInt8 = 0
-    public var tmPitchAndFamily: TMPF_FLAGS = TMPF_FLAGS()
-    public var tmCharSet: UInt8 = 0
-    public var ntmFlags: UInt32 = 0
-    public var ntmSizeEM: UInt32 = 0
-    public var ntmCellHeight: UInt32 = 0
-    public var ntmAvgWidth: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct OBJ_TYPE {
     public var value: Int32 = 0
 
@@ -5154,82 +3742,6 @@ public let OBJ_TYPE_OBJ_COLORSPACE: OBJ_TYPE = OBJ_TYPE(14)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
 @C
-public struct OUTLINETEXTMETRICA {
-    public var otmSize: UInt32 = 0
-    public var otmTextMetrics: TEXTMETRICA = TEXTMETRICA()
-    public var otmFiller: UInt8 = 0
-    public var otmPanoseNumber: PANOSE = PANOSE()
-    public var otmfsSelection: UInt32 = 0
-    public var otmfsType: UInt32 = 0
-    public var otmsCharSlopeRise: Int32 = 0
-    public var otmsCharSlopeRun: Int32 = 0
-    public var otmItalicAngle: Int32 = 0
-    public var otmEMSquare: UInt32 = 0
-    public var otmAscent: Int32 = 0
-    public var otmDescent: Int32 = 0
-    public var otmLineGap: UInt32 = 0
-    public var otmsCapEmHeight: UInt32 = 0
-    public var otmsXHeight: UInt32 = 0
-    public var otmrcFontBox: Win32_Foundation.RECT = Win32_Foundation.RECT()
-    public var otmMacAscent: Int32 = 0
-    public var otmMacDescent: Int32 = 0
-    public var otmMacLineGap: UInt32 = 0
-    public var otmusMinimumPPEM: UInt32 = 0
-    public var otmptSubscriptSize: Win32_Foundation.POINT = Win32_Foundation.POINT()
-    public var otmptSubscriptOffset: Win32_Foundation.POINT = Win32_Foundation.POINT()
-    public var otmptSuperscriptSize: Win32_Foundation.POINT = Win32_Foundation.POINT()
-    public var otmptSuperscriptOffset: Win32_Foundation.POINT = Win32_Foundation.POINT()
-    public var otmsStrikeoutSize: UInt32 = 0
-    public var otmsStrikeoutPosition: Int32 = 0
-    public var otmsUnderscoreSize: Int32 = 0
-    public var otmsUnderscorePosition: Int32 = 0
-    public var otmpFamilyName: CPointer<UInt8> = CPointer<UInt8>()
-    public var otmpFaceName: CPointer<UInt8> = CPointer<UInt8>()
-    public var otmpStyleName: CPointer<UInt8> = CPointer<UInt8>()
-    public var otmpFullName: CPointer<UInt8> = CPointer<UInt8>()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct OUTLINETEXTMETRICW {
-    public var otmSize: UInt32 = 0
-    public var otmTextMetrics: TEXTMETRICW = TEXTMETRICW()
-    public var otmFiller: UInt8 = 0
-    public var otmPanoseNumber: PANOSE = PANOSE()
-    public var otmfsSelection: UInt32 = 0
-    public var otmfsType: UInt32 = 0
-    public var otmsCharSlopeRise: Int32 = 0
-    public var otmsCharSlopeRun: Int32 = 0
-    public var otmItalicAngle: Int32 = 0
-    public var otmEMSquare: UInt32 = 0
-    public var otmAscent: Int32 = 0
-    public var otmDescent: Int32 = 0
-    public var otmLineGap: UInt32 = 0
-    public var otmsCapEmHeight: UInt32 = 0
-    public var otmsXHeight: UInt32 = 0
-    public var otmrcFontBox: Win32_Foundation.RECT = Win32_Foundation.RECT()
-    public var otmMacAscent: Int32 = 0
-    public var otmMacDescent: Int32 = 0
-    public var otmMacLineGap: UInt32 = 0
-    public var otmusMinimumPPEM: UInt32 = 0
-    public var otmptSubscriptSize: Win32_Foundation.POINT = Win32_Foundation.POINT()
-    public var otmptSubscriptOffset: Win32_Foundation.POINT = Win32_Foundation.POINT()
-    public var otmptSuperscriptSize: Win32_Foundation.POINT = Win32_Foundation.POINT()
-    public var otmptSuperscriptOffset: Win32_Foundation.POINT = Win32_Foundation.POINT()
-    public var otmsStrikeoutSize: UInt32 = 0
-    public var otmsStrikeoutPosition: Int32 = 0
-    public var otmsUnderscoreSize: Int32 = 0
-    public var otmsUnderscorePosition: Int32 = 0
-    public var otmpFamilyName: CPointer<UInt8> = CPointer<UInt8>()
-    public var otmpFaceName: CPointer<UInt8> = CPointer<UInt8>()
-    public var otmpStyleName: CPointer<UInt8> = CPointer<UInt8>()
-    public var otmpFullName: CPointer<UInt8> = CPointer<UInt8>()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct PAINTSTRUCT {
     public var hdc: HDC = CPointer<Unit>()
     public var fErase: Int32 = 0
@@ -5251,23 +3763,6 @@ public struct PALETTEENTRY {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct PANOSE {
-    public var bFamilyType: PAN_FAMILY_TYPE = PAN_FAMILY_TYPE()
-    public var bSerifStyle: PAN_SERIF_STYLE = PAN_SERIF_STYLE()
-    public var bWeight: PAN_WEIGHT = PAN_WEIGHT()
-    public var bProportion: PAN_PROPORTION = PAN_PROPORTION()
-    public var bContrast: PAN_CONTRAST = PAN_CONTRAST()
-    public var bStrokeVariation: PAN_STROKE_VARIATION = PAN_STROKE_VARIATION()
-    public var bArmStyle: PAN_ARM_STYLE = PAN_ARM_STYLE()
-    public var bLetterform: PAN_LETT_FORM = PAN_LETT_FORM()
-    public var bMidline: PAN_MIDLINE = PAN_MIDLINE()
-    public var bXHeight: PAN_XHEIGHT = PAN_XHEIGHT()
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct PAN_ARM_STYLE {
     public var value: UInt8 = 0
 
@@ -5322,7 +3817,6 @@ public let PAN_ARM_STYLE_PAN_BENT_ARMS_SINGLE_SERIF: PAN_ARM_STYLE = PAN_ARM_STY
 public let PAN_ARM_STYLE_PAN_BENT_ARMS_DOUBLE_SERIF: PAN_ARM_STYLE = PAN_ARM_STYLE(11)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct PAN_CONTRAST {
     public var value: UInt8 = 0
 
@@ -5374,7 +3868,6 @@ public let PAN_CONTRAST_PAN_CONTRAST_HIGH: PAN_CONTRAST = PAN_CONTRAST(8)
 public let PAN_CONTRAST_PAN_CONTRAST_VERY_HIGH: PAN_CONTRAST = PAN_CONTRAST(9)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct PAN_FAMILY_TYPE {
     public var value: UInt8 = 0
 
@@ -5411,7 +3904,6 @@ public let PAN_FAMILY_TYPE_PAN_FAMILY_DECORATIVE: PAN_FAMILY_TYPE = PAN_FAMILY_T
 public let PAN_FAMILY_TYPE_PAN_FAMILY_PICTORIAL: PAN_FAMILY_TYPE = PAN_FAMILY_TYPE(5)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct PAN_LETT_FORM {
     public var value: UInt8 = 0
 
@@ -5478,7 +3970,6 @@ public let PAN_LETT_FORM_PAN_LETT_OBLIQUE_OFF_CENTER: PAN_LETT_FORM = PAN_LETT_F
 public let PAN_LETT_FORM_PAN_LETT_OBLIQUE_SQUARE: PAN_LETT_FORM = PAN_LETT_FORM(15)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct PAN_MIDLINE {
     public var value: UInt8 = 0
 
@@ -5542,7 +4033,6 @@ public let PAN_MIDLINE_PAN_MIDLINE_LOW_POINTED: PAN_MIDLINE = PAN_MIDLINE(12)
 public let PAN_MIDLINE_PAN_MIDLINE_LOW_SERIFED: PAN_MIDLINE = PAN_MIDLINE(13)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct PAN_PROPORTION {
     public var value: UInt8 = 0
 
@@ -5591,7 +4081,6 @@ public let PAN_PROPORTION_PAN_PROP_VERY_CONDENSED: PAN_PROPORTION = PAN_PROPORTI
 public let PAN_PROPORTION_PAN_PROP_MONOSPACED: PAN_PROPORTION = PAN_PROPORTION(9)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct PAN_SERIF_STYLE {
     public var value: UInt8 = 0
 
@@ -5658,7 +4147,6 @@ public let PAN_SERIF_STYLE_PAN_SERIF_FLARED: PAN_SERIF_STYLE = PAN_SERIF_STYLE(1
 public let PAN_SERIF_STYLE_PAN_SERIF_ROUNDED: PAN_SERIF_STYLE = PAN_SERIF_STYLE(15)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct PAN_STROKE_VARIATION {
     public var value: UInt8 = 0
 
@@ -5704,7 +4192,6 @@ public let PAN_STROKE_VARIATION_PAN_STROKE_RAPID_HORZ: PAN_STROKE_VARIATION = PA
 public let PAN_STROKE_VARIATION_PAN_STROKE_INSTANT_VERT: PAN_STROKE_VARIATION = PAN_STROKE_VARIATION(8)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct PAN_WEIGHT {
     public var value: UInt8 = 0
 
@@ -5762,7 +4249,6 @@ public let PAN_WEIGHT_PAN_WEIGHT_BLACK: PAN_WEIGHT = PAN_WEIGHT(10)
 public let PAN_WEIGHT_PAN_WEIGHT_NORD: PAN_WEIGHT = PAN_WEIGHT(11)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct PAN_XHEIGHT {
     public var value: UInt8 = 0
 
@@ -5819,7 +4305,6 @@ public struct PELARRAY {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct PEN_STYLE {
     public var value: Int32 = 0
 
@@ -5949,7 +4434,6 @@ public struct POLYTEXTW {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct R2_MODE {
     public var value: Int32 = 0
 
@@ -6031,7 +4515,6 @@ public struct RASTERIZER_STATUS {
 public type READEMBEDPROC = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> UInt32>
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct REDRAW_WINDOW_FLAGS {
     public var value: UInt32 = 0
 
@@ -6120,14 +4603,6 @@ public struct RGBTRIPLE {
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
 @C
-public struct RGNDATA {
-    public var rdh: RGNDATAHEADER = RGNDATAHEADER()
-    public var Buffer: VArray<Win32_Foundation.CHAR, $1> = VArray<Win32_Foundation.CHAR, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct RGNDATAHEADER {
     public var dwSize: UInt32 = 0
     public var iType: UInt32 = 0
@@ -6138,7 +4613,6 @@ public struct RGNDATAHEADER {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct RGN_COMBINE_MODE {
     public var value: Int32 = 0
 
@@ -6178,7 +4652,6 @@ public let RGN_COMBINE_MODE_RGN_MIN: RGN_COMBINE_MODE = RGN_COMBINE_MODE(1)
 public let RGN_COMBINE_MODE_RGN_MAX: RGN_COMBINE_MODE = RGN_COMBINE_MODE(5)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct ROP_CODE {
     public var value: UInt32 = 0
 
@@ -6262,7 +4735,6 @@ public let ROP_CODE_CAPTUREBLT: ROP_CODE = ROP_CODE(1073741824)
 public let ROP_CODE_NOMIRRORBITMAP: ROP_CODE = ROP_CODE(2147483648)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct SET_BOUNDS_RECT_FLAGS {
     public var value: UInt32 = 0
 
@@ -6293,7 +4765,6 @@ public let SET_BOUNDS_RECT_FLAGS_DCB_ENABLE: SET_BOUNDS_RECT_FLAGS = SET_BOUNDS_
 public let SET_BOUNDS_RECT_FLAGS_DCB_RESET: SET_BOUNDS_RECT_FLAGS = SET_BOUNDS_RECT_FLAGS(1)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct STRETCH_BLT_MODE {
     public var value: Int32 = 0
 
@@ -6336,7 +4807,6 @@ public let STRETCH_BLT_MODE_STRETCH_ORSCANS: STRETCH_BLT_MODE = STRETCH_BLT_MODE
 public let STRETCH_BLT_MODE_WHITEONBLACK: STRETCH_BLT_MODE = STRETCH_BLT_MODE(2)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct SYSTEM_PALETTE_USE {
     public var value: UInt32 = 0
 
@@ -6364,7 +4834,6 @@ public let SYSTEM_PALETTE_USE_SYSPAL_NOSTATIC256: SYSTEM_PALETTE_USE = SYSTEM_PA
 public let SYSTEM_PALETTE_USE_SYSPAL_STATIC: SYSTEM_PALETTE_USE = SYSTEM_PALETTE_USE(1)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct SYS_COLOR_INDEX {
     public var value: Int32 = 0
 
@@ -6491,59 +4960,6 @@ public let SYS_COLOR_INDEX_COLOR_3DHILIGHT: SYS_COLOR_INDEX = SYS_COLOR_INDEX(20
 public let SYS_COLOR_INDEX_COLOR_BTNHILIGHT: SYS_COLOR_INDEX = SYS_COLOR_INDEX(20)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct TEXTMETRICA {
-    public var tmHeight: Int32 = 0
-    public var tmAscent: Int32 = 0
-    public var tmDescent: Int32 = 0
-    public var tmInternalLeading: Int32 = 0
-    public var tmExternalLeading: Int32 = 0
-    public var tmAveCharWidth: Int32 = 0
-    public var tmMaxCharWidth: Int32 = 0
-    public var tmWeight: Int32 = 0
-    public var tmOverhang: Int32 = 0
-    public var tmDigitizedAspectX: Int32 = 0
-    public var tmDigitizedAspectY: Int32 = 0
-    public var tmFirstChar: UInt8 = 0
-    public var tmLastChar: UInt8 = 0
-    public var tmDefaultChar: UInt8 = 0
-    public var tmBreakChar: UInt8 = 0
-    public var tmItalic: UInt8 = 0
-    public var tmUnderlined: UInt8 = 0
-    public var tmStruckOut: UInt8 = 0
-    public var tmPitchAndFamily: TMPF_FLAGS = TMPF_FLAGS()
-    public var tmCharSet: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
-public struct TEXTMETRICW {
-    public var tmHeight: Int32 = 0
-    public var tmAscent: Int32 = 0
-    public var tmDescent: Int32 = 0
-    public var tmInternalLeading: Int32 = 0
-    public var tmExternalLeading: Int32 = 0
-    public var tmAveCharWidth: Int32 = 0
-    public var tmMaxCharWidth: Int32 = 0
-    public var tmWeight: Int32 = 0
-    public var tmOverhang: Int32 = 0
-    public var tmDigitizedAspectX: Int32 = 0
-    public var tmDigitizedAspectY: Int32 = 0
-    public var tmFirstChar: UInt16 = 0
-    public var tmLastChar: UInt16 = 0
-    public var tmDefaultChar: UInt16 = 0
-    public var tmBreakChar: UInt16 = 0
-    public var tmItalic: UInt8 = 0
-    public var tmUnderlined: UInt8 = 0
-    public var tmStruckOut: UInt8 = 0
-    public var tmPitchAndFamily: TMPF_FLAGS = TMPF_FLAGS()
-    public var tmCharSet: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct TEXT_ALIGN_OPTIONS {
     public var value: UInt32 = 0
 
@@ -6624,7 +5040,6 @@ public let TEXT_ALIGN_OPTIONS_VTA_BOTTOM: TEXT_ALIGN_OPTIONS = TEXT_ALIGN_OPTION
 public let TEXT_ALIGN_OPTIONS_VTA_TOP: TEXT_ALIGN_OPTIONS = TEXT_ALIGN_OPTIONS(0)
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct TMPF_FLAGS {
     public var value: UInt8 = 0
 
@@ -6690,7 +5105,6 @@ public struct TTEMBEDINFO {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct TTEMBED_FLAGS {
     public var value: UInt32 = 0
 
@@ -6744,7 +5158,6 @@ public struct TTLOADINFO {
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]
-@C
 public struct TTLOAD_EMBEDDED_FONT_STATUS {
     public var value: UInt32 = 0
 
@@ -6857,11 +5270,1546 @@ public struct XFORM {
     public init() {}
 }
 
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct AXESLISTA {
+    public var axlReserved: UInt32 = 0
+    public var axlNumAxes: UInt32 = 0
+    public var axlAxisInfo: VArray<AXISINFOA, $16> = VArray<AXISINFOA, $16>(repeat: AXISINFOA())
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct AXESLISTW {
+    public var axlReserved: UInt32 = 0
+    public var axlNumAxes: UInt32 = 0
+    public var axlAxisInfo: VArray<AXISINFOW, $16> = VArray<AXISINFOW, $16>(repeat: AXISINFOW())
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct BITMAPCOREINFO {
+    public var bmciHeader: BITMAPCOREHEADER = BITMAPCOREHEADER()
+    public var bmciColors: VArray<RGBTRIPLE, $1> = VArray<RGBTRIPLE, $1>(repeat: RGBTRIPLE())
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct BITMAPINFO {
+    public var bmiHeader: BITMAPINFOHEADER = BITMAPINFOHEADER()
+    public var bmiColors: VArray<RGBQUAD, $1> = VArray<RGBQUAD, $1>(repeat: RGBQUAD())
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct BITMAPV4HEADER {
+    public var bV4Size: UInt32 = 0
+    public var bV4Width: Int32 = 0
+    public var bV4Height: Int32 = 0
+    public var bV4Planes: UInt16 = 0
+    public var bV4BitCount: UInt16 = 0
+    public var bV4V4Compression: UInt32 = 0
+    public var bV4SizeImage: UInt32 = 0
+    public var bV4XPelsPerMeter: Int32 = 0
+    public var bV4YPelsPerMeter: Int32 = 0
+    public var bV4ClrUsed: UInt32 = 0
+    public var bV4ClrImportant: UInt32 = 0
+    public var bV4RedMask: UInt32 = 0
+    public var bV4GreenMask: UInt32 = 0
+    public var bV4BlueMask: UInt32 = 0
+    public var bV4AlphaMask: UInt32 = 0
+    public var bV4CSType: UInt32 = 0
+    public var bV4Endpoints: CIEXYZTRIPLE = CIEXYZTRIPLE()
+    public var bV4GammaRed: UInt32 = 0
+    public var bV4GammaGreen: UInt32 = 0
+    public var bV4GammaBlue: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct BITMAPV5HEADER {
+    public var bV5Size: UInt32 = 0
+    public var bV5Width: Int32 = 0
+    public var bV5Height: Int32 = 0
+    public var bV5Planes: UInt16 = 0
+    public var bV5BitCount: UInt16 = 0
+    public var bV5Compression: UInt32 = 0
+    public var bV5SizeImage: UInt32 = 0
+    public var bV5XPelsPerMeter: Int32 = 0
+    public var bV5YPelsPerMeter: Int32 = 0
+    public var bV5ClrUsed: UInt32 = 0
+    public var bV5ClrImportant: UInt32 = 0
+    public var bV5RedMask: UInt32 = 0
+    public var bV5GreenMask: UInt32 = 0
+    public var bV5BlueMask: UInt32 = 0
+    public var bV5AlphaMask: UInt32 = 0
+    public var bV5CSType: UInt32 = 0
+    public var bV5Endpoints: CIEXYZTRIPLE = CIEXYZTRIPLE()
+    public var bV5GammaRed: UInt32 = 0
+    public var bV5GammaGreen: UInt32 = 0
+    public var bV5GammaBlue: UInt32 = 0
+    public var bV5Intent: UInt32 = 0
+    public var bV5ProfileData: UInt32 = 0
+    public var bV5ProfileSize: UInt32 = 0
+    public var bV5Reserved: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DEVMODEA {
+    public var dmDeviceName: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
+    public var dmSpecVersion: UInt16 = 0
+    public var dmDriverVersion: UInt16 = 0
+    public var dmSize: UInt16 = 0
+    public var dmDriverExtra: UInt16 = 0
+    public var dmFields: UInt32 = 0
+    public var Anonymous1: DEVMODEA__Anonymous1_e__Union = DEVMODEA__Anonymous1_e__Union()
+    public var dmColor: Int16 = 0
+    public var dmDuplex: Int16 = 0
+    public var dmYResolution: Int16 = 0
+    public var dmTTOption: Int16 = 0
+    public var dmCollate: Int16 = 0
+    public var dmFormName: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
+    public var dmLogPixels: UInt16 = 0
+    public var dmBitsPerPel: UInt32 = 0
+    public var dmPelsWidth: UInt32 = 0
+    public var dmPelsHeight: UInt32 = 0
+    public var Anonymous2: DEVMODEA__Anonymous2_e__Union = DEVMODEA__Anonymous2_e__Union()
+    public var dmDisplayFrequency: UInt32 = 0
+    public var dmICMMethod: UInt32 = 0
+    public var dmICMIntent: UInt32 = 0
+    public var dmMediaType: UInt32 = 0
+    public var dmDitherType: UInt32 = 0
+    public var dmReserved1: UInt32 = 0
+    public var dmReserved2: UInt32 = 0
+    public var dmPanningWidth: UInt32 = 0
+    public var dmPanningHeight: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DEVMODEA__Anonymous1_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop anonymous1: DEVMODEA__Anonymous1_e__Union__Anonymous1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVMODEA__Anonymous1_e__Union__Anonymous1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVMODEA__Anonymous1_e__Union__Anonymous1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop anonymous2: DEVMODEA__Anonymous1_e__Union__Anonymous2_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVMODEA__Anonymous1_e__Union__Anonymous2_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVMODEA__Anonymous1_e__Union__Anonymous2_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DEVMODEA__Anonymous1_e__Union__Anonymous1_e__Struct {
+    public var dmOrientation: Int16 = 0
+    public var dmPaperSize: Int16 = 0
+    public var dmPaperLength: Int16 = 0
+    public var dmPaperWidth: Int16 = 0
+    public var dmScale: Int16 = 0
+    public var dmCopies: Int16 = 0
+    public var dmDefaultSource: Int16 = 0
+    public var dmPrintQuality: Int16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DEVMODEA__Anonymous1_e__Union__Anonymous2_e__Struct {
+    public var dmPosition: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
+    public var dmDisplayOrientation: UInt32 = 0
+    public var dmDisplayFixedOutput: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DEVMODEA__Anonymous2_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+
+    public mut prop dmDisplayFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dmNup: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DEVMODEW {
+    public var dmDeviceName: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0)
+    public var dmSpecVersion: UInt16 = 0
+    public var dmDriverVersion: UInt16 = 0
+    public var dmSize: UInt16 = 0
+    public var dmDriverExtra: UInt16 = 0
+    public var dmFields: UInt32 = 0
+    public var Anonymous1: DEVMODEW__Anonymous1_e__Union = DEVMODEW__Anonymous1_e__Union()
+    public var dmColor: Int16 = 0
+    public var dmDuplex: Int16 = 0
+    public var dmYResolution: Int16 = 0
+    public var dmTTOption: Int16 = 0
+    public var dmCollate: Int16 = 0
+    public var dmFormName: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0)
+    public var dmLogPixels: UInt16 = 0
+    public var dmBitsPerPel: UInt32 = 0
+    public var dmPelsWidth: UInt32 = 0
+    public var dmPelsHeight: UInt32 = 0
+    public var Anonymous2: DEVMODEW__Anonymous2_e__Union = DEVMODEW__Anonymous2_e__Union()
+    public var dmDisplayFrequency: UInt32 = 0
+    public var dmICMMethod: UInt32 = 0
+    public var dmICMIntent: UInt32 = 0
+    public var dmMediaType: UInt32 = 0
+    public var dmDitherType: UInt32 = 0
+    public var dmReserved1: UInt32 = 0
+    public var dmReserved2: UInt32 = 0
+    public var dmPanningWidth: UInt32 = 0
+    public var dmPanningHeight: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DEVMODEW__Anonymous1_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop anonymous1: DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop anonymous2: DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct {
+    public var dmOrientation: Int16 = 0
+    public var dmPaperSize: Int16 = 0
+    public var dmPaperLength: Int16 = 0
+    public var dmPaperWidth: Int16 = 0
+    public var dmScale: Int16 = 0
+    public var dmCopies: Int16 = 0
+    public var dmDefaultSource: Int16 = 0
+    public var dmPrintQuality: Int16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct {
+    public var dmPosition: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
+    public var dmDisplayOrientation: UInt32 = 0
+    public var dmDisplayFixedOutput: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DEVMODEW__Anonymous2_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+
+    public mut prop dmDisplayFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dmNup: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DISPLAY_DEVICEA {
+    public var cb: UInt32 = 0
+    public var DeviceName: VArray<Int8, $32> = VArray<Int8, $32>(repeat: 0)
+    public var DeviceString: VArray<Int8, $128> = VArray<Int8, $128>(repeat: 0)
+    public var StateFlags: UInt32 = 0
+    public var DeviceID: VArray<Int8, $128> = VArray<Int8, $128>(repeat: 0)
+    public var DeviceKey: VArray<Int8, $128> = VArray<Int8, $128>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DISPLAY_DEVICEW {
+    public var cb: UInt32 = 0
+    public var DeviceName: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0)
+    public var DeviceString: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0)
+    public var StateFlags: UInt32 = 0
+    public var DeviceID: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0)
+    public var DeviceKey: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type DRAWSTATEPROC = CFunc<(HDC, IntNative, UIntNative, Int32, Int32) -> Int32>
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMR {
+    public var iType: UInt32 = 0
+    public var nSize: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRALPHABLEND {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var xDest: Int32 = 0
+    public var yDest: Int32 = 0
+    public var cxDest: Int32 = 0
+    public var cyDest: Int32 = 0
+    public var dwRop: UInt32 = 0
+    public var xSrc: Int32 = 0
+    public var ySrc: Int32 = 0
+    public var xformSrc: XFORM = XFORM()
+    public var crBkColorSrc: UInt32 = 0
+    public var iUsageSrc: UInt32 = 0
+    public var offBmiSrc: UInt32 = 0
+    public var cbBmiSrc: UInt32 = 0
+    public var offBitsSrc: UInt32 = 0
+    public var cbBitsSrc: UInt32 = 0
+    public var cxSrc: Int32 = 0
+    public var cySrc: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRANGLEARC {
+    public var emr: EMR = EMR()
+    public var ptlCenter: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
+    public var nRadius: UInt32 = 0
+    public var eStartAngle: Float32 = 0.0
+    public var eSweepAngle: Float32 = 0.0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRARC {
+    public var emr: EMR = EMR()
+    public var rclBox: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var ptlStart: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
+    public var ptlEnd: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRBITBLT {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var xDest: Int32 = 0
+    public var yDest: Int32 = 0
+    public var cxDest: Int32 = 0
+    public var cyDest: Int32 = 0
+    public var dwRop: UInt32 = 0
+    public var xSrc: Int32 = 0
+    public var ySrc: Int32 = 0
+    public var xformSrc: XFORM = XFORM()
+    public var crBkColorSrc: UInt32 = 0
+    public var iUsageSrc: UInt32 = 0
+    public var offBmiSrc: UInt32 = 0
+    public var cbBmiSrc: UInt32 = 0
+    public var offBitsSrc: UInt32 = 0
+    public var cbBitsSrc: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRCOLORCORRECTPALETTE {
+    public var emr: EMR = EMR()
+    public var ihPalette: UInt32 = 0
+    public var nFirstEntry: UInt32 = 0
+    public var nPalEntries: UInt32 = 0
+    public var nReserved: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRCOLORMATCHTOTARGET {
+    public var emr: EMR = EMR()
+    public var dwAction: UInt32 = 0
+    public var dwFlags: UInt32 = 0
+    public var cbName: UInt32 = 0
+    public var cbData: UInt32 = 0
+    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRCREATEBRUSHINDIRECT {
+    public var emr: EMR = EMR()
+    public var ihBrush: UInt32 = 0
+    public var lb: LOGBRUSH32 = LOGBRUSH32()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRCREATEDIBPATTERNBRUSHPT {
+    public var emr: EMR = EMR()
+    public var ihBrush: UInt32 = 0
+    public var iUsage: UInt32 = 0
+    public var offBmi: UInt32 = 0
+    public var cbBmi: UInt32 = 0
+    public var offBits: UInt32 = 0
+    public var cbBits: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRCREATEMONOBRUSH {
+    public var emr: EMR = EMR()
+    public var ihBrush: UInt32 = 0
+    public var iUsage: UInt32 = 0
+    public var offBmi: UInt32 = 0
+    public var cbBmi: UInt32 = 0
+    public var offBits: UInt32 = 0
+    public var cbBits: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRCREATEPEN {
+    public var emr: EMR = EMR()
+    public var ihPen: UInt32 = 0
+    public var lopn: LOGPEN = LOGPEN()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRELLIPSE {
+    public var emr: EMR = EMR()
+    public var rclBox: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMREOF {
+    public var emr: EMR = EMR()
+    public var nPalEntries: UInt32 = 0
+    public var offPalEntries: UInt32 = 0
+    public var nSizeLast: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMREXCLUDECLIPRECT {
+    public var emr: EMR = EMR()
+    public var rclClip: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMREXTCREATEPEN {
+    public var emr: EMR = EMR()
+    public var ihPen: UInt32 = 0
+    public var offBmi: UInt32 = 0
+    public var cbBmi: UInt32 = 0
+    public var offBits: UInt32 = 0
+    public var cbBits: UInt32 = 0
+    public var elp: EXTLOGPEN32 = EXTLOGPEN32()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMREXTESCAPE {
+    public var emr: EMR = EMR()
+    public var iEscape: Int32 = 0
+    public var cbEscData: Int32 = 0
+    public var EscData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMREXTFLOODFILL {
+    public var emr: EMR = EMR()
+    public var ptlStart: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
+    public var crColor: UInt32 = 0
+    public var iMode: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMREXTSELECTCLIPRGN {
+    public var emr: EMR = EMR()
+    public var cbRgnData: UInt32 = 0
+    public var iMode: UInt32 = 0
+    public var RgnData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMREXTTEXTOUTA {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var iGraphicsMode: UInt32 = 0
+    public var exScale: Float32 = 0.0
+    public var eyScale: Float32 = 0.0
+    public var emrtext: EMRTEXT = EMRTEXT()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRFILLPATH {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRFILLRGN {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var cbRgnData: UInt32 = 0
+    public var ihBrush: UInt32 = 0
+    public var RgnData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRFRAMERGN {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var cbRgnData: UInt32 = 0
+    public var ihBrush: UInt32 = 0
+    public var szlStroke: Win32_Foundation.SIZE = Win32_Foundation.SIZE()
+    public var RgnData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRGDICOMMENT {
+    public var emr: EMR = EMR()
+    public var cbData: UInt32 = 0
+    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRGLSBOUNDEDRECORD {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var cbData: UInt32 = 0
+    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRGLSRECORD {
+    public var emr: EMR = EMR()
+    public var cbData: UInt32 = 0
+    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRGRADIENTFILL {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var nVer: UInt32 = 0
+    public var nTri: UInt32 = 0
+    public var ulMode: UInt32 = 0
+    public var Ver: VArray<TRIVERTEX, $1> = VArray<TRIVERTEX, $1>(repeat: TRIVERTEX())
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRINVERTRGN {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var cbRgnData: UInt32 = 0
+    public var RgnData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRLINETO {
+    public var emr: EMR = EMR()
+    public var ptl: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRMASKBLT {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var xDest: Int32 = 0
+    public var yDest: Int32 = 0
+    public var cxDest: Int32 = 0
+    public var cyDest: Int32 = 0
+    public var dwRop: UInt32 = 0
+    public var xSrc: Int32 = 0
+    public var ySrc: Int32 = 0
+    public var xformSrc: XFORM = XFORM()
+    public var crBkColorSrc: UInt32 = 0
+    public var iUsageSrc: UInt32 = 0
+    public var offBmiSrc: UInt32 = 0
+    public var cbBmiSrc: UInt32 = 0
+    public var offBitsSrc: UInt32 = 0
+    public var cbBitsSrc: UInt32 = 0
+    public var xMask: Int32 = 0
+    public var yMask: Int32 = 0
+    public var iUsageMask: UInt32 = 0
+    public var offBmiMask: UInt32 = 0
+    public var cbBmiMask: UInt32 = 0
+    public var offBitsMask: UInt32 = 0
+    public var cbBitsMask: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRMODIFYWORLDTRANSFORM {
+    public var emr: EMR = EMR()
+    public var xform: XFORM = XFORM()
+    public var iMode: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRNAMEDESCAPE {
+    public var emr: EMR = EMR()
+    public var iEscape: Int32 = 0
+    public var cbDriver: Int32 = 0
+    public var cbEscData: Int32 = 0
+    public var EscData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMROFFSETCLIPRGN {
+    public var emr: EMR = EMR()
+    public var ptlOffset: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRPLGBLT {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var aptlDest: VArray<Win32_Foundation.POINTL, $3> = VArray<Win32_Foundation.POINTL, $3>(repeat: Win32_Foundation.POINTL())
+    public var xSrc: Int32 = 0
+    public var ySrc: Int32 = 0
+    public var cxSrc: Int32 = 0
+    public var cySrc: Int32 = 0
+    public var xformSrc: XFORM = XFORM()
+    public var crBkColorSrc: UInt32 = 0
+    public var iUsageSrc: UInt32 = 0
+    public var offBmiSrc: UInt32 = 0
+    public var cbBmiSrc: UInt32 = 0
+    public var offBitsSrc: UInt32 = 0
+    public var cbBitsSrc: UInt32 = 0
+    public var xMask: Int32 = 0
+    public var yMask: Int32 = 0
+    public var iUsageMask: UInt32 = 0
+    public var offBmiMask: UInt32 = 0
+    public var cbBmiMask: UInt32 = 0
+    public var offBitsMask: UInt32 = 0
+    public var cbBitsMask: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRPOLYDRAW {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var cptl: UInt32 = 0
+    public var aptl: VArray<Win32_Foundation.POINTL, $1> = VArray<Win32_Foundation.POINTL, $1>(repeat: Win32_Foundation.POINTL())
+    public var abTypes: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRPOLYDRAW16 {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var cpts: UInt32 = 0
+    public var apts: VArray<Win32_Foundation.POINTS, $1> = VArray<Win32_Foundation.POINTS, $1>(repeat: Win32_Foundation.POINTS())
+    public var abTypes: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRPOLYLINE {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var cptl: UInt32 = 0
+    public var aptl: VArray<Win32_Foundation.POINTL, $1> = VArray<Win32_Foundation.POINTL, $1>(repeat: Win32_Foundation.POINTL())
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRPOLYLINE16 {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var cpts: UInt32 = 0
+    public var apts: VArray<Win32_Foundation.POINTS, $1> = VArray<Win32_Foundation.POINTS, $1>(repeat: Win32_Foundation.POINTS())
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRPOLYPOLYLINE {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var nPolys: UInt32 = 0
+    public var cptl: UInt32 = 0
+    public var aPolyCounts: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var aptl: VArray<Win32_Foundation.POINTL, $1> = VArray<Win32_Foundation.POINTL, $1>(repeat: Win32_Foundation.POINTL())
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRPOLYPOLYLINE16 {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var nPolys: UInt32 = 0
+    public var cpts: UInt32 = 0
+    public var aPolyCounts: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var apts: VArray<Win32_Foundation.POINTS, $1> = VArray<Win32_Foundation.POINTS, $1>(repeat: Win32_Foundation.POINTS())
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRPOLYTEXTOUTA {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var iGraphicsMode: UInt32 = 0
+    public var exScale: Float32 = 0.0
+    public var eyScale: Float32 = 0.0
+    public var cStrings: Int32 = 0
+    public var aemrtext: VArray<EMRTEXT, $1> = VArray<EMRTEXT, $1>(repeat: EMRTEXT())
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRRESIZEPALETTE {
+    public var emr: EMR = EMR()
+    public var ihPal: UInt32 = 0
+    public var cEntries: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRRESTOREDC {
+    public var emr: EMR = EMR()
+    public var iRelative: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRROUNDRECT {
+    public var emr: EMR = EMR()
+    public var rclBox: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var szlCorner: Win32_Foundation.SIZE = Win32_Foundation.SIZE()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSCALEVIEWPORTEXTEX {
+    public var emr: EMR = EMR()
+    public var xNum: Int32 = 0
+    public var xDenom: Int32 = 0
+    public var yNum: Int32 = 0
+    public var yDenom: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSELECTCLIPPATH {
+    public var emr: EMR = EMR()
+    public var iMode: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSELECTOBJECT {
+    public var emr: EMR = EMR()
+    public var ihObject: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSELECTPALETTE {
+    public var emr: EMR = EMR()
+    public var ihPal: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETARCDIRECTION {
+    public var emr: EMR = EMR()
+    public var iArcDirection: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETCOLORADJUSTMENT {
+    public var emr: EMR = EMR()
+    public var ColorAdjustment: COLORADJUSTMENT = COLORADJUSTMENT()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETCOLORSPACE {
+    public var emr: EMR = EMR()
+    public var ihCS: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETDIBITSTODEVICE {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var xDest: Int32 = 0
+    public var yDest: Int32 = 0
+    public var xSrc: Int32 = 0
+    public var ySrc: Int32 = 0
+    public var cxSrc: Int32 = 0
+    public var cySrc: Int32 = 0
+    public var offBmiSrc: UInt32 = 0
+    public var cbBmiSrc: UInt32 = 0
+    public var offBitsSrc: UInt32 = 0
+    public var cbBitsSrc: UInt32 = 0
+    public var iUsageSrc: UInt32 = 0
+    public var iStartScan: UInt32 = 0
+    public var cScans: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETICMPROFILE {
+    public var emr: EMR = EMR()
+    public var dwFlags: UInt32 = 0
+    public var cbName: UInt32 = 0
+    public var cbData: UInt32 = 0
+    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETMAPPERFLAGS {
+    public var emr: EMR = EMR()
+    public var dwFlags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETMITERLIMIT {
+    public var emr: EMR = EMR()
+    public var eMiterLimit: Float32 = 0.0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETPALETTEENTRIES {
+    public var emr: EMR = EMR()
+    public var ihPal: UInt32 = 0
+    public var iStart: UInt32 = 0
+    public var cEntries: UInt32 = 0
+    public var aPalEntries: VArray<PALETTEENTRY, $1> = VArray<PALETTEENTRY, $1>(repeat: PALETTEENTRY())
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETPIXELV {
+    public var emr: EMR = EMR()
+    public var ptlPixel: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
+    public var crColor: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETTEXTCOLOR {
+    public var emr: EMR = EMR()
+    public var crColor: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETVIEWPORTEXTEX {
+    public var emr: EMR = EMR()
+    public var szlExtent: Win32_Foundation.SIZE = Win32_Foundation.SIZE()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETVIEWPORTORGEX {
+    public var emr: EMR = EMR()
+    public var ptlOrigin: Win32_Foundation.POINTL = Win32_Foundation.POINTL()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETWORLDTRANSFORM {
+    public var emr: EMR = EMR()
+    public var xform: XFORM = XFORM()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSTRETCHBLT {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var xDest: Int32 = 0
+    public var yDest: Int32 = 0
+    public var cxDest: Int32 = 0
+    public var cyDest: Int32 = 0
+    public var dwRop: UInt32 = 0
+    public var xSrc: Int32 = 0
+    public var ySrc: Int32 = 0
+    public var xformSrc: XFORM = XFORM()
+    public var crBkColorSrc: UInt32 = 0
+    public var iUsageSrc: UInt32 = 0
+    public var offBmiSrc: UInt32 = 0
+    public var cbBmiSrc: UInt32 = 0
+    public var offBitsSrc: UInt32 = 0
+    public var cbBitsSrc: UInt32 = 0
+    public var cxSrc: Int32 = 0
+    public var cySrc: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSTRETCHDIBITS {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var xDest: Int32 = 0
+    public var yDest: Int32 = 0
+    public var xSrc: Int32 = 0
+    public var ySrc: Int32 = 0
+    public var cxSrc: Int32 = 0
+    public var cySrc: Int32 = 0
+    public var offBmiSrc: UInt32 = 0
+    public var cbBmiSrc: UInt32 = 0
+    public var offBitsSrc: UInt32 = 0
+    public var cbBitsSrc: UInt32 = 0
+    public var iUsageSrc: UInt32 = 0
+    public var dwRop: UInt32 = 0
+    public var cxDest: Int32 = 0
+    public var cyDest: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRTRANSPARENTBLT {
+    public var emr: EMR = EMR()
+    public var rclBounds: Win32_Foundation.RECTL = Win32_Foundation.RECTL()
+    public var xDest: Int32 = 0
+    public var yDest: Int32 = 0
+    public var cxDest: Int32 = 0
+    public var cyDest: Int32 = 0
+    public var dwRop: UInt32 = 0
+    public var xSrc: Int32 = 0
+    public var ySrc: Int32 = 0
+    public var xformSrc: XFORM = XFORM()
+    public var crBkColorSrc: UInt32 = 0
+    public var iUsageSrc: UInt32 = 0
+    public var offBmiSrc: UInt32 = 0
+    public var cbBmiSrc: UInt32 = 0
+    public var offBitsSrc: UInt32 = 0
+    public var cbBitsSrc: UInt32 = 0
+    public var cxSrc: Int32 = 0
+    public var cySrc: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ENUMLOGFONTA {
+    public var elfLogFont: LOGFONTA = LOGFONTA()
+    public var elfFullName: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
+    public var elfStyle: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ENUMLOGFONTEXA {
+    public var elfLogFont: LOGFONTA = LOGFONTA()
+    public var elfFullName: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
+    public var elfStyle: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
+    public var elfScript: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ENUMLOGFONTEXDVA {
+    public var elfEnumLogfontEx: ENUMLOGFONTEXA = ENUMLOGFONTEXA()
+    public var elfDesignVector: DESIGNVECTOR = DESIGNVECTOR()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ENUMLOGFONTEXW {
+    public var elfLogFont: LOGFONTW = LOGFONTW()
+    public var elfFullName: VArray<UInt16, $64> = VArray<UInt16, $64>(repeat: 0)
+    public var elfStyle: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0)
+    public var elfScript: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ENUMLOGFONTW {
+    public var elfLogFont: LOGFONTW = LOGFONTW()
+    public var elfFullName: VArray<UInt16, $64> = VArray<UInt16, $64>(repeat: 0)
+    public var elfStyle: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct GLYPHSET {
+    public var cbThis: UInt32 = 0
+    public var flAccel: UInt32 = 0
+    public var cGlyphsSupported: UInt32 = 0
+    public var cRanges: UInt32 = 0
+    public var ranges: VArray<WCRANGE, $1> = VArray<WCRANGE, $1>(repeat: WCRANGE())
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type GRAYSTRINGPROC = CFunc<(HDC, IntNative, Int32) -> Int32>
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct HANDLETABLE {
+    public var objectHandle: VArray<HGDIOBJ, $1> = VArray<HGDIOBJ, $1>(repeat: CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type HBITMAP = CPointer<Unit>
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type HBRUSH = CPointer<Unit>
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type HFONT = CPointer<Unit>
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct LOGPALETTE {
+    public var palVersion: UInt16 = 0
+    public var palNumEntries: UInt16 = 0
+    public var palPalEntry: VArray<PALETTEENTRY, $1> = VArray<PALETTEENTRY, $1>(repeat: PALETTEENTRY())
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type LPFNDEVCAPS = CFunc<(CPointer<UInt8>, CPointer<UInt8>, UInt32, CPointer<UInt8>, CPointer<DEVMODEA>) -> UInt32>
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type LPFNDEVMODE = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<DEVMODEA>, CPointer<UInt8>, CPointer<UInt8>, CPointer<DEVMODEA>, CPointer<UInt8>, UInt32) -> UInt32>
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type MFENUMPROC = CFunc<(HDC, CPointer<HANDLETABLE>, CPointer<METARECORD>, Int32, IntNative) -> Int32>
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct NEWTEXTMETRICA {
+    public var tmHeight: Int32 = 0
+    public var tmAscent: Int32 = 0
+    public var tmDescent: Int32 = 0
+    public var tmInternalLeading: Int32 = 0
+    public var tmExternalLeading: Int32 = 0
+    public var tmAveCharWidth: Int32 = 0
+    public var tmMaxCharWidth: Int32 = 0
+    public var tmWeight: Int32 = 0
+    public var tmOverhang: Int32 = 0
+    public var tmDigitizedAspectX: Int32 = 0
+    public var tmDigitizedAspectY: Int32 = 0
+    public var tmFirstChar: UInt8 = 0
+    public var tmLastChar: UInt8 = 0
+    public var tmDefaultChar: UInt8 = 0
+    public var tmBreakChar: UInt8 = 0
+    public var tmItalic: UInt8 = 0
+    public var tmUnderlined: UInt8 = 0
+    public var tmStruckOut: UInt8 = 0
+    public var tmPitchAndFamily: UInt8 = 0
+    public var tmCharSet: UInt8 = 0
+    public var ntmFlags: UInt32 = 0
+    public var ntmSizeEM: UInt32 = 0
+    public var ntmCellHeight: UInt32 = 0
+    public var ntmAvgWidth: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct NEWTEXTMETRICW {
+    public var tmHeight: Int32 = 0
+    public var tmAscent: Int32 = 0
+    public var tmDescent: Int32 = 0
+    public var tmInternalLeading: Int32 = 0
+    public var tmExternalLeading: Int32 = 0
+    public var tmAveCharWidth: Int32 = 0
+    public var tmMaxCharWidth: Int32 = 0
+    public var tmWeight: Int32 = 0
+    public var tmOverhang: Int32 = 0
+    public var tmDigitizedAspectX: Int32 = 0
+    public var tmDigitizedAspectY: Int32 = 0
+    public var tmFirstChar: UInt16 = 0
+    public var tmLastChar: UInt16 = 0
+    public var tmDefaultChar: UInt16 = 0
+    public var tmBreakChar: UInt16 = 0
+    public var tmItalic: UInt8 = 0
+    public var tmUnderlined: UInt8 = 0
+    public var tmStruckOut: UInt8 = 0
+    public var tmPitchAndFamily: UInt8 = 0
+    public var tmCharSet: UInt8 = 0
+    public var ntmFlags: UInt32 = 0
+    public var ntmSizeEM: UInt32 = 0
+    public var ntmCellHeight: UInt32 = 0
+    public var ntmAvgWidth: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct PANOSE {
+    public var bFamilyType: UInt8 = 0
+    public var bSerifStyle: UInt8 = 0
+    public var bWeight: UInt8 = 0
+    public var bProportion: UInt8 = 0
+    public var bContrast: UInt8 = 0
+    public var bStrokeVariation: UInt8 = 0
+    public var bArmStyle: UInt8 = 0
+    public var bLetterform: UInt8 = 0
+    public var bMidline: UInt8 = 0
+    public var bXHeight: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct RGNDATA {
+    public var rdh: RGNDATAHEADER = RGNDATAHEADER()
+    public var Buffer: VArray<Int8, $1> = VArray<Int8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct TEXTMETRICA {
+    public var tmHeight: Int32 = 0
+    public var tmAscent: Int32 = 0
+    public var tmDescent: Int32 = 0
+    public var tmInternalLeading: Int32 = 0
+    public var tmExternalLeading: Int32 = 0
+    public var tmAveCharWidth: Int32 = 0
+    public var tmMaxCharWidth: Int32 = 0
+    public var tmWeight: Int32 = 0
+    public var tmOverhang: Int32 = 0
+    public var tmDigitizedAspectX: Int32 = 0
+    public var tmDigitizedAspectY: Int32 = 0
+    public var tmFirstChar: UInt8 = 0
+    public var tmLastChar: UInt8 = 0
+    public var tmDefaultChar: UInt8 = 0
+    public var tmBreakChar: UInt8 = 0
+    public var tmItalic: UInt8 = 0
+    public var tmUnderlined: UInt8 = 0
+    public var tmStruckOut: UInt8 = 0
+    public var tmPitchAndFamily: UInt8 = 0
+    public var tmCharSet: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct TEXTMETRICW {
+    public var tmHeight: Int32 = 0
+    public var tmAscent: Int32 = 0
+    public var tmDescent: Int32 = 0
+    public var tmInternalLeading: Int32 = 0
+    public var tmExternalLeading: Int32 = 0
+    public var tmAveCharWidth: Int32 = 0
+    public var tmMaxCharWidth: Int32 = 0
+    public var tmWeight: Int32 = 0
+    public var tmOverhang: Int32 = 0
+    public var tmDigitizedAspectX: Int32 = 0
+    public var tmDigitizedAspectY: Int32 = 0
+    public var tmFirstChar: UInt16 = 0
+    public var tmLastChar: UInt16 = 0
+    public var tmDefaultChar: UInt16 = 0
+    public var tmBreakChar: UInt16 = 0
+    public var tmItalic: UInt8 = 0
+    public var tmUnderlined: UInt8 = 0
+    public var tmStruckOut: UInt8 = 0
+    public var tmPitchAndFamily: UInt8 = 0
+    public var tmCharSet: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ABORTPATH {
+    public var emr: EMR = EMR()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRCREATEPALETTE {
+    public var emr: EMR = EMR()
+    public var ihPal: UInt32 = 0
+    public var lgpl: LOGPALETTE = LOGPALETTE()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type ENHMFENUMPROC = CFunc<(HDC, CPointer<HANDLETABLE>, CPointer<ENHMETARECORD>, Int32, IntNative) -> Int32>
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ENUMLOGFONTEXDVW {
+    public var elfEnumLogfontEx: ENUMLOGFONTEXW = ENUMLOGFONTEXW()
+    public var elfDesignVector: DESIGNVECTOR = DESIGNVECTOR()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EXTLOGFONTA {
+    public var elfLogFont: LOGFONTA = LOGFONTA()
+    public var elfFullName: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
+    public var elfStyle: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
+    public var elfVersion: UInt32 = 0
+    public var elfStyleSize: UInt32 = 0
+    public var elfMatch: UInt32 = 0
+    public var elfReserved: UInt32 = 0
+    public var elfVendorId: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var elfCulture: UInt32 = 0
+    public var elfPanose: PANOSE = PANOSE()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EXTLOGFONTW {
+    public var elfLogFont: LOGFONTW = LOGFONTW()
+    public var elfFullName: VArray<UInt16, $64> = VArray<UInt16, $64>(repeat: 0)
+    public var elfStyle: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0)
+    public var elfVersion: UInt32 = 0
+    public var elfStyleSize: UInt32 = 0
+    public var elfMatch: UInt32 = 0
+    public var elfReserved: UInt32 = 0
+    public var elfVendorId: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var elfCulture: UInt32 = 0
+    public var elfPanose: PANOSE = PANOSE()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type FONTENUMPROCA = CFunc<(CPointer<LOGFONTA>, CPointer<TEXTMETRICA>, UInt32, IntNative) -> Int32>
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type FONTENUMPROCW = CFunc<(CPointer<LOGFONTW>, CPointer<TEXTMETRICW>, UInt32, IntNative) -> Int32>
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct OUTLINETEXTMETRICA {
+    public var otmSize: UInt32 = 0
+    public var otmTextMetrics: TEXTMETRICA = TEXTMETRICA()
+    public var otmFiller: UInt8 = 0
+    public var otmPanoseNumber: PANOSE = PANOSE()
+    public var otmfsSelection: UInt32 = 0
+    public var otmfsType: UInt32 = 0
+    public var otmsCharSlopeRise: Int32 = 0
+    public var otmsCharSlopeRun: Int32 = 0
+    public var otmItalicAngle: Int32 = 0
+    public var otmEMSquare: UInt32 = 0
+    public var otmAscent: Int32 = 0
+    public var otmDescent: Int32 = 0
+    public var otmLineGap: UInt32 = 0
+    public var otmsCapEmHeight: UInt32 = 0
+    public var otmsXHeight: UInt32 = 0
+    public var otmrcFontBox: Win32_Foundation.RECT = Win32_Foundation.RECT()
+    public var otmMacAscent: Int32 = 0
+    public var otmMacDescent: Int32 = 0
+    public var otmMacLineGap: UInt32 = 0
+    public var otmusMinimumPPEM: UInt32 = 0
+    public var otmptSubscriptSize: Win32_Foundation.POINT = Win32_Foundation.POINT()
+    public var otmptSubscriptOffset: Win32_Foundation.POINT = Win32_Foundation.POINT()
+    public var otmptSuperscriptSize: Win32_Foundation.POINT = Win32_Foundation.POINT()
+    public var otmptSuperscriptOffset: Win32_Foundation.POINT = Win32_Foundation.POINT()
+    public var otmsStrikeoutSize: UInt32 = 0
+    public var otmsStrikeoutPosition: Int32 = 0
+    public var otmsUnderscoreSize: Int32 = 0
+    public var otmsUnderscorePosition: Int32 = 0
+    public var otmpFamilyName: CPointer<UInt8> = CPointer<UInt8>()
+    public var otmpFaceName: CPointer<UInt8> = CPointer<UInt8>()
+    public var otmpStyleName: CPointer<UInt8> = CPointer<UInt8>()
+    public var otmpFullName: CPointer<UInt8> = CPointer<UInt8>()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct OUTLINETEXTMETRICW {
+    public var otmSize: UInt32 = 0
+    public var otmTextMetrics: TEXTMETRICW = TEXTMETRICW()
+    public var otmFiller: UInt8 = 0
+    public var otmPanoseNumber: PANOSE = PANOSE()
+    public var otmfsSelection: UInt32 = 0
+    public var otmfsType: UInt32 = 0
+    public var otmsCharSlopeRise: Int32 = 0
+    public var otmsCharSlopeRun: Int32 = 0
+    public var otmItalicAngle: Int32 = 0
+    public var otmEMSquare: UInt32 = 0
+    public var otmAscent: Int32 = 0
+    public var otmDescent: Int32 = 0
+    public var otmLineGap: UInt32 = 0
+    public var otmsCapEmHeight: UInt32 = 0
+    public var otmsXHeight: UInt32 = 0
+    public var otmrcFontBox: Win32_Foundation.RECT = Win32_Foundation.RECT()
+    public var otmMacAscent: Int32 = 0
+    public var otmMacDescent: Int32 = 0
+    public var otmMacLineGap: UInt32 = 0
+    public var otmusMinimumPPEM: UInt32 = 0
+    public var otmptSubscriptSize: Win32_Foundation.POINT = Win32_Foundation.POINT()
+    public var otmptSubscriptOffset: Win32_Foundation.POINT = Win32_Foundation.POINT()
+    public var otmptSuperscriptSize: Win32_Foundation.POINT = Win32_Foundation.POINT()
+    public var otmptSuperscriptOffset: Win32_Foundation.POINT = Win32_Foundation.POINT()
+    public var otmsStrikeoutSize: UInt32 = 0
+    public var otmsStrikeoutPosition: Int32 = 0
+    public var otmsUnderscoreSize: Int32 = 0
+    public var otmsUnderscorePosition: Int32 = 0
+    public var otmpFamilyName: CPointer<UInt8> = CPointer<UInt8>()
+    public var otmpFaceName: CPointer<UInt8> = CPointer<UInt8>()
+    public var otmpStyleName: CPointer<UInt8> = CPointer<UInt8>()
+    public var otmpFullName: CPointer<UInt8> = CPointer<UInt8>()
+    public init() {}
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMREXTCREATEFONTINDIRECTW {
+    public var emr: EMR = EMR()
+    public var ihFont: UInt32 = 0
+    public var elfw: EXTLOGFONTW = EXTLOGFONTW()
+    public init() {}
+}
+
 @When[FONTSUB == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
-    func CreateFontPackage(puchSrcBuffer: CPointer<UInt8>, ulSrcBufferSize: UInt32, ppuchFontPackageBuffer: CPointer<CPointer<UInt8>>, pulFontPackageBufferSize: CPointer<UInt32>, pulBytesWritten: CPointer<UInt32>, usFlag: UInt16, usTTCIndex: UInt16, usSubsetFormat: UInt16, usSubsetLanguage: UInt16, usSubsetPlatform: CREATE_FONT_PACKAGE_SUBSET_PLATFORM, usSubsetEncoding: CREATE_FONT_PACKAGE_SUBSET_ENCODING, pusSubsetKeepList: CPointer<UInt16>, usSubsetListCount: UInt16, lpfnAllocate: CFP_ALLOCPROC, lpfnReAllocate: CFP_REALLOCPROC, lpfnFree: CFP_FREEPROC, lpvReserved: CPointer<Unit>): UInt32
+    func CreateFontPackage(puchSrcBuffer: CPointer<UInt8>, ulSrcBufferSize: UInt32, ppuchFontPackageBuffer: CPointer<CPointer<UInt8>>, pulFontPackageBufferSize: CPointer<UInt32>, pulBytesWritten: CPointer<UInt32>, usFlag: UInt16, usTTCIndex: UInt16, usSubsetFormat: UInt16, usSubsetLanguage: UInt16, usSubsetPlatform: Int16, usSubsetEncoding: Int16, pusSubsetKeepList: CPointer<UInt16>, usSubsetListCount: UInt16, lpfnAllocate: CFP_ALLOCPROC, lpfnReAllocate: CFP_REALLOCPROC, lpfnFree: CFP_FREEPROC, lpvReserved: CPointer<Unit>): UInt32
     // pinvoke-hint: cc=cdecl
     func MergeFontPackage(puchMergeFontBuffer: CPointer<UInt8>, ulMergeFontBufferSize: UInt32, puchFontPackageBuffer: CPointer<UInt8>, ulFontPackageBufferSize: UInt32, ppuchDestBuffer: CPointer<CPointer<UInt8>>, pulDestBufferSize: CPointer<UInt32>, pulBytesWritten: CPointer<UInt32>, usMode: UInt16, lpfnAllocate: CFP_ALLOCPROC, lpfnReAllocate: CFP_REALLOCPROC, lpfnFree: CFP_FREEPROC, lpvReserved: CPointer<Unit>): UInt32
 }
@@ -6874,9 +6822,9 @@ foreign {
     func AddFontMemResourceEx(pFileView: CPointer<Unit>, cjSize: UInt32, pvResrved: CPointer<Unit>, pNumFonts: CPointer<UInt32>): CPointer<Unit>
     func AddFontResourceA(param0: CPointer<UInt8>): Int32
     // param-hint: res optional reserved
-    func AddFontResourceExA(name: CPointer<UInt8>, fl: FONT_RESOURCE_CHARACTERISTICS, res: CPointer<Unit>): Int32
+    func AddFontResourceExA(name: CPointer<UInt8>, fl: UInt32, res: CPointer<Unit>): Int32
     // param-hint: res optional reserved
-    func AddFontResourceExW(name: CPointer<UInt16>, fl: FONT_RESOURCE_CHARACTERISTICS, res: CPointer<Unit>): Int32
+    func AddFontResourceExW(name: CPointer<UInt16>, fl: UInt32, res: CPointer<Unit>): Int32
     func AddFontResourceW(param0: CPointer<UInt16>): Int32
     func AngleArc(hdc: HDC, x: Int32, y: Int32, r: UInt32, StartAngle: Float32, SweepAngle: Float32): Int32
     // param-hint: ppe len=param[2]
@@ -6886,7 +6834,7 @@ foreign {
     func BeginPath(hdc: HDC): Int32
     // param-hint: hdcSrc optional
     // pinvoke-hint: SetLastError
-    func BitBlt(hdc: HDC, x: Int32, y: Int32, cx: Int32, cy: Int32, hdcSrc: HDC, x1: Int32, y1: Int32, rop: ROP_CODE): Int32
+    func BitBlt(hdc: HDC, x: Int32, y: Int32, cx: Int32, cy: Int32, hdcSrc: HDC, x1: Int32, y1: Int32, rop: UInt32): Int32
     func CancelDC(hdc: HDC): Int32
     func Chord(hdc: HDC, x1: Int32, y1: Int32, x2: Int32, y2: Int32, x3: Int32, y3: Int32, x4: Int32, y4: Int32): Int32
     func CloseEnhMetaFile(hdc: HDC): HENHMETAFILE
@@ -6895,7 +6843,7 @@ foreign {
     // param-hint: hrgnDst optional
     // param-hint: hrgnSrc1 optional
     // param-hint: hrgnSrc2 optional
-    func CombineRgn(hrgnDst: HRGN, hrgnSrc1: HRGN, hrgnSrc2: HRGN, iMode: RGN_COMBINE_MODE): GDI_REGION_TYPE
+    func CombineRgn(hrgnDst: HRGN, hrgnSrc1: HRGN, hrgnSrc2: HRGN, iMode: Int32): Int32
     func CombineTransform(lpxfOut: CPointer<XFORM>, lpxf1: CPointer<XFORM>, lpxf2: CPointer<XFORM>): Int32
     // param-hint: lpFileName optional
     func CopyEnhMetaFileA(hEnh: HENHMETAFILE, lpFileName: CPointer<UInt8>): HENHMETAFILE
@@ -6922,16 +6870,16 @@ foreign {
     // param-hint: pszPort optional
     // param-hint: pdm optional
     func CreateDCW(pwszDriver: CPointer<UInt16>, pwszDevice: CPointer<UInt16>, pszPort: CPointer<UInt16>, pdm: CPointer<DEVMODEW>): HDC
-    func CreateDIBPatternBrush(h: Win32_Foundation.HGLOBAL, iUsage: DIB_USAGE): HBRUSH
-    func CreateDIBPatternBrushPt(lpPackedDIB: CPointer<Unit>, iUsage: DIB_USAGE): HBRUSH
+    func CreateDIBPatternBrush(h: CPointer<Unit>, iUsage: UInt32): HBRUSH
+    func CreateDIBPatternBrushPt(lpPackedDIB: CPointer<Unit>, iUsage: UInt32): HBRUSH
     // param-hint: hdc optional
     // param-hint: hSection optional
     // pinvoke-hint: SetLastError
-    func CreateDIBSection(hdc: HDC, pbmi: CPointer<BITMAPINFO>, usage: DIB_USAGE, ppvBits: CPointer<CPointer<Unit>>, hSection: CPointer<Unit>, offset: UInt32): HBITMAP
+    func CreateDIBSection(hdc: HDC, pbmi: CPointer<BITMAPINFO>, usage: UInt32, ppvBits: CPointer<CPointer<Unit>>, hSection: CPointer<Unit>, offset: UInt32): HBITMAP
     // param-hint: pbmih optional
     // param-hint: pjBits optional
     // param-hint: pbmi optional
-    func CreateDIBitmap(hdc: HDC, pbmih: CPointer<BITMAPINFOHEADER>, flInit: UInt32, pjBits: CPointer<Unit>, pbmi: CPointer<BITMAPINFO>, iUsage: DIB_USAGE): HBITMAP
+    func CreateDIBitmap(hdc: HDC, pbmih: CPointer<BITMAPINFOHEADER>, flInit: UInt32, pjBits: CPointer<Unit>, pbmi: CPointer<BITMAPINFO>, iUsage: UInt32): HBITMAP
     func CreateDiscardableBitmap(hdc: HDC, cx: Int32, cy: Int32): HBITMAP
     func CreateEllipticRgn(x1: Int32, y1: Int32, x2: Int32, y2: Int32): HRGN
     func CreateEllipticRgnIndirect(lprect: CPointer<Win32_Foundation.RECT>): HRGN
@@ -6955,7 +6903,7 @@ foreign {
     func CreateFontW(cHeight: Int32, cWidth: Int32, cEscapement: Int32, cOrientation: Int32, cWeight: Int32, bItalic: UInt32, bUnderline: UInt32, bStrikeOut: UInt32, iCharSet: UInt32, iOutPrecision: UInt32, iClipPrecision: UInt32, iQuality: UInt32, iPitchAndFamily: UInt32, pszFaceName: CPointer<UInt16>): HFONT
     // param-hint: hdc optional
     func CreateHalftonePalette(hdc: HDC): HPALETTE
-    func CreateHatchBrush(iHatch: HATCH_BRUSH_STYLE, color: Win32_Foundation.COLORREF): HBRUSH
+    func CreateHatchBrush(iHatch: Int32, color: UInt32): HBRUSH
     // param-hint: pszDriver optional
     // param-hint: pszDevice optional
     // param-hint: pszPort optional
@@ -6972,12 +6920,12 @@ foreign {
     func CreateMetaFileW(pszFile: CPointer<UInt16>): HDC
     func CreatePalette(plpal: CPointer<LOGPALETTE>): HPALETTE
     func CreatePatternBrush(hbm: HBITMAP): HBRUSH
-    func CreatePen(iStyle: PEN_STYLE, cWidth: Int32, color: Win32_Foundation.COLORREF): HPEN
+    func CreatePen(iStyle: Int32, cWidth: Int32, color: UInt32): HPEN
     func CreatePenIndirect(plpen: CPointer<LOGPEN>): HPEN
     // param-hint: pc len=param[2]
-    func CreatePolyPolygonRgn(pptl: CPointer<Win32_Foundation.POINT>, pc: CPointer<Int32>, cPoly: Int32, iMode: CREATE_POLYGON_RGN_MODE): HRGN
+    func CreatePolyPolygonRgn(pptl: CPointer<Win32_Foundation.POINT>, pc: CPointer<Int32>, cPoly: Int32, iMode: Int32): HRGN
     // param-hint: pptl len=param[1]
-    func CreatePolygonRgn(pptl: CPointer<Win32_Foundation.POINT>, cPoint: Int32, iMode: CREATE_POLYGON_RGN_MODE): HRGN
+    func CreatePolygonRgn(pptl: CPointer<Win32_Foundation.POINT>, cPoint: Int32, iMode: Int32): HRGN
     func CreateRectRgn(x1: Int32, y1: Int32, x2: Int32, y2: Int32): HRGN
     func CreateRectRgnIndirect(lprect: CPointer<Win32_Foundation.RECT>): HRGN
     func CreateRoundRectRgn(x1: Int32, y1: Int32, x2: Int32, y2: Int32, w: Int32, h: Int32): HRGN
@@ -6987,7 +6935,7 @@ foreign {
     // param-hint: lpszPath optional
     // pinvoke-hint: SetLastError
     func CreateScalableFontResourceW(fdwHidden: UInt32, lpszFont: CPointer<UInt16>, lpszFile: CPointer<UInt16>, lpszPath: CPointer<UInt16>): Int32
-    func CreateSolidBrush(color: Win32_Foundation.COLORREF): HBRUSH
+    func CreateSolidBrush(color: UInt32): HBRUSH
     // param-hint: lppt len=param[2]
     func DPtoLP(hdc: HDC, lppt: CPointer<Win32_Foundation.POINT>, c: Int32): Int32
     func DeleteDC(hdc: HDC): Int32
@@ -7015,31 +6963,31 @@ foreign {
     func EnumFontsW(hdc: HDC, lpLogfont: CPointer<UInt16>, lpProc: FONTENUMPROCW, lParam: IntNative): Int32
     // param-hint: param3 optional
     func EnumMetaFile(hdc: HDC, hmf: HMETAFILE, proc: MFENUMPROC, param3: IntNative): Int32
-    func EnumObjects(hdc: HDC, nType: OBJ_TYPE, lpFunc: GOBJENUMPROC, lParam: IntNative): Int32
+    func EnumObjects(hdc: HDC, nType: Int32, lpFunc: GOBJENUMPROC, lParam: IntNative): Int32
     func EqualRgn(hrgn1: HRGN, hrgn2: HRGN): Int32
-    func ExcludeClipRect(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32): GDI_REGION_TYPE
+    func ExcludeClipRect(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32): Int32
     // param-hint: pstyle len=param[3] optional
     func ExtCreatePen(iPenStyle: UInt32, cWidth: UInt32, plbrush: CPointer<LOGBRUSH>, cStyle: UInt32, pstyle: CPointer<UInt32>): HPEN
     // param-hint: lpx optional
     // param-hint: lpData bytes=param[1]
     func ExtCreateRegion(lpx: CPointer<XFORM>, nCount: UInt32, lpData: CPointer<RGNDATA>): HRGN
-    func ExtFloodFill(hdc: HDC, x: Int32, y: Int32, color: Win32_Foundation.COLORREF, type_: EXT_FLOOD_FILL_TYPE): Int32
+    func ExtFloodFill(hdc: HDC, x: Int32, y: Int32, color: UInt32, type_: UInt32): Int32
     // param-hint: hrgn optional
-    func ExtSelectClipRgn(hdc: HDC, hrgn: HRGN, mode: RGN_COMBINE_MODE): GDI_REGION_TYPE
+    func ExtSelectClipRgn(hdc: HDC, hrgn: HRGN, mode: Int32): Int32
     // param-hint: lprect optional
     // param-hint: lpString len=param[6] optional
     // param-hint: lpDx len=param[6] optional
-    func ExtTextOutA(hdc: HDC, x: Int32, y: Int32, options: ETO_OPTIONS, lprect: CPointer<Win32_Foundation.RECT>, lpString: CPointer<UInt8>, c: UInt32, lpDx: CPointer<Int32>): Int32
+    func ExtTextOutA(hdc: HDC, x: Int32, y: Int32, options: UInt32, lprect: CPointer<Win32_Foundation.RECT>, lpString: CPointer<UInt8>, c: UInt32, lpDx: CPointer<Int32>): Int32
     // param-hint: lprect optional
     // param-hint: lpString len=param[6] optional
     // param-hint: lpDx len=param[6] optional
-    func ExtTextOutW(hdc: HDC, x: Int32, y: Int32, options: ETO_OPTIONS, lprect: CPointer<Win32_Foundation.RECT>, lpString: CPointer<UInt16>, c: UInt32, lpDx: CPointer<Int32>): Int32
+    func ExtTextOutW(hdc: HDC, x: Int32, y: Int32, options: UInt32, lprect: CPointer<Win32_Foundation.RECT>, lpString: CPointer<UInt16>, c: UInt32, lpDx: CPointer<Int32>): Int32
     func FillPath(hdc: HDC): Int32
     func FillRgn(hdc: HDC, hrgn: HRGN, hbr: HBRUSH): Int32
     // param-hint: ptl optional
     func FixBrushOrgEx(hdc: HDC, x: Int32, y: Int32, ptl: CPointer<Win32_Foundation.POINT>): Int32
     func FlattenPath(hdc: HDC): Int32
-    func FloodFill(hdc: HDC, x: Int32, y: Int32, color: Win32_Foundation.COLORREF): Int32
+    func FloodFill(hdc: HDC, x: Int32, y: Int32, color: UInt32): Int32
     func FrameRgn(hdc: HDC, hrgn: HRGN, hbr: HBRUSH, w: Int32, h: Int32): Int32
     func GdiAlphaBlend(hdcDest: HDC, xoriginDest: Int32, yoriginDest: Int32, wDest: Int32, hDest: Int32, hdcSrc: HDC, xoriginSrc: Int32, yoriginSrc: Int32, wSrc: Int32, hSrc: Int32, ftn: BLENDFUNCTION): Int32
     // param-hint: lpData bytes=param[1]
@@ -7047,7 +6995,7 @@ foreign {
     func GdiFlush(): Int32
     func GdiGetBatchLimit(): UInt32
     // param-hint: pVertex len=param[2]
-    func GdiGradientFill(hdc: HDC, pVertex: CPointer<TRIVERTEX>, nVertex: UInt32, pMesh: CPointer<Unit>, nCount: UInt32, ulMode: GRADIENT_FILL): Int32
+    func GdiGradientFill(hdc: HDC, pVertex: CPointer<TRIVERTEX>, nVertex: UInt32, pMesh: CPointer<Unit>, nCount: UInt32, ulMode: UInt32): Int32
     func GdiSetBatchLimit(dw: UInt32): UInt32
     func GdiTransparentBlt(hdcDest: HDC, xoriginDest: Int32, yoriginDest: Int32, wDest: Int32, hDest: Int32, hdcSrc: HDC, xoriginSrc: Int32, yoriginSrc: Int32, wSrc: Int32, hSrc: Int32, crTransparent: UInt32): Int32
     func GetArcDirection(hdc: HDC): Int32
@@ -7055,7 +7003,7 @@ foreign {
     // param-hint: lpvBits bytes=param[1]
     func GetBitmapBits(hbit: HBITMAP, cb: Int32, lpvBits: CPointer<Unit>): Int32
     func GetBitmapDimensionEx(hbit: HBITMAP, lpsize: CPointer<Win32_Foundation.SIZE>): Int32
-    func GetBkColor(hdc: HDC): Win32_Foundation.COLORREF
+    func GetBkColor(hdc: HDC): UInt32
     func GetBkMode(hdc: HDC): Int32
     func GetBoundsRect(hdc: HDC, lprect: CPointer<Win32_Foundation.RECT>, flags: UInt32): UInt32
     func GetBrushOrgEx(hdc: HDC, lppt: CPointer<Win32_Foundation.POINT>): Int32
@@ -7076,21 +7024,21 @@ foreign {
     func GetCharWidthI(hdc: HDC, giFirst: UInt32, cgi: UInt32, pgi: CPointer<UInt16>, piWidths: CPointer<Int32>): Int32
     func GetCharWidthW(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpBuffer: CPointer<Int32>): Int32
     // param-hint: lpString len=param[2]
-    func GetCharacterPlacementA(hdc: HDC, lpString: CPointer<UInt8>, nCount: Int32, nMexExtent: Int32, lpResults: CPointer<GCP_RESULTSA>, dwFlags: GET_CHARACTER_PLACEMENT_FLAGS): UInt32
+    func GetCharacterPlacementA(hdc: HDC, lpString: CPointer<UInt8>, nCount: Int32, nMexExtent: Int32, lpResults: CPointer<GCP_RESULTSA>, dwFlags: UInt32): UInt32
     // param-hint: lpString len=param[2]
-    func GetCharacterPlacementW(hdc: HDC, lpString: CPointer<UInt16>, nCount: Int32, nMexExtent: Int32, lpResults: CPointer<GCP_RESULTSW>, dwFlags: GET_CHARACTER_PLACEMENT_FLAGS): UInt32
-    func GetClipBox(hdc: HDC, lprect: CPointer<Win32_Foundation.RECT>): GDI_REGION_TYPE
+    func GetCharacterPlacementW(hdc: HDC, lpString: CPointer<UInt16>, nCount: Int32, nMexExtent: Int32, lpResults: CPointer<GCP_RESULTSW>, dwFlags: UInt32): UInt32
+    func GetClipBox(hdc: HDC, lprect: CPointer<Win32_Foundation.RECT>): Int32
     func GetClipRgn(hdc: HDC, hrgn: HRGN): Int32
     func GetColorAdjustment(hdc: HDC, lpca: CPointer<COLORADJUSTMENT>): Int32
     func GetCurrentObject(hdc: HDC, type_: UInt32): HGDIOBJ
     func GetCurrentPositionEx(hdc: HDC, lppt: CPointer<Win32_Foundation.POINT>): Int32
-    func GetDCBrushColor(hdc: HDC): Win32_Foundation.COLORREF
+    func GetDCBrushColor(hdc: HDC): UInt32
     func GetDCOrgEx(hdc: HDC, lppt: CPointer<Win32_Foundation.POINT>): Int32
-    func GetDCPenColor(hdc: HDC): Win32_Foundation.COLORREF
+    func GetDCPenColor(hdc: HDC): UInt32
     // param-hint: prgbq len=param[2]
     func GetDIBColorTable(hdc: HDC, iStart: UInt32, cEntries: UInt32, prgbq: CPointer<RGBQUAD>): UInt32
     // param-hint: lpvBits optional
-    func GetDIBits(hdc: HDC, hbm: HBITMAP, start: UInt32, cLines: UInt32, lpvBits: CPointer<Unit>, lpbmi: CPointer<BITMAPINFO>, usage: DIB_USAGE): Int32
+    func GetDIBits(hdc: HDC, hbm: HBITMAP, start: UInt32, cLines: UInt32, lpvBits: CPointer<Unit>, lpbmi: CPointer<BITMAPINFO>, usage: UInt32): Int32
     // param-hint: hdc optional
     func GetDeviceCaps(hdc: HDC, index: Int32): Int32
     func GetEnhMetaFileA(lpName: CPointer<UInt8>): HENHMETAFILE
@@ -7117,9 +7065,9 @@ foreign {
     // param-hint: pgi len=param[2]
     func GetGlyphIndicesW(hdc: HDC, lpstr: CPointer<UInt16>, c: Int32, pgi: CPointer<UInt16>, fl: UInt32): UInt32
     // param-hint: pvBuffer bytes=param[4] optional
-    func GetGlyphOutlineA(hdc: HDC, uChar: UInt32, fuFormat: GET_GLYPH_OUTLINE_FORMAT, lpgm: CPointer<GLYPHMETRICS>, cjBuffer: UInt32, pvBuffer: CPointer<Unit>, lpmat2: CPointer<MAT2>): UInt32
+    func GetGlyphOutlineA(hdc: HDC, uChar: UInt32, fuFormat: UInt32, lpgm: CPointer<GLYPHMETRICS>, cjBuffer: UInt32, pvBuffer: CPointer<Unit>, lpmat2: CPointer<MAT2>): UInt32
     // param-hint: pvBuffer bytes=param[4] optional
-    func GetGlyphOutlineW(hdc: HDC, uChar: UInt32, fuFormat: GET_GLYPH_OUTLINE_FORMAT, lpgm: CPointer<GLYPHMETRICS>, cjBuffer: UInt32, pvBuffer: CPointer<Unit>, lpmat2: CPointer<MAT2>): UInt32
+    func GetGlyphOutlineW(hdc: HDC, uChar: UInt32, fuFormat: UInt32, lpgm: CPointer<GLYPHMETRICS>, cjBuffer: UInt32, pvBuffer: CPointer<Unit>, lpmat2: CPointer<MAT2>): UInt32
     func GetGraphicsMode(hdc: HDC): Int32
     // param-hint: lpKernPair len=param[1] optional
     func GetKerningPairsA(hdc: HDC, nPairs: UInt32, lpKernPair: CPointer<KERNINGPAIR>): UInt32
@@ -7127,15 +7075,15 @@ foreign {
     func GetKerningPairsW(hdc: HDC, nPairs: UInt32, lpKernPair: CPointer<KERNINGPAIR>): UInt32
     // pinvoke-hint: SetLastError
     func GetLayout(hdc: HDC): UInt32
-    func GetMapMode(hdc: HDC): HDC_MAP_MODE
+    func GetMapMode(hdc: HDC): Int32
     func GetMetaFileA(lpName: CPointer<UInt8>): HMETAFILE
     // param-hint: lpData bytes=param[1] optional
     func GetMetaFileBitsEx(hMF: HMETAFILE, cbBuffer: UInt32, lpData: CPointer<Unit>): UInt32
     func GetMetaFileW(lpName: CPointer<UInt16>): HMETAFILE
     func GetMetaRgn(hdc: HDC, hrgn: HRGN): Int32
     func GetMiterLimit(hdc: HDC, plimit: CPointer<Float32>): Int32
-    func GetNearestColor(hdc: HDC, color: Win32_Foundation.COLORREF): Win32_Foundation.COLORREF
-    func GetNearestPaletteIndex(h: HPALETTE, color: Win32_Foundation.COLORREF): UInt32
+    func GetNearestColor(hdc: HDC, color: UInt32): UInt32
+    func GetNearestPaletteIndex(h: HPALETTE, color: UInt32): UInt32
     // param-hint: pv bytes=param[1] optional
     func GetObjectA(h: HGDIOBJ, c: Int32, pv: CPointer<Unit>): Int32
     func GetObjectType(h: HGDIOBJ): UInt32
@@ -7150,23 +7098,23 @@ foreign {
     // param-hint: apt len=param[3] optional
     // param-hint: aj len=param[3] optional
     func GetPath(hdc: HDC, apt: CPointer<Win32_Foundation.POINT>, aj: CPointer<UInt8>, cpt: Int32): Int32
-    func GetPixel(hdc: HDC, x: Int32, y: Int32): Win32_Foundation.COLORREF
+    func GetPixel(hdc: HDC, x: Int32, y: Int32): UInt32
     func GetPolyFillMode(hdc: HDC): Int32
-    func GetROP2(hdc: HDC): R2_MODE
+    func GetROP2(hdc: HDC): Int32
     func GetRandomRgn(hdc: HDC, hrgn: HRGN, i: Int32): Int32
     // param-hint: lpraststat bytes=param[1]
     func GetRasterizerCaps(lpraststat: CPointer<RASTERIZER_STATUS>, cjBytes: UInt32): Int32
     // param-hint: lpRgnData bytes=param[1] optional
     func GetRegionData(hrgn: HRGN, nCount: UInt32, lpRgnData: CPointer<RGNDATA>): UInt32
-    func GetRgnBox(hrgn: HRGN, lprc: CPointer<Win32_Foundation.RECT>): GDI_REGION_TYPE
-    func GetStockObject(i: GET_STOCK_OBJECT_FLAGS): HGDIOBJ
+    func GetRgnBox(hrgn: HRGN, lprc: CPointer<Win32_Foundation.RECT>): Int32
+    func GetStockObject(i: Int32): HGDIOBJ
     func GetStretchBltMode(hdc: HDC): Int32
     // param-hint: pPalEntries len=param[2] optional
     func GetSystemPaletteEntries(hdc: HDC, iStart: UInt32, cEntries: UInt32, pPalEntries: CPointer<PALETTEENTRY>): UInt32
     func GetSystemPaletteUse(hdc: HDC): UInt32
-    func GetTextAlign(hdc: HDC): TEXT_ALIGN_OPTIONS
+    func GetTextAlign(hdc: HDC): UInt32
     func GetTextCharacterExtra(hdc: HDC): Int32
-    func GetTextColor(hdc: HDC): Win32_Foundation.COLORREF
+    func GetTextColor(hdc: HDC): UInt32
     // param-hint: lpszString len=param[2]
     // param-hint: lpnFit optional
     // param-hint: lpnDx len=param[2] optional
@@ -7202,7 +7150,7 @@ foreign {
     func GetWindowExtEx(hdc: HDC, lpsize: CPointer<Win32_Foundation.SIZE>): Int32
     func GetWindowOrgEx(hdc: HDC, lppoint: CPointer<Win32_Foundation.POINT>): Int32
     func GetWorldTransform(hdc: HDC, lpxf: CPointer<XFORM>): Int32
-    func IntersectClipRect(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32): GDI_REGION_TYPE
+    func IntersectClipRect(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32): Int32
     func InvertRgn(hdc: HDC, hrgn: HRGN): Int32
     // param-hint: lppt len=param[2]
     func LPtoDP(hdc: HDC, lppt: CPointer<Win32_Foundation.POINT>, c: Int32): Int32
@@ -7211,17 +7159,17 @@ foreign {
     func LineTo(hdc: HDC, x: Int32, y: Int32): Int32
     func MaskBlt(hdcDest: HDC, xDest: Int32, yDest: Int32, width: Int32, height: Int32, hdcSrc: HDC, xSrc: Int32, ySrc: Int32, hbmMask: HBITMAP, xMask: Int32, yMask: Int32, rop: UInt32): Int32
     // param-hint: lpxf optional
-    func ModifyWorldTransform(hdc: HDC, lpxf: CPointer<XFORM>, mode: MODIFY_WORLD_TRANSFORM_MODE): Int32
+    func ModifyWorldTransform(hdc: HDC, lpxf: CPointer<XFORM>, mode: UInt32): Int32
     // param-hint: lppt optional
     func MoveToEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINT>): Int32
-    func OffsetClipRgn(hdc: HDC, x: Int32, y: Int32): GDI_REGION_TYPE
-    func OffsetRgn(hrgn: HRGN, x: Int32, y: Int32): GDI_REGION_TYPE
+    func OffsetClipRgn(hdc: HDC, x: Int32, y: Int32): Int32
+    func OffsetRgn(hrgn: HRGN, x: Int32, y: Int32): Int32
     // param-hint: lppt optional
     func OffsetViewportOrgEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINT>): Int32
     // param-hint: lppt optional
     func OffsetWindowOrgEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINT>): Int32
     func PaintRgn(hdc: HDC, hrgn: HRGN): Int32
-    func PatBlt(hdc: HDC, x: Int32, y: Int32, w: Int32, h: Int32, rop: ROP_CODE): Int32
+    func PatBlt(hdc: HDC, x: Int32, y: Int32, w: Int32, h: Int32, rop: UInt32): Int32
     func PathToRegion(hdc: HDC): HRGN
     func Pie(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32, xr1: Int32, yr1: Int32, xr2: Int32, yr2: Int32): Int32
     func PlayEnhMetaFile(hdc: HDC, hmf: HENHMETAFILE, lprect: CPointer<Win32_Foundation.RECT>): Int32
@@ -7277,53 +7225,53 @@ foreign {
     func ScaleViewportExtEx(hdc: HDC, xn: Int32, dx: Int32, yn: Int32, yd: Int32, lpsz: CPointer<Win32_Foundation.SIZE>): Int32
     // param-hint: lpsz optional
     func ScaleWindowExtEx(hdc: HDC, xn: Int32, xd: Int32, yn: Int32, yd: Int32, lpsz: CPointer<Win32_Foundation.SIZE>): Int32
-    func SelectClipPath(hdc: HDC, mode: RGN_COMBINE_MODE): Int32
+    func SelectClipPath(hdc: HDC, mode: Int32): Int32
     // param-hint: hrgn optional
-    func SelectClipRgn(hdc: HDC, hrgn: HRGN): GDI_REGION_TYPE
+    func SelectClipRgn(hdc: HDC, hrgn: HRGN): Int32
     func SelectObject(hdc: HDC, h: HGDIOBJ): HGDIOBJ
     func SelectPalette(hdc: HDC, hPal: HPALETTE, bForceBkgd: Int32): HPALETTE
-    func SetArcDirection(hdc: HDC, dir: ARC_DIRECTION): Int32
+    func SetArcDirection(hdc: HDC, dir: Int32): Int32
     // param-hint: pvBits bytes=param[1]
     func SetBitmapBits(hbm: HBITMAP, cb: UInt32, pvBits: CPointer<Unit>): Int32
     // param-hint: lpsz optional
     func SetBitmapDimensionEx(hbm: HBITMAP, w: Int32, h: Int32, lpsz: CPointer<Win32_Foundation.SIZE>): Int32
-    func SetBkColor(hdc: HDC, color: Win32_Foundation.COLORREF): Win32_Foundation.COLORREF
+    func SetBkColor(hdc: HDC, color: UInt32): UInt32
     func SetBkMode(hdc: HDC, mode: Int32): Int32
     // param-hint: lprect optional
-    func SetBoundsRect(hdc: HDC, lprect: CPointer<Win32_Foundation.RECT>, flags: SET_BOUNDS_RECT_FLAGS): UInt32
+    func SetBoundsRect(hdc: HDC, lprect: CPointer<Win32_Foundation.RECT>, flags: UInt32): UInt32
     // param-hint: lppt optional
     func SetBrushOrgEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINT>): Int32
     func SetColorAdjustment(hdc: HDC, lpca: CPointer<COLORADJUSTMENT>): Int32
-    func SetDCBrushColor(hdc: HDC, color: Win32_Foundation.COLORREF): Win32_Foundation.COLORREF
-    func SetDCPenColor(hdc: HDC, color: Win32_Foundation.COLORREF): Win32_Foundation.COLORREF
+    func SetDCBrushColor(hdc: HDC, color: UInt32): UInt32
+    func SetDCPenColor(hdc: HDC, color: UInt32): UInt32
     // param-hint: prgbq len=param[2]
     func SetDIBColorTable(hdc: HDC, iStart: UInt32, cEntries: UInt32, prgbq: CPointer<RGBQUAD>): UInt32
     // param-hint: hdc optional
-    func SetDIBits(hdc: HDC, hbm: HBITMAP, start: UInt32, cLines: UInt32, lpBits: CPointer<Unit>, lpbmi: CPointer<BITMAPINFO>, ColorUse: DIB_USAGE): Int32
-    func SetDIBitsToDevice(hdc: HDC, xDest: Int32, yDest: Int32, w: UInt32, h: UInt32, xSrc: Int32, ySrc: Int32, StartScan: UInt32, cLines: UInt32, lpvBits: CPointer<Unit>, lpbmi: CPointer<BITMAPINFO>, ColorUse: DIB_USAGE): Int32
+    func SetDIBits(hdc: HDC, hbm: HBITMAP, start: UInt32, cLines: UInt32, lpBits: CPointer<Unit>, lpbmi: CPointer<BITMAPINFO>, ColorUse: UInt32): Int32
+    func SetDIBitsToDevice(hdc: HDC, xDest: Int32, yDest: Int32, w: UInt32, h: UInt32, xSrc: Int32, ySrc: Int32, StartScan: UInt32, cLines: UInt32, lpvBits: CPointer<Unit>, lpbmi: CPointer<BITMAPINFO>, ColorUse: UInt32): Int32
     // param-hint: pb bytes=param[0]
     func SetEnhMetaFileBits(nSize: UInt32, pb: CPointer<UInt8>): HENHMETAFILE
-    func SetGraphicsMode(hdc: HDC, iMode: GRAPHICS_MODE): Int32
-    func SetLayout(hdc: HDC, l: DC_LAYOUT): UInt32
-    func SetMapMode(hdc: HDC, iMode: HDC_MAP_MODE): Int32
+    func SetGraphicsMode(hdc: HDC, iMode: Int32): Int32
+    func SetLayout(hdc: HDC, l: UInt32): UInt32
+    func SetMapMode(hdc: HDC, iMode: Int32): Int32
     func SetMapperFlags(hdc: HDC, flags: UInt32): UInt32
     // param-hint: lpData bytes=param[0]
     func SetMetaFileBitsEx(cbBuffer: UInt32, lpData: CPointer<UInt8>): HMETAFILE
-    func SetMetaRgn(hdc: HDC): GDI_REGION_TYPE
+    func SetMetaRgn(hdc: HDC): Int32
     // param-hint: old optional
     func SetMiterLimit(hdc: HDC, limit: Float32, old: CPointer<Float32>): Int32
     // param-hint: pPalEntries len=param[2]
     func SetPaletteEntries(hpal: HPALETTE, iStart: UInt32, cEntries: UInt32, pPalEntries: CPointer<PALETTEENTRY>): UInt32
-    func SetPixel(hdc: HDC, x: Int32, y: Int32, color: Win32_Foundation.COLORREF): Win32_Foundation.COLORREF
-    func SetPixelV(hdc: HDC, x: Int32, y: Int32, color: Win32_Foundation.COLORREF): Int32
-    func SetPolyFillMode(hdc: HDC, mode: CREATE_POLYGON_RGN_MODE): Int32
-    func SetROP2(hdc: HDC, rop2: R2_MODE): Int32
+    func SetPixel(hdc: HDC, x: Int32, y: Int32, color: UInt32): UInt32
+    func SetPixelV(hdc: HDC, x: Int32, y: Int32, color: UInt32): Int32
+    func SetPolyFillMode(hdc: HDC, mode: Int32): Int32
+    func SetROP2(hdc: HDC, rop2: Int32): Int32
     func SetRectRgn(hrgn: HRGN, left: Int32, top: Int32, right: Int32, bottom: Int32): Int32
-    func SetStretchBltMode(hdc: HDC, mode: STRETCH_BLT_MODE): Int32
-    func SetSystemPaletteUse(hdc: HDC, use: SYSTEM_PALETTE_USE): UInt32
-    func SetTextAlign(hdc: HDC, align: TEXT_ALIGN_OPTIONS): UInt32
+    func SetStretchBltMode(hdc: HDC, mode: Int32): Int32
+    func SetSystemPaletteUse(hdc: HDC, use: UInt32): UInt32
+    func SetTextAlign(hdc: HDC, align: UInt32): UInt32
     func SetTextCharacterExtra(hdc: HDC, extra: Int32): Int32
-    func SetTextColor(hdc: HDC, color: Win32_Foundation.COLORREF): Win32_Foundation.COLORREF
+    func SetTextColor(hdc: HDC, color: UInt32): UInt32
     func SetTextJustification(hdc: HDC, extra: Int32, count: Int32): Int32
     // param-hint: lpsz optional
     func SetViewportExtEx(hdc: HDC, x: Int32, y: Int32, lpsz: CPointer<Win32_Foundation.SIZE>): Int32
@@ -7335,9 +7283,9 @@ foreign {
     func SetWindowOrgEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINT>): Int32
     func SetWorldTransform(hdc: HDC, lpxf: CPointer<XFORM>): Int32
     // param-hint: hdcSrc optional
-    func StretchBlt(hdcDest: HDC, xDest: Int32, yDest: Int32, wDest: Int32, hDest: Int32, hdcSrc: HDC, xSrc: Int32, ySrc: Int32, wSrc: Int32, hSrc: Int32, rop: ROP_CODE): Int32
+    func StretchBlt(hdcDest: HDC, xDest: Int32, yDest: Int32, wDest: Int32, hDest: Int32, hdcSrc: HDC, xSrc: Int32, ySrc: Int32, wSrc: Int32, hSrc: Int32, rop: UInt32): Int32
     // param-hint: lpBits optional
-    func StretchDIBits(hdc: HDC, xDest: Int32, yDest: Int32, DestWidth: Int32, DestHeight: Int32, xSrc: Int32, ySrc: Int32, SrcWidth: Int32, SrcHeight: Int32, lpBits: CPointer<Unit>, lpbmi: CPointer<BITMAPINFO>, iUsage: DIB_USAGE, rop: ROP_CODE): Int32
+    func StretchDIBits(hdc: HDC, xDest: Int32, yDest: Int32, DestWidth: Int32, DestHeight: Int32, xSrc: Int32, ySrc: Int32, SrcWidth: Int32, SrcHeight: Int32, lpBits: CPointer<Unit>, lpbmi: CPointer<BITMAPINFO>, iUsage: UInt32, rop: UInt32): Int32
     func StrokeAndFillPath(hdc: HDC): Int32
     func StrokePath(hdc: HDC): Int32
     // param-hint: lpString len=param[4]
@@ -7353,7 +7301,7 @@ foreign {
 foreign {
     func AlphaBlend(hdcDest: HDC, xoriginDest: Int32, yoriginDest: Int32, wDest: Int32, hDest: Int32, hdcSrc: HDC, xoriginSrc: Int32, yoriginSrc: Int32, wSrc: Int32, hSrc: Int32, ftn: BLENDFUNCTION): Int32
     // param-hint: pVertex len=param[2]
-    func GradientFill(hdc: HDC, pVertex: CPointer<TRIVERTEX>, nVertex: UInt32, pMesh: CPointer<Unit>, nMesh: UInt32, ulMode: GRADIENT_FILL): Int32
+    func GradientFill(hdc: HDC, pVertex: CPointer<TRIVERTEX>, nVertex: UInt32, pMesh: CPointer<Unit>, nMesh: UInt32, ulMode: UInt32): Int32
     func TransparentBlt(hdcDest: HDC, xoriginDest: Int32, yoriginDest: Int32, wDest: Int32, hDest: Int32, hdcSrc: HDC, xoriginSrc: Int32, yoriginSrc: Int32, wSrc: Int32, hSrc: Int32, crTransparent: UInt32): Int32
 }
 
@@ -7366,43 +7314,43 @@ foreign {
 foreign {
     func BeginPaint(hWnd: CPointer<Unit>, lpPaint: CPointer<PAINTSTRUCT>): HDC
     // param-hint: lpDevMode optional
-    func ChangeDisplaySettingsA(lpDevMode: CPointer<DEVMODEA>, dwFlags: CDS_TYPE): DISP_CHANGE
+    func ChangeDisplaySettingsA(lpDevMode: CPointer<DEVMODEA>, dwFlags: UInt32): Int32
     // param-hint: lpszDeviceName optional
     // param-hint: lpDevMode optional
     // param-hint: hwnd optional reserved
     // param-hint: lParam optional
-    func ChangeDisplaySettingsExA(lpszDeviceName: CPointer<UInt8>, lpDevMode: CPointer<DEVMODEA>, hwnd: CPointer<Unit>, dwflags: CDS_TYPE, lParam: CPointer<Unit>): DISP_CHANGE
+    func ChangeDisplaySettingsExA(lpszDeviceName: CPointer<UInt8>, lpDevMode: CPointer<DEVMODEA>, hwnd: CPointer<Unit>, dwflags: UInt32, lParam: CPointer<Unit>): Int32
     // param-hint: lpszDeviceName optional
     // param-hint: lpDevMode optional
     // param-hint: hwnd optional reserved
     // param-hint: lParam optional
-    func ChangeDisplaySettingsExW(lpszDeviceName: CPointer<UInt16>, lpDevMode: CPointer<DEVMODEW>, hwnd: CPointer<Unit>, dwflags: CDS_TYPE, lParam: CPointer<Unit>): DISP_CHANGE
+    func ChangeDisplaySettingsExW(lpszDeviceName: CPointer<UInt16>, lpDevMode: CPointer<DEVMODEW>, hwnd: CPointer<Unit>, dwflags: UInt32, lParam: CPointer<Unit>): Int32
     // param-hint: lpDevMode optional
-    func ChangeDisplaySettingsW(lpDevMode: CPointer<DEVMODEW>, dwFlags: CDS_TYPE): DISP_CHANGE
+    func ChangeDisplaySettingsW(lpDevMode: CPointer<DEVMODEW>, dwFlags: UInt32): Int32
     func ClientToScreen(hWnd: CPointer<Unit>, lpPoint: CPointer<Win32_Foundation.POINT>): Int32
     func CopyRect(lprcDst: CPointer<Win32_Foundation.RECT>, lprcSrc: CPointer<Win32_Foundation.RECT>): Int32
     // param-hint: hwnd optional
     func DrawAnimatedRects(hwnd: CPointer<Unit>, idAni: Int32, lprcFrom: CPointer<Win32_Foundation.RECT>, lprcTo: CPointer<Win32_Foundation.RECT>): Int32
-    func DrawCaption(hwnd: CPointer<Unit>, hdc: HDC, lprect: CPointer<Win32_Foundation.RECT>, flags: DRAW_CAPTION_FLAGS): Int32
-    func DrawEdge(hdc: HDC, qrc: CPointer<Win32_Foundation.RECT>, edge: DRAWEDGE_FLAGS, grfFlags: DRAW_EDGE_FLAGS): Int32
+    func DrawCaption(hwnd: CPointer<Unit>, hdc: HDC, lprect: CPointer<Win32_Foundation.RECT>, flags: UInt32): Int32
+    func DrawEdge(hdc: HDC, qrc: CPointer<Win32_Foundation.RECT>, edge: UInt32, grfFlags: UInt32): Int32
     func DrawFocusRect(hDC: HDC, lprc: CPointer<Win32_Foundation.RECT>): Int32
     func DrawFrameControl(hdc: HDC, lprc: CPointer<Win32_Foundation.RECT>, uType: UInt32, uState: UInt32): Int32
     // param-hint: hbrFore optional
     // param-hint: qfnCallBack optional
-    func DrawStateA(hdc: HDC, hbrFore: HBRUSH, qfnCallBack: DRAWSTATEPROC, lData: IntNative, wData: UIntNative, x: Int32, y: Int32, cx: Int32, cy: Int32, uFlags: DRAWSTATE_FLAGS): Int32
+    func DrawStateA(hdc: HDC, hbrFore: HBRUSH, qfnCallBack: DRAWSTATEPROC, lData: IntNative, wData: UIntNative, x: Int32, y: Int32, cx: Int32, cy: Int32, uFlags: UInt32): Int32
     // param-hint: hbrFore optional
     // param-hint: qfnCallBack optional
-    func DrawStateW(hdc: HDC, hbrFore: HBRUSH, qfnCallBack: DRAWSTATEPROC, lData: IntNative, wData: UIntNative, x: Int32, y: Int32, cx: Int32, cy: Int32, uFlags: DRAWSTATE_FLAGS): Int32
+    func DrawStateW(hdc: HDC, hbrFore: HBRUSH, qfnCallBack: DRAWSTATEPROC, lData: IntNative, wData: UIntNative, x: Int32, y: Int32, cx: Int32, cy: Int32, uFlags: UInt32): Int32
     // param-hint: lpchText len=param[2]
-    func DrawTextA(hdc: HDC, lpchText: CPointer<UInt8>, cchText: Int32, lprc: CPointer<Win32_Foundation.RECT>, format: DRAW_TEXT_FORMAT): Int32
-    // param-hint: lpchText len=param[2]
-    // param-hint: lpdtp optional
-    func DrawTextExA(hdc: HDC, lpchText: CPointer<UInt8>, cchText: Int32, lprc: CPointer<Win32_Foundation.RECT>, format: DRAW_TEXT_FORMAT, lpdtp: CPointer<DRAWTEXTPARAMS>): Int32
+    func DrawTextA(hdc: HDC, lpchText: CPointer<UInt8>, cchText: Int32, lprc: CPointer<Win32_Foundation.RECT>, format: UInt32): Int32
     // param-hint: lpchText len=param[2]
     // param-hint: lpdtp optional
-    func DrawTextExW(hdc: HDC, lpchText: CPointer<UInt16>, cchText: Int32, lprc: CPointer<Win32_Foundation.RECT>, format: DRAW_TEXT_FORMAT, lpdtp: CPointer<DRAWTEXTPARAMS>): Int32
+    func DrawTextExA(hdc: HDC, lpchText: CPointer<UInt8>, cchText: Int32, lprc: CPointer<Win32_Foundation.RECT>, format: UInt32, lpdtp: CPointer<DRAWTEXTPARAMS>): Int32
     // param-hint: lpchText len=param[2]
-    func DrawTextW(hdc: HDC, lpchText: CPointer<UInt16>, cchText: Int32, lprc: CPointer<Win32_Foundation.RECT>, format: DRAW_TEXT_FORMAT): Int32
+    // param-hint: lpdtp optional
+    func DrawTextExW(hdc: HDC, lpchText: CPointer<UInt16>, cchText: Int32, lprc: CPointer<Win32_Foundation.RECT>, format: UInt32, lpdtp: CPointer<DRAWTEXTPARAMS>): Int32
+    // param-hint: lpchText len=param[2]
+    func DrawTextW(hdc: HDC, lpchText: CPointer<UInt16>, cchText: Int32, lprc: CPointer<Win32_Foundation.RECT>, format: UInt32): Int32
     func EndPaint(hWnd: CPointer<Unit>, lpPaint: CPointer<PAINTSTRUCT>): Int32
     // param-hint: lpDevice optional
     func EnumDisplayDevicesA(lpDevice: CPointer<UInt8>, iDevNum: UInt32, lpDisplayDevice: CPointer<DISPLAY_DEVICEA>, dwFlags: UInt32): Int32
@@ -7412,13 +7360,13 @@ foreign {
     // param-hint: lprcClip optional
     func EnumDisplayMonitors(hdc: HDC, lprcClip: CPointer<Win32_Foundation.RECT>, lpfnEnum: MONITORENUMPROC, dwData: IntNative): Int32
     // param-hint: lpszDeviceName optional
-    func EnumDisplaySettingsA(lpszDeviceName: CPointer<UInt8>, iModeNum: ENUM_DISPLAY_SETTINGS_MODE, lpDevMode: CPointer<DEVMODEA>): Int32
+    func EnumDisplaySettingsA(lpszDeviceName: CPointer<UInt8>, iModeNum: UInt32, lpDevMode: CPointer<DEVMODEA>): Int32
     // param-hint: lpszDeviceName optional
-    func EnumDisplaySettingsExA(lpszDeviceName: CPointer<UInt8>, iModeNum: ENUM_DISPLAY_SETTINGS_MODE, lpDevMode: CPointer<DEVMODEA>, dwFlags: ENUM_DISPLAY_SETTINGS_FLAGS): Int32
+    func EnumDisplaySettingsExA(lpszDeviceName: CPointer<UInt8>, iModeNum: UInt32, lpDevMode: CPointer<DEVMODEA>, dwFlags: UInt32): Int32
     // param-hint: lpszDeviceName optional
-    func EnumDisplaySettingsExW(lpszDeviceName: CPointer<UInt16>, iModeNum: ENUM_DISPLAY_SETTINGS_MODE, lpDevMode: CPointer<DEVMODEW>, dwFlags: ENUM_DISPLAY_SETTINGS_FLAGS): Int32
+    func EnumDisplaySettingsExW(lpszDeviceName: CPointer<UInt16>, iModeNum: UInt32, lpDevMode: CPointer<DEVMODEW>, dwFlags: UInt32): Int32
     // param-hint: lpszDeviceName optional
-    func EnumDisplaySettingsW(lpszDeviceName: CPointer<UInt16>, iModeNum: ENUM_DISPLAY_SETTINGS_MODE, lpDevMode: CPointer<DEVMODEW>): Int32
+    func EnumDisplaySettingsW(lpszDeviceName: CPointer<UInt16>, iModeNum: UInt32, lpDevMode: CPointer<DEVMODEW>): Int32
     func EqualRect(lprc1: CPointer<Win32_Foundation.RECT>, lprc2: CPointer<Win32_Foundation.RECT>): Int32
     func ExcludeUpdateRgn(hDC: HDC, hWnd: CPointer<Unit>): Int32
     func FillRect(hDC: HDC, lprc: CPointer<Win32_Foundation.RECT>, hbr: HBRUSH): Int32
@@ -7427,11 +7375,11 @@ foreign {
     func GetDC(hWnd: CPointer<Unit>): HDC
     // param-hint: hWnd optional
     // param-hint: hrgnClip optional
-    func GetDCEx(hWnd: CPointer<Unit>, hrgnClip: HRGN, flags: GET_DCX_FLAGS): HDC
+    func GetDCEx(hWnd: CPointer<Unit>, hrgnClip: HRGN, flags: UInt32): HDC
     func GetMonitorInfoA(hMonitor: HMONITOR, lpmi: CPointer<MONITORINFO>): Int32
     func GetMonitorInfoW(hMonitor: HMONITOR, lpmi: CPointer<MONITORINFO>): Int32
-    func GetSysColor(nIndex: SYS_COLOR_INDEX): UInt32
-    func GetSysColorBrush(nIndex: SYS_COLOR_INDEX): HBRUSH
+    func GetSysColor(nIndex: Int32): UInt32
+    func GetSysColorBrush(nIndex: Int32): HBRUSH
     // param-hint: lpString len=param[2]
     // param-hint: lpnTabStopPositions len=param[3] optional
     func GetTabbedTextExtentA(hdc: HDC, lpString: CPointer<UInt8>, chCount: Int32, nTabPositions: Int32, lpnTabStopPositions: CPointer<Int32>): UInt32
@@ -7440,11 +7388,11 @@ foreign {
     func GetTabbedTextExtentW(hdc: HDC, lpString: CPointer<UInt16>, chCount: Int32, nTabPositions: Int32, lpnTabStopPositions: CPointer<Int32>): UInt32
     // param-hint: lpRect optional
     func GetUpdateRect(hWnd: CPointer<Unit>, lpRect: CPointer<Win32_Foundation.RECT>, bErase: Int32): Int32
-    func GetUpdateRgn(hWnd: CPointer<Unit>, hRgn: HRGN, bErase: Int32): GDI_REGION_TYPE
+    func GetUpdateRgn(hWnd: CPointer<Unit>, hRgn: HRGN, bErase: Int32): Int32
     // param-hint: hWnd optional
     func GetWindowDC(hWnd: CPointer<Unit>): HDC
-    func GetWindowRgn(hWnd: CPointer<Unit>, hRgn: HRGN): GDI_REGION_TYPE
-    func GetWindowRgnBox(hWnd: CPointer<Unit>, lprc: CPointer<Win32_Foundation.RECT>): GDI_REGION_TYPE
+    func GetWindowRgn(hWnd: CPointer<Unit>, hRgn: HRGN): Int32
+    func GetWindowRgnBox(hWnd: CPointer<Unit>, lprc: CPointer<Win32_Foundation.RECT>): Int32
     // param-hint: hBrush optional
     // param-hint: lpOutputFunc optional
     func GrayStringA(hDC: HDC, hBrush: HBRUSH, lpOutputFunc: GRAYSTRINGPROC, lpData: IntNative, nCount: Int32, X: Int32, Y: Int32, nWidth: Int32, nHeight: Int32): Int32
@@ -7470,16 +7418,16 @@ foreign {
     // param-hint: hWndTo optional
     // param-hint: lpPoints len=param[3]
     func MapWindowPoints(hWndFrom: CPointer<Unit>, hWndTo: CPointer<Unit>, lpPoints: CPointer<Win32_Foundation.POINT>, cPoints: UInt32): Int32
-    func MonitorFromPoint(pt: Win32_Foundation.POINT, dwFlags: MONITOR_FROM_FLAGS): HMONITOR
-    func MonitorFromRect(lprc: CPointer<Win32_Foundation.RECT>, dwFlags: MONITOR_FROM_FLAGS): HMONITOR
-    func MonitorFromWindow(hwnd: CPointer<Unit>, dwFlags: MONITOR_FROM_FLAGS): HMONITOR
+    func MonitorFromPoint(pt: Win32_Foundation.POINT, dwFlags: UInt32): HMONITOR
+    func MonitorFromRect(lprc: CPointer<Win32_Foundation.RECT>, dwFlags: UInt32): HMONITOR
+    func MonitorFromWindow(hwnd: CPointer<Unit>, dwFlags: UInt32): HMONITOR
     func OffsetRect(lprc: CPointer<Win32_Foundation.RECT>, dx: Int32, dy: Int32): Int32
     func PaintDesktop(hdc: HDC): Int32
     func PtInRect(lprc: CPointer<Win32_Foundation.RECT>, pt: Win32_Foundation.POINT): Int32
     // param-hint: hWnd optional
     // param-hint: lprcUpdate optional
     // param-hint: hrgnUpdate optional
-    func RedrawWindow(hWnd: CPointer<Unit>, lprcUpdate: CPointer<Win32_Foundation.RECT>, hrgnUpdate: HRGN, flags: REDRAW_WINDOW_FLAGS): Int32
+    func RedrawWindow(hWnd: CPointer<Unit>, lprcUpdate: CPointer<Win32_Foundation.RECT>, hrgnUpdate: HRGN, flags: UInt32): Int32
     // param-hint: hWnd optional
     func ReleaseDC(hWnd: CPointer<Unit>, hDC: HDC): Int32
     func ScreenToClient(hWnd: CPointer<Unit>, lpPoint: CPointer<Win32_Foundation.POINT>): Int32
@@ -7488,7 +7436,7 @@ foreign {
     // param-hint: lpaElements len=param[0]
     // param-hint: lpaRgbValues len=param[0]
     // pinvoke-hint: SetLastError
-    func SetSysColors(cElements: Int32, lpaElements: CPointer<Int32>, lpaRgbValues: CPointer<Win32_Foundation.COLORREF>): Int32
+    func SetSysColors(cElements: Int32, lpaElements: CPointer<Int32>, lpaRgbValues: CPointer<UInt32>): Int32
     // param-hint: hRgn optional
     func SetWindowRgn(hWnd: CPointer<Unit>, hRgn: HRGN, bRedraw: Int32): Int32
     func SubtractRect(lprcDst: CPointer<Win32_Foundation.RECT>, lprcSrc1: CPointer<Win32_Foundation.RECT>, lprcSrc2: CPointer<Win32_Foundation.RECT>): Int32
@@ -7516,17 +7464,17 @@ foreign {
     func TTDeleteEmbeddedFont(hFontReference: CPointer<Unit>, ulFlags: UInt32, pulStatus: CPointer<UInt32>): Int32
     // param-hint: pusCharCodeSet len=param[8]
     // param-hint: pTTEmbedInfo optional
-    func TTEmbedFont(hDC: HDC, ulFlags: TTEMBED_FLAGS, ulCharSet: EMBED_FONT_CHARSET, pulPrivStatus: CPointer<EMBEDDED_FONT_PRIV_STATUS>, pulStatus: CPointer<UInt32>, lpfnWriteToStream: WRITEEMBEDPROC, lpvWriteStream: CPointer<Unit>, pusCharCodeSet: CPointer<UInt16>, usCharCodeCount: UInt16, usLanguage: UInt16, pTTEmbedInfo: CPointer<TTEMBEDINFO>): Int32
+    func TTEmbedFont(hDC: HDC, ulFlags: UInt32, ulCharSet: UInt32, pulPrivStatus: CPointer<UInt32>, pulStatus: CPointer<UInt32>, lpfnWriteToStream: WRITEEMBEDPROC, lpvWriteStream: CPointer<Unit>, pusCharCodeSet: CPointer<UInt16>, usCharCodeCount: UInt16, usLanguage: UInt16, pTTEmbedInfo: CPointer<TTEMBEDINFO>): Int32
     // param-hint: pulCharCodeSet len=param[8]
     // param-hint: pTTEmbedInfo optional
-    func TTEmbedFontEx(hDC: HDC, ulFlags: TTEMBED_FLAGS, ulCharSet: EMBED_FONT_CHARSET, pulPrivStatus: CPointer<EMBEDDED_FONT_PRIV_STATUS>, pulStatus: CPointer<UInt32>, lpfnWriteToStream: WRITEEMBEDPROC, lpvWriteStream: CPointer<Unit>, pulCharCodeSet: CPointer<UInt32>, usCharCodeCount: UInt16, usLanguage: UInt16, pTTEmbedInfo: CPointer<TTEMBEDINFO>): Int32
+    func TTEmbedFontEx(hDC: HDC, ulFlags: UInt32, ulCharSet: UInt32, pulPrivStatus: CPointer<UInt32>, pulStatus: CPointer<UInt32>, lpfnWriteToStream: WRITEEMBEDPROC, lpvWriteStream: CPointer<Unit>, pulCharCodeSet: CPointer<UInt32>, usCharCodeCount: UInt16, usLanguage: UInt16, pTTEmbedInfo: CPointer<TTEMBEDINFO>): Int32
     // param-hint: pusCharCodeSet len=param[10]
     // param-hint: pTTEmbedInfo optional
-    func TTEmbedFontFromFileA(hDC: HDC, szFontFileName: CPointer<UInt8>, usTTCIndex: UInt16, ulFlags: TTEMBED_FLAGS, ulCharSet: EMBED_FONT_CHARSET, pulPrivStatus: CPointer<EMBEDDED_FONT_PRIV_STATUS>, pulStatus: CPointer<UInt32>, lpfnWriteToStream: WRITEEMBEDPROC, lpvWriteStream: CPointer<Unit>, pusCharCodeSet: CPointer<UInt16>, usCharCodeCount: UInt16, usLanguage: UInt16, pTTEmbedInfo: CPointer<TTEMBEDINFO>): Int32
+    func TTEmbedFontFromFileA(hDC: HDC, szFontFileName: CPointer<UInt8>, usTTCIndex: UInt16, ulFlags: UInt32, ulCharSet: UInt32, pulPrivStatus: CPointer<UInt32>, pulStatus: CPointer<UInt32>, lpfnWriteToStream: WRITEEMBEDPROC, lpvWriteStream: CPointer<Unit>, pusCharCodeSet: CPointer<UInt16>, usCharCodeCount: UInt16, usLanguage: UInt16, pTTEmbedInfo: CPointer<TTEMBEDINFO>): Int32
     func TTEnableEmbeddingForFacename(lpszFacename: CPointer<UInt8>, bEnable: Int32): Int32
     // param-hint: pTTLoadInfo optional
-    func TTGetEmbeddedFontInfo(ulFlags: TTEMBED_FLAGS, pulPrivStatus: CPointer<UInt32>, ulPrivs: FONT_LICENSE_PRIVS, pulStatus: CPointer<UInt32>, lpfnReadFromStream: READEMBEDPROC, lpvReadStream: CPointer<Unit>, pTTLoadInfo: CPointer<TTLOADINFO>): Int32
-    func TTGetEmbeddingType(hDC: HDC, pulEmbedType: CPointer<EMBEDDED_FONT_PRIV_STATUS>): Int32
+    func TTGetEmbeddedFontInfo(ulFlags: UInt32, pulPrivStatus: CPointer<UInt32>, ulPrivs: UInt32, pulStatus: CPointer<UInt32>, lpfnReadFromStream: READEMBEDPROC, lpvReadStream: CPointer<Unit>, pTTLoadInfo: CPointer<TTLOADINFO>): Int32
+    func TTGetEmbeddingType(hDC: HDC, pulEmbedType: CPointer<UInt32>): Int32
     // param-hint: wzWinFamilyName len=param[2]
     // param-hint: szMacFamilyName len=param[4]
     func TTGetNewFontName(phFontReference: CPointer<CPointer<Unit>>, wzWinFamilyName: CPointer<UInt16>, cchMaxWinName: Int32, szMacFamilyName: CPointer<UInt8>, cchMaxMacName: Int32): Int32
@@ -7535,7 +7483,7 @@ foreign {
     // param-hint: szWinFamilyName optional
     // param-hint: szMacFamilyName optional
     // param-hint: pTTLoadInfo optional
-    func TTLoadEmbeddedFont(phFontReference: CPointer<CPointer<Unit>>, ulFlags: UInt32, pulPrivStatus: CPointer<EMBEDDED_FONT_PRIV_STATUS>, ulPrivs: FONT_LICENSE_PRIVS, pulStatus: CPointer<TTLOAD_EMBEDDED_FONT_STATUS>, lpfnReadFromStream: READEMBEDPROC, lpvReadStream: CPointer<Unit>, szWinFamilyName: CPointer<UInt16>, szMacFamilyName: CPointer<UInt8>, pTTLoadInfo: CPointer<TTLOADINFO>): Int32
+    func TTLoadEmbeddedFont(phFontReference: CPointer<CPointer<Unit>>, ulFlags: UInt32, pulPrivStatus: CPointer<UInt32>, ulPrivs: UInt32, pulStatus: CPointer<UInt32>, lpfnReadFromStream: READEMBEDPROC, lpvReadStream: CPointer<Unit>, szWinFamilyName: CPointer<UInt16>, szMacFamilyName: CPointer<UInt8>, pTTLoadInfo: CPointer<TTLOADINFO>): Int32
     func TTRunValidationTests(hDC: HDC, pTestParam: CPointer<TTVALIDATIONTESTSPARAMS>): Int32
     func TTRunValidationTestsEx(hDC: HDC, pTestParam: CPointer<TTVALIDATIONTESTSPARAMSEX>): Int32
 }

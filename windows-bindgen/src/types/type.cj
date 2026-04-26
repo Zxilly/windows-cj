@@ -166,6 +166,11 @@ public func projectBindgenType(index: TypeIndex, entry: BindgenTypeEntry, highLe
 }
 
 func isHandleBindgenType(index: TypeIndex, fileIdx: Int64, row: Int64): Bool {
+    let namespace = index.typeDefNamespace(fileIdx, row)
+    if (namespace != "Windows.Win32" && !namespace.startsWith("Windows.Win32.")) {
+        return false
+    }
+
     let (fieldStart, fieldEnd) = index.typeDefFields(fileIdx, row)
     if (fieldEnd - fieldStart != 1) {
         return false

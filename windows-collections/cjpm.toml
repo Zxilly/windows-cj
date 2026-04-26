@@ -1,0 +1,17 @@
+[package]
+  name = "windows_collections"
+  version = "0.1.0"
+  description = "Windows.Foundation.Collections support crate for Cangjie"
+  output-type = "static"
+  cjc-version = "1.1.0"
+  compile-option = "--cfg . -Woff unused -Woff parser -Woff package-import"
+
+[dependencies]
+  windows_core = { path = "../windows-core" }
+  windows_interface = { path = "../windows-interface" }
+  windows_polyfill = { path = "../windows-polyfill" }
+  windows_result = { path = "../windows-result" }
+  windows_strings = { path = "../windows-strings" }
+
+[windows-cj]
+features = ["Windows_Foundation", "Windows_Foundation_Collections"]

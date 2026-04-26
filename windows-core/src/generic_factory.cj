@@ -1,6 +1,6 @@
 package windows_core
 
-let IID_IGENERICFACTORY = GUID.fromValues(0x00000035u32, 0x0000u16, 0x0000u16, 0xC0u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x46u8)
+let IID_IGENERICFACTORY = GUID.from_values(0x00000035u32, 0x0000u16, 0x0000u16, 0xC0u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x46u8)
 
 func takeIGenericFactoryFromAbi(raw: CPointer<Unit>): IGenericFactory {
     IGenericFactory.fromAbiTake(raw)

@@ -4,8 +4,8 @@ import std.collection.HashMap
 import std.sync.Mutex
 import windows_core.*
 import windows_result.Win32Exception
-import windows_sys.win32.foundation.*
-import windows_sys.win32.ui.windows_and_messaging.*
+import windows_sys.Win32.Foundation.*
+import windows_sys.Win32.UI.WindowsAndMessaging.*
 
 func windowWithWideString<R>(s: String, action: (CPointer<UInt16>) -> R): R {
     let ws = CWideString(s)
@@ -40,6 +40,36 @@ func registerWindowClassWithName(
 
 // createWindowEx — creates a window, throwing if the returned HWND is null.
 public func createWindowEx(
+    exStyle: UInt32,
+    className: CPointer<UInt16>,
+    windowName: String,
+    style: WINDOW_STYLE,
+    x: Int32,
+    y: Int32,
+    width: Int32,
+    height: Int32,
+    parent: HWND,
+    menu: HMENU,
+    instance: HINSTANCE,
+    param: CPointer<Unit>
+): HWND {
+    createWindowEx(
+        WINDOW_EX_STYLE(exStyle),
+        className,
+        windowName,
+        style,
+        x,
+        y,
+        width,
+        height,
+        parent,
+        menu,
+        instance,
+        param
+    )
+}
+
+public func createWindowEx(
     exStyle: WINDOW_EX_STYLE,
     className: CPointer<UInt16>,
     windowName: String,
@@ -53,12 +83,14 @@ public func createWindowEx(
     instance: HINSTANCE,
     param: CPointer<Unit>
 ): HWND {
+    let rawExStyle = exStyle.value
+    let rawStyle = style.value
     let hwnd = windowWithWideString(windowName) { pName: CPointer<UInt16> =>
         ffiCreateWindowExW(
-            exStyle,
+            WINDOW_EX_STYLE(rawExStyle),
             className,
             pName,
-            style,
+            WINDOW_STYLE(rawStyle),
             x, y, width, height,
             parent, menu, instance, param
         )
@@ -155,6 +187,34 @@ public func registerWindowClass(
 
 // createWindowWithHandler — creates a window and registers its WndProc handler.
 public func createWindowWithHandler(
+    exStyle: UInt32,
+    className: String,
+    windowName: String,
+    style: WINDOW_STYLE,
+    x: Int32,
+    y: Int32,
+    width: Int32,
+    height: Int32,
+    parent: HWND,
+    menu: HMENU,
+    instance: HINSTANCE
+): HWND {
+    createWindowWithHandler(
+        WINDOW_EX_STYLE(exStyle),
+        className,
+        windowName,
+        style,
+        x,
+        y,
+        width,
+        height,
+        parent,
+        menu,
+        instance
+    )
+}
+
+public func createWindowWithHandler(
     exStyle: WINDOW_EX_STYLE,
     className: String,
     windowName: String,
@@ -167,6 +227,8 @@ public func createWindowWithHandler(
     menu: HMENU,
     instance: HINSTANCE
 ): HWND {
+    let rawExStyle = exStyle.value
+    let rawStyle = style.value
     var pendingKey = UIntNative(0)
     let pendingParam = match (lookupWindowClassHandler(className)) {
         case Some(wrapper) =>
@@ -178,10 +240,10 @@ public func createWindowWithHandler(
     let hwnd = windowWithWideString(className) { pClass: CPointer<UInt16> =>
         windowWithWideString(windowName) { pName: CPointer<UInt16> =>
             ffiCreateWindowExW(
-                exStyle,
+                WINDOW_EX_STYLE(rawExStyle),
                 pClass,
                 pName,
-                style,
+                WINDOW_STYLE(rawStyle),
                 x, y, width, height,
                 parent, menu, instance,
                 pendingParam

@@ -1,7 +1,7 @@
 package windows_core
 
+import windows_interface
 import std.sync.*
-import windows_sys.win32.foundation.{CO_E_NOTINITIALIZED, REGDB_E_CLASSNOTREG}
 
 let DLL_GET_ACTIVATION_FACTORY_PROC_NAME: Array<UInt8> = [
     0x44u8, 0x6Cu8, 0x6Cu8, 0x47u8, 0x65u8, 0x74u8, 0x41u8, 0x63u8,
@@ -28,6 +28,7 @@ let CO_INCREMENT_MTA_USAGE_PROC_NAME: Array<UInt8> = [
 var cachedCombaseModule: CPointer<Unit> = CPointer<Unit>()
 var cachedRoGetActivationFactoryProc: CPointer<Unit> = CPointer<Unit>()
 var cachedCoIncrementMTAUsageProc: CPointer<Unit> = CPointer<Unit>()
+let combaseInitMutex = Mutex()
 
 foreign {
     func GetProcAddress(hModule: CPointer<Unit>, lpProcName: CPointer<UInt8>): CPointer<Unit>
@@ -36,25 +37,31 @@ foreign {
 }
 
 func combaseModule(): CPointer<Unit> {
+    // Double-checked: race between two threads must not call LoadLibraryExA twice
+    // and stash conflicting handles into the global slot.
     if (cachedCombaseModule.isNotNull()) {
         return cachedCombaseModule
     }
-
-    unsafe {
-        let libraryHandle = acquireArrayRawData(COMBASE_DLL_NAME)
-        try {
-            let module = LoadLibraryExA(
-                libraryHandle.pointer,
-                CPointer<Unit>(),
-                LOAD_LIBRARY_SEARCH_DEFAULT_DIRS
-            )
-            if (module.isNull()) {
-                throw Exception("failed to load combase.dll")
+    synchronized(combaseInitMutex) {
+        if (cachedCombaseModule.isNotNull()) {
+            return cachedCombaseModule
+        }
+        unsafe {
+            let libraryHandle = acquireArrayRawData(COMBASE_DLL_NAME)
+            try {
+                let module = LoadLibraryExA(
+                    libraryHandle.pointer,
+                    CPointer<Unit>(),
+                    LOAD_LIBRARY_SEARCH_DEFAULT_DIRS
+                )
+                if (module.isNull()) {
+                    throw Exception("failed to load combase.dll")
+                }
+                cachedCombaseModule = module
+                return module
+            } finally {
+                releaseArrayRawData(libraryHandle)
             }
-            cachedCombaseModule = module
-            return module
-        } finally {
-            releaseArrayRawData(libraryHandle)
         }
     }
 }
@@ -79,18 +86,28 @@ func roGetActivationFactoryProc(): CPointer<Unit> {
     if (cachedRoGetActivationFactoryProc.isNotNull()) {
         return cachedRoGetActivationFactoryProc
     }
-    let proc = resolveCombaseProc(RO_GET_ACTIVATION_FACTORY_PROC_NAME)
-    cachedRoGetActivationFactoryProc = proc
-    proc
+    synchronized(combaseInitMutex) {
+        if (cachedRoGetActivationFactoryProc.isNotNull()) {
+            return cachedRoGetActivationFactoryProc
+        }
+        let proc = resolveCombaseProc(RO_GET_ACTIVATION_FACTORY_PROC_NAME)
+        cachedRoGetActivationFactoryProc = proc
+        return proc
+    }
 }
 
 func coIncrementMTAUsageProc(): CPointer<Unit> {
     if (cachedCoIncrementMTAUsageProc.isNotNull()) {
         return cachedCoIncrementMTAUsageProc
     }
-    let proc = resolveCombaseProc(CO_INCREMENT_MTA_USAGE_PROC_NAME)
-    cachedCoIncrementMTAUsageProc = proc
-    proc
+    synchronized(combaseInitMutex) {
+        if (cachedCoIncrementMTAUsageProc.isNotNull()) {
+            return cachedCoIncrementMTAUsageProc
+        }
+        let proc = resolveCombaseProc(CO_INCREMENT_MTA_USAGE_PROC_NAME)
+        cachedCoIncrementMTAUsageProc = proc
+        return proc
+    }
 }
 
 func callRoGetActivationFactory(
@@ -152,7 +169,7 @@ func loadSystemActivationFactory<I>(
             )
         }
 
-        if (hr.value == CO_E_NOTINITIALIZED) {
+        if (hr.value == CO_E_NOTINITIALIZED.value) {
             var cookie = CPointer<Unit>()
             callCoIncrementMTAUsage(CPointer<CPointer<Unit>>(inout cookie))
             iid = descriptor.iid
@@ -287,7 +304,7 @@ func loadRegFreeActivationFactory<I>(
         searchIndex = dotIndex - 1
     }
 
-    Result<I>.Err(WinError.fromHRESULT(HRESULT(REGDB_E_CLASSNOTREG)))
+    Result<I>.Err(WinError.fromHRESULT(REGDB_E_CLASSNOTREG))
 }
 
 func loadActivationFactory<I>(
@@ -298,7 +315,7 @@ func loadActivationFactory<I>(
         case Result<I>.Ok(value) =>
             Result<I>.Ok(value)
         case Result<I>.Err(error) =>
-            if (error.code().value == REGDB_E_CLASSNOTREG) {
+            if (error.code().value == REGDB_E_CLASSNOTREG.value) {
                 return loadRegFreeActivationFactory(runtimeName, descriptor)
             }
             Result<I>.Err(error)
@@ -311,6 +328,10 @@ public func factory<C, I>(): Result<I> where C <: RuntimeName, I <: ComInterface
 
 public func loadFactory<C, I>(): Result<I> where C <: RuntimeName, I <: ComInterface & Interface<I> {
     loadActivationFactory(C.runtimeName(), I.descriptor())
+}
+
+public func activationFactory<C>(): Result<windows_interface.IActivationFactory> where C <: RuntimeName {
+    loadActivationFactory(C.runtimeName(), windows_interface.IActivationFactory.descriptor())
 }
 
 public class FactoryCache<C, I> <: Resource where C <: RuntimeName, I <: ComInterface & Interface<I> {

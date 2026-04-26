@@ -516,7 +516,7 @@ public class TypeIndex {
     public func fieldType(fileIdx: Int64, row: Int64): MetadataType {
         let file = files[fileIdx]
         var blob = file.getBlob(row, TABLE_FIELD, 2)
-        let prolog = blob.readU8() // should be 0x06
+        let _ = blob.readU8() // should be 0x06
         return blob.readTypeSignature(file, Array<MetadataType>())
     }
 

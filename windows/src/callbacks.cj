@@ -1,11 +1,10 @@
 package windows
 
+import std.collection.ArrayList
 import std.collection.HashMap
 import std.sync.Mutex
-import windows_core.*
 import windows_result.Win32Exception
-import windows_sys.win32.foundation.{ERROR_SUCCESS}
-import windows_sys.win32.ui.windows_and_messaging.{CREATESTRUCTW, WM_NCCREATE, WM_NCDESTROY}
+import windows_sys.Win32.UI.WindowsAndMessaging.{WM_NCCREATE, WM_NCDESTROY}
 
 // =============================================================================
 // Generic callback registry
@@ -142,6 +141,7 @@ var wndProcMutex = Mutex()
 var wndProcRegistry = HashMap<UIntNative, Object>()
 var pendingWndProcMutex = Mutex()
 var pendingWndProcRegistry = HashMap<UIntNative, Object>()
+var pendingWndProcOrder = ArrayList<UIntNative>()
 var timerProcMutex = Mutex()
 var timerProcRegistry = HashMap<UIntNative, Object>()
 
@@ -174,6 +174,7 @@ public func registerPendingWndProc(
     }
     let entry = PendingWndProcEntry(key, handler)
     pendingWndProcRegistry.add(key, entry)
+    pendingWndProcOrder.add(key)
     pendingWndProcMutex.unlock()
     entry.contextParam()
 }
@@ -202,11 +203,18 @@ func lookupWndProc(hwnd: CPointer<Unit>): Option<Object> {
     result
 }
 
-func takePendingWndProcByKey(key: UIntNative): Option<WndProcHandler> {
+func takeNextPendingWndProc(): Option<WndProcHandler> {
     pendingWndProcMutex.lock()
-    let result = pendingWndProcRegistry.get(key)
-    if (result.isSome()) {
-        pendingWndProcRegistry.remove(key)
+    var result: Option<Object> = None
+    while (!pendingWndProcOrder.isEmpty()) {
+        let key = pendingWndProcOrder[0]
+        pendingWndProcOrder.remove(at: 0)
+        let entry = pendingWndProcRegistry.get(key)
+        if (entry.isSome()) {
+            pendingWndProcRegistry.remove(key)
+            result = entry
+            break
+        }
     }
     pendingWndProcMutex.unlock()
     match (result) {
@@ -316,23 +324,13 @@ public func wndProcThunk(
     hwnd: CPointer<Unit>,
     msg: UInt32,
     wParam: UIntNative,
-    lParamRaw: CPointer<Unit>
+    lParam: IntNative
 ): IntNative {
-    let lParam = IntNative(lParamRaw.toUIntNative())
-
     if (msg == WM_NCCREATE) {
         match (lookupWndProc(hwnd)) {
             case Some(_) => ()
             case None =>
-                let contextKey = unsafe {
-                    let createStruct = CPointer<CREATESTRUCTW>(lParamRaw).read()
-                    if (createStruct.lpCreateParams.isNull()) {
-                        UIntNative(0)
-                    } else {
-                        CPointer<UIntNative>(createStruct.lpCreateParams).read()
-                    }
-                }
-                match (takePendingWndProcByKey(contextKey)) {
+                match (takeNextPendingWndProc()) {
                     case Some(wrapper) => registerWndProc(hwnd, wrapper.handler)
                     case None => ()
                 }

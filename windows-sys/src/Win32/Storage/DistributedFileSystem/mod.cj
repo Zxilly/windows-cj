@@ -2,7 +2,10 @@
 package windows_sys.Win32.Storage.DistributedFileSystem
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
 
 
@@ -55,13 +58,6 @@ public struct DFS_INFO_103 {
 
 @When[Windows_Win32_Storage_DistributedFileSystem == "on"]
 @C
-public struct DFS_INFO_104 {
-    public var TargetPriority: DFS_TARGET_PRIORITY = DFS_TARGET_PRIORITY()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
-@C
 public struct DFS_INFO_105 {
     public var Comment: CPointer<UInt16> = CPointer<UInt16>()
     public var State: UInt32 = 0
@@ -71,15 +67,7 @@ public struct DFS_INFO_105 {
     public init() {}
 }
 
-@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
-@C
-public struct DFS_INFO_106 {
-    public var State: UInt32 = 0
-    public var TargetPriority: DFS_TARGET_PRIORITY = DFS_TARGET_PRIORITY()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && Windows_Win32_Security == "on"]
 @C
 public struct DFS_INFO_107 {
     public var Comment: CPointer<UInt16> = CPointer<UInt16>()
@@ -92,7 +80,7 @@ public struct DFS_INFO_107 {
     public init() {}
 }
 
-@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && Windows_Win32_Security == "on"]
 @C
 public struct DFS_INFO_150 {
     public var SdLengthReserved: UInt32 = 0
@@ -136,17 +124,6 @@ public struct DFS_INFO_2_32 {
 
 @When[Windows_Win32_Storage_DistributedFileSystem == "on"]
 @C
-public struct DFS_INFO_3 {
-    public var EntryPath: CPointer<UInt16> = CPointer<UInt16>()
-    public var Comment: CPointer<UInt16> = CPointer<UInt16>()
-    public var State: UInt32 = 0
-    public var NumberOfStorages: UInt32 = 0
-    public var Storage: CPointer<DFS_STORAGE_INFO> = CPointer<DFS_STORAGE_INFO>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
-@C
 public struct DFS_INFO_300 {
     public var Flags: UInt32 = 0
     public var DfsName: CPointer<UInt16> = CPointer<UInt16>()
@@ -161,19 +138,6 @@ public struct DFS_INFO_3_32 {
     public var State: UInt32 = 0
     public var NumberOfStorages: UInt32 = 0
     public var Storage: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
-@C
-public struct DFS_INFO_4 {
-    public var EntryPath: CPointer<UInt16> = CPointer<UInt16>()
-    public var Comment: CPointer<UInt16> = CPointer<UInt16>()
-    public var State: UInt32 = 0
-    public var Timeout: UInt32 = 0
-    public var Guid: GUID = GUID()
-    public var NumberOfStorages: UInt32 = 0
-    public var Storage: CPointer<DFS_STORAGE_INFO> = CPointer<DFS_STORAGE_INFO>()
     public init() {}
 }
 
@@ -215,27 +179,12 @@ public struct DFS_INFO_50 {
 
 @When[Windows_Win32_Storage_DistributedFileSystem == "on"]
 @C
-public struct DFS_INFO_6 {
-    public var EntryPath: CPointer<UInt16> = CPointer<UInt16>()
-    public var Comment: CPointer<UInt16> = CPointer<UInt16>()
-    public var State: UInt32 = 0
-    public var Timeout: UInt32 = 0
-    public var Guid: GUID = GUID()
-    public var PropertyFlags: UInt32 = 0
-    public var MetadataSize: UInt32 = 0
-    public var NumberOfStorages: UInt32 = 0
-    public var Storage: CPointer<DFS_STORAGE_INFO_1> = CPointer<DFS_STORAGE_INFO_1>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
-@C
 public struct DFS_INFO_7 {
     public var GenerationGuid: GUID = GUID()
     public init() {}
 }
 
-@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && Windows_Win32_Security == "on"]
 @C
 public struct DFS_INFO_8 {
     public var EntryPath: CPointer<UInt16> = CPointer<UInt16>()
@@ -252,24 +201,6 @@ public struct DFS_INFO_8 {
 }
 
 @When[Windows_Win32_Storage_DistributedFileSystem == "on"]
-@C
-public struct DFS_INFO_9 {
-    public var EntryPath: CPointer<UInt16> = CPointer<UInt16>()
-    public var Comment: CPointer<UInt16> = CPointer<UInt16>()
-    public var State: UInt32 = 0
-    public var Timeout: UInt32 = 0
-    public var Guid: GUID = GUID()
-    public var PropertyFlags: UInt32 = 0
-    public var MetadataSize: UInt32 = 0
-    public var SdLengthReserved: UInt32 = 0
-    public var pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR = CPointer<Unit>()
-    public var NumberOfStorages: UInt32 = 0
-    public var Storage: CPointer<DFS_STORAGE_INFO_1> = CPointer<DFS_STORAGE_INFO_1>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
-@C
 public struct DFS_NAMESPACE_VERSION_ORIGIN {
     public var value: Int32 = 0
 
@@ -295,14 +226,6 @@ public let DFS_NAMESPACE_VERSION_ORIGIN_DFS_NAMESPACE_VERSION_ORIGIN_SERVER: DFS
 
 @When[Windows_Win32_Storage_DistributedFileSystem == "on"]
 public let DFS_NAMESPACE_VERSION_ORIGIN_DFS_NAMESPACE_VERSION_ORIGIN_DOMAIN: DFS_NAMESPACE_VERSION_ORIGIN = DFS_NAMESPACE_VERSION_ORIGIN(2)
-
-@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
-@C
-public struct DFS_SITELIST_INFO {
-    public var cSites: UInt32 = 0
-    public var Site: VArray<DFS_SITENAME_INFO, $1> = VArray<DFS_SITENAME_INFO, $1>(repeat: DFS_SITENAME_INFO())
-    public init() {}
-}
 
 @When[Windows_Win32_Storage_DistributedFileSystem == "on"]
 @C
@@ -332,16 +255,6 @@ public struct DFS_STORAGE_INFO_0_32 {
 
 @When[Windows_Win32_Storage_DistributedFileSystem == "on"]
 @C
-public struct DFS_STORAGE_INFO_1 {
-    public var State: UInt32 = 0
-    public var ServerName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ShareName: CPointer<UInt16> = CPointer<UInt16>()
-    public var TargetPriority: DFS_TARGET_PRIORITY = DFS_TARGET_PRIORITY()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
-@C
 public struct DFS_SUPPORTED_NAMESPACE_VERSION_INFO {
     public var DomainDfsMajorVersion: UInt32 = 0
     public var DomainDfsMinorVersion: UInt32 = 0
@@ -353,16 +266,6 @@ public struct DFS_SUPPORTED_NAMESPACE_VERSION_INFO {
 }
 
 @When[Windows_Win32_Storage_DistributedFileSystem == "on"]
-@C
-public struct DFS_TARGET_PRIORITY {
-    public var TargetPriorityClass: DFS_TARGET_PRIORITY_CLASS = DFS_TARGET_PRIORITY_CLASS()
-    public var TargetPriorityRank: UInt16 = 0
-    public var Reserved: UInt16 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
-@C
 public struct DFS_TARGET_PRIORITY_CLASS {
     public var value: Int32 = 0
 
@@ -398,6 +301,104 @@ public let DFS_TARGET_PRIORITY_CLASS_DfsSiteCostLowPriorityClass: DFS_TARGET_PRI
 @When[Windows_Win32_Storage_DistributedFileSystem == "on"]
 public let DFS_TARGET_PRIORITY_CLASS_DfsGlobalLowPriorityClass: DFS_TARGET_PRIORITY_CLASS = DFS_TARGET_PRIORITY_CLASS(4)
 
+@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
+@C
+public struct DFS_INFO_3 {
+    public var EntryPath: CPointer<UInt16> = CPointer<UInt16>()
+    public var Comment: CPointer<UInt16> = CPointer<UInt16>()
+    public var State: UInt32 = 0
+    public var NumberOfStorages: UInt32 = 0
+    public var Storage: CPointer<DFS_STORAGE_INFO> = CPointer<DFS_STORAGE_INFO>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
+@C
+public struct DFS_INFO_4 {
+    public var EntryPath: CPointer<UInt16> = CPointer<UInt16>()
+    public var Comment: CPointer<UInt16> = CPointer<UInt16>()
+    public var State: UInt32 = 0
+    public var Timeout: UInt32 = 0
+    public var Guid: GUID = GUID()
+    public var NumberOfStorages: UInt32 = 0
+    public var Storage: CPointer<DFS_STORAGE_INFO> = CPointer<DFS_STORAGE_INFO>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
+@C
+public struct DFS_SITELIST_INFO {
+    public var cSites: UInt32 = 0
+    public var Site: VArray<DFS_SITENAME_INFO, $1> = VArray<DFS_SITENAME_INFO, $1>(repeat: DFS_SITENAME_INFO())
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
+@C
+public struct DFS_TARGET_PRIORITY {
+    public var TargetPriorityClass: Int32 = 0
+    public var TargetPriorityRank: UInt16 = 0
+    public var Reserved: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
+@C
+public struct DFS_INFO_104 {
+    public var TargetPriority: DFS_TARGET_PRIORITY = DFS_TARGET_PRIORITY()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
+@C
+public struct DFS_INFO_106 {
+    public var State: UInt32 = 0
+    public var TargetPriority: DFS_TARGET_PRIORITY = DFS_TARGET_PRIORITY()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
+@C
+public struct DFS_STORAGE_INFO_1 {
+    public var State: UInt32 = 0
+    public var ServerName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ShareName: CPointer<UInt16> = CPointer<UInt16>()
+    public var TargetPriority: DFS_TARGET_PRIORITY = DFS_TARGET_PRIORITY()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on"]
+@C
+public struct DFS_INFO_6 {
+    public var EntryPath: CPointer<UInt16> = CPointer<UInt16>()
+    public var Comment: CPointer<UInt16> = CPointer<UInt16>()
+    public var State: UInt32 = 0
+    public var Timeout: UInt32 = 0
+    public var Guid: GUID = GUID()
+    public var PropertyFlags: UInt32 = 0
+    public var MetadataSize: UInt32 = 0
+    public var NumberOfStorages: UInt32 = 0
+    public var Storage: CPointer<DFS_STORAGE_INFO_1> = CPointer<DFS_STORAGE_INFO_1>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && Windows_Win32_Security == "on"]
+@C
+public struct DFS_INFO_9 {
+    public var EntryPath: CPointer<UInt16> = CPointer<UInt16>()
+    public var Comment: CPointer<UInt16> = CPointer<UInt16>()
+    public var State: UInt32 = 0
+    public var Timeout: UInt32 = 0
+    public var Guid: GUID = GUID()
+    public var PropertyFlags: UInt32 = 0
+    public var MetadataSize: UInt32 = 0
+    public var SdLengthReserved: UInt32 = 0
+    public var pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR = CPointer<Unit>()
+    public var NumberOfStorages: UInt32 = 0
+    public var Storage: CPointer<DFS_STORAGE_INFO_1> = CPointer<DFS_STORAGE_INFO_1>()
+    public init() {}
+}
+
 @When[NETAPI32 == "on"]
 foreign {
     // param-hint: Comment optional
@@ -413,14 +414,11 @@ foreign {
     // param-hint: ServerName optional
     // param-hint: ShareName optional
     func NetDfsGetClientInfo(DfsEntryPath: CPointer<UInt16>, ServerName: CPointer<UInt16>, ShareName: CPointer<UInt16>, Level: UInt32, Buffer: CPointer<CPointer<UInt8>>): UInt32
-    func NetDfsGetFtContainerSecurity(DomainName: CPointer<UInt16>, SecurityInformation: UInt32, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, lpcbSecurityDescriptor: CPointer<UInt32>): UInt32
     // param-hint: ServerName optional
     // param-hint: ShareName optional
     func NetDfsGetInfo(DfsEntryPath: CPointer<UInt16>, ServerName: CPointer<UInt16>, ShareName: CPointer<UInt16>, Level: UInt32, Buffer: CPointer<CPointer<UInt8>>): UInt32
-    func NetDfsGetSecurity(DfsEntryPath: CPointer<UInt16>, SecurityInformation: UInt32, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, lpcbSecurityDescriptor: CPointer<UInt32>): UInt32
-    func NetDfsGetStdContainerSecurity(MachineName: CPointer<UInt16>, SecurityInformation: UInt32, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, lpcbSecurityDescriptor: CPointer<UInt32>): UInt32
     // param-hint: pName optional
-    func NetDfsGetSupportedNamespaceVersion(Origin: DFS_NAMESPACE_VERSION_ORIGIN, pName: CPointer<UInt16>, ppVersionInfo: CPointer<CPointer<DFS_SUPPORTED_NAMESPACE_VERSION_INFO>>): UInt32
+    func NetDfsGetSupportedNamespaceVersion(Origin: Int32, pName: CPointer<UInt16>, ppVersionInfo: CPointer<CPointer<DFS_SUPPORTED_NAMESPACE_VERSION_INFO>>): UInt32
     func NetDfsMove(OldDfsEntryPath: CPointer<UInt16>, NewDfsEntryPath: CPointer<UInt16>, Flags: UInt32): UInt32
     // param-hint: ServerName optional
     // param-hint: ShareName optional
@@ -436,10 +434,17 @@ foreign {
     // param-hint: ServerName optional
     // param-hint: ShareName optional
     func NetDfsSetClientInfo(DfsEntryPath: CPointer<UInt16>, ServerName: CPointer<UInt16>, ShareName: CPointer<UInt16>, Level: UInt32, Buffer: CPointer<UInt8>): UInt32
-    func NetDfsSetFtContainerSecurity(DomainName: CPointer<UInt16>, SecurityInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
     // param-hint: ServerName optional
     // param-hint: ShareName optional
     func NetDfsSetInfo(DfsEntryPath: CPointer<UInt16>, ServerName: CPointer<UInt16>, ShareName: CPointer<UInt16>, Level: UInt32, Buffer: CPointer<UInt8>): UInt32
+}
+
+@When[NETAPI32 == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func NetDfsGetFtContainerSecurity(DomainName: CPointer<UInt16>, SecurityInformation: UInt32, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, lpcbSecurityDescriptor: CPointer<UInt32>): UInt32
+    func NetDfsGetSecurity(DfsEntryPath: CPointer<UInt16>, SecurityInformation: UInt32, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, lpcbSecurityDescriptor: CPointer<UInt32>): UInt32
+    func NetDfsGetStdContainerSecurity(MachineName: CPointer<UInt16>, SecurityInformation: UInt32, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, lpcbSecurityDescriptor: CPointer<UInt32>): UInt32
+    func NetDfsSetFtContainerSecurity(DomainName: CPointer<UInt16>, SecurityInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
     func NetDfsSetSecurity(DfsEntryPath: CPointer<UInt16>, SecurityInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
     func NetDfsSetStdContainerSecurity(MachineName: CPointer<UInt16>, SecurityInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
 }

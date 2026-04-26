@@ -42,6 +42,35 @@ public class CodeWriter {
         lines.add("")
     }
 
+    public func writeRaw(content: String): Unit {
+        if (content.isEmpty()) {
+            return
+        }
+
+        let arr = content.toArray()
+        var start: Int64 = 0
+        var i: Int64 = 0
+        while (i < Int64(arr.size)) {
+            if (arr[i] == b'\n') {
+                var end = i
+                if (end > start && arr[end - 1] == b'\r') {
+                    end -= 1
+                }
+                lines.add(String.fromUtf8(arr[start..end]))
+                start = i + 1
+            }
+            i += 1
+        }
+
+        if (start < Int64(arr.size)) {
+            var end = Int64(arr.size)
+            if (end > start && arr[end - 1] == b'\r') {
+                end -= 1
+            }
+            lines.add(String.fromUtf8(arr[start..end]))
+        }
+    }
+
     public func writeBlock(header: String, body: () -> Unit): Unit {
         writeLine("${header} {")
         indent()
@@ -277,6 +306,13 @@ public func writeAvailabilityForTags(w: CodeWriter, feature: String, tags: Array
     }
 }
 
+public func writeNegatedAvailabilityForTags(w: CodeWriter, feature: String, tags: ArrayList<String>): Unit {
+    let condition = negatedAvailabilityCondition(feature, tags)
+    if (!condition.isEmpty()) {
+        w.writeLine("@When[${condition}]")
+    }
+}
+
 public func availabilityCondition(feature: String, tags: ArrayList<String>): String {
     let conditions = ArrayList<String>()
     if (!feature.isEmpty()) {
@@ -285,7 +321,13 @@ public func availabilityCondition(feature: String, tags: ArrayList<String>): Str
 
     let uniqueTags = uniqueStrings(tags)
     if (uniqueTags.size == 1) {
-        conditions.add(availabilityTagCondition(uniqueTags[0]))
+        var condition = availabilityTagCondition(uniqueTags[0])
+        if (!conditions.isEmpty() && conditionNeedsParentheses(condition)) {
+            condition = "(${condition})"
+        } else if (conditions.isEmpty()) {
+            condition = stripTopLevelConditionParentheses(condition)
+        }
+        conditions.add(condition)
     } else if (!uniqueTags.isEmpty()) {
         let options = ArrayList<String>()
         for (tag in uniqueTags) {
@@ -315,6 +357,95 @@ func availabilityTagCondition(tag: String): String {
     }
 }
 
+public func negatedAvailabilityCondition(feature: String, tags: ArrayList<String>): String {
+    let conditions = ArrayList<String>()
+    if (!feature.isEmpty()) {
+        conditions.add("${feature} != \"on\"")
+    }
+
+    let uniqueTags = uniqueStrings(tags)
+    if (uniqueTags.size == 1) {
+        conditions.add(negateAvailabilityTagCondition(uniqueTags[0]))
+    } else if (!uniqueTags.isEmpty()) {
+        let options = ArrayList<String>()
+        for (tag in uniqueTags) {
+            let option = negateAvailabilityTagCondition(tag)
+            if (conditionNeedsParentheses(option)) {
+                options.add("(${option})")
+            } else {
+                options.add(option)
+            }
+        }
+        conditions.add(joinStrings(options, " && "))
+    }
+
+    if (conditions.isEmpty()) {
+        return ""
+    }
+    return joinStrings(conditions, " || ")
+}
+
+func negateAvailabilityTagCondition(tag: String): String {
+    let condition = availabilityTagCondition(tag)
+    if (condition.indexOf(" || ", 0).isSome()) {
+        let terms = splitStringByString(condition, " || ")
+        let negated = ArrayList<String>()
+        for (term in terms) {
+            negated.add(negateSimpleAvailabilityCondition(term))
+        }
+        return joinStrings(negated, " && ")
+    }
+    if (condition.indexOf(" && ", 0).isSome()) {
+        let terms = splitStringByString(condition, " && ")
+        let negated = ArrayList<String>()
+        for (term in terms) {
+            negated.add(negateSimpleAvailabilityCondition(term))
+        }
+        return joinStrings(negated, " || ")
+    }
+    return negateSimpleAvailabilityCondition(condition)
+}
+
+func negateSimpleAvailabilityCondition(condition: String): String {
+    match (condition.indexOf(" == ", 0)) {
+        case Some(pos) =>
+            let arr = condition.toArray()
+            return "${String.fromUtf8(arr[0..pos])} != ${String.fromUtf8(arr[pos + 4..Int64(arr.size)])}"
+        case None => ()
+    }
+    match (condition.indexOf(" != ", 0)) {
+        case Some(pos) =>
+            let arr = condition.toArray()
+            return "${String.fromUtf8(arr[0..pos])} == ${String.fromUtf8(arr[pos + 4..Int64(arr.size)])}"
+        case None => ()
+    }
+    return "${condition} == \"off\""
+}
+
+func splitStringByString(value: String, sep: String): ArrayList<String> {
+    let result = ArrayList<String>()
+    let arr = value.toArray()
+    let sepLen = Int64(sep.toArray().size)
+    var start: Int64 = 0
+    var search: Int64 = 0
+    while (search <= Int64(arr.size)) {
+        match (value.indexOf(sep, search)) {
+            case Some(pos) =>
+                result.add(String.fromUtf8(arr[start..pos]))
+                start = pos + sepLen
+                search = start
+            case None =>
+                result.add(String.fromUtf8(arr[start..Int64(arr.size)]))
+                break
+        }
+    }
+    return result
+}
+
+func conditionNeedsParentheses(condition: String): Bool {
+    return condition.indexOf(" && ", 0).isSome() || condition.indexOf(" || ", 0).isSome()
+}
+
 func uniqueStrings(values: ArrayList<String>): ArrayList<String> {
     let result = ArrayList<String>()
     for (value in values) {
@@ -339,12 +470,47 @@ public func architectureCfgTags(arches: String): ArrayList<String> {
         return result
     }
     if ((mask & 2) != 0) {
-        result.add("arch_x86_64")
+        result.add("arch == \"x86_64\"")
     }
     if ((mask & 4) != 0) {
-        result.add("arch_arm64")
+        result.add("arch == \"aarch64\"")
     }
     return result
+}
+
+func stripTopLevelConditionParentheses(condition: String): String {
+    if (topLevelParenthesesWrapWholeCondition(condition)) {
+        let arr = condition.toArray()
+        return String.fromUtf8(arr[1..Int64(arr.size) - 1])
+    }
+    return condition
+}
+
+func topLevelParenthesesWrapWholeCondition(condition: String): Bool {
+    if (!condition.startsWith("(") || !condition.endsWith(")")) {
+        return false
+    }
+
+    let arr = condition.toArray()
+    var depth: Int64 = 0
+    var i: Int64 = 0
+    while (i < Int64(arr.size)) {
+        let ch = arr[i]
+        if (ch == b'(') {
+            depth += 1
+        } else if (ch == b')') {
+            depth -= 1
+            if (depth < 0) {
+                return false
+            }
+            if (depth == 0 && i < Int64(arr.size) - 1) {
+                return false
+            }
+        }
+        i += 1
+    }
+
+    return depth == 0
 }
 
 public func isUnsupportedOnlyArchitecture(arches: String): Bool {

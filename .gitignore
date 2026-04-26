@@ -1,5 +1,29 @@
-target/
-tests/output/
+/target/
+**/target/
+**/target_*/
+**/__pycache__/
+*.py[cod]
+
+# Local build and probe artifacts.
+*.cjo
+*.prof
 *.log
+*.tmp
+*.bak
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+.windows-cj-generated-output
+**/generated_archive/
+/tmp/
+/tmp_*/
+**/tmp/
+**/tmp_*/
+/windows-*-probe/
+
+# OS/editor noise.
 .DS_Store
 Thumbs.db

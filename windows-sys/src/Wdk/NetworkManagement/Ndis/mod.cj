@@ -2,11 +2,15 @@
 package windows_sys.Wdk.NetworkManagement.Ndis
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt32, unionReadUInt32, unionWriteInt32, unionWriteUInt32}
-import windows_sys.Wdk.impl as Wdk_impl
+import windows_polyfill as windows_polyfill
+import windows_sys.Wdk._impl_l0 as Wdk__impl_l0
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_NetworkManagement_Ndis == "on"]
 import windows_sys.Win32.NetworkManagement.Ndis as Win32_NetworkManagement_Ndis
-import windows_sys.Win32.impl as Win32_impl
+import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
@@ -134,15 +138,10 @@ public type CO_AF_REGISTER_NOTIFY_HANDLER = CFunc<() -> Unit>
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
-public struct CO_CALL_MANAGER_PARAMETERS {
-    public var Transmit: Win32_impl.FLOWSPEC = Win32_impl.FLOWSPEC()
-    public var Receive: Win32_impl.FLOWSPEC = Win32_impl.FLOWSPEC()
-    public var CallMgrSpecific: CO_SPECIFIC_PARAMETERS = CO_SPECIFIC_PARAMETERS()
+public struct CO_CALL_PARAMETERS {
+    public var Value: IntNative = 0
     public init() {}
 }
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type CO_CALL_PARAMETERS = CPointer<Unit>
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 public type CO_CREATE_VC_HANDLER = CFunc<() -> Int32>
@@ -151,13 +150,9 @@ public type CO_CREATE_VC_HANDLER = CFunc<() -> Int32>
 public type CO_DELETE_VC_HANDLER = CFunc<() -> Int32>
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type CO_MEDIA_PARAMETERS = CPointer<Unit>
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
-public struct CO_PVC {
-    public var NdisAfHandle: CPointer<Unit> = CPointer<Unit>()
-    public var PvcParameters: CO_SPECIFIC_PARAMETERS = CO_SPECIFIC_PARAMETERS()
+public struct CO_MEDIA_PARAMETERS {
+    public var Value: IntNative = 0
     public init() {}
 }
 
@@ -180,7 +175,11 @@ public struct CO_SPECIFIC_PARAMETERS {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type ETH_FILTER = CPointer<Unit>
+@C
+public struct ETH_FILTER {
+    public var Value: IntNative = 0
+    public init() {}
+}
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
@@ -193,50 +192,53 @@ public struct FILTERDBS {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct FILTERDBS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func ethDB(): CPointer<ETH_FILTER> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<ETH_FILTER>>(p)
-            return ptr.read()
+    public mut prop ethDB: CPointer<ETH_FILTER> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<ETH_FILTER>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<ETH_FILTER>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_ethDB(val: CPointer<ETH_FILTER>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<ETH_FILTER>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop nullDB: CPointer<IntNative> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IntNative>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func nullDB(): CPointer<IntNative> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IntNative>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_nullDB(val: CPointer<IntNative>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IntNative>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IntNative>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -262,16 +264,6 @@ public struct GEN_GET_TIME_CAPS {
 public struct LOCK_STATE {
     public var LockState: UInt16 = 0
     public var OldIrql: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct MEDIA_SPECIFIC_INFORMATION {
-    public var NextEntryOffset: UInt32 = 0
-    public var ClassId: NDIS_CLASS_ID = NDIS_CLASS_ID()
-    public var Size: UInt32 = 0
-    public var ClassInformation: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
     public init() {}
 }
 
@@ -321,23 +313,6 @@ public struct NDIS_802_11_ASSOCIATION_INFORMATION {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_802_11_AUTHENTICATION_ENCRYPTION {
-    public var AuthModeSupported: NDIS_802_11_AUTHENTICATION_MODE = NDIS_802_11_AUTHENTICATION_MODE()
-    public var EncryptStatusSupported: NDIS_802_11_WEP_STATUS = NDIS_802_11_WEP_STATUS()
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_802_11_AUTHENTICATION_EVENT {
-    public var Status: NDIS_802_11_STATUS_INDICATION = NDIS_802_11_STATUS_INDICATION()
-    public var Request: VArray<NDIS_802_11_AUTHENTICATION_REQUEST, $1> = VArray<NDIS_802_11_AUTHENTICATION_REQUEST, $1>(repeat: NDIS_802_11_AUTHENTICATION_REQUEST())
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_802_11_AUTHENTICATION_MODE {
     public var value: Int32 = 0
 
@@ -405,44 +380,6 @@ public struct NDIS_802_11_AUTHENTICATION_REQUEST {
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
-public struct NDIS_802_11_BSSID_LIST {
-    public var NumberOfItems: UInt32 = 0
-    public var Bssid: VArray<NDIS_WLAN_BSSID, $1> = VArray<NDIS_WLAN_BSSID, $1>(repeat: NDIS_WLAN_BSSID())
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_802_11_BSSID_LIST_EX {
-    public var NumberOfItems: UInt32 = 0
-    public var Bssid: VArray<NDIS_WLAN_BSSID_EX, $1> = VArray<NDIS_WLAN_BSSID_EX, $1>(repeat: NDIS_WLAN_BSSID_EX())
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_802_11_CAPABILITY {
-    public var Length: UInt32 = 0
-    public var Version: UInt32 = 0
-    public var NoOfPMKIDs: UInt32 = 0
-    public var NoOfAuthEncryptPairsSupported: UInt32 = 0
-    public var AuthenticationEncryptionSupported: VArray<NDIS_802_11_AUTHENTICATION_ENCRYPTION, $1> = VArray<NDIS_802_11_AUTHENTICATION_ENCRYPTION, $1>(repeat: NDIS_802_11_AUTHENTICATION_ENCRYPTION())
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_802_11_CONFIGURATION {
-    public var Length: UInt32 = 0
-    public var BeaconPeriod: UInt32 = 0
-    public var ATIMWindow: UInt32 = 0
-    public var DSConfig: UInt32 = 0
-    public var FHConfig: NDIS_802_11_CONFIGURATION_FH = NDIS_802_11_CONFIGURATION_FH()
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_802_11_CONFIGURATION_FH {
     public var Length: UInt32 = 0
     public var HopPattern: UInt32 = 0
@@ -473,7 +410,6 @@ public struct NDIS_802_11_KEY {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_802_11_MEDIA_STREAM_MODE {
     public var value: Int32 = 0
 
@@ -498,7 +434,6 @@ public let NDIS_802_11_MEDIA_STREAM_MODE_Ndis802_11MediaStreamOff: NDIS_802_11_M
 public let NDIS_802_11_MEDIA_STREAM_MODE_Ndis802_11MediaStreamOn: NDIS_802_11_MEDIA_STREAM_MODE = NDIS_802_11_MEDIA_STREAM_MODE(1)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_802_11_NETWORK_INFRASTRUCTURE {
     public var value: Int32 = 0
 
@@ -529,7 +464,6 @@ public let NDIS_802_11_NETWORK_INFRASTRUCTURE_Ndis802_11AutoUnknown: NDIS_802_11
 public let NDIS_802_11_NETWORK_INFRASTRUCTURE_Ndis802_11InfrastructureMax: NDIS_802_11_NETWORK_INFRASTRUCTURE = NDIS_802_11_NETWORK_INFRASTRUCTURE(3)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_802_11_NETWORK_TYPE {
     public var value: Int32 = 0
 
@@ -569,15 +503,7 @@ public let NDIS_802_11_NETWORK_TYPE_Ndis802_11NetworkTypeMax: NDIS_802_11_NETWOR
 @C
 public struct NDIS_802_11_NETWORK_TYPE_LIST {
     public var NumberOfItems: UInt32 = 0
-    public var NetworkType: VArray<NDIS_802_11_NETWORK_TYPE, $1> = VArray<NDIS_802_11_NETWORK_TYPE, $1>(repeat: NDIS_802_11_NETWORK_TYPE())
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_802_11_NON_BCAST_SSID_LIST {
-    public var NumberOfItems: UInt32 = 0
-    public var Non_Bcast_Ssid: VArray<NDIS_802_11_SSID, $1> = VArray<NDIS_802_11_SSID, $1>(repeat: NDIS_802_11_SSID())
+    public var NetworkType: VArray<Int32, $1> = VArray<Int32, $1>(repeat: 0)
     public init() {}
 }
 
@@ -591,16 +517,6 @@ public struct NDIS_802_11_PMKID {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_802_11_PMKID_CANDIDATE_LIST {
-    public var Version: UInt32 = 0
-    public var NumCandidates: UInt32 = 0
-    public var CandidateList: VArray<PMKID_CANDIDATE, $1> = VArray<PMKID_CANDIDATE, $1>(repeat: PMKID_CANDIDATE())
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_802_11_POWER_MODE {
     public var value: Int32 = 0
 
@@ -631,7 +547,6 @@ public let NDIS_802_11_POWER_MODE_Ndis802_11PowerModeFast_PSP: NDIS_802_11_POWER
 public let NDIS_802_11_POWER_MODE_Ndis802_11PowerModeMax: NDIS_802_11_POWER_MODE = NDIS_802_11_POWER_MODE(3)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_802_11_PRIVACY_FILTER {
     public var value: Int32 = 0
 
@@ -656,7 +571,6 @@ public let NDIS_802_11_PRIVACY_FILTER_Ndis802_11PrivFilterAcceptAll: NDIS_802_11
 public let NDIS_802_11_PRIVACY_FILTER_Ndis802_11PrivFilter8021xWEP: NDIS_802_11_PRIVACY_FILTER = NDIS_802_11_PRIVACY_FILTER(1)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_802_11_RADIO_STATUS {
     public var value: Int32 = 0
 
@@ -690,7 +604,6 @@ public let NDIS_802_11_RADIO_STATUS_Ndis802_11RadioStatusHardwareSoftwareOff: ND
 public let NDIS_802_11_RADIO_STATUS_Ndis802_11RadioStatusMax: NDIS_802_11_RADIO_STATUS = NDIS_802_11_RADIO_STATUS(4)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_802_11_RELOAD_DEFAULTS {
     public var value: Int32 = 0
 
@@ -760,14 +673,6 @@ public struct NDIS_802_11_STATISTICS {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_802_11_STATUS_INDICATION {
-    public var StatusType: NDIS_802_11_STATUS_TYPE = NDIS_802_11_STATUS_TYPE()
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_802_11_STATUS_TYPE {
     public var value: Int32 = 0
 
@@ -799,61 +704,6 @@ public let NDIS_802_11_STATUS_TYPE_Ndis802_11StatusTypeMax: NDIS_802_11_STATUS_T
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
-public struct NDIS_802_11_TEST {
-    public var Length: UInt32 = 0
-    public var Type: UInt32 = 0
-    public var Anonymous: NDIS_802_11_TEST__Anonymous_e__Union = NDIS_802_11_TEST__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct NDIS_802_11_TEST__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
-
-    public func authenticationEvent(): NDIS_802_11_AUTHENTICATION_EVENT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDIS_802_11_AUTHENTICATION_EVENT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_authenticationEvent(val: NDIS_802_11_AUTHENTICATION_EVENT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDIS_802_11_AUTHENTICATION_EVENT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func rssiTrigger(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
-        }
-    }
-
-    public mut func set_rssiTrigger(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_802_11_VARIABLE_IEs {
     public var ElementID: UInt8 = 0
     public var Length: UInt8 = 0
@@ -872,7 +722,6 @@ public struct NDIS_802_11_WEP {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_802_11_WEP_STATUS {
     public var value: Int32 = 0
 
@@ -927,7 +776,6 @@ public let NDIS_802_11_WEP_STATUS_Ndis802_11Encryption3Enabled: NDIS_802_11_WEP_
 public let NDIS_802_11_WEP_STATUS_Ndis802_11Encryption3KeyAbsent: NDIS_802_11_WEP_STATUS = NDIS_802_11_WEP_STATUS(7)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_802_5_RING_STATE {
     public var value: Int32 = 0
 
@@ -964,13 +812,20 @@ public let NDIS_802_5_RING_STATE_NdisRingStateOpenFailure: NDIS_802_5_RING_STATE
 public let NDIS_802_5_RING_STATE_NdisRingStateRingFailure: NDIS_802_5_RING_STATE = NDIS_802_5_RING_STATE(6)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type NDIS_AF_LIST = CPointer<Unit>
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type NDIS_CALL_MANAGER_CHARACTERISTICS = CPointer<Unit>
+@C
+public struct NDIS_AF_LIST {
+    public var Value: IntNative = 0
+    public init() {}
+}
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
+public struct NDIS_CALL_MANAGER_CHARACTERISTICS {
+    public var Value: IntNative = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 public struct NDIS_CLASS_ID {
     public var value: Int32 = 0
 
@@ -1002,115 +857,6 @@ public let NDIS_CLASS_ID_NdisClassAtmAALInfo: NDIS_CLASS_ID = NDIS_CLASS_ID(3)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
-public struct NDIS_CONFIGURATION_PARAMETER {
-    public var ParameterType: NDIS_PARAMETER_TYPE = NDIS_PARAMETER_TYPE()
-    public var ParameterData: NDIS_CONFIGURATION_PARAMETER__ParameterData_e__Union = NDIS_CONFIGURATION_PARAMETER__ParameterData_e__Union()
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct NDIS_CONFIGURATION_PARAMETER__ParameterData_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func integerData(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_integerData(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func stringData(): Win32_Foundation.UNICODE_STRING {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_Foundation.UNICODE_STRING>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_stringData(val: Win32_Foundation.UNICODE_STRING): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_Foundation.UNICODE_STRING>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func binaryData(): BINARY_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BINARY_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_binaryData(val: BINARY_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BINARY_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_CO_DEVICE_PROFILE {
-    public var DeviceDescription: NDIS_VAR_DATA_DESC = NDIS_VAR_DATA_DESC()
-    public var DevSpecificInfo: NDIS_VAR_DATA_DESC = NDIS_VAR_DATA_DESC()
-    public var ulTAPISupplementaryPassThru: UInt32 = 0
-    public var ulAddressModes: UInt32 = 0
-    public var ulNumAddresses: UInt32 = 0
-    public var ulBearerModes: UInt32 = 0
-    public var ulMaxTxRate: UInt32 = 0
-    public var ulMinTxRate: UInt32 = 0
-    public var ulMaxRxRate: UInt32 = 0
-    public var ulMinRxRate: UInt32 = 0
-    public var ulMediaModes: UInt32 = 0
-    public var ulGenerateToneModes: UInt32 = 0
-    public var ulGenerateToneMaxNumFreq: UInt32 = 0
-    public var ulGenerateDigitModes: UInt32 = 0
-    public var ulMonitorToneMaxNumFreq: UInt32 = 0
-    public var ulMonitorToneMaxNumEntries: UInt32 = 0
-    public var ulMonitorDigitModes: UInt32 = 0
-    public var ulGatherDigitsMinTimeout: UInt32 = 0
-    public var ulGatherDigitsMaxTimeout: UInt32 = 0
-    public var ulDevCapFlags: UInt32 = 0
-    public var ulMaxNumActiveCalls: UInt32 = 0
-    public var ulAnswerMode: UInt32 = 0
-    public var ulUUIAcceptSize: UInt32 = 0
-    public var ulUUIAnswerSize: UInt32 = 0
-    public var ulUUIMakeCallSize: UInt32 = 0
-    public var ulUUIDropSize: UInt32 = 0
-    public var ulUUISendUserUserInfoSize: UInt32 = 0
-    public var ulUUICallInfoSize: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_CO_LINK_SPEED {
     public var Outbound: UInt32 = 0
     public var Inbound: UInt32 = 0
@@ -1118,7 +864,6 @@ public struct NDIS_CO_LINK_SPEED {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_DEVICE_PNP_EVENT {
     public var value: Int32 = 0
 
@@ -1158,7 +903,6 @@ public let NDIS_DEVICE_PNP_EVENT_NdisDevicePnPEventPowerProfileChanged: NDIS_DEV
 public let NDIS_DEVICE_PNP_EVENT_NdisDevicePnPEventMaximum: NDIS_DEVICE_PNP_EVENT = NDIS_DEVICE_PNP_EVENT(6)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_DEVICE_POWER_STATE {
     public var value: Int32 = 0
 
@@ -1194,32 +938,31 @@ public let NDIS_DEVICE_POWER_STATE_NdisDeviceStateD3: NDIS_DEVICE_POWER_STATE = 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 public let NDIS_DEVICE_POWER_STATE_NdisDeviceStateMaximum: NDIS_DEVICE_POWER_STATE = NDIS_DEVICE_POWER_STATE(5)
 
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on")]
 @C
 public struct NDIS_DMA_BLOCK {
     public var MapRegisterBase: CPointer<Unit> = CPointer<Unit>()
-    public var AllocationEvent: Wdk_impl.KEVENT = Wdk_impl.KEVENT()
+    public var AllocationEvent: Wdk__impl_l0.KEVENT = Wdk__impl_l0.KEVENT()
     public var SystemAdapterObject: CPointer<Unit> = CPointer<Unit>()
     public var Miniport: CPointer<Unit> = CPointer<Unit>()
-    public var InProgress: Win32_Foundation.BOOLEAN = 0
+    public var InProgress: UInt8 = 0
     public init() {}
 }
 
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Wdk_System_SystemServices == "on"]
 @C
 public struct NDIS_DMA_DESCRIPTION {
-    public var DemandMode: Win32_Foundation.BOOLEAN = 0
-    public var AutoInitialize: Win32_Foundation.BOOLEAN = 0
-    public var DmaChannelSpecified: Win32_Foundation.BOOLEAN = 0
-    public var DmaWidth: Wdk_impl.DMA_WIDTH = Wdk_impl.DMA_WIDTH()
-    public var DmaSpeed: Wdk_impl.DMA_SPEED = Wdk_impl.DMA_SPEED()
+    public var DemandMode: UInt8 = 0
+    public var AutoInitialize: UInt8 = 0
+    public var DmaChannelSpecified: UInt8 = 0
+    public var DmaWidth: Int32 = 0
+    public var DmaSpeed: Int32 = 0
     public var DmaPort: UInt32 = 0
     public var DmaChannel: UInt32 = 0
     public init() {}
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_ENVIRONMENT_TYPE {
     public var value: Int32 = 0
 
@@ -1243,15 +986,14 @@ public let NDIS_ENVIRONMENT_TYPE_NdisEnvironmentWindows: NDIS_ENVIRONMENT_TYPE =
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 public let NDIS_ENVIRONMENT_TYPE_NdisEnvironmentWindowsNt: NDIS_ENVIRONMENT_TYPE = NDIS_ENVIRONMENT_TYPE(1)
 
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on")]
 @C
 public struct NDIS_EVENT {
-    public var Event: Wdk_impl.KEVENT = Wdk_impl.KEVENT()
+    public var Event: Wdk__impl_l0.KEVENT = Wdk__impl_l0.KEVENT()
     public init() {}
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_FDDI_ATTACHMENT_TYPE {
     public var value: Int32 = 0
 
@@ -1309,7 +1051,6 @@ public let NDIS_FDDI_ATTACHMENT_TYPE_NdisFddiTypeCWrapS: NDIS_FDDI_ATTACHMENT_TY
 public let NDIS_FDDI_ATTACHMENT_TYPE_NdisFddiTypeThrough: NDIS_FDDI_ATTACHMENT_TYPE = NDIS_FDDI_ATTACHMENT_TYPE(13)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_FDDI_LCONNECTION_STATE {
     public var value: Int32 = 0
 
@@ -1358,7 +1099,6 @@ public let NDIS_FDDI_LCONNECTION_STATE_NdisFddiStateActive: NDIS_FDDI_LCONNECTIO
 public let NDIS_FDDI_LCONNECTION_STATE_NdisFddiStateMaintenance: NDIS_FDDI_LCONNECTION_STATE = NDIS_FDDI_LCONNECTION_STATE(10)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_FDDI_RING_MGT_STATE {
     public var value: Int32 = 0
 
@@ -1411,60 +1151,51 @@ public struct NDIS_GUID {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct NDIS_GUID__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func oid(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop oid: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_oid(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop status: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
         }
-    }
-
-    public func status(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
-        }
-    }
-
-    public mut func set_status(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_HARDWARE_CROSSTIMESTAMP {
-    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
-    public var Flags: UInt32 = 0
-    public var SystemTimestamp1: UInt64 = 0
-    public var HardwareClockTimestamp: UInt64 = 0
-    public var SystemTimestamp2: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_HARDWARE_STATUS {
     public var value: Int32 = 0
 
@@ -1498,7 +1229,6 @@ public let NDIS_HARDWARE_STATUS_NdisHardwareStatusClosing: NDIS_HARDWARE_STATUS 
 public let NDIS_HARDWARE_STATUS_NdisHardwareStatusNotReady: NDIS_HARDWARE_STATUS = NDIS_HARDWARE_STATUS(4)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_INTERFACE_TYPE {
     public var value: Int32 = 0
 
@@ -1571,7 +1301,6 @@ public let NDIS_INTERFACE_TYPE_NdisInterface1394: NDIS_INTERFACE_TYPE = NDIS_INT
 public let NDIS_INTERFACE_TYPE_NdisMaximumInterfaceType: NDIS_INTERFACE_TYPE = NDIS_INTERFACE_TYPE(19)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_INTERRUPT_MODERATION {
     public var value: Int32 = 0
 
@@ -1600,15 +1329,6 @@ public let NDIS_INTERRUPT_MODERATION_NdisInterruptModerationEnabled: NDIS_INTERR
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 public let NDIS_INTERRUPT_MODERATION_NdisInterruptModerationDisabled: NDIS_INTERRUPT_MODERATION = NDIS_INTERRUPT_MODERATION(3)
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_INTERRUPT_MODERATION_PARAMETERS {
-    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
-    public var Flags: UInt32 = 0
-    public var InterruptModeration: NDIS_INTERRUPT_MODERATION = NDIS_INTERRUPT_MODERATION()
-    public init() {}
-}
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
@@ -1644,31 +1364,12 @@ public struct NDIS_IPSEC_OFFLOAD_V1__IPv4ESP_e__Struct {
     public init() {}
 }
 
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_IP_OPER_STATE {
-    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
-    public var Flags: UInt32 = 0
-    public var IpOperationalStatus: NDIS_IP_OPER_STATUS = NDIS_IP_OPER_STATUS()
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
 @C
 public struct NDIS_IP_OPER_STATUS {
     public var AddressFamily: UInt32 = 0
-    public var OperationalStatus: Win32_NetworkManagement_Ndis.NET_IF_OPER_STATUS = Win32_NetworkManagement_Ndis.NET_IF_OPER_STATUS()
+    public var OperationalStatus: Int32 = 0
     public var OperationalStatusFlags: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_IP_OPER_STATUS_INFO {
-    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
-    public var Flags: UInt32 = 0
-    public var NumberofAddressFamiliesReturned: UInt32 = 0
-    public var IpOperationalStatus: VArray<NDIS_IP_OPER_STATUS, $32> = VArray<NDIS_IP_OPER_STATUS, $32>(repeat: NDIS_IP_OPER_STATUS())
     public init() {}
 }
 
@@ -1682,18 +1383,6 @@ public struct NDIS_IRDA_PACKET_INFO {
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
-public struct NDIS_LINK_PARAMETERS {
-    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
-    public var MediaDuplexState: Win32_NetworkManagement_Ndis.NET_IF_MEDIA_DUPLEX_STATE = Win32_NetworkManagement_Ndis.NET_IF_MEDIA_DUPLEX_STATE()
-    public var XmitLinkSpeed: UInt64 = 0
-    public var RcvLinkSpeed: UInt64 = 0
-    public var PauseFunctions: NDIS_SUPPORTED_PAUSE_FUNCTIONS = NDIS_SUPPORTED_PAUSE_FUNCTIONS()
-    public var AutoNegotiationFlags: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_LINK_SPEED {
     public var XmitLinkSpeed: UInt64 = 0
     public var RcvLinkSpeed: UInt64 = 0
@@ -1701,20 +1390,6 @@ public struct NDIS_LINK_SPEED {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_LINK_STATE {
-    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
-    public var MediaConnectState: Win32_NetworkManagement_Ndis.NET_IF_MEDIA_CONNECT_STATE = Win32_NetworkManagement_Ndis.NET_IF_MEDIA_CONNECT_STATE()
-    public var MediaDuplexState: Win32_NetworkManagement_Ndis.NET_IF_MEDIA_DUPLEX_STATE = Win32_NetworkManagement_Ndis.NET_IF_MEDIA_DUPLEX_STATE()
-    public var XmitLinkSpeed: UInt64 = 0
-    public var RcvLinkSpeed: UInt64 = 0
-    public var PauseFunctions: NDIS_SUPPORTED_PAUSE_FUNCTIONS = NDIS_SUPPORTED_PAUSE_FUNCTIONS()
-    public var AutoNegotiationFlags: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_MEDIA_STATE {
     public var value: Int32 = 0
 
@@ -1739,7 +1414,6 @@ public let NDIS_MEDIA_STATE_NdisMediaStateConnected: NDIS_MEDIA_STATE = NDIS_MED
 public let NDIS_MEDIA_STATE_NdisMediaStateDisconnected: NDIS_MEDIA_STATE = NDIS_MEDIA_STATE(1)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_MEDIUM {
     public var value: Int32 = 0
 
@@ -1821,25 +1495,20 @@ public let NDIS_MEDIUM_NdisMediumIP: NDIS_MEDIUM = NDIS_MEDIUM(19)
 public let NDIS_MEDIUM_NdisMediumMax: NDIS_MEDIUM = NDIS_MEDIUM(20)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type NDIS_MINIPORT_BLOCK = CPointer<Unit>
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
-public struct NDIS_MINIPORT_TIMER {
-    public var Timer: Wdk_impl.KTIMER = Wdk_impl.KTIMER()
-    public var Dpc: Wdk_impl.KDPC = Wdk_impl.KDPC()
-    public var MiniportTimerFunction: PNDIS_TIMER_FUNCTION = {  => () }
-    public var MiniportTimerContext: CPointer<Unit> = CPointer<Unit>()
-    public var Miniport: CPointer<NDIS_MINIPORT_BLOCK> = CPointer<NDIS_MINIPORT_BLOCK>()
-    public var NextTimer: CPointer<NDIS_MINIPORT_TIMER> = CPointer<NDIS_MINIPORT_TIMER>()
+public struct NDIS_MINIPORT_BLOCK {
+    public var Value: IntNative = 0
     public init() {}
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type NDIS_M_DRIVER_BLOCK = CPointer<Unit>
+@C
+public struct NDIS_M_DRIVER_BLOCK {
+    public var Value: IntNative = 0
+    public init() {}
+}
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_NETWORK_CHANGE_TYPE {
     public var value: Int32 = 0
 
@@ -1880,18 +1549,6 @@ public struct NDIS_OBJECT_HEADER {
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
-public struct NDIS_OFFLOAD {
-    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
-    public var Checksum: NDIS_TCP_IP_CHECKSUM_OFFLOAD = NDIS_TCP_IP_CHECKSUM_OFFLOAD()
-    public var LsoV1: NDIS_TCP_LARGE_SEND_OFFLOAD_V1 = NDIS_TCP_LARGE_SEND_OFFLOAD_V1()
-    public var IPsecV1: NDIS_IPSEC_OFFLOAD_V1 = NDIS_IPSEC_OFFLOAD_V1()
-    public var LsoV2: NDIS_TCP_LARGE_SEND_OFFLOAD_V2 = NDIS_TCP_LARGE_SEND_OFFLOAD_V2()
-    public var Flags: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_OFFLOAD_PARAMETERS {
     public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
     public var IPv4Checksum: UInt8 = 0
@@ -1910,13 +1567,17 @@ public struct NDIS_OFFLOAD_PARAMETERS {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type NDIS_OPEN_BLOCK = CPointer<Unit>
+@C
+public struct NDIS_OPEN_BLOCK {
+    public var Value: IntNative = 0
+    public init() {}
+}
 
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
 @C
 public struct NDIS_OPER_STATE {
     public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
-    public var OperationalStatus: Win32_NetworkManagement_Ndis.NET_IF_OPER_STATUS = Win32_NetworkManagement_Ndis.NET_IF_OPER_STATUS()
+    public var OperationalStatus: Int32 = 0
     public var OperationalStatusFlags: UInt32 = 0
     public init() {}
 }
@@ -1929,50 +1590,53 @@ public struct NDIS_PACKET_8021Q_INFO {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct NDIS_PACKET_8021Q_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func tagHeader(): NDIS_PACKET_8021Q_INFO__Anonymous_e__Union__TagHeader_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDIS_PACKET_8021Q_INFO__Anonymous_e__Union__TagHeader_e__Struct>(p)
-            return ptr.read()
+    public mut prop tagHeader: NDIS_PACKET_8021Q_INFO__Anonymous_e__Union__TagHeader_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDIS_PACKET_8021Q_INFO__Anonymous_e__Union__TagHeader_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDIS_PACKET_8021Q_INFO__Anonymous_e__Union__TagHeader_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_tagHeader(val: NDIS_PACKET_8021Q_INFO__Anonymous_e__Union__TagHeader_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDIS_PACKET_8021Q_INFO__Anonymous_e__Union__TagHeader_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop value: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func value(): CPointer<Unit> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_value(val: CPointer<Unit>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1986,7 +1650,6 @@ public struct NDIS_PACKET_8021Q_INFO__Anonymous_e__Union__TagHeader_e__Struct {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_PARAMETER_TYPE {
     public var value: Int32 = 0
 
@@ -2039,16 +1702,27 @@ public struct NDIS_PCI_DEVICE_CUSTOM_PROPERTIES {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type NDIS_PD_COUNTER_HANDLE = CPointer<Unit>
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type NDIS_PD_FILTER_HANDLE = CPointer<Unit>
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type NDIS_PD_PROVIDER_HANDLE = CPointer<Unit>
+@C
+public struct NDIS_PD_COUNTER_HANDLE {
+    public var Value: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
+public struct NDIS_PD_FILTER_HANDLE {
+    public var Value: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_PD_PROVIDER_HANDLE {
+    public var Value: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 public struct NDIS_PER_PACKET_INFO {
     public var value: Int32 = 0
 
@@ -2114,7 +1788,6 @@ public struct NDIS_PHYSICAL_ADDRESS_UNIT {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_PHYSICAL_MEDIUM {
     public var value: Int32 = 0
 
@@ -2213,9 +1886,9 @@ public struct NDIS_PM_PACKET_PATTERN {
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
 public struct NDIS_PM_WAKE_UP_CAPABILITIES {
-    public var MinMagicPacketWakeUp: NDIS_DEVICE_POWER_STATE = NDIS_DEVICE_POWER_STATE()
-    public var MinPatternWakeUp: NDIS_DEVICE_POWER_STATE = NDIS_DEVICE_POWER_STATE()
-    public var MinLinkChangeWakeUp: NDIS_DEVICE_POWER_STATE = NDIS_DEVICE_POWER_STATE()
+    public var MinMagicPacketWakeUp: Int32 = 0
+    public var MinPatternWakeUp: Int32 = 0
+    public var MinLinkChangeWakeUp: Int32 = 0
     public init() {}
 }
 
@@ -2228,43 +1901,13 @@ public struct NDIS_PNP_CAPABILITIES {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type NDIS_POLL_HANDLE = CPointer<Unit>
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
-public struct NDIS_PORT {
-    public var Next: CPointer<NDIS_PORT> = CPointer<NDIS_PORT>()
-    public var NdisReserved: CPointer<Unit> = CPointer<Unit>()
-    public var MiniportReserved: CPointer<Unit> = CPointer<Unit>()
-    public var ProtocolReserved: CPointer<Unit> = CPointer<Unit>()
-    public var PortCharacteristics: NDIS_PORT_CHARACTERISTICS = NDIS_PORT_CHARACTERISTICS()
+public struct NDIS_POLL_HANDLE {
+    public var Value: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_PORT_ARRAY {
-    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
-    public var NumberOfPorts: UInt32 = 0
-    public var OffsetFirstPort: UInt32 = 0
-    public var ElementSize: UInt32 = 0
-    public var Ports: VArray<NDIS_PORT_CHARACTERISTICS, $1> = VArray<NDIS_PORT_CHARACTERISTICS, $1>(repeat: NDIS_PORT_CHARACTERISTICS())
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_PORT_AUTHENTICATION_PARAMETERS {
-    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
-    public var SendControlState: NDIS_PORT_CONTROL_STATE = NDIS_PORT_CONTROL_STATE()
-    public var RcvControlState: NDIS_PORT_CONTROL_STATE = NDIS_PORT_CONTROL_STATE()
-    public var SendAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE = NDIS_PORT_AUTHORIZATION_STATE()
-    public var RcvAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE = NDIS_PORT_AUTHORIZATION_STATE()
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_PORT_AUTHORIZATION_STATE {
     public var value: Int32 = 0
 
@@ -2295,25 +1938,6 @@ public let NDIS_PORT_AUTHORIZATION_STATE_NdisPortUnauthorized: NDIS_PORT_AUTHORI
 public let NDIS_PORT_AUTHORIZATION_STATE_NdisPortReauthorizing: NDIS_PORT_AUTHORIZATION_STATE = NDIS_PORT_AUTHORIZATION_STATE(3)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_PORT_CHARACTERISTICS {
-    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
-    public var PortNumber: UInt32 = 0
-    public var Flags: UInt32 = 0
-    public var Type: NDIS_PORT_TYPE = NDIS_PORT_TYPE()
-    public var MediaConnectState: Win32_NetworkManagement_Ndis.NET_IF_MEDIA_CONNECT_STATE = Win32_NetworkManagement_Ndis.NET_IF_MEDIA_CONNECT_STATE()
-    public var XmitLinkSpeed: UInt64 = 0
-    public var RcvLinkSpeed: UInt64 = 0
-    public var Direction: Win32_NetworkManagement_Ndis.NET_IF_DIRECTION_TYPE = Win32_NetworkManagement_Ndis.NET_IF_DIRECTION_TYPE()
-    public var SendControlState: NDIS_PORT_CONTROL_STATE = NDIS_PORT_CONTROL_STATE()
-    public var RcvControlState: NDIS_PORT_CONTROL_STATE = NDIS_PORT_CONTROL_STATE()
-    public var SendAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE = NDIS_PORT_AUTHORIZATION_STATE()
-    public var RcvAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE = NDIS_PORT_AUTHORIZATION_STATE()
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_PORT_CONTROL_STATE {
     public var value: Int32 = 0
 
@@ -2340,24 +1964,23 @@ public let NDIS_PORT_CONTROL_STATE_NdisPortControlStateControlled: NDIS_PORT_CON
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 public let NDIS_PORT_CONTROL_STATE_NdisPortControlStateUncontrolled: NDIS_PORT_CONTROL_STATE = NDIS_PORT_CONTROL_STATE(2)
 
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
 @C
 public struct NDIS_PORT_STATE {
     public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
-    public var MediaConnectState: Win32_NetworkManagement_Ndis.NET_IF_MEDIA_CONNECT_STATE = Win32_NetworkManagement_Ndis.NET_IF_MEDIA_CONNECT_STATE()
+    public var MediaConnectState: Int32 = 0
     public var XmitLinkSpeed: UInt64 = 0
     public var RcvLinkSpeed: UInt64 = 0
-    public var Direction: Win32_NetworkManagement_Ndis.NET_IF_DIRECTION_TYPE = Win32_NetworkManagement_Ndis.NET_IF_DIRECTION_TYPE()
-    public var SendControlState: NDIS_PORT_CONTROL_STATE = NDIS_PORT_CONTROL_STATE()
-    public var RcvControlState: NDIS_PORT_CONTROL_STATE = NDIS_PORT_CONTROL_STATE()
-    public var SendAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE = NDIS_PORT_AUTHORIZATION_STATE()
-    public var RcvAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE = NDIS_PORT_AUTHORIZATION_STATE()
+    public var Direction: Int32 = 0
+    public var SendControlState: Int32 = 0
+    public var RcvControlState: Int32 = 0
+    public var SendAuthorizationState: Int32 = 0
+    public var RcvAuthorizationState: Int32 = 0
     public var Flags: UInt32 = 0
     public init() {}
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_PORT_TYPE {
     public var value: Int32 = 0
 
@@ -2391,7 +2014,6 @@ public let NDIS_PORT_TYPE_NdisPortType8021xSupplicant: NDIS_PORT_TYPE = NDIS_POR
 public let NDIS_PORT_TYPE_NdisPortTypeMax: NDIS_PORT_TYPE = NDIS_PORT_TYPE(4)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_POWER_PROFILE {
     public var value: Int32 = 0
 
@@ -2419,7 +2041,6 @@ public let NDIS_POWER_PROFILE_NdisPowerProfileAcOnLine: NDIS_POWER_PROFILE = NDI
 public type NDIS_PROC = CFunc<() -> Unit>
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_PROCESSOR_TYPE {
     public var value: Int32 = 0
 
@@ -2462,7 +2083,6 @@ public let NDIS_PROCESSOR_TYPE_NdisProcessorArm: NDIS_PROCESSOR_TYPE = NDIS_PROC
 public let NDIS_PROCESSOR_TYPE_NdisProcessorArm64: NDIS_PROCESSOR_TYPE = NDIS_PROCESSOR_TYPE(7)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_PROCESSOR_VENDOR {
     public var value: Int32 = 0
 
@@ -2493,10 +2113,11 @@ public let NDIS_PROCESSOR_VENDOR_NdisProcessorVendorGenuineIntel: NDIS_PROCESSOR
 public let NDIS_PROCESSOR_VENDOR_NdisProcessorVendorAuthenticAMD: NDIS_PROCESSOR_VENDOR = NDIS_PROCESSOR_VENDOR(2)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type NDIS_PROC_CALLBACK = CFunc<(CPointer<NDIS_WORK_ITEM>, CPointer<Unit>) -> Unit>
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type NDIS_PROTOCOL_BLOCK = CPointer<Unit>
+@C
+public struct NDIS_PROTOCOL_BLOCK {
+    public var Value: IntNative = 0
+    public init() {}
+}
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
@@ -2534,7 +2155,6 @@ public struct NDIS_RECEIVE_SCALE_PARAMETERS {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_REQUEST_TYPE {
     public var value: Int32 = 0
 
@@ -2589,192 +2209,49 @@ public let NDIS_REQUEST_TYPE_NdisRequestGeneric3: NDIS_REQUEST_TYPE = NDIS_REQUE
 public let NDIS_REQUEST_TYPE_NdisRequestGeneric4: NDIS_REQUEST_TYPE = NDIS_REQUEST_TYPE(11)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_RW_LOCK {
-    public var Anonymous1: NDIS_RW_LOCK__Anonymous1_e__Union = NDIS_RW_LOCK__Anonymous1_e__Union()
-    public var Anonymous2: NDIS_RW_LOCK__Anonymous2_e__Union = NDIS_RW_LOCK__Anonymous2_e__Union()
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct NDIS_RW_LOCK__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func anonymous(): NDIS_RW_LOCK__Anonymous1_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDIS_RW_LOCK__Anonymous1_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: NDIS_RW_LOCK__Anonymous1_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDIS_RW_LOCK__Anonymous1_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func reserved(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_reserved(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_RW_LOCK__Anonymous1_e__Union__Anonymous_e__Struct {
-    public var SpinLock: UIntNative = 0
-    public var Context: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct NDIS_RW_LOCK__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $512> = VArray<UInt8, $512>(repeat: 0)
-
-    public func refCount(): VArray<NDIS_RW_LOCK_REFCOUNT, $32> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<NDIS_RW_LOCK_REFCOUNT, $32>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_refCount(val: VArray<NDIS_RW_LOCK_REFCOUNT, $32>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<NDIS_RW_LOCK_REFCOUNT, $32>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func refCountEx(): VArray<UInt32, $128> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt32, $128>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_refCountEx(val: VArray<UInt32, $128>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt32, $128>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func anonymous(): NDIS_RW_LOCK__Anonymous2_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDIS_RW_LOCK__Anonymous2_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: NDIS_RW_LOCK__Anonymous2_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDIS_RW_LOCK__Anonymous2_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_RW_LOCK__Anonymous2_e__Union__Anonymous_e__Struct {
-    public var RefCountLock: UIntNative = 0
-    public var SharedRefCount: UInt32 = 0
-    public var WriterWaiting: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct NDIS_RW_LOCK_REFCOUNT {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
 
-    public func refCount(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop refCount: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_refCount(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop cacheLine: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func cacheLine(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_cacheLine(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2834,7 +2311,6 @@ public struct NDIS_STATISTICS_VALUE_EX {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_SUPPORTED_PAUSE_FUNCTIONS {
     public var value: Int32 = 0
 
@@ -2928,67 +2404,71 @@ public struct NDIS_TCP_IP_CHECKSUM_PACKET_INFO {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func transmit(): NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Transmit_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Transmit_e__Struct>(p)
-            return ptr.read()
+    public mut prop transmit: NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Transmit_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Transmit_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Transmit_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_transmit(val: NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Transmit_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Transmit_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop receive: NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Receive_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Receive_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Receive_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func receive(): NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Receive_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Receive_e__Struct>(p)
-            return ptr.read()
+    public mut prop value: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
         }
-    }
-
-    public mut func set_receive(val: NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Receive_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Receive_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func value(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_value(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -3062,11 +2542,11 @@ public struct NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES {
     public init() {}
 }
 
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on")]
 @C
 public struct NDIS_TIMER {
-    public var Timer: Wdk_impl.KTIMER = Wdk_impl.KTIMER()
-    public var Dpc: Wdk_impl.KDPC = Wdk_impl.KDPC()
+    public var Timer: Wdk__impl_l0.KTIMER = Wdk__impl_l0.KTIMER()
+    public var Dpc: Wdk__impl_l0.KDPC = Wdk__impl_l0.KDPC()
     public init() {}
 }
 
@@ -3075,33 +2555,21 @@ public type NDIS_TIMER_FUNCTION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointe
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
-public struct NDIS_TIMESTAMP_CAPABILITIES {
-    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
-    public var HardwareClockFrequencyHz: UInt64 = 0
-    public var CrossTimestamp: Win32_Foundation.BOOLEAN = 0
-    public var Reserved1: UInt64 = 0
-    public var Reserved2: UInt64 = 0
-    public var TimestampFlags: NDIS_TIMESTAMP_CAPABILITY_FLAGS = NDIS_TIMESTAMP_CAPABILITY_FLAGS()
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_TIMESTAMP_CAPABILITY_FLAGS {
-    public var PtpV2OverUdpIPv4EventMsgReceiveHw: Win32_Foundation.BOOLEAN = 0
-    public var PtpV2OverUdpIPv4AllMsgReceiveHw: Win32_Foundation.BOOLEAN = 0
-    public var PtpV2OverUdpIPv4EventMsgTransmitHw: Win32_Foundation.BOOLEAN = 0
-    public var PtpV2OverUdpIPv4AllMsgTransmitHw: Win32_Foundation.BOOLEAN = 0
-    public var PtpV2OverUdpIPv6EventMsgReceiveHw: Win32_Foundation.BOOLEAN = 0
-    public var PtpV2OverUdpIPv6AllMsgReceiveHw: Win32_Foundation.BOOLEAN = 0
-    public var PtpV2OverUdpIPv6EventMsgTransmitHw: Win32_Foundation.BOOLEAN = 0
-    public var PtpV2OverUdpIPv6AllMsgTransmitHw: Win32_Foundation.BOOLEAN = 0
-    public var AllReceiveHw: Win32_Foundation.BOOLEAN = 0
-    public var AllTransmitHw: Win32_Foundation.BOOLEAN = 0
-    public var TaggedTransmitHw: Win32_Foundation.BOOLEAN = 0
-    public var AllReceiveSw: Win32_Foundation.BOOLEAN = 0
-    public var AllTransmitSw: Win32_Foundation.BOOLEAN = 0
-    public var TaggedTransmitSw: Win32_Foundation.BOOLEAN = 0
+    public var PtpV2OverUdpIPv4EventMsgReceiveHw: UInt8 = 0
+    public var PtpV2OverUdpIPv4AllMsgReceiveHw: UInt8 = 0
+    public var PtpV2OverUdpIPv4EventMsgTransmitHw: UInt8 = 0
+    public var PtpV2OverUdpIPv4AllMsgTransmitHw: UInt8 = 0
+    public var PtpV2OverUdpIPv6EventMsgReceiveHw: UInt8 = 0
+    public var PtpV2OverUdpIPv6AllMsgReceiveHw: UInt8 = 0
+    public var PtpV2OverUdpIPv6EventMsgTransmitHw: UInt8 = 0
+    public var PtpV2OverUdpIPv6AllMsgTransmitHw: UInt8 = 0
+    public var AllReceiveHw: UInt8 = 0
+    public var AllTransmitHw: UInt8 = 0
+    public var TaggedTransmitHw: UInt8 = 0
+    public var AllReceiveSw: UInt8 = 0
+    public var AllTransmitSw: UInt8 = 0
+    public var TaggedTransmitSw: UInt8 = 0
     public init() {}
 }
 
@@ -3144,7 +2612,6 @@ public struct NDIS_WAN_GET_STATS {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_WAN_HEADER_FORMAT {
     public var value: Int32 = 0
 
@@ -3177,23 +2644,6 @@ public struct NDIS_WAN_LINE_DOWN {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_WAN_LINE_UP {
-    public var LinkSpeed: UInt32 = 0
-    public var MaximumTotalSize: UInt32 = 0
-    public var Quality: NDIS_WAN_QUALITY = NDIS_WAN_QUALITY()
-    public var SendWindow: UInt16 = 0
-    public var RemoteAddress: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
-    public var LocalAddress: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
-    public var ProtocolBufferLength: UInt32 = 0
-    public var ProtocolBuffer: CPointer<UInt8> = CPointer<UInt8>()
-    public var ProtocolType: UInt16 = 0
-    public var DeviceName: Win32_Foundation.UNICODE_STRING = Win32_Foundation.UNICODE_STRING()
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_WAN_MEDIUM_SUBTYPE {
     public var value: Int32 = 0
 
@@ -3271,7 +2721,6 @@ public struct NDIS_WAN_PROTOCOL_CAPS {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_WAN_QUALITY {
     public var value: Int32 = 0
 
@@ -3298,52 +2747,18 @@ public let NDIS_WAN_QUALITY_NdisWanErrorControl: NDIS_WAN_QUALITY = NDIS_WAN_QUA
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 public let NDIS_WAN_QUALITY_NdisWanReliable: NDIS_WAN_QUALITY = NDIS_WAN_QUALITY(2)
 
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_WLAN_BSSID {
-    public var Length: UInt32 = 0
-    public var MacAddress: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
-    public var Reserved: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
-    public var Ssid: NDIS_802_11_SSID = NDIS_802_11_SSID()
-    public var Privacy: UInt32 = 0
-    public var Rssi: Int32 = 0
-    public var NetworkTypeInUse: NDIS_802_11_NETWORK_TYPE = NDIS_802_11_NETWORK_TYPE()
-    public var Configuration: NDIS_802_11_CONFIGURATION = NDIS_802_11_CONFIGURATION()
-    public var InfrastructureMode: NDIS_802_11_NETWORK_INFRASTRUCTURE = NDIS_802_11_NETWORK_INFRASTRUCTURE()
-    public var SupportedRates: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct NDIS_WLAN_BSSID_EX {
-    public var Length: UInt32 = 0
-    public var MacAddress: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
-    public var Reserved: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
-    public var Ssid: NDIS_802_11_SSID = NDIS_802_11_SSID()
-    public var Privacy: UInt32 = 0
-    public var Rssi: Int32 = 0
-    public var NetworkTypeInUse: NDIS_802_11_NETWORK_TYPE = NDIS_802_11_NETWORK_TYPE()
-    public var Configuration: NDIS_802_11_CONFIGURATION = NDIS_802_11_CONFIGURATION()
-    public var InfrastructureMode: NDIS_802_11_NETWORK_INFRASTRUCTURE = NDIS_802_11_NETWORK_INFRASTRUCTURE()
-    public var SupportedRates: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var IELength: UInt32 = 0
-    public var IEs: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
 @C
 public struct NDIS_WMI_ENUM_ADAPTER {
     public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
     public var IfIndex: UInt32 = 0
     public var NetLuid: Win32_NetworkManagement_Ndis.NET_LUID_LH = Win32_NetworkManagement_Ndis.NET_LUID_LH()
     public var DeviceNameLength: UInt16 = 0
-    public var DeviceName: VArray<Win32_Foundation.CHAR, $1> = VArray<Win32_Foundation.CHAR, $1>(repeat: 0)
+    public var DeviceName: VArray<Int8, $1> = VArray<Int8, $1>(repeat: 0)
     public init() {}
 }
 
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
 @C
 public struct NDIS_WMI_EVENT_HEADER {
     public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
@@ -3403,7 +2818,7 @@ public struct NDIS_WMI_IPSEC_OFFLOAD_V1__IPv4ESP_e__Struct {
     public init() {}
 }
 
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
 @C
 public struct NDIS_WMI_METHOD_HEADER {
     public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
@@ -3417,18 +2832,6 @@ public struct NDIS_WMI_METHOD_HEADER {
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
-public struct NDIS_WMI_OFFLOAD {
-    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
-    public var Checksum: NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD = NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD()
-    public var LsoV1: NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1 = NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1()
-    public var IPsecV1: NDIS_WMI_IPSEC_OFFLOAD_V1 = NDIS_WMI_IPSEC_OFFLOAD_V1()
-    public var LsoV2: NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2 = NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2()
-    public var Flags: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct NDIS_WMI_OUTPUT_INFO {
     public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
     public var Flags: UInt32 = 0
@@ -3437,7 +2840,7 @@ public struct NDIS_WMI_OUTPUT_INFO {
     public init() {}
 }
 
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
 @C
 public struct NDIS_WMI_SET_HEADER {
     public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
@@ -3569,13 +2972,17 @@ public struct NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2__IPv6_e__Struct {
 @C
 public struct NDIS_WORK_ITEM {
     public var Context: CPointer<Unit> = CPointer<Unit>()
-    public var Routine: NDIS_PROC = {  => () }
+    public var Routine: NDIS_PROC = CFunc<() -> Unit>(CPointer<Unit>())
     public var WrapperReserved: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
     public init() {}
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type NDIS_WRAPPER_HANDLE = CPointer<Unit>
+@C
+public struct NDIS_WRAPPER_HANDLE {
+    public var Value: IntNative = 0
+    public init() {}
+}
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
@@ -3624,7 +3031,11 @@ public struct NETWORK_ADDRESS_LIST {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type NULL_FILTER = CPointer<Unit>
+@C
+public struct NULL_FILTER {
+    public var Value: IntNative = 0
+    public init() {}
+}
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
@@ -3636,7 +3047,6 @@ public struct OFFLOAD_ALGO_INFO {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct OFFLOAD_CONF_ALGO {
     public var value: Int32 = 0
 
@@ -3670,7 +3080,6 @@ public let OFFLOAD_CONF_ALGO_OFFLOAD_IPSEC_CONF_3_DES: OFFLOAD_CONF_ALGO = OFFLO
 public let OFFLOAD_CONF_ALGO_OFFLOAD_IPSEC_CONF_MAX: OFFLOAD_CONF_ALGO = OFFLOAD_CONF_ALGO(4)
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct OFFLOAD_INTEGRITY_ALGO {
     public var value: Int32 = 0
 
@@ -3702,50 +3111,6 @@ public let OFFLOAD_INTEGRITY_ALGO_OFFLOAD_IPSEC_INTEGRITY_MAX: OFFLOAD_INTEGRITY
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
-public struct OFFLOAD_IPSEC_ADD_SA {
-    public var SrcAddr: UInt32 = 0
-    public var SrcMask: UInt32 = 0
-    public var DestAddr: UInt32 = 0
-    public var DestMask: UInt32 = 0
-    public var Protocol: UInt32 = 0
-    public var SrcPort: UInt16 = 0
-    public var DestPort: UInt16 = 0
-    public var SrcTunnelAddr: UInt32 = 0
-    public var DestTunnelAddr: UInt32 = 0
-    public var Flags: UInt16 = 0
-    public var NumSAs: Int16 = 0
-    public var SecAssoc: VArray<OFFLOAD_SECURITY_ASSOCIATION, $3> = VArray<OFFLOAD_SECURITY_ASSOCIATION, $3>(repeat: OFFLOAD_SECURITY_ASSOCIATION())
-    public var OffloadHandle: CPointer<Unit> = CPointer<Unit>()
-    public var KeyLen: UInt32 = 0
-    public var KeyMat: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct OFFLOAD_IPSEC_ADD_UDPESP_SA {
-    public var SrcAddr: UInt32 = 0
-    public var SrcMask: UInt32 = 0
-    public var DstAddr: UInt32 = 0
-    public var DstMask: UInt32 = 0
-    public var Protocol: UInt32 = 0
-    public var SrcPort: UInt16 = 0
-    public var DstPort: UInt16 = 0
-    public var SrcTunnelAddr: UInt32 = 0
-    public var DstTunnelAddr: UInt32 = 0
-    public var Flags: UInt16 = 0
-    public var NumSAs: Int16 = 0
-    public var SecAssoc: VArray<OFFLOAD_SECURITY_ASSOCIATION, $3> = VArray<OFFLOAD_SECURITY_ASSOCIATION, $3>(repeat: OFFLOAD_SECURITY_ASSOCIATION())
-    public var OffloadHandle: CPointer<Unit> = CPointer<Unit>()
-    public var EncapTypeEntry: OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY = OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY()
-    public var EncapTypeEntryOffldHandle: CPointer<Unit> = CPointer<Unit>()
-    public var KeyLen: UInt32 = 0
-    public var KeyMat: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct OFFLOAD_IPSEC_DELETE_SA {
     public var OffloadHandle: CPointer<Unit> = CPointer<Unit>()
     public init() {}
@@ -3760,15 +3125,6 @@ public struct OFFLOAD_IPSEC_DELETE_UDPESP_SA {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
-public struct OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY {
-    public var UdpEncapType: UDP_ENCAP_TYPE = UDP_ENCAP_TYPE()
-    public var DstEncapPort: UInt16 = 0
-    public init() {}
-}
-
-@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct OFFLOAD_OPERATION_E {
     public var value: Int32 = 0
 
@@ -3795,7 +3151,7 @@ public let OFFLOAD_OPERATION_E_ENCRYPT: OFFLOAD_OPERATION_E = OFFLOAD_OPERATION_
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 @C
 public struct OFFLOAD_SECURITY_ASSOCIATION {
-    public var Operation: OFFLOAD_OPERATION_E = OFFLOAD_OPERATION_E()
+    public var Operation: Int32 = 0
     public var SPI: UInt32 = 0
     public var IntegrityAlgo: OFFLOAD_ALGO_INFO = OFFLOAD_ALGO_INFO()
     public var ConfAlgo: OFFLOAD_ALGO_INFO = OFFLOAD_ALGO_INFO()
@@ -3909,7 +3265,7 @@ public type PROTOCOL_CO_DELETE_VC = CFunc<(CPointer<Unit>) -> Int32>
 public struct REFERENCE {
     public var SpinLock: UIntNative = 0
     public var ReferenceCount: UInt16 = 0
-    public var Closing: Win32_Foundation.BOOLEAN = 0
+    public var Closing: UInt8 = 0
     public init() {}
 }
 
@@ -3928,10 +3284,13 @@ public struct TRANSPORT_HEADER_OFFSET {
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-public type TR_FILTER = CPointer<Unit>
+@C
+public struct TR_FILTER {
+    public var Value: IntNative = 0
+    public init() {}
+}
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
-@C
 public struct UDP_ENCAP_TYPE {
     public var value: Int32 = 0
 
@@ -3979,6 +3338,703 @@ public type W_CO_DEACTIVATE_VC_HANDLER = CFunc<() -> Int32>
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]
 public type W_CO_DELETE_VC_HANDLER = CFunc<() -> Int32>
 
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct CO_CALL_MANAGER_PARAMETERS {
+    public var Transmit: Win32__impl_l0.FLOWSPEC = Win32__impl_l0.FLOWSPEC()
+    public var Receive: Win32__impl_l0.FLOWSPEC = Win32__impl_l0.FLOWSPEC()
+    public var CallMgrSpecific: CO_SPECIFIC_PARAMETERS = CO_SPECIFIC_PARAMETERS()
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct CO_PVC {
+    public var NdisAfHandle: CPointer<Unit> = CPointer<Unit>()
+    public var PvcParameters: CO_SPECIFIC_PARAMETERS = CO_SPECIFIC_PARAMETERS()
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct MEDIA_SPECIFIC_INFORMATION {
+    public var NextEntryOffset: UInt32 = 0
+    public var ClassId: Int32 = 0
+    public var Size: UInt32 = 0
+    public var ClassInformation: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_802_11_AUTHENTICATION_ENCRYPTION {
+    public var AuthModeSupported: Int32 = 0
+    public var EncryptStatusSupported: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_802_11_CAPABILITY {
+    public var Length: UInt32 = 0
+    public var Version: UInt32 = 0
+    public var NoOfPMKIDs: UInt32 = 0
+    public var NoOfAuthEncryptPairsSupported: UInt32 = 0
+    public var AuthenticationEncryptionSupported: VArray<NDIS_802_11_AUTHENTICATION_ENCRYPTION, $1> = VArray<NDIS_802_11_AUTHENTICATION_ENCRYPTION, $1>(repeat: NDIS_802_11_AUTHENTICATION_ENCRYPTION())
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_802_11_CONFIGURATION {
+    public var Length: UInt32 = 0
+    public var BeaconPeriod: UInt32 = 0
+    public var ATIMWindow: UInt32 = 0
+    public var DSConfig: UInt32 = 0
+    public var FHConfig: NDIS_802_11_CONFIGURATION_FH = NDIS_802_11_CONFIGURATION_FH()
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_802_11_NON_BCAST_SSID_LIST {
+    public var NumberOfItems: UInt32 = 0
+    public var Non_Bcast_Ssid: VArray<NDIS_802_11_SSID, $1> = VArray<NDIS_802_11_SSID, $1>(repeat: NDIS_802_11_SSID())
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_802_11_PMKID_CANDIDATE_LIST {
+    public var Version: UInt32 = 0
+    public var NumCandidates: UInt32 = 0
+    public var CandidateList: VArray<PMKID_CANDIDATE, $1> = VArray<PMKID_CANDIDATE, $1>(repeat: PMKID_CANDIDATE())
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_802_11_STATUS_INDICATION {
+    public var StatusType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_CONFIGURATION_PARAMETER {
+    public var ParameterType: Int32 = 0
+    public var ParameterData: NDIS_CONFIGURATION_PARAMETER__ParameterData_e__Union = NDIS_CONFIGURATION_PARAMETER__ParameterData_e__Union()
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct NDIS_CONFIGURATION_PARAMETER__ParameterData_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop integerData: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop stringData: Win32_Foundation.UNICODE_STRING {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32_Foundation.UNICODE_STRING>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32_Foundation.UNICODE_STRING>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop binaryData: BINARY_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BINARY_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BINARY_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_CO_DEVICE_PROFILE {
+    public var DeviceDescription: NDIS_VAR_DATA_DESC = NDIS_VAR_DATA_DESC()
+    public var DevSpecificInfo: NDIS_VAR_DATA_DESC = NDIS_VAR_DATA_DESC()
+    public var ulTAPISupplementaryPassThru: UInt32 = 0
+    public var ulAddressModes: UInt32 = 0
+    public var ulNumAddresses: UInt32 = 0
+    public var ulBearerModes: UInt32 = 0
+    public var ulMaxTxRate: UInt32 = 0
+    public var ulMinTxRate: UInt32 = 0
+    public var ulMaxRxRate: UInt32 = 0
+    public var ulMinRxRate: UInt32 = 0
+    public var ulMediaModes: UInt32 = 0
+    public var ulGenerateToneModes: UInt32 = 0
+    public var ulGenerateToneMaxNumFreq: UInt32 = 0
+    public var ulGenerateDigitModes: UInt32 = 0
+    public var ulMonitorToneMaxNumFreq: UInt32 = 0
+    public var ulMonitorToneMaxNumEntries: UInt32 = 0
+    public var ulMonitorDigitModes: UInt32 = 0
+    public var ulGatherDigitsMinTimeout: UInt32 = 0
+    public var ulGatherDigitsMaxTimeout: UInt32 = 0
+    public var ulDevCapFlags: UInt32 = 0
+    public var ulMaxNumActiveCalls: UInt32 = 0
+    public var ulAnswerMode: UInt32 = 0
+    public var ulUUIAcceptSize: UInt32 = 0
+    public var ulUUIAnswerSize: UInt32 = 0
+    public var ulUUIMakeCallSize: UInt32 = 0
+    public var ulUUIDropSize: UInt32 = 0
+    public var ulUUISendUserUserInfoSize: UInt32 = 0
+    public var ulUUICallInfoSize: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_HARDWARE_CROSSTIMESTAMP {
+    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
+    public var Flags: UInt32 = 0
+    public var SystemTimestamp1: UInt64 = 0
+    public var HardwareClockTimestamp: UInt64 = 0
+    public var SystemTimestamp2: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_INTERRUPT_MODERATION_PARAMETERS {
+    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
+    public var Flags: UInt32 = 0
+    public var InterruptModeration: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_IP_OPER_STATE {
+    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
+    public var Flags: UInt32 = 0
+    public var IpOperationalStatus: NDIS_IP_OPER_STATUS = NDIS_IP_OPER_STATUS()
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_IP_OPER_STATUS_INFO {
+    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
+    public var Flags: UInt32 = 0
+    public var NumberofAddressFamiliesReturned: UInt32 = 0
+    public var IpOperationalStatus: VArray<NDIS_IP_OPER_STATUS, $32> = VArray<NDIS_IP_OPER_STATUS, $32>(repeat: NDIS_IP_OPER_STATUS())
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_LINK_PARAMETERS {
+    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
+    public var MediaDuplexState: Int32 = 0
+    public var XmitLinkSpeed: UInt64 = 0
+    public var RcvLinkSpeed: UInt64 = 0
+    public var PauseFunctions: Int32 = 0
+    public var AutoNegotiationFlags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_LINK_STATE {
+    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
+    public var MediaConnectState: Int32 = 0
+    public var MediaDuplexState: Int32 = 0
+    public var XmitLinkSpeed: UInt64 = 0
+    public var RcvLinkSpeed: UInt64 = 0
+    public var PauseFunctions: Int32 = 0
+    public var AutoNegotiationFlags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_System_SystemServices == "on")]
+@C
+public struct NDIS_MINIPORT_TIMER {
+    public var Timer: Wdk__impl_l0.KTIMER = Wdk__impl_l0.KTIMER()
+    public var Dpc: Wdk__impl_l0.KDPC = Wdk__impl_l0.KDPC()
+    public var MiniportTimerFunction: PNDIS_TIMER_FUNCTION = CFunc<() -> Unit>(CPointer<Unit>())
+    public var MiniportTimerContext: CPointer<Unit> = CPointer<Unit>()
+    public var Miniport: CPointer<NDIS_MINIPORT_BLOCK> = CPointer<NDIS_MINIPORT_BLOCK>()
+    public var NextTimer: CPointer<NDIS_MINIPORT_TIMER> = CPointer<NDIS_MINIPORT_TIMER>()
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_OFFLOAD {
+    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
+    public var Checksum: NDIS_TCP_IP_CHECKSUM_OFFLOAD = NDIS_TCP_IP_CHECKSUM_OFFLOAD()
+    public var LsoV1: NDIS_TCP_LARGE_SEND_OFFLOAD_V1 = NDIS_TCP_LARGE_SEND_OFFLOAD_V1()
+    public var IPsecV1: NDIS_IPSEC_OFFLOAD_V1 = NDIS_IPSEC_OFFLOAD_V1()
+    public var LsoV2: NDIS_TCP_LARGE_SEND_OFFLOAD_V2 = NDIS_TCP_LARGE_SEND_OFFLOAD_V2()
+    public var Flags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_PORT_AUTHENTICATION_PARAMETERS {
+    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
+    public var SendControlState: Int32 = 0
+    public var RcvControlState: Int32 = 0
+    public var SendAuthorizationState: Int32 = 0
+    public var RcvAuthorizationState: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_PORT_CHARACTERISTICS {
+    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
+    public var PortNumber: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var Type: Int32 = 0
+    public var MediaConnectState: Int32 = 0
+    public var XmitLinkSpeed: UInt64 = 0
+    public var RcvLinkSpeed: UInt64 = 0
+    public var Direction: Int32 = 0
+    public var SendControlState: Int32 = 0
+    public var RcvControlState: Int32 = 0
+    public var SendAuthorizationState: Int32 = 0
+    public var RcvAuthorizationState: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+public type NDIS_PROC_CALLBACK = CFunc<(CPointer<NDIS_WORK_ITEM>, CPointer<Unit>) -> Unit>
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_RW_LOCK {
+    public var Anonymous1: NDIS_RW_LOCK__Anonymous1_e__Union = NDIS_RW_LOCK__Anonymous1_e__Union()
+    public var Anonymous2: NDIS_RW_LOCK__Anonymous2_e__Union = NDIS_RW_LOCK__Anonymous2_e__Union()
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct NDIS_RW_LOCK__Anonymous1_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop anonymous: NDIS_RW_LOCK__Anonymous1_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDIS_RW_LOCK__Anonymous1_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDIS_RW_LOCK__Anonymous1_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reserved: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_RW_LOCK__Anonymous1_e__Union__Anonymous_e__Struct {
+    public var SpinLock: UIntNative = 0
+    public var Context: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct NDIS_RW_LOCK__Anonymous2_e__Union {
+    public var _raw: VArray<UInt64, $64> = VArray<UInt64, $64>(repeat: 0)
+
+    public mut prop refCount: VArray<NDIS_RW_LOCK_REFCOUNT, $32> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<NDIS_RW_LOCK_REFCOUNT, $32>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<NDIS_RW_LOCK_REFCOUNT, $32>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop refCountEx: VArray<UInt32, $128> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt32, $128>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt32, $128>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop anonymous: NDIS_RW_LOCK__Anonymous2_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDIS_RW_LOCK__Anonymous2_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDIS_RW_LOCK__Anonymous2_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_RW_LOCK__Anonymous2_e__Union__Anonymous_e__Struct {
+    public var RefCountLock: UIntNative = 0
+    public var SharedRefCount: UInt32 = 0
+    public var WriterWaiting: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_TIMESTAMP_CAPABILITIES {
+    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
+    public var HardwareClockFrequencyHz: UInt64 = 0
+    public var CrossTimestamp: UInt8 = 0
+    public var Reserved1: UInt64 = 0
+    public var Reserved2: UInt64 = 0
+    public var TimestampFlags: NDIS_TIMESTAMP_CAPABILITY_FLAGS = NDIS_TIMESTAMP_CAPABILITY_FLAGS()
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_WAN_LINE_UP {
+    public var LinkSpeed: UInt32 = 0
+    public var MaximumTotalSize: UInt32 = 0
+    public var Quality: Int32 = 0
+    public var SendWindow: UInt16 = 0
+    public var RemoteAddress: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
+    public var LocalAddress: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
+    public var ProtocolBufferLength: UInt32 = 0
+    public var ProtocolBuffer: CPointer<UInt8> = CPointer<UInt8>()
+    public var ProtocolType: UInt16 = 0
+    public var DeviceName: Win32_Foundation.UNICODE_STRING = Win32_Foundation.UNICODE_STRING()
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_WLAN_BSSID {
+    public var Length: UInt32 = 0
+    public var MacAddress: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
+    public var Reserved: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var Ssid: NDIS_802_11_SSID = NDIS_802_11_SSID()
+    public var Privacy: UInt32 = 0
+    public var Rssi: Int32 = 0
+    public var NetworkTypeInUse: Int32 = 0
+    public var Configuration: NDIS_802_11_CONFIGURATION = NDIS_802_11_CONFIGURATION()
+    public var InfrastructureMode: Int32 = 0
+    public var SupportedRates: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_WLAN_BSSID_EX {
+    public var Length: UInt32 = 0
+    public var MacAddress: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
+    public var Reserved: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var Ssid: NDIS_802_11_SSID = NDIS_802_11_SSID()
+    public var Privacy: UInt32 = 0
+    public var Rssi: Int32 = 0
+    public var NetworkTypeInUse: Int32 = 0
+    public var Configuration: NDIS_802_11_CONFIGURATION = NDIS_802_11_CONFIGURATION()
+    public var InfrastructureMode: Int32 = 0
+    public var SupportedRates: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var IELength: UInt32 = 0
+    public var IEs: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_WMI_OFFLOAD {
+    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
+    public var Checksum: NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD = NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD()
+    public var LsoV1: NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1 = NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1()
+    public var IPsecV1: NDIS_WMI_IPSEC_OFFLOAD_V1 = NDIS_WMI_IPSEC_OFFLOAD_V1()
+    public var LsoV2: NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2 = NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2()
+    public var Flags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct OFFLOAD_IPSEC_ADD_SA {
+    public var SrcAddr: UInt32 = 0
+    public var SrcMask: UInt32 = 0
+    public var DestAddr: UInt32 = 0
+    public var DestMask: UInt32 = 0
+    public var Protocol: UInt32 = 0
+    public var SrcPort: UInt16 = 0
+    public var DestPort: UInt16 = 0
+    public var SrcTunnelAddr: UInt32 = 0
+    public var DestTunnelAddr: UInt32 = 0
+    public var Flags: UInt16 = 0
+    public var NumSAs: Int16 = 0
+    public var SecAssoc: VArray<OFFLOAD_SECURITY_ASSOCIATION, $3> = VArray<OFFLOAD_SECURITY_ASSOCIATION, $3>(repeat: OFFLOAD_SECURITY_ASSOCIATION())
+    public var OffloadHandle: CPointer<Unit> = CPointer<Unit>()
+    public var KeyLen: UInt32 = 0
+    public var KeyMat: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY {
+    public var UdpEncapType: Int32 = 0
+    public var DstEncapPort: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_802_11_AUTHENTICATION_EVENT {
+    public var Status: NDIS_802_11_STATUS_INDICATION = NDIS_802_11_STATUS_INDICATION()
+    public var Request: VArray<NDIS_802_11_AUTHENTICATION_REQUEST, $1> = VArray<NDIS_802_11_AUTHENTICATION_REQUEST, $1>(repeat: NDIS_802_11_AUTHENTICATION_REQUEST())
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_802_11_BSSID_LIST {
+    public var NumberOfItems: UInt32 = 0
+    public var Bssid: VArray<NDIS_WLAN_BSSID, $1> = VArray<NDIS_WLAN_BSSID, $1>(repeat: NDIS_WLAN_BSSID())
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_802_11_BSSID_LIST_EX {
+    public var NumberOfItems: UInt32 = 0
+    public var Bssid: VArray<NDIS_WLAN_BSSID_EX, $1> = VArray<NDIS_WLAN_BSSID_EX, $1>(repeat: NDIS_WLAN_BSSID_EX())
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_802_11_TEST {
+    public var Length: UInt32 = 0
+    public var Type: UInt32 = 0
+    public var Anonymous: NDIS_802_11_TEST__Anonymous_e__Union = NDIS_802_11_TEST__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct NDIS_802_11_TEST__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $5> = VArray<UInt32, $5>(repeat: 0)
+
+    public mut prop authenticationEvent: NDIS_802_11_AUTHENTICATION_EVENT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDIS_802_11_AUTHENTICATION_EVENT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDIS_802_11_AUTHENTICATION_EVENT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop rssiTrigger: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_PORT {
+    public var Next: CPointer<NDIS_PORT> = CPointer<NDIS_PORT>()
+    public var NdisReserved: CPointer<Unit> = CPointer<Unit>()
+    public var MiniportReserved: CPointer<Unit> = CPointer<Unit>()
+    public var ProtocolReserved: CPointer<Unit> = CPointer<Unit>()
+    public var PortCharacteristics: NDIS_PORT_CHARACTERISTICS = NDIS_PORT_CHARACTERISTICS()
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+@C
+public struct NDIS_PORT_ARRAY {
+    public var Header: NDIS_OBJECT_HEADER = NDIS_OBJECT_HEADER()
+    public var NumberOfPorts: UInt32 = 0
+    public var OffsetFirstPort: UInt32 = 0
+    public var ElementSize: UInt32 = 0
+    public var Ports: VArray<NDIS_PORT_CHARACTERISTICS, $1> = VArray<NDIS_PORT_CHARACTERISTICS, $1>(repeat: NDIS_PORT_CHARACTERISTICS())
+    public init() {}
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on"]
+@C
+public struct OFFLOAD_IPSEC_ADD_UDPESP_SA {
+    public var SrcAddr: UInt32 = 0
+    public var SrcMask: UInt32 = 0
+    public var DstAddr: UInt32 = 0
+    public var DstMask: UInt32 = 0
+    public var Protocol: UInt32 = 0
+    public var SrcPort: UInt16 = 0
+    public var DstPort: UInt16 = 0
+    public var SrcTunnelAddr: UInt32 = 0
+    public var DstTunnelAddr: UInt32 = 0
+    public var Flags: UInt16 = 0
+    public var NumSAs: Int16 = 0
+    public var SecAssoc: VArray<OFFLOAD_SECURITY_ASSOCIATION, $3> = VArray<OFFLOAD_SECURITY_ASSOCIATION, $3>(repeat: OFFLOAD_SECURITY_ASSOCIATION())
+    public var OffloadHandle: CPointer<Unit> = CPointer<Unit>()
+    public var EncapTypeEntry: OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY = OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY()
+    public var EncapTypeEntryOffldHandle: CPointer<Unit> = CPointer<Unit>()
+    public var KeyLen: UInt32 = 0
+    public var KeyMat: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
 @When[NDIS_SYS == "on"]
 @CallingConv[CDECL]
 foreign {
@@ -3988,9 +4044,8 @@ foreign {
 
 @When[NDIS_SYS == "on"]
 foreign {
-    func NdisAcquireReadWriteLock(Lock: CPointer<NDIS_RW_LOCK>, fWrite: Win32_Foundation.BOOLEAN, LockState: CPointer<LOCK_STATE>): Unit
+    func NdisAcquireReadWriteLock(Lock: CPointer<NDIS_RW_LOCK>, fWrite: UInt8, LockState: CPointer<LOCK_STATE>): Unit
     func NdisAllocateMemoryWithTag(VirtualAddress: CPointer<CPointer<Unit>>, Length: UInt32, Tag: UInt32): Int32
-    func NdisCancelTimer(Timer: CPointer<NDIS_TIMER>, TimerCancelled: CPointer<Win32_Foundation.BOOLEAN>): Unit
     func NdisClAddParty(NdisVcHandle: CPointer<Unit>, ProtocolPartyContext: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERS>, NdisPartyHandle: CPointer<CPointer<Unit>>): Int32
     func NdisClCloseAddressFamily(NdisAfHandle: CPointer<Unit>): Int32
     // param-hint: NdisPartyHandle optional
@@ -4037,8 +4092,6 @@ foreign {
     func NdisCoCreateVc(NdisBindingHandle: CPointer<Unit>, NdisAfHandle: CPointer<Unit>, ProtocolVcContext: CPointer<Unit>, NdisVcHandle: CPointer<CPointer<Unit>>): Int32
     func NdisCoDeleteVc(NdisVcHandle: CPointer<Unit>): Int32
     func NdisCoGetTapiCallId(NdisVcHandle: CPointer<Unit>, TapiCallId: CPointer<VAR_STRING>): Int32
-    func NdisCompleteDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk_impl.MDL>, Offset: UInt32, Length: UInt32, WriteToDevice: Win32_Foundation.BOOLEAN): Unit
-    func NdisCopyBuffer(Status: CPointer<Int32>, Buffer: CPointer<CPointer<Wdk_impl.MDL>>, PoolHandle: CPointer<Unit>, MemoryDescriptor: CPointer<Unit>, Offset: UInt32, Length: UInt32): Unit
     func NdisDeregisterTdiCallBack(): Unit
     // param-hint: VirtualAddress bytes=param[1]
     func NdisFreeMemory(VirtualAddress: CPointer<Unit>, Length: UInt32, MemoryFlags: UInt32): Unit
@@ -4054,14 +4107,10 @@ foreign {
     func NdisIMGetBindingContext(NdisBindingHandle: CPointer<Unit>): CPointer<Unit>
     // param-hint: DeviceContext optional
     func NdisIMInitializeDeviceInstanceEx(DriverHandle: CPointer<Unit>, DriverInstance: CPointer<Win32_Foundation.UNICODE_STRING>, DeviceContext: CPointer<Unit>): Int32
-    func NdisInitializeEvent(Event: CPointer<NDIS_EVENT>): Unit
     func NdisInitializeReadWriteLock(Lock: CPointer<NDIS_RW_LOCK>): Unit
     func NdisInitializeString(Destination: CPointer<Win32_Foundation.UNICODE_STRING>, Source: CPointer<UInt8>): Unit
-    // param-hint: FunctionContext optional
-    func NdisInitializeTimer(Timer: CPointer<NDIS_TIMER>, TimerFunction: PNDIS_TIMER_FUNCTION, FunctionContext: CPointer<Unit>): Unit
-    func NdisMAllocateSharedMemory(MiniportAdapterHandle: CPointer<Unit>, Length: UInt32, Cached: Win32_Foundation.BOOLEAN, VirtualAddress: CPointer<CPointer<Unit>>, PhysicalAddress: CPointer<Int64>): Unit
-    func NdisMAllocateSharedMemoryAsync(MiniportAdapterHandle: CPointer<Unit>, Length: UInt32, Cached: Win32_Foundation.BOOLEAN, Context: CPointer<Unit>): Int32
-    func NdisMCancelTimer(Timer: CPointer<NDIS_MINIPORT_TIMER>, TimerCancelled: CPointer<Win32_Foundation.BOOLEAN>): Unit
+    func NdisMAllocateSharedMemory(MiniportAdapterHandle: CPointer<Unit>, Length: UInt32, Cached: UInt8, VirtualAddress: CPointer<CPointer<Unit>>, PhysicalAddress: CPointer<Int64>): Unit
+    func NdisMAllocateSharedMemoryAsync(MiniportAdapterHandle: CPointer<Unit>, Length: UInt32, Cached: UInt8, Context: CPointer<Unit>): Int32
     func NdisMCloseLog(LogHandle: CPointer<Unit>): Unit
     func NdisMCmActivateVc(NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERS>): Int32
     func NdisMCmCreateVc(MiniportAdapterHandle: CPointer<Unit>, NdisAfHandle: CPointer<Unit>, MiniportVcContext: CPointer<Unit>, NdisVcHandle: CPointer<CPointer<Unit>>): Int32
@@ -4075,22 +4124,13 @@ foreign {
     func NdisMDeregisterIoPortRange(MiniportAdapterHandle: CPointer<Unit>, InitialPort: UInt32, NumberOfPorts: UInt32, PortOffset: CPointer<Unit>): Unit
     func NdisMFlushLog(LogHandle: CPointer<Unit>): Unit
     // param-hint: VirtualAddress bytes=param[1]
-    func NdisMFreeSharedMemory(MiniportAdapterHandle: CPointer<Unit>, Length: UInt32, Cached: Win32_Foundation.BOOLEAN, VirtualAddress: CPointer<Unit>, PhysicalAddress: Int64): Unit
-    // param-hint: PhysicalDeviceObject optional
-    // param-hint: FunctionalDeviceObject optional
-    // param-hint: NextDeviceObject optional
-    // param-hint: AllocatedResources optional
-    // param-hint: AllocatedResourcesTranslated optional
-    func NdisMGetDeviceProperty(MiniportAdapterHandle: CPointer<Unit>, PhysicalDeviceObject: CPointer<CPointer<Wdk_impl.DEVICE_OBJECT>>, FunctionalDeviceObject: CPointer<CPointer<Wdk_impl.DEVICE_OBJECT>>, NextDeviceObject: CPointer<CPointer<Wdk_impl.DEVICE_OBJECT>>, AllocatedResources: CPointer<CPointer<Wdk_impl.CM_RESOURCE_LIST>>, AllocatedResourcesTranslated: CPointer<CPointer<Wdk_impl.CM_RESOURCE_LIST>>): Unit
+    func NdisMFreeSharedMemory(MiniportAdapterHandle: CPointer<Unit>, Length: UInt32, Cached: UInt8, VirtualAddress: CPointer<Unit>, PhysicalAddress: Int64): Unit
     func NdisMGetDmaAlignment(MiniportAdapterHandle: CPointer<Unit>): UInt32
-    func NdisMInitializeTimer(Timer: CPointer<NDIS_MINIPORT_TIMER>, MiniportAdapterHandle: CPointer<Unit>, TimerFunction: PNDIS_TIMER_FUNCTION, FunctionContext: CPointer<Unit>): Unit
     func NdisMMapIoSpace(VirtualAddress: CPointer<CPointer<Unit>>, MiniportAdapterHandle: CPointer<Unit>, PhysicalAddress: Int64, Length: UInt32): Int32
     func NdisMQueryAdapterInstanceName(pAdapterInstanceName: CPointer<Win32_Foundation.UNICODE_STRING>, MiniportHandle: CPointer<Unit>): Int32
     func NdisMReadDmaCounter(MiniportDmaHandle: CPointer<Unit>): UInt32
-    func NdisMRegisterDmaChannel(MiniportDmaHandle: CPointer<CPointer<Unit>>, MiniportAdapterHandle: CPointer<Unit>, DmaChannel: UInt32, Dma32BitAddresses: Win32_Foundation.BOOLEAN, DmaDescription: CPointer<NDIS_DMA_DESCRIPTION>, MaximumLength: UInt32): Int32
     func NdisMRegisterIoPortRange(PortOffset: CPointer<CPointer<Unit>>, MiniportAdapterHandle: CPointer<Unit>, InitialPort: UInt32, NumberOfPorts: UInt32): Int32
     func NdisMRemoveMiniport(MiniportHandle: CPointer<Unit>): Int32
-    func NdisMSetPeriodicTimer(Timer: CPointer<NDIS_MINIPORT_TIMER>, MillisecondPeriod: UInt32): Unit
     func NdisMSleep(MicrosecondsToSleep: UInt32): Unit
     // param-hint: VirtualAddress bytes=param[2]
     func NdisMUnmapIoSpace(MiniportAdapterHandle: CPointer<Unit>, VirtualAddress: CPointer<Unit>, Length: UInt32): Unit
@@ -4103,24 +4143,60 @@ foreign {
     func NdisQueryAdapterInstanceName(pAdapterInstanceName: CPointer<Win32_Foundation.UNICODE_STRING>, NdisBindingHandle: CPointer<Unit>): Int32
     func NdisQueryBindInstanceName(pAdapterInstanceName: CPointer<Win32_Foundation.UNICODE_STRING>, BindingContext: CPointer<Unit>): Int32
     func NdisReEnumerateProtocolBindings(NdisProtocolHandle: CPointer<Unit>): Unit
-    func NdisReadConfiguration(Status: CPointer<Int32>, ParameterValue: CPointer<CPointer<NDIS_CONFIGURATION_PARAMETER>>, ConfigurationHandle: CPointer<Unit>, Keyword: CPointer<Win32_Foundation.UNICODE_STRING>, ParameterType: NDIS_PARAMETER_TYPE): Unit
+    func NdisReadConfiguration(Status: CPointer<Int32>, ParameterValue: CPointer<CPointer<NDIS_CONFIGURATION_PARAMETER>>, ConfigurationHandle: CPointer<Unit>, Keyword: CPointer<Win32_Foundation.UNICODE_STRING>, ParameterType: Int32): Unit
     func NdisReadNetworkAddress(Status: CPointer<Int32>, NetworkAddress: CPointer<CPointer<Unit>>, NetworkAddressLength: CPointer<UInt32>, ConfigurationHandle: CPointer<Unit>): Unit
     func NdisRegisterTdiCallBack(RegisterCallback: TDI_REGISTER_CALLBACK, PnPHandler: TDI_PNP_HANDLER): Unit
     func NdisReleaseReadWriteLock(Lock: CPointer<NDIS_RW_LOCK>, LockState: CPointer<LOCK_STATE>): Unit
-    func NdisResetEvent(Event: CPointer<NDIS_EVENT>): Unit
-    func NdisSetEvent(Event: CPointer<NDIS_EVENT>): Unit
-    func NdisSetPeriodicTimer(NdisTimer: CPointer<NDIS_TIMER>, MillisecondsPeriod: UInt32): Unit
-    func NdisSetTimer(Timer: CPointer<NDIS_TIMER>, MillisecondsToDelay: UInt32): Unit
-    func NdisSetTimerEx(NdisTimer: CPointer<NDIS_TIMER>, MillisecondsToDelay: UInt32, FunctionContext: CPointer<Unit>): Unit
-    func NdisSetupDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk_impl.MDL>, Offset: UInt32, Length: UInt32, WriteToDevice: Win32_Foundation.BOOLEAN): Unit
     func NdisSystemProcessorCount(): Int8
     func NdisUnmapFile(FileHandle: CPointer<Unit>): Unit
     func NdisUpdateSharedMemory(NdisAdapterHandle: CPointer<Unit>, Length: UInt32, VirtualAddress: CPointer<Unit>, PhysicalAddress: Int64): Unit
-    func NdisWaitEvent(Event: CPointer<NDIS_EVENT>, MsToWait: UInt32): Win32_Foundation.BOOLEAN
     func NdisWriteConfiguration(Status: CPointer<Int32>, ConfigurationHandle: CPointer<Unit>, Keyword: CPointer<Win32_Foundation.UNICODE_STRING>, ParameterValue: CPointer<NDIS_CONFIGURATION_PARAMETER>): Unit
     // param-hint: StringsList optional
     // param-hint: Data bytes=param[5] optional
     func NdisWriteEventLogEntry(LogHandle: CPointer<Unit>, EventCode: Int32, UniqueEventValue: UInt32, NumStrings: UInt16, StringsList: CPointer<Unit>, DataSize: UInt32, Data: CPointer<Unit>): Int32
+}
+
+@When[NDIS_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on")]
+foreign {
+    // param-hint: PhysicalDeviceObject optional
+    // param-hint: FunctionalDeviceObject optional
+    // param-hint: NextDeviceObject optional
+    // param-hint: AllocatedResources optional
+    // param-hint: AllocatedResourcesTranslated optional
+    func NdisMGetDeviceProperty(MiniportAdapterHandle: CPointer<Unit>, PhysicalDeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECT>>, FunctionalDeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECT>>, NextDeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECT>>, AllocatedResources: CPointer<CPointer<Wdk__impl_l0.CM_RESOURCE_LIST>>, AllocatedResourcesTranslated: CPointer<CPointer<Wdk__impl_l0.CM_RESOURCE_LIST>>): Unit
+}
+
+@When[NDIS_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on")]
+foreign {
+    func NdisCancelTimer(Timer: CPointer<NDIS_TIMER>, TimerCancelled: CPointer<UInt8>): Unit
+    // param-hint: FunctionContext optional
+    func NdisInitializeTimer(Timer: CPointer<NDIS_TIMER>, TimerFunction: PNDIS_TIMER_FUNCTION, FunctionContext: CPointer<Unit>): Unit
+    func NdisMCancelTimer(Timer: CPointer<NDIS_MINIPORT_TIMER>, TimerCancelled: CPointer<UInt8>): Unit
+    func NdisMInitializeTimer(Timer: CPointer<NDIS_MINIPORT_TIMER>, MiniportAdapterHandle: CPointer<Unit>, TimerFunction: PNDIS_TIMER_FUNCTION, FunctionContext: CPointer<Unit>): Unit
+    func NdisMSetPeriodicTimer(Timer: CPointer<NDIS_MINIPORT_TIMER>, MillisecondPeriod: UInt32): Unit
+    func NdisSetPeriodicTimer(NdisTimer: CPointer<NDIS_TIMER>, MillisecondsPeriod: UInt32): Unit
+    func NdisSetTimer(Timer: CPointer<NDIS_TIMER>, MillisecondsToDelay: UInt32): Unit
+    func NdisSetTimerEx(NdisTimer: CPointer<NDIS_TIMER>, MillisecondsToDelay: UInt32, FunctionContext: CPointer<Unit>): Unit
+}
+
+@When[NDIS_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on")]
+foreign {
+    func NdisInitializeEvent(Event: CPointer<NDIS_EVENT>): Unit
+    func NdisResetEvent(Event: CPointer<NDIS_EVENT>): Unit
+    func NdisSetEvent(Event: CPointer<NDIS_EVENT>): Unit
+    func NdisWaitEvent(Event: CPointer<NDIS_EVENT>, MsToWait: UInt32): UInt8
+}
+
+@When[NDIS_SYS == "on" && Windows_Wdk_Foundation == "on"]
+foreign {
+    func NdisCompleteDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk__impl_l0.MDL>, Offset: UInt32, Length: UInt32, WriteToDevice: UInt8): Unit
+    func NdisCopyBuffer(Status: CPointer<Int32>, Buffer: CPointer<CPointer<Wdk__impl_l0.MDL>>, PoolHandle: CPointer<Unit>, MemoryDescriptor: CPointer<Unit>, Offset: UInt32, Length: UInt32): Unit
+    func NdisSetupDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk__impl_l0.MDL>, Offset: UInt32, Length: UInt32, WriteToDevice: UInt8): Unit
+}
+
+@When[NDIS_SYS == "on" && Windows_Wdk_System_SystemServices == "on"]
+foreign {
+    func NdisMRegisterDmaChannel(MiniportDmaHandle: CPointer<CPointer<Unit>>, MiniportAdapterHandle: CPointer<Unit>, DmaChannel: UInt32, Dma32BitAddresses: UInt8, DmaDescription: CPointer<NDIS_DMA_DESCRIPTION>, MaximumLength: UInt32): Int32
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]

@@ -2,22 +2,14 @@
 package windows_sys.Win32.NetworkManagement.Rras
 
 import windows_interface.{GUID}
-import windows_polyfill.{packedReadInt32, packedReadUInt32, packedWriteInt32, packedWriteUInt32, unionReadUInt64, unionWriteUInt64}
+import windows_interface as windows_interface
+import windows_polyfill.{packedReadInt32, packedReadUInt32, packedReadUIntNative, packedReadValue, packedWriteInt32, packedWriteUInt32, packedWriteUIntNative, packedWriteValue, unionReadUInt64, unionWriteUInt64}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-import windows_sys.Win32.impl as Win32_impl
+import windows_sys.Win32._impl_l0 as Win32__impl_l0
+import windows_sys.Win32._impl_l1 as Win32__impl_l1
 
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct AUTH_VALIDATION_EX {
-    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
-    public var hRasConnection: CPointer<Unit> = CPointer<Unit>()
-    public var wszUserName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
-    public var wszLogonDomain: VArray<UInt16, $16> = VArray<UInt16, $16>(repeat: 0)
-    public var AuthInfoSize: UInt32 = 0
-    public var AuthInfo: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 @C
@@ -31,17 +23,6 @@ public struct GRE_CONFIG_PARAMS0 {
 public type HRASCONN = CPointer<Unit>
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct IKEV2_CONFIG_PARAMS {
-    public var dwNumPorts: UInt32 = 0
-    public var dwPortFlags: UInt32 = 0
-    public var dwTunnelConfigParamFlags: UInt32 = 0
-    public var TunnelConfigParams: IKEV2_TUNNEL_CONFIG_PARAMS4 = IKEV2_TUNNEL_CONFIG_PARAMS4()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct IKEV2_ID_PAYLOAD_TYPE {
     public var value: Int32 = 0
 
@@ -143,61 +124,6 @@ public struct IKEV2_PROJECTION_INFO2 {
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 @C
-public struct IKEV2_TUNNEL_CONFIG_PARAMS2 {
-    public var dwIdleTimeout: UInt32 = 0
-    public var dwNetworkBlackoutTime: UInt32 = 0
-    public var dwSaLifeTime: UInt32 = 0
-    public var dwSaDataSizeForRenegotiation: UInt32 = 0
-    public var dwConfigOptions: UInt32 = 0
-    public var dwTotalCertificates: UInt32 = 0
-    public var certificateNames: CPointer<Win32_impl.CRYPT_INTEGER_BLOB> = CPointer<Win32_impl.CRYPT_INTEGER_BLOB>()
-    public var machineCertificateName: Win32_impl.CRYPT_INTEGER_BLOB = Win32_impl.CRYPT_INTEGER_BLOB()
-    public var dwEncryptionType: UInt32 = 0
-    public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct IKEV2_TUNNEL_CONFIG_PARAMS3 {
-    public var dwIdleTimeout: UInt32 = 0
-    public var dwNetworkBlackoutTime: UInt32 = 0
-    public var dwSaLifeTime: UInt32 = 0
-    public var dwSaDataSizeForRenegotiation: UInt32 = 0
-    public var dwConfigOptions: UInt32 = 0
-    public var dwTotalCertificates: UInt32 = 0
-    public var certificateNames: CPointer<Win32_impl.CRYPT_INTEGER_BLOB> = CPointer<Win32_impl.CRYPT_INTEGER_BLOB>()
-    public var machineCertificateName: Win32_impl.CRYPT_INTEGER_BLOB = Win32_impl.CRYPT_INTEGER_BLOB()
-    public var dwEncryptionType: UInt32 = 0
-    public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0>()
-    public var dwTotalEkus: UInt32 = 0
-    public var certificateEKUs: CPointer<MPR_CERT_EKU> = CPointer<MPR_CERT_EKU>()
-    public var machineCertificateHash: Win32_impl.CRYPT_INTEGER_BLOB = Win32_impl.CRYPT_INTEGER_BLOB()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct IKEV2_TUNNEL_CONFIG_PARAMS4 {
-    public var dwIdleTimeout: UInt32 = 0
-    public var dwNetworkBlackoutTime: UInt32 = 0
-    public var dwSaLifeTime: UInt32 = 0
-    public var dwSaDataSizeForRenegotiation: UInt32 = 0
-    public var dwConfigOptions: UInt32 = 0
-    public var dwTotalCertificates: UInt32 = 0
-    public var certificateNames: CPointer<Win32_impl.CRYPT_INTEGER_BLOB> = CPointer<Win32_impl.CRYPT_INTEGER_BLOB>()
-    public var machineCertificateName: Win32_impl.CRYPT_INTEGER_BLOB = Win32_impl.CRYPT_INTEGER_BLOB()
-    public var dwEncryptionType: UInt32 = 0
-    public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0>()
-    public var dwTotalEkus: UInt32 = 0
-    public var certificateEKUs: CPointer<MPR_CERT_EKU> = CPointer<MPR_CERT_EKU>()
-    public var machineCertificateHash: Win32_impl.CRYPT_INTEGER_BLOB = Win32_impl.CRYPT_INTEGER_BLOB()
-    public var dwMmSaLifeTime: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct L2TP_CONFIG_PARAMS0 {
     public var dwNumPorts: UInt32 = 0
     public var dwPortFlags: UInt32 = 0
@@ -205,40 +131,6 @@ public struct L2TP_CONFIG_PARAMS0 {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct L2TP_CONFIG_PARAMS1 {
-    public var dwNumPorts: UInt32 = 0
-    public var dwPortFlags: UInt32 = 0
-    public var dwTunnelConfigParamFlags: UInt32 = 0
-    public var TunnelConfigParams: L2TP_TUNNEL_CONFIG_PARAMS2 = L2TP_TUNNEL_CONFIG_PARAMS2()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct L2TP_TUNNEL_CONFIG_PARAMS1 {
-    public var dwIdleTimeout: UInt32 = 0
-    public var dwEncryptionType: UInt32 = 0
-    public var dwSaLifeTime: UInt32 = 0
-    public var dwSaDataSizeForRenegotiation: UInt32 = 0
-    public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct L2TP_TUNNEL_CONFIG_PARAMS2 {
-    public var dwIdleTimeout: UInt32 = 0
-    public var dwEncryptionType: UInt32 = 0
-    public var dwSaLifeTime: UInt32 = 0
-    public var dwSaDataSizeForRenegotiation: UInt32 = 0
-    public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0>()
-    public var dwMmSaLifeTime: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct MGM_ENUM_TYPES {
     public var value: Int32 = 0
 
@@ -274,25 +166,6 @@ public struct MGM_IF_ENTRY {
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 @C
-public struct MPRAPI_ADMIN_DLL_CALLBACKS {
-    public var revision: UInt8 = 0
-    public var lpfnMprAdminGetIpAddressForUser: PMPRADMINGETIPADDRESSFORUSER = { _, _, _, _ => 0 }
-    public var lpfnMprAdminReleaseIpAddress: PMPRADMINRELEASEIPADRESS = { _, _, _ => () }
-    public var lpfnMprAdminGetIpv6AddressForUser: PMPRADMINGETIPV6ADDRESSFORUSER = { _, _, _, _ => 0 }
-    public var lpfnMprAdminReleaseIpV6AddressForUser: PMPRADMINRELEASEIPV6ADDRESSFORUSER = { _, _, _ => () }
-    public var lpfnRasAdminAcceptNewLink: PMPRADMINACCEPTNEWLINK = { _, _ => 0 }
-    public var lpfnRasAdminLinkHangupNotification: PMPRADMINLINKHANGUPNOTIFICATION = { _, _ => () }
-    public var lpfnRasAdminTerminateDll: PMPRADMINTERMINATEDLL = {  => 0 }
-    public var lpfnRasAdminAcceptNewConnectionEx: PMPRADMINACCEPTNEWCONNECTIONEX = { _ => 0 }
-    public var lpfnRasAdminAcceptEndpointChangeEx: PMPRADMINACCEPTTUNNELENDPOINTCHANGEEX = { _ => 0 }
-    public var lpfnRasAdminAcceptReauthenticationEx: PMPRADMINACCEPTREAUTHENTICATIONEX = { _ => 0 }
-    public var lpfnRasAdminConnectionHangupNotificationEx: PMPRADMINCONNECTIONHANGUPNOTIFICATIONEX = { _ => () }
-    public var lpfnRASValidatePreAuthenticatedConnectionEx: PMPRADMINRASVALIDATEPREAUTHENTICATEDCONNECTIONEX = { _ => 0 }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct MPRAPI_OBJECT_HEADER {
     public var revision: UInt8 = 0
     public var type_: UInt8 = 0
@@ -301,7 +174,6 @@ public struct MPRAPI_OBJECT_HEADER {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct MPRAPI_OBJECT_TYPE {
     public var value: Int32 = 0
 
@@ -336,27 +208,6 @@ public let MPRAPI_OBJECT_TYPE_MPRAPI_OBJECT_TYPE_UPDATE_CONNECTION_OBJECT: MPRAP
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 public let MPRAPI_OBJECT_TYPE_MPRAPI_OBJECT_TYPE_IF_CUSTOM_CONFIG_OBJECT: MPRAPI_OBJECT_TYPE = MPRAPI_OBJECT_TYPE(6)
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct MPRAPI_TUNNEL_CONFIG_PARAMS0 {
-    public var IkeConfigParams: IKEV2_CONFIG_PARAMS = IKEV2_CONFIG_PARAMS()
-    public var PptpConfigParams: PPTP_CONFIG_PARAMS = PPTP_CONFIG_PARAMS()
-    public var L2tpConfigParams: L2TP_CONFIG_PARAMS1 = L2TP_CONFIG_PARAMS1()
-    public var SstpConfigParams: SSTP_CONFIG_PARAMS = SSTP_CONFIG_PARAMS()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct MPRAPI_TUNNEL_CONFIG_PARAMS1 {
-    public var IkeConfigParams: IKEV2_CONFIG_PARAMS = IKEV2_CONFIG_PARAMS()
-    public var PptpConfigParams: PPTP_CONFIG_PARAMS = PPTP_CONFIG_PARAMS()
-    public var L2tpConfigParams: L2TP_CONFIG_PARAMS1 = L2TP_CONFIG_PARAMS1()
-    public var SstpConfigParams: SSTP_CONFIG_PARAMS = SSTP_CONFIG_PARAMS()
-    public var GREConfigParams: GRE_CONFIG_PARAMS0 = GRE_CONFIG_PARAMS0()
-    public init() {}
-}
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 @C
@@ -402,7 +253,6 @@ public struct MPR_DEVICE_1 {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct MPR_ET {
     public var value: UInt32 = 0
 
@@ -449,151 +299,6 @@ public struct MPR_IFTRANSPORT_0 {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct MPR_IF_CUSTOMINFOEX0 {
-    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
-    public var dwFlags: UInt32 = 0
-    public var customIkev2Config: ROUTER_IKEv2_IF_CUSTOM_CONFIG0 = ROUTER_IKEv2_IF_CUSTOM_CONFIG0()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct MPR_IF_CUSTOMINFOEX1 {
-    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
-    public var dwFlags: UInt32 = 0
-    public var customIkev2Config: ROUTER_IKEv2_IF_CUSTOM_CONFIG1 = ROUTER_IKEv2_IF_CUSTOM_CONFIG1()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct MPR_IF_CUSTOMINFOEX2 {
-    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
-    public var dwFlags: UInt32 = 0
-    public var customIkev2Config: ROUTER_IKEv2_IF_CUSTOM_CONFIG2 = ROUTER_IKEv2_IF_CUSTOM_CONFIG2()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct MPR_INTERFACE_0 {
-    public var wszInterfaceName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
-    public var hInterface: CPointer<Unit> = CPointer<Unit>()
-    public var fEnabled: Int32 = 0
-    public var dwIfType: ROUTER_INTERFACE_TYPE = ROUTER_INTERFACE_TYPE()
-    public var dwConnectionState: ROUTER_CONNECTION_STATE = ROUTER_CONNECTION_STATE()
-    public var fUnReachabilityReasons: UInt32 = 0
-    public var dwLastError: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct MPR_INTERFACE_1 {
-    public var wszInterfaceName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
-    public var hInterface: CPointer<Unit> = CPointer<Unit>()
-    public var fEnabled: Int32 = 0
-    public var dwIfType: ROUTER_INTERFACE_TYPE = ROUTER_INTERFACE_TYPE()
-    public var dwConnectionState: ROUTER_CONNECTION_STATE = ROUTER_CONNECTION_STATE()
-    public var fUnReachabilityReasons: UInt32 = 0
-    public var dwLastError: UInt32 = 0
-    public var lpwsDialoutHoursRestriction: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct MPR_INTERFACE_2 {
-    public var wszInterfaceName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
-    public var hInterface: CPointer<Unit> = CPointer<Unit>()
-    public var fEnabled: Int32 = 0
-    public var dwIfType: ROUTER_INTERFACE_TYPE = ROUTER_INTERFACE_TYPE()
-    public var dwConnectionState: ROUTER_CONNECTION_STATE = ROUTER_CONNECTION_STATE()
-    public var fUnReachabilityReasons: UInt32 = 0
-    public var dwLastError: UInt32 = 0
-    public var dwfOptions: UInt32 = 0
-    public var szLocalPhoneNumber: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
-    public var szAlternates: CPointer<UInt16> = CPointer<UInt16>()
-    public var ipaddr: UInt32 = 0
-    public var ipaddrDns: UInt32 = 0
-    public var ipaddrDnsAlt: UInt32 = 0
-    public var ipaddrWins: UInt32 = 0
-    public var ipaddrWinsAlt: UInt32 = 0
-    public var dwfNetProtocols: UInt32 = 0
-    public var szDeviceType: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
-    public var szDeviceName: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
-    public var szX25PadType: VArray<UInt16, $33> = VArray<UInt16, $33>(repeat: 0)
-    public var szX25Address: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
-    public var szX25Facilities: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
-    public var szX25UserData: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
-    public var dwChannels: UInt32 = 0
-    public var dwSubEntries: UInt32 = 0
-    public var dwDialMode: MPR_INTERFACE_DIAL_MODE = MPR_INTERFACE_DIAL_MODE()
-    public var dwDialExtraPercent: UInt32 = 0
-    public var dwDialExtraSampleSeconds: UInt32 = 0
-    public var dwHangUpExtraPercent: UInt32 = 0
-    public var dwHangUpExtraSampleSeconds: UInt32 = 0
-    public var dwIdleDisconnectSeconds: UInt32 = 0
-    public var dwType: UInt32 = 0
-    public var dwEncryptionType: MPR_ET = MPR_ET()
-    public var dwCustomAuthKey: UInt32 = 0
-    public var dwCustomAuthDataSize: UInt32 = 0
-    public var lpbCustomAuthData: CPointer<UInt8> = CPointer<UInt8>()
-    public var guidId: GUID = GUID()
-    public var dwVpnStrategy: MPR_VS = MPR_VS()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct MPR_INTERFACE_3 {
-    public var wszInterfaceName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
-    public var hInterface: CPointer<Unit> = CPointer<Unit>()
-    public var fEnabled: Int32 = 0
-    public var dwIfType: ROUTER_INTERFACE_TYPE = ROUTER_INTERFACE_TYPE()
-    public var dwConnectionState: ROUTER_CONNECTION_STATE = ROUTER_CONNECTION_STATE()
-    public var fUnReachabilityReasons: UInt32 = 0
-    public var dwLastError: UInt32 = 0
-    public var dwfOptions: UInt32 = 0
-    public var szLocalPhoneNumber: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
-    public var szAlternates: CPointer<UInt16> = CPointer<UInt16>()
-    public var ipaddr: UInt32 = 0
-    public var ipaddrDns: UInt32 = 0
-    public var ipaddrDnsAlt: UInt32 = 0
-    public var ipaddrWins: UInt32 = 0
-    public var ipaddrWinsAlt: UInt32 = 0
-    public var dwfNetProtocols: UInt32 = 0
-    public var szDeviceType: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
-    public var szDeviceName: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
-    public var szX25PadType: VArray<UInt16, $33> = VArray<UInt16, $33>(repeat: 0)
-    public var szX25Address: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
-    public var szX25Facilities: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
-    public var szX25UserData: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
-    public var dwChannels: UInt32 = 0
-    public var dwSubEntries: UInt32 = 0
-    public var dwDialMode: MPR_INTERFACE_DIAL_MODE = MPR_INTERFACE_DIAL_MODE()
-    public var dwDialExtraPercent: UInt32 = 0
-    public var dwDialExtraSampleSeconds: UInt32 = 0
-    public var dwHangUpExtraPercent: UInt32 = 0
-    public var dwHangUpExtraSampleSeconds: UInt32 = 0
-    public var dwIdleDisconnectSeconds: UInt32 = 0
-    public var dwType: UInt32 = 0
-    public var dwEncryptionType: MPR_ET = MPR_ET()
-    public var dwCustomAuthKey: UInt32 = 0
-    public var dwCustomAuthDataSize: UInt32 = 0
-    public var lpbCustomAuthData: CPointer<UInt8> = CPointer<UInt8>()
-    public var guidId: GUID = GUID()
-    public var dwVpnStrategy: MPR_VS = MPR_VS()
-    public var AddressCount: UInt32 = 0
-    public var ipv6addrDns: Win32_impl.IN6_ADDR = Win32_impl.IN6_ADDR()
-    public var ipv6addrDnsAlt: Win32_impl.IN6_ADDR = Win32_impl.IN6_ADDR()
-    public var ipv6addr: CPointer<Win32_impl.IN6_ADDR> = CPointer<Win32_impl.IN6_ADDR>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct MPR_INTERFACE_DIAL_MODE {
     public var value: UInt32 = 0
 
@@ -662,50 +367,6 @@ public struct MPR_SERVER_2 {
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 @C
-public struct MPR_SERVER_EX0 {
-    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
-    public var fLanOnlyMode: UInt32 = 0
-    public var dwUpTime: UInt32 = 0
-    public var dwTotalPorts: UInt32 = 0
-    public var dwPortsInUse: UInt32 = 0
-    public var Reserved: UInt32 = 0
-    public var ConfigParams: MPRAPI_TUNNEL_CONFIG_PARAMS0 = MPRAPI_TUNNEL_CONFIG_PARAMS0()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct MPR_SERVER_EX1 {
-    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
-    public var fLanOnlyMode: UInt32 = 0
-    public var dwUpTime: UInt32 = 0
-    public var dwTotalPorts: UInt32 = 0
-    public var dwPortsInUse: UInt32 = 0
-    public var Reserved: UInt32 = 0
-    public var ConfigParams: MPRAPI_TUNNEL_CONFIG_PARAMS1 = MPRAPI_TUNNEL_CONFIG_PARAMS1()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct MPR_SERVER_SET_CONFIG_EX0 {
-    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
-    public var setConfigForProtocols: UInt32 = 0
-    public var ConfigParams: MPRAPI_TUNNEL_CONFIG_PARAMS0 = MPRAPI_TUNNEL_CONFIG_PARAMS0()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct MPR_SERVER_SET_CONFIG_EX1 {
-    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
-    public var setConfigForProtocols: UInt32 = 0
-    public var ConfigParams: MPRAPI_TUNNEL_CONFIG_PARAMS1 = MPRAPI_TUNNEL_CONFIG_PARAMS1()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct MPR_TRANSPORT_0 {
     public var dwTransportId: UInt32 = 0
     public var hTransport: CPointer<Unit> = CPointer<Unit>()
@@ -714,30 +375,6 @@ public struct MPR_TRANSPORT_0 {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct MPR_VPN_TRAFFIC_SELECTOR {
-    public var type_: MPR_VPN_TS_TYPE = MPR_VPN_TS_TYPE()
-    public var protocolId: UInt8 = 0
-    public var portStart: UInt16 = 0
-    public var portEnd: UInt16 = 0
-    public var tsPayloadId: UInt16 = 0
-    public var addrStart: VPN_TS_IP_ADDRESS = VPN_TS_IP_ADDRESS()
-    public var addrEnd: VPN_TS_IP_ADDRESS = VPN_TS_IP_ADDRESS()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct MPR_VPN_TRAFFIC_SELECTORS {
-    public var numTsi: UInt32 = 0
-    public var numTsr: UInt32 = 0
-    public var tsI: CPointer<MPR_VPN_TRAFFIC_SELECTOR> = CPointer<MPR_VPN_TRAFFIC_SELECTOR>()
-    public var tsR: CPointer<MPR_VPN_TRAFFIC_SELECTOR> = CPointer<MPR_VPN_TRAFFIC_SELECTOR>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct MPR_VPN_TS_TYPE {
     public var value: Int32 = 0
 
@@ -762,7 +399,6 @@ public let MPR_VPN_TS_TYPE_MPR_VPN_TS_IPv4_ADDR_RANGE: MPR_VPN_TS_TYPE = MPR_VPN
 public let MPR_VPN_TS_TYPE_MPR_VPN_TS_IPv6_ADDR_RANGE: MPR_VPN_TS_TYPE = MPR_VPN_TS_TYPE(8)
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct MPR_VS {
     public var value: UInt32 = 0
 
@@ -814,9 +450,6 @@ public type PFNRASRETRIEVEBUFFER = CFunc<(CPointer<Unit>, CPointer<UInt8>, CPoin
 public type PFNRASSENDBUFFER = CFunc<(CPointer<Unit>, CPointer<UInt8>, UInt32) -> UInt32>
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PFNRASSETCOMMSETTINGS = CFunc<(CPointer<Unit>, CPointer<RASCOMMSETTINGS>, CPointer<Unit>) -> UInt32>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
 public type PMGM_CREATION_ALERT_CALLBACK = CFunc<(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, CPointer<MGM_IF_ENTRY>) -> UInt32>
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
@@ -844,58 +477,16 @@ public type PMGM_RPF_CALLBACK = CFunc<(UInt32, UInt32, UInt32, UInt32, CPointer<
 public type PMGM_WRONG_IF_CALLBACK = CFunc<(UInt32, UInt32, UInt32, UInt32, UInt32, CPointer<UInt8>) -> UInt32>
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PMPRADMINACCEPTNEWCONNECTION = CFunc<(CPointer<RAS_CONNECTION_0>, CPointer<RAS_CONNECTION_1>) -> Int32>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PMPRADMINACCEPTNEWCONNECTION2 = CFunc<(CPointer<RAS_CONNECTION_0>, CPointer<RAS_CONNECTION_1>, CPointer<RAS_CONNECTION_2>) -> Int32>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PMPRADMINACCEPTNEWCONNECTION3 = CFunc<(CPointer<RAS_CONNECTION_0>, CPointer<RAS_CONNECTION_1>, CPointer<RAS_CONNECTION_2>, CPointer<RAS_CONNECTION_3>) -> Int32>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PMPRADMINACCEPTNEWCONNECTIONEX = CFunc<(CPointer<RAS_CONNECTION_EX>) -> Int32>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PMPRADMINACCEPTNEWLINK = CFunc<(CPointer<RAS_PORT_0>, CPointer<RAS_PORT_1>) -> Int32>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PMPRADMINACCEPTREAUTHENTICATION = CFunc<(CPointer<RAS_CONNECTION_0>, CPointer<RAS_CONNECTION_1>, CPointer<RAS_CONNECTION_2>, CPointer<RAS_CONNECTION_3>) -> Int32>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PMPRADMINACCEPTREAUTHENTICATIONEX = CFunc<(CPointer<RAS_CONNECTION_EX>) -> Int32>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PMPRADMINACCEPTTUNNELENDPOINTCHANGEEX = CFunc<(CPointer<RAS_CONNECTION_EX>) -> Int32>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PMPRADMINCONNECTIONHANGUPNOTIFICATION = CFunc<(CPointer<RAS_CONNECTION_0>, CPointer<RAS_CONNECTION_1>) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PMPRADMINCONNECTIONHANGUPNOTIFICATION2 = CFunc<(CPointer<RAS_CONNECTION_0>, CPointer<RAS_CONNECTION_1>, CPointer<RAS_CONNECTION_2>) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PMPRADMINCONNECTIONHANGUPNOTIFICATION3 = CFunc<(CPointer<RAS_CONNECTION_0>, CPointer<RAS_CONNECTION_1>, CPointer<RAS_CONNECTION_2>, CPointer<RAS_CONNECTION_3>) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PMPRADMINCONNECTIONHANGUPNOTIFICATIONEX = CFunc<(CPointer<RAS_CONNECTION_EX>) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
 public type PMPRADMINGETIPADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>, CPointer<Int32>) -> UInt32>
 
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PMPRADMINGETIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl.IN6_ADDR>, CPointer<Int32>) -> UInt32>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PMPRADMINLINKHANGUPNOTIFICATION = CFunc<(CPointer<RAS_PORT_0>, CPointer<RAS_PORT_1>) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PMPRADMINRASVALIDATEPREAUTHENTICATEDCONNECTIONEX = CFunc<(CPointer<AUTH_VALIDATION_EX>) -> UInt32>
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
+public type PMPRADMINGETIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l0.IN6_ADDR>, CPointer<Int32>) -> UInt32>
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 public type PMPRADMINRELEASEIPADRESS = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>) -> Unit>
 
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type PMPRADMINRELEASEIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32_impl.IN6_ADDR>) -> Unit>
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
+public type PMPRADMINRELEASEIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l0.IN6_ADDR>) -> Unit>
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 public type PMPRADMINTERMINATEDLL = CFunc<() -> UInt32>
@@ -916,39 +507,6 @@ public struct PPP_CCP_INFO {
     public var dwOptions: UInt32 = 0
     public var dwRemoteCompressionAlgorithm: UInt32 = 0
     public var dwRemoteOptions: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct PPP_INFO {
-    public var nbf: PPP_NBFCP_INFO = PPP_NBFCP_INFO()
-    public var ip: PPP_IPCP_INFO = PPP_IPCP_INFO()
-    public var ipx: PPP_IPXCP_INFO = PPP_IPXCP_INFO()
-    public var at: PPP_ATCP_INFO = PPP_ATCP_INFO()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct PPP_INFO_2 {
-    public var nbf: PPP_NBFCP_INFO = PPP_NBFCP_INFO()
-    public var ip: PPP_IPCP_INFO2 = PPP_IPCP_INFO2()
-    public var ipx: PPP_IPXCP_INFO = PPP_IPXCP_INFO()
-    public var at: PPP_ATCP_INFO = PPP_ATCP_INFO()
-    public var ccp: PPP_CCP_INFO = PPP_CCP_INFO()
-    public var lcp: PPP_LCP_INFO = PPP_LCP_INFO()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct PPP_INFO_3 {
-    public var nbf: PPP_NBFCP_INFO = PPP_NBFCP_INFO()
-    public var ip: PPP_IPCP_INFO2 = PPP_IPCP_INFO2()
-    public var ipv6: PPP_IPV6_CP_INFO = PPP_IPV6_CP_INFO()
-    public var ccp: PPP_CCP_INFO = PPP_CCP_INFO()
-    public var lcp: PPP_LCP_INFO = PPP_LCP_INFO()
     public init() {}
 }
 
@@ -996,7 +554,6 @@ public struct PPP_IPXCP_INFO {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct PPP_LCP {
     public var value: UInt32 = 0
 
@@ -1027,24 +584,6 @@ public let PPP_LCP_PPP_LCP_EAP: PPP_LCP = PPP_LCP(49703)
 public let PPP_LCP_PPP_LCP_SPAP: PPP_LCP = PPP_LCP(49191)
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct PPP_LCP_INFO {
-    public var dwError: UInt32 = 0
-    public var dwAuthenticationProtocol: PPP_LCP = PPP_LCP()
-    public var dwAuthenticationData: PPP_LCP_INFO_AUTH_DATA = PPP_LCP_INFO_AUTH_DATA()
-    public var dwRemoteAuthenticationProtocol: UInt32 = 0
-    public var dwRemoteAuthenticationData: UInt32 = 0
-    public var dwTerminateReason: UInt32 = 0
-    public var dwRemoteTerminateReason: UInt32 = 0
-    public var dwOptions: UInt32 = 0
-    public var dwRemoteOptions: UInt32 = 0
-    public var dwEapTypeId: UInt32 = 0
-    public var dwRemoteEapTypeId: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct PPP_LCP_INFO_AUTH_DATA {
     public var value: UInt32 = 0
 
@@ -1095,10 +634,10 @@ public struct PPP_PROJECTION_INFO {
     public var dwPrefixLength: UInt32 = 0
     public var IPv6SubInterfaceIndex: UInt64 = 0
     public var dwLcpError: UInt32 = 0
-    public var dwAuthenticationProtocol: PPP_LCP = PPP_LCP()
-    public var dwAuthenticationData: PPP_LCP_INFO_AUTH_DATA = PPP_LCP_INFO_AUTH_DATA()
-    public var dwRemoteAuthenticationProtocol: PPP_LCP = PPP_LCP()
-    public var dwRemoteAuthenticationData: PPP_LCP_INFO_AUTH_DATA = PPP_LCP_INFO_AUTH_DATA()
+    public var dwAuthenticationProtocol: UInt32 = 0
+    public var dwAuthenticationData: UInt32 = 0
+    public var dwRemoteAuthenticationProtocol: UInt32 = 0
+    public var dwRemoteAuthenticationData: UInt32 = 0
     public var dwLcpTerminateReason: UInt32 = 0
     public var dwLcpRemoteTerminateReason: UInt32 = 0
     public var dwLcpOptions: UInt32 = 0
@@ -1129,10 +668,10 @@ public struct PPP_PROJECTION_INFO2 {
     public var dwPrefixLength: UInt32 = 0
     public var IPv6SubInterfaceIndex: UInt64 = 0
     public var dwLcpError: UInt32 = 0
-    public var dwAuthenticationProtocol: PPP_LCP = PPP_LCP()
-    public var dwAuthenticationData: PPP_LCP_INFO_AUTH_DATA = PPP_LCP_INFO_AUTH_DATA()
-    public var dwRemoteAuthenticationProtocol: PPP_LCP = PPP_LCP()
-    public var dwRemoteAuthenticationData: PPP_LCP_INFO_AUTH_DATA = PPP_LCP_INFO_AUTH_DATA()
+    public var dwAuthenticationProtocol: UInt32 = 0
+    public var dwAuthenticationData: UInt32 = 0
+    public var dwRemoteAuthenticationProtocol: UInt32 = 0
+    public var dwRemoteAuthenticationData: UInt32 = 0
     public var dwLcpTerminateReason: UInt32 = 0
     public var dwLcpRemoteTerminateReason: UInt32 = 0
     public var dwLcpOptions: UInt32 = 0
@@ -1165,50 +704,53 @@ public struct PROJECTION_INFO {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct PROJECTION_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $192> = VArray<UInt8, $192>(repeat: 0)
+    public var _raw: VArray<UInt64, $24> = VArray<UInt64, $24>(repeat: 0)
 
-    public func pppProjectionInfo(): PPP_PROJECTION_INFO {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PPP_PROJECTION_INFO>(p)
-            return ptr.read()
+    public mut prop pppProjectionInfo: PPP_PROJECTION_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PPP_PROJECTION_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PPP_PROJECTION_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_pppProjectionInfo(val: PPP_PROJECTION_INFO): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PPP_PROJECTION_INFO>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop ikev2ProjectionInfo: IKEV2_PROJECTION_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEV2_PROJECTION_INFO>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func ikev2ProjectionInfo(): IKEV2_PROJECTION_INFO {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEV2_PROJECTION_INFO>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikev2ProjectionInfo(val: IKEV2_PROJECTION_INFO): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEV2_PROJECTION_INFO>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEV2_PROJECTION_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1223,133 +765,152 @@ public struct PROJECTION_INFO2 {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct PROJECTION_INFO2__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $200> = VArray<UInt8, $200>(repeat: 0)
+    public var _raw: VArray<UInt64, $25> = VArray<UInt64, $25>(repeat: 0)
 
-    public func pppProjectionInfo(): PPP_PROJECTION_INFO2 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PPP_PROJECTION_INFO2>(p)
-            return ptr.read()
+    public mut prop pppProjectionInfo: PPP_PROJECTION_INFO2 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PPP_PROJECTION_INFO2>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PPP_PROJECTION_INFO2>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_pppProjectionInfo(val: PPP_PROJECTION_INFO2): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PPP_PROJECTION_INFO2>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop ikev2ProjectionInfo: IKEV2_PROJECTION_INFO2 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEV2_PROJECTION_INFO2>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func ikev2ProjectionInfo(): IKEV2_PROJECTION_INFO2 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEV2_PROJECTION_INFO2>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikev2ProjectionInfo(val: IKEV2_PROJECTION_INFO2): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEV2_PROJECTION_INFO2>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEV2_PROJECTION_INFO2>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type RASADFUNCA = CFunc<(CPointer<UInt8>, CPointer<UInt8>, CPointer<RASADPARAMS>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type RASADFUNCW = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<RASADPARAMS>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
+// packed(4)
 @C
 public struct RASADPARAMS {
     public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
 
-    public func dwSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dwSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop hwndOwner: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Unit> = CPointer<Unit>()
+                return packedReadValue<CPointer<Unit>>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `hwndOwner`: type `CPointer<Unit>` not supported by polyfill; skipped
-
-    public func dwFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
+    public mut prop dwFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
+    public mut prop xDlg: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt32(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt32(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func xDlg(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt32(base, 16)
+    public mut prop yDlg: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt32(base, 20)
+            }
         }
-    }
-
-    public mut func set_xDlg(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt32(base, 16, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func yDlg(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt32(base, 20)
-        }
-    }
-
-    public mut func set_yDlg(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt32(base, 20, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt32(base, 20, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1360,7 +921,7 @@ public struct RASADPARAMS {
 public struct RASAMBA {
     public var dwSize: UInt32 = 0
     public var dwError: UInt32 = 0
-    public var szNetBiosError: VArray<Win32_Foundation.CHAR, $17> = VArray<Win32_Foundation.CHAR, $17>(repeat: 0)
+    public var szNetBiosError: VArray<Int8, $17> = VArray<Int8, $17>(repeat: 0)
     public var bLana: UInt8 = 0
     public init() {}
 }
@@ -1376,7 +937,6 @@ public struct RASAMBW {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct RASAPIVERSION {
     public var value: Int32 = 0
 
@@ -1412,7 +972,7 @@ public struct RASAUTODIALENTRYA {
     public var dwSize: UInt32 = 0
     public var dwFlags: UInt32 = 0
     public var dwDialingLocation: UInt32 = 0
-    public var szEntry: VArray<Win32_Foundation.CHAR, $257> = VArray<Win32_Foundation.CHAR, $257>(repeat: 0)
+    public var szEntry: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0)
     public init() {}
 }
 
@@ -1438,81 +998,220 @@ public struct RASCOMMSETTINGS {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && (arch == "x86_64" || arch == "aarch64")]
+// packed(4)
 @C
 public struct RASCONNA {
-    public var _raw: VArray<UInt8, $692> = VArray<UInt8, $692>(repeat: 0u8)
+    public var _raw: VArray<UInt8, $724> = VArray<UInt8, $724>(repeat: 0u8)
 
-    public func dwSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dwSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop hrasconn: HRASCONN {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: HRASCONN = CPointer<Unit>()
+                return packedReadValue<HRASCONN>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `hrasconn`: type `HRASCONN` not supported by polyfill; skipped
-
-    // packed field `szEntryName`: type `VArray<Win32_Foundation.CHAR, $257>` not supported by polyfill; skipped
-
-    // packed field `szDeviceType`: type `VArray<Win32_Foundation.CHAR, $17>` not supported by polyfill; skipped
-
-    // packed field `szDeviceName`: type `VArray<Win32_Foundation.CHAR, $129>` not supported by polyfill; skipped
-
-    // packed field `szPhonebook`: type `VArray<Win32_Foundation.CHAR, $260>` not supported by polyfill; skipped
-
-    public func dwSubEntry(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 676)
+    public mut prop szEntryName: VArray<Int8, $257> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0)
+                return packedReadValue<VArray<Int8, $257>>(base, 12, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSubEntry(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 676, val)
-            _raw = rawStorage
+    public mut prop szDeviceType: VArray<Int8, $17> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<Int8, $17> = VArray<Int8, $17>(repeat: 0)
+                return packedReadValue<VArray<Int8, $17>>(base, 269, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 269, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `guidEntry`: layout unknown; skipped
-
-    public func dwFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 680)
+    public mut prop szDeviceName: VArray<Int8, $129> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<Int8, $129> = VArray<Int8, $129>(repeat: 0)
+                return packedReadValue<VArray<Int8, $129>>(base, 286, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 286, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 680, val)
-            _raw = rawStorage
+    public mut prop szPhonebook: VArray<Int8, $260> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
+                return packedReadValue<VArray<Int8, $260>>(base, 415, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 415, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `luid`: type `Win32_Foundation.LUID` not supported by polyfill; skipped
+    public mut prop dwSubEntry: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 676)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 676, val)
+                _raw = rawStorage
+            }
+        }
+    }
 
-    // packed field `guidCorrelationId`: layout unknown; skipped
+    public mut prop guidEntry: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: GUID = GUID()
+                return packedReadValue<GUID>(base, 680, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 680, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 696)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 696, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop luid: Win32_Foundation.LUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: Win32_Foundation.LUID = Win32_Foundation.LUID()
+                return packedReadValue<Win32_Foundation.LUID>(base, 700, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 700, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop guidCorrelationId: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: GUID = GUID()
+                return packedReadValue<GUID>(base, 708, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 708, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct RASCONNSTATE {
     public var value: Int32 = 0
 
@@ -1627,37 +1326,6 @@ public let RASCONNSTATE_RASCS_Connected: RASCONNSTATE = RASCONNSTATE(8192)
 public let RASCONNSTATE_RASCS_Disconnected: RASCONNSTATE = RASCONNSTATE(8193)
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct RASCONNSTATUSA {
-    public var dwSize: UInt32 = 0
-    public var rasconnstate: RASCONNSTATE = RASCONNSTATE()
-    public var dwError: UInt32 = 0
-    public var szDeviceType: VArray<Win32_Foundation.CHAR, $17> = VArray<Win32_Foundation.CHAR, $17>(repeat: 0)
-    public var szDeviceName: VArray<Win32_Foundation.CHAR, $129> = VArray<Win32_Foundation.CHAR, $129>(repeat: 0)
-    public var szPhoneNumber: VArray<Win32_Foundation.CHAR, $129> = VArray<Win32_Foundation.CHAR, $129>(repeat: 0)
-    public var localEndPoint: RASTUNNELENDPOINT = RASTUNNELENDPOINT()
-    public var remoteEndPoint: RASTUNNELENDPOINT = RASTUNNELENDPOINT()
-    public var rasconnsubstate: RASCONNSUBSTATE = RASCONNSUBSTATE()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct RASCONNSTATUSW {
-    public var dwSize: UInt32 = 0
-    public var rasconnstate: RASCONNSTATE = RASCONNSTATE()
-    public var dwError: UInt32 = 0
-    public var szDeviceType: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
-    public var szDeviceName: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
-    public var szPhoneNumber: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
-    public var localEndPoint: RASTUNNELENDPOINT = RASTUNNELENDPOINT()
-    public var remoteEndPoint: RASTUNNELENDPOINT = RASTUNNELENDPOINT()
-    public var rasconnsubstate: RASCONNSUBSTATE = RASCONNSUBSTATE()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct RASCONNSUBSTATE {
     public var value: Int32 = 0
 
@@ -1688,76 +1356,216 @@ public let RASCONNSUBSTATE_RASCSS_Reconnecting: RASCONNSUBSTATE = RASCONNSUBSTAT
 public let RASCONNSUBSTATE_RASCSS_Reconnected: RASCONNSUBSTATE = RASCONNSUBSTATE(8192)
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && (arch == "x86_64" || arch == "aarch64")]
+// packed(4)
 @C
 public struct RASCONNW {
-    public var _raw: VArray<UInt8, $1356> = VArray<UInt8, $1356>(repeat: 0u8)
+    public var _raw: VArray<UInt8, $1388> = VArray<UInt8, $1388>(repeat: 0u8)
 
-    public func dwSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dwSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop hrasconn: HRASCONN {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: HRASCONN = CPointer<Unit>()
+                return packedReadValue<HRASCONN>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `hrasconn`: type `HRASCONN` not supported by polyfill; skipped
-
-    // packed field `szEntryName`: type `VArray<UInt16, $257>` not supported by polyfill; skipped
-
-    // packed field `szDeviceType`: type `VArray<UInt16, $17>` not supported by polyfill; skipped
-
-    // packed field `szDeviceName`: type `VArray<UInt16, $129>` not supported by polyfill; skipped
-
-    // packed field `szPhonebook`: type `VArray<UInt16, $260>` not supported by polyfill; skipped
-
-    public func dwSubEntry(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 1340)
+    public mut prop szEntryName: VArray<UInt16, $257> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+                return packedReadValue<VArray<UInt16, $257>>(base, 12, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSubEntry(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 1340, val)
-            _raw = rawStorage
+    public mut prop szDeviceType: VArray<UInt16, $17> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
+                return packedReadValue<VArray<UInt16, $17>>(base, 526, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 526, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `guidEntry`: layout unknown; skipped
-
-    public func dwFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 1344)
+    public mut prop szDeviceName: VArray<UInt16, $129> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
+                return packedReadValue<VArray<UInt16, $129>>(base, 560, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 560, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 1344, val)
-            _raw = rawStorage
+    public mut prop szPhonebook: VArray<UInt16, $260> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
+                return packedReadValue<VArray<UInt16, $260>>(base, 818, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 818, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `luid`: type `Win32_Foundation.LUID` not supported by polyfill; skipped
+    public mut prop dwSubEntry: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 1340)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 1340, val)
+                _raw = rawStorage
+            }
+        }
+    }
 
-    // packed field `guidCorrelationId`: layout unknown; skipped
+    public mut prop guidEntry: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: GUID = GUID()
+                return packedReadValue<GUID>(base, 1344, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 1344, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 1360)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 1360, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop luid: Win32_Foundation.LUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: Win32_Foundation.LUID = Win32_Foundation.LUID()
+                return packedReadValue<Win32_Foundation.LUID>(base, 1364, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 1364, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop guidCorrelationId: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: GUID = GUID()
+                return packedReadValue<GUID>(base, 1372, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 1372, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
@@ -1766,9 +1574,9 @@ public struct RASCONNW {
 public struct RASCREDENTIALSA {
     public var dwSize: UInt32 = 0
     public var dwMask: UInt32 = 0
-    public var szUserName: VArray<Win32_Foundation.CHAR, $257> = VArray<Win32_Foundation.CHAR, $257>(repeat: 0)
-    public var szPassword: VArray<Win32_Foundation.CHAR, $257> = VArray<Win32_Foundation.CHAR, $257>(repeat: 0)
-    public var szDomain: VArray<Win32_Foundation.CHAR, $16> = VArray<Win32_Foundation.CHAR, $16>(repeat: 0)
+    public var szUserName: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0)
+    public var szPassword: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0)
+    public var szDomain: VArray<Int8, $16> = VArray<Int8, $16>(repeat: 0)
     public init() {}
 }
 
@@ -1796,36 +1604,10 @@ public struct RASCTRYINFO {
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 @C
-public struct RASCUSTOMSCRIPTEXTENSIONS {
-    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
-
-    public func dwSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_dwSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `pfnRasSetCommSettings`: type `PFNRASSETCOMMSETTINGS` not supported by polyfill; skipped
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct RASDEVINFOA {
     public var dwSize: UInt32 = 0
-    public var szDeviceType: VArray<Win32_Foundation.CHAR, $17> = VArray<Win32_Foundation.CHAR, $17>(repeat: 0)
-    public var szDeviceName: VArray<Win32_Foundation.CHAR, $129> = VArray<Win32_Foundation.CHAR, $129>(repeat: 0)
+    public var szDeviceType: VArray<Int8, $17> = VArray<Int8, $17>(repeat: 0)
+    public var szDeviceName: VArray<Int8, $129> = VArray<Int8, $129>(repeat: 0)
     public init() {}
 }
 
@@ -1839,401 +1621,705 @@ public struct RASDEVINFOW {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && (arch == "x86_64" || arch == "aarch64")]
+// packed(4)
 @C
 public struct RASDEVSPECIFICINFO {
     public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
 
-    public func dwSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dwSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop pbDevSpecificInfo: CPointer<UInt8> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<UInt8> = CPointer<UInt8>()
+                return packedReadValue<CPointer<UInt8>>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    // packed field `pbDevSpecificInfo`: type `CPointer<UInt8>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
+// packed(4)
 @C
 public struct RASDIALDLG {
     public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0u8)
 
-    public func dwSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dwSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop hwndOwner: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Unit> = CPointer<Unit>()
+                return packedReadValue<CPointer<Unit>>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `hwndOwner`: type `CPointer<Unit>` not supported by polyfill; skipped
-
-    public func dwFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
+    public mut prop dwFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
+    public mut prop xDlg: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt32(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt32(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func xDlg(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt32(base, 16)
+    public mut prop yDlg: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt32(base, 20)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt32(base, 20, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_xDlg(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt32(base, 16, val)
-            _raw = rawStorage
+    public mut prop dwSubEntry: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 24)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 24, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func yDlg(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt32(base, 20)
+    public mut prop dwError: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 28)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 28, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_yDlg(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt32(base, 20, val)
-            _raw = rawStorage
+    public mut prop reserved: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUIntNative(base, 32)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUIntNative(base, 32, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func dwSubEntry(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 24)
+    public mut prop reserved2: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUIntNative(base, 40)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUIntNative(base, 40, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public mut func set_dwSubEntry(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 24, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dwError(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 28)
-        }
-    }
-
-    public mut func set_dwError(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 28, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `reserved`: type `UIntNative` not supported by polyfill; skipped
-
-    // packed field `reserved2`: type `UIntNative` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct RASDIALEXTENSIONS {
-    public var _raw: VArray<UInt8, $60> = VArray<UInt8, $60>(repeat: 0u8)
-
-    public func dwSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_dwSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dwfOptions(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
-        }
-    }
-
-    public mut func set_dwfOptions(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `hwndParent`: type `CPointer<Unit>` not supported by polyfill; skipped
-
-    // packed field `reserved`: type `UIntNative` not supported by polyfill; skipped
-
-    // packed field `reserved1`: type `UIntNative` not supported by polyfill; skipped
-
-    // packed field `RasEapInfo`: type `RASEAPINFO` not supported by polyfill; skipped
-
-    public func fSkipPppAuth(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt32(base, 44)
-        }
-    }
-
-    public mut func set_fSkipPppAuth(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt32(base, 44, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `RasDevSpecificInfo`: type `RASDEVSPECIFICINFO` not supported by polyfill; skipped
-    public init() {}
-}
+public type RASDIALFUNC = CFunc<(UInt32, Int32, UInt32) -> Unit>
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type RASDIALFUNC = CFunc<(UInt32, RASCONNSTATE, UInt32) -> Unit>
+public type RASDIALFUNC1 = CFunc<(HRASCONN, UInt32, Int32, UInt32, UInt32) -> Unit>
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type RASDIALFUNC1 = CFunc<(HRASCONN, UInt32, RASCONNSTATE, UInt32, UInt32) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type RASDIALFUNC2 = CFunc<(UIntNative, UInt32, HRASCONN, UInt32, RASCONNSTATE, UInt32, UInt32) -> UInt32>
+public type RASDIALFUNC2 = CFunc<(UIntNative, UInt32, HRASCONN, UInt32, Int32, UInt32, UInt32) -> UInt32>
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && (arch == "x86_64" || arch == "aarch64")]
+// packed(4)
 @C
 public struct RASDIALPARAMSA {
     public var _raw: VArray<UInt8, $1076> = VArray<UInt8, $1076>(repeat: 0u8)
 
-    public func dwSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dwSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop szEntryName: VArray<Int8, $257> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0)
+                return packedReadValue<VArray<Int8, $257>>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `szEntryName`: type `VArray<Win32_Foundation.CHAR, $257>` not supported by polyfill; skipped
-
-    // packed field `szPhoneNumber`: type `VArray<Win32_Foundation.CHAR, $129>` not supported by polyfill; skipped
-
-    // packed field `szCallbackNumber`: type `VArray<Win32_Foundation.CHAR, $129>` not supported by polyfill; skipped
-
-    // packed field `szUserName`: type `VArray<Win32_Foundation.CHAR, $257>` not supported by polyfill; skipped
-
-    // packed field `szPassword`: type `VArray<Win32_Foundation.CHAR, $257>` not supported by polyfill; skipped
-
-    // packed field `szDomain`: type `VArray<Win32_Foundation.CHAR, $16>` not supported by polyfill; skipped
-
-    public func dwSubEntry(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 1052)
+    public mut prop szPhoneNumber: VArray<Int8, $129> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<Int8, $129> = VArray<Int8, $129>(repeat: 0)
+                return packedReadValue<VArray<Int8, $129>>(base, 261, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 261, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSubEntry(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 1052, val)
-            _raw = rawStorage
+    public mut prop szCallbackNumber: VArray<Int8, $129> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<Int8, $129> = VArray<Int8, $129>(repeat: 0)
+                return packedReadValue<VArray<Int8, $129>>(base, 390, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 390, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `dwCallbackId`: type `UIntNative` not supported by polyfill; skipped
-
-    public func dwIfIndex(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 1064)
+    public mut prop szUserName: VArray<Int8, $257> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0)
+                return packedReadValue<VArray<Int8, $257>>(base, 519, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 519, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwIfIndex(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 1064, val)
-            _raw = rawStorage
+    public mut prop szPassword: VArray<Int8, $257> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0)
+                return packedReadValue<VArray<Int8, $257>>(base, 776, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 776, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `szEncPassword`: type `CPointer<UInt8>` not supported by polyfill; skipped
+    public mut prop szDomain: VArray<Int8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<Int8, $16> = VArray<Int8, $16>(repeat: 0)
+                return packedReadValue<VArray<Int8, $16>>(base, 1033, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 1033, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwSubEntry: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 1052)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 1052, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwCallbackId: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUIntNative(base, 1056)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUIntNative(base, 1056, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwIfIndex: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 1064)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 1064, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop szEncPassword: CPointer<UInt8> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<UInt8> = CPointer<UInt8>()
+                return packedReadValue<CPointer<UInt8>>(base, 1068, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 1068, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && (arch == "x86_64" || arch == "aarch64")]
+// packed(4)
 @C
 public struct RASDIALPARAMSW {
     public var _raw: VArray<UInt8, $2120> = VArray<UInt8, $2120>(repeat: 0u8)
 
-    public func dwSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dwSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop szEntryName: VArray<UInt16, $257> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+                return packedReadValue<VArray<UInt16, $257>>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `szEntryName`: type `VArray<UInt16, $257>` not supported by polyfill; skipped
-
-    // packed field `szPhoneNumber`: type `VArray<UInt16, $129>` not supported by polyfill; skipped
-
-    // packed field `szCallbackNumber`: type `VArray<UInt16, $129>` not supported by polyfill; skipped
-
-    // packed field `szUserName`: type `VArray<UInt16, $257>` not supported by polyfill; skipped
-
-    // packed field `szPassword`: type `VArray<UInt16, $257>` not supported by polyfill; skipped
-
-    // packed field `szDomain`: type `VArray<UInt16, $16>` not supported by polyfill; skipped
-
-    public func dwSubEntry(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 2096)
+    public mut prop szPhoneNumber: VArray<UInt16, $129> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
+                return packedReadValue<VArray<UInt16, $129>>(base, 518, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 518, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSubEntry(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 2096, val)
-            _raw = rawStorage
+    public mut prop szCallbackNumber: VArray<UInt16, $129> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
+                return packedReadValue<VArray<UInt16, $129>>(base, 776, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 776, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `dwCallbackId`: type `UIntNative` not supported by polyfill; skipped
-
-    public func dwIfIndex(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 2108)
+    public mut prop szUserName: VArray<UInt16, $257> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+                return packedReadValue<VArray<UInt16, $257>>(base, 1034, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 1034, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwIfIndex(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 2108, val)
-            _raw = rawStorage
+    public mut prop szPassword: VArray<UInt16, $257> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+                return packedReadValue<VArray<UInt16, $257>>(base, 1548, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 1548, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `szEncPassword`: type `CPointer<UInt16>` not supported by polyfill; skipped
+    public mut prop szDomain: VArray<UInt16, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt16, $16> = VArray<UInt16, $16>(repeat: 0)
+                return packedReadValue<VArray<UInt16, $16>>(base, 2062, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 2062, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwSubEntry: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 2096)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 2096, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwCallbackId: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUIntNative(base, 2100)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUIntNative(base, 2100, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwIfIndex: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 2108)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 2108, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop szEncPassword: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<UInt16> = CPointer<UInt16>()
+                return packedReadValue<CPointer<UInt16>>(base, 2112, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 2112, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
+// packed(4)
 @C
 public struct RASEAPINFO {
     public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
 
-    public func dwSizeofEapInfo(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dwSizeofEapInfo: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSizeofEapInfo(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop pbEapInfo: CPointer<UInt8> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<UInt8> = CPointer<UInt8>()
+                return packedReadValue<CPointer<UInt8>>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    // packed field `pbEapInfo`: type `CPointer<UInt8>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 @C
 public struct RASEAPUSERIDENTITYA {
-    public var szUserName: VArray<Win32_Foundation.CHAR, $257> = VArray<Win32_Foundation.CHAR, $257>(repeat: 0)
+    public var szUserName: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0)
     public var dwSizeofEapInfo: UInt32 = 0
     public var pbEapInfo: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
     public init() {}
@@ -2248,270 +2334,347 @@ public struct RASEAPUSERIDENTITYW {
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct RASENTRYA {
-    public var dwSize: UInt32 = 0
-    public var dwfOptions: UInt32 = 0
-    public var dwCountryID: UInt32 = 0
-    public var dwCountryCode: UInt32 = 0
-    public var szAreaCode: VArray<Win32_Foundation.CHAR, $11> = VArray<Win32_Foundation.CHAR, $11>(repeat: 0)
-    public var szLocalPhoneNumber: VArray<Win32_Foundation.CHAR, $129> = VArray<Win32_Foundation.CHAR, $129>(repeat: 0)
-    public var dwAlternateOffset: UInt32 = 0
-    public var ipaddr: RASIPADDR = RASIPADDR()
-    public var ipaddrDns: RASIPADDR = RASIPADDR()
-    public var ipaddrDnsAlt: RASIPADDR = RASIPADDR()
-    public var ipaddrWins: RASIPADDR = RASIPADDR()
-    public var ipaddrWinsAlt: RASIPADDR = RASIPADDR()
-    public var dwFrameSize: UInt32 = 0
-    public var dwfNetProtocols: UInt32 = 0
-    public var dwFramingProtocol: UInt32 = 0
-    public var szScript: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
-    public var szAutodialDll: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
-    public var szAutodialFunc: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
-    public var szDeviceType: VArray<Win32_Foundation.CHAR, $17> = VArray<Win32_Foundation.CHAR, $17>(repeat: 0)
-    public var szDeviceName: VArray<Win32_Foundation.CHAR, $129> = VArray<Win32_Foundation.CHAR, $129>(repeat: 0)
-    public var szX25PadType: VArray<Win32_Foundation.CHAR, $33> = VArray<Win32_Foundation.CHAR, $33>(repeat: 0)
-    public var szX25Address: VArray<Win32_Foundation.CHAR, $201> = VArray<Win32_Foundation.CHAR, $201>(repeat: 0)
-    public var szX25Facilities: VArray<Win32_Foundation.CHAR, $201> = VArray<Win32_Foundation.CHAR, $201>(repeat: 0)
-    public var szX25UserData: VArray<Win32_Foundation.CHAR, $201> = VArray<Win32_Foundation.CHAR, $201>(repeat: 0)
-    public var dwChannels: UInt32 = 0
-    public var dwReserved1: UInt32 = 0
-    public var dwReserved2: UInt32 = 0
-    public var dwSubEntries: UInt32 = 0
-    public var dwDialMode: RASENTRY_DIAL_MODE = RASENTRY_DIAL_MODE()
-    public var dwDialExtraPercent: UInt32 = 0
-    public var dwDialExtraSampleSeconds: UInt32 = 0
-    public var dwHangUpExtraPercent: UInt32 = 0
-    public var dwHangUpExtraSampleSeconds: UInt32 = 0
-    public var dwIdleDisconnectSeconds: UInt32 = 0
-    public var dwType: UInt32 = 0
-    public var dwEncryptionType: UInt32 = 0
-    public var dwCustomAuthKey: UInt32 = 0
-    public var guidId: GUID = GUID()
-    public var szCustomDialDll: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
-    public var dwVpnStrategy: UInt32 = 0
-    public var dwfOptions2: UInt32 = 0
-    public var dwfOptions3: UInt32 = 0
-    public var szDnsSuffix: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
-    public var dwTcpWindowSize: UInt32 = 0
-    public var szPrerequisitePbk: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
-    public var szPrerequisiteEntry: VArray<Win32_Foundation.CHAR, $257> = VArray<Win32_Foundation.CHAR, $257>(repeat: 0)
-    public var dwRedialCount: UInt32 = 0
-    public var dwRedialPause: UInt32 = 0
-    public var ipv6addrDns: Win32_impl.IN6_ADDR = Win32_impl.IN6_ADDR()
-    public var ipv6addrDnsAlt: Win32_impl.IN6_ADDR = Win32_impl.IN6_ADDR()
-    public var dwIPv4InterfaceMetric: UInt32 = 0
-    public var dwIPv6InterfaceMetric: UInt32 = 0
-    public var ipv6addr: Win32_impl.IN6_ADDR = Win32_impl.IN6_ADDR()
-    public var dwIPv6PrefixLength: UInt32 = 0
-    public var dwNetworkOutageTime: UInt32 = 0
-    public var szIDi: VArray<Win32_Foundation.CHAR, $257> = VArray<Win32_Foundation.CHAR, $257>(repeat: 0)
-    public var szIDr: VArray<Win32_Foundation.CHAR, $257> = VArray<Win32_Foundation.CHAR, $257>(repeat: 0)
-    public var fIsImsConfig: Int32 = 0
-    public var IdiType: IKEV2_ID_PAYLOAD_TYPE = IKEV2_ID_PAYLOAD_TYPE()
-    public var IdrType: IKEV2_ID_PAYLOAD_TYPE = IKEV2_ID_PAYLOAD_TYPE()
-    public var fDisableIKEv2Fragmentation: Int32 = 0
-    public init() {}
-}
-
 @When[Windows_Win32_NetworkManagement_Rras == "on" && (arch == "x86_64" || arch == "aarch64")]
+// packed(4)
 @C
 public struct RASENTRYDLGA {
     public var _raw: VArray<UInt8, $304> = VArray<UInt8, $304>(repeat: 0u8)
 
-    public func dwSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dwSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop hwndOwner: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Unit> = CPointer<Unit>()
+                return packedReadValue<CPointer<Unit>>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `hwndOwner`: type `CPointer<Unit>` not supported by polyfill; skipped
-
-    public func dwFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
+    public mut prop dwFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
+    public mut prop xDlg: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt32(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt32(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func xDlg(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt32(base, 16)
+    public mut prop yDlg: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt32(base, 20)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt32(base, 20, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_xDlg(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt32(base, 16, val)
-            _raw = rawStorage
+    public mut prop szEntry: VArray<Int8, $257> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0)
+                return packedReadValue<VArray<Int8, $257>>(base, 24, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 24, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func yDlg(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt32(base, 20)
+    public mut prop dwError: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 284)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 284, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_yDlg(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt32(base, 20, val)
-            _raw = rawStorage
+    public mut prop reserved: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUIntNative(base, 288)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUIntNative(base, 288, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `szEntry`: type `VArray<Win32_Foundation.CHAR, $257>` not supported by polyfill; skipped
-
-    public func dwError(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 284)
+    public mut prop reserved2: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUIntNative(base, 296)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUIntNative(base, 296, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public mut func set_dwError(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 284, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `reserved`: type `UIntNative` not supported by polyfill; skipped
-
-    // packed field `reserved2`: type `UIntNative` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && (arch == "x86_64" || arch == "aarch64")]
+// packed(4)
 @C
 public struct RASENTRYDLGW {
     public var _raw: VArray<UInt8, $560> = VArray<UInt8, $560>(repeat: 0u8)
 
-    public func dwSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dwSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop hwndOwner: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Unit> = CPointer<Unit>()
+                return packedReadValue<CPointer<Unit>>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `hwndOwner`: type `CPointer<Unit>` not supported by polyfill; skipped
-
-    public func dwFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
+    public mut prop dwFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
+    public mut prop xDlg: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt32(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt32(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func xDlg(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt32(base, 16)
+    public mut prop yDlg: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt32(base, 20)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt32(base, 20, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_xDlg(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt32(base, 16, val)
-            _raw = rawStorage
+    public mut prop szEntry: VArray<UInt16, $257> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+                return packedReadValue<VArray<UInt16, $257>>(base, 24, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 24, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func yDlg(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt32(base, 20)
+    public mut prop dwError: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 540)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 540, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_yDlg(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt32(base, 20, val)
-            _raw = rawStorage
+    public mut prop reserved: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUIntNative(base, 544)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUIntNative(base, 544, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `szEntry`: type `VArray<UInt16, $257>` not supported by polyfill; skipped
-
-    public func dwError(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 540)
+    public mut prop reserved2: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUIntNative(base, 552)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUIntNative(base, 552, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public mut func set_dwError(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 540, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `reserved`: type `UIntNative` not supported by polyfill; skipped
-
-    // packed field `reserved2`: type `UIntNative` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -2519,9 +2682,9 @@ public struct RASENTRYDLGW {
 @C
 public struct RASENTRYNAMEA {
     public var dwSize: UInt32 = 0
-    public var szEntryName: VArray<Win32_Foundation.CHAR, $257> = VArray<Win32_Foundation.CHAR, $257>(repeat: 0)
+    public var szEntryName: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0)
     public var dwFlags: UInt32 = 0
-    public var szPhonebookPath: VArray<Win32_Foundation.CHAR, $261> = VArray<Win32_Foundation.CHAR, $261>(repeat: 0)
+    public var szPhonebookPath: VArray<Int8, $261> = VArray<Int8, $261>(repeat: 0)
     public init() {}
 }
 
@@ -2536,74 +2699,6 @@ public struct RASENTRYNAMEW {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct RASENTRYW {
-    public var dwSize: UInt32 = 0
-    public var dwfOptions: UInt32 = 0
-    public var dwCountryID: UInt32 = 0
-    public var dwCountryCode: UInt32 = 0
-    public var szAreaCode: VArray<UInt16, $11> = VArray<UInt16, $11>(repeat: 0)
-    public var szLocalPhoneNumber: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
-    public var dwAlternateOffset: UInt32 = 0
-    public var ipaddr: RASIPADDR = RASIPADDR()
-    public var ipaddrDns: RASIPADDR = RASIPADDR()
-    public var ipaddrDnsAlt: RASIPADDR = RASIPADDR()
-    public var ipaddrWins: RASIPADDR = RASIPADDR()
-    public var ipaddrWinsAlt: RASIPADDR = RASIPADDR()
-    public var dwFrameSize: UInt32 = 0
-    public var dwfNetProtocols: UInt32 = 0
-    public var dwFramingProtocol: UInt32 = 0
-    public var szScript: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
-    public var szAutodialDll: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
-    public var szAutodialFunc: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
-    public var szDeviceType: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
-    public var szDeviceName: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
-    public var szX25PadType: VArray<UInt16, $33> = VArray<UInt16, $33>(repeat: 0)
-    public var szX25Address: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
-    public var szX25Facilities: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
-    public var szX25UserData: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
-    public var dwChannels: UInt32 = 0
-    public var dwReserved1: UInt32 = 0
-    public var dwReserved2: UInt32 = 0
-    public var dwSubEntries: UInt32 = 0
-    public var dwDialMode: RASENTRY_DIAL_MODE = RASENTRY_DIAL_MODE()
-    public var dwDialExtraPercent: UInt32 = 0
-    public var dwDialExtraSampleSeconds: UInt32 = 0
-    public var dwHangUpExtraPercent: UInt32 = 0
-    public var dwHangUpExtraSampleSeconds: UInt32 = 0
-    public var dwIdleDisconnectSeconds: UInt32 = 0
-    public var dwType: UInt32 = 0
-    public var dwEncryptionType: UInt32 = 0
-    public var dwCustomAuthKey: UInt32 = 0
-    public var guidId: GUID = GUID()
-    public var szCustomDialDll: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
-    public var dwVpnStrategy: UInt32 = 0
-    public var dwfOptions2: UInt32 = 0
-    public var dwfOptions3: UInt32 = 0
-    public var szDnsSuffix: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var dwTcpWindowSize: UInt32 = 0
-    public var szPrerequisitePbk: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
-    public var szPrerequisiteEntry: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
-    public var dwRedialCount: UInt32 = 0
-    public var dwRedialPause: UInt32 = 0
-    public var ipv6addrDns: Win32_impl.IN6_ADDR = Win32_impl.IN6_ADDR()
-    public var ipv6addrDnsAlt: Win32_impl.IN6_ADDR = Win32_impl.IN6_ADDR()
-    public var dwIPv4InterfaceMetric: UInt32 = 0
-    public var dwIPv6InterfaceMetric: UInt32 = 0
-    public var ipv6addr: Win32_impl.IN6_ADDR = Win32_impl.IN6_ADDR()
-    public var dwIPv6PrefixLength: UInt32 = 0
-    public var dwNetworkOutageTime: UInt32 = 0
-    public var szIDi: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
-    public var szIDr: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
-    public var fIsImsConfig: Int32 = 0
-    public var IdiType: IKEV2_ID_PAYLOAD_TYPE = IKEV2_ID_PAYLOAD_TYPE()
-    public var IdrType: IKEV2_ID_PAYLOAD_TYPE = IKEV2_ID_PAYLOAD_TYPE()
-    public var fDisableIKEv2Fragmentation: Int32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct RASENTRY_DIAL_MODE {
     public var value: UInt32 = 0
 
@@ -2627,165 +2722,7 @@ public let RASENTRY_DIAL_MODE_RASEDM_DialAll: RASENTRY_DIAL_MODE = RASENTRY_DIAL
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 public let RASENTRY_DIAL_MODE_RASEDM_DialAsNeeded: RASENTRY_DIAL_MODE = RASENTRY_DIAL_MODE(2)
 
-@When[Windows_Win32_NetworkManagement_Rras == "on" && (arch == "x86_64" || arch == "aarch64")]
-@C
-public struct RASIKEV2_PROJECTION_INFO {
-    public var _raw: VArray<UInt8, $92> = VArray<UInt8, $92>(repeat: 0u8)
-
-    public func dwIPv4NegotiationError(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_dwIPv4NegotiationError(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `ipv4Address`: type `Win32_impl.IN_ADDR` not supported by polyfill; skipped
-
-    // packed field `ipv4ServerAddress`: type `Win32_impl.IN_ADDR` not supported by polyfill; skipped
-
-    public func dwIPv6NegotiationError(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
-        }
-    }
-
-    public mut func set_dwIPv6NegotiationError(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `ipv6Address`: type `Win32_impl.IN6_ADDR` not supported by polyfill; skipped
-
-    // packed field `ipv6ServerAddress`: type `Win32_impl.IN6_ADDR` not supported by polyfill; skipped
-
-    public func dwPrefixLength(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 48)
-        }
-    }
-
-    public mut func set_dwPrefixLength(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 48, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dwAuthenticationProtocol(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 52)
-        }
-    }
-
-    public mut func set_dwAuthenticationProtocol(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 52, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dwEapTypeId(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 56)
-        }
-    }
-
-    public mut func set_dwEapTypeId(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 56, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `dwFlags`: type `RASIKEV_PROJECTION_INFO_FLAGS` not supported by polyfill; skipped
-
-    public func dwEncryptionMethod(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 64)
-        }
-    }
-
-    public mut func set_dwEncryptionMethod(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 64, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func numIPv4ServerAddresses(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 68)
-        }
-    }
-
-    public mut func set_numIPv4ServerAddresses(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 68, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `ipv4ServerAddresses`: type `CPointer<Win32_impl.IN_ADDR>` not supported by polyfill; skipped
-
-    public func numIPv6ServerAddresses(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 80)
-        }
-    }
-
-    public mut func set_numIPv6ServerAddresses(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 80, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `ipv6ServerAddresses`: type `CPointer<Win32_impl.IN6_ADDR>` not supported by polyfill; skipped
-    public init() {}
-}
-
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct RASIKEV_PROJECTION_INFO_FLAGS {
     public var value: UInt32 = 0
 
@@ -2851,9 +2788,9 @@ public struct RASNOUSERA {
     public var dwSize: UInt32 = 0
     public var dwFlags: UInt32 = 0
     public var dwTimeoutMs: UInt32 = 0
-    public var szUserName: VArray<Win32_Foundation.CHAR, $257> = VArray<Win32_Foundation.CHAR, $257>(repeat: 0)
-    public var szPassword: VArray<Win32_Foundation.CHAR, $257> = VArray<Win32_Foundation.CHAR, $257>(repeat: 0)
-    public var szDomain: VArray<Win32_Foundation.CHAR, $16> = VArray<Win32_Foundation.CHAR, $16>(repeat: 0)
+    public var szUserName: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0)
+    public var szPassword: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0)
+    public var szDomain: VArray<Int8, $16> = VArray<Int8, $16>(repeat: 0)
     public init() {}
 }
 
@@ -2869,108 +2806,6 @@ public struct RASNOUSERW {
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_Rras == "on" && (arch == "x86_64" || arch == "aarch64")]
-@C
-public struct RASPBDLGA {
-    public var _raw: VArray<UInt8, $60> = VArray<UInt8, $60>(repeat: 0u8)
-
-    public func dwSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_dwSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `hwndOwner`: type `CPointer<Unit>` not supported by polyfill; skipped
-
-    public func dwFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
-        }
-    }
-
-    public mut func set_dwFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func xDlg(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt32(base, 16)
-        }
-    }
-
-    public mut func set_xDlg(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt32(base, 16, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func yDlg(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt32(base, 20)
-        }
-    }
-
-    public mut func set_yDlg(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt32(base, 20, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `dwCallbackId`: type `UIntNative` not supported by polyfill; skipped
-
-    // packed field `pCallback`: type `RASPBDLGFUNCA` not supported by polyfill; skipped
-
-    public func dwError(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 40)
-        }
-    }
-
-    public mut func set_dwError(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 40, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `reserved`: type `UIntNative` not supported by polyfill; skipped
-
-    // packed field `reserved2`: type `UIntNative` not supported by polyfill; skipped
-    public init() {}
-}
-
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 public type RASPBDLGFUNCA = CFunc<(UIntNative, UInt32, CPointer<UInt8>, CPointer<Unit>) -> Unit>
 
@@ -2978,104 +2813,192 @@ public type RASPBDLGFUNCA = CFunc<(UIntNative, UInt32, CPointer<UInt8>, CPointer
 public type RASPBDLGFUNCW = CFunc<(UIntNative, UInt32, CPointer<UInt16>, CPointer<Unit>) -> Unit>
 
 @When[Windows_Win32_NetworkManagement_Rras == "on" && (arch == "x86_64" || arch == "aarch64")]
+// packed(4)
 @C
 public struct RASPBDLGW {
     public var _raw: VArray<UInt8, $60> = VArray<UInt8, $60>(repeat: 0u8)
 
-    public func dwSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dwSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop hwndOwner: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Unit> = CPointer<Unit>()
+                return packedReadValue<CPointer<Unit>>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `hwndOwner`: type `CPointer<Unit>` not supported by polyfill; skipped
-
-    public func dwFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
+    public mut prop dwFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
+    public mut prop xDlg: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt32(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt32(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func xDlg(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt32(base, 16)
+    public mut prop yDlg: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt32(base, 20)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt32(base, 20, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_xDlg(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt32(base, 16, val)
-            _raw = rawStorage
+    public mut prop dwCallbackId: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUIntNative(base, 24)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUIntNative(base, 24, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func yDlg(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt32(base, 20)
+    public mut prop pCallback: RASPBDLGFUNCW {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: RASPBDLGFUNCW = CFunc<(UIntNative, UInt32, CPointer<UInt16>, CPointer<Unit>) -> Unit>(CPointer<Unit>())
+                return packedReadValue<RASPBDLGFUNCW>(base, 32, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 32, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_yDlg(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt32(base, 20, val)
-            _raw = rawStorage
+    public mut prop dwError: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 40)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 40, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `dwCallbackId`: type `UIntNative` not supported by polyfill; skipped
-
-    // packed field `pCallback`: type `RASPBDLGFUNCW` not supported by polyfill; skipped
-
-    public func dwError(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 40)
+    public mut prop reserved: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUIntNative(base, 44)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUIntNative(base, 44, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwError(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 40, val)
-            _raw = rawStorage
+    public mut prop reserved2: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUIntNative(base, 52)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUIntNative(base, 52, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    // packed field `reserved`: type `UIntNative` not supported by polyfill; skipped
-
-    // packed field `reserved2`: type `UIntNative` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -3096,8 +3019,8 @@ public struct RASPPPCCP {
 public struct RASPPPIPA {
     public var dwSize: UInt32 = 0
     public var dwError: UInt32 = 0
-    public var szIpAddress: VArray<Win32_Foundation.CHAR, $16> = VArray<Win32_Foundation.CHAR, $16>(repeat: 0)
-    public var szServerIpAddress: VArray<Win32_Foundation.CHAR, $16> = VArray<Win32_Foundation.CHAR, $16>(repeat: 0)
+    public var szIpAddress: VArray<Int8, $16> = VArray<Int8, $16>(repeat: 0)
+    public var szServerIpAddress: VArray<Int8, $16> = VArray<Int8, $16>(repeat: 0)
     public var dwOptions: UInt32 = 0
     public var dwServerOptions: UInt32 = 0
     public init() {}
@@ -3132,7 +3055,7 @@ public struct RASPPPIPW {
 public struct RASPPPIPXA {
     public var dwSize: UInt32 = 0
     public var dwError: UInt32 = 0
-    public var szIpxAddress: VArray<Win32_Foundation.CHAR, $22> = VArray<Win32_Foundation.CHAR, $22>(repeat: 0)
+    public var szIpxAddress: VArray<Int8, $22> = VArray<Int8, $22>(repeat: 0)
     public init() {}
 }
 
@@ -3151,7 +3074,7 @@ public struct RASPPPLCPA {
     public var fMultilink: Int32 = 0
     public var dwTerminateReason: UInt32 = 0
     public var dwServerTerminateReason: UInt32 = 0
-    public var szReplyMessage: VArray<Win32_Foundation.CHAR, $1024> = VArray<Win32_Foundation.CHAR, $1024>(repeat: 0)
+    public var szReplyMessage: VArray<Int8, $1024> = VArray<Int8, $1024>(repeat: 0)
     public var dwOptions: UInt32 = 0
     public var dwServerOptions: UInt32 = 0
     public init() {}
@@ -3184,8 +3107,8 @@ public struct RASPPPNBFA {
     public var dwSize: UInt32 = 0
     public var dwError: UInt32 = 0
     public var dwNetBiosError: UInt32 = 0
-    public var szNetBiosError: VArray<Win32_Foundation.CHAR, $17> = VArray<Win32_Foundation.CHAR, $17>(repeat: 0)
-    public var szWorkstationName: VArray<Win32_Foundation.CHAR, $17> = VArray<Win32_Foundation.CHAR, $17>(repeat: 0)
+    public var szNetBiosError: VArray<Int8, $17> = VArray<Int8, $17>(repeat: 0)
+    public var szWorkstationName: VArray<Int8, $17> = VArray<Int8, $17>(repeat: 0)
     public var bLana: UInt8 = 0
     public init() {}
 }
@@ -3203,36 +3126,6 @@ public struct RASPPPNBFW {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct RASPPP_PROJECTION_INFO {
-    public var dwIPv4NegotiationError: UInt32 = 0
-    public var ipv4Address: Win32_impl.IN_ADDR = Win32_impl.IN_ADDR()
-    public var ipv4ServerAddress: Win32_impl.IN_ADDR = Win32_impl.IN_ADDR()
-    public var dwIPv4Options: UInt32 = 0
-    public var dwIPv4ServerOptions: UInt32 = 0
-    public var dwIPv6NegotiationError: UInt32 = 0
-    public var bInterfaceIdentifier: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-    public var bServerInterfaceIdentifier: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-    public var fBundled: Int32 = 0
-    public var fMultilink: Int32 = 0
-    public var dwAuthenticationProtocol: RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL = RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL()
-    public var dwAuthenticationData: RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA = RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA()
-    public var dwServerAuthenticationProtocol: RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL = RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL()
-    public var dwServerAuthenticationData: RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA = RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA()
-    public var dwEapTypeId: UInt32 = 0
-    public var dwServerEapTypeId: UInt32 = 0
-    public var dwLcpOptions: UInt32 = 0
-    public var dwLcpServerOptions: UInt32 = 0
-    public var dwCcpError: UInt32 = 0
-    public var dwCcpCompressionAlgorithm: UInt32 = 0
-    public var dwCcpServerCompressionAlgorithm: UInt32 = 0
-    public var dwCcpOptions: UInt32 = 0
-    public var dwCcpServerOptions: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA {
     public var value: UInt32 = 0
 
@@ -3260,7 +3153,6 @@ public let RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA_RASLCPAD_CHAP_MS: RASPPP_PROJ
 public let RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA_RASLCPAD_CHAP_MSV2: RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA = RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA(129)
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL {
     public var value: UInt32 = 0
 
@@ -3291,7 +3183,6 @@ public let RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL_RASLCPAP_CHAP: RASPPP_PRO
 public let RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL_RASLCPAP_EAP: RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL = RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL(49703)
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct RASPROJECTION {
     public var value: Int32 = 0
 
@@ -3331,7 +3222,6 @@ public let RASPROJECTION_RASP_PppLcp: RASPROJECTION = RASPROJECTION(49185)
 public let RASPROJECTION_RASP_PppIpv6: RASPROJECTION = RASPROJECTION(32855)
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct RASPROJECTION_INFO_TYPE {
     public var value: Int32 = 0
 
@@ -3363,9 +3253,9 @@ public type RASSECURITYPROC = CFunc<() -> UInt32>
 public struct RASSUBENTRYA {
     public var dwSize: UInt32 = 0
     public var dwfFlags: UInt32 = 0
-    public var szDeviceType: VArray<Win32_Foundation.CHAR, $17> = VArray<Win32_Foundation.CHAR, $17>(repeat: 0)
-    public var szDeviceName: VArray<Win32_Foundation.CHAR, $129> = VArray<Win32_Foundation.CHAR, $129>(repeat: 0)
-    public var szLocalPhoneNumber: VArray<Win32_Foundation.CHAR, $129> = VArray<Win32_Foundation.CHAR, $129>(repeat: 0)
+    public var szDeviceType: VArray<Int8, $17> = VArray<Int8, $17>(repeat: 0)
+    public var szDeviceName: VArray<Int8, $129> = VArray<Int8, $129>(repeat: 0)
+    public var szLocalPhoneNumber: VArray<Int8, $129> = VArray<Int8, $129>(repeat: 0)
     public var dwAlternateOffset: UInt32 = 0
     public init() {}
 }
@@ -3382,7 +3272,7 @@ public struct RASSUBENTRYW {
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct RASTUNNELENDPOINT {
     public var dwType: UInt32 = 0
@@ -3390,60 +3280,63 @@ public struct RASTUNNELENDPOINT {
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct RASTUNNELENDPOINT__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
 
-    public func ipv4(): Win32_impl.IN_ADDR {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_impl.IN_ADDR>(p)
-            return ptr.read()
+    public mut prop ipv4: Win32__impl_l0.IN_ADDR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32__impl_l0.IN_ADDR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32__impl_l0.IN_ADDR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_ipv4(val: Win32_impl.IN_ADDR): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_impl.IN_ADDR>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop ipv6: Win32__impl_l0.IN6_ADDR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32__impl_l0.IN6_ADDR>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func ipv6(): Win32_impl.IN6_ADDR {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_impl.IN6_ADDR>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ipv6(val: Win32_impl.IN6_ADDR): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_impl.IN6_ADDR>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32__impl_l0.IN6_ADDR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct RASUPDATECONN {
-    public var version: RASAPIVERSION = RASAPIVERSION()
+    public var version: Int32 = 0
     public var dwSize: UInt32 = 0
     public var dwFlags: UInt32 = 0
     public var dwIfIndex: UInt32 = 0
@@ -3453,140 +3346,6 @@ public struct RASUPDATECONN {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct RAS_CONNECTION_0 {
-    public var hConnection: CPointer<Unit> = CPointer<Unit>()
-    public var hInterface: CPointer<Unit> = CPointer<Unit>()
-    public var dwConnectDuration: UInt32 = 0
-    public var dwInterfaceType: ROUTER_INTERFACE_TYPE = ROUTER_INTERFACE_TYPE()
-    public var dwConnectionFlags: RAS_FLAGS = RAS_FLAGS()
-    public var wszInterfaceName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
-    public var wszUserName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
-    public var wszLogonDomain: VArray<UInt16, $16> = VArray<UInt16, $16>(repeat: 0)
-    public var wszRemoteComputer: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct RAS_CONNECTION_1 {
-    public var hConnection: CPointer<Unit> = CPointer<Unit>()
-    public var hInterface: CPointer<Unit> = CPointer<Unit>()
-    public var PppInfo: PPP_INFO = PPP_INFO()
-    public var dwBytesXmited: UInt32 = 0
-    public var dwBytesRcved: UInt32 = 0
-    public var dwFramesXmited: UInt32 = 0
-    public var dwFramesRcved: UInt32 = 0
-    public var dwCrcErr: UInt32 = 0
-    public var dwTimeoutErr: UInt32 = 0
-    public var dwAlignmentErr: UInt32 = 0
-    public var dwHardwareOverrunErr: UInt32 = 0
-    public var dwFramingErr: UInt32 = 0
-    public var dwBufferOverrunErr: UInt32 = 0
-    public var dwCompressionRatioIn: UInt32 = 0
-    public var dwCompressionRatioOut: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct RAS_CONNECTION_2 {
-    public var hConnection: CPointer<Unit> = CPointer<Unit>()
-    public var wszUserName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
-    public var dwInterfaceType: ROUTER_INTERFACE_TYPE = ROUTER_INTERFACE_TYPE()
-    public var guid: GUID = GUID()
-    public var PppInfo2: PPP_INFO_2 = PPP_INFO_2()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct RAS_CONNECTION_3 {
-    public var dwVersion: UInt32 = 0
-    public var dwSize: UInt32 = 0
-    public var hConnection: CPointer<Unit> = CPointer<Unit>()
-    public var wszUserName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
-    public var dwInterfaceType: ROUTER_INTERFACE_TYPE = ROUTER_INTERFACE_TYPE()
-    public var guid: GUID = GUID()
-    public var PppInfo3: PPP_INFO_3 = PPP_INFO_3()
-    public var rasQuarState: RAS_QUARANTINE_STATE = RAS_QUARANTINE_STATE()
-    public var timer: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct RAS_CONNECTION_4 {
-    public var dwConnectDuration: UInt32 = 0
-    public var dwInterfaceType: ROUTER_INTERFACE_TYPE = ROUTER_INTERFACE_TYPE()
-    public var dwConnectionFlags: RAS_FLAGS = RAS_FLAGS()
-    public var wszInterfaceName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
-    public var wszUserName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
-    public var wszLogonDomain: VArray<UInt16, $16> = VArray<UInt16, $16>(repeat: 0)
-    public var wszRemoteComputer: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
-    public var guid: GUID = GUID()
-    public var rasQuarState: RAS_QUARANTINE_STATE = RAS_QUARANTINE_STATE()
-    public var probationTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var connectionStartTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var ullBytesXmited: UInt64 = 0
-    public var ullBytesRcved: UInt64 = 0
-    public var dwFramesXmited: UInt32 = 0
-    public var dwFramesRcved: UInt32 = 0
-    public var dwCrcErr: UInt32 = 0
-    public var dwTimeoutErr: UInt32 = 0
-    public var dwAlignmentErr: UInt32 = 0
-    public var dwHardwareOverrunErr: UInt32 = 0
-    public var dwFramingErr: UInt32 = 0
-    public var dwBufferOverrunErr: UInt32 = 0
-    public var dwCompressionRatioIn: UInt32 = 0
-    public var dwCompressionRatioOut: UInt32 = 0
-    public var dwNumSwitchOvers: UInt32 = 0
-    public var wszRemoteEndpointAddress: VArray<UInt16, $65> = VArray<UInt16, $65>(repeat: 0)
-    public var wszLocalEndpointAddress: VArray<UInt16, $65> = VArray<UInt16, $65>(repeat: 0)
-    public var ProjectionInfo: PROJECTION_INFO2 = PROJECTION_INFO2()
-    public var hConnection: CPointer<Unit> = CPointer<Unit>()
-    public var hInterface: CPointer<Unit> = CPointer<Unit>()
-    public var dwDeviceType: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct RAS_CONNECTION_EX {
-    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
-    public var dwConnectDuration: UInt32 = 0
-    public var dwInterfaceType: ROUTER_INTERFACE_TYPE = ROUTER_INTERFACE_TYPE()
-    public var dwConnectionFlags: RAS_FLAGS = RAS_FLAGS()
-    public var wszInterfaceName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
-    public var wszUserName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
-    public var wszLogonDomain: VArray<UInt16, $16> = VArray<UInt16, $16>(repeat: 0)
-    public var wszRemoteComputer: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
-    public var guid: GUID = GUID()
-    public var rasQuarState: RAS_QUARANTINE_STATE = RAS_QUARANTINE_STATE()
-    public var probationTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var dwBytesXmited: UInt32 = 0
-    public var dwBytesRcved: UInt32 = 0
-    public var dwFramesXmited: UInt32 = 0
-    public var dwFramesRcved: UInt32 = 0
-    public var dwCrcErr: UInt32 = 0
-    public var dwTimeoutErr: UInt32 = 0
-    public var dwAlignmentErr: UInt32 = 0
-    public var dwHardwareOverrunErr: UInt32 = 0
-    public var dwFramingErr: UInt32 = 0
-    public var dwBufferOverrunErr: UInt32 = 0
-    public var dwCompressionRatioIn: UInt32 = 0
-    public var dwCompressionRatioOut: UInt32 = 0
-    public var dwNumSwitchOvers: UInt32 = 0
-    public var wszRemoteEndpointAddress: VArray<UInt16, $65> = VArray<UInt16, $65>(repeat: 0)
-    public var wszLocalEndpointAddress: VArray<UInt16, $65> = VArray<UInt16, $65>(repeat: 0)
-    public var ProjectionInfo: PROJECTION_INFO = PROJECTION_INFO()
-    public var hConnection: CPointer<Unit> = CPointer<Unit>()
-    public var hInterface: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct RAS_FLAGS {
     public var value: UInt32 = 0
 
@@ -3623,7 +3382,6 @@ public let RAS_FLAGS_RAS_FLAGS_IKEV2_CONNECTION: RAS_FLAGS = RAS_FLAGS(16)
 public let RAS_FLAGS_RAS_FLAGS_DORMANT: RAS_FLAGS = RAS_FLAGS(32)
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct RAS_HARDWARE_CONDITION {
     public var value: Int32 = 0
 
@@ -3649,25 +3407,10 @@ public let RAS_HARDWARE_CONDITION_RAS_HARDWARE_FAILURE: RAS_HARDWARE_CONDITION =
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 @C
-public struct RAS_PORT_0 {
-    public var hPort: CPointer<Unit> = CPointer<Unit>()
-    public var hConnection: CPointer<Unit> = CPointer<Unit>()
-    public var dwPortCondition: RAS_PORT_CONDITION = RAS_PORT_CONDITION()
-    public var dwTotalNumberOfCalls: UInt32 = 0
-    public var dwConnectDuration: UInt32 = 0
-    public var wszPortName: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
-    public var wszMediaName: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
-    public var wszDeviceName: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
-    public var wszDeviceType: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct RAS_PORT_1 {
     public var hPort: CPointer<Unit> = CPointer<Unit>()
     public var hConnection: CPointer<Unit> = CPointer<Unit>()
-    public var dwHardwareCondition: RAS_HARDWARE_CONDITION = RAS_HARDWARE_CONDITION()
+    public var dwHardwareCondition: Int32 = 0
     public var dwLineSpeed: UInt32 = 0
     public var dwBytesXmited: UInt32 = 0
     public var dwBytesRcved: UInt32 = 0
@@ -3694,7 +3437,7 @@ public struct RAS_PORT_2 {
     public var wszMediaName: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
     public var wszDeviceName: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
     public var wszDeviceType: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
-    public var dwHardwareCondition: RAS_HARDWARE_CONDITION = RAS_HARDWARE_CONDITION()
+    public var dwHardwareCondition: Int32 = 0
     public var dwLineSpeed: UInt32 = 0
     public var dwCrcErr: UInt32 = 0
     public var dwSerialOverRunErrs: UInt32 = 0
@@ -3718,7 +3461,6 @@ public struct RAS_PORT_2 {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct RAS_PORT_CONDITION {
     public var value: Int32 = 0
 
@@ -3758,68 +3500,6 @@ public let RAS_PORT_CONDITION_RAS_PORT_AUTHENTICATED: RAS_PORT_CONDITION = RAS_P
 public let RAS_PORT_CONDITION_RAS_PORT_INITIALIZING: RAS_PORT_CONDITION = RAS_PORT_CONDITION(6)
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct RAS_PROJECTION_INFO {
-    public var version: RASAPIVERSION = RASAPIVERSION()
-    public var type_: RASPROJECTION_INFO_TYPE = RASPROJECTION_INFO_TYPE()
-    public var Anonymous: RAS_PROJECTION_INFO__Anonymous_e__Union = RAS_PROJECTION_INFO__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct RAS_PROJECTION_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $100> = VArray<UInt8, $100>(repeat: 0)
-
-    public func ppp(): RASPPP_PROJECTION_INFO {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RASPPP_PROJECTION_INFO>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ppp(val: RASPPP_PROJECTION_INFO): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RASPPP_PROJECTION_INFO>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    @When[arch == "x86_64" || arch == "aarch64"]
-    public func ikev2(): RASIKEV2_PROJECTION_INFO {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RASIKEV2_PROJECTION_INFO>(p)
-            return ptr.read()
-        }
-    }
-
-    @When[arch == "x86_64" || arch == "aarch64"]
-    public mut func set_ikev2(val: RASIKEV2_PROJECTION_INFO): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RASIKEV2_PROJECTION_INFO>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct RAS_QUARANTINE_STATE {
     public var value: Int32 = 0
 
@@ -3854,7 +3534,7 @@ public let RAS_QUARANTINE_STATE_RAS_QUAR_STATE_NOT_CAPABLE: RAS_QUARANTINE_STATE
 public struct RAS_SECURITY_INFO {
     public var LastError: UInt32 = 0
     public var BytesReceived: UInt32 = 0
-    public var DeviceName: VArray<Win32_Foundation.CHAR, $129> = VArray<Win32_Foundation.CHAR, $129>(repeat: 0)
+    public var DeviceName: VArray<Int8, $129> = VArray<Int8, $129>(repeat: 0)
     public init() {}
 }
 
@@ -3907,7 +3587,6 @@ public struct RAS_USER_1 {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct ROUTER_CONNECTION_STATE {
     public var value: Int32 = 0
 
@@ -3949,42 +3628,28 @@ public struct ROUTER_CUSTOM_IKEv2_POLICY0 {
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
 @C
 public struct ROUTER_IKEv2_IF_CUSTOM_CONFIG0 {
     public var dwSaLifeTime: UInt32 = 0
     public var dwSaDataSize: UInt32 = 0
-    public var certificateName: Win32_impl.CRYPT_INTEGER_BLOB = Win32_impl.CRYPT_INTEGER_BLOB()
+    public var certificateName: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
     public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0>()
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
 @C
 public struct ROUTER_IKEv2_IF_CUSTOM_CONFIG1 {
     public var dwSaLifeTime: UInt32 = 0
     public var dwSaDataSize: UInt32 = 0
-    public var certificateName: Win32_impl.CRYPT_INTEGER_BLOB = Win32_impl.CRYPT_INTEGER_BLOB()
+    public var certificateName: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
     public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0>()
-    public var certificateHash: Win32_impl.CRYPT_INTEGER_BLOB = Win32_impl.CRYPT_INTEGER_BLOB()
+    public var certificateHash: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct ROUTER_IKEv2_IF_CUSTOM_CONFIG2 {
-    public var dwSaLifeTime: UInt32 = 0
-    public var dwSaDataSize: UInt32 = 0
-    public var certificateName: Win32_impl.CRYPT_INTEGER_BLOB = Win32_impl.CRYPT_INTEGER_BLOB()
-    public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0>()
-    public var certificateHash: Win32_impl.CRYPT_INTEGER_BLOB = Win32_impl.CRYPT_INTEGER_BLOB()
-    public var dwMmSaLifeTime: UInt32 = 0
-    public var vpnTrafficSelectors: MPR_VPN_TRAFFIC_SELECTORS = MPR_VPN_TRAFFIC_SELECTORS()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct ROUTER_INTERFACE_TYPE {
     public var value: Int32 = 0
 
@@ -4033,50 +3698,15 @@ public let ROUTER_INTERFACE_TYPE_ROUTER_IF_TYPE_MAX: ROUTER_INTERFACE_TYPE = ROU
 @C
 public struct ROUTING_PROTOCOL_CONFIG {
     public var dwCallbackFlags: UInt32 = 0
-    public var pfnRpfCallback: PMGM_RPF_CALLBACK = { _, _, _, _, _, _, _, _, _, _ => 0 }
-    public var pfnCreationAlertCallback: PMGM_CREATION_ALERT_CALLBACK = { _, _, _, _, _, _, _, _ => 0 }
-    public var pfnPruneAlertCallback: PMGM_PRUNE_ALERT_CALLBACK = { _, _, _, _, _, _, _, _ => 0 }
-    public var pfnJoinAlertCallback: PMGM_JOIN_ALERT_CALLBACK = { _, _, _, _, _ => 0 }
-    public var pfnWrongIfCallback: PMGM_WRONG_IF_CALLBACK = { _, _, _, _, _, _ => 0 }
-    public var pfnLocalJoinCallback: PMGM_LOCAL_JOIN_CALLBACK = { _, _, _, _, _, _ => 0 }
-    public var pfnLocalLeaveCallback: PMGM_LOCAL_LEAVE_CALLBACK = { _, _, _, _, _, _ => 0 }
-    public var pfnDisableIgmpCallback: PMGM_DISABLE_IGMP_CALLBACK = { _, _ => 0 }
-    public var pfnEnableIgmpCallback: PMGM_ENABLE_IGMP_CALLBACK = { _, _ => 0 }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct RTM_DEST_INFO {
-    public var DestHandle: IntNative = 0
-    public var DestAddress: RTM_NET_ADDRESS = RTM_NET_ADDRESS()
-    public var LastChanged: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var BelongsToViews: UInt32 = 0
-    public var NumberOfViews: UInt32 = 0
-    public var ViewInfo: VArray<RTM_DEST_INFO__Anonymous_e__Struct, $1> = VArray<RTM_DEST_INFO__Anonymous_e__Struct, $1>(repeat: RTM_DEST_INFO__Anonymous_e__Struct())
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct RTM_DEST_INFO__Anonymous_e__Struct {
-    public var ViewId: Int32 = 0
-    public var NumRoutes: UInt32 = 0
-    public var Route: IntNative = 0
-    public var Owner: IntNative = 0
-    public var DestFlags: UInt32 = 0
-    public var HoldRoute: IntNative = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type RTM_ENTITY_EXPORT_METHOD = CFunc<(IntNative, IntNative, CPointer<RTM_ENTITY_METHOD_INPUT>, CPointer<RTM_ENTITY_METHOD_OUTPUT>) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct RTM_ENTITY_EXPORT_METHODS {
-    public var NumMethods: UInt32 = 0
-    public var Methods: VArray<RTM_ENTITY_EXPORT_METHOD, $1> = VArray<RTM_ENTITY_EXPORT_METHOD, $1>(repeat: { _, _, _, _ => () })
+    public var pfnRpfCallback: PMGM_RPF_CALLBACK = CFunc<(UInt32, UInt32, UInt32, UInt32, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt32>, UInt32, CPointer<UInt8>, CPointer<UInt8>) -> UInt32>(CPointer<Unit>())
+    public var pfnCreationAlertCallback: PMGM_CREATION_ALERT_CALLBACK = CFunc<(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, CPointer<MGM_IF_ENTRY>) -> UInt32>(CPointer<Unit>())
+    public var pfnPruneAlertCallback: PMGM_PRUNE_ALERT_CALLBACK = CFunc<(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, Int32, CPointer<UInt32>) -> UInt32>(CPointer<Unit>())
+    public var pfnJoinAlertCallback: PMGM_JOIN_ALERT_CALLBACK = CFunc<(UInt32, UInt32, UInt32, UInt32, Int32) -> UInt32>(CPointer<Unit>())
+    public var pfnWrongIfCallback: PMGM_WRONG_IF_CALLBACK = CFunc<(UInt32, UInt32, UInt32, UInt32, UInt32, CPointer<UInt8>) -> UInt32>(CPointer<Unit>())
+    public var pfnLocalJoinCallback: PMGM_LOCAL_JOIN_CALLBACK = CFunc<(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32) -> UInt32>(CPointer<Unit>())
+    public var pfnLocalLeaveCallback: PMGM_LOCAL_LEAVE_CALLBACK = CFunc<(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32) -> UInt32>(CPointer<Unit>())
+    public var pfnDisableIgmpCallback: PMGM_DISABLE_IGMP_CALLBACK = CFunc<(UInt32, UInt32) -> UInt32>(CPointer<Unit>())
+    public var pfnEnableIgmpCallback: PMGM_ENABLE_IGMP_CALLBACK = CFunc<(UInt32, UInt32) -> UInt32>(CPointer<Unit>())
     public init() {}
 }
 
@@ -4088,46 +3718,49 @@ public struct RTM_ENTITY_ID {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct RTM_ENTITY_ID__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): RTM_ENTITY_ID__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RTM_ENTITY_ID__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: RTM_ENTITY_ID__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RTM_ENTITY_ID__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RTM_ENTITY_ID__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: RTM_ENTITY_ID__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RTM_ENTITY_ID__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop entityId: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func entityId(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_entityId(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -4170,10 +3803,6 @@ public struct RTM_ENTITY_METHOD_OUTPUT {
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type RTM_EVENT_CALLBACK = CFunc<(IntNative, RTM_EVENT_TYPE, CPointer<Unit>, CPointer<Unit>) -> UInt32>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct RTM_EVENT_TYPE {
     public var value: Int32 = 0
 
@@ -4273,31 +3902,16 @@ public type RasCustomDeleteEntryNotifyFn = CFunc<(CPointer<UInt16>, CPointer<UIn
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 public type RasCustomDialDlgFn = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<RASDIALDLG>, CPointer<Unit>) -> Int32>
 
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-public type RasCustomDialFn = CFunc<(CPointer<Unit>, CPointer<RASDIALEXTENSIONS>, CPointer<UInt16>, CPointer<RASDIALPARAMSA>, UInt32, CPointer<Unit>, CPointer<HRASCONN>, UInt32) -> UInt32>
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && ((arch == "x86_64" || arch == "aarch64"))]
 public type RasCustomEntryDlgFn = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<RASENTRYDLGA>, UInt32) -> Int32>
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
 public type RasCustomHangUpFn = CFunc<(HRASCONN) -> UInt32>
 
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && ((arch == "x86_64" || arch == "aarch64"))]
 public type RasCustomScriptExecuteFn = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, PFNRASGETBUFFER, PFNRASFREEBUFFER, PFNRASSENDBUFFER, PFNRASRECEIVEBUFFER, PFNRASRETRIEVEBUFFER, CPointer<Unit>, CPointer<RASDIALPARAMSA>, CPointer<Unit>) -> UInt32>
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
-public struct SECURITY_MESSAGE {
-    public var dwMsgId: SECURITY_MESSAGE_MSG_ID = SECURITY_MESSAGE_MSG_ID()
-    public var hPort: IntNative = 0
-    public var dwError: UInt32 = 0
-    public var UserName: VArray<Win32_Foundation.CHAR, $257> = VArray<Win32_Foundation.CHAR, $257>(repeat: 0)
-    public var Domain: VArray<Win32_Foundation.CHAR, $16> = VArray<Win32_Foundation.CHAR, $16>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-@C
 public struct SECURITY_MESSAGE_MSG_ID {
     public var value: UInt32 = 0
 
@@ -4334,15 +3948,15 @@ public struct SOURCE_GROUP_ENTRY {
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
 @C
 public struct SSTP_CERT_INFO {
     public var isDefault: Int32 = 0
-    public var certBlob: Win32_impl.CRYPT_INTEGER_BLOB = Win32_impl.CRYPT_INTEGER_BLOB()
+    public var certBlob: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
 @C
 public struct SSTP_CONFIG_PARAMS {
     public var dwNumPorts: UInt32 = 0
@@ -4353,7 +3967,7 @@ public struct SSTP_CONFIG_PARAMS {
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct VPN_TS_IP_ADDRESS {
     public var Type: UInt16 = 0
@@ -4361,55 +3975,1663 @@ public struct VPN_TS_IP_ADDRESS {
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_Rras == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct VPN_TS_IP_ADDRESS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
 
-    public func v4(): Win32_impl.IN_ADDR {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_impl.IN_ADDR>(p)
-            return ptr.read()
+    public mut prop v4: Win32__impl_l0.IN_ADDR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32__impl_l0.IN_ADDR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32__impl_l0.IN_ADDR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_v4(val: Win32_impl.IN_ADDR): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_impl.IN_ADDR>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop v6: Win32__impl_l0.IN6_ADDR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32__impl_l0.IN6_ADDR>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func v6(): Win32_impl.IN6_ADDR {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_impl.IN6_ADDR>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_v6(val: Win32_impl.IN6_ADDR): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_impl.IN6_ADDR>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32__impl_l0.IN6_ADDR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct AUTH_VALIDATION_EX {
+    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
+    public var hRasConnection: CPointer<Unit> = CPointer<Unit>()
+    public var wszUserName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+    public var wszLogonDomain: VArray<UInt16, $16> = VArray<UInt16, $16>(repeat: 0)
+    public var AuthInfoSize: UInt32 = 0
+    public var AuthInfo: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct IKEV2_TUNNEL_CONFIG_PARAMS2 {
+    public var dwIdleTimeout: UInt32 = 0
+    public var dwNetworkBlackoutTime: UInt32 = 0
+    public var dwSaLifeTime: UInt32 = 0
+    public var dwSaDataSizeForRenegotiation: UInt32 = 0
+    public var dwConfigOptions: UInt32 = 0
+    public var dwTotalCertificates: UInt32 = 0
+    public var certificateNames: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOB> = CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOB>()
+    public var machineCertificateName: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var dwEncryptionType: UInt32 = 0
+    public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct IKEV2_TUNNEL_CONFIG_PARAMS3 {
+    public var dwIdleTimeout: UInt32 = 0
+    public var dwNetworkBlackoutTime: UInt32 = 0
+    public var dwSaLifeTime: UInt32 = 0
+    public var dwSaDataSizeForRenegotiation: UInt32 = 0
+    public var dwConfigOptions: UInt32 = 0
+    public var dwTotalCertificates: UInt32 = 0
+    public var certificateNames: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOB> = CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOB>()
+    public var machineCertificateName: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var dwEncryptionType: UInt32 = 0
+    public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0>()
+    public var dwTotalEkus: UInt32 = 0
+    public var certificateEKUs: CPointer<MPR_CERT_EKU> = CPointer<MPR_CERT_EKU>()
+    public var machineCertificateHash: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct IKEV2_TUNNEL_CONFIG_PARAMS4 {
+    public var dwIdleTimeout: UInt32 = 0
+    public var dwNetworkBlackoutTime: UInt32 = 0
+    public var dwSaLifeTime: UInt32 = 0
+    public var dwSaDataSizeForRenegotiation: UInt32 = 0
+    public var dwConfigOptions: UInt32 = 0
+    public var dwTotalCertificates: UInt32 = 0
+    public var certificateNames: CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOB> = CPointer<Win32__impl_l0.CRYPT_INTEGER_BLOB>()
+    public var machineCertificateName: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var dwEncryptionType: UInt32 = 0
+    public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0>()
+    public var dwTotalEkus: UInt32 = 0
+    public var certificateEKUs: CPointer<MPR_CERT_EKU> = CPointer<MPR_CERT_EKU>()
+    public var machineCertificateHash: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var dwMmSaLifeTime: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct L2TP_TUNNEL_CONFIG_PARAMS1 {
+    public var dwIdleTimeout: UInt32 = 0
+    public var dwEncryptionType: UInt32 = 0
+    public var dwSaLifeTime: UInt32 = 0
+    public var dwSaDataSizeForRenegotiation: UInt32 = 0
+    public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct L2TP_TUNNEL_CONFIG_PARAMS2 {
+    public var dwIdleTimeout: UInt32 = 0
+    public var dwEncryptionType: UInt32 = 0
+    public var dwSaLifeTime: UInt32 = 0
+    public var dwSaDataSizeForRenegotiation: UInt32 = 0
+    public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0>()
+    public var dwMmSaLifeTime: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct MPR_IF_CUSTOMINFOEX0 {
+    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
+    public var dwFlags: UInt32 = 0
+    public var customIkev2Config: ROUTER_IKEv2_IF_CUSTOM_CONFIG0 = ROUTER_IKEv2_IF_CUSTOM_CONFIG0()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct MPR_IF_CUSTOMINFOEX1 {
+    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
+    public var dwFlags: UInt32 = 0
+    public var customIkev2Config: ROUTER_IKEv2_IF_CUSTOM_CONFIG1 = ROUTER_IKEv2_IF_CUSTOM_CONFIG1()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct MPR_INTERFACE_0 {
+    public var wszInterfaceName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+    public var hInterface: CPointer<Unit> = CPointer<Unit>()
+    public var fEnabled: Int32 = 0
+    public var dwIfType: Int32 = 0
+    public var dwConnectionState: Int32 = 0
+    public var fUnReachabilityReasons: UInt32 = 0
+    public var dwLastError: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct MPR_INTERFACE_1 {
+    public var wszInterfaceName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+    public var hInterface: CPointer<Unit> = CPointer<Unit>()
+    public var fEnabled: Int32 = 0
+    public var dwIfType: Int32 = 0
+    public var dwConnectionState: Int32 = 0
+    public var fUnReachabilityReasons: UInt32 = 0
+    public var dwLastError: UInt32 = 0
+    public var lpwsDialoutHoursRestriction: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct MPR_INTERFACE_2 {
+    public var wszInterfaceName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+    public var hInterface: CPointer<Unit> = CPointer<Unit>()
+    public var fEnabled: Int32 = 0
+    public var dwIfType: Int32 = 0
+    public var dwConnectionState: Int32 = 0
+    public var fUnReachabilityReasons: UInt32 = 0
+    public var dwLastError: UInt32 = 0
+    public var dwfOptions: UInt32 = 0
+    public var szLocalPhoneNumber: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
+    public var szAlternates: CPointer<UInt16> = CPointer<UInt16>()
+    public var ipaddr: UInt32 = 0
+    public var ipaddrDns: UInt32 = 0
+    public var ipaddrDnsAlt: UInt32 = 0
+    public var ipaddrWins: UInt32 = 0
+    public var ipaddrWinsAlt: UInt32 = 0
+    public var dwfNetProtocols: UInt32 = 0
+    public var szDeviceType: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
+    public var szDeviceName: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
+    public var szX25PadType: VArray<UInt16, $33> = VArray<UInt16, $33>(repeat: 0)
+    public var szX25Address: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
+    public var szX25Facilities: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
+    public var szX25UserData: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
+    public var dwChannels: UInt32 = 0
+    public var dwSubEntries: UInt32 = 0
+    public var dwDialMode: UInt32 = 0
+    public var dwDialExtraPercent: UInt32 = 0
+    public var dwDialExtraSampleSeconds: UInt32 = 0
+    public var dwHangUpExtraPercent: UInt32 = 0
+    public var dwHangUpExtraSampleSeconds: UInt32 = 0
+    public var dwIdleDisconnectSeconds: UInt32 = 0
+    public var dwType: UInt32 = 0
+    public var dwEncryptionType: UInt32 = 0
+    public var dwCustomAuthKey: UInt32 = 0
+    public var dwCustomAuthDataSize: UInt32 = 0
+    public var lpbCustomAuthData: CPointer<UInt8> = CPointer<UInt8>()
+    public var guidId: GUID = GUID()
+    public var dwVpnStrategy: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct MPR_INTERFACE_3 {
+    public var wszInterfaceName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+    public var hInterface: CPointer<Unit> = CPointer<Unit>()
+    public var fEnabled: Int32 = 0
+    public var dwIfType: Int32 = 0
+    public var dwConnectionState: Int32 = 0
+    public var fUnReachabilityReasons: UInt32 = 0
+    public var dwLastError: UInt32 = 0
+    public var dwfOptions: UInt32 = 0
+    public var szLocalPhoneNumber: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
+    public var szAlternates: CPointer<UInt16> = CPointer<UInt16>()
+    public var ipaddr: UInt32 = 0
+    public var ipaddrDns: UInt32 = 0
+    public var ipaddrDnsAlt: UInt32 = 0
+    public var ipaddrWins: UInt32 = 0
+    public var ipaddrWinsAlt: UInt32 = 0
+    public var dwfNetProtocols: UInt32 = 0
+    public var szDeviceType: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
+    public var szDeviceName: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
+    public var szX25PadType: VArray<UInt16, $33> = VArray<UInt16, $33>(repeat: 0)
+    public var szX25Address: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
+    public var szX25Facilities: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
+    public var szX25UserData: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
+    public var dwChannels: UInt32 = 0
+    public var dwSubEntries: UInt32 = 0
+    public var dwDialMode: UInt32 = 0
+    public var dwDialExtraPercent: UInt32 = 0
+    public var dwDialExtraSampleSeconds: UInt32 = 0
+    public var dwHangUpExtraPercent: UInt32 = 0
+    public var dwHangUpExtraSampleSeconds: UInt32 = 0
+    public var dwIdleDisconnectSeconds: UInt32 = 0
+    public var dwType: UInt32 = 0
+    public var dwEncryptionType: UInt32 = 0
+    public var dwCustomAuthKey: UInt32 = 0
+    public var dwCustomAuthDataSize: UInt32 = 0
+    public var lpbCustomAuthData: CPointer<UInt8> = CPointer<UInt8>()
+    public var guidId: GUID = GUID()
+    public var dwVpnStrategy: UInt32 = 0
+    public var AddressCount: UInt32 = 0
+    public var ipv6addrDns: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
+    public var ipv6addrDnsAlt: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
+    public var ipv6addr: CPointer<Win32__impl_l0.IN6_ADDR> = CPointer<Win32__impl_l0.IN6_ADDR>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct MPR_VPN_TRAFFIC_SELECTOR {
+    public var type_: Int32 = 0
+    public var protocolId: UInt8 = 0
+    public var portStart: UInt16 = 0
+    public var portEnd: UInt16 = 0
+    public var tsPayloadId: UInt16 = 0
+    public var addrStart: VPN_TS_IP_ADDRESS = VPN_TS_IP_ADDRESS()
+    public var addrEnd: VPN_TS_IP_ADDRESS = VPN_TS_IP_ADDRESS()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct MPR_VPN_TRAFFIC_SELECTORS {
+    public var numTsi: UInt32 = 0
+    public var numTsr: UInt32 = 0
+    public var tsI: CPointer<MPR_VPN_TRAFFIC_SELECTOR> = CPointer<MPR_VPN_TRAFFIC_SELECTOR>()
+    public var tsR: CPointer<MPR_VPN_TRAFFIC_SELECTOR> = CPointer<MPR_VPN_TRAFFIC_SELECTOR>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type PFNRASSETCOMMSETTINGS = CFunc<(CPointer<Unit>, CPointer<RASCOMMSETTINGS>, CPointer<Unit>) -> UInt32>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type PMPRADMINRASVALIDATEPREAUTHENTICATEDCONNECTIONEX = CFunc<(CPointer<AUTH_VALIDATION_EX>) -> UInt32>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct PPP_INFO {
+    public var nbf: PPP_NBFCP_INFO = PPP_NBFCP_INFO()
+    public var ip: PPP_IPCP_INFO = PPP_IPCP_INFO()
+    public var ipx: PPP_IPXCP_INFO = PPP_IPXCP_INFO()
+    public var at: PPP_ATCP_INFO = PPP_ATCP_INFO()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct PPP_LCP_INFO {
+    public var dwError: UInt32 = 0
+    public var dwAuthenticationProtocol: UInt32 = 0
+    public var dwAuthenticationData: UInt32 = 0
+    public var dwRemoteAuthenticationProtocol: UInt32 = 0
+    public var dwRemoteAuthenticationData: UInt32 = 0
+    public var dwTerminateReason: UInt32 = 0
+    public var dwRemoteTerminateReason: UInt32 = 0
+    public var dwOptions: UInt32 = 0
+    public var dwRemoteOptions: UInt32 = 0
+    public var dwEapTypeId: UInt32 = 0
+    public var dwRemoteEapTypeId: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type RASADFUNCA = CFunc<(CPointer<UInt8>, CPointer<UInt8>, CPointer<RASADPARAMS>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type RASADFUNCW = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<RASADPARAMS>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct RASCONNSTATUSA {
+    public var dwSize: UInt32 = 0
+    public var rasconnstate: Int32 = 0
+    public var dwError: UInt32 = 0
+    public var szDeviceType: VArray<Int8, $17> = VArray<Int8, $17>(repeat: 0)
+    public var szDeviceName: VArray<Int8, $129> = VArray<Int8, $129>(repeat: 0)
+    public var szPhoneNumber: VArray<Int8, $129> = VArray<Int8, $129>(repeat: 0)
+    public var localEndPoint: RASTUNNELENDPOINT = RASTUNNELENDPOINT()
+    public var remoteEndPoint: RASTUNNELENDPOINT = RASTUNNELENDPOINT()
+    public var rasconnsubstate: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct RASCONNSTATUSW {
+    public var dwSize: UInt32 = 0
+    public var rasconnstate: Int32 = 0
+    public var dwError: UInt32 = 0
+    public var szDeviceType: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
+    public var szDeviceName: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
+    public var szPhoneNumber: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
+    public var localEndPoint: RASTUNNELENDPOINT = RASTUNNELENDPOINT()
+    public var remoteEndPoint: RASTUNNELENDPOINT = RASTUNNELENDPOINT()
+    public var rasconnsubstate: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+// packed(4)
+@C
+public struct RASCUSTOMSCRIPTEXTENSIONS {
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public mut prop dwSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pfnRasSetCommSettings: PFNRASSETCOMMSETTINGS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: PFNRASSETCOMMSETTINGS = CFunc<(CPointer<Unit>, CPointer<RASCOMMSETTINGS>, CPointer<Unit>) -> UInt32>(CPointer<Unit>())
+                return packedReadValue<PFNRASSETCOMMSETTINGS>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+// packed(4)
+@C
+public struct RASDIALEXTENSIONS {
+    public var _raw: VArray<UInt8, $60> = VArray<UInt8, $60>(repeat: 0u8)
+
+    public mut prop dwSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwfOptions: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop hwndParent: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Unit> = CPointer<Unit>()
+                return packedReadValue<CPointer<Unit>>(base, 8, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 8, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reserved: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUIntNative(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUIntNative(base, 16, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reserved1: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUIntNative(base, 24)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUIntNative(base, 24, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop rasEapInfo: RASEAPINFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: RASEAPINFO = RASEAPINFO()
+                return packedReadValue<RASEAPINFO>(base, 32, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 32, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop fSkipPppAuth: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt32(base, 44)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt32(base, 44, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop rasDevSpecificInfo: RASDEVSPECIFICINFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: RASDEVSPECIFICINFO = RASDEVSPECIFICINFO()
+                return packedReadValue<RASDEVSPECIFICINFO>(base, 48, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 48, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct RASENTRYA {
+    public var dwSize: UInt32 = 0
+    public var dwfOptions: UInt32 = 0
+    public var dwCountryID: UInt32 = 0
+    public var dwCountryCode: UInt32 = 0
+    public var szAreaCode: VArray<Int8, $11> = VArray<Int8, $11>(repeat: 0)
+    public var szLocalPhoneNumber: VArray<Int8, $129> = VArray<Int8, $129>(repeat: 0)
+    public var dwAlternateOffset: UInt32 = 0
+    public var ipaddr: RASIPADDR = RASIPADDR()
+    public var ipaddrDns: RASIPADDR = RASIPADDR()
+    public var ipaddrDnsAlt: RASIPADDR = RASIPADDR()
+    public var ipaddrWins: RASIPADDR = RASIPADDR()
+    public var ipaddrWinsAlt: RASIPADDR = RASIPADDR()
+    public var dwFrameSize: UInt32 = 0
+    public var dwfNetProtocols: UInt32 = 0
+    public var dwFramingProtocol: UInt32 = 0
+    public var szScript: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
+    public var szAutodialDll: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
+    public var szAutodialFunc: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
+    public var szDeviceType: VArray<Int8, $17> = VArray<Int8, $17>(repeat: 0)
+    public var szDeviceName: VArray<Int8, $129> = VArray<Int8, $129>(repeat: 0)
+    public var szX25PadType: VArray<Int8, $33> = VArray<Int8, $33>(repeat: 0)
+    public var szX25Address: VArray<Int8, $201> = VArray<Int8, $201>(repeat: 0)
+    public var szX25Facilities: VArray<Int8, $201> = VArray<Int8, $201>(repeat: 0)
+    public var szX25UserData: VArray<Int8, $201> = VArray<Int8, $201>(repeat: 0)
+    public var dwChannels: UInt32 = 0
+    public var dwReserved1: UInt32 = 0
+    public var dwReserved2: UInt32 = 0
+    public var dwSubEntries: UInt32 = 0
+    public var dwDialMode: UInt32 = 0
+    public var dwDialExtraPercent: UInt32 = 0
+    public var dwDialExtraSampleSeconds: UInt32 = 0
+    public var dwHangUpExtraPercent: UInt32 = 0
+    public var dwHangUpExtraSampleSeconds: UInt32 = 0
+    public var dwIdleDisconnectSeconds: UInt32 = 0
+    public var dwType: UInt32 = 0
+    public var dwEncryptionType: UInt32 = 0
+    public var dwCustomAuthKey: UInt32 = 0
+    public var guidId: GUID = GUID()
+    public var szCustomDialDll: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
+    public var dwVpnStrategy: UInt32 = 0
+    public var dwfOptions2: UInt32 = 0
+    public var dwfOptions3: UInt32 = 0
+    public var szDnsSuffix: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
+    public var dwTcpWindowSize: UInt32 = 0
+    public var szPrerequisitePbk: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
+    public var szPrerequisiteEntry: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0)
+    public var dwRedialCount: UInt32 = 0
+    public var dwRedialPause: UInt32 = 0
+    public var ipv6addrDns: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
+    public var ipv6addrDnsAlt: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
+    public var dwIPv4InterfaceMetric: UInt32 = 0
+    public var dwIPv6InterfaceMetric: UInt32 = 0
+    public var ipv6addr: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
+    public var dwIPv6PrefixLength: UInt32 = 0
+    public var dwNetworkOutageTime: UInt32 = 0
+    public var szIDi: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0)
+    public var szIDr: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0)
+    public var fIsImsConfig: Int32 = 0
+    public var IdiType: Int32 = 0
+    public var IdrType: Int32 = 0
+    public var fDisableIKEv2Fragmentation: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct RASENTRYW {
+    public var dwSize: UInt32 = 0
+    public var dwfOptions: UInt32 = 0
+    public var dwCountryID: UInt32 = 0
+    public var dwCountryCode: UInt32 = 0
+    public var szAreaCode: VArray<UInt16, $11> = VArray<UInt16, $11>(repeat: 0)
+    public var szLocalPhoneNumber: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
+    public var dwAlternateOffset: UInt32 = 0
+    public var ipaddr: RASIPADDR = RASIPADDR()
+    public var ipaddrDns: RASIPADDR = RASIPADDR()
+    public var ipaddrDnsAlt: RASIPADDR = RASIPADDR()
+    public var ipaddrWins: RASIPADDR = RASIPADDR()
+    public var ipaddrWinsAlt: RASIPADDR = RASIPADDR()
+    public var dwFrameSize: UInt32 = 0
+    public var dwfNetProtocols: UInt32 = 0
+    public var dwFramingProtocol: UInt32 = 0
+    public var szScript: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
+    public var szAutodialDll: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
+    public var szAutodialFunc: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
+    public var szDeviceType: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
+    public var szDeviceName: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
+    public var szX25PadType: VArray<UInt16, $33> = VArray<UInt16, $33>(repeat: 0)
+    public var szX25Address: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
+    public var szX25Facilities: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
+    public var szX25UserData: VArray<UInt16, $201> = VArray<UInt16, $201>(repeat: 0)
+    public var dwChannels: UInt32 = 0
+    public var dwReserved1: UInt32 = 0
+    public var dwReserved2: UInt32 = 0
+    public var dwSubEntries: UInt32 = 0
+    public var dwDialMode: UInt32 = 0
+    public var dwDialExtraPercent: UInt32 = 0
+    public var dwDialExtraSampleSeconds: UInt32 = 0
+    public var dwHangUpExtraPercent: UInt32 = 0
+    public var dwHangUpExtraSampleSeconds: UInt32 = 0
+    public var dwIdleDisconnectSeconds: UInt32 = 0
+    public var dwType: UInt32 = 0
+    public var dwEncryptionType: UInt32 = 0
+    public var dwCustomAuthKey: UInt32 = 0
+    public var guidId: GUID = GUID()
+    public var szCustomDialDll: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
+    public var dwVpnStrategy: UInt32 = 0
+    public var dwfOptions2: UInt32 = 0
+    public var dwfOptions3: UInt32 = 0
+    public var szDnsSuffix: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var dwTcpWindowSize: UInt32 = 0
+    public var szPrerequisitePbk: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
+    public var szPrerequisiteEntry: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+    public var dwRedialCount: UInt32 = 0
+    public var dwRedialPause: UInt32 = 0
+    public var ipv6addrDns: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
+    public var ipv6addrDnsAlt: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
+    public var dwIPv4InterfaceMetric: UInt32 = 0
+    public var dwIPv6InterfaceMetric: UInt32 = 0
+    public var ipv6addr: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
+    public var dwIPv6PrefixLength: UInt32 = 0
+    public var dwNetworkOutageTime: UInt32 = 0
+    public var szIDi: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+    public var szIDr: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+    public var fIsImsConfig: Int32 = 0
+    public var IdiType: Int32 = 0
+    public var IdrType: Int32 = 0
+    public var fDisableIKEv2Fragmentation: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && (arch == "x86_64" && Windows_Win32_Networking_WinSock == "on" || arch == "aarch64" && Windows_Win32_Networking_WinSock == "on")]
+// packed(4)
+@C
+public struct RASIKEV2_PROJECTION_INFO {
+    public var _raw: VArray<UInt8, $92> = VArray<UInt8, $92>(repeat: 0u8)
+
+    public mut prop dwIPv4NegotiationError: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipv4Address: Win32__impl_l0.IN_ADDR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: Win32__impl_l0.IN_ADDR = Win32__impl_l0.IN_ADDR()
+                return packedReadValue<Win32__impl_l0.IN_ADDR>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipv4ServerAddress: Win32__impl_l0.IN_ADDR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: Win32__impl_l0.IN_ADDR = Win32__impl_l0.IN_ADDR()
+                return packedReadValue<Win32__impl_l0.IN_ADDR>(base, 8, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 8, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwIPv6NegotiationError: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipv6Address: Win32__impl_l0.IN6_ADDR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
+                return packedReadValue<Win32__impl_l0.IN6_ADDR>(base, 16, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 16, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipv6ServerAddress: Win32__impl_l0.IN6_ADDR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: Win32__impl_l0.IN6_ADDR = Win32__impl_l0.IN6_ADDR()
+                return packedReadValue<Win32__impl_l0.IN6_ADDR>(base, 32, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 32, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwPrefixLength: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 48)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 48, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwAuthenticationProtocol: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 52)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 52, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwEapTypeId: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 56)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 56, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwFlags: RASIKEV_PROJECTION_INFO_FLAGS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return RASIKEV_PROJECTION_INFO_FLAGS(packedReadUInt32(base, 60))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 60, val.value)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwEncryptionMethod: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 64)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 64, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop numIPv4ServerAddresses: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 68)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 68, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipv4ServerAddresses: CPointer<Win32__impl_l0.IN_ADDR> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Win32__impl_l0.IN_ADDR> = CPointer<Win32__impl_l0.IN_ADDR>()
+                return packedReadValue<CPointer<Win32__impl_l0.IN_ADDR>>(base, 72, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 72, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop numIPv6ServerAddresses: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 80)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 80, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipv6ServerAddresses: CPointer<Win32__impl_l0.IN6_ADDR> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Win32__impl_l0.IN6_ADDR> = CPointer<Win32__impl_l0.IN6_ADDR>()
+                return packedReadValue<CPointer<Win32__impl_l0.IN6_ADDR>>(base, 84, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 84, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && (arch == "x86_64" || arch == "aarch64")]
+// packed(4)
+@C
+public struct RASPBDLGA {
+    public var _raw: VArray<UInt8, $60> = VArray<UInt8, $60>(repeat: 0u8)
+
+    public mut prop dwSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop hwndOwner: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<Unit> = CPointer<Unit>()
+                return packedReadValue<CPointer<Unit>>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop xDlg: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt32(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt32(base, 16, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop yDlg: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt32(base, 20)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt32(base, 20, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwCallbackId: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUIntNative(base, 24)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUIntNative(base, 24, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pCallback: RASPBDLGFUNCA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: RASPBDLGFUNCA = CFunc<(UIntNative, UInt32, CPointer<UInt8>, CPointer<Unit>) -> Unit>(CPointer<Unit>())
+                return packedReadValue<RASPBDLGFUNCA>(base, 32, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 32, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwError: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 40)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 40, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reserved: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUIntNative(base, 44)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUIntNative(base, 44, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reserved2: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUIntNative(base, 52)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUIntNative(base, 52, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct RASPPP_PROJECTION_INFO {
+    public var dwIPv4NegotiationError: UInt32 = 0
+    public var ipv4Address: Win32__impl_l0.IN_ADDR = Win32__impl_l0.IN_ADDR()
+    public var ipv4ServerAddress: Win32__impl_l0.IN_ADDR = Win32__impl_l0.IN_ADDR()
+    public var dwIPv4Options: UInt32 = 0
+    public var dwIPv4ServerOptions: UInt32 = 0
+    public var dwIPv6NegotiationError: UInt32 = 0
+    public var bInterfaceIdentifier: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var bServerInterfaceIdentifier: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var fBundled: Int32 = 0
+    public var fMultilink: Int32 = 0
+    public var dwAuthenticationProtocol: UInt32 = 0
+    public var dwAuthenticationData: UInt32 = 0
+    public var dwServerAuthenticationProtocol: UInt32 = 0
+    public var dwServerAuthenticationData: UInt32 = 0
+    public var dwEapTypeId: UInt32 = 0
+    public var dwServerEapTypeId: UInt32 = 0
+    public var dwLcpOptions: UInt32 = 0
+    public var dwLcpServerOptions: UInt32 = 0
+    public var dwCcpError: UInt32 = 0
+    public var dwCcpCompressionAlgorithm: UInt32 = 0
+    public var dwCcpServerCompressionAlgorithm: UInt32 = 0
+    public var dwCcpOptions: UInt32 = 0
+    public var dwCcpServerOptions: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct RAS_CONNECTION_0 {
+    public var hConnection: CPointer<Unit> = CPointer<Unit>()
+    public var hInterface: CPointer<Unit> = CPointer<Unit>()
+    public var dwConnectDuration: UInt32 = 0
+    public var dwInterfaceType: Int32 = 0
+    public var dwConnectionFlags: UInt32 = 0
+    public var wszInterfaceName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+    public var wszUserName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+    public var wszLogonDomain: VArray<UInt16, $16> = VArray<UInt16, $16>(repeat: 0)
+    public var wszRemoteComputer: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct RAS_CONNECTION_1 {
+    public var hConnection: CPointer<Unit> = CPointer<Unit>()
+    public var hInterface: CPointer<Unit> = CPointer<Unit>()
+    public var PppInfo: PPP_INFO = PPP_INFO()
+    public var dwBytesXmited: UInt32 = 0
+    public var dwBytesRcved: UInt32 = 0
+    public var dwFramesXmited: UInt32 = 0
+    public var dwFramesRcved: UInt32 = 0
+    public var dwCrcErr: UInt32 = 0
+    public var dwTimeoutErr: UInt32 = 0
+    public var dwAlignmentErr: UInt32 = 0
+    public var dwHardwareOverrunErr: UInt32 = 0
+    public var dwFramingErr: UInt32 = 0
+    public var dwBufferOverrunErr: UInt32 = 0
+    public var dwCompressionRatioIn: UInt32 = 0
+    public var dwCompressionRatioOut: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct RAS_CONNECTION_4 {
+    public var dwConnectDuration: UInt32 = 0
+    public var dwInterfaceType: Int32 = 0
+    public var dwConnectionFlags: UInt32 = 0
+    public var wszInterfaceName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+    public var wszUserName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+    public var wszLogonDomain: VArray<UInt16, $16> = VArray<UInt16, $16>(repeat: 0)
+    public var wszRemoteComputer: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
+    public var guid: GUID = GUID()
+    public var rasQuarState: Int32 = 0
+    public var probationTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var connectionStartTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var ullBytesXmited: UInt64 = 0
+    public var ullBytesRcved: UInt64 = 0
+    public var dwFramesXmited: UInt32 = 0
+    public var dwFramesRcved: UInt32 = 0
+    public var dwCrcErr: UInt32 = 0
+    public var dwTimeoutErr: UInt32 = 0
+    public var dwAlignmentErr: UInt32 = 0
+    public var dwHardwareOverrunErr: UInt32 = 0
+    public var dwFramingErr: UInt32 = 0
+    public var dwBufferOverrunErr: UInt32 = 0
+    public var dwCompressionRatioIn: UInt32 = 0
+    public var dwCompressionRatioOut: UInt32 = 0
+    public var dwNumSwitchOvers: UInt32 = 0
+    public var wszRemoteEndpointAddress: VArray<UInt16, $65> = VArray<UInt16, $65>(repeat: 0)
+    public var wszLocalEndpointAddress: VArray<UInt16, $65> = VArray<UInt16, $65>(repeat: 0)
+    public var ProjectionInfo: PROJECTION_INFO2 = PROJECTION_INFO2()
+    public var hConnection: CPointer<Unit> = CPointer<Unit>()
+    public var hInterface: CPointer<Unit> = CPointer<Unit>()
+    public var dwDeviceType: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct RAS_CONNECTION_EX {
+    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
+    public var dwConnectDuration: UInt32 = 0
+    public var dwInterfaceType: Int32 = 0
+    public var dwConnectionFlags: UInt32 = 0
+    public var wszInterfaceName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+    public var wszUserName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+    public var wszLogonDomain: VArray<UInt16, $16> = VArray<UInt16, $16>(repeat: 0)
+    public var wszRemoteComputer: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
+    public var guid: GUID = GUID()
+    public var rasQuarState: Int32 = 0
+    public var probationTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var dwBytesXmited: UInt32 = 0
+    public var dwBytesRcved: UInt32 = 0
+    public var dwFramesXmited: UInt32 = 0
+    public var dwFramesRcved: UInt32 = 0
+    public var dwCrcErr: UInt32 = 0
+    public var dwTimeoutErr: UInt32 = 0
+    public var dwAlignmentErr: UInt32 = 0
+    public var dwHardwareOverrunErr: UInt32 = 0
+    public var dwFramingErr: UInt32 = 0
+    public var dwBufferOverrunErr: UInt32 = 0
+    public var dwCompressionRatioIn: UInt32 = 0
+    public var dwCompressionRatioOut: UInt32 = 0
+    public var dwNumSwitchOvers: UInt32 = 0
+    public var wszRemoteEndpointAddress: VArray<UInt16, $65> = VArray<UInt16, $65>(repeat: 0)
+    public var wszLocalEndpointAddress: VArray<UInt16, $65> = VArray<UInt16, $65>(repeat: 0)
+    public var ProjectionInfo: PROJECTION_INFO = PROJECTION_INFO()
+    public var hConnection: CPointer<Unit> = CPointer<Unit>()
+    public var hInterface: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct RAS_PORT_0 {
+    public var hPort: CPointer<Unit> = CPointer<Unit>()
+    public var hConnection: CPointer<Unit> = CPointer<Unit>()
+    public var dwPortCondition: Int32 = 0
+    public var dwTotalNumberOfCalls: UInt32 = 0
+    public var dwConnectDuration: UInt32 = 0
+    public var wszPortName: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
+    public var wszMediaName: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
+    public var wszDeviceName: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
+    public var wszDeviceType: VArray<UInt16, $17> = VArray<UInt16, $17>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && (((arch == "x86_64" && Windows_Win32_Networking_WinSock == "on") || (arch == "aarch64" && Windows_Win32_Networking_WinSock == "on")) && Windows_Win32_Networking_WinSock == "on")]
+@C
+public struct RAS_PROJECTION_INFO {
+    public var version: Int32 = 0
+    public var type_: Int32 = 0
+    public var Anonymous: RAS_PROJECTION_INFO__Anonymous_e__Union = RAS_PROJECTION_INFO__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && (((arch == "x86_64" && Windows_Win32_Networking_WinSock == "on") || (arch == "aarch64" && Windows_Win32_Networking_WinSock == "on")) && Windows_Win32_Networking_WinSock == "on")]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct RAS_PROJECTION_INFO__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $25> = VArray<UInt32, $25>(repeat: 0)
+
+    public mut prop ppp: RASPPP_PROJECTION_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RASPPP_PROJECTION_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RASPPP_PROJECTION_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    @When[arch == "x86_64" || arch == "aarch64"]
+    public mut prop ikev2: RASIKEV2_PROJECTION_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RASIKEV2_PROJECTION_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RASIKEV2_PROJECTION_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && (Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security_Cryptography == "on")]
+@C
+public struct ROUTER_IKEv2_IF_CUSTOM_CONFIG2 {
+    public var dwSaLifeTime: UInt32 = 0
+    public var dwSaDataSize: UInt32 = 0
+    public var certificateName: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var customPolicy: CPointer<ROUTER_CUSTOM_IKEv2_POLICY0> = CPointer<ROUTER_CUSTOM_IKEv2_POLICY0>()
+    public var certificateHash: Win32__impl_l0.CRYPT_INTEGER_BLOB = Win32__impl_l0.CRYPT_INTEGER_BLOB()
+    public var dwMmSaLifeTime: UInt32 = 0
+    public var vpnTrafficSelectors: MPR_VPN_TRAFFIC_SELECTORS = MPR_VPN_TRAFFIC_SELECTORS()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct RTM_DEST_INFO {
+    public var DestHandle: IntNative = 0
+    public var DestAddress: RTM_NET_ADDRESS = RTM_NET_ADDRESS()
+    public var LastChanged: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var BelongsToViews: UInt32 = 0
+    public var NumberOfViews: UInt32 = 0
+    public var ViewInfo: VArray<RTM_DEST_INFO__Anonymous_e__Struct, $1> = VArray<RTM_DEST_INFO__Anonymous_e__Struct, $1>(repeat: RTM_DEST_INFO__Anonymous_e__Struct())
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct RTM_DEST_INFO__Anonymous_e__Struct {
+    public var ViewId: Int32 = 0
+    public var NumRoutes: UInt32 = 0
+    public var Route: IntNative = 0
+    public var Owner: IntNative = 0
+    public var DestFlags: UInt32 = 0
+    public var HoldRoute: IntNative = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type RTM_ENTITY_EXPORT_METHOD = CFunc<(IntNative, IntNative, CPointer<RTM_ENTITY_METHOD_INPUT>, CPointer<RTM_ENTITY_METHOD_OUTPUT>) -> Unit>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct RTM_ENTITY_EXPORT_METHODS {
+    public var NumMethods: UInt32 = 0
+    public var Methods: RTM_ENTITY_EXPORT_METHOD = CFunc<(IntNative, IntNative, CPointer<RTM_ENTITY_METHOD_INPUT>, CPointer<RTM_ENTITY_METHOD_OUTPUT>) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type RTM_EVENT_CALLBACK = CFunc<(IntNative, Int32, CPointer<Unit>, CPointer<Unit>) -> UInt32>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+public type RasCustomDialFn = CFunc<(CPointer<Unit>, CPointer<RASDIALEXTENSIONS>, CPointer<UInt16>, CPointer<RASDIALPARAMSA>, UInt32, CPointer<Unit>, CPointer<HRASCONN>, UInt32) -> UInt32>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct SECURITY_MESSAGE {
+    public var dwMsgId: UInt32 = 0
+    public var hPort: IntNative = 0
+    public var dwError: UInt32 = 0
+    public var UserName: VArray<Int8, $257> = VArray<Int8, $257>(repeat: 0)
+    public var Domain: VArray<Int8, $16> = VArray<Int8, $16>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct IKEV2_CONFIG_PARAMS {
+    public var dwNumPorts: UInt32 = 0
+    public var dwPortFlags: UInt32 = 0
+    public var dwTunnelConfigParamFlags: UInt32 = 0
+    public var TunnelConfigParams: IKEV2_TUNNEL_CONFIG_PARAMS4 = IKEV2_TUNNEL_CONFIG_PARAMS4()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct L2TP_CONFIG_PARAMS1 {
+    public var dwNumPorts: UInt32 = 0
+    public var dwPortFlags: UInt32 = 0
+    public var dwTunnelConfigParamFlags: UInt32 = 0
+    public var TunnelConfigParams: L2TP_TUNNEL_CONFIG_PARAMS2 = L2TP_TUNNEL_CONFIG_PARAMS2()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct MPRAPI_TUNNEL_CONFIG_PARAMS0 {
+    public var IkeConfigParams: IKEV2_CONFIG_PARAMS = IKEV2_CONFIG_PARAMS()
+    public var PptpConfigParams: PPTP_CONFIG_PARAMS = PPTP_CONFIG_PARAMS()
+    public var L2tpConfigParams: L2TP_CONFIG_PARAMS1 = L2TP_CONFIG_PARAMS1()
+    public var SstpConfigParams: SSTP_CONFIG_PARAMS = SSTP_CONFIG_PARAMS()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct MPRAPI_TUNNEL_CONFIG_PARAMS1 {
+    public var IkeConfigParams: IKEV2_CONFIG_PARAMS = IKEV2_CONFIG_PARAMS()
+    public var PptpConfigParams: PPTP_CONFIG_PARAMS = PPTP_CONFIG_PARAMS()
+    public var L2tpConfigParams: L2TP_CONFIG_PARAMS1 = L2TP_CONFIG_PARAMS1()
+    public var SstpConfigParams: SSTP_CONFIG_PARAMS = SSTP_CONFIG_PARAMS()
+    public var GREConfigParams: GRE_CONFIG_PARAMS0 = GRE_CONFIG_PARAMS0()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && (Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security_Cryptography == "on")]
+@C
+public struct MPR_IF_CUSTOMINFOEX2 {
+    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
+    public var dwFlags: UInt32 = 0
+    public var customIkev2Config: ROUTER_IKEv2_IF_CUSTOM_CONFIG2 = ROUTER_IKEv2_IF_CUSTOM_CONFIG2()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct MPR_SERVER_EX0 {
+    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
+    public var fLanOnlyMode: UInt32 = 0
+    public var dwUpTime: UInt32 = 0
+    public var dwTotalPorts: UInt32 = 0
+    public var dwPortsInUse: UInt32 = 0
+    public var Reserved: UInt32 = 0
+    public var ConfigParams: MPRAPI_TUNNEL_CONFIG_PARAMS0 = MPRAPI_TUNNEL_CONFIG_PARAMS0()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct MPR_SERVER_EX1 {
+    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
+    public var fLanOnlyMode: UInt32 = 0
+    public var dwUpTime: UInt32 = 0
+    public var dwTotalPorts: UInt32 = 0
+    public var dwPortsInUse: UInt32 = 0
+    public var Reserved: UInt32 = 0
+    public var ConfigParams: MPRAPI_TUNNEL_CONFIG_PARAMS1 = MPRAPI_TUNNEL_CONFIG_PARAMS1()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct MPR_SERVER_SET_CONFIG_EX0 {
+    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
+    public var setConfigForProtocols: UInt32 = 0
+    public var ConfigParams: MPRAPI_TUNNEL_CONFIG_PARAMS0 = MPRAPI_TUNNEL_CONFIG_PARAMS0()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct MPR_SERVER_SET_CONFIG_EX1 {
+    public var Header: MPRAPI_OBJECT_HEADER = MPRAPI_OBJECT_HEADER()
+    public var setConfigForProtocols: UInt32 = 0
+    public var ConfigParams: MPRAPI_TUNNEL_CONFIG_PARAMS1 = MPRAPI_TUNNEL_CONFIG_PARAMS1()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type PMPRADMINACCEPTNEWCONNECTION = CFunc<(CPointer<RAS_CONNECTION_0>, CPointer<RAS_CONNECTION_1>) -> Int32>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type PMPRADMINACCEPTNEWCONNECTIONEX = CFunc<(CPointer<RAS_CONNECTION_EX>) -> Int32>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type PMPRADMINACCEPTNEWLINK = CFunc<(CPointer<RAS_PORT_0>, CPointer<RAS_PORT_1>) -> Int32>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type PMPRADMINACCEPTREAUTHENTICATIONEX = CFunc<(CPointer<RAS_CONNECTION_EX>) -> Int32>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type PMPRADMINACCEPTTUNNELENDPOINTCHANGEEX = CFunc<(CPointer<RAS_CONNECTION_EX>) -> Int32>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type PMPRADMINCONNECTIONHANGUPNOTIFICATION = CFunc<(CPointer<RAS_CONNECTION_0>, CPointer<RAS_CONNECTION_1>) -> Unit>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type PMPRADMINCONNECTIONHANGUPNOTIFICATIONEX = CFunc<(CPointer<RAS_CONNECTION_EX>) -> Unit>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type PMPRADMINLINKHANGUPNOTIFICATION = CFunc<(CPointer<RAS_PORT_0>, CPointer<RAS_PORT_1>) -> Unit>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct PPP_INFO_2 {
+    public var nbf: PPP_NBFCP_INFO = PPP_NBFCP_INFO()
+    public var ip: PPP_IPCP_INFO2 = PPP_IPCP_INFO2()
+    public var ipx: PPP_IPXCP_INFO = PPP_IPXCP_INFO()
+    public var at: PPP_ATCP_INFO = PPP_ATCP_INFO()
+    public var ccp: PPP_CCP_INFO = PPP_CCP_INFO()
+    public var lcp: PPP_LCP_INFO = PPP_LCP_INFO()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct PPP_INFO_3 {
+    public var nbf: PPP_NBFCP_INFO = PPP_NBFCP_INFO()
+    public var ip: PPP_IPCP_INFO2 = PPP_IPCP_INFO2()
+    public var ipv6: PPP_IPV6_CP_INFO = PPP_IPV6_CP_INFO()
+    public var ccp: PPP_CCP_INFO = PPP_CCP_INFO()
+    public var lcp: PPP_LCP_INFO = PPP_LCP_INFO()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct RAS_CONNECTION_2 {
+    public var hConnection: CPointer<Unit> = CPointer<Unit>()
+    public var wszUserName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+    public var dwInterfaceType: Int32 = 0
+    public var guid: GUID = GUID()
+    public var PppInfo2: PPP_INFO_2 = PPP_INFO_2()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+@C
+public struct RAS_CONNECTION_3 {
+    public var dwVersion: UInt32 = 0
+    public var dwSize: UInt32 = 0
+    public var hConnection: CPointer<Unit> = CPointer<Unit>()
+    public var wszUserName: VArray<UInt16, $257> = VArray<UInt16, $257>(repeat: 0)
+    public var dwInterfaceType: Int32 = 0
+    public var guid: GUID = GUID()
+    public var PppInfo3: PPP_INFO_3 = PPP_INFO_3()
+    public var rasQuarState: Int32 = 0
+    public var timer: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct MPRAPI_ADMIN_DLL_CALLBACKS {
+    public var revision: UInt8 = 0
+    public var lpfnMprAdminGetIpAddressForUser: PMPRADMINGETIPADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>, CPointer<Int32>) -> UInt32>(CPointer<Unit>())
+    public var lpfnMprAdminReleaseIpAddress: PMPRADMINRELEASEIPADRESS = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>) -> Unit>(CPointer<Unit>())
+    public var lpfnMprAdminGetIpv6AddressForUser: PMPRADMINGETIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l0.IN6_ADDR>, CPointer<Int32>) -> UInt32>(CPointer<Unit>())
+    public var lpfnMprAdminReleaseIpV6AddressForUser: PMPRADMINRELEASEIPV6ADDRESSFORUSER = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Win32__impl_l0.IN6_ADDR>) -> Unit>(CPointer<Unit>())
+    public var lpfnRasAdminAcceptNewLink: PMPRADMINACCEPTNEWLINK = CFunc<(CPointer<RAS_PORT_0>, CPointer<RAS_PORT_1>) -> Int32>(CPointer<Unit>())
+    public var lpfnRasAdminLinkHangupNotification: PMPRADMINLINKHANGUPNOTIFICATION = CFunc<(CPointer<RAS_PORT_0>, CPointer<RAS_PORT_1>) -> Unit>(CPointer<Unit>())
+    public var lpfnRasAdminTerminateDll: PMPRADMINTERMINATEDLL = CFunc<() -> UInt32>(CPointer<Unit>())
+    public var lpfnRasAdminAcceptNewConnectionEx: PMPRADMINACCEPTNEWCONNECTIONEX = CFunc<(CPointer<RAS_CONNECTION_EX>) -> Int32>(CPointer<Unit>())
+    public var lpfnRasAdminAcceptEndpointChangeEx: PMPRADMINACCEPTTUNNELENDPOINTCHANGEEX = CFunc<(CPointer<RAS_CONNECTION_EX>) -> Int32>(CPointer<Unit>())
+    public var lpfnRasAdminAcceptReauthenticationEx: PMPRADMINACCEPTREAUTHENTICATIONEX = CFunc<(CPointer<RAS_CONNECTION_EX>) -> Int32>(CPointer<Unit>())
+    public var lpfnRasAdminConnectionHangupNotificationEx: PMPRADMINCONNECTIONHANGUPNOTIFICATIONEX = CFunc<(CPointer<RAS_CONNECTION_EX>) -> Unit>(CPointer<Unit>())
+    public var lpfnRASValidatePreAuthenticatedConnectionEx: PMPRADMINRASVALIDATEPREAUTHENTICATEDCONNECTIONEX = CFunc<(CPointer<AUTH_VALIDATION_EX>) -> UInt32>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type PMPRADMINACCEPTNEWCONNECTION2 = CFunc<(CPointer<RAS_CONNECTION_0>, CPointer<RAS_CONNECTION_1>, CPointer<RAS_CONNECTION_2>) -> Int32>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type PMPRADMINACCEPTNEWCONNECTION3 = CFunc<(CPointer<RAS_CONNECTION_0>, CPointer<RAS_CONNECTION_1>, CPointer<RAS_CONNECTION_2>, CPointer<RAS_CONNECTION_3>) -> Int32>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type PMPRADMINACCEPTREAUTHENTICATION = CFunc<(CPointer<RAS_CONNECTION_0>, CPointer<RAS_CONNECTION_1>, CPointer<RAS_CONNECTION_2>, CPointer<RAS_CONNECTION_3>) -> Int32>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type PMPRADMINCONNECTIONHANGUPNOTIFICATION2 = CFunc<(CPointer<RAS_CONNECTION_0>, CPointer<RAS_CONNECTION_1>, CPointer<RAS_CONNECTION_2>) -> Unit>
+
+@When[Windows_Win32_NetworkManagement_Rras == "on"]
+public type PMPRADMINCONNECTIONHANGUPNOTIFICATION3 = CFunc<(CPointer<RAS_CONNECTION_0>, CPointer<RAS_CONNECTION_1>, CPointer<RAS_CONNECTION_2>, CPointer<RAS_CONNECTION_3>) -> Unit>
 
 @When[MPRAPI == "on"]
 foreign {
@@ -4440,7 +5662,6 @@ foreign {
     // param-hint: lpwsDomainName optional
     func MprAdminInterfaceGetCredentials(lpwsServer: CPointer<UInt16>, lpwsInterfaceName: CPointer<UInt16>, lpwsUserName: CPointer<UInt16>, lpwsPassword: CPointer<UInt16>, lpwsDomainName: CPointer<UInt16>): UInt32
     func MprAdminInterfaceGetCredentialsEx(hMprServer: IntNative, hInterface: CPointer<Unit>, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32
-    func MprAdminInterfaceGetCustomInfoEx(hMprServer: IntNative, hInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2>): UInt32
     func MprAdminInterfaceGetHandle(hMprServer: IntNative, lpwsInterfaceName: CPointer<UInt16>, phInterface: CPointer<CPointer<Unit>>, fIncludeClientInterfaces: Int32): UInt32
     func MprAdminInterfaceGetInfo(hMprServer: IntNative, hInterface: CPointer<Unit>, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32
     func MprAdminInterfaceQueryUpdateResult(hMprServer: IntNative, hInterface: CPointer<Unit>, dwProtocolId: UInt32, lpdwUpdateResult: CPointer<UInt32>): UInt32
@@ -4450,7 +5671,6 @@ foreign {
     // param-hint: lpwsPassword optional
     func MprAdminInterfaceSetCredentials(lpwsServer: CPointer<UInt16>, lpwsInterfaceName: CPointer<UInt16>, lpwsUserName: CPointer<UInt16>, lpwsDomainName: CPointer<UInt16>, lpwsPassword: CPointer<UInt16>): UInt32
     func MprAdminInterfaceSetCredentialsEx(hMprServer: IntNative, hInterface: CPointer<Unit>, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32
-    func MprAdminInterfaceSetCustomInfoEx(hMprServer: IntNative, hInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2>): UInt32
     func MprAdminInterfaceSetInfo(hMprServer: IntNative, hInterface: CPointer<Unit>, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32
     func MprAdminInterfaceTransportAdd(hMprServer: IntNative, hInterface: CPointer<Unit>, dwTransportId: UInt32, pInterfaceInfo: CPointer<UInt8>, dwInterfaceInfoSize: UInt32): UInt32
     // param-hint: lpdwInterfaceInfoSize optional
@@ -4485,10 +5705,8 @@ foreign {
     func MprAdminServerDisconnect(hMprServer: IntNative): Unit
     func MprAdminServerGetCredentials(hMprServer: IntNative, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32
     func MprAdminServerGetInfo(hMprServer: IntNative, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32
-    func MprAdminServerGetInfoEx(hMprServer: IntNative, pServerInfo: CPointer<MPR_SERVER_EX1>): UInt32
     func MprAdminServerSetCredentials(hMprServer: IntNative, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32
     func MprAdminServerSetInfo(hMprServer: IntNative, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32
-    func MprAdminServerSetInfoEx(hMprServer: IntNative, pServerInfo: CPointer<MPR_SERVER_SET_CONFIG_EX1>): UInt32
     // param-hint: lpwsTransportName optional
     // param-hint: pClientInterfaceInfo optional
     // param-hint: dwClientInterfaceInfoSize optional
@@ -4515,10 +5733,8 @@ foreign {
     func MprConfigInterfaceDelete(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>): UInt32
     // param-hint: lpdwResumeHandle optional
     func MprConfigInterfaceEnum(hMprConfig: CPointer<Unit>, dwLevel: UInt32, lplpBuffer: CPointer<CPointer<UInt8>>, dwPrefMaxLen: UInt32, lpdwEntriesRead: CPointer<UInt32>, lpdwTotalEntries: CPointer<UInt32>, lpdwResumeHandle: CPointer<UInt32>): UInt32
-    func MprConfigInterfaceGetCustomInfoEx(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2>): UInt32
     func MprConfigInterfaceGetHandle(hMprConfig: CPointer<Unit>, lpwsInterfaceName: CPointer<UInt16>, phRouterInterface: CPointer<CPointer<Unit>>): UInt32
     func MprConfigInterfaceGetInfo(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, dwLevel: UInt32, lplpBuffer: CPointer<CPointer<UInt8>>, lpdwBufferSize: CPointer<UInt32>): UInt32
-    func MprConfigInterfaceSetCustomInfoEx(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2>): UInt32
     func MprConfigInterfaceSetInfo(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32
     // param-hint: lpwsTransportName optional
     // param-hint: pInterfaceInfo bytes=param[5]
@@ -4537,12 +5753,10 @@ foreign {
     func MprConfigServerConnect(lpwsServerName: CPointer<UInt16>, phMprConfig: CPointer<CPointer<Unit>>): UInt32
     func MprConfigServerDisconnect(hMprConfig: CPointer<Unit>): Unit
     func MprConfigServerGetInfo(hMprConfig: CPointer<Unit>, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32
-    func MprConfigServerGetInfoEx(hMprConfig: CPointer<Unit>, pServerInfo: CPointer<MPR_SERVER_EX1>): UInt32
     func MprConfigServerInstall(dwLevel: UInt32, pBuffer: CPointer<Unit>): UInt32
     func MprConfigServerRefresh(hMprConfig: CPointer<Unit>): UInt32
     func MprConfigServerRestore(hMprConfig: CPointer<Unit>, lpwsPath: CPointer<UInt16>): UInt32
     func MprConfigServerSetInfo(hMprServer: IntNative, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32
-    func MprConfigServerSetInfoEx(hMprConfig: CPointer<Unit>, pSetServerConfig: CPointer<MPR_SERVER_SET_CONFIG_EX1>): UInt32
     // param-hint: lpwsTransportName optional
     // param-hint: pGlobalInfo bytes=param[4]
     // param-hint: pClientInterfaceInfo bytes=param[6] optional
@@ -4576,6 +5790,22 @@ foreign {
     func MprInfoRemoveAll(lpHeader: CPointer<Unit>, lplpNewHeader: CPointer<CPointer<Unit>>): UInt32
 }
 
+@When[MPRAPI == "on" && (Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security_Cryptography == "on")]
+foreign {
+    func MprAdminInterfaceGetCustomInfoEx(hMprServer: IntNative, hInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2>): UInt32
+    func MprAdminInterfaceSetCustomInfoEx(hMprServer: IntNative, hInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2>): UInt32
+    func MprConfigInterfaceGetCustomInfoEx(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2>): UInt32
+    func MprConfigInterfaceSetCustomInfoEx(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2>): UInt32
+}
+
+@When[MPRAPI == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func MprAdminServerGetInfoEx(hMprServer: IntNative, pServerInfo: CPointer<MPR_SERVER_EX1>): UInt32
+    func MprAdminServerSetInfoEx(hMprServer: IntNative, pServerInfo: CPointer<MPR_SERVER_SET_CONFIG_EX1>): UInt32
+    func MprConfigServerGetInfoEx(hMprConfig: CPointer<Unit>, pServerInfo: CPointer<MPR_SERVER_EX1>): UInt32
+    func MprConfigServerSetInfoEx(hMprConfig: CPointer<Unit>, pSetServerConfig: CPointer<MPR_SERVER_SET_CONFIG_EX1>): UInt32
+}
+
 @When[RASAPI32 == "on"]
 foreign {
     func RasClearConnectionStatistics(hRasConn: HRASCONN): UInt32
@@ -4594,14 +5824,6 @@ foreign {
     func RasDeleteSubEntryA(pszPhonebook: CPointer<UInt8>, pszEntry: CPointer<UInt8>, dwSubentryId: UInt32): UInt32
     // param-hint: pszPhonebook optional
     func RasDeleteSubEntryW(pszPhonebook: CPointer<UInt16>, pszEntry: CPointer<UInt16>, dwSubEntryId: UInt32): UInt32
-    // param-hint: param0 optional
-    // param-hint: param1 optional
-    // param-hint: param4 optional
-    func RasDialA(param0: CPointer<RASDIALEXTENSIONS>, param1: CPointer<UInt8>, param2: CPointer<RASDIALPARAMSA>, param3: UInt32, param4: CPointer<Unit>, param5: CPointer<HRASCONN>): UInt32
-    // param-hint: param0 optional
-    // param-hint: param1 optional
-    // param-hint: param4 optional
-    func RasDialW(param0: CPointer<RASDIALEXTENSIONS>, param1: CPointer<UInt16>, param2: CPointer<RASDIALPARAMSW>, param3: UInt32, param4: CPointer<Unit>, param5: CPointer<HRASCONN>): UInt32
     // param-hint: param1 optional
     func RasEditPhonebookEntryA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: CPointer<UInt8>): UInt32
     // param-hint: param1 optional
@@ -4610,10 +5832,6 @@ foreign {
     func RasEnumAutodialAddressesA(lppRasAutodialAddresses: CPointer<CPointer<UInt8>>, lpdwcbRasAutodialAddresses: CPointer<UInt32>, lpdwcRasAutodialAddresses: CPointer<UInt32>): UInt32
     // param-hint: lppRasAutodialAddresses bytes=param[1] optional
     func RasEnumAutodialAddressesW(lppRasAutodialAddresses: CPointer<CPointer<UInt16>>, lpdwcbRasAutodialAddresses: CPointer<UInt32>, lpdwcRasAutodialAddresses: CPointer<UInt32>): UInt32
-    // param-hint: param0 len=param[2] optional
-    func RasEnumConnectionsA(param0: CPointer<RASCONNA>, param1: CPointer<UInt32>, param2: CPointer<UInt32>): UInt32
-    // param-hint: param0 len=param[2] optional
-    func RasEnumConnectionsW(param0: CPointer<RASCONNW>, param1: CPointer<UInt32>, param2: CPointer<UInt32>): UInt32
     // param-hint: param0 optional
     func RasEnumDevicesA(param0: CPointer<RASDEVINFOA>, param1: CPointer<UInt32>, param2: CPointer<UInt32>): UInt32
     // param-hint: param0 optional
@@ -4640,8 +5858,6 @@ foreign {
     func RasGetAutodialEnableW(param0: UInt32, param1: CPointer<Int32>): UInt32
     func RasGetAutodialParamA(param0: UInt32, param1: CPointer<Unit>, param2: CPointer<UInt32>): UInt32
     func RasGetAutodialParamW(param0: UInt32, param1: CPointer<Unit>, param2: CPointer<UInt32>): UInt32
-    func RasGetConnectStatusA(param0: HRASCONN, param1: CPointer<RASCONNSTATUSA>): UInt32
-    func RasGetConnectStatusW(param0: HRASCONN, param1: CPointer<RASCONNSTATUSW>): UInt32
     func RasGetConnectionStatistics(hRasConn: HRASCONN, lpStatistics: CPointer<RAS_STATS>): UInt32
     // param-hint: param0 optional
     func RasGetCountryInfoA(param0: CPointer<RASCTRYINFO>, param1: CPointer<UInt32>): UInt32
@@ -4669,30 +5885,14 @@ foreign {
     func RasGetEapUserIdentityA(pszPhonebook: CPointer<UInt8>, pszEntry: CPointer<UInt8>, dwFlags: UInt32, hwnd: CPointer<Unit>, ppRasEapUserIdentity: CPointer<CPointer<RASEAPUSERIDENTITYA>>): UInt32
     // param-hint: pszPhonebook optional
     func RasGetEapUserIdentityW(pszPhonebook: CPointer<UInt16>, pszEntry: CPointer<UInt16>, dwFlags: UInt32, hwnd: CPointer<Unit>, ppRasEapUserIdentity: CPointer<CPointer<RASEAPUSERIDENTITYW>>): UInt32
-    // param-hint: param0 optional
-    func RasGetEntryDialParamsA(param0: CPointer<UInt8>, param1: CPointer<RASDIALPARAMSA>, param2: CPointer<Int32>): UInt32
-    // param-hint: param0 optional
-    func RasGetEntryDialParamsW(param0: CPointer<UInt16>, param1: CPointer<RASDIALPARAMSW>, param2: CPointer<Int32>): UInt32
-    // param-hint: param0 optional
-    // param-hint: param2 optional
-    // param-hint: param4 optional
-    // param-hint: param5 optional
-    func RasGetEntryPropertiesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<RASENTRYA>, param3: CPointer<UInt32>, param4: CPointer<UInt8>, param5: CPointer<UInt32>): UInt32
-    // param-hint: param0 optional
-    // param-hint: param2 optional
-    // param-hint: param4 optional
-    // param-hint: param5 optional
-    func RasGetEntryPropertiesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: CPointer<RASENTRYW>, param3: CPointer<UInt32>, param4: CPointer<UInt8>, param5: CPointer<UInt32>): UInt32
     // param-hint: lpszString len=param[2]
     func RasGetErrorStringA(ResourceId: UInt32, lpszString: CPointer<UInt8>, InBufSize: UInt32): UInt32
     // param-hint: lpszString len=param[2]
     func RasGetErrorStringW(ResourceId: UInt32, lpszString: CPointer<UInt16>, InBufSize: UInt32): UInt32
     func RasGetLinkStatistics(hRasConn: HRASCONN, dwSubEntry: UInt32, lpStatistics: CPointer<RAS_STATS>): UInt32
     func RasGetPCscf(lpszPCscf: CPointer<UInt16>): UInt32
-    func RasGetProjectionInfoA(param0: HRASCONN, param1: RASPROJECTION, param2: CPointer<Unit>, param3: CPointer<UInt32>): UInt32
-    // param-hint: pRasProjection optional
-    func RasGetProjectionInfoEx(hrasconn: HRASCONN, pRasProjection: CPointer<RAS_PROJECTION_INFO>, lpdwSize: CPointer<UInt32>): UInt32
-    func RasGetProjectionInfoW(param0: HRASCONN, param1: RASPROJECTION, param2: CPointer<Unit>, param3: CPointer<UInt32>): UInt32
+    func RasGetProjectionInfoA(param0: HRASCONN, param1: Int32, param2: CPointer<Unit>, param3: CPointer<UInt32>): UInt32
+    func RasGetProjectionInfoW(param0: HRASCONN, param1: Int32, param2: CPointer<Unit>, param3: CPointer<UInt32>): UInt32
     func RasGetSubEntryHandleA(param0: HRASCONN, param1: UInt32, param2: CPointer<HRASCONN>): UInt32
     func RasGetSubEntryHandleW(param0: HRASCONN, param1: UInt32, param2: CPointer<HRASCONN>): UInt32
     // param-hint: param0 optional
@@ -4709,7 +5909,6 @@ foreign {
     func RasGetSubEntryPropertiesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: UInt32, param3: CPointer<RASSUBENTRYW>, param4: CPointer<UInt32>, param5: CPointer<UInt8>, param6: CPointer<UInt32>): UInt32
     func RasHangUpA(param0: HRASCONN): UInt32
     func RasHangUpW(param0: HRASCONN): UInt32
-    func RasInvokeEapUI(param0: HRASCONN, param1: UInt32, param2: CPointer<RASDIALEXTENSIONS>, param3: CPointer<Unit>): UInt32
     // param-hint: param0 optional
     func RasRenameEntryA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<UInt8>): UInt32
     // param-hint: param0 optional
@@ -4741,26 +5940,69 @@ foreign {
     // param-hint: pszPhonebook optional
     func RasSetEapUserDataW(hToken: CPointer<Unit>, pszPhonebook: CPointer<UInt16>, pszEntry: CPointer<UInt16>, pbEapData: CPointer<UInt8>, dwSizeofEapData: UInt32): UInt32
     // param-hint: param0 optional
+    // param-hint: param5 optional
+    func RasSetSubEntryPropertiesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: UInt32, param3: CPointer<RASSUBENTRYA>, param4: UInt32, param5: CPointer<UInt8>, param6: UInt32): UInt32
+    // param-hint: param0 optional
+    // param-hint: param5 optional
+    func RasSetSubEntryPropertiesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: UInt32, param3: CPointer<RASSUBENTRYW>, param4: UInt32, param5: CPointer<UInt8>, param6: UInt32): UInt32
+    // param-hint: param0 optional
+    func RasValidateEntryNameA(param0: CPointer<UInt8>, param1: CPointer<UInt8>): UInt32
+    // param-hint: param0 optional
+    func RasValidateEntryNameW(param0: CPointer<UInt16>, param1: CPointer<UInt16>): UInt32
+}
+
+@When[RASAPI32 == "on" && (((arch == "x86_64" && Windows_Win32_Networking_WinSock == "on") || (arch == "aarch64" && Windows_Win32_Networking_WinSock == "on")) && Windows_Win32_Networking_WinSock == "on")]
+foreign {
+    // param-hint: pRasProjection optional
+    func RasGetProjectionInfoEx(hrasconn: HRASCONN, pRasProjection: CPointer<RAS_PROJECTION_INFO>, lpdwSize: CPointer<UInt32>): UInt32
+}
+
+@When[RASAPI32 == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+foreign {
+    // param-hint: param0 optional
+    // param-hint: param1 optional
+    // param-hint: param4 optional
+    func RasDialA(param0: CPointer<RASDIALEXTENSIONS>, param1: CPointer<UInt8>, param2: CPointer<RASDIALPARAMSA>, param3: UInt32, param4: CPointer<Unit>, param5: CPointer<HRASCONN>): UInt32
+    // param-hint: param0 optional
+    // param-hint: param1 optional
+    // param-hint: param4 optional
+    func RasDialW(param0: CPointer<RASDIALEXTENSIONS>, param1: CPointer<UInt16>, param2: CPointer<RASDIALPARAMSW>, param3: UInt32, param4: CPointer<Unit>, param5: CPointer<HRASCONN>): UInt32
+    // param-hint: param0 len=param[2] optional
+    func RasEnumConnectionsA(param0: CPointer<RASCONNA>, param1: CPointer<UInt32>, param2: CPointer<UInt32>): UInt32
+    // param-hint: param0 len=param[2] optional
+    func RasEnumConnectionsW(param0: CPointer<RASCONNW>, param1: CPointer<UInt32>, param2: CPointer<UInt32>): UInt32
+    // param-hint: param0 optional
+    func RasGetEntryDialParamsA(param0: CPointer<UInt8>, param1: CPointer<RASDIALPARAMSA>, param2: CPointer<Int32>): UInt32
+    // param-hint: param0 optional
+    func RasGetEntryDialParamsW(param0: CPointer<UInt16>, param1: CPointer<RASDIALPARAMSW>, param2: CPointer<Int32>): UInt32
+    func RasInvokeEapUI(param0: HRASCONN, param1: UInt32, param2: CPointer<RASDIALEXTENSIONS>, param3: CPointer<Unit>): UInt32
+    // param-hint: param0 optional
     func RasSetEntryDialParamsA(param0: CPointer<UInt8>, param1: CPointer<RASDIALPARAMSA>, param2: Int32): UInt32
     // param-hint: param0 optional
     func RasSetEntryDialParamsW(param0: CPointer<UInt16>, param1: CPointer<RASDIALPARAMSW>, param2: Int32): UInt32
+}
+
+@When[RASAPI32 == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func RasGetConnectStatusA(param0: HRASCONN, param1: CPointer<RASCONNSTATUSA>): UInt32
+    func RasGetConnectStatusW(param0: HRASCONN, param1: CPointer<RASCONNSTATUSW>): UInt32
+    // param-hint: param0 optional
+    // param-hint: param2 optional
+    // param-hint: param4 optional
+    // param-hint: param5 optional
+    func RasGetEntryPropertiesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<RASENTRYA>, param3: CPointer<UInt32>, param4: CPointer<UInt8>, param5: CPointer<UInt32>): UInt32
+    // param-hint: param0 optional
+    // param-hint: param2 optional
+    // param-hint: param4 optional
+    // param-hint: param5 optional
+    func RasGetEntryPropertiesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: CPointer<RASENTRYW>, param3: CPointer<UInt32>, param4: CPointer<UInt8>, param5: CPointer<UInt32>): UInt32
     // param-hint: param0 optional
     // param-hint: param4 optional
     func RasSetEntryPropertiesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<RASENTRYA>, param3: UInt32, param4: CPointer<UInt8>, param5: UInt32): UInt32
     // param-hint: param0 optional
     // param-hint: param4 optional
     func RasSetEntryPropertiesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: CPointer<RASENTRYW>, param3: UInt32, param4: CPointer<UInt8>, param5: UInt32): UInt32
-    // param-hint: param0 optional
-    // param-hint: param5 optional
-    func RasSetSubEntryPropertiesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: UInt32, param3: CPointer<RASSUBENTRYA>, param4: UInt32, param5: CPointer<UInt8>, param6: UInt32): UInt32
-    // param-hint: param0 optional
-    // param-hint: param5 optional
-    func RasSetSubEntryPropertiesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: UInt32, param3: CPointer<RASSUBENTRYW>, param4: UInt32, param5: CPointer<UInt8>, param6: UInt32): UInt32
     func RasUpdateConnection(hrasconn: HRASCONN, lprasupdateconn: CPointer<RASUPDATECONN>): UInt32
-    // param-hint: param0 optional
-    func RasValidateEntryNameA(param0: CPointer<UInt8>, param1: CPointer<UInt8>): UInt32
-    // param-hint: param0 optional
-    func RasValidateEntryNameW(param0: CPointer<UInt16>, param1: CPointer<UInt16>): UInt32
 }
 
 @When[RASDLG == "on"]
@@ -4773,6 +6015,10 @@ foreign {
     // param-hint: lpszEntry optional
     // param-hint: lpszPhoneNumber optional
     func RasDialDlgW(lpszPhonebook: CPointer<UInt16>, lpszEntry: CPointer<UInt16>, lpszPhoneNumber: CPointer<UInt16>, lpInfo: CPointer<RASDIALDLG>): Int32
+}
+
+@When[RASDLG == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+foreign {
     // param-hint: lpszPhonebook optional
     // param-hint: lpszEntry optional
     func RasEntryDlgA(lpszPhonebook: CPointer<UInt8>, lpszEntry: CPointer<UInt8>, lpInfo: CPointer<RASENTRYDLGA>): Int32
@@ -4794,22 +6040,16 @@ foreign {
     func MgmDeleteGroupMembershipEntry(hProtocol: CPointer<Unit>, dwSourceAddr: UInt32, dwSourceMask: UInt32, dwGroupAddr: UInt32, dwGroupMask: UInt32, dwIfIndex: UInt32, dwIfNextHopIPAddr: UInt32, dwFlags: UInt32): UInt32
     func MgmGetFirstMfe(pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>): UInt32
     func MgmGetFirstMfeStats(pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>, dwFlags: UInt32): UInt32
-    func MgmGetMfe(pimm: CPointer<Win32_impl.MIB_IPMCAST_MFE>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>): UInt32
-    func MgmGetMfeStats(pimm: CPointer<Win32_impl.MIB_IPMCAST_MFE>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, dwFlags: UInt32): UInt32
-    func MgmGetNextMfe(pimmStart: CPointer<Win32_impl.MIB_IPMCAST_MFE>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>): UInt32
-    func MgmGetNextMfeStats(pimmStart: CPointer<Win32_impl.MIB_IPMCAST_MFE>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>, dwFlags: UInt32): UInt32
     func MgmGetProtocolOnInterface(dwIfIndex: UInt32, dwIfNextHopAddr: UInt32, pdwIfProtocolId: CPointer<UInt32>, pdwIfComponentId: CPointer<UInt32>): UInt32
     func MgmGroupEnumerationEnd(hEnum: CPointer<Unit>): UInt32
     func MgmGroupEnumerationGetNext(hEnum: CPointer<Unit>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>): UInt32
-    func MgmGroupEnumerationStart(hProtocol: CPointer<Unit>, metEnumType: MGM_ENUM_TYPES, phEnumHandle: CPointer<CPointer<Unit>>): UInt32
+    func MgmGroupEnumerationStart(hProtocol: CPointer<Unit>, metEnumType: Int32, phEnumHandle: CPointer<CPointer<Unit>>): UInt32
     func MgmRegisterMProtocol(prpiInfo: CPointer<ROUTING_PROTOCOL_CONFIG>, dwProtocolId: UInt32, dwComponentId: UInt32, phProtocol: CPointer<CPointer<Unit>>): UInt32
     func MgmReleaseInterfaceOwnership(hProtocol: CPointer<Unit>, dwIfIndex: UInt32, dwIfNextHopAddr: UInt32): UInt32
     func MgmTakeInterfaceOwnership(hProtocol: CPointer<Unit>, dwIfIndex: UInt32, dwIfNextHopAddr: UInt32): UInt32
     func RtmAddNextHop(RtmRegHandle: IntNative, NextHopInfo: CPointer<RTM_NEXTHOP_INFO>, NextHopHandle: CPointer<IntNative>, ChangeFlags: CPointer<UInt32>): UInt32
     func RtmAddRouteToDest(RtmRegHandle: IntNative, RouteHandle: CPointer<IntNative>, DestAddress: CPointer<RTM_NET_ADDRESS>, RouteInfo: CPointer<RTM_ROUTE_INFO>, TimeToLive: UInt32, RouteListHandle: IntNative, NotifyType: UInt32, NotifyHandle: IntNative, ChangeFlags: CPointer<UInt32>): UInt32
     func RtmBlockMethods(RtmRegHandle: IntNative, TargetHandle: CPointer<Unit>, TargetType: UInt8, BlockingFlag: UInt32): UInt32
-    func RtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress: CPointer<RTM_NET_ADDRESS>, Address: Win32_impl.IN6_ADDR, dwLength: UInt32, dwAddressSize: UInt32): UInt32
-    func RtmConvertNetAddressToIpv6AddressAndLength(pNetAddress: CPointer<RTM_NET_ADDRESS>, pAddress: CPointer<Win32_impl.IN6_ADDR>, pLength: CPointer<UInt32>, dwAddressSize: UInt32): UInt32
     func RtmCreateDestEnum(RtmRegHandle: IntNative, TargetViews: UInt32, EnumFlags: UInt32, NetAddress: CPointer<RTM_NET_ADDRESS>, ProtocolId: UInt32, RtmEnumHandle: CPointer<IntNative>): UInt32
     func RtmCreateNextHopEnum(RtmRegHandle: IntNative, EnumFlags: UInt32, NetAddress: CPointer<RTM_NET_ADDRESS>, RtmEnumHandle: CPointer<IntNative>): UInt32
     func RtmCreateRouteEnum(RtmRegHandle: IntNative, DestHandle: IntNative, TargetViews: UInt32, EnumFlags: UInt32, StartDest: CPointer<RTM_NET_ADDRESS>, MatchingFlags: UInt32, CriteriaRoute: CPointer<RTM_ROUTE_INFO>, CriteriaInterface: UInt32, RtmEnumHandle: CPointer<IntNative>): UInt32
@@ -4865,6 +6105,20 @@ foreign {
     func RtmReleaseRouteInfo(RtmRegHandle: IntNative, RouteInfo: CPointer<RTM_ROUTE_INFO>): UInt32
     func RtmReleaseRoutes(RtmRegHandle: IntNative, NumRoutes: UInt32, RouteHandles: CPointer<IntNative>): UInt32
     func RtmUpdateAndUnlockRoute(RtmRegHandle: IntNative, RouteHandle: IntNative, TimeToLive: UInt32, RouteListHandle: IntNative, NotifyType: UInt32, NotifyHandle: IntNative, ChangeFlags: CPointer<UInt32>): UInt32
+}
+
+@When[RTM == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
+foreign {
+    func MgmGetMfe(pimm: CPointer<Win32__impl_l1.MIB_IPMCAST_MFE>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>): UInt32
+    func MgmGetMfeStats(pimm: CPointer<Win32__impl_l1.MIB_IPMCAST_MFE>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, dwFlags: UInt32): UInt32
+    func MgmGetNextMfe(pimmStart: CPointer<Win32__impl_l1.MIB_IPMCAST_MFE>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>): UInt32
+    func MgmGetNextMfeStats(pimmStart: CPointer<Win32__impl_l1.MIB_IPMCAST_MFE>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>, dwFlags: UInt32): UInt32
+}
+
+@When[RTM == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func RtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress: CPointer<RTM_NET_ADDRESS>, Address: Win32__impl_l0.IN6_ADDR, dwLength: UInt32, dwAddressSize: UInt32): UInt32
+    func RtmConvertNetAddressToIpv6AddressAndLength(pNetAddress: CPointer<RTM_NET_ADDRESS>, pAddress: CPointer<Win32__impl_l0.IN6_ADDR>, pLength: CPointer<UInt32>, dwAddressSize: UInt32): UInt32
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]
